@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false"
+				width="30" height="10">
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states> 
+	<s:Group  bottom="0" left="0" right="0" top="0">
+		<s:Rect bottom="0" left="0" right="0" top="0">
+			<s:fill>
+				<s:SolidColor color="0x0" alpha="0.5" color.hovered="0xffffff" color.selected="0xffffff"/>
+			</s:fill>
+		</s:Rect>
+	</s:Group>
+</s:ItemRenderer>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	creationComplete="creationCompleteHandler(event)">
+<mx:Script>
+	<![CDATA[
+		import mx.controls.Alert;
+		import mx.collections.XMLListCollection;
+		import mx.collections.ArrayCollection;
+		import demo.*;
+		import twaver.*;
+		import twaver.network.Network;
+		import mx.events.PropertyChangeEvent;
+		
+		
+		private var file:FileReference;
+		private var path:String;
+
+		[Bindable] 
+		private var imageSrc:String;	
+		private var imageTypes:FileFilter;
+		private var _network:Network;
+		private var elementBox:ElementBox;
+
+		
+		public function set network(network:Network):void{
+			if(_network==network){
+				return;
+			}
+			if(network==null){
+				return;
+			}
+			_network=network;
+			elementBox=_network.elementBox;				
+		}
+			
+		private function creationCompleteHandler(event:Event):void {
+			file = new FileReference();
+			file.addEventListener(Event.SELECT, selectHandler);
+			file.addEventListener(IOErrorEvent.IO_ERROR, uploadIoErrorHandler);
+			file.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadCompleteHandler);
+			imageTypes = new FileFilter("Images (*.jpg, *.jpeg, *.png, *.gif)", 
+				"*.jpg; *.jpeg; *.png; *.gif;");
+		}			
+		private function browseHandler(event:Event):void {
+			btnUpload.visible = false;
+			file.browse([imageTypes]);
+		}
+		
+		private function selectHandler(event:Event):void {
+			txtFilename.text = file.name;
+			btnUpload.visible = true;
+		}
+
+		private function uploadHandler(event:Event):void {
+			var url:String = "/MonitorPortal/Servlet/UploadHandler";
+			var request:URLRequest = new URLRequest(url);
+			request.method = URLRequestMethod.POST;
+			
+			var _data:URLVariables = new URLVariables();
+			_data.userName = parentDocument.userName;
+			_data.preName = parentDocument.preName;
+			request.data = _data;
+			file.upload(request);
+			txtFilename.text = "";
+		}
+		
+		private function uploadCompleteHandler(event:DataEvent):void {
+			var _data:URLVariables = new URLVariables(event.data);
+			if (_data.state == "true")
+			{ 
+				var xmlContent:String = _data.data;
+				var xml:XML=new XML(xmlContent);
+				var xmlList:XMLList = xml.elements("Item"); 
+				var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList);
+				var imageArray:ArrayCollection = new ArrayCollection(xmlListCollection.toArray());
+				
+				if (imageArray.length>0)
+				{
+					 for (var i:int = 0; i<imageArray.length; i++)
+					 {
+						 
+						 	var picName:String = imageArray[i].Name;
+							
+							var _urlReq:URLRequest = new URLRequest();
+							_urlReq.url = "/MonitorPortal/Portlet/TopologyView/getBackGroundImageData.do";
+							_urlReq.method = URLRequestMethod.POST;
+							var data:URLVariables = new URLVariables();
+							data.userName_fileName = imageArray[i].Value;
+							if (data!=null){
+								_urlReq.data =data;
+							}
+							var _loader:Loader = new Loader();
+							
+							_loader.load(_urlReq);
+							
+							_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderComplete(picName,_network));
+						 
+						 /*
+						 
+						var loader:Loader = new Loader();
+						loader.load(new URLRequest(encodeURI(imageArray[i].Value)));
+						var picName:String = imageArray[i].Name;
+						loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderComplete(picName,_network)
+						);
+						*/
+					}
+			   } 
+			}
+		}
+		 public static function onLoaderComplete(picName:String,network:Network):Function {
+		 var fun:Function = function(e:Event):Boolean{
+				var bitmap:BitmapData = new BitmapData(e.currentTarget.content.width, e.currentTarget.content.height); 
+				bitmap.draw(e.currentTarget.content);
+				Utils.registerImageByBitmapData(picName, bitmap);
+				//network.elementBox.setStyle(Styles.BACKGROUND_IMAGE, picName);
+					//给默认的子网背景图
+				//network.addPropertyChangeListener(function(e:PropertyChangeEvent):void{
+				// if(e.property == "currentSubNetwork"){
+				//	if (network.currentSubNetwork != null) {
+				//		 network.currentSubNetwork.setStyle(Styles.BACKGROUND_TYPE, Consts.BACKGROUND_TYPE_IMAGE);
+				//         network.currentSubNetwork.setStyle(Styles.BACKGROUND_IMAGE, picName);
+				//	  }	
+			  //    }
+			  //}); 
+			     if (network.currentSubNetwork != null) {
+					 network.currentSubNetwork.setStyle(Styles.BACKGROUND_TYPE, Consts.BACKGROUND_TYPE_IMAGE);
+					 network.currentSubNetwork.setStyle(Styles.BACKGROUND_IMAGE, picName)
+				}
+				else {
+				     network.elementBox.setStyle(Styles.BACKGROUND_IMAGE, picName);
+				}
+				return false ;
+		  }
+		return fun;
+       }
+		private function uploadIoErrorHandler(event:IOErrorEvent):void {
+			Alert.show("错误: " + event.toString());
+		}
+	]]>
+</mx:Script>
+<mx:Image id="imgPhoto" visible="true" autoLoad="true" source="{imageSrc}" />
+<mx:HBox>
+	<mx:TextInput id="txtFilename" editable="false" width="70" />
+		<mx:Button id="btnBrowse" label="浏览" 
+			click="browseHandler(event)" />
+		<mx:Button id="btnUpload" label="上传" 
+			click="uploadHandler(event)" visible="false" />
+</mx:HBox>
+</mx:HBox>

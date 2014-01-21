@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+            xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" 
+			creationComplete="init();" xmlns:ns="http://www.servasoftware.com/2009/twaver/flex">
+   
+   <fx:Script>
+      <![CDATA[
+		  import twaver.AlarmSeverity;
+		  import twaver.Consts;
+		  import twaver.Node;
+		  import twaver.Styles;
+		  import twaver.SubNetwork;
+		  import twaver.Utils;
+         function init():void{
+            var loader:Loader = new Loader();
+            var url:String = 'subnetwork_2.png';
+            loader.load(new URLRequest(encodeURI(url)));
+            var picName:String = 'subnetwork_2.png';
+            loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
+               Utils.registerImageByBitmapData(picName, (e.currentTarget.content as Bitmap).bitmapData);
+              var subNetworkA:SubNetwork=new SubNetwork();
+              subNetworkA.setStyle(Styles.BACKGROUND_TYPE,Consts.BACKGROUND_TYPE_VECTOR);
+               subNetworkA.setStyle(Styles.BACKGROUND_VECTOR_FILL_COLOR,0x00ff00);
+               subNetworkA.addChild(node);
+               subNetworkA.name="Subnetwork A";
+                subNetworkA.setLocation(20,20);
+			   subNetworkA.alarmState.increaseNewAlarm(AlarmSeverity.CRITICAL);
+               network.elementBox.add(node);
+            });
+         }
+      ]]>
+   </fx:Script>
+   <ns:Network id="network" width="100%" height="100%" />
+</mx:Application>

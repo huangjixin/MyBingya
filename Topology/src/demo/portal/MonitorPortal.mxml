@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:ns="http://www.servasoftware.com/2009/twaver/flex"
+				applicationComplete="{init();}" backgroundColor="#00ffffff" layout="absolute"
+				verticalAlign="top" xmlns:s="library://ns.adobe.com/flex/spark">
+	<mx:XML id="licenseXML" source="demo/license.xml"/>
+	<mx:Script source="source.as"/>
+	<mx:HTTPService id="getMSDataService" fault="_getMSData_Fault(event)" method="POST" result="_getMSData_result(event)"
+					url="/MonitorPortal/PortletNew/MonitorSystemView/getMonitorSystemDefineViewData.do"
+					useProxy="false">
+		<mx:resultFormat>text</mx:resultFormat> 
+		<mx:request xmlns="">
+			<resourceid>
+				{this.resourceId}
+			</resourceid>
+		</mx:request>
+	</mx:HTTPService>
+	<mx:HTTPService id="getAlertListService" fault="_getMSData_Fault(event)" method="POST" result="_getAlertList_result(event)"
+					url="/MonitorPortal/PortletNew/MonitorSystemView/getAlertListByResid.do"
+					useProxy="false">
+		<mx:resultFormat>text</mx:resultFormat> 
+		<mx:request xmlns="">
+			<resids>
+				{this.resids}
+			</resids>
+		</mx:request>
+	</mx:HTTPService>
+	<mx:HTTPService id="getViewService" fault="getViewService_faultHandler(event)" method="POST" result="getViewService_resultHandler(event)"
+					url="/MonitorPortal/Portlet/TopologyView/getView.do"
+					useProxy="false">
+		<mx:resultFormat>text</mx:resultFormat> 
+		<mx:request xmlns="">
+			<preName>
+				{this.preName}
+			</preName>
+			<userName>
+				{this.userName}
+			</userName>
+		</mx:request>
+	</mx:HTTPService>
+	<!--<mx:HTTPService id="getImagesService" fault="getViewService_faultHandler(event)" method="POST" result="getViewService_resultHandler(event)"
+					url="/MonitorPortal/Portlet/TopologyView/getView.do"
+					useProxy="false">
+		<mx:resultFormat>text</mx:resultFormat> 
+		<mx:request xmlns="">
+			<preName>
+				{this.preName}
+			</preName>
+			<userName>
+				{this.userName}
+			</userName>
+		</mx:request>
+	</mx:HTTPService>-->
+	<mx:HBox id="twBody" width="100%" height="100%" horizontalScrollPolicy="off"
+			 verticalScrollPolicy="off" horizontalAlign="center" verticalAlign="middle">
+		<ns:Network id="network" width="100%" height="100%" autoLayout="true"
+					backgroundColor="#00ffffff" horizontalScrollPolicy="auto"
+					verticalScrollPolicy="auto"/>
+	</mx:HBox>
+	<mx:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
+		<mx:filters>
+			<mx:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
+		</mx:filters>
+	</mx:Label>
+	<!--<s:Image id="img" horizontalCenter="0" verticalCenter="0"/>-->
+</mx:Application>

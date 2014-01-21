@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+		 xmlns:editor="demo.editor.link.*" 
+		 paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" cornerRadius="5" borderStyle="solid" creationComplete="init()"  >
+	<mx:Script>
+		<![CDATA[
+			import demo.DemoUtils;
+			import demo.TopologyService;
+			import mx.controls.ComboBox;
+			
+			import mx.binding.utils.BindingUtils;
+			import mx.core.UIComponent;
+			import mx.events.NumericStepperEvent;
+			import mx.events.PropertyChangeEvent;
+			import mx.collections.XMLListCollection;
+			import mx.collections.ArrayCollection;
+			
+			import twaver.*;
+			import twaver.network.Network;
+			import twaver.network.layout.AutoLayouter;
+			import mx.controls.Alert;
+			import flash.net.URLLoaderDataFormat;
+			import flash.net.URLVariables;
+			import demo.alarm.alarmmapping.*;
+			
+			private var _currentElement:IElement;
+			private var isAdjusting:Boolean=false;
+			
+			private var _elementBox:ElementBox;
+			private var _network:Network;
+			//public var resources:String;
+			public function set network(network:Network):void{
+				if(_network==network){
+					return;
+				}
+				if(network==null){
+					return;
+				}
+				if(_network){
+					_network.removePropertyChangeListener(dataBoxChanged);
+				}
+				_network=network;
+				_network.addPropertyChangeListener(dataBoxChanged);
+			  //  _network.addSelectionChangeListener(selectionChanged);
+
+				elementBox=_network.elementBox;
+				
+			}
+			
+			private function dataBoxChanged(e:PropertyChangeEvent):void{
+				if(e.property == "elementBox"){
+					elementBox = _network.elementBox;
+				}
+			}
+			
+			private function set elementBox(elementBox:ElementBox):void{
+				if(this._elementBox==elementBox){
+					return;
+				}
+				if(elementBox==null){
+					return;
+				}
+				if(this._elementBox){
+					_elementBox.removeDataPropertyChangeListener(elementPropertyChanged);
+				}
+				this._elementBox=elementBox;
+				this._elementBox.addDataPropertyChangeListener(elementPropertyChanged);
+			}
+			
+			private function elementPropertyChanged(e:PropertyChangeEvent):void{
+				loadElementProperties();
+			}
+		   
+			private function init():void {
+				bindingProperty("name",labelName,"text", false);
+				bindingProperty(Styles.LABEL_COLOR, this.labelColor,"selectedColor");
+				bindingProperty(Styles.LABEL_XOFFSET, this.labelOffsetX,"value");
+				bindingProperty(Styles.LABEL_YOFFSET, this.labelOffsetY,"value");
+				
+				/*bindingProperty(Styles.LINK_TYPE, this.linkType,"selectedItem");
+				bindingProperty(Styles.LINK_COLOR, this.linkColor,"selectedColor");
+				bindingProperty(Styles.LINK_WIDTH, this.linkWidth,"value");
+				bindingProperty(Styles.LINK_SPLIT_BY_PERCENT, this.linkSplitByPercent,"selected");
+				bindingProperty(Styles.LINK_SPLIT_PERCENT, this.linkSplitPercentValue,"value");
+				bindingProperty(Styles.LINK_SPLIT_VALUE, this.linkSplitValue,"value");
+				bindingProperty(Styles.LINK_EXTEND, this.linkExtend,"value");
+				dashedPatternBinding(Styles.LINK_PATTERN,this.linkDashed,this.linkDashedPattern_1,this.linkDashedPattern_2);
+				bindingProperty(Styles.LINK_FROM_AT_EDGE, this.linkFromAtEdge,"selected");
+				bindingProperty(Styles.LINK_FROM_XOFFSET, this.linkFromOffsetX,"value");
+				bindingProperty(Styles.LINK_FROM_YOFFSET, this.linkFromOffsetY,"value");
+				bindingProperty(Styles.LINK_TO_AT_EDGE, this.linkToAtEdge,"selected");
+				bindingProperty(Styles.LINK_TO_XOFFSET, this.linkToOffsetX,"value");
+				bindingProperty(Styles.LINK_TO_YOFFSET, this.linkToOffsetY,"value");
+				
+				bindingProperty(Styles.ARROW_FROM, this.linkFromArrow,"selected");
+				bindingProperty(Styles.ARROW_FROM_AT_EDGE, this.arrowFromAtEdge,"selected");
+				bindingProperty(Styles.ARROW_FROM_SHAPE, this.linkFromArrowShape,"selectedItem");
+				bindingProperty(Styles.ARROW_FROM_WIDTH, this.linkFromArrowWidth,"value");
+				bindingProperty(Styles.ARROW_FROM_HEIGHT, this.linkFromArrowHeight,"value");
+				bindingProperty(Styles.ARROW_FROM_XOFFSET, this.linkFromArrowOffsetX,"value");
+				bindingProperty(Styles.ARROW_FROM_YOFFSET, this.linkFromArrowOffsetY,"value");
+				bindingProperty(Styles.ARROW_FROM_FILL, this.linkFromArrowFill,"selected");
+				bindingProperty(Styles.ARROW_FROM_COLOR, this.linkFromArrowColor,"selectedColor");
+				bindingProperty(Styles.ARROW_FROM_ALPHA, this.linkFromArrowAlpha,"value");
+				bindingProperty(Styles.ARROW_FROM_OUTLINE_COLOR, this.linkFromArrowOutlineColor,"selectedColor");
+				bindingProperty(Styles.ARROW_FROM_OUTLINE_ALPHA, this.linkFromArrowOutlineAlpha,"value");
+				bindingProperty(Styles.ARROW_FROM_OUTLINE_WIDTH, this.linkFromArrowOutlineWidth,"value");
+				dashedPatternBinding(Styles.ARROW_FROM_OUTLINE_PATTERN,this.linkFromArrowOutlineDashed,this.linkFromArrowOutlineDashedPattern_1,this.linkFromArrowOutlineDashedPattern_2);
+				
+				bindingProperty(Styles.ARROW_TO, this.linkToArrow,"selected");
+				bindingProperty(Styles.ARROW_TO_AT_EDGE, this.arrowToAtEdge,"selected");
+				bindingProperty(Styles.ARROW_TO_SHAPE, this.linkToArrowShape,"selectedItem");
+				bindingProperty(Styles.ARROW_TO_WIDTH, this.linkToArrowWidth,"value");
+				bindingProperty(Styles.ARROW_TO_HEIGHT, this.linkToArrowHeight,"value");
+				bindingProperty(Styles.ARROW_TO_XOFFSET, this.linkToArrowOffsetX,"value");
+				bindingProperty(Styles.ARROW_TO_YOFFSET, this.linkToArrowOffsetY,"value");
+				bindingProperty(Styles.ARROW_TO_FILL, this.linkToArrowFill,"selected");
+				bindingProperty(Styles.ARROW_TO_COLOR, this.linkToArrowColor,"selectedColor");
+				bindingProperty(Styles.ARROW_TO_ALPHA, this.linkToArrowAlpha,"value");
+				bindingProperty(Styles.ARROW_TO_OUTLINE_COLOR, this.linkToArrowOutlineColor,"selectedColor");
+				bindingProperty(Styles.ARROW_TO_OUTLINE_ALPHA, this.linkToArrowOutlineAlpha,"value");
+				bindingProperty(Styles.ARROW_TO_OUTLINE_WIDTH, this.linkToArrowOutlineWidth,"value");
+				dashedPatternBinding(Styles.ARROW_TO_OUTLINE_PATTERN, this.linkToArrowOutlineDashed, this.linkToArrowOutlineDashedPattern_1, this.linkToArrowOutlineDashedPattern_2);
+				*/
+			}
+			
+			public function get currentElement():IElement{
+				return _currentElement;
+			}
+			
+			public function set currentElement(element:IElement):void{
+				if(_currentElement==element){
+					return;
+				}
+				_currentElement=element;
+				loadElementProperties();
+			}
+		/*
+			public static function hasControlPoint(linkType:String):Boolean{
+				return linkType&&(linkType==Consts.LINK_TYPE_ORTHOGONAL||
+					linkType==Consts.LINK_TYPE_ORTHOGONAL_HORIZONTAL||
+					linkType==Consts.LINK_TYPE_ORTHOGONAL_VERTICAL||
+					linkType==Consts.LINK_TYPE_EXTEND_BOTTOM||
+					linkType==Consts.LINK_TYPE_EXTEND_LEFT||
+					linkType==Consts.LINK_TYPE_EXTEND_RIGHT||
+					linkType==Consts.LINK_TYPE_EXTEND_TOP);
+			}
+			*/
+			/*
+			public static function isSplitTypeLink(type:String):Boolean{
+				return type&&(type==Consts.LINK_TYPE_ORTHOGONAL|| 
+					type==Consts.LINK_TYPE_ORTHOGONAL_HORIZONTAL||
+					type==Consts.LINK_TYPE_ORTHOGONAL_VERTICAL);
+			}
+			*/
+			/*
+			public static function isExtendTypeLink(linkType:String):Boolean{
+				return linkType&&(linkType==Consts.LINK_TYPE_FLEXIONAL||
+					linkType==Consts.LINK_TYPE_FLEXIONAL_HORIZONTAL||
+					linkType==Consts.LINK_TYPE_FLEXIONAL_VERTICAL||
+					linkType==Consts.LINK_TYPE_EXTEND_TOP||
+					linkType==Consts.LINK_TYPE_EXTEND_LEFT||
+					linkType==Consts.LINK_TYPE_EXTEND_BOTTOM||
+					linkType==Consts.LINK_TYPE_EXTEND_RIGHT);
+			}
+           */
+			private function loadElementProperties():void {				
+				if(_currentElement==null||isAdjusting){
+					return;
+				}
+				isAdjusting = true;
+
+				if (currentElement.getClient(CustomAlarmElementMapping.MAPPINGID) != null) {
+					var i:int = 0;
+					for each (var item:XML in Source.dataProvider) {
+						if (currentElement.getClient(CustomAlarmElementMapping.MAPPINGID) == item.child("Value")[0].text()) {
+							if (Source.selectedIndex != i) Source.selectedIndex = i;
+							break;
+						}
+						i++;
+					}
+				}				
+				
+				labelName.text=currentElement.name;
+				if(_currentElement is Node){
+					locationForm.visible=true;
+					locationForm.includeInLayout=true;
+					locationX.value=(_currentElement as Node).x;
+					locationY.value=(_currentElement as Node).y;
+				}else{
+					locationForm.visible=false;
+					locationForm.includeInLayout=false;
+				}
+				this.labelColor.selectedColor=currentElement.getStyle(Styles.LABEL_COLOR);
+				this.labelOffsetX.value=currentElement.getStyle(Styles.LABEL_XOFFSET);
+				this.labelOffsetY.value=currentElement.getStyle(Styles.LABEL_YOFFSET);
+				/*linkPropertyBox.visible=(currentElement is Link);
+				linkPropertyBox.includeInLayout=(currentElement is Link);
+				if(currentElement is Link){
+					var link:Link = currentElement as Link;
+					this.linkColor.selectedColor=link.getStyle(Styles.LINK_COLOR);
+					this.linkWidth.value=link.getStyle(Styles.LINK_WIDTH);
+					var linkTypeValue:String=link.getStyle(Styles.LINK_TYPE);
+					this.linkType.selectedItem=linkTypeValue;
+					
+					byControlPointForm1.visible=hasControlPoint(linkTypeValue);
+					byControlPointForm1.includeInLayout=hasControlPoint(linkTypeValue);
+					byControlPointForm2.visible=hasControlPoint(linkTypeValue)&&linkSplitByControlPoint.selected;
+					byControlPointForm2.includeInLayout=hasControlPoint(linkTypeValue)&&linkSplitByControlPoint.selected;
+					
+					extendPane.visible=isExtendTypeLink(linkTypeValue);
+					extendPane.includeInLayout=isExtendTypeLink(linkTypeValue);
+					
+					var controlPoint:Point=link.getStyle(Styles.LINK_CONTROL_POINT);
+					if(controlPoint is Point){
+						linkSplitByControlPoint.selected=true;
+						this.linkControlPointX.value=controlPoint.x;
+						this.linkControlPointY.value=controlPoint.y;
+					}else{
+						linkSplitByControlPoint.selected=false;
+					}
+					var isSplitLink:Boolean = (!controlPoint is Point)&&isSplitTypeLink(linkTypeValue);
+					splitLinkForm1.visible=isSplitLink;
+					splitLinkForm1.includeInLayout=isSplitLink;
+					splitLinkForm2.visible=isSplitLink;
+					splitLinkForm2.includeInLayout=isSplitLink;
+					splitLinkForm3.visible=isSplitLink;
+					splitLinkForm3.includeInLayout=isSplitLink;
+					
+					this.linkSplitByPercent.selected=link.getStyle(Styles.LINK_SPLIT_BY_PERCENT);
+					this.linkSplitPercentValue.value=link.getStyle(Styles.LINK_SPLIT_PERCENT);
+					this.linkSplitValue.value=link.getStyle(Styles.LINK_SPLIT_VALUE);
+					this.linkExtend.value=link.getStyle(Styles.LINK_EXTEND);
+					var linkPattern:Array=link.getStyle(Styles.LINK_PATTERN);
+					this.linkDashed.selected=linkPattern!=null;
+					if(this.linkDashed.selected){
+						this.linkDashedPattern_1.value=linkPattern[0];
+						this.linkDashedPattern_2.value=linkPattern[1];
+					}
+					this.linkFromAtEdge.selected=link.getStyle(Styles.LINK_FROM_AT_EDGE);
+					this.linkFromOffsetX.value=link.getStyle(Styles.LINK_FROM_XOFFSET);
+					this.linkFromOffsetY.value=link.getStyle(Styles.LINK_FROM_YOFFSET);
+					this.linkToAtEdge.selected=link.getStyle(Styles.LINK_TO_AT_EDGE);
+					this.linkToOffsetX.value=link.getStyle(Styles.LINK_TO_XOFFSET);
+					this.linkToOffsetY.value=link.getStyle(Styles.LINK_TO_YOFFSET);
+					
+					this.linkFromArrow.selected=link.getStyle(Styles.ARROW_FROM);
+					this.arrowFromAtEdge.selected = link.getStyle(Styles.ARROW_FROM_AT_EDGE);
+					this.linkFromArrowShape.selectedItem=link.getStyle(Styles.ARROW_FROM_SHAPE);
+					this.linkFromArrowWidth.value=link.getStyle(Styles.ARROW_FROM_WIDTH);
+					this.linkFromArrowHeight.value=link.getStyle(Styles.ARROW_FROM_HEIGHT);
+					this.linkFromArrowOffsetX.value=link.getStyle(Styles.ARROW_FROM_XOFFSET);
+					this.linkFromArrowOffsetY.value=link.getStyle(Styles.ARROW_FROM_YOFFSET);
+					this.linkFromArrowFill.selected=link.getStyle(Styles.ARROW_FROM_FILL);
+					this.linkFromArrowColor.selectedColor=link.getStyle(Styles.ARROW_FROM_COLOR);
+					this.linkFromArrowAlpha.value=link.getStyle(Styles.ARROW_FROM_ALPHA);
+					this.linkFromArrowOutlineAlpha.value=link.getStyle(Styles.ARROW_FROM_OUTLINE_ALPHA);
+					this.linkFromArrowOutlineColor.selectedColor=link.getStyle(Styles.ARROW_FROM_OUTLINE_COLOR);
+					this.linkFromArrowOutlineWidth.value=link.getStyle(Styles.ARROW_FROM_OUTLINE_WIDTH);
+					
+					linkPattern=link.getStyle(Styles.ARROW_FROM_OUTLINE_PATTERN);
+					this.linkFromArrowOutlineDashed.selected=linkPattern!=null;
+					if(this.linkFromArrowOutlineDashed.selected){
+						this.linkFromArrowOutlineDashedPattern_1.value=linkPattern[0];
+						this.linkFromArrowOutlineDashedPattern_2.value=linkPattern[1];
+					}
+					
+					this.linkToArrow.selected=link.getStyle(Styles.ARROW_TO);
+					this.arrowToAtEdge.selected = link.getStyle(Styles.ARROW_TO_AT_EDGE);
+					this.linkToArrowShape.selectedItem=link.getStyle(Styles.ARROW_TO_SHAPE);
+					this.linkToArrowWidth.value=link.getStyle(Styles.ARROW_TO_WIDTH);
+					this.linkToArrowHeight.value=link.getStyle(Styles.ARROW_TO_HEIGHT);
+					this.linkToArrowOffsetX.value=link.getStyle(Styles.ARROW_TO_XOFFSET);
+					this.linkToArrowOffsetY.value=link.getStyle(Styles.ARROW_TO_YOFFSET);
+					this.linkToArrowFill.selected=link.getStyle(Styles.ARROW_TO_FILL);
+					this.linkToArrowColor.selectedColor=link.getStyle(Styles.ARROW_TO_COLOR);
+					this.linkToArrowAlpha.value=link.getStyle(Styles.ARROW_TO_ALPHA);
+					this.linkToArrowOutlineColor.selectedColor=link.getStyle(Styles.ARROW_TO_OUTLINE_COLOR);
+					this.linkToArrowOutlineAlpha.value=link.getStyle(Styles.ARROW_TO_OUTLINE_ALPHA);
+					this.linkToArrowOutlineWidth.value=link.getStyle(Styles.ARROW_TO_OUTLINE_WIDTH);
+					
+					linkPattern=link.getStyle(Styles.ARROW_TO_OUTLINE_PATTERN);
+					this.linkToArrowOutlineDashed.selected=linkPattern!=null;
+					if(this.linkToArrowOutlineDashed.selected){
+						this.linkToArrowOutlineDashedPattern_1.value=linkPattern[0];
+						this.linkToArrowOutlineDashedPattern_2.value=linkPattern[1];
+					}
+				}*/
+				isAdjusting=false;
+			}
+			/*
+			private function dashedPatternBinding(styleName:String,dashedCheckBox:CheckBox,pattern1:NumericStepper,pattern2:NumericStepper):void{
+				dashedCheckBox.addEventListener(Event.CHANGE,function(e:Event):void{
+					if(_currentElement==null){
+						return;
+					}
+					if(isAdjusting){
+						return;
+					}
+					isAdjusting=true;
+					if(dashedCheckBox.selected){
+						_currentElement.setStyle(styleName,[pattern1.value,pattern2.value]);
+					}else{
+						_currentElement.setStyle(styleName,null);
+					}
+					isAdjusting=false;
+				});
+				pattern1.addEventListener(NumericStepperEvent.CHANGE,function(e:NumericStepperEvent):void{
+					if(_currentElement&&dashedCheckBox.selected){
+						if(isAdjusting){
+							return;
+						}
+						isAdjusting=true;
+						var x:Number=pattern1.value;
+						var y:Number=0;
+						var pattern:Array=_currentElement.getStyle(styleName);
+						if(pattern is Array&&pattern.length>1){
+							y=pattern[1];
+						}
+						if(x==0&&y==0){
+							_currentElement.setStyle(styleName,null);
+						}else{
+							_currentElement.setStyle(styleName,[x,y]);
+						}
+						isAdjusting=false;
+					}
+				});
+				pattern2.addEventListener(NumericStepperEvent.CHANGE,function(e:NumericStepperEvent):void{
+					if(_currentElement&&dashedCheckBox.selected){
+						if(isAdjusting){
+							return;
+						}
+						isAdjusting=true;
+						var x:Number=0;
+						var y:Number=pattern2.value;
+						var pattern:Array=_currentElement.getStyle(styleName);
+						if(pattern is Array&&pattern.length>0){
+							x=pattern[0];
+						}
+						if(x==0&&y==0){
+							_currentElement.setStyle(styleName,null);
+						}else{
+							_currentElement.setStyle(styleName,[x,y]);
+						}
+						isAdjusting=false;
+					}
+				});
+			}*/
+				
+			private function createSetPropertyFunction(styleName:String,isStyle:Boolean=false,canNull:Boolean=true):Function{
+				return function(value:*):void{
+					if(isAdjusting){
+						return;
+					}
+					isAdjusting=true;
+					if(canNull||value!==null){
+						if(currentElement){
+							if(isStyle){
+								currentElement.setStyle(styleName,value);
+							}else{
+								currentElement[styleName]=value;
+							}
+						}
+					}
+					isAdjusting=false;
+				}
+			}
+			
+            
+			protected function location_changeHandler(event:NumericStepperEvent):void
+			{
+				if(isAdjusting){
+					return;
+				}
+				isAdjusting=true;
+				if(_currentElement is Node){
+					(_currentElement as Node).location=new Point(locationX.value,locationY.value);
+				}
+				isAdjusting=false;
+			}
+           /*
+			protected function linkSplitByControlPoint_clickHandler(event:MouseEvent):void
+			{
+				if(!(_currentElement is Link)){
+					return;
+				}
+				var byControlPoint:Boolean=linkSplitByControlPoint.selected;
+				if(!byControlPoint){
+					_currentElement.setStyle(Styles.LINK_CONTROL_POINT,null);
+					return;
+				}
+				var controlPoint:Point=_currentElement.getStyle(Styles.LINK_CONTROL_POINT);
+				if(controlPoint){
+					return;
+				}else{
+					if(_network){
+						var fromAgent:Node=(_currentElement as Link).fromAgent;
+						var toAgent:Node=(_currentElement as Link).toAgent;
+						_currentElement.setStyle(Styles.LINK_CONTROL_POINT,
+							new Point((fromAgent.centerLocation.x+toAgent.centerLocation.x)/2,
+								(fromAgent.centerLocation.y+toAgent.centerLocation.y)/2));
+					}
+				}
+			}
+
+			protected function linkControlPoint_changeHandler(event:NumericStepperEvent):void
+			{
+				if(isAdjusting){
+					return;
+				}
+				isAdjusting=true;
+				if(_currentElement is Link){
+					(_currentElement as Link).setStyle(Styles.LINK_CONTROL_POINT,new Point(linkControlPointX.value,linkControlPointY.value));
+				}
+				isAdjusting=false;
+			}
+			*/
+			private function bindingProperty(propertyName:String, ui:UIComponent, uiProperty:String, isStyle:Boolean=true):void{
+				BindingUtils.bindSetter(createSetPropertyFunction(propertyName, isStyle), ui, uiProperty);
+			}
+			
+			public function onGetNetworkResources(items:XMLListCollection):void {
+				Source.dataProvider = items.children();
+				Source.labelField = "Name";
+			}
+			
+		    private function onChange():void { 
+				//屏蔽代码，此代码是判断是否存在事件源
+				//var strResources:Array = resources.split(',');
+				//if (strResources.length > 0) {
+				  // for (var i:int = 0; i < strResources.length;i++ ) {
+				        // if (strResources[i] != Source.selectedItem.Value) {
+							   if (currentElement.getClient(CustomAlarmElementMapping.MAPPINGID) != Source.selectedItem.Value) {
+									currentElement.setClient(CustomAlarmElementMapping.MAPPINGID, Source.selectedItem.Value);
+									currentElement.name = Source.selectedItem.Name;
+							   }
+						// }else {
+						//	Alert.show("已存在事件源！"); 
+						// }
+					 //} 
+				//}
+			 }
+			SerializationSettings.registerGlobalClient(CustomAlarmElementMapping.MAPPINGID, Consts.TYPE_STRING);
+		]]>
+	</mx:Script>
+	
+	<editor:ExpandButton label="基本信息" expandTarget="{basicPropertyPane}" />
+	<mx:Form backgroundAlpha="0.5" cornerRadius="5" indicatorGap="5" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"  id="basicPropertyPane" width="100%" >
+		<mx:FormItem label="事件源:">
+			<mx:ComboBox id="Source" change="onChange();" prompt="-请选择-" />
+		</mx:FormItem>
+		<mx:FormItem label="名称:">
+			<mx:TextInput width="90%" id="labelName"/>
+		</mx:FormItem>
+		<mx:FormItem label="颜色:">
+			<mx:ColorPicker  id="labelColor" editable="false"/>
+		</mx:FormItem>
+		<mx:FormItem id="locationForm" label="定位位置(X,Y):">
+			<mx:NumericStepper minimum="0" maximum="1000"  id="locationX"  change="location_changeHandler(event)"/>
+			<mx:NumericStepper minimum="0" maximum="1000"  id="locationY" change="location_changeHandler(event)"/>
+		</mx:FormItem>
+		<mx:FormItem label="移动名称位置(X,Y):">
+			<mx:NumericStepper minimum="-200" maximum="200"  id="labelOffsetX"/>
+			<mx:NumericStepper minimum="-200" maximum="200"  id="labelOffsetY"/>
+		</mx:FormItem>
+	</mx:Form>
+	</mx:VBox>

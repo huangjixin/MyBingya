@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" implements="demo.ISerializable" 
+   xmlns:twaver="http://www.servasoftware.com/2009/twaver/flex" 
+   width="100%" height="100%" creationComplete="init();" xmlns:editors="demo.editor.link.*"
+   xmlns:demo="demo.common.*"
+   xmlns:editor="demo.alarm.alarmmapping.*"
+   preloader="demo.DownProBar" paddingLeft="3" paddingRight="3" paddingTop="3" paddingBottom="3">
+   <mx:XML source = "demo/license.xml" id="licenseXML"/>
+   <mx:Script>
+	   <![CDATA[
+	      import demo.*;
+	      import demo.alarm.alarmmapping.*;
+	      import demo.common.*;
+	      import demo.editor.link.*;
+	      
+	      import flash.events.*;
+	      import flash.net.URLLoader;
+	      import flash.net.URLLoaderDataFormat;
+	      import flash.net.URLRequest;
+	      import flash.net.URLVariables;
+	      
+	      import mx.collections.ArrayCollection;
+	      import mx.collections.XMLListCollection;
+	      import mx.containers.FormItem;
+	      import mx.controls.*;
+	      import mx.controls.Alert;
+	      import mx.controls.CheckBox;
+	      import mx.controls.List;
+	      import mx.controls.PopUpMenuButton;
+	      import mx.controls.dataGridClasses.DataGridColumn;
+	      import mx.events.*;
+	      
+	      import twaver.*;
+	      import twaver.network.layout.AutoLayouter;
+
+		  private var box:ElementBox = new ElementBox();
+		  private var popupMenuButton:PopUpMenuButton = new PopUpMenuButton();
+		  private var autoLayouter:AutoLayouter = null;
+		  public var timer:Timer = new Timer(100);
+		 // public var tableArray:ArrayCollection;
+		  public var LightAlarm:AlarmSeverity = null; 
+          public var SeriousAlarm:AlarmSeverity = null;
+		  
+          [Embed(source="../images/element/subnetwork_image.png")]
+		   public static const subnetwork_image:Class;
+		   
+	      [Embed(source="../images/mainScreen.png")]
+		  public static const mainScreen:Class;	
+	      [Embed(source="../images/black.png")]
+		  public static const black:Class;	
+		   
+		  SerializationSettings.registerGlobalClient(CustomAlarmElementMapping.MAPPINGID, Consts.TYPE_STRING); 
+		  public function get dataBox():DataBox{
+			  return box;
+		   }
+		   private function init():void { 
+			  
+			    //TopologyService.getBackgroundImages(preName);
+				
+			    Utils.validateLicense(this.licenseXML);
+				 this.autoLayouter = new AutoLayouter(network);
+				 box.alarmBox.alarmElementMapping = new CustomAlarmElementMapping(box);
+				 network.elementBox = box;
+			     DemoUtils.addInteractionComboBox(toolbar, network);
+				 network.zoom = this.zoomSlider.value;	
+				 network.addSelectionChangeListener(selectionChanged);
+				 initNetWork();
+				 popupMenuButton.dataProvider = [
+						"圆形布局","对称布局","顶底布局","底顶布局","左右布局","右左布局"
+						];	
+				 popupMenuButton.height = DemoUtils.DEFAULT_BUTTON_HEIGHT;
+				 popupMenuButton.addEventListener("itemClick", doLayout);	
+				// toolbar.addChild(popupMenuButton);
+                 onGetAlertColor();
+				 
+//				 tick();
+			 }
+			 //显示NetWork图
+			 public function initNetWork():void {
+				 var parameters : Object = Application.application.parameters;
+				var preName:String  = parameters.name;//portlet首选项name的值
+				var userName:String  = parameters.userName;
+				TopologyService.getImagesTypeList(preName,userName,null,network,true);
+				 TopologyService.alarmDemo = this;
+				// TopologyService.getBackgroundImages(preName,null,network,true);
+				//TopologyService.getNetworkResourceTypeImages(null,network,true);
+			 }
+			
+			private function doLayout(e:Event = null):void{
+				this.autoLayouter.explicitXOffset = 30;
+				this.autoLayouter.explicitYOffset = 150;
+				this.autoLayouter.doLayout(this.popupMenuButton.label);
+				
+               if(this.popupMenuButton.label == "圆形布局"){
+				  this.autoLayouter.doLayout(Consts.LAYOUT_ROUND);
+               }
+			   else if (this.popupMenuButton.label == "对称布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_SYMMETRY);
+			   } 
+			   else if (this.popupMenuButton.label == "顶底布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_TOPBOTTOM);
+			   } 
+			   else if (this.popupMenuButton.label == "底顶布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_BOTTOMTOP);
+			   } 
+			   else if (this.popupMenuButton.label == "左右布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_LEFTRIGHT);
+			   } 
+			   else if (this.popupMenuButton.label == "右左布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_RIGHTLEFT);
+			   } 
+			}		
+			
+			 
+		    public var resources:String = "";
+		   	public function tick(event:TimerEvent = null):void {
+				timer.delay = 10000;
+				//遍历network中的所有node的Id
+				network.elementBox.forEach(function(node:Object):void {
+					var id:String = "";
+					try { 
+						id = node.getClient(CustomAlarmElementMapping.MAPPINGID);
+					} catch(e:Event) {
+						
+					}
+					if (id != null && id != "")
+						resources+="'"+id+"'"+ ",";
+				});
+				
+		      	resources = resources.substring(0,resources.length-1);
+				//获取Alert数据
+			//	if (box.alarmBox.count == 0) {
+				 TopologyService.getAlerts(resources,
+				    function (event:Event):void {
+						var loader:URLLoader=URLLoader(event.target); 
+						var _data:URLVariables = new URLVariables(loader.data); 
+						var xmlContent:String = _data.data;
+						
+						var xml:XML=new XML(xmlContent);
+						var xmlList:XMLList = xml.elements("Item"); 
+						var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList);
+					    var tableArray:ArrayCollection= new ArrayCollection(xmlListCollection.toArray());
+						 
+						renderAlerts(tableArray);
+						onAlerts(tableArray);
+					});	
+					
+					resources = "";
+			   //}
+			}
+			//响应Alert数据
+		    public function onAlerts(array:ArrayCollection):void {
+				clearAlerts();
+				clearAlarms();
+				renderAlerts(array);
+				network.elementBox.forEach(function(node:Object):void {
+					
+					var id:String = "";
+					try {
+						id = node.getClient(CustomAlarmElementMapping.MAPPINGID);
+					} catch(e:Event) {
+						
+					}
+					if(id != null && id != ""){
+						//var index:int= -1;
+						for (var i:int = 0; i < array.length;i++ )
+						{
+							var index:int= -1;
+							if (id == array[i].SOURCE ) {
+								//index = i;
+								//break;
+								index++;
+							}
+							if (index >= 0)
+						      renderAlert(id, array[i].MMESSAGE,array[i].SEVERITY);
+							//else
+							//  clearAlert(id);
+						}
+					}
+				});
+			}
+			
+			public function clearAlerts():void{
+				tableTimer.dataBox.clear();
+			}
+			
+			public function renderAlerts(tableArray:ArrayCollection):void {
+				if (tableArray.length > 0)
+			    {
+					 var tableTimerBox:ElementBox = new ElementBox();
+					 for (var i:int = 0; i < tableArray.length;i++)
+					 {
+						  var tableTimerNode:Node = new Node();
+						  tableTimerNode.setClient("Id", tableArray[i].ID);
+						//  tableTimerNode.setClient("Category", tableArray[i].CATEGORY);
+						  tableTimerNode.setClient("CreateTime", tableArray[i].CREATETIME);
+						//  tableTimerNode.setClient("Entity", tableArray[i].ENTITY);
+						//  tableTimerNode.setClient("GroupName", tableArray[i].GROUPNAME);
+						//  tableTimerNode.setClient("MapName", tableArray[i].MAPNAME);
+						  tableTimerNode.setClient("Mmessage", tableArray[i].MMESSAGE);
+						  tableTimerNode.setClient("ModTime", tableArray[i].MODTIME);
+						//  tableTimerNode.setClient("OwnerName", tableArray[i].OWNERNAME);
+						//  tableTimerNode.setClient("PreviousSeverity", tableArray[i].PREVIOUSSEVERITY);
+						//  tableTimerNode.setClient("Priority", tableArray[i].PRIORITY);
+						  tableTimerNode.setClient("Source", tableArray[i].SOURCE);
+						  tableTimerNode.setClient("Severity", tableArray[i].SEVERITY);
+						  tableTimerNode.setClient("severitycn", tableArray[i].severitycn);
+						//  tableTimerNode.setClient("WebNMS", tableArray[i].WEBNMS);
+						//  tableTimerNode.setClient("Who", tableArray[i].WHO);
+						//  tableTimerNode.setClient("Stage", tableArray[i].STAGE);
+						  
+						  tableTimerNode.setClient("displayname", tableArray[i].displayname);
+						  tableTimerNode.setClient("physicalLocation", tableArray[i].physicalLocation);
+						  tableTimerNode.setClient("acceptState", tableArray[i].acceptState);
+						  tableTimerNode.setClient("excuteAction", tableArray[i].excuteAction);
+						  tableTimerNode.setClient("contactPerson", tableArray[i].contactPerson);
+						  tableTimerNode.setClient("telphone", tableArray[i].telphone);
+						  tableTimerNode.setClient("ownedBusiness", tableArray[i].ownedBusiness);
+						  
+						  tableTimerBox.add(tableTimerNode);
+					 }
+					 tableTimer.dataBox = tableTimerBox;
+			   }
+			}
+			
+			public function clearAlert(id:String):void{
+				var element:IElement = TopologyService.findNetworkResource(id,"",network);
+				//清除提示
+				box.alarmBox.removeAlarmsByElement(element);
+			}
+			
+			public function clearAlarms():void{
+				box.alarmBox.clear();
+			}
+			
+			public function renderAlert(id: String, message:String,severity:int):void{
+				var element:IElement = TopologyService.findNetworkResource(id,message,network);
+				//使用Alert.Message刷新提示
+				var alarm:Alarm;
+				if (element != null) {
+					//var alarm:Alarm = new Alarm(null, element.id, AlarmSeverity.CRITICAL);
+				    alarm = new Alarm(null, element.id);
+					if (severity == 1) {
+						if (SeriousAlarm != null)
+						   alarm.alarmSeverity = SeriousAlarm;
+						else
+					       alarm.alarmSeverity = AlarmSeverity.CRITICAL;
+					}
+					else if (severity == 2 ||severity == 3||severity == 4) {
+						if (LightAlarm != null)
+						   alarm.alarmSeverity = LightAlarm;
+						else
+					     alarm.alarmSeverity = AlarmSeverity.INDETERMINATE;
+					}
+					else if (severity==5) {
+					  alarm.alarmSeverity = AlarmSeverity.CLEARED;
+					}
+					
+					alarm.setClient(CustomAlarmElementMapping.MAPPINGID, id);
+					box.alarmBox.add(alarm);
+					//显示告警信息
+				//	network.alarmLabelFunction = function(element) : String{
+				    //   return element.getClient("Message");
+					//};
+				}
+			}
+		
+			private function selectionChanged(e:SelectionChangeEvent=null):void {
+				var firstStr:String;
+				var selection:ICollection = network.selectionModel.selection;
+				if (!(selection && selection.count > 0)) {
+					panel.visible=false;
+					panel.includeInLayout = false;
+					tick(null);
+					timer.start();
+		            return;
+		       }
+			    var List:Array = selection.toArray();
+				var id:String = List[0].getClient(CustomAlarmElementMapping.MAPPINGID);
+				var type:String = List[0].image;
+				
+				 var index:int = type.indexOf('_');
+				   if (index > 0)
+                       firstStr = type.substring(0, index);
+				    else 
+					   firstStr = type ;	   
+				var resources:String = "'" + id + "'";
+				//根据事件源id获取该id的alert等信息
+				TopologyService.getAlerts(resources,
+				    function (event:Event):void {
+						var loader:URLLoader=URLLoader(event.target); 
+						var _data:URLVariables = new URLVariables(loader.data); 
+						var xmlContent:String = _data.data;
+						
+						var xml:XML=new XML(xmlContent);
+						var xmlList:XMLList = xml.elements("Item"); 
+						var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList);
+					    var tableArray:ArrayCollection = new ArrayCollection(xmlListCollection.toArray()); 
+					   renderAlerts(tableArray);
+					});
+				//根据事件源id获取该id的基本信息
+			 TopologyService.getNetworkResourceProperties(id, firstStr,function(event:Event):void {
+						var loader:URLLoader=URLLoader(event.target); 
+						var _data:URLVariables = new URLVariables(loader.data); 
+						 
+						var xmlContent:String = _data.data;
+						
+						var xml:XML=new XML(xmlContent);
+						var xmlList:XMLList = xml.elements("Item"); 
+						var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList);
+						var array:ArrayCollection = new ArrayCollection(xmlListCollection.toArray());
+						
+						if (selection && selection.count > 0) { 
+						
+							 var tableBox:ElementBox = new ElementBox();
+							   if (array.length > 0) {
+								   for (var i:int = 0; i < array.length;i++)
+							     {
+		
+								   if(array[i].IsBool==false){
+											 var node:Node = new Node();
+											 node.setClient("Propertie", array[i].Propertie);
+											 node.setClient("PropertieValue", array[i].PropertieValue);
+										     tableBox.add(node);
+										
+								    }
+									else if (array[i].IsBool == true) {
+										 var UrlNode:Node = new Node();
+										 UrlNode.setClient("link", array[i].link);
+										 buttUrl.addEventListener(MouseEvent.CLICK,function (event:Event):void {
+										 var url:String = UrlNode.getClient("link");
+										 var request:URLRequest = new URLRequest(url);
+										 navigateToURL(request);
+								       });
+									}
+								 }
+							}
+							  table.dataBox = tableBox;
+							  panel.visible=true;
+					          panel.includeInLayout = true;
+						}
+             });
+			}
+			//自定义警告颜色
+			public function register(value:int, name:String, nickName:String, color:uint, displayName:String
+            = null):AlarmSeverity {
+                var alarmseverityColor:AlarmSeverity = new AlarmSeverity(value,name,nickName,color,displayName);
+				 return alarmseverityColor;
+			}
+			private function onGetAlertColor():void {
+				var parameters : Object = Application.application.parameters;
+				var param1 : String = parameters.name;
+				var userName:String = parameters.userName;
+			   TopologyService.getAlertColor(param1,userName,"false",function(event:Event):void {
+				   var loader:URLLoader=URLLoader(event.target); 
+						var _data:URLVariables = new URLVariables(loader.data); 
+						var xmlContent:String = _data.data;
+						
+						var xml:XML=new XML(xmlContent);
+						var xmlList:XMLList = xml.elements("Item"); 
+						var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList);
+						var array:ArrayCollection = new ArrayCollection(xmlListCollection.toArray());
+						if(array.length>0){
+						   SeriousAlarm = register(500, "SeriousAlarm", "", uint(array[0].seriousColor));
+			               LightAlarm = register(100, "LightAlarm", "", uint(array[0].lightColor));
+						}
+				  });
+			}
+				private function onItemClick(evt:ListEvent):void {
+					   var data:IData = tableTimer.selectionModel.lastData;
+					   var id:String = data.getClient("Id");
+					   var url:String = "/MonitorPortal/appmanager/portal/desktop?_nfpb=true&_pageLabel=Monitor_page_85&id="+id;
+					   var request:URLRequest = new URLRequest(url);
+					   navigateToURL(request);
+				}
+	   ]]>
+   </mx:Script>   
+   <mx:initialize>
+		<![CDATA[
+		    Utils.registerImageByClass("subnetwork_image",subnetwork_image, true, null, [subnetwork_image]);
+			Utils.registerImageByClass("mainScreen",mainScreen);
+		    Utils.registerImageByClass("black",black);
+		]]>
+	</mx:initialize>
+	<editors:ElementCreator elementClass="{SubNetwork}" label="subnetwork" imageName="subnetwork_image" styles=" " />
+   <mx:HDividedBox width="100%" height="100%" backgroundColor="0xCCCCCC">
+		 <mx:VDividedBox width="70%" height="100%">
+		 <mx:Canvas  id="canvas" width="100%" height="100%"  horizontalScrollPolicy="off" verticalScrollPolicy="off"  >
+		   <twaver:Network id="network" width="100%" height="100%" backgroundColor="0xFFFFFF"/>
+		   <mx:HBox id="toolbar" top="5" left="15" />
+		   <mx:VSlider id="zoomSlider" top="30" left="15" liveDragging="true" value="0.84" minimum="0.5" maximum="1.2" dataTipPlacement="right" change="network.zoom=zoomSlider.value;" />
+		   <mx:Panel id="panel" visible="false" top="10" right="20" includeInLayout="false" >
+				 <twaver:Table id="table" width="100%" height="100%">						
+					<twaver:columns>	
+						<twaver:TableColumn dataField="C:Propertie" headerText="属性"/>	
+						<twaver:TableColumn dataField="C:PropertieValue" headerText="值"/>
+				    </twaver:columns>					
+				</twaver:Table>	
+				<mx:FormItem>
+						<mx:Button id="buttUrl" label="详细"/>
+					</mx:FormItem>
+			</mx:Panel>		
+			 <mx:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
+				 <mx:filters>
+					 <mx:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
+				 </mx:filters>
+			 </mx:Label>
+           </mx:Canvas>
+		  <mx:VBox width="100%" height="40%" verticalGap="0">
+			  <twaver:Table id="tableTimer" width="100%" height="100%" itemClick="{onItemClick(event)}">						
+					<twaver:columns>
+						<twaver:TableColumn dataField="C:Id" client="Id" headerText="Id" visible="false" />
+						<twaver:TableColumn dataField="C:displayname"  headerText="显示名称"/>
+						<!--<twaver:TableColumn dataField="C:Source"  headerText="显示名称"/>-->
+						<twaver:TableColumn dataField="C:severitycn" headerText="告警级别"/>
+						<!--<twaver:TableColumn dataField="C:Severity" headerText="告警级别"/>-->
+						<twaver:TableColumn dataField="C:Mmessage" headerText="告警信息"/>
+						<twaver:TableColumn dataField="C:physicalLocation" headerText="物理位置"/>
+						<!--<twaver:TableColumn dataField="C:acceptState" headerText="受理状态"/>-->
+						<!--<twaver:TableColumn dataField="C:excuteAction" headerText="执行动作"/>-->
+						<twaver:TableColumn dataField="C:contactPerson" headerText="联系人"/>
+						<twaver:TableColumn dataField="C:telphone" headerText="联系电话"/>
+						<!--<twaver:TableColumn dataField="C:ownedBusiness" headerText="所属业务"/>-->
+					</twaver:columns>					
+				</twaver:Table>								
+			</mx:VBox>
+	  </mx:VDividedBox>
+   </mx:HDividedBox>
+</mx:Application>

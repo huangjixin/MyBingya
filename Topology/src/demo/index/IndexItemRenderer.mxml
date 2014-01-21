@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				xmlns:filters="org.gonta.filters.*"
+				xmlns:ns="http://www.servasoftware.com/2009/twaver/flex"
+				autoDrawBackground="false"
+				mouseDown="itemrenderer1_mouseDownHandler(event)" toolTip="{data.label}">
+	<!--<fx:Script source="IndexItemRenderer_Script.as"/> creationComplete="init();"-->
+	<fx:Script>
+		<![CDATA[
+			import mx.events.ItemClickEvent;
+			protected function itemrenderer1_mouseDownHandler(event:MouseEvent):void
+			{
+				var e:ItemClickEvent = new ItemClickEvent(ItemClickEvent.ITEM_CLICK, true);
+				e.item = data;
+				e.index = itemIndex;
+				dispatchEvent(e);
+
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!---->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states> 
+	<s:Group left="0" right="0" top="0" bottom="0">
+		<s:filters>
+			<s:GlowFilter excludeFrom="normal" blurX="20" blurY="20" color="0xfff000"/>
+		</s:filters>
+		<s:Rect includeIn="selected" left="0" right="0" top="0" bottom="0">
+			<s:fill>
+				<s:SolidColor color="0x0"/>
+			</s:fill>
+		</s:Rect>
+		<!--<mx:HBox id="twBody" width="100%" height="100%" horizontalAlign="center"
+				 horizontalScrollPolicy="off" verticalAlign="middle" verticalScrollPolicy="off">
+			<ns:Network id="network" width="100%" height="100%" autoLayout="true"
+						backgroundColor="#00ffffff" horizontalScrollPolicy="auto"
+						verticalScrollPolicy="auto"/>
+			<mx:filters>  
+				<filters:WetFloorFilter y="{img.height}" height="50" alpha=".5"/>  
+			</mx:filters>
+		</mx:HBox>-->
+		<s:BitmapImage id="img" left="2" right="2" top="2" bottom="2" width="100%"
+					   height="100%" fillMode="scale" source="{data.source}">
+			<s:filters>  
+				<filters:WetFloorFilter y="{img.height}" height="50" alpha=".5"/>  
+			</s:filters>
+		</s:BitmapImage>
+		<s:Group left="2" right="2" bottom="2" height="{height*0.2}">
+			<s:Rect left="0" right="0" top="0" bottom="0">
+				<s:fill>
+					<s:SolidColor alpha="0.3" color="0x0"/>
+				</s:fill>
+			</s:Rect>
+			<s:Label left="2" color="0xffffff" fontFamily="微软雅黑" fontSize="16" fontWeight="bold"
+					 text="{data.label}" verticalCenter="0"/>
+		</s:Group>
+		<s:HGroup right="4" bottom="4" color="0xffffff">
+			<s:Label text="状态"/>
+			<s:Image source="@Embed(source='demo/index/images/MonitorPortal_sad.png')"/>
+			<s:Label text="预警"/>
+			<s:Image source="@Embed(source='demo/index/images/MonitorPortal_smile.png')"/>
+		</s:HGroup>
+	</s:Group>
+</s:ItemRenderer>

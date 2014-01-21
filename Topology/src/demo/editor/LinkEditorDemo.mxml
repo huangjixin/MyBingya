@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" implements="demo.ISerializable"
+	xmlns:twaver="http://www.servasoftware.com/2009/twaver/flex" 
+	xmlns:demo="demo.common.*"
+	width="100%" height="100%" creationComplete="init();" xmlns:editor="demo.editor.link.*"
+	xmlns:upload="demo.editor.upload.*"
+	preloader="demo.DownProBar" paddingLeft="3" paddingRight="3" paddingTop="3" paddingBottom="3">
+	<mx:XML source = "demo/license.xml" id="licenseXML"/>
+	<mx:Script>
+		<![CDATA[
+			import adobe.utils.CustomActions;
+			import demo.*;
+			import flash.net.URLRequest;
+			import twaver.network.interaction.MapFilterInteractionHandler;
+			import twaver.network.interaction.InteractionEvent;
+			import twaver.network.layout.AutoLayouter;
+			//import demo.common.*;
+			import demo.editor.link.*;
+			import demo.alarm.alarmmapping.*;
+			import mx.collections.XMLListCollection;
+			import mx.collections.ArrayCollection;
+			import flash.events.*;
+			import mx.controls.*;
+			import mx.events.*;
+			import mx.managers.*;
+			import mx.controls.Alert;
+			
+			import twaver.*;
+			import twaver.controls.*;
+			import twaver.network.*;
+			import flash.net.URLLoaderDataFormat;
+			import flash.net.URLVariables;
+			//import flash.utils.Dictionary;
+			
+			import mx.controls.PopUpMenuButton;
+            import mx.containers.TitleWindow;
+            import flash.geom.Point;
+			
+			import mx.managers.PopUpManager;
+            import mx.controls.Text;
+			
+			[Embed(source="link/images/linkToArrowDelta.png")]
+			public static const linkToArrowDelta:Class;
+			[Embed(source="link/images/linkToArrowStandard.png")]
+			public static const linkToArrowStandard:Class;
+			[Embed(source="link/images/linkToArrowShort.png")]
+			public static const linkToArrowShort:Class;
+			[Embed(source="link/images/linkToArrowDiamond.png")]
+			public static const linkToArrowDiamond:Class;
+			[Embed(source="link/images/linkToArrowSlant.png")]
+			public static const linkToArrowSlant:Class;
+			
+			[Embed(source="link/images/linkFromArrowDelta.png")]
+			public static const linkFromArrowDelta:Class;
+			[Embed(source="link/images/linkFromArrowStandard.png")]
+			public static const linkFromArrowStandard:Class;
+			[Embed(source="link/images/linkFromArrowShort.png")]
+			public static const linkFromArrowShort:Class;
+			[Embed(source="link/images/linkFromArrowDiamond.png")]
+			public static const linkFromArrowDiamond:Class;
+			[Embed(source="link/images/linkFromArrowSlant.png")]
+			public static const linkFromArrowSlant:Class;
+
+			[Embed(source="../images/element/link_flexional_icon.png")]
+			public static const link_flexional_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_bottom_icon.png")]
+			public static const link_orthogonal_bottom_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_control_point_icon.png")]
+			public static const link_orthogonal_control_point_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_h_icon.png")]
+			public static const link_orthogonal_h_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_left_icon.png")]
+			public static const link_orthogonal_left_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_right_icon.png")]
+			public static const link_orthogonal_right_icon:Class;	
+			[Embed(source="../images/element/link_orthogonal_top_icon.png")]
+			public static const link_orthogonal_top_icon:Class;	
+			[Embed(source="../images/element/subnetwork_image.png")]
+		     public static const subnetwork_image:Class;
+			 
+			[Embed(source="../images/mainScreen.png")]
+			public static const mainScreen:Class;	
+			[Embed(source="../images/black.png")]
+			public static const black:Class;	
+
+			private var xmlSerializer:XMLSerializer;
+			
+			private var elementBox:ElementBox;
+			
+			private var _lastType:String;
+			public var _lastTypepic:String;
+			
+			private var popupMenuButton:PopUpMenuButton = new PopUpMenuButton();
+			private var autoLayouter:AutoLayouter = null;
+			
+			public var userName:String;
+			public var preName:String;
+			
+			public function get dataBox():DataBox{
+				return elementBox;
+			}
+			private function init():void { 
+	
+				Alert.show("","First init");
+				var parameters : Object = Application.application.parameters;
+		        userName = parameters.userName;//登录用户名
+				preName = parameters.name;//portlet首选项name的值
+				
+				Alert.show(userName,preName);
+				
+				TopologyService.getImagesTypeList(preName,userName,imageItems, network, false);
+			   // TopologyService.getBackgroundImages(preName,imageItems, network, false);
+				
+				Utils.validateLicense(this.licenseXML);
+				this.autoLayouter = new AutoLayouter(network);
+				elementBox=network.elementBox;
+				DemoUtils.initNetworkToolbar(toolbar, network);
+				
+				network.zoom = this.zoomSlider.value;
+				network.interactionHandlers = new Collection([
+						new MapFilterInteractionHandler(network)
+				]);	
+				
+				popupMenuButton.dataProvider = [
+					//Consts.LAYOUT_ROUND, Consts.LAYOUT_SYMMETRY, 
+					//Consts.LAYOUT_TOPBOTTOM, Consts.LAYOUT_BOTTOMTOP, 
+					//Consts.LAYOUT_LEFTRIGHT, Consts.LAYOUT_RIGHTLEFT
+					"圆形布局","对称布局","顶底布局","底顶布局","左右布局","右左布局"
+					];	
+				popupMenuButton.height = DemoUtils.DEFAULT_BUTTON_HEIGHT;
+				popupMenuButton.addEventListener("itemClick", doLayout);	
+				
+			
+				//TopologyService.getNetworkResourceTypeImages(imageItems, network, false);
+				
+				network.setEditInteractionHandlers();
+				network.addEventListener(DragEvent.DRAG_ENTER,onDragEnter);
+				network.addEventListener(DragEvent.DRAG_DROP,onDragDrop);
+				network.addEventListener(DragEvent.DRAG_OVER, onDragOver);
+				
+				network.editableFunction = function(element:IElement):Boolean{
+					if(element is Node){
+						return (element as Node).width>0 && (element as Node).height>0;
+					}
+					return true;
+				}
+				network.addSelectionChangeListener(selectionChanged);
+				
+				_lastType = "";
+				toolbar.addChild(popupMenuButton);
+				
+				elementBox.setStyle(Styles.BACKGROUND_TYPE, Consts.BACKGROUND_TYPE_IMAGE);
+				
+				onGetAlertColor();
+			}
+			
+			 //显示NetWork图
+			 private var resources:String = ""; 
+			
+			 /* 屏蔽代码，此代码是或者拓扑图所以的事件源id，也是判断是否存在事件源功能一部分代码
+			 public function getResources():void {
+				 resources = "";
+				 network.elementBox.forEach(function(node:Object):void {
+					var id:String = "";
+					try { 
+						id = node.getClient(CustomAlarmElementMapping.MAPPINGID);
+					} catch(e:Event) {
+						
+					}
+					if (id != null && id != "")
+						resources+=id+ ",";
+				});	
+				resources = resources.substring(0,resources.length-1);
+			 } */
+             private function doLayout(e:Event = null):void{
+				this.autoLayouter.explicitXOffset = 30;
+				this.autoLayouter.explicitYOffset = 150;
+				this.autoLayouter.doLayout(this.popupMenuButton.label);
+               if(this.popupMenuButton.label == "圆形布局"){
+                  this.autoLayouter.doLayout(Consts.LAYOUT_ROUND);
+               }
+			   else if (this.popupMenuButton.label == "对称布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_SYMMETRY);
+			   } 
+			   else if (this.popupMenuButton.label == "顶底布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_TOPBOTTOM);
+			   } 
+			   else if (this.popupMenuButton.label == "底顶布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_BOTTOMTOP);
+			   } 
+			   else if (this.popupMenuButton.label == "左右布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_LEFTRIGHT);
+			   } 
+			   else if (this.popupMenuButton.label == "右左布局") {
+				   this.autoLayouter.doLayout(Consts.LAYOUT_RIGHTLEFT);
+			   } 
+			}		
+			 
+			 ///
+			///保存文件名字和xml内容后，返回结果以及弹出消息框
+			///
+		   // public function onSaveView():void {
+			//	var parameters : Object = Application.application.parameters;
+			//	var param1 : String = parameters.name;
+			//    var serializer:XMLSerializer = new XMLSerializer(network.elementBox);
+			//    var xmlData:String = serializer.serialize();
+			//	TopologyService.saveView(param1, xmlData, function(event:Event):void {
+			//		  var loader:URLLoader=URLLoader(event.target); 
+			//		  var _data:URLVariables = new URLVariables(loader.data);
+			//		  if (_data.state == "true") {
+			//			  Alert.show("success"); 
+			//		  }else {
+			//			  Alert.show("fail");
+			//		  }
+			//	});
+			//}			
+			private function createLink(from:Node, to:Node, color:uint, linkType:String = null, name:String = null, dashed:Boolean = false, labelPosition:String = null, lineWidth:int = 2):Link{
+				var link:Link = new Link(from,to);
+				link.setStyle(Styles.LINK_COLOR, color);
+				link.setStyle(Styles.LINK_WIDTH, lineWidth);
+				if(linkType == null){
+					linkType = Consts.LINK_TYPE_ORTHOGONAL_VERTICAL;
+					link.setStyle(Styles.LINK_SPLIT_VALUE, 34);
+					link.setStyle(Styles.LINK_CORNER, Consts.LINK_CORNER_NONE);
+				}
+				link.setStyle(Styles.LINK_TYPE, linkType);
+				if(name){
+					link.name = name;
+				}
+				if(dashed){
+					link.setStyle(Styles.LINK_PATTERN, [25,10]);
+				}
+				if(labelPosition){
+					link.setStyle(Styles.LABEL_POSITION, labelPosition);
+				}
+				dataBox.add(link);
+				return link;
+			}
+			
+			private function onDragEnter(evt:DragEvent):void {
+				var data:Object = getData(evt);
+				if(data is IElementCreator||data is IStylesCreator) {
+					DragManager.acceptDragDrop(network);
+					return;
+				}
+			}
+			
+			private function onDragOver(evt:DragEvent):void{
+				var data:Object = getData(evt);
+				if(data is IStylesCreator){
+					var link:Link=getElement(evt,Link) as Link;
+					if(link){
+						highlightLink(link);
+					}else{
+						clearLinkHighlight();
+					}
+				}
+			}
+			
+			private var currentHighlightLink:Link;
+			private var oldLinkColor:*;
+			private var oldLinkOuterColor:*;
+			private const OUTLINE_COLOR:uint = 0x0000FF;
+			private const LINK_COLOR:uint = 0xFF0000
+			
+			private function highlightLink(link:Link):void{
+				clearLinkHighlight();
+				currentHighlightLink=link;
+				oldLinkColor=link.getStyle(Styles.LINK_COLOR);
+				oldLinkOuterColor = link.getStyle(Styles.OUTER_COLOR);
+				link.setStyle(Styles.LINK_COLOR, LINK_COLOR);
+				link.setStyle(Styles.OUTER_COLOR, OUTLINE_COLOR);
+			}
+			
+			private function clearLinkHighlight():void{
+				if(currentHighlightLink){
+					currentHighlightLink.setStyle(Styles.LINK_COLOR,oldLinkColor);
+					currentHighlightLink.setStyle(Styles.OUTER_COLOR,oldLinkOuterColor);
+				}
+				currentHighlightLink=null;
+			}
+			
+			private function onDragDrop( evt:DragEvent ):void {
+				var data:Object = getData(evt);
+				if(data is IElementCreator){
+					elementBox.add((data as IElementCreator).createElement(evt,network));
+					return;
+				}
+				if(data is IStylesCreator){
+					var element:IElement=getElement(evt,Link);
+					if(element){
+						(data as IStylesCreator).createStyles(element);
+					}
+				}
+				clearLinkHighlight();
+			}
+			private var node:Node=null;
+			private function selectionChanged(e:SelectionChangeEvent):void {
+			 //   getResources();
+			    var firstStr:String;	
+				var selection:ICollection = network.selectionModel.selection;
+				if (selection && selection.count > 0) {
+					
+					var element:IElement = selection.getItemAt(selection.count - 1) as IElement;
+					var type:String;
+					if ((element as Link) != null) {
+					     type = null;
+					 }
+					if ((element as Node) != null) {
+						node=element as Node
+					    type = (element as Node).image;
+					 }
+					 if (type != null)
+					 {
+						 var index:int = type.indexOf('_');
+						 if (index > 0)
+                           firstStr = type.substring(0, index);
+						 else 
+						   firstStr = type ;
+					 }
+					if (type != null && type != _lastType) {
+						 
+						TopologyService.getNetworkResources(
+							firstStr,
+							function(event:Event):void {
+								var loader:URLLoader=URLLoader(event.target); 
+								var _data:URLVariables = new URLVariables(loader.data); 
+								var xmlContent:String = _data.data;
+								var xml:XML = new XML(xmlContent);
+								var xmlListCollection:XMLListCollection = new XMLListCollection(new XMLList([xml]));
+								_lastType = type;
+
+								propertySheet.onGetNetworkResources(xmlListCollection);
+								propertySheet.currentElement = element;
+							//	propertySheet.resources = resources;
+								propertySheet.visible = true;
+								propertySheet.includeInLayout = true;
+							});
+							
+					}else {
+						if ((element as Link) != null) {
+					       propertySheet.currentElement = null;
+						   propertySheet.visible = false;
+						   propertySheet.includeInLayout = false;
+					    }
+						if ((element as Node) != null) {
+							propertySheet.currentElement=element;
+					        propertySheet.visible=true;
+					        propertySheet.includeInLayout=true;
+						}
+					}
+					
+					 if (type != null )
+					 { 
+						 var date:Date = new Date();
+                         var sec :String =date.getMinutes().toString()+ date.getSeconds().toString()+date.getMilliseconds().toString();
+						
+						 _lastTypepic = sec;
+						 imagetype.removeAll();
+						 panel.visible = true;
+						
+					     TopologyService.getTypePic(firstStr,imagetype,_lastTypepic,this);
+					 }
+				}else {
+					panel.visible=false;
+					propertySheet.currentElement = null;
+					propertySheet.visible=false;
+					propertySheet.includeInLayout=false;
+				}
+			}
+			
+			private function getElement(e:MouseEvent,elementClass:Class):IElement{
+				var element:IElement=network.getElementByMouseEvent(e, false, 2);
+				if(element is elementClass){
+					return element;
+				}
+				return null;
+			}
+			
+			private function getData(evt:DragEvent):Object{
+				var data:Object = evt.dragSource.dataForFormat( "items" );
+				if( data is Array ) {
+					data = data[0];
+				}
+				return data;
+			}
+			
+			private function onEditItemClick(evt:ListEvent):void {
+				if (evt.target is TileList && ((evt.target as TileList).selectedItem is ActionTile)) {
+					var item:ActionTile = (evt.target as TileList).selectedItem as ActionTile;
+					 if (node != null)
+					 {
+						 node.image = item.imageName;
+						 //ITCM-26 【IT监控】【自定义视图】更改设置图片时，名称应保持不变
+						 //node.name=item.imageName;
+					 }
+					
+				}
+			}
+			private function onItemClick(evt:ListEvent):void {
+				if (evt.target is TileList && ((evt.target as TileList).selectedItem is ActionTile)) {
+					var item:ActionTile = (evt.target as TileList).selectedItem as ActionTile;
+					if(item.action!=null){
+						item.action();
+					}else{
+						network.setEditInteractionHandlers();
+					}
+				}
+			}
+			
+			private function createLinkInteraction(linkClass:Class,
+													linkType:String,
+													callback:Function=null,
+													isByControlPoint:Boolean=false,
+													splitByPercent:Boolean=true,
+													value:Number=-1):void{
+				network.setCreateLinkInteractionHandlers(linkClass,callback,linkType,isByControlPoint,value,true);
+			}
+
+           // private function Save():void {
+	           
+			//	 onSaveView();
+           // }
+			 
+
+		   private function onSaveAlertColor():void {
+				var lightColor :String =LightColor.selectedColor.toString();
+				var seriousColor :String = SeriousColor.selectedColor.toString();
+				var parameters : Object = Application.application.parameters;
+				var param1 : String = parameters.name;
+				var userName:String = parameters.userName;
+				if (lightColor == seriousColor) {
+					Alert.show("正常告警与严重告警颜色相同，请重新选择");
+				}else{  
+				   TopologyService.SaveAlertColor(param1,userName,lightColor, seriousColor, "true",function(event:Event):void {
+						  var loader:URLLoader=URLLoader(event.target); 
+						  var _data:URLVariables = new URLVariables(loader.data);
+						  if (_data.state == "true") {
+							  Alert.show("自定义颜色成功");
+//							  SeriousAlarm = register(500, "SeriousAlarm", "", SeriousColor.selectedColor);
+//							  LightAlarm = register(100, "LightAlarm", "", LightColor.selectedColor);
+						  }else {
+							  Alert.show("自定义颜色失败");
+						  }
+					});
+				}
+			}
+					//自定义警告颜色
+			private function onGetAlertColor():void {
+				var parameters : Object = Application.application.parameters;
+				var param1 : String = parameters.name;
+				var userName:String = parameters.userName;
+			   TopologyService.getEditAlertColor(param1,userName,LightColor,SeriousColor,"false");
+			}	
+		]]>
+	</mx:Script>
+	
+	<mx:initialize>
+		<![CDATA[
+		Utils.registerImageByClass("linkToArrowDelta",linkToArrowDelta);
+		Utils.registerImageByClass("linkToArrowStandard",linkToArrowStandard);
+		Utils.registerImageByClass("linkToArrowShort",linkToArrowShort);
+		Utils.registerImageByClass("linkToArrowDiamond",linkToArrowDiamond);
+		Utils.registerImageByClass("linkToArrowSlant",linkToArrowSlant);
+		Utils.registerImageByClass("linkFromArrowDelta",linkFromArrowDelta);
+		Utils.registerImageByClass("linkFromArrowStandard",linkFromArrowStandard);
+		Utils.registerImageByClass("linkFromArrowShort",linkFromArrowShort);
+		Utils.registerImageByClass("linkFromArrowDiamond",linkFromArrowDiamond);
+		Utils.registerImageByClass("linkFromArrowSlant",linkFromArrowSlant);
+		
+		Utils.registerImageByClass("link_flexional_icon",link_flexional_icon);
+		Utils.registerImageByClass("link_orthogonal_h_icon",link_orthogonal_h_icon);
+		Utils.registerImageByClass("link_orthogonal_control_point_icon",link_orthogonal_control_point_icon);
+		Utils.registerImageByClass("link_orthogonal_top_icon", link_orthogonal_top_icon); 
+		Utils.registerImageByClass("link_orthogonal_left_icon",link_orthogonal_left_icon);
+		Utils.registerImageByClass("link_orthogonal_bottom_icon",link_orthogonal_bottom_icon);
+		Utils.registerImageByClass("link_orthogonal_right_icon",link_orthogonal_right_icon);
+		Utils.registerImageByClass("subnetwork_image",subnetwork_image, true, null, [subnetwork_image]);
+		Utils.registerImageByClass("mainScreen",mainScreen);
+		Utils.registerImageByClass("black",black);	
+		]]>
+	</mx:initialize>
+	  
+	<mx:ArrayCollection id="imageItems">
+	<editor:ElementCreator elementClass="{SubNetwork}" label="subnetwork" imageName="subnetwork_image"/>
+	</mx:ArrayCollection>
+ <mx:ArrayCollection id="imagetype">
+	 
+	</mx:ArrayCollection>
+   
+	<mx:ArrayCollection id="linkItems">
+		<editor:ActionTile label="可弯曲连线" imageName="link_flexional_icon" 
+						 action="{function():void{
+							createLinkInteraction(Link,Consts.LINK_TYPE_FLEXIONAL);
+						 }}" />
+		<editor:ActionTile label="垂直连线" imageName="link_orthogonal_h_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_ORTHOGONAL,null,false,false);
+						   }}" />
+		<editor:ActionTile label="点垂直连线" imageName="link_orthogonal_control_point_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_ORTHOGONAL,null,true,false);
+						   }}" />
+		<editor:ActionTile label="顶垂直连线" imageName="link_orthogonal_top_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_EXTEND_TOP,null,false,false);
+						   }}" />
+		<editor:ActionTile label="左垂直连线" imageName="link_orthogonal_left_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_EXTEND_LEFT,null,false,false);
+						   }}" />
+		<editor:ActionTile label="底部垂直连线" imageName="link_orthogonal_bottom_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_EXTEND_BOTTOM,null,false,false);
+						   }}" />
+		<editor:ActionTile label="右垂直连线" imageName="link_orthogonal_right_icon" 
+						   action="{function():void{
+						   createLinkInteraction(Link,Consts.LINK_TYPE_EXTEND_RIGHT,null,false,false);
+						   }}" />
+	</mx:ArrayCollection>
+	<mx:ArrayCollection id="arrowLinkItems">
+		<editor:StylesCreator label="三角箭头" imageName="linkToArrowDelta" styles="{[[Styles.ARROW_TO,true],[Styles.ARROW_TO_SHAPE,Consts.ARROW_STANDARD]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkToArrowStandard" styles="{[[Styles.ARROW_TO,true],[Styles.ARROW_TO_SHAPE,Consts.ARROW_STANDARD]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkToArrowShort" styles="{[[Styles.ARROW_TO,true],[Styles.ARROW_TO_SHAPE,Consts.ARROW_SHORT]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkToArrowDiamond" styles="{[[Styles.ARROW_TO,true],[Styles.ARROW_TO_SHAPE,Consts.ARROW_DIAMOND]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkToArrowSlant" styles="{[[Styles.ARROW_TO,true],[Styles.ARROW_TO_SHAPE,Consts.ARROW_SLANT]]}" />
+		
+		<editor:StylesCreator label="三角箭头" imageName="linkFromArrowDelta" styles="{[[Styles.ARROW_FROM,true],[Styles.ARROW_FROM_SHAPE,Consts.ARROW_STANDARD]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkFromArrowStandard" styles="{[[Styles.ARROW_FROM,true],[Styles.ARROW_FROM_SHAPE,Consts.ARROW_STANDARD]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkFromArrowShort" styles="{[[Styles.ARROW_FROM,true],[Styles.ARROW_FROM_SHAPE,Consts.ARROW_SHORT]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkFromArrowDiamond" styles="{[[Styles.ARROW_FROM,true],[Styles.ARROW_FROM_SHAPE,Consts.ARROW_DIAMOND]]}" />
+		<editor:StylesCreator label="三角箭头" imageName="linkFromArrowSlant" styles="{[[Styles.ARROW_FROM,true],[Styles.ARROW_FROM_SHAPE,Consts.ARROW_SLANT]]}" />
+	</mx:ArrayCollection>
+    	
+	<mx:HDividedBox width="100%" height="100%" >
+		<mx:VBox height="100%" width="140" >
+			<mx:Accordion id="nodeAccordion" height="50%" width="100%" >
+				<mx:HBox label="图片列表" height="100%" width="100%"  >
+					<mx:TileList dragEnabled="true"  dataProvider="{imageItems}" width="100%" height="100%" itemClick="{onItemClick(event)}" >
+						<mx:itemRenderer>
+							<editor:ActionTileRenderer left="10" right="10" />
+						</mx:itemRenderer>
+					</mx:TileList>
+				</mx:HBox>
+			</mx:Accordion>
+			<mx:Accordion id="linkAccordion" height="50%" width="100%">
+				<mx:HBox label="连线列表" height="100%"  width="100%">
+					<mx:TileList dragEnabled="true"  dataProvider="{linkItems}" width="100%" height="100%" itemClick="{onItemClick(event)}" >
+						<mx:itemRenderer>
+							<editor:ActionTileRenderer />
+						</mx:itemRenderer>
+					</mx:TileList>
+				</mx:HBox>
+				<mx:HBox label="箭头列表" height="100%"  width="100%">
+					<mx:TileList dragEnabled="true"   dataProvider="{arrowLinkItems}" width="100%" height="100%" itemClick="{onItemClick(event)}" >
+						<mx:itemRenderer>
+							<editor:ActionTileRenderer />
+						</mx:itemRenderer>
+					</mx:TileList>
+				</mx:HBox>
+			</mx:Accordion>	
+		</mx:VBox>
+		
+		<mx:VDividedBox width="70%" height="100%">	
+		<mx:Canvas  id="canvas" width="100%" height="100%"  horizontalScrollPolicy="off" verticalScrollPolicy="off"  >		
+			<twaver:Network id="network" width="100%" height="100%"/>
+			<mx:HBox id="toolbar" top="0" left="0"/>
+			<mx:VSlider id="zoomSlider" top="20" left="6" liveDragging="true" value="0.84" minimum="0.5" maximum="1.2" dataTipPlacement="right" change="network.zoom=zoomSlider.value;" />
+			<mx:FormItem label="一般告警颜色:" top="30" left="30">
+		       <mx:ColorPicker  id="LightColor" editable="false" top="5"/>
+		    </mx:FormItem>
+		   <mx:FormItem label="严重告警颜色:" top="30" left="140">
+		     <mx:ColorPicker  id="SeriousColor" editable="false" top="5"/>
+		   </mx:FormItem>
+		   <mx:FormItem top="30" left="250">
+			 <mx:Button id="butt" label="提交" click="onSaveAlertColor();" />
+		   </mx:FormItem>
+			 <mx:FormItem label="背景图:" top="30" left="330">
+					<upload:ImageUpload id="backGroundImagePanel" network="{network}" />
+			</mx:FormItem>	
+			<editor:LinkPropertyPane id="propertySheet" styleName="controlPane" minWidth="250" visible="false"  includeInLayout="false"  
+				maxHeight="{network.height}"  top="10" right="20" horizontalScrollPolicy="off" network="{network}" />
+			<mx:VBox id="panel" visible="false" top="250" backgroundAlpha="1" right="24" >
+				<editor:ExpandButton label="图片列表" expandTarget="{list}"/>
+				<mx:TileList id="list" dragEnabled="true"  dataProvider="{imagetype}" width="100%"  paddingBottom="1" paddingLeft="1" paddingRight="1" paddingTop="1" itemClick="{onEditItemClick(event)}" >
+					  <mx:itemRenderer>
+						  <editor:ActionTileRenderer left="10" right="10" />
+				     </mx:itemRenderer>
+			</mx:TileList>
+		  </mx:VBox>
+		</mx:Canvas>
+	</mx:VDividedBox>	
+	</mx:HDividedBox>
+</mx:Application>

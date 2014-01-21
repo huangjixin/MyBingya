@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:ns="http://www.servasoftware.com/2009/twaver/flex"
+		 creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<mx:HTTPService id="getMSDataService" fault="_getMSData_Fault(event)" method="POST"
+						result="_getMSData_result(event)"
+						url="/MonitorPortal/PortletNew/MonitorSystemView/getMonitorSystemDefineViewData.do"
+						useProxy="false">
+			<mx:resultFormat>text</mx:resultFormat> 
+			<mx:request xmlns="">
+				<resourceid>
+					{this.resourceid}
+				</resourceid>
+			</mx:request>
+		</mx:HTTPService>
+		<mx:HTTPService id="getAlertListService" fault="_getMSData_Fault(event)" method="POST"
+						result="_getAlertList_result(event)"
+						url="/MonitorPortal/PortletNew/MonitorSystemView/getAlertListByResid.do"
+						useProxy="false">
+			<mx:resultFormat>text</mx:resultFormat> 
+			<mx:request xmlns="">
+				<resids>
+					{this.resids}
+				</resids>
+			</mx:request>
+		</mx:HTTPService>
+	</fx:Declarations>
+	<fx:Script source="NetWorkGroup_Script.as">
+	</fx:Script>
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="blue" alpha="0.5"/>
+		</s:fill>
+	</s:Rect>
+	<ns:Network id="network" width="100%" height="100%" autoLayout="true"
+				backgroundColor="#00ffffff" horizontalCenter="0" horizontalScrollPolicy="auto"
+				verticalCenter="0" verticalScrollPolicy="auto"/>
+</s:Group>
