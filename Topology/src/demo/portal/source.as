@@ -1,4 +1,5 @@
 import demo.TopologyService;
+import demo.index.NetWorkGroup;
 
 import flash.display.Bitmap;
 import flash.display.Loader;
@@ -19,6 +20,8 @@ import mx.collections.ArrayList;
 import mx.collections.XMLListCollection;
 import mx.controls.Alert;
 import mx.core.FlexGlobals;
+import mx.events.FlexMouseEvent;
+import mx.managers.PopUpManager;
 import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
 import mx.rpc.http.mxml.HTTPService;
@@ -121,6 +124,8 @@ private var preName:String;//资源字符串
 
 [Bindable]
 private var arrayList:ArrayList;
+
+private var hasSubnetwork:Boolean;
 /**
  * 初始化函数 
  */
@@ -131,6 +136,8 @@ public function init() : void
 	this.userName = parameters.uName;
 	this.resourceId = parameters.resourceId;
 //	this.preName  = parameters.name;//portlet首选项name的值
+	var hasSubnet:Boolean = parameters.hasSubnetwork as Boolean;
+	trace(hasSubnet);
 	
 	Utils.registerImageByClass("sad", sad);
 	Utils.registerImageByClass("smile", smile);
@@ -307,119 +314,6 @@ public function addExternalInfo(msdataString:String) : void
 	
 	getAlertListService.send();
 //	processAlertLists(alertStr);
-	
-	/*var dataNodeXML:XML;
-	var MPID:String;
-	var nodeId:String;
-	var node:Node;
-	var simularType:String;
-	var firstResult:Node;
-	var xml:XML = XML(msdataString);
-	reset();
-	var _loc_3:int = 0;
-	var _loc_6:int = 0;
-	var _loc_7:XMLList = xml.data;
-	var _loc_5:* = new XMLList("");
-	var _loc_8:*;
-	for each (_loc_8 in _loc_7)
-	{
-	
-	var _loc_9:* = _loc_7[_loc_6];
-	with (_loc_7[_loc_6])
-	{
-	var _loc_10:String = "twaver.Node";
-	@type = "twaver.Node";
-	if (_loc_10)
-	{
-	_loc_5[_loc_6] = _loc_8;
-	}
-	}
-	}
-	var _loc_4:* = _loc_5;
-	while (_loc_4 in _loc_3)
-	{
-	
-	dataNodeXML = _loc_4[_loc_3];
-	var _loc_6:int = 0;
-	var _loc_7:* = dataNodeXML.c;
-	var _loc_5:* = new XMLList("");
-	for each (_loc_8 in _loc_7)
-	{
-	
-	var _loc_9:* = _loc_7[_loc_6];
-	with (_loc_7[_loc_6])
-	{
-	if (@n == "MAPPINGID")
-	{
-	_loc_5[_loc_6] = _loc_8;
-	}
-	}
-	}
-	MPID = _loc_5;
-	if (MPID != null && MPID != "")
-	{
-	resids = resids + (MPID + ",");
-	nodeId = dataNodeXML.@id;
-	node = new Node();
-	node.setClient("mapID", MPID);
-	node.setClient("dataID", nodeId);
-	var _loc_6:int = 0;
-	var _loc_7:* = dataNodeXML.p;
-	var _loc_5:* = new XMLList("");
-	for each (_loc_8 in _loc_7)
-	{
-	
-	var _loc_9:* = _loc_7[_loc_6];
-	with (_loc_7[_loc_6])
-	{
-	if (@n == "icon")
-	{
-	_loc_5[_loc_6] = _loc_8;
-	}
-	}
-	}
-	simularType = _loc_5;
-	if (simularType == null || simularType == "")
-	{
-	var _loc_6:int = 0;
-	var _loc_7:* = dataNodeXML.p;
-	var _loc_5:* = new XMLList("");
-	for each (_loc_8 in _loc_7)
-	{
-	
-	var _loc_9:* = _loc_7[_loc_6];
-	with (_loc_7[_loc_6])
-	{
-	if (@n == "image")
-	{
-	_loc_5[_loc_6] = _loc_8;
-	}
-	}
-	}
-	simularType = _loc_5;
-	if (simularType == null)
-	{
-	simularType;
-	}
-	}
-	node.setClient("type", simularType);
-	dataNodes.addItem(node);
-	firstResult = network.elementBox.getElementByID(nodeId) as Node;
-	if (firstResult != null)
-	{
-	firstResult.setClient("type", simularType);
-	firstResult.setClient("MAPPINGID", MPID);
-	firstResult.setClient("dataID", nodeId);
-	}
-	}
-	}
-	if (resids.length == 0)
-	{
-	ExternalInterface.call("setPreLoadedCompleted");
-	return;
-	}
-	resids = resids.substring(0, (resids.length - 1)); 
-	getAlertList.send();*/
 	
 	return;
 }
@@ -796,6 +690,16 @@ public function addEventListenerForNodes() : void
 		var node:Node = obj as Node;
 		var mappingid:String = node.getClient("MAPPINGID");
 		var type:String = node.getClient("type");
+		if(mappingid != null && mappingid != "" && this.hasSubnetwork){
+			var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
+			netWorkGroup.resourceid = mappingid;
+			netWorkGroup.width = 800;
+			netWorkGroup.height = 370;
+			PopUpManager.centerPopUp(netWorkGroup);
+			netWorkGroup.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,function onMouseDownOutside(event:FlexMouseEvent):void{
+				PopUpManager.removePopUp(netWorkGroup);
+			});
+		}
 		if (mappingid != null && mappingid != "" && type != null && type != "")
 		{
 			ExternalInterface.call("nav2ElementLink", mappingid, type);
@@ -854,7 +758,6 @@ public function registerImages() : void
 //-----------------------------------------------------------------------------------------------
 protected function getViewService_faultHandler(event:FaultEvent):void
 {
-	// TODO Auto-generated method stub
 	
 }
 
