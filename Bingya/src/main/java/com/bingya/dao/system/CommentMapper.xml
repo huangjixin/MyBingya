@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bingya.dao.system.CommentMapper" >
   <resultMap id="BaseResultMap" type="com.bingya.domain.system.Comment" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="tb_article_id" property="tbArticleId" jdbcType="INTEGER" />
-    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="tb_article_id" property="tbArticleId" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -84,15 +84,15 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from tb_comment
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from tb_comment
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.bingya.domain.system.CommentExample" >
     delete from tb_comment
@@ -103,8 +103,8 @@
   <insert id="insert" parameterType="com.bingya.domain.system.Comment" >
     insert into tb_comment (id, content, tb_article_id, 
       parentId)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{tbArticleId,jdbcType=INTEGER}, 
-      #{parentid,jdbcType=INTEGER})
+    values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tbArticleId,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bingya.domain.system.Comment" >
     insert into tb_comment
@@ -124,16 +124,16 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
       <if test="tbArticleId != null" >
-        #{tbArticleId,jdbcType=INTEGER},
+        #{tbArticleId,jdbcType=VARCHAR},
       </if>
       <if test="parentid != null" >
-        #{parentid,jdbcType=INTEGER},
+        #{parentid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,16 +147,16 @@
     update tb_comment
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
       </if>
       <if test="record.tbArticleId != null" >
-        tb_article_id = #{record.tbArticleId,jdbcType=INTEGER},
+        tb_article_id = #{record.tbArticleId,jdbcType=VARCHAR},
       </if>
       <if test="record.parentid != null" >
-        parentId = #{record.parentid,jdbcType=INTEGER},
+        parentId = #{record.parentid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,10 +165,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tb_comment
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
-      tb_article_id = #{record.tbArticleId,jdbcType=INTEGER},
-      parentId = #{record.parentid,jdbcType=INTEGER}
+      tb_article_id = #{record.tbArticleId,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,20 +180,20 @@
         content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="tbArticleId != null" >
-        tb_article_id = #{tbArticleId,jdbcType=INTEGER},
+        tb_article_id = #{tbArticleId,jdbcType=VARCHAR},
       </if>
       <if test="parentid != null" >
-        parentId = #{parentid,jdbcType=INTEGER},
+        parentId = #{parentid,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bingya.domain.system.Comment" >
     update tb_comment
     set content = #{content,jdbcType=VARCHAR},
-      tb_article_id = #{tbArticleId,jdbcType=INTEGER},
-      parentId = #{parentid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      tb_article_id = #{tbArticleId,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >
     <if test="page != null" >

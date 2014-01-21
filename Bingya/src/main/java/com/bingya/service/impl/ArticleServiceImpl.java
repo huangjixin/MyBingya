@@ -51,10 +51,10 @@ public class ArticleServiceImpl implements IArticleService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.Integer)
+	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.String)
 	 */
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(String id) {
 		// --先删除子表数据。
 		CommentExample commentExample = new CommentExample();
 		commentExample.createCriteria().andTbArticleIdEqualTo(id);
@@ -74,12 +74,12 @@ public class ArticleServiceImpl implements IArticleService {
 	 * @see com.bingya.service.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public Integer insert(Article entity) {
+	public String insert(Article entity) {
 		Date date = new Date();
 		Long time = date.getTime();
 		int i = articleMapper.insertSelective(entity);
 		if (i == 0) {
-			return i;
+			return i+"";
 		}
 
 		return entity.getId();
@@ -99,10 +99,10 @@ public class ArticleServiceImpl implements IArticleService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.Integer)
+	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.String)
 	 */
 	@Override
-	public Article selectByPrimaryKey(Integer id) {
+	public Article selectByPrimaryKey(String id) {
 		return articleMapper.selectByPrimaryKey(id);
 	}
 
@@ -112,8 +112,8 @@ public class ArticleServiceImpl implements IArticleService {
 	 * @see com.bingya.service.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public int update(Article entity) {
-		return articleMapper.updateByExampleSelective(entity, null);
+	public String update(Article entity) {
+		return articleMapper.updateByExampleSelective(entity, null)+"";
 	}
 
 	/*

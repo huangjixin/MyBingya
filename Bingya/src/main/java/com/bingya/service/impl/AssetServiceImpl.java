@@ -53,7 +53,7 @@ public class AssetServiceImpl implements IAssetService {
 	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.Integer)
 	 */
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(String id) {
 		Asset asset = assetMapper.selectByPrimaryKey(id);
 		asset.getPath();
 		String uploadPath = System.getProperty("web.root");
@@ -77,7 +77,7 @@ public class AssetServiceImpl implements IAssetService {
 	 * @see com.bingya.service.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public Integer insert(Asset entity) {
+	public String insert(Asset entity) {
 		int i = assetMapper.insertSelective(entity);
 		return entity.getId();
 	}
@@ -99,7 +99,7 @@ public class AssetServiceImpl implements IAssetService {
 	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.Integer)
 	 */
 	@Override
-	public Asset selectByPrimaryKey(Integer id) {
+	public Asset selectByPrimaryKey(String id) {
 		return assetMapper.selectByPrimaryKey(id);
 	}
 
@@ -109,8 +109,8 @@ public class AssetServiceImpl implements IAssetService {
 	 * @see com.bingya.service.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public int update(Asset entity) {
-		return assetMapper.updateByExampleSelective(entity, null);
+	public String update(Asset entity) {
+		return assetMapper.updateByExampleSelective(entity, null)+"";
 	}
 
 	/*
@@ -135,7 +135,7 @@ public class AssetServiceImpl implements IAssetService {
 	@Override
 	public Page queryByUserId(Page page, Integer userId) {
 		AssetExample assetExample = new AssetExample();
-		assetExample.createCriteria().andUserIdEqualTo(userId);
+//		assetExample.createCriteria().andUserIdEqualTo(userId);
 		assetExample.setPage(page);
 		
 		int total = assetMapper.countByExample(assetExample);
@@ -148,7 +148,7 @@ public class AssetServiceImpl implements IAssetService {
 	@Override
 	public List<Asset> selectByUserId(Integer userId) {
 		AssetExample assetExample = new AssetExample();
-		assetExample.createCriteria().andUserIdEqualTo(userId);
+//		assetExample.createCriteria().andUserIdEqualTo(userId);
 		
 		List<Asset> list = assetMapper.selectByExample(assetExample);
 		return list;
@@ -168,27 +168,27 @@ public class AssetServiceImpl implements IAssetService {
 //		String title = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Root><Page Id=\"1\"><Title>把顾客变成信徒VIP顾客的维护和管理</Title><Content></Content></Page><Page Id=\"2\"><Title>培训小贴士</Title><Content></Content></Page><Page Id=\"3\"><Title>课程大纲</Title><Content></Content></Page><Page Id=\"4\"><Title>课程大纲</Title><Content></Content></Page><Page Id=\"5\"><Title>adfd</Title><Content></Content></Page></Root>";
 		String title = "";
 		List<String> list = new ArrayList<String>();
-		Asset asset = assetMapper.selectByPrimaryKey(id);
-		String path = asset.getPath();
-		path = path.replace("\\", "/");
-		int lastDot = path.lastIndexOf(".");
-		if(lastDot!=-1){
-			path = path.substring(0,lastDot);
-		}
-		String path1 = path+"1";
-		String path2 = path+"2";
-		String path3 = path+"3";
-		String path4 = path+"4";
-		path+=".swf";
-		path1+=".swf";
-		path2+=".swf";
-		path3+=".swf";
-		path4+=".swf";
-		list.add(path);
-		list.add(path1);
-		list.add(path2);
-		list.add(path3);
-		list.add(path4);
+//		Asset asset = assetMapper.selectByPrimaryKey(id);
+//		String path = asset.getPath();
+//		path = path.replace("\\", "/");
+//		int lastDot = path.lastIndexOf(".");
+//		if(lastDot!=-1){
+//			path = path.substring(0,lastDot);
+//		}
+//		String path1 = path+"1";
+//		String path2 = path+"2";
+//		String path3 = path+"3";
+//		String path4 = path+"4";
+//		path+=".swf";
+//		path1+=".swf";
+//		path2+=".swf";
+//		path3+=".swf";
+//		path4+=".swf";
+//		list.add(path);
+//		list.add(path1);
+//		list.add(path2);
+//		list.add(path3);
+//		list.add(path4);
 		
 		AssetBusiDomain assetBusiDomain = new AssetBusiDomain();
 		assetBusiDomain.setPaths(list);
@@ -201,7 +201,7 @@ public class AssetServiceImpl implements IAssetService {
 		if("".equals(xmlString)){
 			return false;
 		}
-		Asset asset = assetMapper.selectByPrimaryKey(assetId);
+		Asset asset = assetMapper.selectByPrimaryKey(assetId+"");
 		asset.getPath();
 		String uploadPath = System.getProperty("web.root");
 		uploadPath += asset.getPath();
@@ -220,7 +220,7 @@ public class AssetServiceImpl implements IAssetService {
 		if("".equals(xmlString)){
 			return "abcdefg";
 		}
-		Asset asset = assetMapper.selectByPrimaryKey(assetId);
+		Asset asset = assetMapper.selectByPrimaryKey(assetId+"");
 		asset.getPath();
 		String uploadPath = System.getProperty("web.root");
 		uploadPath += asset.getPath();

@@ -54,7 +54,7 @@ public class UserServiceImpl implements IUserService {
 	 * .Integer)
 	 */
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(String id) {
 		// --先删除子表数据。
 		UserRoleExample userRoleExample = new UserRoleExample();
 		userRoleExample.createCriteria().andUserIdEqualTo(id);
@@ -75,9 +75,9 @@ public class UserServiceImpl implements IUserService {
 	 * com.bingya.service.system.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public Integer insert(User entity) {
+	public String insert(User entity) {
 		int i = userMapper.insertSelective(entity);
-		return entity.getId();
+		return i+"";
 	}
 
 	/*
@@ -99,7 +99,7 @@ public class UserServiceImpl implements IUserService {
 	 * .Integer)
 	 */
 	@Override
-	public User selectByPrimaryKey(Integer id) {
+	public User selectByPrimaryKey(String id) {
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
 	}
@@ -111,9 +111,9 @@ public class UserServiceImpl implements IUserService {
 	 * com.bingya.service.system.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public int update(User entity) {
+	public String update(User entity) {
 		int i = userMapper.updateByPrimaryKey(entity);
-		return i;
+		return i+"";
 	}
 
 	/*

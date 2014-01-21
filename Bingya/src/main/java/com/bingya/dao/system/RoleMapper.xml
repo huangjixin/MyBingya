@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bingya.dao.system.RoleMapper" >
   <resultMap id="BaseResultMap" type="com.bingya.domain.system.Role" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from tb_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,30 +83,30 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=INTEGER}
+    from tb_role
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from role
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_role
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.bingya.domain.system.RoleExample" >
-    delete from role
+    delete from tb_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.bingya.domain.system.Role" >
-    insert into role (id, name, description
+    insert into tb_role (id, name, description
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.bingya.domain.system.Role" >
-    insert into role
+    insert into tb_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -120,7 +120,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -131,16 +131,16 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.bingya.domain.system.RoleExample" resultType="java.lang.Integer" >
-    select count(*) from role
+    select count(*) from tb_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update role
+    update tb_role
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -154,8 +154,8 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update role
-    set id = #{record.id,jdbcType=INTEGER},
+    update tb_role
+    set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -163,7 +163,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.bingya.domain.system.Role" >
-    update role
+    update tb_role
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -172,13 +172,13 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bingya.domain.system.Role" >
-    update role
+    update tb_role
     set name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >
     <if test="page != null" >

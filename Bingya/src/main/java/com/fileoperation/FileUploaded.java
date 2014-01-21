@@ -128,7 +128,7 @@ public class FileUploaded extends HttpServlet {
 						//保存附件的相对路径
 						Asset asset = new Asset();
 						asset.setPath(relativePath);
-						asset.setUserId(Integer.parseInt(userId));
+//						asset.setUserId(Integer.parseInt(userId));
 						asset.setName(name);
 						assetService.insert(asset);
 						

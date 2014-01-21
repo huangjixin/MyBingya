@@ -40,7 +40,7 @@ public class UserController extends BasicController {
 			@RequestParam(value = "id", required = true) Integer id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		int i = userService.deleteByPrimaryKey(id);
+		int i = userService.deleteByPrimaryKey(id+"");
 		return json(i, httpServletResponse);
 	}
 
@@ -49,7 +49,7 @@ public class UserController extends BasicController {
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 
-		int i = userService.update(user);
+		String i = userService.update(user);
 		// return "redirect:/menus/"
 		// + encodeUrlPathSegment("" + i, httpServletRequest);
 		return "redirect:/users";
@@ -63,7 +63,7 @@ public class UserController extends BasicController {
 			return "menus/create";
 		}
 		uiModel.asMap().clear();
-		Integer i = userService.insert(user);
+		String i = userService.insert(user);
 		// return "redirect:/menus/"
 		// + encodeUrlPathSegment("" + i, httpServletRequest);
 		return "redirect:/users";

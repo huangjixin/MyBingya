@@ -49,7 +49,7 @@ public class CategoryController extends BasicController {
 			@RequestParam(value = "id", required = true) Integer id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		int i = categoryService.deleteByPrimaryKey(id);
+		int i = categoryService.deleteByPrimaryKey(id+"");
 		return json(i, httpServletResponse);
 	}
 

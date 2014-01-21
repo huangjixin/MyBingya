@@ -8,7 +8,7 @@ import com.bingya.service.IGenericService;
 public interface IMenuService extends IGenericService<Menu, Integer> {
 	List getMenuTree();
 
-	List<Menu> getByParentId(Integer id);
+	List<Menu> getByParentId(String id);
 	
 	String getMenuXmlStr(String basePath);
 }

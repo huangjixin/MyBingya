@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bingya.dao.system.RoleMenuMapper" >
   <resultMap id="BaseResultMap" type="com.bingya.domain.system.RoleMenu" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role_menu
+    from tb_role_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,30 +83,30 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from role_menu
-    where id = #{id,jdbcType=INTEGER}
+    from tb_role_menu
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from role_menu
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_role_menu
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.bingya.domain.system.RoleMenuExample" >
-    delete from role_menu
+    delete from tb_role_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.bingya.domain.system.RoleMenu" >
-    insert into role_menu (id, role_id, menu_id
+    insert into tb_role_menu (id, role_id, menu_id
       )
-    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}
+    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.bingya.domain.system.RoleMenu" >
-    insert into role_menu
+    insert into tb_role_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -120,33 +120,33 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="menuId != null" >
-        #{menuId,jdbcType=INTEGER},
+        #{menuId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.bingya.domain.system.RoleMenuExample" resultType="java.lang.Integer" >
-    select count(*) from role_menu
+    select count(*) from tb_role_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update role_menu
+    update tb_role_menu
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null" >
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.menuId != null" >
-        menu_id = #{record.menuId,jdbcType=INTEGER},
+        menu_id = #{record.menuId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -154,31 +154,31 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update role_menu
-    set id = #{record.id,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER},
-      menu_id = #{record.menuId,jdbcType=INTEGER}
+    update tb_role_menu
+    set id = #{record.id,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      menu_id = #{record.menuId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.bingya.domain.system.RoleMenu" >
-    update role_menu
+    update tb_role_menu
     <set >
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=INTEGER},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="menuId != null" >
-        menu_id = #{menuId,jdbcType=INTEGER},
+        menu_id = #{menuId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bingya.domain.system.RoleMenu" >
-    update role_menu
-    set role_id = #{roleId,jdbcType=INTEGER},
-      menu_id = #{menuId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    update tb_role_menu
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      menu_id = #{menuId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >
     <if test="page != null" >

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Article implements Serializable {
-    private Integer id;
+    private String id;
 
     private String title;
 
@@ -14,7 +14,7 @@ public class Article implements Serializable {
 
     private String description;
 
-    private Integer tbCategoryId;
+    private String tbCategoryId;
 
     private Date createdate;
 
@@ -22,12 +22,12 @@ public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getTitle() {
@@ -62,12 +62,12 @@ public class Article implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getTbCategoryId() {
+    public String getTbCategoryId() {
         return tbCategoryId;
     }
 
-    public void setTbCategoryId(Integer tbCategoryId) {
-        this.tbCategoryId = tbCategoryId;
+    public void setTbCategoryId(String tbCategoryId) {
+        this.tbCategoryId = tbCategoryId == null ? null : tbCategoryId.trim();
     }
 
     public Date getCreatedate() {

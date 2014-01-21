@@ -51,7 +51,7 @@ public class MenuController extends BasicController {
 			@RequestParam(value = "id", required = true) Integer id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		int i = menuService.deleteByPrimaryKey(id);
+		int i = menuService.deleteByPrimaryKey(id+"");
 		return json(i, httpServletResponse);
 	}
 
@@ -62,10 +62,10 @@ public class MenuController extends BasicController {
 			@RequestParam(value = "parentId", required = true) Integer parentId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		Menu menu = menuService.selectByPrimaryKey(id);
+		Menu menu = menuService.selectByPrimaryKey(id+"");
 		menu.setName(name);
-		menu.setParentid(parentId);
-		int i = menuService.update(menu);
+		menu.setParentid(parentId+"");
+		String i = menuService.update(menu);
 		return json(i, httpServletResponse);
 	}
 
@@ -100,7 +100,7 @@ public class MenuController extends BasicController {
 			return "menus/create";
 		}
 		uiModel.asMap().clear();
-		Integer i = menuService.insert(menu);
+		String i = menuService.insert(menu);
 //		return "redirect:/menus/"
 //				+ encodeUrlPathSegment("" + i, httpServletRequest);
 		return "redirect:/menus";
@@ -119,7 +119,7 @@ public class MenuController extends BasicController {
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			Model uiModel) {
-		menuService.deleteByPrimaryKey(id);
+		menuService.deleteByPrimaryKey(id+"");
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
@@ -128,7 +128,7 @@ public class MenuController extends BasicController {
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Integer id, Model uiModel) {
-		uiModel.addAttribute("menu", menuService.selectByPrimaryKey(id));
+		uiModel.addAttribute("menu", menuService.selectByPrimaryKey(id+""));
 //		uiModel.addAttribute("itemId", id);
 		return "menus/show";
 	}

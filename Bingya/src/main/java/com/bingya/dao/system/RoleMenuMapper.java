@@ -10,7 +10,7 @@ public interface RoleMenuMapper {
 
     int deleteByExample(RoleMenuExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(RoleMenu record);
 
@@ -18,7 +18,7 @@ public interface RoleMenuMapper {
 
     List<RoleMenu> selectByExample(RoleMenuExample example);
 
-    RoleMenu selectByPrimaryKey(Integer id);
+    RoleMenu selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") RoleMenu record, @Param("example") RoleMenuExample example);
 

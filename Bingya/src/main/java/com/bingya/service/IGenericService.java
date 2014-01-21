@@ -19,14 +19,14 @@ public interface IGenericService<T extends Serializable, PK extends Serializable
 	 * 根据主键删除实体。
 	 * @param id
 	 */
-	int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(String id);
 
 	/**
 	 * 插入实体。
 	 * @param entity
 	 * @return
 	 */
-	Integer insert(T entity);
+	String insert(T entity);
 
 	/**
 	 * 查询所有实体。
@@ -39,14 +39,14 @@ public interface IGenericService<T extends Serializable, PK extends Serializable
 	 * @param id
 	 * @return
 	 */
-	T selectByPrimaryKey(Integer id);
+	T selectByPrimaryKey(String id);
 
 	/**
 	 * 更新实体类。
 	 * @param entity
 	 * @return
 	 */
-	int update(T entity);
+	String update(T entity);
 
 	/**
 	 * 分页查询。

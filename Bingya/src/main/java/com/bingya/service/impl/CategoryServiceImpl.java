@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.Integer)
 	 */
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(String id) {
 		// --先删除子表数据。
 		ArticleExample articleExample = new ArticleExample();
 		articleExample.createCriteria().andTbCategoryIdEqualTo(id);
@@ -75,7 +75,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	 * @see com.bingya.service.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public Integer insert(Category entity) {
+	public String insert(Category entity) {
 		int i = categoryMapper.insertSelective(entity);
 		return entity.getId();
 	}
@@ -97,7 +97,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.Integer)
 	 */
 	@Override
-	public Category selectByPrimaryKey(Integer id) {
+	public Category selectByPrimaryKey(String id) {
 		return categoryMapper.selectByPrimaryKey(id);
 	}
 
@@ -107,8 +107,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	 * @see com.bingya.service.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public int update(Category entity) {
-		return categoryMapper.updateByExampleSelective(entity, null);
+	public String update(Category entity) {
+		return categoryMapper.updateByExampleSelective(entity, null)+"";
 	}
 
 	/*
@@ -131,7 +131,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public List<Category> getByParentId(Integer id) {
+	public List<Category> getByParentId(String id) {
 		CategoryExample categoryExample = new CategoryExample();
 		categoryExample.createCriteria().andParentidEqualTo(id);
 		return categoryMapper.selectByExample(categoryExample);

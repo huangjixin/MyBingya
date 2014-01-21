@@ -12,14 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bingya.dao.system.RoleMapper;
 import com.bingya.dao.system.RoleMenuMapper;
-import com.bingya.dao.system.RoleResourceMapper;
 import com.bingya.dao.system.UserRoleMapper;
 import com.bingya.domain.system.Role;
 import com.bingya.domain.system.RoleExample;
 import com.bingya.domain.system.RoleMenu;
 import com.bingya.domain.system.RoleMenuExample;
-import com.bingya.domain.system.RoleResource;
-import com.bingya.domain.system.RoleResourceExample;
 import com.bingya.domain.system.UserRole;
 import com.bingya.domain.system.UserRoleExample;
 import com.bingya.service.system.IRoleService;
@@ -38,8 +35,6 @@ public class RoleServiceImpl implements IRoleService {
 	@Resource
 	private UserRoleMapper userRoleMapper;
 	@Resource
-	private RoleResourceMapper roleResourceMapper;
-	@Resource
 	private RoleMenuMapper roleMenuMapper;
 
 	/*
@@ -50,7 +45,7 @@ public class RoleServiceImpl implements IRoleService {
 	 * .Integer)
 	 */
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(String id) {
 		// --先删除子表数据。
 		// --角色用户。
 		UserRoleExample userRoleExample = new UserRoleExample();
@@ -59,15 +54,6 @@ public class RoleServiceImpl implements IRoleService {
 				.selectByExample(userRoleExample);
 		for (UserRole userRole : userRoles) {
 			userRoleMapper.deleteByPrimaryKey(userRole.getId());
-		}
-
-		// --角色资源。
-		RoleResourceExample roleResourceExample = new RoleResourceExample();
-		roleResourceExample.createCriteria().andRoleIdEqualTo(id);
-		List<RoleResource> roleResources = roleResourceMapper
-				.selectByExample(roleResourceExample);
-		for (RoleResource roleResource : roleResources) {
-			roleResourceMapper.deleteByPrimaryKey(roleResource.getId());
 		}
 
 		// --角色
@@ -90,7 +76,7 @@ public class RoleServiceImpl implements IRoleService {
 	 * com.bingya.service.system.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public Integer insert(Role entity) {
+	public String insert(Role entity) {
 		int i = roleMapper.insertSelective(entity);
 		return entity.getId();
 	}
@@ -114,7 +100,7 @@ public class RoleServiceImpl implements IRoleService {
 	 * .Integer)
 	 */
 	@Override
-	public Role selectByPrimaryKey(Integer id) {
+	public Role selectByPrimaryKey(String id) {
 		Role role = roleMapper.selectByPrimaryKey(id);
 		return role;
 	}
@@ -126,9 +112,9 @@ public class RoleServiceImpl implements IRoleService {
 	 * com.bingya.service.system.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public int update(Role entity) {
+	public String update(Role entity) {
 		int i = roleMapper.updateByPrimaryKey(entity);
-		return i;
+		return i+"";
 	}
 
 	/*

@@ -10,7 +10,7 @@ public interface MenuMapper {
 
     int deleteByExample(MenuExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Menu record);
 
@@ -18,7 +18,7 @@ public interface MenuMapper {
 
     List<Menu> selectByExample(MenuExample example);
 
-    Menu selectByPrimaryKey(Integer id);
+    Menu selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuExample example);
 
