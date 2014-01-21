@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   title="关联配置项" width="800" height="600"
+			   close="PopUpManager.removePopUp(this)"
+			   creationComplete="titlewindow1_creationCompleteHandler(event)"
+			   fontFamily="微软雅黑">
+	<fx:Script>
+		<![CDATA[
+			import com.itsm.configuration.controller.TopoProviderEvent;
+			import com.itsm.configuration.model.TopoProviderRemoteProxy;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.events.GridSelectionEvent;
+			
+			private var topoProxy:TopoProviderRemoteProxy;
+			
+			public var xml:XML;
+			
+			[Bindable]
+			public var item:Object;
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				if(!xml){
+					Alert.show("请传入序列化的xml");
+				}
+				if(!item){
+					Alert.show("请传入所选节点的data");
+				}
+				topoProxy = new TopoProviderRemoteProxy();
+				topoProxy.getUnlinkItem(xml.toString(),item.@nodeIcon,"");
+				topoProxy.addEventListener(TopoProviderEvent.GET_UNLINK_ITEM_RESULT,ongetUnlinkItemResult);
+				topoProxy.addEventListener(TopoProviderEvent.GET_UNLINK_ITEM_FAULT,ongetUnlinkItemFault);
+			}
+			
+			protected function ongetUnlinkItemResult(event:TopoProviderEvent):void
+			{
+				dataGrid.dataProvider = event.object as ArrayCollection;
+			}
+			
+			protected function ongetUnlinkItemFault(event:TopoProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询出错");
+			}
+			
+			protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent):void
+			{
+				item = dataGrid.selectedItem;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+	</fx:Declarations>
+	<s:DataGrid id="dataGrid" horizontalCenter="0" verticalCenter="0" requestedRowCount="10" width="90%" height="90%"
+				selectionChange="dataGrid_selectionChangeHandler(event)">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn dataField="CI_ID" headerText="CI_ID" visible="false"></s:GridColumn>
+				<s:GridColumn dataField="CI_CODE" headerText="配置编号"></s:GridColumn>
+				<s:GridColumn dataField="CT" headerText="资产类型"></s:GridColumn>
+				<s:GridColumn dataField="PN" headerText="批次号"></s:GridColumn>
+				<s:GridColumn dataField="CI_NAME" headerText="资产名称"></s:GridColumn>
+				<s:GridColumn dataField="PROVIDER" headerText="供应商 "></s:GridColumn>
+				<s:GridColumn dataField="BRAND" headerText="品牌"></s:GridColumn>
+				<s:GridColumn dataField="PRICE" headerText="单价  +加"></s:GridColumn>
+				<s:GridColumn dataField="STORAGE_DATE" headerText="入库日期"></s:GridColumn>
+				<s:GridColumn dataField="CI_DESC" headerText="资产描述"></s:GridColumn>
+			</s:ArrayList>
+		</s:columns>
+		<s:typicalItem>
+			<fx:Object dataField1="CI_ID"></fx:Object>
+		</s:typicalItem>
+		<s:ArrayList>
+			<fx:Object dataField1="数据1" ></fx:Object>
+			<fx:Object dataField1="数据2" ></fx:Object>
+			<fx:Object dataField1="数据3" ></fx:Object>
+			<fx:Object dataField1="数据4" ></fx:Object>
+		</s:ArrayList>
+	</s:DataGrid>
+	<s:controlBarContent>
+		<s:Spacer width="80%"/>
+		<s:Button id="saveBtn" enabled="{dataGrid.selectedItem!=null}" label="保存"/>
+		<s:Button id="cancelBtn" label="取消" click="PopUpManager.removePopUp(this)"/>
+	</s:controlBarContent>
+</s:TitleWindow>

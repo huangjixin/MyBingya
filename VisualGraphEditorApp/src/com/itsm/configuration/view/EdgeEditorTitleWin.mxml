@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   title="关联配置项" width="800" height="600"
+			   close="PopUpManager.removePopUp(this)"
+			   creationComplete="titlewindow1_creationCompleteHandler(event)"
+			   fontFamily="微软雅黑" xmlns:primatives="ws.tink.spark.primatives.*" xmlns:graphics="ws.tink.spark.graphics.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.ColorPickerEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.events.TextOperationEvent;
+			
+			public var xml:XML;
+			
+			private var _item:Object;
+			
+			[Bindable]
+			public function get item():Object
+			{
+				return _item;
+			}
+
+			public function set item(value:Object):void
+			{
+				_item = value;
+				numericStepper.value = _item.@thickness;
+				textInput.text = _item.@edgeLabel;
+			}
+
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				if(!item){
+					Alert.show("请传入要编辑的连线数据！");
+				}
+			}
+			
+			protected function colorPicker_changeHandler(event:ColorPickerEvent):void
+			{
+				item.@color = event.color;
+			}
+			
+			protected function numericStepper_changeHandler(event:Event):void
+			{
+				item.@thickness = numericStepper.value;
+			}
+			
+			protected function textInput_changeHandler(event:TextOperationEvent):void
+			{
+				item.@edgeLabel = textInput.text;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+	</fx:Declarations>
+	<s:Group width="400" height="200">
+		<primatives:Rect width="100%" height="100%" radiusX="10" radiusY="10">
+			<primatives:stroke>
+				<graphics:SolidColorDash  caps="square" color="0x212121" dash="5" weight="2"/>
+			</primatives:stroke>
+		</primatives:Rect>
+		<s:VGroup horizontalCenter="0" verticalCenter="0">
+			<mx:ColorPicker id="colorPicker" change="colorPicker_changeHandler(event)"/>
+			<s:NumericStepper id="numericStepper" change="numericStepper_changeHandler(event)"/>
+			<s:TextInput id="textInput" change="textInput_changeHandler(event)"/>
+		</s:VGroup>
+	</s:Group>
+	<s:controlBarContent>
+		<s:Spacer width="80%"/>
+		<s:Button id="saveBtn" label="保存"/>
+		<s:Button id="cancelBtn" label="取消" click="PopUpManager.removePopUp(this)"/>
+	</s:controlBarContent>
+</s:TitleWindow>

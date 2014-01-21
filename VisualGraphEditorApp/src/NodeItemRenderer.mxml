@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				autoDrawBackground="false" 
+				xmlns:nodes="org.un.cava.birdeye.ravis.components.renderers.nodes.*" 
+				xmlns:editor="cn.hnisi.ravis.editor.*" xmlns:graphics="ws.tink.spark.graphics.*" xmlns:primatives="ws.tink.spark.primatives.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			override public function set data(value:Object):void{
+				super.data = value;
+				
+				iconRenderer.data = getData(value);
+			}
+			
+			protected function getData(data:Object):Object
+			{
+				var object :Object = {};
+				var xml:XML = new XML(data);
+				object.data = xml;
+				
+				return object;
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+		<s:State name="selected" />
+	</s:states>
+	<s:Rect left="10" right="10" top="2" bottom="2" radiusX="2" radiusY="2">
+		<s:stroke>
+			<s:SolidColorStroke color.selected="#C28A30"
+								color.hovered="#DBCB9A" alpha="0"
+								alpha.selected="1" 
+								alpha.hovered="1">
+			</s:SolidColorStroke>
+		</s:stroke>
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry color.selected="#FFF480" color.hovered="#Ffffff" alpha="0"
+								 alpha.selected="1" 
+								 alpha.hovered="1"/>
+				<s:GradientEntry color.selected="#FFD96C"  color.hovered="#FEE487" alpha="0"
+								 alpha.selected="1" 
+								 alpha.hovered="1"/>
+				<s:GradientEntry color.selected="#FFF480"  color.hovered="#Ffffff" alpha="0"
+								 alpha.selected="1" 
+								 alpha.hovered="1"/>
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	<!--<primatives:Path id="path" data="M 0 0 L 0 80 L 80 80 L 80 0 L 00 0">
+		<primatives:stroke>
+			<graphics:SolidColorDash dash="5" gap="5" caps="round" weight="2"/>
+		</primatives:stroke>
+	</primatives:Path>-->
+	<editor:Palette horizontalCenter="0" verticalCenter="-10">
+		<nodes:IconNodeRenderer id="iconRenderer" data="{getData(data)}" />
+	</editor:Palette>
+</s:ItemRenderer>

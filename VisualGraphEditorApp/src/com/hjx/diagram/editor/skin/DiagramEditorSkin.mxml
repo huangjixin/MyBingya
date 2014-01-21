@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:editor="com.hjx.diagram.editor.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.hjx.diagram.editor.DiagramEditor")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=diagramParent, type=spark.components.Group, required=true
+	name=grid, type=com.hjx.diagram.editor.Grid, required=false
+	name=adornersGroup, type=spark.components.Group, required=true
+	-->
+	<s:Rect top="0" bottom="0" left="0" right="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#D0D0D0" weight="1"/>
+		</s:stroke>
+	</s:Rect>
+	<editor:Grid id="grid" left="0" right="0" top="0" bottom="0" step="8">
+		<editor:stroke>
+			<s:SolidColorStroke color="#DADADA" alpha="0.5" weight="1"/>
+		</editor:stroke>
+	</editor:Grid>
+	<editor:Grid left="0" right="0" top="0" bottom="0" step="40">
+		<editor:stroke>
+			<s:SolidColorStroke color="#DADADA" alpha="0.5" weight="1"/>
+		</editor:stroke>
+	</editor:Grid>
+	<s:Group id="diagramParent" left="0" right="0" top="0" bottom="0"/>
+	<s:Group id="adornersGroup" width="100%" height="100%"/>
+</s:Skin>

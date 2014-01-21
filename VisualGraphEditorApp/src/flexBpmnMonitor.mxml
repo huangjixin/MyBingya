@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:local="*"
+			   xmlns:diagram="com.hjx.diagram.*"
+			   minWidth="955" minHeight="600" creationComplete="creationCompleteHandler(event)" xmlns:editor="com.hjx.diagram.editor.*">
+	<fx:Style source="bpmgraphic.css">
+		
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			import com.hjx.bpmn.graphic.ConnectingObject;
+			import com.hjx.bpmn.graphic.FlowObject;
+			import com.hjx.bpmn.graphic.LaneBase;
+			import com.hjx.diagram.serialization.XMLSerializer;
+			import com.hjx.graphic.Link;
+			import com.hjx.graphic.Node;
+			import com.hjx.graphic.Renderer;
+			import com.hjx.graphic.SubGraph;
+			import com.itsm.common.Global;
+			import com.itsm.designer.controller.DesignerProviderEvent;
+			import com.itsm.designer.model.DesignerProviderRemoteProxy;
+			import com.itsm.designer.model.vo.FlowInfo;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.utils.StringUtil;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private var domainId:Number;
+			
+			private var processInstanceId:Number;
+			private var ticketId:Number;
+			
+			private var designerProxy:DesignerProviderRemoteProxy;
+			
+			private var currentRenderer:Renderer;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				//获得流程Id参数；
+				processInstanceId = FlexGlobals.topLevelApplication.parameters["processInstanceId"];
+				ticketId = FlexGlobals.topLevelApplication.parameters["ticketId"];
+				domainId = FlexGlobals.topLevelApplication.parameters["domainId"];
+				
+				var url:String = "";
+				var endPoint:String = "";
+				url = FlexGlobals.topLevelApplication.url;
+				
+				var array:Array = url.split("/");
+				if(array && array.length>1){
+					//		endPoint = array[0]+ "//" + array[1]+ array[2];
+					endPoint = array[0]+ "//" + array[1]+ array[2] + "/" + array[3]; //发布web文件夹下面
+					
+					url = array[0]+ "//" + array[1]+ array[2] + "/" + array[3]+ "/" + array[4];
+					Global.getInstance().url = url;
+					//确定端点；
+					//Global.getInstance().endPoint = 'messagebroker/amf';
+					Global.getInstance().endPoint = endPoint + "/"+'messagebroker/amf';
+					
+					designerProxy = new DesignerProviderRemoteProxy();
+				}
+				
+				if(designerProxy){
+//					designerProxy.getAllProcessDefinitionInfo(domainId);
+//					designerProxy.addEventListener(DesignerProviderEvent.GET_ALL_PROCESS_DEFINITIONINFO_FAULT,getAllProcessDefinitionInfoFault);
+//					designerProxy.addEventListener(DesignerProviderEvent.GET_ALL_PROCESS_DEFINITIONINFO_RESULT,getAllProcessDefinitionInfoResult);
+
+					designerProxy.getProcessDefinitionById(processInstanceId);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_PROCESS_DEFINITION_BYID_FAULT,getProcessDefinitionByIdFault);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_PROCESS_DEFINITION_BYID_RESULT,getProcessDefinitionByIdResult);
+				
+				}
+			}
+			
+			/* protected function getAllProcessDefinitionInfoResult(event:DesignerProviderEvent):void
+			{
+				var arrcol:ArrayCollection = event.object as ArrayCollection;		
+				processDefinitionList.dataProvider = arrcol;
+			}
+			
+			protected function getAllProcessDefinitionInfoFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询所有出错");
+			}
+			
+			protected function processDefinitionList_changeHandler(event:IndexChangeEvent):void
+			{
+				var item:Object = processDefinitionList.selectedItem;
+				if(item){
+					var currentTime:String = item.VERSION;
+					var proecessdefinitionName:String = item.NAME_EN;
+					designerProxy.getProcessDefinition(new Number(domainId),item.NAME_EN,item.VERSION);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_PROCESS_DEFINITION_FAULT,getProcessDefinitionFault);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_PROCESS_DEFINITION_RESULT,getProcessDefinitionResult);
+				}
+			} */
+			
+			private function myLabelFunction(item:Object):String{
+				return item.NAME_EN+item.NAME_ZH+item.VERSION;
+			}
+			
+			protected function startButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function pauseButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function endButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			/**
+			 * 获得一个流程以后，反序列化流程。
+			 */ 
+			protected function getProcessDefinitionResult(event:DesignerProviderEvent):void
+			{
+				var object:Object = event.object;
+				try {
+					var xml:XML = new XML(object.GPD.toString());
+					//------- 根据限定名判断是不是可以解析的流程文件。
+					if(xml.localName() != "BpmnDiagram"){
+						Alert.show("该文件不是流程文件");
+						return;
+					}
+					new XMLSerializer().deserialize(diagram.graph, xml);
+				} catch(err:Error){
+					Alert.show(err.message);
+				}
+			}
+			
+			protected function getProcessDefinitionFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询出错")
+			}
+			
+			protected function getProcessDefinitionByIdFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询出错")
+			}
+			
+			protected function getProcessDefinitionByIdResult(event:DesignerProviderEvent):void
+			{
+				var object:Object = event.object;
+				try {
+					var xml:XML = new XML(object.GPD.toString());
+					if(xml.localName() != "BpmnDiagram"){
+						Alert.show("该文件不是流程文件");
+						return;
+					}
+					new XMLSerializer().deserialize(diagram.graph, xml);
+					
+					designerProxy.getFlowInfo(ticketId);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_FLOW_INFO_FAULT,getFlowInfoFault);
+					designerProxy.addEventListener(DesignerProviderEvent.GET_FLOW_INFO_RESULT,getFlowInfoResult);
+				} catch(err:Error){
+					Alert.show(err.message);
+				}
+			}
+			
+			/**
+			 * 取得流程历史记录之后，遍历所有的节点，将jbmn流程记录映射为节点数组，
+			 * 
+			 */ 
+			protected function getFlowInfoResult(event:DesignerProviderEvent):void
+			{
+				var arrcol:ArrayCollection = event.object as ArrayCollection;
+				var rendererArrCol:ArrayCollection = new ArrayCollection();
+				var length:int = arrcol.length;
+				var renderer:Renderer ;
+				//----------- 此处逻辑比较复杂，是这样的：先遍历查找到jbpm历史记录所有的图形节点，再存进去一个数组里面。
+				for(var i:int=0;i<length;i++) 
+				{
+					var flowInfo:FlowInfo = arrcol[i]as FlowInfo;
+					
+					var nodeName:String = flowInfo.NODE_NAME;
+					if(StringUtil.trim(nodeName) == "流程开始"){
+						flowInfo.NODE_NAME = "开始";
+					}else if(StringUtil.trim(nodeName) == "流程结束"){
+						flowInfo.NODE_NAME = "结束";
+					}
+					renderer = jbpmnToRenderer(flowInfo.NODE_NAME);
+					if(renderer){
+						rendererArrCol.addItem(renderer);
+					}
+				}
+				
+				for(i= 0;i<rendererArrCol.length;i++){
+					//------------- 寻找当前节点并且把它的状态设置为"active"
+					renderer= rendererArrCol[i] as Renderer;
+					
+					var flowObject:FlowObject;
+					if(renderer is FlowObject){
+						flowObject = renderer as FlowObject;
+						flowObject.monitoringStatus ="active";
+					}
+					
+					//-------------- 光有节点不行，还得把跑过的连线给设置为"done"；
+					var next:FlowObject;
+					var links:Vector.<Link>;
+					var link:Link;
+					if(flowObject){
+						if(i+1< rendererArrCol.length){
+							next = rendererArrCol[i+1];
+						}
+						
+						if(next){
+							//----------- 查找到有下一个节点的时候，就把上一个改成done。
+							links = flowObject.outgoingLinks;
+							for each (link in links) 
+							{
+								if(link.endNode == next){
+									ConnectingObject(link).monitoringStatus = "done"
+									break;
+								}
+							}
+							
+							flowObject.monitoringStatus ="done";
+							next.monitoringStatus ="active";
+						}
+					}
+					
+					//---------------- 由于系统里面根本到流程结束，后台直接在服务台就给结束掉了，所以要做额外工作来进行图形绘制。
+					if(StringUtil.trim(flowInfo.MEMO) == "流程结束"){
+						if(next){
+							next.monitoringStatus ="done";
+							renderer = jbpmnToRenderer("结束");
+							links = next.outgoingLinks;
+							if(!renderer){
+								return;
+							}
+							for each (link in links) 
+							{
+								if(link.endNode == renderer){
+									ConnectingObject(link).monitoringStatus = "done";
+									renderer["monitoringStatus"] = "done";
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			/**
+			 * 根据名称查找节点。
+			 */ 
+			protected function jbpmnToRenderer(nodeName:String):Renderer
+			{
+				currentRenderer = null;
+				var renderer:Renderer;
+				serializeToJbpm(nodeName);
+				renderer = currentRenderer;
+				currentRenderer = null;
+				return renderer;
+			}
+			
+			/**
+			 * 第一层查找节点。
+			 */ 	
+			public function serializeToJbpm(label:String):void{
+				for (var i:int = 0;i<diagram.graph.numElements;i++) 
+				{
+					var ele:Renderer = diagram.graph.getElementAt(i) as Renderer;
+					serializeRenderer(ele,label);
+				}
+			}
+			
+			/**
+			 * 根据label标签找到相对应的图形节点，遍历查找
+			 */ 
+			public function serializeRenderer(renderer:Renderer,label:String):void{
+				if(renderer is Node && (renderer is SubGraph)==false ){
+					if(renderer.hasOwnProperty("label")){
+						if(renderer["label"] == label){
+							currentRenderer = renderer;
+							return ;
+						}
+					}
+				}else if(renderer is SubGraph){
+					for (var i:int = 0;i<LaneBase(renderer).numElements;i++) 
+					{
+						var ele:Renderer = LaneBase(renderer).getElementAt(i) as Renderer;
+						serializeRenderer(ele,label);
+					}
+				}
+			}
+			
+			/**
+			 *  查詢流程保错
+			 * 
+			 */ 
+			protected function getFlowInfoFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询出错");
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+	</fx:Declarations>
+	<s:VGroup id="mainGroup" left="5" right="5" top="5" bottom="5" width="100%" height="100%"
+			  autoLayout="true" clipAndEnableScrolling="true" gap="8">
+		<!--<s:HGroup width="100%" gap="5" verticalAlign="middle">
+			<s:Label text="流程："/>
+			<s:DropDownList id="processDefinitionList" width="150"
+							change="processDefinitionList_changeHandler(event)"
+							labelFunction="myLabelFunction"/>
+			<s:Spacer width="6"/>
+			<s:Button id="startButton" label="开始" click="startButton_clickHandler(event)"/>
+			<s:Button id="pauseButton" label="暂停" click="pauseButton_clickHandler(event)"/>
+			<s:Button id="endButton" label="结束" click="endButton_clickHandler(event)"/>
+		</s:HGroup>-->
+		<mx:VDividedBox width="100%" height="100%" liveDragging="true">
+			<s:Group width="100%" height="70%">          
+				<s:Panel id="titlePanel" width="100%" height="100%">
+					<diagram:Diagram id="diagram" width="100%" height="100%"
+									 automaticGraphLayout="false" labelField="@label"
+									 selectionMode="multiple" xLocationField="@x"
+									 yLocationField="@y">
+					</diagram:Diagram>
+				</s:Panel>
+			</s:Group>
+			<s:VGroup width="100%" height="30%">  
+				<local:LogList id="log" left="0" width="100%" height="100%"
+							   allowMultipleSelection="false">
+					<local:dataProvider>
+						<s:ArrayList>
+						</s:ArrayList>
+					</local:dataProvider>
+					<local:itemRenderer>
+						<fx:Component>
+							<s:ItemRenderer>
+								<s:states>
+									<s:State name="normal"/>
+									<s:State name="hovered"/>
+									<s:State name="selected"/>
+								</s:states>
+								<mx:Label left="5" right="5" top="2" htmlText="{data.label}"/>
+							</s:ItemRenderer>
+						</fx:Component>
+					</local:itemRenderer>
+				</local:LogList>
+			</s:VGroup>
+		</mx:VDividedBox>
+	</s:VGroup>
+</s:Application>

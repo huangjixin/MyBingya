@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:editor="com.hjx.diagram.editor.*" xmlns:primatives="ws.tink.spark.primatives.*" xmlns:graphics="ws.tink.spark.graphics.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.hjx.diagram.editor.NodeAdorner")]
+	</fx:Metadata>
+	<primatives:Rect left="-4" right="-4" top="-4" bottom="-4">
+		<primatives:stroke>
+			<graphics:SolidColorDash  color="0x00A8FF"/>
+		</primatives:stroke>
+	</primatives:Rect>
+	<!--<editor:Handle id="topLeftHandle" left="-8" top="-8"
+				   skinClass="com.hjx.diagram.editor.skin.HandleSkin"/>
+	<editor:Handle id="topRightHandle" right="-8" top="-8"  
+				   skinClass="com.hjx.diagram.editor.skin.HandleSkin"/>
+	<editor:Handle id="bottomLeftHandle" left="-8" bottom="-8" 
+				   skinClass="com.hjx.diagram.editor.skin.HandleSkin"/>
+	<editor:Handle id="bottomRightHandle" right="-8" bottom="-8"
+				   skinClass="com.hjx.diagram.editor.skin.HandleSkin"/>-->
+	
+	<editor:LinkHandle id="rightArrowHandle" right="-28" verticalCenter="5"
+				   skinClass="com.hjx.diagram.editor.skin.ArrowSkin"/>
+	<editor:LinkHandle id="topArrowHandle" top="-28" horizontalCenter="5" rotation="-90"
+				   skinClass="com.hjx.diagram.editor.skin.ArrowSkin"/>
+	<editor:LinkHandle id="bottomArrowHandle" bottom="-28"  horizontalCenter="-5" rotation="90"
+				   skinClass="com.hjx.diagram.editor.skin.ArrowSkin"/>
+	<editor:LinkHandle id="leftArrowHandle" left="-28" verticalCenter="-5" rotation="180"
+				   skinClass="com.hjx.diagram.editor.skin.ArrowSkin"/>
+	
+	<!--<editor:ConnectingAreaHandle id="rightConnectingHandle" right="0" verticalCenter="{-rightConnectingHandle.height/2}"
+				   skinClass="com.hjx.diagram.editor.skin.ConnectingAreaHandleSkin"/>
+	<editor:ConnectingAreaHandle id="topConnectingHandle" top="-10" horizontalCenter="0"
+				   skinClass="com.hjx.diagram.editor.skin.ConnectingAreaHandleSkin"/>
+	<editor:ConnectingAreaHandle id="bottomConnectingHandle" bottom="-10"  horizontalCenter="-0" 
+				   skinClass="com.hjx.diagram.editor.skin.ConnectingAreaHandleSkin"/>
+	<editor:ConnectingAreaHandle id="leftConnectingHandle" left="0" verticalCenter="{-leftConnectingHandle.height/2}"
+				   skinClass="com.hjx.diagram.editor.skin.ConnectingAreaHandleSkin"/>-->
+</s:Skin>

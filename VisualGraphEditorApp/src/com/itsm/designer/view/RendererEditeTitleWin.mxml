@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="400" height="300"
+			   close="PopUpManager.removePopUp(this)"
+			   title="编辑图形属性" xmlns:common="com.itsm.common.*"
+			   defaultButton="{saveBtn}">
+	<fx:Script>
+		<![CDATA[
+			import com.hjx.bpmn.graphic.ConnectingObject;
+			import com.hjx.bpmn.graphic.Event;
+			import com.hjx.bpmn.graphic.LaneBase;
+			import com.hjx.bpmn.graphic.Task;
+			import com.hjx.diagram.editor.DiagramEditor;
+			import com.hjx.graphic.Renderer;
+			import com.hjx.jbpm.Assignment;
+			import com.hjx.jbpm.Element;
+			import com.hjx.jbpm.Event;
+			import com.itsm.common.CheckBoxHeaderRenderer;
+			import com.itsm.common.CheckBoxItemRenderer;
+			import com.itsm.designer.controller.DesignerProviderEvent;
+			import com.itsm.designer.model.DesignerProviderRemoteProxy;
+			import com.itsm.designer.model.vo.MainFormPageFieldMeta;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.mx_internal;
+			import mx.managers.PopUpManager;
+			
+			private var _renderer:Renderer;
+
+			private var designerProxy:DesignerProviderRemoteProxy = new DesignerProviderRemoteProxy();
+			[Bindable]
+			public var domainId:Number= 0;
+			[Bindable]
+			public function get renderer():Renderer
+			{
+				return _renderer;
+			}
+
+			public function set renderer(value:Renderer):void
+			{
+				_renderer = value;
+				if(_renderer){
+					if(_renderer.hasOwnProperty("label")){
+						textInput.text = _renderer["label"];
+					}
+					
+					if(_renderer is Task){
+						tabNavi.removeElement(ncRoleSetting);
+						
+						var task:Task = _renderer as Task;
+						textArea.text = task.task.description;
+						
+						var e:com.hjx.jbpm.Event;
+						if(task.task.commonNodeElements.events.length > 0){
+							e = task.task.commonNodeElements.events[0];
+							if(e.action.sendName != ""){
+								sendNameInput.text = e.action.sendName;
+							}						
+						}
+						var operationList:Vector.<Element>;
+						if(e){
+							operationList = e.action.operationList;						
+						}
+						
+						for (var i:int = 1; i < 6; i++) 
+						{
+							var checkBox:CheckBox = this["CB"+i];
+							for each (var opeEle:Element in operationList) 
+							{
+								if(checkBox.label == opeEle.value){
+									checkBox.selected = true;
+								}
+							}
+						}
+							
+						CB6.selected = task.task.create_tasks;
+						if(e){
+							if(e.action.execType == "COLL"){
+								CB7.selected = true;	
+							}else if(e.action.execType == "GRAB"){
+								CB7.selected = false;
+							}						
+						}
+						
+						designerProxy.getMainFormFields();
+						designerProxy.addEventListener(DesignerProviderEvent.GETMAINFORMFIELDS_RESULT,getMainFormFieldsResult);
+						designerProxy.addEventListener(DesignerProviderEvent.GETMAINFORMFIELDS_FAULT,getMainFormFieldsFault); 
+						
+					}else if(_renderer is LaneBase){
+						tabNavi.removeElement(ncProp);
+						tabNavi.removeElement(ncFuncSetting);
+						tabNavi.removeElement(ncMainForm);
+						tabNavi.removeElement(ncExtend);
+						
+						designerProxy.getRoles(domainId);
+						designerProxy.addEventListener(DesignerProviderEvent.GETROLES_RESULT,getRolesResult);
+						designerProxy.addEventListener(DesignerProviderEvent.GETROLES_FAULT,getRolesFault);
+						
+						var laneBase:LaneBase = _renderer as LaneBase;
+						startRoleCK.selected = laneBase.swimlane.name =="流程启动者"; 
+					}else if( _renderer is ConnectingObject){
+						tabNavi.removeElement(ncRoleSetting);
+						tabNavi.removeElement(ncFuncSetting);
+						tabNavi.removeElement(ncMainForm);
+						tabNavi.removeElement(ncExtend);
+					}else if( _renderer is com.hjx.bpmn.graphic.Event){
+						tabNavi.removeElement(ncRoleSetting);
+						tabNavi.removeElement(ncFuncSetting);
+						tabNavi.removeElement(ncMainForm);
+						tabNavi.removeElement(ncExtend);
+					}
+				}
+			}
+
+			protected function getMainFormFieldsResult(event:DesignerProviderEvent):void
+			{
+				var arrcol:ArrayCollection = event.object as ArrayCollection;
+				dataGrid.dataProvider = arrcol;
+				
+				var task:Task = _renderer as Task;
+				var e:com.hjx.jbpm.Event;
+				if(task.task.commonNodeElements.events.length > 0){
+					e = task.task.commonNodeElements.events[0];						
+				}
+				if(!e){
+					return;
+				}
+				var formFieldList:Vector.<Element> = e.action.formFieldList;
+				var selecedIndex:Vector.<int> = new Vector.<int>();
+				for(var i:int = 0;i<arrcol.length;i++){
+					var item:Object = arrcol[i];
+//					item.isSelected = false;
+					for each (var ele:Element in formFieldList) 
+					{
+						if(item.field == ele.value){
+							selecedIndex.push(i);
+//							item.isSelected = true;
+							break;
+						}
+					}
+				}
+				dataGrid.selectedIndices = selecedIndex;
+			}
+			
+			protected function getMainFormFieldsFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.toString(),"查询表单出错");
+			}
+			
+			protected function getRolesResult(event:DesignerProviderEvent):void
+			{
+				var object:Object = event.object;
+				rolesComboBox.dataProvider  = object as ArrayCollection;
+				if(object){
+//					rolesComboBox.selectedIndex = 0;
+					rolesComboBox.textInput.editable = false;
+				}
+			}
+			
+			protected function getRolesFault(event:DesignerProviderEvent):void
+			{
+				Alert.show(event.object.toString(),"查询角色出错");
+			}
+			
+			protected function saveBtn_clickHandler(event:MouseEvent):void
+			{
+				if(_renderer.hasOwnProperty("label")){
+					_renderer["label"] = textInput.text;
+				}
+				
+				if(renderer is Task){
+					var task:Task = renderer as Task;
+					task.task.name = _renderer["label"];
+					task.task.description = textArea.text;
+					var assignment:Assignment = new Assignment();
+					assignment.pooled_actors = rolesComboBox.selectedItem;
+					/* if(!assignment.canIgnored()){
+						task.task.task.assignment = assignment;
+					} */
+					
+					var operationList:XML = new XML(<operationList></operationList>);
+					var formFieldList:XML = new XML(<formFieldList></formFieldList>);
+					task.task.commonNodeElements.events[0] = new com.hjx.jbpm.Event();
+					var ev:com.hjx.jbpm.Event = task.task.commonNodeElements.events[0] as com.hjx.jbpm.Event;
+					
+					ev.action.sendName = sendNameInput.text;
+					if(CB6.selected){
+						task.task.create_tasks = true;
+					}else{
+						task.task.create_tasks = false;
+					}
+					
+					if(CB7.selected){
+						ev.action.execType = "COLL";	
+					}else{
+						ev.action.execType = "GRAB";
+					}
+					
+					ev.action.operationList = new Vector.<Element>();
+					var ele:Element = new Element(sendNameInput.text);
+					
+					for (var i:int = 0; i < 6; i++) 
+					{
+						var checkBox:CheckBox = this["CB"+i]; 
+						if(checkBox && checkBox.selected){
+							ele = new Element(checkBox.label);
+							ev.action.operationList.push(ele);
+						}
+					}
+					
+					ev.action.formFieldList = new Vector.<Element>();
+					for each (var mainForm:MainFormPageFieldMeta in dataGrid.selectedItems) 
+					{
+						ele = new Element(mainForm.field);
+						ev.action.formFieldList.push(ele);
+					}
+					
+					
+					/* var parentGraph:Renderer = DiagramEditor.getRenderer(task.parent);
+					var parentLane:LaneBase;
+					if(parentGraph && parentGraph is LaneBase){
+						parentLane = parentGraph as LaneBase;
+						task.task.task.swimlane.name = parentLane.swimlane.name;
+					} */ 
+				}
+				
+				if(renderer is LaneBase){
+					var laneBase:LaneBase = renderer as LaneBase;
+					if(startRoleCK.selected){
+						_renderer["label"] = textInput.text = laneBase.swimlane.name = "流程启动者";
+						laneBase.swimlane.assignment.className="org.wbase.framework.jbpm.extend.ProcessStarterAssignmentHandler";
+					}else{
+						_renderer["label"] = textInput.text = laneBase.swimlane.name = rolesComboBox.selectedItem;
+					}
+				}
+				
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+	</fx:Declarations>
+	<mx:TabNavigator id="tabNavi" width="100%" height="100%" backgroundColor="0xf0f0f0" creationPolicy="all">
+		<s:NavigatorContent id="ncProp" width="100%" height="100%" label="常规属性">
+			<s:VGroup left="20" right="20" top="20" bottom="20">
+				<s:HGroup verticalAlign="middle">
+					<s:Label text="名称:"/>
+					<s:TextInput id="textInput"/>
+				</s:HGroup>
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#828790"/>
+						</s:stroke>
+					</s:Rect>
+					<s:VGroup left="20" right="20" top="20" bottom="20">
+						<s:Label text="描述:"/>
+						<s:TextArea id="textArea" width="100%" height="100%"/>	
+					</s:VGroup>
+					
+				</s:Group>
+			</s:VGroup>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="ncRoleSetting" width="100%" height="100%" label="任务设置">
+			<s:VGroup left="20" right="20" top="20" bottom="20">
+				<s:HGroup verticalAlign="middle">
+					<s:Label text="名称:"/>
+					<s:TextInput text="{renderer['label']}" editable="false"/>
+				</s:HGroup>
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#828790"/>
+						</s:stroke>
+					</s:Rect>
+					<s:HGroup id="roleHgroup" verticalAlign="middle" left="20" top="20" enabled="{!startRoleCK.selected}">
+						<s:Label text="执行角色:"/>
+						<s:ComboBox id="rolesComboBox" top="10" left="10"/>
+					</s:HGroup>
+					<s:HGroup top="70" left="20">
+						<s:CheckBox id="startRoleCK" label="流程启动者"/>
+					</s:HGroup>
+				</s:Group>
+			</s:VGroup>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="ncFuncSetting" width="100%" height="100%" label="功能设置">
+			<s:Group left="20" right="20" top="20" bottom="20">
+				<s:Rect width="100%" height="100%">
+					<s:stroke>
+						<s:SolidColorStroke color="#828790"/>
+					</s:stroke>
+				</s:Rect>
+				<s:HGroup verticalAlign="middle" horizontalCenter="0" verticalCenter="0">
+					<s:Label text="环节操作:"/>
+					<s:VGroup>
+						<s:CheckBox id="CB0" selected="true" label="发送" enabled="false"/>
+						<s:CheckBox id="CB1" label="转交"/>
+						<s:CheckBox id="CB2" label="补充信息"/>
+						<s:CheckBox id="CB3" label="解决方案"/>
+						<s:CheckBox id="CB4" label="回访"/>
+						<s:CheckBox id="CB5" label="发起服务"/>
+					</s:VGroup>
+					<s:VGroup>
+						<s:CheckBox id="CB6" label="自动创建任务"/>
+						<s:CheckBox id="CB7" label="协作任务"/>
+					</s:VGroup>
+					<s:HGroup verticalAlign="middle">
+						<s:Label text="发送名称:"/>
+						<s:TextInput  id="sendNameInput" width="36" text="{CB0.label}"/>
+					</s:HGroup>
+				</s:HGroup>
+			</s:Group>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="ncMainForm" width="100%" height="100%" label="表单定制">
+			<s:DataGrid id="dataGrid" left="5" right="5" top="5" bottom="5"
+					    selectionMode="multipleRows">
+				<s:columns>
+					<s:ArrayList>
+						<!--<common:CheckBoxColumn dataField="isSelected" width="25"    
+													   draggable="false" resizable="false" sortable="false" 
+													   headerRenderer="{new ClassFactory(CheckBoxHeaderRenderer)}" 
+													   itemRenderer="{new ClassFactory(CheckBoxItemRenderer)}" 
+													   /> -->
+						<s:GridColumn dataField="field" headerText="字段代码"></s:GridColumn>
+						<s:GridColumn dataField="name" headerText="字段名称"></s:GridColumn>
+					</s:ArrayList>
+				</s:columns>	
+			</s:DataGrid>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="ncExtend" width="100%" height="100%" label="扩展属性">
+		</s:NavigatorContent>
+	</mx:TabNavigator>
+	<s:controlBarContent>
+		<s:Spacer width="80%"/>
+		<s:Button id="saveBtn" label="保存" click="saveBtn_clickHandler(event)"/>
+		<s:Button id="cancelBtn" label="取消" click="PopUpManager.removePopUp(this)"/>
+	</s:controlBarContent>
+</s:TitleWindow>

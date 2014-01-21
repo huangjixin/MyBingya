@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			private var _adornerObject:UIComponent;
+			
+			
+			public function get adornerObject():UIComponent
+			{
+				return _adornerObject;
+			}
+
+			public function set adornerObject(value:UIComponent):void
+			{
+				_adornerObject = value;
+				invalidateProperties();
+			}
+			
+			protected function getAdornerRectangle(arg1:DisplayObject):Rectangle
+			{
+				return this._adornerObject.getBounds(arg1);
+			}
+
+			
+			protected override function commitProperties():void
+			{
+				var rectangle:Rectangle=null;
+				super.commitProperties();
+				if(!this._adornerObject){
+					return;
+				}
+				if (this._adornerObject.parent != null) 
+				{
+					rectangle = this.getAdornerRectangle(this._adornerObject.parent);
+					this.left = rectangle.x;
+					this.top = rectangle.y;
+					this.width = rectangle.width;
+					this.height = rectangle.height;
+				}
+				return;
+			}
+		]]>
+	</fx:Script>
+	<!--<s:Label text="{data}"/>-->
+	<s:Group width="100" height="100">
+		<s:Rect top="0" bottom="0" left="0" right="0">
+			<s:stroke>
+				<s:SolidColorStroke color="red"/>
+			</s:stroke>
+		</s:Rect>
+	</s:Group>
+</s:ItemRenderer>

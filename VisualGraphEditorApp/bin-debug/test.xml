@@ -1,0 +1,127 @@
+<diagram xmlns:bg="bpm.graphic" xmlns:ciied="com.ibm.ilog.elixir.diagram" xmlns:fg="flash.geom">
+  <bg:HPool id="hPool1" automaticGraphLayout="false" expandedWidth="500" gap="-2" height="198" width="500" x="153" y="90">
+    <label>Horizontal Pool</label>
+    <ports>
+      <ciied:Port id="port1" clipOnShape="true" movable="false">
+        <id>CENTER</id>
+      </ciied:Port>
+    </ports>
+    <bg:HLane id="hLane1" automaticGraphLayout="false" expandedHeight="100" height="100" width="475">
+      <label>Lane</label>
+      <ports>
+        <ciied:Port id="port2" clipOnShape="true" movable="false">
+          <id>CENTER</id>
+        </ciied:Port>
+      </ports>
+      <bg:StartEvent id="startEvent1" height="46" width="31" x="26" y="28">
+        <label>Start</label>
+        <ports>
+          <ciied:Port id="port3" clipOnShape="true" movable="false">
+            <id>CENTER</id>
+          </ciied:Port>
+          <ciied:Port id="port4" x="1">
+            <id>RIGHT</id>
+          </ciied:Port>
+          <ciied:Port id="port5" x="1">
+            <id>RIGHT</id>
+          </ciied:Port>
+        </ports>
+      </bg:StartEvent>
+      <bg:EndEvent id="endEvent1" height="49" width="34" x="370" y="20">
+        <label>End</label>
+        <ports>
+          <ciied:Port id="port6" clipOnShape="true" movable="false">
+            <id>CENTER</id>
+          </ciied:Port>
+        </ports>
+      </bg:EndEvent>
+      <bg:Task id="task1" height="50" width="90" x="233" y="16">
+        <label>Task</label>
+        <ports>
+          <ciied:Port id="port7" clipOnShape="true" movable="false">
+            <id>CENTER</id>
+          </ciied:Port>
+          <ciied:Port id="port8" x="0">
+            <id>LEFT</id>
+          </ciied:Port>
+          <ciied:Port id="port9" x="1">
+            <id>RIGHT</id>
+          </ciied:Port>
+        </ports>
+      </bg:Task>
+    </bg:HLane>
+    <bg:HLane id="hLane2" automaticGraphLayout="false" expandedHeight="100" height="100" width="475" y="98">
+      <label>Lane</label>
+      <ports>
+        <ciied:Port id="port10" clipOnShape="true" movable="false">
+          <id>CENTER</id>
+        </ciied:Port>
+      </ports>
+      <bg:Task id="task2" height="50" width="90" x="83" y="39">
+        <label>Task</label>
+        <ports>
+          <ciied:Port id="port11" clipOnShape="true" movable="false">
+            <id>CENTER</id>
+          </ciied:Port>
+          <ciied:Port id="port12" x="0">
+            <id>LEFT</id>
+          </ciied:Port>
+          <ciied:Port id="port13" x="1">
+            <id>RIGHT</id>
+          </ciied:Port>
+        </ports>
+      </bg:Task>
+    </bg:HLane>
+    <bg:SequenceFlow id="sequenceFlow1" endPort="port12" startPort="port5">
+      <fallbackEndPoint>
+        <fg:Point id="point1" x="117" y="40"/>
+      </fallbackEndPoint>
+      <fallbackStartPoint>
+        <fg:Point id="point2" x="25"/>
+      </fallbackStartPoint>
+      <label></label>
+    </bg:SequenceFlow>
+    <bg:SequenceFlow id="sequenceFlow2" endPort="port8" startPort="port13">
+      <fallbackEndPoint>
+        <fg:Point id="point3" x="268" y="40"/>
+      </fallbackEndPoint>
+      <fallbackStartPoint>
+        <fg:Point id="point4" x="25"/>
+      </fallbackStartPoint>
+      <label></label>
+    </bg:SequenceFlow>
+  </bg:HPool>
+  <bg:SequenceFlow id="sequenceFlow3" startPort="port9">
+    <fallbackEndPoint>
+      <fg:Point id="point5" x="577" y="130"/>
+    </fallbackEndPoint>
+    <fallbackStartPoint>
+      <fg:Point id="point6"/>
+    </fallbackStartPoint>
+    <label></label>
+  </bg:SequenceFlow>
+  <bg:VPool id="vPool1" automaticGraphLayout="false" expandedHeight="500" gap="-2" height="500" width="198" x="711" y="48">
+    <label>Vertical Pool</label>
+    <ports>
+      <ciied:Port id="port14" clipOnShape="true" movable="false">
+        <id>CENTER</id>
+      </ciied:Port>
+    </ports>
+    <bg:VLane id="vLane1" automaticGraphLayout="false" expandedWidth="100" height="475" width="100">
+      <label>Lane</label>
+      <ports>
+        <ciied:Port id="port15" clipOnShape="true" movable="false">
+          <id>CENTER</id>
+        </ciied:Port>
+      </ports>
+    </bg:VLane>
+    <bg:VLane id="vLane2" automaticGraphLayout="false" expandedWidth="100" height="475" width="100" x="98">
+      <label>Lane</label>
+      <ports>
+        <ciied:Port id="port16" clipOnShape="true" movable="false">
+          <id>CENTER</id>
+        </ciied:Port>
+      </ports>
+    </bg:VLane>
+  </bg:VPool>
+</diagram>
