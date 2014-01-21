@@ -6,7 +6,6 @@ package com.bingya.service.system.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -69,7 +68,7 @@ public class MenuServiceImpl implements IMenuService {
 			roleMenuMapper.deleteByPrimaryKey(roleMenu.getId());
 		}
 
-		List<Menu> menuList = getByParentId(id);
+		List<Menu> menuList = getByParentId(id,null);
 		for (Menu menu : menuList) {
 			deleteByPrimaryKey(menu.getId());
 		}
@@ -88,12 +87,12 @@ public class MenuServiceImpl implements IMenuService {
 	public String insert(Menu entity) {
 		Date date = new Date();
 		Long time = date.getTime();
-//		entity.setId(time);
+		// entity.setId(time);
 		if ("".equals(entity.getParentid())) {
 			entity.setParentid(null);
 		}
 		int i = menuMapper.insertSelective(entity);
-		
+
 		return entity.getId();
 	}
 
@@ -128,7 +127,7 @@ public class MenuServiceImpl implements IMenuService {
 	 */
 	@Override
 	public String update(Menu entity) {
-		return menuMapper.updateByExampleSelective(entity, null)+"";
+		return menuMapper.updateByExampleSelective(entity, null) + "";
 	}
 
 	/*
@@ -152,17 +151,37 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public List getMenuTree() {
+	public List getMenuTreeByRoleId(String roleId) {
 		MenuExample menuExample = new MenuExample();
 		menuExample.createCriteria().andParentidIsNull();
 
 		List<Menu> list = menuMapper.selectByExample(menuExample);
+		List<RoleMenu> roleMenus = null;
+		if (roleId != null) {
+			RoleMenuExample roleMenuExample = new RoleMenuExample();
+			roleMenuExample.createCriteria().andRoleIdEqualTo(roleId);
+			roleMenus = roleMenuMapper
+					.selectByExample(roleMenuExample);
+			for (Menu menu : list) {
+				Boolean flag = false;
+				for (RoleMenu roleMenu : roleMenus) {
+					if (roleMenu.getMenuId().equals(menu.getId())) {
+						flag = true;
+						break;
+					}
+				}
+				if (false == flag) {
+					list.remove(menu);
+				}
+			}
+		}
+
 		List children = new ArrayList();
 		try {
 			for (Menu object : list) {
 				JSONObject jsonObject;
 
-				jsonObject = searialMenu(object);
+				jsonObject = searialMenu(object, roleMenus);
 				children.add(jsonObject);
 			}
 		} catch (org.json.JSONException e) {
@@ -173,10 +192,26 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public List<Menu> getByParentId(String id) {
+	public List<Menu> getByParentId(String id, List<RoleMenu> roleMenus) {
 		MenuExample menuExample = new MenuExample();
 		menuExample.createCriteria().andParentidEqualTo(id);
-		return menuMapper.selectByExample(menuExample);
+		List<Menu> list = menuMapper.selectByExample(menuExample);
+		if (roleMenus != null) {
+			for (Menu menu : list) {
+				Boolean flag = false;
+				for (RoleMenu roleMenu : roleMenus) {
+					if (roleMenu.getMenuId().equals(menu.getId())) {
+						flag = true;
+						break;
+					}
+				}
+				if (false == flag) {
+					list.remove(menu);
+				}
+			}
+		}
+
+		return list;
 	}
 
 	@Override
@@ -203,14 +238,14 @@ public class MenuServiceImpl implements IMenuService {
 	// private 私有方法
 	// ---------------------------------------------------
 
-	private JSONObject searialMenu(Menu menu) throws org.json.JSONException {
+	public JSONObject searialMenu(Menu menu,List<RoleMenu> roleMenus) throws org.json.JSONException {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put("id", menu.getId());
 			jsonObject.put("parentid", menu.getParentid());
 			jsonObject.put("name", menu.getName());
 
-			List list = searialChild(menu);
+			List list = searialChild(menu,roleMenus);
 			if (null != list) {
 				jsonObject.put("children", list);
 			}
@@ -223,15 +258,15 @@ public class MenuServiceImpl implements IMenuService {
 		return jsonObject;
 	}
 
-	private List searialChild(Menu menu) {
+	public List searialChild(Menu menu,List<RoleMenu> roleMenus) {
 		List children = null;
-		List<Menu> list = getByParentId(menu.getId());
+		List<Menu> list = getByParentId(menu.getId(),roleMenus);
 		if (list != null && list.size() > 0) {
 			children = new ArrayList();
 		}
 		try {
 			for (Menu object : list) {
-				JSONObject jsonObject = searialMenu(object);
+				JSONObject jsonObject = searialMenu(object,roleMenus);
 				children.add(jsonObject);
 			}
 		} catch (Exception e) {
@@ -266,7 +301,7 @@ public class MenuServiceImpl implements IMenuService {
 			Integer index) {
 		Element element = null;
 
-		List<Menu> list = getByParentId(menu.getId());
+		List<Menu> list = getByParentId(menu.getId(),null);
 		if (list != null && list.size() > 0) {
 			Element hrefElement = parentEle.element("a");
 			hrefElement.addAttribute("class", "sub" + index);

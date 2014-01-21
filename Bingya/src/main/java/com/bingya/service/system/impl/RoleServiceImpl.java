@@ -3,22 +3,28 @@
  */
 package com.bingya.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingya.dao.system.MenuMapper;
 import com.bingya.dao.system.RoleMapper;
 import com.bingya.dao.system.RoleMenuMapper;
 import com.bingya.dao.system.UserRoleMapper;
+import com.bingya.domain.system.Menu;
+import com.bingya.domain.system.MenuExample;
 import com.bingya.domain.system.Role;
 import com.bingya.domain.system.RoleExample;
 import com.bingya.domain.system.RoleMenu;
 import com.bingya.domain.system.RoleMenuExample;
 import com.bingya.domain.system.UserRole;
 import com.bingya.domain.system.UserRoleExample;
+import com.bingya.service.system.IMenuService;
 import com.bingya.service.system.IRoleService;
 import com.bingya.util.Page;
 
@@ -31,11 +37,14 @@ import com.bingya.util.Page;
 public class RoleServiceImpl implements IRoleService {
 	@Resource
 	private RoleMapper roleMapper;
-
 	@Resource
 	private UserRoleMapper userRoleMapper;
 	@Resource
 	private RoleMenuMapper roleMenuMapper;
+	@Resource
+	private MenuMapper menuMapper;
+	@Resource
+	private IMenuService menuService;
 
 	/*
 	 * 删除角色。
@@ -139,6 +148,12 @@ public class RoleServiceImpl implements IRoleService {
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
 	// ---------------------------------------------------
+
+	@Override
+	public List getMenusById(String id) {
+		List list = menuService.getMenuTreeByRoleId(id);
+		return list;
+	}
 
 	// ---------------------------------------------------
 	// public 公有方法

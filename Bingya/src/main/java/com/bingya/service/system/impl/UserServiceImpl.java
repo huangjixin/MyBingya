@@ -3,6 +3,7 @@
  */
 package com.bingya.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,8 +11,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingya.dao.system.RoleMapper;
 import com.bingya.dao.system.UserMapper;
 import com.bingya.dao.system.UserRoleMapper;
+import com.bingya.domain.system.Role;
 import com.bingya.domain.system.User;
 import com.bingya.domain.system.UserExample;
 import com.bingya.domain.system.UserRole;
@@ -34,6 +37,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private UserRoleMapper userRoleMapper;
+	
+	@Resource
+	private RoleMapper roleMapper;
 
 	// ---------------------------------------------------
 	// public 公有方法
@@ -134,6 +140,25 @@ public class UserServiceImpl implements IUserService {
 		List<User> list = userMapper.selectByExample(userExample);
 		page.setRows(list);
 		return page;
+	}
+
+	/* 
+	 * 根据用户id查询对应的角色。
+	 * @see com.bingya.service.system.IUserService#getRolesById(java.lang.String)
+	 */
+	@Override
+	public List<Role> getRolesById(String id) {
+		List<Role> roles = new ArrayList<Role>();
+		
+		UserRoleExample userRoleExample = new UserRoleExample();
+		userRoleExample.createCriteria().andUserIdEqualTo(id);
+		List<UserRole> userRoles = userRoleMapper
+				.selectByExample(userRoleExample);
+		for (UserRole userRole : userRoles) {
+			Role role = roleMapper.selectByPrimaryKey(userRole.getRoleId());
+			roles.add(role);
+		}
+		return roles;
 	}
 
 }

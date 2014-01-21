@@ -42,7 +42,7 @@ public class MenuController extends BasicController {
 	@RequestMapping("getMenuTree")
 	public String getMenuTree(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		List<JSONObject> list = menuService.getMenuTree();
+		List<JSONObject> list = menuService.getMenuTreeByRoleId(null);
 		return json(list, httpServletResponse);
 	}
 
