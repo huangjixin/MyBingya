@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   creationComplete="initApp();"
+					   close="closeApp(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.quetwo.Arduino.ArduinoConnector;
+			import com.quetwo.Arduino.ArduinoConnectorEvent;
+			
+			import flash.utils.setInterval;
+			
+			public var arduino:ArduinoConnector;
+			
+			private var timer:Timer;
+			
+			public function initApp():void
+			{
+				arduino = new ArduinoConnector();
+				var array:Array = arduino.getComPorts();
+				try
+				{
+					trace(arduino.isSupported());
+					arduino.addEventListener("socketData",onSocketData);
+				} 
+				catch(error:Error) 
+				{
+					trace(error.toString());
+				}
+			}
+			
+			protected function closeApp(event:Event):void
+			{
+				arduino.dispose();                              
+			}
+
+			//-----------------------------------------------------------
+			//	event listener handler
+			//-----------------------------------------------------------
+			protected function onSocketData(event:ArduinoConnectorEvent):void
+			{
+				var readBytesAsString:String = arduino.readBytesAsString();
+//				readBytesAsString+="\n";
+				receArea.text+=readBytesAsString;
+			}
+			
+			
+			//-----------------------------------------------------------
+			//	event handler
+			//-----------------------------------------------------------
+			protected function sendBtn_clickHandler(event:MouseEvent=null):void
+			{
+				arduino.writeString(toSendInput.text);
+			}
+			
+			protected function intervalSendBox_clickHandler(event:MouseEvent):void
+			{
+				if(intervalSendBox.selected){
+					if(!timer)
+						timer = new Timer(100,0);
+					timer.start();
+					timer.addEventListener(TimerEvent.TIMER,onTimer);
+				}else{
+					if(timer)
+						timer.stop();
+				}
+			}
+			
+			/**
+			 * 周期性发送
+			 */ 
+			protected function onTimer(event:TimerEvent):void
+			{
+				timer.delay = Number(intervalInput.text);
+				sendBtn_clickHandler();
+			}
+			
+			
+			/**
+			 * 打开关闭连接
+			 */ 
+			protected function openArduinoTogBtn_clickHandler(event:MouseEvent):void
+			{
+				if (openArduinoTogBtn.selected) 
+				{
+					arduino.connect("COM4",9600);
+				}
+				else
+				{
+					arduino.close();
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%">
+		<s:TextArea id="receArea" width="100%" height="100%"/>
+		<s:HGroup>
+			<s:Button label="设置"/>
+			<s:ToggleButton id="openArduinoTogBtn" label="打开" click="openArduinoTogBtn_clickHandler(event)"/>
+		</s:HGroup>
+		<s:HGroup verticalAlign="middle">
+			<s:CheckBox id="intervalSendBox" click="intervalSendBox_clickHandler(event)" buttonMode="true"/>
+			<s:Label text="周期发送"/>
+			<s:TextInput id="intervalInput" width="30" text="1000" restrict="0-9"/>
+			<s:Label text="毫秒"/>
+			<s:Button id="sendBtn" label="发送" click="sendBtn_clickHandler(event)"/>
+			<s:Button label="清空接收" click="receArea.text = ''"/>
+		</s:HGroup>
+		<s:HGroup>
+			<s:TextInput id="toSendInput" text="0123456789qwertyuiop"/>
+		</s:HGroup>
+	</s:VGroup>
+	
+</s:WindowedApplication>
