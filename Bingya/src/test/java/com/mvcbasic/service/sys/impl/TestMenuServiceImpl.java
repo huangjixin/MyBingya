@@ -59,7 +59,7 @@ public class TestMenuServiceImpl {
 
 	@Test
 	public void testGetMenu() {
-		List list = menuService.getMenuTree();
+		List list = menuService.getMenuTreeByRoleId("2");
 		JSONSerializer jsons = new JSONSerializer();
 		System.out.println(list.toString());
 		assertNotNull(list);
