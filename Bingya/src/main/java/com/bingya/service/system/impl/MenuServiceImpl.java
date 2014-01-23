@@ -387,14 +387,8 @@ public class MenuServiceImpl implements IMenuService {
 
 		List<Menu> list = getByParentId(menu.getId(), roleMenus);
 		if (list != null && list.size() > 0) {
-			element = parentEle.addElement("MenuItem");
-			element.addAttribute("id", menu.getId());
-			element.addAttribute("name", menu.getName());
-			element.addAttribute("parentId", menu.getParentid());
-			element.addAttribute("path", menu.getPath());
-
 			for (Menu object : list) {
-				searialMenuToElementForFlex(object, element, index + 1,
+				searialMenuToElementForFlex(object, parentEle, index + 1,
 						roleMenus);
 			}
 		}
