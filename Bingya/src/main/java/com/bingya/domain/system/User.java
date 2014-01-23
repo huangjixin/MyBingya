@@ -1,6 +1,7 @@
 package com.bingya.domain.system;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private String id;
@@ -14,6 +15,8 @@ public class User implements Serializable {
     private String description;
 
     private Boolean enabled;
+
+    private Date createdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -63,5 +66,13 @@ public class User implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }

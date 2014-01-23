@@ -19,4 +19,8 @@
 <!-- 		<flex:remoting-destination destination-id="testRemoteServerImpl" -->
 <!-- 			message-broker="_messageBroker" channels="my-amf" /> -->
 <!-- 	</bean>	 -->
+<!-- 	<bean id="userService" class="com.bingya.service.system.impl.UserServiceImpl"> -->
+<!-- 		<flex:remoting-destination destination-id="userServiceImpl" -->
+<!-- 			message-broker="_messageBroker" channels="my-amf" /> -->
+<!-- 	</bean>	 -->
 </beans>

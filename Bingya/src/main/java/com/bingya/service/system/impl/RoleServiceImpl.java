@@ -155,6 +155,12 @@ public class RoleServiceImpl implements IRoleService {
 		return list;
 	}
 
+	@Override
+	public String getMenusXMLById(String id) {
+		String str = menuService.serializMenuToXml(id);
+		return str;
+	}
+
 	// ---------------------------------------------------
 	// public 公有方法
 	// ---------------------------------------------------

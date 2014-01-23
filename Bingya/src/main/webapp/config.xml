@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-	<swfAppUrl>http://huangjixin888888.vicp.cc:8088/MyBingya/</swfAppUrl>
-	<endPoint>http://huangjixin888888.vicp.cc:8088/MyBingya/messagebroker/amf</endPoint>
-	<fileUpload>http://huangjixin888888.vicp.cc:8088/MyBingya/FileUploaded</fileUpload>
-	<record>rtmp://huangjixin888888.vicp.cc/RecordStream/</record><!-- 录播路径 -->
-</config>

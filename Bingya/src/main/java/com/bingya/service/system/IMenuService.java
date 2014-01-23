@@ -17,4 +17,6 @@ public interface IMenuService extends IGenericService<Menu, String> {
 	List<Menu> getByParentId(String id,List<RoleMenu>roleMenus);
 	
 	String getMenuXmlStr(String basePath);
+	
+	String serializMenuToXml(String roleId);
 }

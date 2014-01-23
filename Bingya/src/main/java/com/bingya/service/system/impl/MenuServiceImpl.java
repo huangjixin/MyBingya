@@ -68,7 +68,7 @@ public class MenuServiceImpl implements IMenuService {
 			roleMenuMapper.deleteByPrimaryKey(roleMenu.getId());
 		}
 
-		List<Menu> menuList = getByParentId(id,null);
+		List<Menu> menuList = getByParentId(id, null);
 		for (Menu menu : menuList) {
 			deleteByPrimaryKey(menu.getId());
 		}
@@ -160,8 +160,7 @@ public class MenuServiceImpl implements IMenuService {
 		if (roleId != null) {
 			RoleMenuExample roleMenuExample = new RoleMenuExample();
 			roleMenuExample.createCriteria().andRoleIdEqualTo(roleId);
-			roleMenus = roleMenuMapper
-					.selectByExample(roleMenuExample);
+			roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
 			for (Menu menu : list) {
 				Boolean flag = false;
 				for (RoleMenu roleMenu : roleMenus) {
@@ -230,6 +229,47 @@ public class MenuServiceImpl implements IMenuService {
 		return doc.asXML();
 	}
 
+	/*
+	 * 将菜单序列化为xml字符串。
+	 * 
+	 * @see
+	 * com.bingya.service.system.IMenuService#SerializMenuToXml(java.lang.String
+	 * )
+	 */
+	@Override
+	public String serializMenuToXml(String roleId) {
+		MenuExample menuExample = new MenuExample();
+		menuExample.createCriteria().andParentidIsNull();
+
+		List<Menu> list = menuMapper.selectByExample(menuExample);// 查询出来所有菜单。
+
+		List<RoleMenu> roleMenus = null;
+		if (roleId != null) { // 过滤没有权限的菜单
+			RoleMenuExample roleMenuExample = new RoleMenuExample();
+			roleMenuExample.createCriteria().andRoleIdEqualTo(roleId);
+			roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
+			for (Menu menu : list) {
+				Boolean flag = false;
+				for (RoleMenu roleMenu : roleMenus) {
+					if (roleMenu.getMenuId().equals(menu.getId())) {
+						flag = true;
+						break;
+					}
+				}
+				if (false == flag) {
+					list.remove(menu);
+				}
+			}
+		}
+
+		Document doc = DocumentHelper.createDocument();
+		Element root = doc.addElement("MenuItem");
+		for (Menu object : list) {
+			searialMenuToElementForFlex(object, root, 0, roleMenus);
+		}
+		return doc.asXML();
+	}
+
 	// ---------------------------------------------------
 	// protected 方法
 	// ---------------------------------------------------
@@ -238,14 +278,15 @@ public class MenuServiceImpl implements IMenuService {
 	// private 私有方法
 	// ---------------------------------------------------
 
-	public JSONObject searialMenu(Menu menu,List<RoleMenu> roleMenus) throws org.json.JSONException {
+	public JSONObject searialMenu(Menu menu, List<RoleMenu> roleMenus)
+			throws org.json.JSONException {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put("id", menu.getId());
 			jsonObject.put("parentid", menu.getParentid());
 			jsonObject.put("name", menu.getName());
 
-			List list = searialChild(menu,roleMenus);
+			List list = searialChild(menu, roleMenus);
 			if (null != list) {
 				jsonObject.put("children", list);
 			}
@@ -258,15 +299,16 @@ public class MenuServiceImpl implements IMenuService {
 		return jsonObject;
 	}
 
-	public List searialChild(Menu menu,List<RoleMenu> roleMenus) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List searialChild(Menu menu, List<RoleMenu> roleMenus) {
 		List children = null;
-		List<Menu> list = getByParentId(menu.getId(),roleMenus);
+		List<Menu> list = getByParentId(menu.getId(), roleMenus);
 		if (list != null && list.size() > 0) {
 			children = new ArrayList();
 		}
 		try {
 			for (Menu object : list) {
-				JSONObject jsonObject = searialMenu(object,roleMenus);
+				JSONObject jsonObject = searialMenu(object, roleMenus);
 				children.add(jsonObject);
 			}
 		} catch (Exception e) {
@@ -301,10 +343,11 @@ public class MenuServiceImpl implements IMenuService {
 			Integer index) {
 		Element element = null;
 
-		List<Menu> list = getByParentId(menu.getId(),null);
+		List<Menu> list = getByParentId(menu.getId(), null);
 		if (list != null && list.size() > 0) {
 			Element hrefElement = parentEle.element("a");
 			hrefElement.addAttribute("class", "sub" + index);
+			@SuppressWarnings("unused")
 			Attribute attribute = hrefElement.attribute("class");
 			// if(attribute == null){
 			// parentEle.addAttribute("class", "parent");
@@ -313,6 +356,46 @@ public class MenuServiceImpl implements IMenuService {
 
 			for (Menu object : list) {
 				searialMenuToElement(object, element, index + 1);
+			}
+		}
+
+		return element;
+	}
+
+	/**
+	 * 序列化菜单为Element。
+	 * 
+	 * @param menu
+	 * @return
+	 */
+	private Element searialMenuToElementForFlex(Menu menu, Element parentEle,
+			Integer index, List<RoleMenu> roleMenus) {
+		Element element = parentEle.addElement("MenuItem");
+		element.addAttribute("id", menu.getId());
+		element.addAttribute("name", menu.getName());
+		element.addAttribute("parentId", menu.getParentid());
+		element.addAttribute("path", menu.getPath());
+
+		searialChildToElementForFlex(menu, element, index, roleMenus);
+
+		return element;
+	}
+
+	private Element searialChildToElementForFlex(Menu menu, Element parentEle,
+			Integer index, List<RoleMenu> roleMenus) {
+		Element element = null;
+
+		List<Menu> list = getByParentId(menu.getId(), roleMenus);
+		if (list != null && list.size() > 0) {
+			element = parentEle.addElement("MenuItem");
+			element.addAttribute("id", menu.getId());
+			element.addAttribute("name", menu.getName());
+			element.addAttribute("parentId", menu.getParentid());
+			element.addAttribute("path", menu.getPath());
+
+			for (Menu object : list) {
+				searialMenuToElementForFlex(object, element, index + 1,
+						roleMenus);
 			}
 		}
 

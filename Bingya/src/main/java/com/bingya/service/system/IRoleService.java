@@ -19,4 +19,6 @@ public interface IRoleService extends IGenericService<Role, String> {
 	 * @return
 	 */
 	List getMenusById(String id);
+	
+	String getMenusXMLById(String id);
 }

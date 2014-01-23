@@ -8,6 +8,7 @@
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, status, description, enabled
+    id, username, password, status, description, enabled, createDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bingya.domain.system.UserExample" >
     <include refid="OracleDialectPrefix" />
@@ -104,11 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.bingya.domain.system.User" >
     insert into tb_user (id, username, password, 
-      status, description, enabled
-      )
+      status, description, enabled, 
+      createDate)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}
-      )
+      #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
+      #{createdate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.bingya.domain.system.User" >
     insert into tb_user
@@ -131,6 +132,9 @@
       <if test="enabled != null" >
         enabled,
       </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -150,6 +154,9 @@
       </if>
       <if test="enabled != null" >
         #{enabled,jdbcType=BIT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -180,6 +187,9 @@
       <if test="record.enabled != null" >
         enabled = #{record.enabled,jdbcType=BIT},
       </if>
+      <if test="record.createdate != null" >
+        createDate = #{record.createdate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -192,7 +202,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=SMALLINT},
       description = #{record.description,jdbcType=VARCHAR},
-      enabled = #{record.enabled,jdbcType=BIT}
+      enabled = #{record.enabled,jdbcType=BIT},
+      createDate = #{record.createdate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,6 +226,9 @@
       <if test="enabled != null" >
         enabled = #{enabled,jdbcType=BIT},
       </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -224,7 +238,8 @@
       password = #{password,jdbcType=VARCHAR},
       status = #{status,jdbcType=SMALLINT},
       description = #{description,jdbcType=VARCHAR},
-      enabled = #{enabled,jdbcType=BIT}
+      enabled = #{enabled,jdbcType=BIT},
+      createDate = #{createdate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

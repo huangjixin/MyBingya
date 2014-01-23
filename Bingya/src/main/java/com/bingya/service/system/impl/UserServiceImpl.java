@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +20,19 @@ import com.bingya.domain.system.User;
 import com.bingya.domain.system.UserExample;
 import com.bingya.domain.system.UserRole;
 import com.bingya.domain.system.UserRoleExample;
+import com.bingya.service.system.IRoleService;
 import com.bingya.service.system.IUserService;
 import com.bingya.util.Page;
+
+import flex.messaging.util.UUIDUtils;
 
 /**
  * @author huangjixin
  * 
  */
 @Transactional
-@Service(value = "userService")
+@Service
+@RemotingDestination(value="userServiceImpl",channels={"my-amf"})
 public class UserServiceImpl implements IUserService {
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
@@ -37,9 +42,12 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private UserRoleMapper userRoleMapper;
-	
+
 	@Resource
 	private RoleMapper roleMapper;
+	
+	@Resource
+	private IRoleService roleService;
 
 	// ---------------------------------------------------
 	// public 公有方法
@@ -82,8 +90,11 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
+		if(entity.getId()==null||"".equals(entity.getId())){
+			entity.setId(UUIDUtils.createUUID());
+		}
 		int i = userMapper.insertSelective(entity);
-		return i+"";
+		return i + "";
 	}
 
 	/*
@@ -119,7 +130,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public String update(User entity) {
 		int i = userMapper.updateByPrimaryKey(entity);
-		return i+"";
+		return i + "";
 	}
 
 	/*
@@ -142,14 +153,16 @@ public class UserServiceImpl implements IUserService {
 		return page;
 	}
 
-	/* 
+	/*
 	 * 根据用户id查询对应的角色。
-	 * @see com.bingya.service.system.IUserService#getRolesById(java.lang.String)
+	 * 
+	 * @see
+	 * com.bingya.service.system.IUserService#getRolesById(java.lang.String)
 	 */
 	@Override
 	public List<Role> getRolesById(String id) {
 		List<Role> roles = new ArrayList<Role>();
-		
+
 		UserRoleExample userRoleExample = new UserRoleExample();
 		userRoleExample.createCriteria().andUserIdEqualTo(id);
 		List<UserRole> userRoles = userRoleMapper
@@ -159,6 +172,31 @@ public class UserServiceImpl implements IUserService {
 			roles.add(role);
 		}
 		return roles;
+	}
+
+	@Override
+	public User login(String username, String password) {
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andUsernameEqualTo(username)
+				.andPasswordEqualTo(password);
+		List<User> list = userMapper.selectByExample(userExample);
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		} else
+			return null;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public String getMenuByUserId(String id) {
+		List<Role> roles = getRolesById(id);
+		if(roles==null ||roles.size()==0)
+			return null;
+		else{
+			Role role = roles.get(0);
+			String str = roleService.getMenusXMLById(role.getId());
+			return str;
+		}
 	}
 
 }

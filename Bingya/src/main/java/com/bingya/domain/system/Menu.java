@@ -1,6 +1,7 @@
 package com.bingya.domain.system;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Menu implements Serializable {
     private String id;
@@ -12,6 +13,8 @@ public class Menu implements Serializable {
     private String path;
 
     private String parentid;
+
+    private Date createdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -53,5 +56,13 @@ public class Menu implements Serializable {
 
     public void setParentid(String parentid) {
         this.parentid = parentid == null ? null : parentid.trim();
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }

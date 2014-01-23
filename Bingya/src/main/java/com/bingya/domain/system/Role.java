@@ -1,6 +1,7 @@
 package com.bingya.domain.system;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Role implements Serializable {
     private String id;
@@ -8,6 +9,8 @@ public class Role implements Serializable {
     private String name;
 
     private String description;
+
+    private Date createdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,5 +36,13 @@ public class Role implements Serializable {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }
