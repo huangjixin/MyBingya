@@ -16,6 +16,8 @@ public class Menu implements Serializable {
 
     private Date createdate;
 
+    private String icon;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -64,5 +66,13 @@ public class Menu implements Serializable {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
     }
 }

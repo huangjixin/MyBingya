@@ -375,6 +375,7 @@ public class MenuServiceImpl implements IMenuService {
 		element.addAttribute("name", menu.getName());
 		element.addAttribute("parentId", menu.getParentid());
 		element.addAttribute("path", menu.getPath());
+		element.addAttribute("icon", menu.getIcon());
 
 		searialChildToElementForFlex(menu, element, index, roleMenus);
 
