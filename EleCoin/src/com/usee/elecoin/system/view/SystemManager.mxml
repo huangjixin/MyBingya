@@ -37,7 +37,9 @@
 		</s:Group>
 		<mx:ViewStack id="viewStatck" name="viewStatck" visible="false" width="80%" height="100%" creationPolicy="all"
 					  selectedIndex="{secondMenuList.selectedIndex}">
-			<view:UserManager/>
+			<view:UserManager width="100%" height="100%"/>
+			<view:RoleManager/>
+			<view:MenuManager/>
 		</mx:ViewStack>
 	</s:HGroup>
 </s:NavigatorContent>

@@ -136,6 +136,7 @@ protected function storgeMenuNav(container:Container):void
 		/*if(nav.hasOwnProperty("viewStatck")){
 			var displayObject:DisplayObject = nav["viewStatck"];
 			if(displayObject){
+				this.callLater(storgeMenuNav,[displayObject as Container]);
 				storgeMenuNav(displayObject as Container);
 			}
 		}*/

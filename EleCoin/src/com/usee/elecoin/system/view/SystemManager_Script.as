@@ -32,7 +32,7 @@ public function set secondMenuXmllist(value:XMLListCollection):void
 	{
 		_secondMenuXmllist = value;
 		this.dispatchEvent(new Event("secondMenuXmllistChange"));
-		this.callLater(storgeMenuNav,[this.viewStatck]);
+//		this.callLater(storgeMenuNav,[this.viewStatck]);
 	}
 }
 
