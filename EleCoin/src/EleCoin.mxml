@@ -3,13 +3,11 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   minWidth="955" minHeight="600"
-					   fontFamily="微软雅黑"
-					   fontSize="14"
-					   creationComplete="application1_creationCompleteHandler(event)">
+					   creationComplete="application1_creationCompleteHandler(event)"
+					   defaultButton="{loginBtn}" fontFamily="微软雅黑" fontSize="14">
 	<fx:Style source="EleCoinCss.css"/>
 	<fx:Script>
 		<![CDATA[
-			import mx.collections.XMLListCollection;
 		]]>
 	</fx:Script>
 	<fx:Script source="EleCoin_Script.as"/>
@@ -37,21 +35,48 @@
 		<s:State name="logon"/>
 	</s:states>
 	<s:Group includeIn="logon" width="100%" height="100%">
-		
-		<s:Button id="logoutBtn" label="退出" click="logoutBtn_clickHandler(event)"/>
-		<mx:MenuBar id="menuBar" horizontalCenter="0" labelField="@name"/>
-		<s:ButtonBar id="buttonBar" x="354" y="107" labelField="@name"/>
+		<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+			<s:Group width="100%" height="100">
+				<s:Rect width="100%" height="100%">
+					<s:fill>
+						<s:LinearGradient rotation="90">
+							<s:GradientEntry alpha="0.3" color="gray"/>
+							<s:GradientEntry alpha="0.3" color="gray"/>
+						</s:LinearGradient>
+					</s:fill>
+				</s:Rect>
+				<s:Line bottom="0" width="100%">
+					<s:stroke>
+						<s:SolidColorStroke alpha="0.5" color="gray" weight="1"/>
+					</s:stroke>
+				</s:Line>
+				<s:List id="topMenuList" width="100%" height="100%">
+					<s:layout>
+						<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+					</s:layout>
+				</s:List>
+				<mx:MenuBar id="menuBar" horizontalCenter="0" labelField="@name"/>
+				<s:ButtonBar id="buttonBar" x="354" y="107" labelField="@name"/>
+			</s:Group>
+			<mx:ViewStack id="viewStatck" width="100%" height="100%">
+			</mx:ViewStack>
+		</s:VGroup>
+		<s:Button id="logoutBtn" right="10" top="10" label="退出" click="logoutBtn_clickHandler(event)"/>
 	</s:Group>
 	<s:Group includeIn="login" width="100%" height="100%">
 		<s:Rect width="100%" height="100%">
 			<s:fill>
-				<s:LinearGradient rotation="90">
-					<s:GradientEntry color="0x0"/>
-					<s:GradientEntry color="0xfffffa"/>
-				</s:LinearGradient>
+				<s:BitmapFill fillMode="scale"
+							  source="@Embed(source='com/usee/elecoin/assets/images/bg.png')"/>
 			</s:fill>
 		</s:Rect>
 		<s:Form horizontalCenter="0" verticalCenter="0">
+			<s:FormItem>
+				<s:layout>
+					<s:HorizontalLayout verticalAlign="middle"/>
+				</s:layout>
+				<s:Label text="电子币管理系统" fontWeight="bold" fontSize="20"/>
+			</s:FormItem>
 			<s:FormItem>
 				<s:layout>
 					<s:HorizontalLayout verticalAlign="middle"/>
