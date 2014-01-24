@@ -9,7 +9,8 @@ package com.usee.elecoin.icon
 		static public var system:Class;
 		
 		public static function getImageClass(type:String):Class {
-			return EmbeddedIcons[type];
+			var iconClass:Class = EmbeddedIcons[type];
+			return iconClass;
 		}
 	}
 }
