@@ -1,11 +1,13 @@
 import com.usee.elecoin.system.model.vo.User;
 
+import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 
 import mx.collections.ArrayCollection;
 import mx.collections.ArrayList;
 import mx.collections.XMLListCollection;
 import mx.controls.Alert;
+import mx.core.Container;
 import mx.core.FlexGlobals;
 import mx.events.FlexEvent;
 import mx.rpc.events.FaultEvent;
@@ -49,7 +51,7 @@ protected function login_resultHandler(event:ResultEvent):void
 	if(event.result){
 		this.currentState = "logon"; //更改登录状态。
 		resetBtn_clickHandler(null);//重置登陆表单；
-		this.callLater(storgeMenuNav);
+		this.callLater(storgeMenuNav,[this.viewStatck]);
 		//	storgeMenuNav();//存储菜单以供增删。
 		//------------	查询菜单。
 		var user:User = event.result as User;
@@ -122,15 +124,21 @@ protected function getMenuByUserId_faultHandler(event:FaultEvent):void
  * @param event
  * 
  */
-protected function storgeMenuNav():void
+protected function storgeMenuNav(container:Container):void
 {
 	var nav:NavigatorContent;
-	for (var i:int = 0; i < viewStatck.numElements; i++) 
+	for (var i:int = 0; i < container.numElements; i++) 
 	{
-		nav = viewStatck.getElementAt(i) as NavigatorContent;
+		nav = container.getElementAt(i) as NavigatorContent;
 		if(!menuNavArrayList.contains(nav)){
 			menuNavArrayList.addItem(nav);
 		}
+		/*if(nav.hasOwnProperty("viewStatck")){
+			var displayObject:DisplayObject = nav["viewStatck"];
+			if(displayObject){
+				storgeMenuNav(displayObject as Container);
+			}
+		}*/
 	}
 	
 }
@@ -161,6 +169,26 @@ protected function filterMenuNav(xmlListCollection:XMLListCollection):void
 		}else{
 			if(!viewStatck.contains(nav)){
 				viewStatck.addElementAt(nav,i);
+				if(nav.hasOwnProperty("secondMenuXmllist")){
+					nav["secondMenuXmllist"] = new XMLListCollection(xml.children()); 
+				}
+				/*if(nav.hasOwnProperty("viewStatck")){
+					var displayObject:DisplayObject = nav["viewStatck"];
+					if(displayObject){
+						filterMenuNav(new XMLListCollection(xml.children()));
+					}
+				}*/
+			}else{
+				if(nav.hasOwnProperty("secondMenuXmllist")){
+					nav["secondMenuXmllist"] = new XMLListCollection(xml.children()); 
+				}
+				
+				/*if(nav.hasOwnProperty("viewStatck")){
+					var displayObject:DisplayObject = nav["viewStatck"];
+					if(displayObject){
+						filterMenuNav(new XMLListCollection(xml.children()));
+					}
+				}*/
 			}
 		}
 	}
