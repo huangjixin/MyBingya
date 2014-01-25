@@ -1,3 +1,7 @@
+import com.usee.elecoin.system.view.MenuManager;
+import com.usee.elecoin.system.view.RoleManager;
+import com.usee.elecoin.system.view.UserManager;
+
 import flash.display.DisplayObject;
 import flash.events.Event;
 
@@ -32,7 +36,30 @@ public function set secondMenuXmllist(value:XMLListCollection):void
 	{
 		_secondMenuXmllist = value;
 		this.dispatchEvent(new Event("secondMenuXmllistChange"));
-//		this.callLater(storgeMenuNav,[this.viewStatck]);
+		this.callLater(loadMenuNav,[this.viewStatck]);
+	}
+}
+
+/**
+ * 存储菜单内容。 
+ * @param event
+ * 
+ */
+protected function loadMenuNav(container:Container):void
+{
+	container.removeAllElements();
+	for each (var xml:XML in secondMenuXmllist) 
+	{
+		if(xml.@name == "用户管理"){
+			var userManager:UserManager = new UserManager();
+			container.addElement(userManager);
+		}else if(xml.@name == "角色管理"){
+			var roleManager:RoleManager = new RoleManager();
+			container.addElement(roleManager);
+		}else if(xml.@name == "角色管理"){
+			var menuManager:MenuManager = new MenuManager();
+			container.addElement(menuManager);
+		} 
 	}
 }
 
