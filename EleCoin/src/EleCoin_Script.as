@@ -1,4 +1,6 @@
 import com.usee.elecoin.system.model.vo.User;
+import com.usee.elecoin.system.view.SystemManager;
+import com.usee.elecoin.system.view.TestManager;
 
 import flash.display.DisplayObject;
 import flash.events.MouseEvent;
@@ -51,7 +53,7 @@ protected function login_resultHandler(event:ResultEvent):void
 	if(event.result){
 		this.currentState = "logon"; //更改登录状态。
 		resetBtn_clickHandler(null);//重置登陆表单；
-		this.callLater(storgeMenuNav,[this.viewStatck]);
+//		this.callLater(storgeMenuNav,[this.viewStatck]);
 		//	storgeMenuNav();//存储菜单以供增删。
 		//------------	查询菜单。
 		var user:User = event.result as User;
@@ -102,7 +104,8 @@ protected function getMenuByUserId_resultHandler(event:ResultEvent):void
 	topMenuXmllist = new XMLListCollection(xmllist);
 //	this.menuBar.dataProvider = xmllist;
 	this.topMenuList.dataProvider = topMenuXmllist;
-	filterMenuNav(topMenuXmllist);
+	this.callLater(loadMenuNav,[this.viewStatck]);
+//	filterMenuNav(topMenuXmllist);
 //	this.buttonBar.dataProvider= new XMLListCollection(xmllist);
 }
 
@@ -119,6 +122,31 @@ protected function getMenuByUserId_faultHandler(event:FaultEvent):void
 //-------------------------------------------------------------------------
 //----逻辑函数
 //-------------------------------------------------------------------------
+/**
+ * 加载菜单内容。 
+ * @param event
+ * 
+ */
+protected function loadMenuNav(container:Container):void
+{
+	container.removeAllElements();
+	for each (var xml:XML in topMenuXmllist) 
+	{
+		if(xml.@name == "系统管理"){
+			var systemManager:SystemManager = new SystemManager();
+			systemManager.height = 600;
+			systemManager.width = 600;
+			container.addElement(systemManager);
+			systemManager.secondMenuXmllist = new XMLListCollection(xml.children());
+		}else if(xml.@name == "test顶级菜单"){
+			var testManager:TestManager = new TestManager();
+			testManager.percentHeight = 100;
+			testManager.percentWidth = 100;
+			container.addElement(testManager);
+		} 
+	}
+}
+
 /**
  * 存储菜单内容。 
  * @param event
