@@ -36,7 +36,8 @@ public function set secondMenuXmllist(value:XMLListCollection):void
 	{
 		_secondMenuXmllist = value;
 		this.dispatchEvent(new Event("secondMenuXmllistChange"));
-		this.callLater(loadMenuNav,[this.viewStatck]);
+		this.callLater(storgeMenuNav,[this.viewStatck]);
+		this.callLater(filterMenuNav,[this.secondMenuXmllist]);
 	}
 }
 
@@ -79,5 +80,58 @@ protected function storgeMenuNav(container:Container):void
 			}
 		}
 	}
+}
+
+/**
+ * 过滤菜单内容。 
+ * @param event
+ * 
+ */
+protected function filterMenuNav(xmlListCollection:XMLListCollection):void
+{
+	var nav:NavigatorContent;
+	for (var i:int = 0; i < menuNavArrayList.length; i++) 
+	{
+		nav = menuNavArrayList.getItemAt(i) as NavigatorContent;
+		var flag:Boolean = false;
+		for each (var xml:XML in xmlListCollection) 
+		{
+			var name:String = xml.@name;
+			if(name == nav.label){ //name == nav.name后期要用这样。
+				flag= true;
+				break;
+			}
+		}
+		if(!flag){
+			if(viewStatck.contains(nav)){
+				viewStatck.removeElement(nav);
+			}
+		}else{
+			if(!viewStatck.contains(nav)){
+				viewStatck.addElementAt(nav,i);
+				/*if(nav.hasOwnProperty("secondMenuXmllist")){
+					nav["secondMenuXmllist"] = new XMLListCollection(xml.children()); 
+				}
+				if(nav.hasOwnProperty("viewStatck")){
+				var displayObject:DisplayObject = nav["viewStatck"];
+				if(displayObject){
+				filterMenuNav(new XMLListCollection(xml.children()));
+				}
+				}*/
+			}else{
+				/*if(nav.hasOwnProperty("secondMenuXmllist")){
+					nav["secondMenuXmllist"] = new XMLListCollection(xml.children()); 
+				}
+				
+				if(nav.hasOwnProperty("viewStatck")){
+				var displayObject:DisplayObject = nav["viewStatck"];
+				if(displayObject){
+				filterMenuNav(new XMLListCollection(xml.children()));
+				}
+				}*/
+			}
+		}
+	}
 	
+	this.viewStatck.visible = true;//过滤完了菜单把导航器设置为可视。
 }

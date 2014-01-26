@@ -35,7 +35,7 @@
 				</s:stroke>
 			</s:Line>
 		</s:Group>
-		<mx:ViewStack id="viewStatck" name="viewStatck" visible="false" width="80%" height="100%" creationPolicy="all"
+		<mx:ViewStack id="viewStatck" name="viewStatck" visible="true" width="80%" height="100%" creationPolicy="all"
 					  selectedIndex="{secondMenuList.selectedIndex}">
 			<view:UserManager width="100%" height="100%"/>
 			<view:RoleManager/>

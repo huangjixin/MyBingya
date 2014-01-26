@@ -7,5 +7,5 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:Label text="测试菜单内容1"/>
+	<s:Label text="测试菜单内容2"/>
 </s:NavigatorContent>
