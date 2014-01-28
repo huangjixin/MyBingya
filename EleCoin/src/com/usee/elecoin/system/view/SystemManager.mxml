@@ -2,7 +2,9 @@
 <s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
 					xmlns:s="library://ns.adobe.com/flex/spark"
 					xmlns:mx="library://ns.adobe.com/flex/mx"
-					width="100%" height="100%" label="系统管理" name="SystemManager" xmlns:view="com.usee.elecoin.system.view.*">
+					xmlns:view="com.usee.elecoin.system.view.*"
+					width="100%" height="100%" label="系统管理" name="SystemManager"
+					>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
@@ -24,7 +26,8 @@
 				</s:fill>
 			</s:Rect>
 			<s:List id="secondMenuList" width="100%" height="100%" borderVisible="false"
-					itemRenderer="com.usee.elecoin.system.view.TopMenuListItemRenderer" dataProvider="{secondMenuXmllist}">
+					dataProvider="{secondMenuXmllist}"
+					itemRenderer="com.usee.elecoin.system.view.TopMenuListItemRenderer">
 				<s:layout>
 					<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 				</s:layout>
@@ -35,11 +38,11 @@
 				</s:stroke>
 			</s:Line>
 		</s:Group>
-		<mx:ViewStack id="viewStatck" name="viewStatck" visible="true" width="80%" height="100%" creationPolicy="all"
-					  selectedIndex="{secondMenuList.selectedIndex}">
-			<view:UserManager width="100%" height="100%"/>
+		<mx:ViewStack id="viewStatck" visible="true" width="80%" height="100%" creationPolicy="all"
+					  name="viewStatck" selectedIndex="{secondMenuList.selectedIndex}">
+			<!--<view:UserManager width="100%" height="100%"/>
 			<view:RoleManager/>
-			<view:MenuManager/>
+			<view:MenuManager/>-->
 		</mx:ViewStack>
 	</s:HGroup>
 </s:NavigatorContent>

@@ -36,8 +36,9 @@ public function set secondMenuXmllist(value:XMLListCollection):void
 	{
 		_secondMenuXmllist = value;
 		this.dispatchEvent(new Event("secondMenuXmllistChange"));
-		this.callLater(storgeMenuNav,[this.viewStatck]);
-		this.callLater(filterMenuNav,[this.secondMenuXmllist]);
+//		this.callLater(storgeMenuNav,[this.viewStatck]);
+//		this.callLater(filterMenuNav,[this.secondMenuXmllist]);
+		this.callLater(loadMenuNav,[this.viewStatck]);
 	}
 }
 
@@ -57,7 +58,7 @@ protected function loadMenuNav(container:Container):void
 		}else if(xml.@name == "角色管理"){
 			var roleManager:RoleManager = new RoleManager();
 			container.addElement(roleManager);
-		}else if(xml.@name == "角色管理"){
+		}else if(xml.@name == "菜单管理"){
 			var menuManager:MenuManager = new MenuManager();
 			container.addElement(menuManager);
 		} 
