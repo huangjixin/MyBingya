@@ -134,8 +134,8 @@ protected function loadMenuNav(container:Container):void
 	{
 		if(xml.@name == "系统管理"){
 			var systemManager:SystemManager = new SystemManager();
-			systemManager.height = 600;
-			systemManager.width = 600;
+			systemManager.percentHeight = 100;
+			systemManager.percentWidth = 100;
 			container.addElement(systemManager);
 			systemManager.secondMenuXmllist = new XMLListCollection(xml.children());
 		}else if(xml.@name == "test顶级菜单"){
@@ -145,6 +145,8 @@ protected function loadMenuNav(container:Container):void
 			container.addElement(testManager);
 		} 
 	}
+	
+	this.viewStatck.visible = true;//过滤完了菜单把导航器设置为可视。
 }
 
 /**

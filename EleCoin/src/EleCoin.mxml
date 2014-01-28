@@ -15,7 +15,7 @@
 	<fx:Script source="EleCoin_Script.as"/>
 	<fx:Declarations>
 		<s:RemoteObject id="userService" destination="userServiceImpl"
-						endpoint="http://localhost:8080/MyBingya/messagebroker/amf"
+						endpoint="http://localhost:8080/Bingya/messagebroker/amf"
 						showBusyCursor="true">
 			<s:method fault="login_faultHandler(event)" name="login"
 					  result="login_resultHandler(event)">
