@@ -14,6 +14,7 @@ package cn.hnisi.ravis.editor
 	import flash.utils.Dictionary;
 	
 	import mx.controls.Alert;
+	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
 	import mx.effects.Glow;
 	import mx.events.ChildExistenceChangedEvent;
@@ -81,6 +82,10 @@ package cn.hnisi.ravis.editor
 			this.doubleClickEnabled = true;
 			this.addEventListener(MouseEvent.DOUBLE_CLICK,onAdornerGroupDoubleClick);
 //			this.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMove);
+			
+			this.horizontalScrollPolicy = ScrollPolicy.ON;
+			this.verticalScrollPolicy = ScrollPolicy.ON;
+			this.clipContent = true;
 		}
 		
 		protected function onMouseMove(event:MouseEvent):void
@@ -564,7 +569,7 @@ package cn.hnisi.ravis.editor
 			if(event.ctrlKey){
 				
 			}else{
-				super.backgroundDragBegin(event);
+//				super.backgroundDragBegin(event);
 				clearAllAdorners();
 				clearAll();
 			}

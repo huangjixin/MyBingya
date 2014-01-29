@@ -153,10 +153,10 @@ package org.un.cava.birdeye.ravis.components.renderers {
 		 * @param size The size, the image will be renderered as a square.
 		 * @returns The Image object of the icon.
 		 * */
-		public static function getUrlbasedIcon(url:String):Image {
+		public static function getUrlbasedIcon(url:String,size:int=32):Image {
 			var img:Image = new Image();
-			/*img.height = size;
-			img.width = size;*/
+			img.height = size;
+			img.width = size;
 			img.source = url;
 			return img;
 		}

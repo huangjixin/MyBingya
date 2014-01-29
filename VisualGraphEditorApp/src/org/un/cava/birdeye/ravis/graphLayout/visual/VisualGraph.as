@@ -40,6 +40,7 @@ package org.un.cava.birdeye.ravis.graphLayout.visual {
 	import mx.core.UIComponent;
 	import mx.effects.Effect;
 	import mx.events.EffectEvent;
+	import mx.events.SandboxMouseEvent;
 	import mx.managers.CursorManager;
 	import mx.utils.ObjectUtil;
 	
@@ -59,7 +60,7 @@ package org.un.cava.birdeye.ravis.graphLayout.visual {
 	 *
 	 *  @eventType org.un.cava.birdeye.ravis.utils.events.VGraphEvent
 	 */
-	[Event(name=VGraphEvent.VGRAPH_CHANGED, type="org.un.cava.birdeye.ravis.utils.events.VGraphEvent")]
+	[Event(name="vgraphChanged", type="org.un.cava.birdeye.ravis.utils.events.VGraphEvent")]
 	
 	/**
 	 *  Dispatched when a drag event starts
@@ -2176,6 +2177,8 @@ package org.un.cava.birdeye.ravis.graphLayout.visual {
 					_dragComponent = ecomponent;
 					ecomponent.stage.addEventListener(MouseEvent.MOUSE_MOVE, handleDrag);
 					this.addEventListener(MouseEvent.MOUSE_UP,dragEnd);
+					this.systemManager.addEventListener(SandboxMouseEvent.MOUSE_UP_SOMEWHERE,onsandboxMouseUp,true);
+					this.systemManager.deployMouseShields(true);
 					/* also register a drop event listener */
 					// ecomponent.stage.addEventListener(MouseEvent.MOUSE_UP, dragEnd);
 					
@@ -2183,6 +2186,7 @@ package org.un.cava.birdeye.ravis.graphLayout.visual {
 					_nodeMouseDownLocation = globalMousePosition();
 					dispatchEvent(new VisualNodeEvent(VisualNodeEvent.DRAG_START,evnode.node,event.ctrlKey));
 					_layouter.dragEvent(event, evnode);
+					
 				} else {
 					throw Error("Event Component was not in the viewToVNode Map");
 				}
@@ -2375,6 +2379,83 @@ package org.un.cava.birdeye.ravis.graphLayout.visual {
 				if(_layouter) {
 					_layouter.dropEvent(event, myvnode);
 				}
+				
+				if(_nodeMouseDownLocation && 
+					Math.abs(mpoint.x - _nodeMouseDownLocation.x) > 2 ||
+					Math.abs(mpoint.y - _nodeMouseDownLocation.y) > 2) {
+					dispatchEvent(new VisualNodeEvent(VisualNodeEvent.DRAG_END,myvnode.node,event.ctrlKey));
+				}
+				/* reset the dragComponent */
+				_dragComponent = null;
+			}	
+		}
+		
+		protected function onsandboxMouseUp(event:SandboxMouseEvent):void {
+			
+			const mpoint:Point = globalMousePosition();
+			
+			var mycomp:UIComponent;
+			var myback:DisplayObject;
+			var myvnode:IVisualNode;
+			
+			this.removeEventListener(MouseEvent.ROLL_OUT,dragEnd);
+			this.removeEventListener(MouseEvent.MOUSE_UP,dragEnd);
+			this.systemManager.removeEventListener(SandboxMouseEvent.MOUSE_UP_SOMEWHERE,onsandboxMouseUp);
+			this.systemManager.deployMouseShields(false);
+			if(_backgroundDragInProgress) {
+				
+				/* if it was a background drag we stop it here */
+				_backgroundDragInProgress = false;
+				
+				/* get the background drag object, which is usually
+				* the canvasm so we just set it to this */
+				myback = (this as DisplayObject);
+				
+				/* unregister event handler */				
+				myback.removeEventListener(MouseEvent.MOUSE_MOVE,backgroundDragContinue);
+				
+				/* and inform the layouter about the dropEvent */
+				/*if(_layouter) {
+					_layouter.bgDropEvent(event);
+				}*/
+				
+				if(event.type == MouseEvent.ROLL_OUT) {
+					CursorManager.removeAllCursors();
+				}
+				
+				//dispatch the drag event only if we have moved somewhere
+				if(_mouseDownLocation && 
+					Math.abs(mpoint.x - _mouseDownLocation.x) > 2 ||
+					Math.abs(mpoint.y - _mouseDownLocation.y) > 2) {
+					dispatchEvent(new VisualGraphEvent(VisualGraphEvent.BACKGROUND_DRAG_END));
+				}else{
+					dispatchEvent(new VisualGraphEvent(VisualGraphEvent.BACKGROUND_CLICK));                    
+				}
+			} else {
+				
+				/* if it was no background drag, the component
+				* is the saved dragComponent */
+				mycomp = _dragComponent;
+				
+				/* But sometimes the dragComponent was already null, 
+				* in this case we have to ignore the thing. */
+				if(mycomp == null) {
+					LogUtil.info(_LOG, "dragEnd: received dragEnd but _dragComponent was null, ignoring");
+					return;
+				}
+				
+				/* remove the event listeners */
+				// HACK: I have to check the stage because there are eventual components not added to the display list
+				if (mycomp.stage != null)
+				{
+					mycomp.stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleDrag);
+				}
+				
+				/* get the associated VNode to notify the layouter */
+				myvnode = _nodeViewToVNodeMap[mycomp];
+				/*if(_layouter) {
+					_layouter.dropEvent(event, myvnode);
+				}*/
 				
 				if(_nodeMouseDownLocation && 
 					Math.abs(mpoint.x - _nodeMouseDownLocation.x) > 2 ||

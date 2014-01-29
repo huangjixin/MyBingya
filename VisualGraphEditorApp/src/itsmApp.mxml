@@ -7,7 +7,7 @@
 	<fx:Declarations>
 		<fx:XML id="xmldata">
 			<Graph>
-				<Node id="1" name="0" desc="This is a description" nodeColor="0x333333" nodeSize="32" nodeClass="earth" nodeIcon="center" x="10" y="10" />
+				<Node id="1" name="0" desc="This is a description" nodeColor="0x333333" nodeSize="32" nodeClass="earth" nodeIcon="url::resources/computer.png" x="10" y="10" />
 				<Node id="2" name="A" desc="This is a description" nodeColor="0x8F8FFF" nodeSize="12" nodeClass="tree" nodeIcon="pc" x="10" y="15" />
 				<Node id="3" name="B" desc="This is a description" nodeColor="0xF00000" nodeSize="36" nodeClass="tree" nodeIcon="pc" x="10" y="20" />
 				<Node id="4" name="C" desc="This is a description" nodeColor="0x00FF00" nodeSize="10" nodeClass="tree" nodeIcon="pc" x="10" y="25" />
