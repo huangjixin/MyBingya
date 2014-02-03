@@ -6,6 +6,7 @@ package com.usee.elecoin.system.model.business
 {
 	
 	import com.usee.elecoin.common.Global;
+	import com.usee.elecoin.common.Page;
 	
 	import mx.rpc.IResponder;
 	import mx.rpc.remoting.mxml.RemoteObject;
@@ -35,7 +36,7 @@ package com.usee.elecoin.system.model.business
 		{
 			_service = new RemoteObject();  
 			_service.endpoint = Global.getInstance().endPoint;  // 端点；
-			_service.destination = "testRemoteServerImpl";        // 目标对象；
+			_service.destination = "userServiceImpl";        // 目标对象；
 			_service.makeObjectsBindable=true;  
 			_service.showBusyCursor=true;
 			
@@ -45,6 +46,42 @@ package com.usee.elecoin.system.model.business
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 		// 相关事件响应函数和逻辑函数存放处
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+		/**
+		 * 登录。 
+		 * @param username
+		 * @param password
+		 * 
+		 */
+		public function  login(username:String,password:String):void
+		{
+			var call:Object = _service.login(username,password);  
+			call.addResponder(_responder);  
+		}
+		
+		/**
+		 * 获取菜单。
+		 * @param id
+		 * 
+		 */
+		public function  getMenuByUserId(id:String):void
+		{
+			var call:Object = _service.getMenuByUserId(id);  
+			call.addResponder(_responder);  
+		}
+		
+		/**
+		 * 分页查询。 
+		 * @param page
+		 * @param key
+		 * @param orderCondition
+		 * 
+		 */
+		public function  query( page:Page,  key:String=null,  orderCondition:String=null):void
+		{
+			var call:Object = _service.query( page,  key,  orderCondition);  
+			call.addResponder(_responder);  
+		}
+		
 		public function  getStr():void
 		{
 			var call:Object = _service.getStr();  

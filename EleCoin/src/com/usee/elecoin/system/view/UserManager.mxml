@@ -2,12 +2,20 @@
 <s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
 					xmlns:s="library://ns.adobe.com/flex/spark"
 					xmlns:mx="library://ns.adobe.com/flex/mx"
-					width="100%" height="100%" label="用户管理" name="UserManager">
+					width="100%" height="100%" label="用户管理" name="UserManager"
+					creationComplete="navigatorcontent1_creationCompleteHandler(event)" xmlns:common="com.usee.elecoin.common.*">
+	<fx:Script>
+		<![CDATA[
+			
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
+		<common:Page id="page"/>
 	</fx:Declarations>
 	<fx:Script source="UserManager_Script.as"/>
 	<s:HGroup width="100%" height="100%">
-		<s:DataGrid id="dataGrid" width="100%" height="100%">
+		<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}">
 			<s:columns>
 				<s:ArrayList>
 					<s:GridColumn dataField="username" headerText="用户名"></s:GridColumn>

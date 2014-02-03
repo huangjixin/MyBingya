@@ -1,8 +1,12 @@
+import com.usee.elecoin.common.Global;
+import com.usee.elecoin.system.controller.UserRemoteServerEvent;
+import com.usee.elecoin.system.model.UserRemoteServerProxy;
 import com.usee.elecoin.system.model.vo.User;
 import com.usee.elecoin.system.view.SystemManager;
 import com.usee.elecoin.system.view.TestManager;
 
 import flash.display.DisplayObject;
+import flash.events.Event;
 import flash.events.MouseEvent;
 
 import mx.collections.ArrayCollection;
@@ -28,6 +32,8 @@ private var topMenuXmllist:XMLListCollection;
  */
 private var menuNavArrayList:ArrayCollection = new ArrayCollection();
 
+
+private var userProxy:UserRemoteServerProxy = new UserRemoteServerProxy();
 /**
  * 初始化，设置登录状态。
  */
@@ -36,13 +42,47 @@ protected function application1_creationCompleteHandler(event:FlexEvent):void
 	//				testRemoteServerImpl.getStr();
 	this.currentState = "login";//设置好登录状态。
 	
+	Global.getInstance().endPoint = "http://localhost:8080/Bingya/messagebroker/amf";
 	//				
 	//				userService.login("admin","123");
+	
+	userProxy.addEventListener(UserRemoteServerEvent.loginResult,onloginResult);
 }
 
 //-------------------------------------------------------------------------
 //----远程交互函数
 //-------------------------------------------------------------------------
+protected function onloginResult(event:UserRemoteServerEvent):void
+{
+	if(event.object){
+		this.currentState = "logon"; //更改登录状态。
+		resetBtn_clickHandler(null);//重置登陆表单；
+		//		this.callLater(storgeMenuNav,[this.viewStatck]);
+		//	storgeMenuNav();//存储菜单以供增删。
+		//------------	查询菜单。
+		var user:User = event.object as User;
+		if(user){
+			this.userService.getMenuByUserId(user.id);
+		}
+		toolTipLabel.visible = false;
+	}else{
+		resetBtn_clickHandler(null);//重置登陆表单；
+		toolTipLabel.visible = true;
+		toolTipLabel.text = "用户名或者密码有误";
+	}
+}
+
+/**
+ * 登录失败。 
+ * @param event
+ * 
+ */
+protected function onloginFault(event:UserRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+
 /**
  * 登录成功。 
  * @param event
@@ -234,7 +274,8 @@ protected function filterMenuNav(xmlListCollection:XMLListCollection):void
  */ 
 protected function loginBtn_clickHandler(event:MouseEvent):void
 {
-	this.userService.login(this.usernameInput.text,this.passwordInput.text);
+//	this.userService.login(this.usernameInput.text,this.passwordInput.text);
+	userProxy.login(this.usernameInput.text,this.passwordInput.text);
 }
 /**
  * 重置

@@ -1,6 +1,7 @@
 package com.usee.elecoin.system.model
 {
 	
+	import com.usee.elecoin.common.Page;
 	import com.usee.elecoin.system.controller.UserRemoteServerEvent;
 	import com.usee.elecoin.system.model.business.UserRemoteServerDelegate;
 	
@@ -12,6 +13,11 @@ package com.usee.elecoin.system.model
 	import mx.rpc.events.ResultEvent;
 	
 	[Bindable]
+	/**
+	 *  
+	 * @author 黄记新
+	 * 
+	 */
 	public class UserRemoteServerProxy  extends EventDispatcher
 	{
 		public function UserRemoteServerProxy()
@@ -33,6 +39,73 @@ package com.usee.elecoin.system.model
 		private function getStrFault(event:FaultEvent):void  
 		{  
 			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.getStrFault,event.fault));
+			Alert.show(event.fault.toString());
+		} 
+		
+		/**
+		 * 登录 
+		 * @param username
+		 * @param password
+		 * 
+		 */
+		public function  login(username:String,password:String):void 
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(loginResult, loginFault));  
+			delegate.login(username,password);
+		}
+		
+		private function loginResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.loginResult,event.result)); 
+		}
+		
+		private function loginFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.loginFault,event.fault));
+			Alert.show(event.fault.toString());
+		} 
+		
+		/**
+		 * 获取菜单Id 
+		 * @param id
+		 * 
+		 */
+		public function getMenuByUserId(id:String):void  
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(getMenuByUserIdResult, getMenuByUserIdFault));  
+			delegate.getMenuByUserId(id);
+		}
+		
+		private function getMenuByUserIdResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.getMenuByUserIdResult,event.result)); 
+		}
+		
+		private function getMenuByUserIdFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.getMenuByUserIdFault,event.fault));
+			Alert.show(event.fault.toString());
+		} 
+		
+		/**
+		 * 分页查询
+		 * @param id
+		 * 
+		 */
+		public function  query( page:Page,  key:String=null,  orderCondition:String=null):void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(queryResult, queryFault));  
+			delegate.query( page,  key,  orderCondition);
+		}
+		
+		private function queryResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.queryResult,event.result)); 
+		}
+		
+		private function queryFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.queryFault,event.fault));
 			Alert.show(event.fault.toString());
 		} 
 	}
