@@ -4,9 +4,18 @@
 					xmlns:mx="library://ns.adobe.com/flex/mx"
 					width="100%" height="100%" label="用户管理" name="UserManager">
 	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:Label text="用户管理"/>
-	<s:Button x="618" y="244" label="按钮"/>
-	<s:CheckBox x="291" y="234" label="复选框"/>
+	<fx:Script source="UserManager_Script.as"/>
+	<s:HGroup width="100%" height="100%">
+		<s:DataGrid id="dataGrid" width="100%" height="100%">
+			<s:columns>
+				<s:ArrayList>
+					<s:GridColumn dataField="username" headerText="用户名"></s:GridColumn>
+					<s:GridColumn dataField="password" headerText="密码"></s:GridColumn>
+					<s:GridColumn dataField="createDate" headerText="登记日期"></s:GridColumn>
+				</s:ArrayList>
+			</s:columns>
+		</s:DataGrid>
+	</s:HGroup>
+	
 </s:NavigatorContent>
