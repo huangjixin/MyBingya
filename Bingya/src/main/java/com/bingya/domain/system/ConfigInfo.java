@@ -20,6 +20,9 @@ public class ConfigInfo {
 	
 	@Value("${mysql.path}")
 	private String mysqlPath;
+	
+	@Value("${database.dbname}")
+	private String dbname;
 
 	public String getDbUsername() {
 		return dbUsername;
@@ -43,6 +46,14 @@ public class ConfigInfo {
 
 	public void setMysqlPath(String mysqlPath) {
 		this.mysqlPath = mysqlPath;
+	}
+
+	public String getDbname() {
+		return dbname;
+	}
+
+	public void setDbname(String dbname) {
+		this.dbname = dbname;
 	}
 
 }

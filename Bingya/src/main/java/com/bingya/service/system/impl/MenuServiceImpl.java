@@ -14,6 +14,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.json.JSONObject;
+import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,7 @@ import flexjson.JSONException;
  */
 @Transactional
 @Service(value = "menuService")
+@RemotingDestination(value="menuServiceImpl",channels={"my-amf"})
 public class MenuServiceImpl implements IMenuService {
 
 	// ---------------------------------------------------

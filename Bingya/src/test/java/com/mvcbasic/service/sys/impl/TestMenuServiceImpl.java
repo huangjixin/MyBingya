@@ -59,6 +59,7 @@ public class TestMenuServiceImpl {
 
 	@Test
 	public void testGetMenu() {
+		@SuppressWarnings("rawtypes")
 		List list = menuService.getMenuTreeByRoleId("2");
 		JSONSerializer jsons = new JSONSerializer();
 		System.out.println(list.toString());
