@@ -12,10 +12,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingya.domain.system.ConfigInfo;
 import com.bingya.service.system.IMySqlService;
 
 /**
@@ -26,7 +28,8 @@ import com.bingya.service.system.IMySqlService;
 @Service
 @RemotingDestination(value = "mySqlServiceImpl", channels = { "my-amf" })
 public class MySqlServiceImpl implements IMySqlService {
-
+	@Autowired
+	private ConfigInfo configInfo;
 	/*
 	 * (non-Javadoc)
 	 * 
