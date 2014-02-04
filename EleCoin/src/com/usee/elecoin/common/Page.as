@@ -15,5 +15,18 @@ package com.usee.elecoin.common
 		public function Page()
 		{
 		}
+
+		/*public function get total():int
+		{
+//			var value:int = (_total / limit) + (_total % limit > 0 ? 1 : 0);
+//			return value;
+			return _total;
+		}
+
+		public function set total(value:int):void
+		{
+			_total = value;
+		}*/
+
 	}
 }

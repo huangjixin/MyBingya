@@ -36,8 +36,3 @@ protected function onqueryFault(event:UserRemoteServerEvent):void
 {
 	Alert.show(event.object.toString());
 }
-
-protected function pagecomponent1_pageChangeHandler(event:Event):void
-{
-	userProxy.query(this.page);
-}
