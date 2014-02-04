@@ -22,12 +22,13 @@ public class TestMysqlServiceImpl {
 	private IMySqlService mySqlService;
 	@Test
 	public void testBackup() throws IOException {
-		mySqlService.backup(null);
+		String database = mySqlService.backup(null);
 		fail("尚未实现");
 	}
 
 	@Test
 	public void testRestore() {
+		mySqlService.restore("D:\\aa.sql");
 		fail("尚未实现");
 	}
 
