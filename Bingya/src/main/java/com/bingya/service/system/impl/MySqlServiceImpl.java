@@ -86,11 +86,18 @@ public class MySqlServiceImpl implements IMySqlService {
 	@Override
 	public Boolean restore(String path) {
 		try {
-			String fPath = "D:\\aa\\aa.sql"; // 备份文件
+			String fPath = "D:\\aa.sql"; // 备份文件
 			Runtime rt = Runtime.getRuntime();
+			String mysqlCmd = configInfo.getMysqlPath();
+			mysqlCmd+=File.separator+"bin"+File.separator+"mysql.exe";
+			mysqlCmd+=" -u"+configInfo.getDbUsername();
+			mysqlCmd+=" -p"+configInfo.getDbPassword();
+			mysqlCmd+="  "+configInfo.getDbname();
 			// 调用 mysql 的 cmd:
 			Process child = rt
-					.exec("C:\\Program Files\\MySQL\\MySQL Server 5.0\\bin\\mysql.exe -uroot -proot testbenfeng ");
+					.exec(mysqlCmd);
+//			Process child = rt
+//					.exec("C:\\Program Files\\MySQL\\MySQL Server 5.0\\bin\\mysql.exe -uroot -proot testbenfeng ");
 			// -u后面是用户名，-p后面是密码 ，testbenfeng是要还原到的数据库名
 			OutputStream out = child.getOutputStream();// 控制台的输入信息作为输出流
 			String inStr;
