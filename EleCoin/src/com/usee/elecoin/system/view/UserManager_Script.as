@@ -3,6 +3,7 @@ import com.usee.elecoin.system.controller.UserRemoteServerEvent;
 import com.usee.elecoin.system.model.UserRemoteServerProxy;
 
 import flash.events.Event;
+import flash.events.MouseEvent;
 
 import mx.controls.Alert;
 import mx.events.FlexEvent;
@@ -39,5 +40,15 @@ protected function onqueryFault(event:UserRemoteServerEvent):void
 
 protected function pagecomponent1_pageChangeHandler(event:Event):void
 {
-	userProxy.query(this.page);
+	userProxy.query(this.page,keyInput.text);
+}
+
+/**
+ * 查询 
+ * @param event
+ * 
+ */
+protected function queryBtn_clickHandler(event:MouseEvent):void
+{
+	userProxy.query(this.page,keyInput.text);
 }

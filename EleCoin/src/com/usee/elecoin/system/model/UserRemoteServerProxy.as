@@ -92,7 +92,7 @@ package com.usee.elecoin.system.model
 		 * @param id
 		 * 
 		 */
-		public function  query( page:Page,  key:String=null,  orderCondition:String=null):void
+		public function  query( page:Page,  key:String="",  orderCondition:String=""):void
 		{  
 			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(queryResult, queryFault));  
 			delegate.query( page,  key,  orderCondition);

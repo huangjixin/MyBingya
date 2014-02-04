@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:common="com.usee.elecoin.common.*">
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:common="com.usee.elecoin.common.*">
 	<fx:Declarations>
 		<common:Page id="page"/>
 	</fx:Declarations>
@@ -10,6 +11,7 @@
 	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
 			
 			protected function lastBtn_clickHandler(event:MouseEvent):void
 			{
@@ -29,11 +31,27 @@
 				}
 			}
 			
+			protected function pageNumInput_enterHandler(event:FlexEvent):void
+			{
+				if(pageNumInput.text == ""){
+					return;
+				}
+				var pageNum:int = int(pageNumInput.text);
+				if(pageNum<=page.total && 0 < pageNum){
+					page.page = pageNum;
+					page.start = (page.page-1)*page.limit;
+					this.dispatchEvent(new Event("pageChange"));
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	<s:HGroup verticalAlign="middle">
 		<s:Button id="lastBtn" label="上一页" click="lastBtn_clickHandler(event)"/>
 		<s:Button id="nextBtn" label="下一页" click="nextBtn_clickHandler(event)"/>
+		<s:Label text="跳转到"/>
+		<s:TextInput id="pageNumInput" width="30" enter="pageNumInput_enterHandler(event)"
+					 focusThickness="0" restrict="0-9"/>
 		<s:Label text="总页数:{page.page}/{page.total}"/>
 	</s:HGroup>
 </s:Group>

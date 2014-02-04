@@ -9,6 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -17,6 +18,11 @@
 	<fx:Script source="UserManager_Script.as"/>
 	<s:HGroup width="100%" height="100%">
 		<s:VGroup width="100%" height="100%">
+			<s:HGroup verticalAlign="middle">
+				<s:Label text="用户名查询"/>
+				<s:TextInput id="keyInput" enter="queryBtn_clickHandler(null)"/>
+				<s:Button id="queryBtn" label="查询" click="queryBtn_clickHandler(event)"/>
+			</s:HGroup>
 			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}">
 				<s:columns>
 					<s:ArrayList>
@@ -26,8 +32,8 @@
 					</s:ArrayList>
 				</s:columns>
 			</s:DataGrid>
+			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>
-		<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 	</s:HGroup>
 	
 </s:NavigatorContent>
