@@ -3,7 +3,7 @@
   type="WEB"
   name="Bingya"
   id="myeclipse.1390189026022"
-  context-root="/MyBingya"
+  context-root="/Bingya"
   j2ee-spec="6.0"
   archive="Bingya.war">
   <attributes>
