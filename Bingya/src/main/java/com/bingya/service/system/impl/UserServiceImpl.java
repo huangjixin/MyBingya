@@ -142,8 +142,11 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public Page query(Page page, String key, String orderCondition) {
-		key = "%" + key + "%";
 		UserExample userExample = new UserExample();
+		if(null!=key && !"".equals(key)){
+			key = "%" + key + "%";
+			userExample.createCriteria().andUsernameLike(key);
+		}
 		// userExample.createCriteria().andDescriptionLike(key);
 		userExample.setPage(page);
 		int total = userMapper.countByExample(userExample);
