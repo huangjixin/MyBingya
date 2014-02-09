@@ -104,7 +104,7 @@ public class MySqlServiceImpl implements IMySqlService {
 			StringBuffer sb = new StringBuffer("");
 			String outStr;
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(fPath), "utf8"));
+					new FileInputStream(path), "utf8"));
 			while ((inStr = br.readLine()) != null) {
 				sb.append(inStr + "\r\n");
 			}
