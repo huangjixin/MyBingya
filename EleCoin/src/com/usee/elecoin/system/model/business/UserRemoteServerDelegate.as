@@ -7,6 +7,7 @@ package com.usee.elecoin.system.model.business
 	
 	import com.usee.elecoin.common.Global;
 	import com.usee.elecoin.common.Page;
+	import com.usee.elecoin.system.model.vo.User;
 	
 	import mx.rpc.IResponder;
 	import mx.rpc.remoting.mxml.RemoteObject;
@@ -79,6 +80,39 @@ package com.usee.elecoin.system.model.business
 		public function  query( page:Page,  key:String=null,  orderCondition:String=null):void
 		{
 			var call:Object = _service.query( page,  key,  orderCondition);  
+			call.addResponder(_responder);  
+		}
+
+		/**
+		 * 添加用户 
+		 * @param user
+		 * 
+		 */
+		public function  insert( user:User):void
+		{
+			var call:Object = _service.insert( user);  
+			call.addResponder(_responder);  
+		}
+		
+		/**
+		 * 修改用户 
+		 * @param user
+		 * 
+		 */
+		public function  update( user:User):void
+		{
+			var call:Object = _service.update( user);  
+			call.addResponder(_responder);  
+		}
+		
+		/**
+		 * 修改用户 
+		 * @param user
+		 * 
+		 */
+		public function  deleteByPrimaryKey( id:String):void
+		{
+			var call:Object = _service.deleteByPrimaryKey(id);  
 			call.addResponder(_responder);  
 		}
 		

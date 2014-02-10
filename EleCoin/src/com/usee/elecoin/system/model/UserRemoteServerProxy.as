@@ -4,6 +4,7 @@ package com.usee.elecoin.system.model
 	import com.usee.elecoin.common.Page;
 	import com.usee.elecoin.system.controller.UserRemoteServerEvent;
 	import com.usee.elecoin.system.model.business.UserRemoteServerDelegate;
+	import com.usee.elecoin.system.model.vo.User;
 	
 	import flash.events.EventDispatcher;
 	
@@ -107,6 +108,69 @@ package com.usee.elecoin.system.model
 		{  
 			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.queryFault,event.fault));
 			Alert.show(event.fault.toString());
+		} 
+		
+		/**
+		 * 添加用户
+		 * @param id
+		 * 
+		 */
+		public function  insert( user:User):void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(insertResult, insertFault));  
+			delegate.insert( user);
+		}
+		
+		private function insertResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.insertResult,event.result)); 
+		}
+		
+		private function insertFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.insertFault,event.fault));
+		} 
+		
+		/**
+		 * 修改用户
+		 * @param id
+		 * 
+		 */
+		public function  update( user:User):void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(updateResult, updateFault));  
+			delegate.update( user);
+		}
+		
+		private function updateResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.updateResult,event.result)); 
+		}
+		
+		private function updateFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.updateFault,event.fault));
+		} 
+		
+		/**
+		 * 删除用户
+		 * @param id
+		 * 
+		 */
+		public function   deleteByPrimaryKey( id:String):void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(deleteByPrimaryKeyResult, deleteByPrimaryKeyFault));  
+			delegate.deleteByPrimaryKey(id);
+		}
+		
+		private function deleteByPrimaryKeyResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.deleteByPrimaryKeyResult,event.result)); 
+		}
+		
+		private function deleteByPrimaryKeyFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.deleteByPrimaryKeyFault,event.fault));
 		} 
 	}
 }

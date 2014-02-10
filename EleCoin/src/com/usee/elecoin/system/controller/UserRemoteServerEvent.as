@@ -19,6 +19,18 @@ package com.usee.elecoin.system.controller
 		public static const query:String = "query";
 		public static const queryResult:String = "queryResult";
 		public static const queryFault:String = "queryFault";
+
+		public static const insert:String = "insert";
+		public static const insertResult:String = "insertResult";
+		public static const insertFault:String = "insertFault";
+
+		public static const update:String = "update";
+		public static const updateResult:String = "updateResult";
+		public static const updateFault:String = "updateFault";
+
+		public static const deleteByPrimaryKey:String = "deleteByPrimaryKey";
+		public static const deleteByPrimaryKeyResult:String = "deleteByPrimaryKeyResult";
+		public static const deleteByPrimaryKeyFault:String = "deleteByPrimaryKeyFault";
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 		// public 公有变量声明处
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

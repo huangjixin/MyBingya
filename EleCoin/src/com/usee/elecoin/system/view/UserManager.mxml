@@ -9,11 +9,10 @@
 	<fx:Script>
 		<![CDATA[
 			
-			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<common:Page id="page" limit="2" start="0"/>
+		<common:Page id="page" limit="3"/>
 	</fx:Declarations>
 	<fx:Script source="UserManager_Script.as"/>
 	<s:HGroup width="100%" height="100%">
@@ -22,6 +21,11 @@
 				<s:Label text="用户名查询"/>
 				<s:TextInput id="keyInput" enter="queryBtn_clickHandler(null)"/>
 				<s:Button id="queryBtn" label="查询" click="queryBtn_clickHandler(event)"/>
+				<s:Button id="addBtn" label="新增" click="addBtn_clickHandler(event)"/>
+				<s:Button id="updateBtn" label="修改" click="updateBtn_clickHandler(event)"
+						  enabled="{dataGrid.selectedItem != null}"/>
+				<s:Button id="deleteBtn" label="删除" click="deleteBtn_clickHandler(event)"
+						  enabled="{dataGrid.selectedItem != null}"/>
 			</s:HGroup>
 			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}">
 				<s:columns>
