@@ -136,7 +136,12 @@ public function init() : void
 	this.userName = parameters.uName;
 	this.resourceId = parameters.resourceId;
 //	this.preName  = parameters.name;//portlet首选项name的值
-	var hasSubnet:Boolean = parameters.hasSubnetwork as Boolean;
+	var hasSubnet:String = parameters.hasSubnetwork;
+	if(hasSubnet == "true"){
+		this.hasSubnetwork = true;
+	}else{
+		this.hasSubnetwork = false;
+	}
 	trace(hasSubnet);
 	
 	Utils.registerImageByClass("sad", sad);

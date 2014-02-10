@@ -9,544 +9,28 @@
 			   creationComplete="creationCompleteHandler(event)" xmlns:index="demo.index.*" xmlns:ns="http://www.servasoftware.com/2009/twaver/flex">
 	<fx:Script>
 		<![CDATA[
-			import demo.TopologyService;
+			import spark.effects.Fade;
 			
-			import mx.collections.ArrayCollection;
-			import mx.collections.ArrayList;
-			import mx.collections.XMLListCollection;
-			import mx.controls.Alert;
-			import mx.core.FlexGlobals;
-			import mx.core.IVisualElement;
-			import mx.events.FlexEvent;
-			import mx.events.FlexMouseEvent;
-			import mx.events.ItemClickEvent;
-			import mx.events.SandboxMouseEvent;
-			import mx.managers.PopUpManager;
-			
-			import spark.components.Image;
-			import spark.effects.Resize;
-			import spark.effects.easing.Bounce;
-			import spark.effects.easing.Elastic;
-			import spark.effects.easing.Linear;
-			import spark.effects.easing.Power;
-			import spark.effects.easing.Sine;
-			import spark.events.RendererExistenceEvent;
-			import spark.primitives.BitmapImage;
-			
-			import twaver.Utils;
-			import twaver.network.Network;
-
-			private var lastX:Number = 0;
-			private var lastY:Number = 0;
-			
-			private var timer:Timer = new Timer(2000,0);
-			
-			[Bindable]
-			private var username:String;
-			
-			[Bindable]
-			private var resourceId:String;
-			
-			[Bindable]
-			private var arrayList:ArrayList;
-			protected function creationCompleteHandler(event:FlexEvent):void
+			protected function angleSlider_changeHandler(event:Event):void
 			{
-				Utils.validateLicense(this.licenseXML);
-				username = FlexGlobals.topLevelApplication.parameters.uName;
-				resourceId = FlexGlobals.topLevelApplication.parameters.resourceId;
-//				registerImages();
-				Utils.registerImageByClass("sad", sad);
-				Utils.registerImageByClass("smile", smile);
-				Utils.registerImageByClass("bg400", bg400);
-				Utils.registerImageByClass("bg600", bg600);
-				Utils.registerImageByClass("bg800", bg800);
-				
-				TopologyService.getImagesTypeList(resourceId,username,null,null,true);
-				
-				initParameters();
-				
-				
-				list.dataProvider = arrayList;
-				navList.dataProvider = arrayList;
-				callLater(function setSelection():void{
-					if(list.dataProvider.length>4){
-						list.selectedIndex = 2;
-					}
-				});
-				
-				addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);
-				timer.start();
-				timer.addEventListener(TimerEvent.TIMER,onTimer);
+				rotate3D1.angleYTo=angleSlider.value;
+				rotate3D1.play();
 			}
 			
-			/**
-			 * 初始化函数。
-			 */ 
-			private function initParameters():void{
-				arrayList = new ArrayList();
-				var arrayStr:String = FlexGlobals.topLevelApplication.parameters.picArray;
-				if(arrayStr){
-					var picArray:Array = arrayStr.split(",");
-					var obj:Object;
-					for (var i:int = 0; i < picArray.length; i++) 
-					{
-						obj = {};
-						obj.source=picArray[i];
-						arrayList.addItem(obj);
-					}
-				}
-				
-				var j:int = 0;
-				
-				/* arrayStr = FlexGlobals.topLevelApplication.parameters.stateArray;
-				if(arrayStr){
-				var stateArray:Array = arrayStr.split(",");
-				for (j = 0; j < stateArray.length; j++) 
-				{
-				obj =arrayList.getItemAt(j);
-				obj.statePic = stateArray[j];
-				}
-				}
-				
-				arrayStr = FlexGlobals.topLevelApplication.parameters.healthArray;
-				if(arrayStr){
-				var healthArray:Array = arrayStr.split(",");
-				for (j = 0; j < healthArray.length; j++) 
-				{
-				obj =arrayList.getItemAt(j);
-				obj.healthPic = healthArray[j];
-				}
-				} */
-				
-				arrayStr = FlexGlobals.topLevelApplication.parameters.labelArray;
-				if(arrayStr){
-					var labelArray:Array = arrayStr.split(",");
-					for (j = 0; j < labelArray.length; j++) 
-					{
-						obj =arrayList.getItemAt(j);
-						obj.label = labelArray[j];
-					}
-				}
-				
-				arrayStr = FlexGlobals.topLevelApplication.parameters.ridsArray;
-				if(arrayStr){
-					var ridsArray:Array = arrayStr.split(",");
-					for (j = 0; j < ridsArray.length; j++) 
-					{
-						obj =arrayList.getItemAt(j);
-						obj.rid = ridsArray[j];
-					}
-				}
-				
-				arrayStr = FlexGlobals.topLevelApplication.parameters.bgArray;
-				if(arrayStr){
-					var bgArray:Array = arrayStr.split(",");
-					for (j = 0; j < bgArray.length; j++) 
-					{
-						var bgSource:String = String(bgArray[j]);
-						var loader:Loader = new Loader();
-						loader.load(new URLRequest(encodeURI(bgSource)));
-						
-						var index:int = bgSource.lastIndexOf("/");
-						var dotindex:int = bgSource.lastIndexOf(".");
-						var picName:String = bgSource.substring(index+1,dotindex);
-						loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoaderTypeListComplete(picName));
-					}
-				}
-			}
-			
-			private var reverse:Boolean;
-			protected function onTimer(event:TimerEvent):void
-			{
-				if(list.dataProvider.length ==0){
-					return;
-				}
-				if(!reverse){
-					if(list.selectedIndex+1<list.dataProvider.length){
-						list.selectedIndex+=1;
-					}
-					
-					if(list.selectedIndex+1==list.dataProvider.length){
-						reverse = true;
-					}
-				}
-				else {
-					if(list.selectedIndex-1>=0){
-						list.selectedIndex-=1;
-					}
-					if(list.selectedIndex==0){
-						reverse = false;
-					}
-				} 
-			}
-			
-			protected function onMouseOver(event:MouseEvent):void
-			{
-				timer.stop();
-			}
-			
-			protected function onMouseOut(event:MouseEvent):void
-			{
-				timer.start();
-			}
-			
-			protected function list_rendererAddHandler(event:RendererExistenceEvent):void
-			{
-				event.renderer.addEventListener(ItemClickEvent.ITEM_CLICK,onItemClick);
-				event.renderer.addEventListener(MouseEvent.MOUSE_OVER,onMouseOver);
-				event.renderer.addEventListener(MouseEvent.MOUSE_OUT,onMouseOut);
-			}
-			
-			/**
-			 * 获取当前项，弹出来。
-			 */ 
-			private function onItemClick(event:ItemClickEvent):void
-			{
-				if(list.selectedIndex == event.index){
-					/* if(!TopologyService.loaded){
-						Alert.show("后台查询仍未完成");
-						return;
-					} */
-					var indexItemrenderer:IndexItemRenderer = event.currentTarget as IndexItemRenderer;
-					var bitImg:BitmapImage = indexItemrenderer.img;
-					var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
-					netWorkGroup.resourceid = list.dataProvider.getItemAt(event.index).rid;
-					netWorkGroup.width = 800;
-					netWorkGroup.height = 370;
-					PopUpManager.centerPopUp(netWorkGroup);
-					netWorkGroup.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,function onMouseDownOutside(event:FlexMouseEvent):void{
-						PopUpManager.removePopUp(netWorkGroup);
-					});
-//					network.visible = true;
-					/* img.source = list.dataProvider.getItemAt(event.index).source;
-					img.validateDisplayList();
-					img.validateProperties();
-					img.validateNow();
-					 var resize:Resize = new Resize(img);
-					resize.duration = 1000;
-					resize.widthFrom = bitImg.width;
-					resize.widthBy =  bitImg.width*2;
-					resize.heightFrom = bitImg.height;
-					resize.heightBy =  bitImg.height*2;
-					resize.play(); */
-					
-					timer.stop();
-				}else{
-					img.source = null;
-//					network.visible = false;
-				}
-			}
-			
-			protected function list_creationCompleteHandler(event:FlexEvent):void
-			{
-				list.selectedIndex = 1;
-				addEventListener(MouseEvent.MOUSE_DOWN,list_mouseDownHandler);
-			}
-			
-			protected function list_mouseDownHandler(event:MouseEvent):void
-			{
-				var image:Image = getImage(event.target);
-				if(image == img){
-					img.source = null;
-					return;
-				}
-				this.lastX = this.mouseX;
-				this.lastY = this.mouseY;
-				
-				var displayObject:DisplayObject = systemManager.getSandboxRoot();  
-				displayObject.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler, true);  
-				displayObject.addEventListener(MouseEvent.MOUSE_MOVE, mouseDragHandler, true);  
-				displayObject.addEventListener(SandboxMouseEvent.MOUSE_UP_SOMEWHERE, mouseUpHandler, true);  
-				displayObject.addEventListener(SandboxMouseEvent.MOUSE_MOVE_SOMEWHERE, mouseDragHandler, true);  
-				systemManager.deployMouseShields(true); 
-			}
-			
-			protected function mouseUpHandler(event:Event):void
-			{
-				if(this.lastX-this.mouseX>list.width/4){
-					if(list.selectedIndex+3<list.dataProvider.length){
-						list.selectedIndex+=3;
-					}else if(list.selectedIndex+2<list.dataProvider.length){
-						list.selectedIndex+=2;
-					}else if(list.selectedIndex+1<list.dataProvider.length){
-						list.selectedIndex+=1;
-					}
-				}else if(this.mouseX-this.lastX>list.width/4){
-					if(list.selectedIndex-3>=0){
-						list.selectedIndex-=3;
-					}else if(list.selectedIndex-2>=0){
-						list.selectedIndex-=2;
-					}else if(list.selectedIndex-1>=0){
-						list.selectedIndex-=1;
-					}
-				}
-				
-				navList.selectedIndex = list.selectedIndex;
-				var displayObject:DisplayObject = systemManager.getSandboxRoot();
-				displayObject.removeEventListener(MouseEvent.MOUSE_UP, this.mouseUpHandler, true);
-				displayObject.removeEventListener(MouseEvent.MOUSE_MOVE, this.mouseDragHandler, true);
-				displayObject.removeEventListener(SandboxMouseEvent.MOUSE_UP_SOMEWHERE, this.mouseUpHandler, true);
-				displayObject.removeEventListener(SandboxMouseEvent.MOUSE_MOVE_SOMEWHERE, this.mouseDragHandler, true);
-				systemManager.deployMouseShields(false);
-			}
-			
-			protected function mouseDragHandler(event:Event):void
-			{
-				// TODO Auto-generated method stub
-				
-			}
-
-			protected function onKeyDown(event:KeyboardEvent):void
-			{
-				if(event.keyCode == Keyboard.ESCAPE){
-					if(stage.displayState==StageDisplayState.FULL_SCREEN){
-						stage.displayState=StageDisplayState.NORMAL;
-						coverflowLayout.numUnselectedElements = 2;
-					}
-				}
-			}
-			
-			protected function list_doubleClickHandler(event:MouseEvent):void
-			{
-				if(stage.displayState==StageDisplayState.FULL_SCREEN){
-					stage.displayState=StageDisplayState.NORMAL;
-					coverflowLayout.numUnselectedElements = 2;
-				}else if(stage.displayState==StageDisplayState.NORMAL){
-					stage.displayState=StageDisplayState.FULL_SCREEN;
-					coverflowLayout.numUnselectedElements = -1;
-				}
-			}
-			
-			public static function getImage(object:Object):Image
-			{
-				while (object is flash.display.DisplayObject) 
-				{
-					if (object is Image) 
-					{
-						return Image(object);
-					}
-					object = object.parent;
-				}
-				return null;
-			}
-			
-			////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////
-			[Embed(source="demo/portal/images/MonitorPortal_UrlMonitor1.png")]
-			public static const  UrlMonitor1:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_PIC2.png")]
-			public static const  PIC2:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_MSSQLDBserver.png")]
-			public static const  MSSQLDBserver:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_PIC4.png")]
-			public static const  PIC4:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_UrlMonitor.png")]
-			public static const  UrlMonitor:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_smile.png")]
-			public static const  smile:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_UrlSeq.png")]
-			public static const  UrlSeq:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_PIC11.png")]
-			public static const  PIC11:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Windows2000.png")]
-			public static const  Windows2000:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Windows2003.png")]
-			public static const  Windows2003:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Tomcatserver.png")]
-			public static const  Tomcatserver:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_HPUX.png")]
-			public static const  HPUX:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_subnetworkimage.png")]
-			public static const  subnetworkimage:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_AIX.png")]
-			public static const  AIX:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Apacheserver.png")]
-			public static const  Apacheserver:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_ORACLEDBserver.png")]
-			public static const  ORACLEDBserver:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_NodeImg.png")]
-			public static const  NodeImg:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_PIC20111216150907.jpg")]
-			public static const  PIC20111216150907:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_WEBLOGICserver.png")]
-			public static const  WEBLOGICserver:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_bg400.jpg")]
-			public static const  bg400:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_bg600.jpg")]
-			public static const  bg600:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_bg800.jpg")]
-			public static const  bg800:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Linux.png")]
-			public static const  Linux:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Switch.png")]
-			public static const  Switch:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_sad.png")]
-			public static const  sad:Class;
-			[Embed(source="demo/portal/images/MonitorPortal_Router.png")]
-			public static const  Router:Class; 
-			
-			/**
-			 * 注册图片。
-			 */ 
-			public function registerImages() : void
-			{
-				var _data:URLVariables = new URLVariables();
-				if(!this.resourceId){
-					_data.preName = "images";
-				}else{
-					_data.preName = resourceId;
-				}
-				_data.userName = this.username;
-				
-				loadImages("/MonitorPortal/Portlet/TopologyView/getNetworkResourceTypeImages3.do",_data,onLoadImageComplete);
-				
-				 Utils.registerImageByClass("sad", sad);
-				Utils.registerImageByClass("smile", smile);
-				Utils.registerImageByClass("AIX", AIX);
-				Utils.registerImageByClass("Apache-server", Apacheserver);
-				Utils.registerImageByClass("HP-UX", HPUX);
-				Utils.registerImageByClass("Linux", Linux);
-				Utils.registerImageByClass("MSSQL-DB-server", MSSQLDBserver);
-				Utils.registerImageByClass("Node", NodeImg);
-				Utils.registerImageByClass("ORACLE-DB-server", ORACLEDBserver);
-				Utils.registerImageByClass("Router", Router);
-				Utils.registerImageByClass("Switch", Switch);
-				Utils.registerImageByClass("Tomcat-server", Tomcatserver);
-				Utils.registerImageByClass("UrlMonitor", UrlMonitor);
-				Utils.registerImageByClass("UrlSeq", UrlSeq);
-				Utils.registerImageByClass("WEBLOGIC-server", WEBLOGICserver);
-				Utils.registerImageByClass("Windows 2000", Windows2000);
-				Utils.registerImageByClass("Windows 2003", Windows2003);
-				Utils.registerImageByClass("20111216150907", PIC20111216150907);
-				Utils.registerImageByClass("02", PIC2);
-				Utils.registerImageByClass("04", PIC4);
-				Utils.registerImageByClass("11", PIC11);
-				Utils.registerImageByClass("bg400", bg400);
-				Utils.registerImageByClass("bg600", bg600);
-				Utils.registerImageByClass("bg800", bg800);
-				Utils.registerImageByClass("subnetwork_image", subnetworkimage);
-				Utils.registerImageByClass("UrlMonitor1", UrlMonitor1); 
-			}
-			
-			protected function loadImages(url:String, data:URLVariables, onEvent:Function):void
-			{
-				var _urlReq:URLRequest = new URLRequest();
-				_urlReq.url = url;
-				_urlReq.method = URLRequestMethod.POST;
-				
-				if (data!=null){
-					_urlReq.data = data;
-				}
-				var loader:URLLoader = new URLLoader();
-				loader.dataFormat = URLLoaderDataFormat.TEXT;
-				loader.load(_urlReq);
-				loader.addEventListener(Event.COMPLETE, onEvent);
-				loader.addEventListener(IOErrorEvent.IO_ERROR, function onIoError(event:IOErrorEvent):void{
-				
-				});
-			}
-			
-			protected function onLoadImageComplete(event:Event):void {
-				var loader:URLLoader=URLLoader(event.target); 
-				var _data:URLVariables = new URLVariables(loader.data); 
-				var xmlContent:String = _data.data;
-				var xml:XML=new XML(xmlContent);
-				var xmlList:XMLList = xml.elements("Item"); 
-				var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList); 
-				var imageArray: ArrayCollection = new ArrayCollection(xmlListCollection.toArray());
-				if (imageArray.length>0)
-				{
-					for (var i:int = 0; i<imageArray.length; i++)
-					{
-						var loader1:Loader = new Loader();
-						loader1.load(new URLRequest(encodeURI(imageArray[i].Value)));
-						var picName:String = imageArray[i].Name;
-						loader1.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderTypeListComplete(picName));
-					}
-				} 
-				
-				var timer:Timer = new Timer(1000,1);
-			}
-			
-			public function onLoaderTypeListComplete(picName:String):Function {
-				var fun:Function=function(e:Event):Boolean {
-					Utils.registerImageByBitmapData(picName, (e.currentTarget.content as Bitmap).bitmapData);
-					return false ;
-				}
-				return fun;
-			}
-			
-			public function getBackGroundImages(url:String, data:URLVariables, onEvent:Function):void {
-				var _urlReq:URLRequest = new URLRequest();
-				_urlReq.url = url;
-				_urlReq.method = URLRequestMethod.POST;
-				
-				if (data!=null){
-					_urlReq.data = data;
-				}
-				var loader:URLLoader = new URLLoader();
-				loader.dataFormat = URLLoaderDataFormat.TEXT;
-				loader.load(_urlReq);
-				loader.addEventListener(Event.COMPLETE, onEvent);
-				loader.addEventListener(IOErrorEvent.IO_ERROR, function onIoError(event:IOErrorEvent):void{});
-				/*var _data:URLVariables = new URLVariables();
-				_data.preName = preName;
-				_data.userName = userName;
-				request("/MonitorPortal/Portlet/TopologyView/getBackGroundImages.do", _data,
-				function(event:Event):void {
-				
-				}
-				);*/
-			}
-			
-			private function onLoadBackComplete(event:Event):void{
-				var loader:URLLoader=URLLoader(event.target); 
-				var _data:URLVariables = new URLVariables(loader.data); 
-				var xmlContent:String = _data.data;
-				var xml:XML=new XML(xmlContent);
-				var xmlList:XMLList = xml.elements("Item"); 
-				var xmlListCollection:XMLListCollection = new XMLListCollection(xmlList); 
-				var imageArray: ArrayCollection = new ArrayCollection(xmlListCollection.toArray());
-				if (imageArray.length>0)
-				{
-					for (var i:int = 0; i<imageArray.length; i++)
-					{
-						
-						var picName:String = imageArray[i].Name;
-						
-						var _urlReq:URLRequest = new URLRequest();
-						_urlReq.url = "/MonitorPortal/Portlet/TopologyView/getBackGroundImageData.do";
-						_urlReq.method = URLRequestMethod.POST;
-						var data:URLVariables = new URLVariables();
-						data.userName_fileName = imageArray[i].Value;
-						if (data!=null){
-							_urlReq.data =data;
-						}
-						var _loader:Loader = new Loader();
-						
-						_loader.load(_urlReq);
-						
-						_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderBackgroundComplete(picName));
-					}
-				} 
-			}
-			
-			
-			public function onLoaderBackgroundComplete(picName:String):Function {
-				var fun:Function=function(e:Event):Boolean {
-					Utils.registerImageByBitmapData(picName, (e.currentTarget.content as Bitmap).bitmapData);
-					return false ;
-				}
-				return fun;
-			}
 		]]>
+	</fx:Script>
+	<fx:Script source="index_actionScript.as">
 	</fx:Script>
 	<fx:Declarations>
 		<fx:XML id="licenseXML" source="demo/license.xml"/>
+		<s:Rotate3D id="rotate3D1" target="{img0}" angleYTo="-10" autoCenterTransform="true"/>
+		<s:Rotate3D id="rotate3D2" target="{img2}" angleYTo="10" autoCenterTransform="true"/>
+		<s:CrossFade id="crossFade0" targets="{[img0]}" duration="1000" />
+		<s:CrossFade id="crossFade1" targets="{[img1]}" duration="1000" />
+		<s:CrossFade id="crossFade2" targets="{[img2]}" duration="1000" />
 	</fx:Declarations>
 	<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
-		<s:List id="list" width="90%" height="300" borderVisible="false"
+		<!--<s:List id="list" width="90%" height="300" borderVisible="false"
 				contentBackgroundColor="#202020"
 				creationComplete="list_creationCompleteHandler(event)"
 				doubleClick="list_doubleClickHandler(event)" doubleClickEnabled="true"
@@ -574,14 +58,26 @@
 					<index:IndexItemRenderer width="220" height="200"/>
 				</fx:Component>
 			</s:itemRenderer>
-		</s:List>
-		<s:Label color="0xffffff"
-				 text="{list.selectedIndex+1}/{list.dataProvider.length}"/>
-		<s:List id="navList" borderVisible="false"
-				change="list.selectedIndex = navList.selectedIndex"
-				contentBackgroundAlpha="0" itemRenderer="demo.index.NavItemRenderer"
-				selectedIndex="{list.selectedIndex}"
-				rendererAdd="list_rendererAddHandler(event)">
+		</s:List>-->
+		<s:Group>
+			<s:HGroup>
+				<s:Image id="img0" width="400" height="400"/>
+				<s:Image id="img2" width="400" height="400"/>
+			</s:HGroup>
+			
+			<s:Group width="410" height="410" horizontalCenter="0" verticalCenter="0">
+				<s:Rect width="100%" height="100%">
+					<s:fill>
+						<s:SolidColor color="0x0"/>
+					</s:fill>
+				</s:Rect>
+				<s:Image id="img1" top="10" bottom="10" left="10" right="10"/>
+			</s:Group>
+		</s:Group>
+		<s:Label color="0xffffff" text="{(this.currentIndex+1)+'/'+this.arrayList.length}"/>
+		<s:HSlider id="angleSlider" minimum="-360" maximum="360" value="0" change="angleSlider_changeHandler(event)"/>
+		<s:List id="navList" borderVisible="false" selectedIndex="{this.currentIndex}"
+				contentBackgroundAlpha="0" itemRenderer="demo.index.NavItemRenderer" dataProvider="{this.arrayList}">
 			<s:layout>
 				<s:HorizontalLayout gap="10"/>
 			</s:layout>
@@ -592,5 +88,4 @@
 			<s:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
 		</s:filters>
 	</s:Label>
-	<s:Image id="img" horizontalCenter="0" verticalCenter="0"/>
 </s:Application>
