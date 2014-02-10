@@ -116,6 +116,17 @@ package com.usee.elecoin.system.model.business
 			call.addResponder(_responder);  
 		}
 		
+		/**
+		 * 修改用户 
+		 * @param user
+		 * 
+		 */
+		public function  selectAll():void
+		{
+			var call:Object = _service.selectAll();  
+			call.addResponder(_responder);  
+		}
+		
 		public function  getStr():void
 		{
 			var call:Object = _service.getStr();  

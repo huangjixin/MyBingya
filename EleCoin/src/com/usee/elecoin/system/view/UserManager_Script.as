@@ -91,6 +91,7 @@ protected function onconfirmBtnClick(event:MouseEvent):void
 	
 	}else{
 //		user.createdate = new Date();
+		user.id = new Date().time+"";
 		userProxy.insert(user);
 	}
 }
@@ -148,4 +149,15 @@ protected function ondeleteByPrimaryKeyResult(event:UserRemoteServerEvent):void
 {
 	keyInput.text = "";
 	queryBtn_clickHandler(null);
+}
+
+/**
+ * 导出excel 
+ * @param event
+ * 
+ */
+protected function exportExcelBtn_clickHandler(event:MouseEvent):void
+{
+	// TODO Auto-generated method stub
+	
 }

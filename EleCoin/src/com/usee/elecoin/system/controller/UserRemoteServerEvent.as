@@ -31,6 +31,10 @@ package com.usee.elecoin.system.controller
 		public static const deleteByPrimaryKey:String = "deleteByPrimaryKey";
 		public static const deleteByPrimaryKeyResult:String = "deleteByPrimaryKeyResult";
 		public static const deleteByPrimaryKeyFault:String = "deleteByPrimaryKeyFault";
+
+		public static const selectAll:String = "selectAll";
+		public static const selectAllResult:String = "selectAllResult";
+		public static const selectAllFault:String = "selectAllFault";
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 		// public 公有变量声明处
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

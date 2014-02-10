@@ -172,5 +172,26 @@ package com.usee.elecoin.system.model
 		{  
 			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.deleteByPrimaryKeyFault,event.fault));
 		} 
+		
+		/**
+		 * 删除用户
+		 * @param id
+		 * 
+		 */
+		public function   selectAll():void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(selectAllResult, selectAllFault));  
+			delegate.selectAll();
+		}
+		
+		private function selectAllResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.selectAllResult,event.result)); 
+		}
+		
+		private function selectAllFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.selectAllFault,event.fault));
+		} 
 	}
 }

@@ -26,6 +26,7 @@
 						  enabled="{dataGrid.selectedItem != null}"/>
 				<s:Button id="deleteBtn" label="删除" click="deleteBtn_clickHandler(event)"
 						  enabled="{dataGrid.selectedItem != null}"/>
+				<s:Button id="exportExcelBtn" label="导出Excel" click="exportExcelBtn_clickHandler(event)"/>
 			</s:HGroup>
 			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}">
 				<s:columns>
