@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.json.JSONObject;
+import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,8 @@ import com.bingya.util.Page;
  * 
  */
 @Transactional
-@Service(value = "roleService")
+@Service
+@RemotingDestination(value = "roleServiceImpl", channels = { "my-amf" })
 public class RoleServiceImpl implements IRoleService {
 	@Resource
 	private RoleMapper roleMapper;
@@ -123,7 +125,7 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	public String update(Role entity) {
 		int i = roleMapper.updateByPrimaryKey(entity);
-		return i+"";
+		return i + "";
 	}
 
 	/*
@@ -145,6 +147,7 @@ public class RoleServiceImpl implements IRoleService {
 		page.setRows(list);
 		return page;
 	}
+
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
 	// ---------------------------------------------------
@@ -159,6 +162,21 @@ public class RoleServiceImpl implements IRoleService {
 	public String getMenusXMLById(String id) {
 		String str = menuService.serializMenuToXml(id);
 		return str;
+	}
+
+	@Override
+	public Role getRoleByUserid(String userId) {
+		UserRoleExample userRoleExample = new UserRoleExample();
+		userRoleExample.createCriteria().andUserIdEqualTo(userId);
+		List<UserRole> userRoles = userRoleMapper
+				.selectByExample(userRoleExample);
+		if (null == userRoles || userRoles.size() == 0) {
+			return null;
+		} else {
+			UserRole userRole = userRoles.get(0);
+			Role role = roleMapper.selectByPrimaryKey(userRole.getRoleId());
+			return role;
+		}
 	}
 
 	// ---------------------------------------------------

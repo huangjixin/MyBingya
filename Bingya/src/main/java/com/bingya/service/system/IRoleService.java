@@ -20,5 +20,17 @@ public interface IRoleService extends IGenericService<Role, String> {
 	 */
 	List getMenusById(String id);
 	
+	/**
+	 * 查询xml字符串。
+	 * @param id
+	 * @return
+	 */
 	String getMenusXMLById(String id);
+	
+	/**
+	 * 根据用户id查询角色。
+	 * @param userId
+	 * @return
+	 */
+	Role getRoleByUserid(String userId);
 }

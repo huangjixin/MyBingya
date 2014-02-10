@@ -4,11 +4,13 @@
 package com.bingya.service.system.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.flex.remoting.RemotingDestination;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +34,7 @@ import flex.messaging.util.UUIDUtils;
  */
 @Transactional
 @Service
-@RemotingDestination(value="userServiceImpl",channels={"my-amf"})
+@RemotingDestination(value = "userServiceImpl", channels = { "my-amf" })
 public class UserServiceImpl implements IUserService {
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
@@ -45,7 +47,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private RoleMapper roleMapper;
-	
+
 	@Resource
 	private IRoleService roleService;
 
@@ -90,9 +92,15 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
-		if(entity.getId()==null||"".equals(entity.getId())){
-			entity.setId(UUIDUtils.createUUID());
-		}
+		 entity.setCreatedate(new Date());
+		// Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		// String password = encoder.encodePassword(entity.getPassword(), null);
+		// entity.setPassword(password);
+		// if(entity.getId()==null||"".equals(entity.getId())){
+		// int count = userMapper.countByExample(new UserExample());
+		// 
+		// }
+		entity.setId(new Date().getTime()+"");
 		int i = userMapper.insertSelective(entity);
 		return i + "";
 	}
@@ -143,7 +151,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public Page query(Page page, String key, String orderCondition) {
 		UserExample userExample = new UserExample();
-		if(null!=key && !"".equals(key)){
+		if (null != key && !"".equals(key)) {
 			key = "%" + key + "%";
 			userExample.createCriteria().andUsernameLike(key);
 		}
@@ -193,9 +201,9 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public String getMenuByUserId(String id) {
 		List<Role> roles = getRolesById(id);
-		if(roles==null ||roles.size()==0)
+		if (roles == null || roles.size() == 0)
 			return null;
-		else{
+		else {
 			Role role = roles.get(0);
 			String str = roleService.getMenusXMLById(role.getId());
 			return str;
