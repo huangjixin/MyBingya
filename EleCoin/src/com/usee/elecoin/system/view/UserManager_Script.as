@@ -90,14 +90,14 @@ protected function onconfirmBtnClick(event:MouseEvent):void
 	if(user.id && user.id!=""){
 	
 	}else{
+//		user.createdate = new Date();
 		userProxy.insert(user);
 	}
 }
 
 protected function oninsertFault(event:UserRemoteServerEvent):void
 {
-	// TODO Auto-generated method stub
-	
+	Alert.show(event.object.toString());
 }
 
 protected function oninsertResult(event:UserRemoteServerEvent):void
