@@ -33,7 +33,7 @@
 					<s:ArrayList>
 						<s:GridColumn dataField="username" headerText="用户名"></s:GridColumn>
 						<s:GridColumn dataField="password" headerText="密码"></s:GridColumn>
-						<s:GridColumn dataField="createDate" headerText="登记日期"></s:GridColumn>
+						<s:GridColumn dataField="createdate" headerText="登记日期"></s:GridColumn>
 					</s:ArrayList>
 				</s:columns>
 			</s:DataGrid>

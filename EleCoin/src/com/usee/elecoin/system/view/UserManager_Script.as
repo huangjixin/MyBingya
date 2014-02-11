@@ -103,7 +103,7 @@ protected function onconfirmBtnClick(event:MouseEvent):void
 	
 	}else{
 //		user.createdate = new Date();
-		user.id = new Date().time+"";
+//		user.id = new Date().time+"";
 		userProxy.insert(user);
 	}
 }
