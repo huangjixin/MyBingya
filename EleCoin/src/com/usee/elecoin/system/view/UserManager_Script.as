@@ -209,7 +209,7 @@ private function exportExcel(arrayCol:IList):void
 			}else{
 				excelFile.sheets.addItem(generateSheet(0,j,name));
 			}
-			
+//			excelFile.sheets.addItem(generateSheet(0,j,name));
 			excelFile.sheets.addItem(generateSheet(i,j,obj[name]));
 			j += 1;  
 		}
