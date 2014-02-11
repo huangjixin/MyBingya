@@ -8,7 +8,7 @@
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
-    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -109,7 +109,7 @@
       createDate)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{createdate,jdbcType=DATE})
+      #{createdate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bingya.domain.system.User" >
     insert into tb_user
@@ -156,7 +156,7 @@
         #{enabled,jdbcType=BIT},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,7 +188,7 @@
         enabled = #{record.enabled,jdbcType=BIT},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=DATE},
+        createDate = #{record.createdate,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -203,7 +203,7 @@
       status = #{record.status,jdbcType=SMALLINT},
       description = #{record.description,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=BIT},
-      createDate = #{record.createdate,jdbcType=DATE}
+      createDate = #{record.createdate,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,7 +227,7 @@
         enabled = #{enabled,jdbcType=BIT},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=DATE},
+        createDate = #{createdate,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -239,7 +239,7 @@
       status = #{status,jdbcType=SMALLINT},
       description = #{description,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=BIT},
-      createDate = #{createdate,jdbcType=DATE}
+      createDate = #{createdate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

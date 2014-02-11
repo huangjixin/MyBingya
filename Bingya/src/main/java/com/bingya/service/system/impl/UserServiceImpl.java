@@ -3,6 +3,7 @@
  */
 package com.bingya.service.system.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -93,8 +94,12 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
-		Date date = Calendar.getInstance().getTime();
-		 entity.setCreatedate(date);
+		Date date = new Date();
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//格式化日期
+		String dateStr = sdf.format(date);
+		
+		 entity.setCreatedate(dateStr);
 		 Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		 String password = encoder.encodePassword(entity.getPassword(), null);
 		 entity.setPassword(password);
