@@ -33,7 +33,7 @@ import flex.messaging.util.UUIDUtils;
  * 
  */
 @Transactional
-@Service
+@Service(value = "userService")
 @RemotingDestination(value = "userServiceImpl", channels = { "my-amf" })
 public class UserServiceImpl implements IUserService {
 	// ---------------------------------------------------
@@ -92,16 +92,16 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
-		 entity.setCreatedate(new Date());
+		// entity.setCreatedate(new Date());
 		// Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		// String password = encoder.encodePassword(entity.getPassword(), null);
 		// entity.setPassword(password);
 		// if(entity.getId()==null||"".equals(entity.getId())){
 		// int count = userMapper.countByExample(new UserExample());
-		// 
+		//
 		// }
-		entity.setId(new Date().getTime()+"");
-		int i = userMapper.insertSelective(entity);
+		// entity.setId(new Date().getTime()+"");
+		int i = userMapper.insert(entity);
 		return i + "";
 	}
 

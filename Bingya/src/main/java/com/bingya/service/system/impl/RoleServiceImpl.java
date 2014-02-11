@@ -3,12 +3,10 @@
  */
 package com.bingya.service.system.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.json.JSONObject;
 import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +15,6 @@ import com.bingya.dao.system.MenuMapper;
 import com.bingya.dao.system.RoleMapper;
 import com.bingya.dao.system.RoleMenuMapper;
 import com.bingya.dao.system.UserRoleMapper;
-import com.bingya.domain.system.Menu;
-import com.bingya.domain.system.MenuExample;
 import com.bingya.domain.system.Role;
 import com.bingya.domain.system.RoleExample;
 import com.bingya.domain.system.RoleMenu;
@@ -34,7 +30,7 @@ import com.bingya.util.Page;
  * 
  */
 @Transactional
-@Service
+@Service(value = "roleService")
 @RemotingDestination(value = "roleServiceImpl", channels = { "my-amf" })
 public class RoleServiceImpl implements IRoleService {
 	@Resource
