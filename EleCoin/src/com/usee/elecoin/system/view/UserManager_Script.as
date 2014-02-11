@@ -36,6 +36,8 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	userProxy.addEventListener(UserRemoteServerEvent.updateFault,onupdateFault);
 	userProxy.addEventListener(UserRemoteServerEvent.deleteByPrimaryKeyResult,ondeleteByPrimaryKeyResult);
 	userProxy.addEventListener(UserRemoteServerEvent.deleteByPrimaryKeyFault,ondeleteByPrimaryKeyFault);
+	userProxy.addEventListener(UserRemoteServerEvent.selectAllResult,onselectAllResult);
+	userProxy.addEventListener(UserRemoteServerEvent.selectAllFault,onselectAllFault);
 }
 
 /**
@@ -161,6 +163,21 @@ protected function ondeleteByPrimaryKeyResult(event:UserRemoteServerEvent):void
 	queryBtn_clickHandler(null);
 }
 
+protected function onselectAllFault(event:UserRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function onselectAllResult(event:UserRemoteServerEvent):void
+{
+	var arrayCol:IList = event.object as ArrayCollection;
+	if(arrayCol){
+		if(arrayCol.length>0){
+			exportExcel(arrayCol);		
+		}
+	}
+}
+
 /**
  * 导出excel 
  * @param event
@@ -170,7 +187,14 @@ private var sheet:Sheet;
 
 protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 {
-	var arrayCol:IList = dataGrid.dataProvider;
+	userProxy.selectAll();
+}
+
+//------------------------------------------------------------------------------------------
+//--- 逻辑函数
+//------------------------------------------------------------------------------------------
+private function exportExcel(arrayCol:IList):void
+{
 	var excelFile:ExcelFile = new ExcelFile();
 	for(var i:int=1; i<=arrayCol.length;i++){  
 		var obj:Object = arrayCol.getItemAt(i-1);  
@@ -185,17 +209,10 @@ protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 			}else{
 				excelFile.sheets.addItem(generateSheet(0,j,name));
 			}
-			  
+			
 			excelFile.sheets.addItem(generateSheet(i,j,obj[name]));
 			j += 1;  
 		}
-		
-		/*var j:int = 0;  
-		for(var key:String in obj){  
-			excelFile.sheets.addItem(generateSheet(0,j,key));  
-			excelFile.sheets.addItem(generateSheet(i,j,obj[key]));  
-			j += 1;  
-		} */ 
 	}  
 	var mbytes:ByteArray = excelFile.saveToByteArray(); 
 	
@@ -227,11 +244,11 @@ protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 	/*var file:FileReference = new FileReference();  
 	try  
 	{  
-		file.save(mbytes,"测试文件.xls"); // 定死文件名  
+	file.save(mbytes,"测试文件.xls"); // 定死文件名  
 	}catch (error:Error){  
-		trace("Failed:", error.message)  
+	trace("Failed:", error.message)  
 	}*/  
-
+	
 	function generateSheet(i:int,j:int,o:Object):Sheet{  
 		if(!sheet){  
 			sheet = new Sheet();  
