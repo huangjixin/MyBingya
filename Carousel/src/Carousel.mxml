@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" initialize="onInit(event)" creationComplete="onCreation(event)"
+	xmlns:carousel="com.pricklythistle.carousel.*" viewSourceURL="srcview/index.html">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.effects.easing.Sine;
+			import mx.effects.easing.Quintic;
+			import mx.effects.easing.Quartic;
+			import mx.effects.easing.Quadratic;
+			import mx.effects.easing.Linear;
+			import mx.effects.easing.Elastic;
+			import mx.effects.easing.Cubic;
+			import mx.effects.easing.Circular;
+			import mx.effects.easing.Bounce;
+			import mx.effects.easing.Back;
+			import mx.effects.easing.Exponential;
+			import com.imageVO;
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			private var images:ArrayCollection;
+			[Bindable]
+			private var _easingFunctions:ArrayCollection;
+			
+			private function onInit(e:Event):void
+			{
+				images = new ArrayCollection();
+				
+				for (var i:int = 1; i < 29; i++)
+				{
+					var imagePath:String = "assets/image_" + i + ".jpg";
+					
+					images.addItem(new imageVO(imagePath));
+				}
+				
+				_easingFunctions = new ArrayCollection();
+				
+				_easingFunctions.addItem({data: mx.effects.easing.Back, label:"Back"});
+				_easingFunctions.addItem({data: mx.effects.easing.Bounce, label:"Bounce"});
+				_easingFunctions.addItem({data: mx.effects.easing.Circular, label:"Circular"});
+				_easingFunctions.addItem({data: mx.effects.easing.Cubic, label:"Cubic"});
+				_easingFunctions.addItem({data: mx.effects.easing.Elastic, label:"Elastic"});
+				_easingFunctions.addItem({data: mx.effects.easing.Exponential, label:"Exponential"});
+				_easingFunctions.addItem({data: mx.effects.easing.Linear, label:"Linear"});
+				_easingFunctions.addItem({data: mx.effects.easing.Quadratic, label:"Quadratic"});
+				_easingFunctions.addItem({data: mx.effects.easing.Quartic, label:"Quartic"});
+				_easingFunctions.addItem({data: mx.effects.easing.Quintic, label:"Quintic"});
+				_easingFunctions.addItem({data: mx.effects.easing.Sine, label:"Sine"});
+			}
+			
+			private function onCreation(e:Event):void
+			{
+				setEasing();
+			}
+			
+			private function setEasing(e:Event = null):void
+			{
+				var pack:Object = easingSelector.selectedItem.data;
+				var easeIn:String = chkEaseIn.selected ? "easeIn" : "easeOut";
+				
+				var easingFunction:Function = pack[easeIn]
+				
+				carousel.easingFunction = easingFunction;
+			}
+			
+			private function hideForm():void
+			{
+				if(cnvForm.visible)
+				{
+					cnvForm.visible = false;
+					btnHide.label = "Show Form";
+				} else {
+					cnvForm.visible = true;
+					btnHide.label = "Hide Form";
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:HBox width="800" top="20" bottom="100" verticalAlign="middle" horizontalAlign="center" horizontalCenter="0">
+		<mx:Button label="&lt;" click="carousel.previous()" height="100" width="50" />
+		
+		<!-- Carousel itself can also pass in item renderer to use your own renderer. -->
+		
+		<carousel:Carousel id="carousel" width="100%" height="100%"
+			dataprovider="{images}" maxItems="{sldMaxItems.value}" elevation="{sldElevation.value}" 
+			itemWidth="{sldItemWidth.value}" itemHeight="{sldItemHeight.value}" duration="{sldDuration.value}" 
+			frontScale="{sldFrontScale.value}" backScale="{sldBackScale.value}" />
+		<mx:Button label="&gt;" click="carousel.next()" height="100" width="50" />
+	</mx:HBox>
+	
+	
+	<!-- Form for adjusting carousel properties -->
+	
+	<mx:WipeDown id="effHideForm" target="{cnvForm}" duration="500" />
+	<mx:WipeUp id="effShowForm" target="{cnvForm}" duration="500" />
+	
+	<mx:Canvas id="cnvForm" left="10" bottom="40" 
+		backgroundColor="0xFFFFFF" backgroundAlpha="1" borderStyle="solid" borderColor="0xCCCCCC" cornerRadius="5"
+		showEffect="{effShowForm}" hideEffect="{effHideForm}">
+		<mx:VBox left="5" right="5" top="5" bottom="5">
+			<mx:HBox height="100%">
+				<mx:Label text="Max Items" />
+				<mx:HSlider id="sldMaxItems" value="8" minimum="1" maximum="28" snapInterval="1" liveDragging="false" toolTip="Max Items" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Item Width" />
+				<mx:HSlider id="sldItemWidth" value="120" minimum="50" maximum="400" liveDragging="true" toolTip="Item Width" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Item Height" />
+				<mx:HSlider id="sldItemHeight" value="100" minimum="50" maximum="400" liveDragging="true" toolTip="Item Height" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Front Scale" />
+				<mx:HSlider id="sldFrontScale" value="2" minimum="0.1" maximum="4" liveDragging="true" toolTip="Front Scale" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Back Scale" />
+				<mx:HSlider id="sldBackScale" value="0.5" minimum="0.1" maximum="4" liveDragging="true" toolTip="Back Scale" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Elevation" />
+				<mx:HSlider id="sldElevation" value="0" minimum="0" maximum="400" liveDragging="true" toolTip="Elevation" />
+			</mx:HBox>
+			<mx:HBox height="100%">
+				<mx:Label text="Duration" />
+				<mx:HSlider id="sldDuration" value="500" minimum="500" maximum="5000" liveDragging="true" toolTip="Duration" />
+			</mx:HBox>
+			<mx:ComboBox id="easingSelector" width="100%" dataProvider="{_easingFunctions}" selectedIndex="0" change="setEasing(event)" />
+			<mx:CheckBox id="chkEaseIn" selected="false" label="Ease In" change="setEasing(event)" />
+		</mx:VBox>
+	</mx:Canvas>
+	
+	<mx:Button id="btnHide" label="Hide Form" click="hideForm()" bottom="15" left="5" />
+	
+</mx:Application>

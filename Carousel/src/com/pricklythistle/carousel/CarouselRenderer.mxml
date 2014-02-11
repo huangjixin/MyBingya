@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300" 
+	mouseOver="onMouseOver(event)" mouseOut="onMouseOut(event)"
+	cornerRadius="5" backgroundAlpha="1" backgroundColor="0xBBBBBB" borderStyle="solid" borderColor="0x666666">
+		
+	<mx:Script>
+		<![CDATA[
+		
+			//##################################################################
+			//#
+			//#		Simple renderer to display image with a border and a mouse
+			//#		over effect. Any renderer can be used.
+			//#
+			//##################################################################
+			
+			import com.imageVO;
+		
+			private var _data:Object;
+			private var _dataUpdate:Boolean = false;
+			private var _margin:int = 5;
+			
+			private function onMouseOver(e:Event):void
+			{
+				this.filters = [new GlowFilter()];
+			}
+			
+			private function onMouseOut(e:Event):void
+			{
+				this.filters = [];
+			}
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				
+				if(_dataUpdate)
+				{
+					_dataUpdate = false;
+					displayImage.source = imageVO(data).imagePath;	
+				}
+			}
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				
+				_dataUpdate = true;
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth,unscaledHeight);
+				
+				if(_imageComplete)
+				{
+					displayImage.visible = true;
+					var imageRatio:Number = displayImage.contentWidth/displayImage.contentHeight;
+					
+					var doubleMargin:int = _margin*2;
+					
+					displayImage.width = int(unscaledWidth - doubleMargin);
+					displayImage.height = int(displayImage.width/imageRatio);
+					
+					if(displayImage.height + doubleMargin > unscaledHeight)
+					{
+						displayImage.height = int(unscaledHeight - doubleMargin);
+						displayImage.width = int(displayImage.height*imageRatio);
+					}
+					
+					displayImage.x = int((unscaledWidth-displayImage.width)/2);
+					displayImage.y = int((unscaledHeight-displayImage.height)/2);
+					
+				} else {
+					displayImage.visible = false;
+				}
+				
+			}
+			
+			
+			private var _imageComplete:Boolean = false;
+			private function onComplete(e:Event):void
+			{
+				_imageComplete = true;
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Image id="displayImage" minHeight="0" minWidth="0" complete="onComplete(event)" />
+
+</mx:Canvas>
