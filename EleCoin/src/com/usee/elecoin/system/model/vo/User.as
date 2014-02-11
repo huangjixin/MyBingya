@@ -11,7 +11,7 @@ package com.usee.elecoin.system.model.vo
 		public var status:int;  
 		public var description:String;  
 		public var enabled:Boolean;  
-		public var createdate:Date;  
+		public var createdate:String;  
 		
 		public function User()  
 		{  

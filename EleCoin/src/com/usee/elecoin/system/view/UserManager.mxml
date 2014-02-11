@@ -8,7 +8,12 @@
 					name="UserManager">
 	<fx:Script>
 		<![CDATA[
-			
+			import spark.formatters.DateTimeFormatter;
+			private function createdateLabelFunction(item:Object, column:GridColumn):String{
+				var dateFormat:DateTimeFormatter = new DateTimeFormatter();
+				dateFormat.dateTimePattern = "yyyy-MM-dd HH:mm:ss";
+				return dateFormat.format(item.createdate);
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
