@@ -4,6 +4,7 @@
 package com.bingya.service.system.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -92,13 +93,14 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
-		 entity.setCreatedate(new Date());
+		Date date = Calendar.getInstance().getTime();
+		 entity.setCreatedate(date);
 		 Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		 String password = encoder.encodePassword(entity.getPassword(), null);
 		 entity.setPassword(password);
 		 if(entity.getId()==null||"".equals(entity.getId())){
 		 int count = userMapper.countByExample(new UserExample());
-		 entity.setId(count+"");
+		 entity.setId(count+1+"");
 		 }
 		 
 		int i = userMapper.insert(entity);
@@ -214,7 +216,7 @@ public class UserServiceImpl implements IUserService {
 
 	public static void main(String[] args) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		String superAdminpPassword = encoder.encodePassword("superAdmin", null);
+		String superAdminpPassword = encoder.encodePassword("123qweasdzxc", null);
 		String adminpPassword = encoder.encodePassword("admin", null);
 		System.out.println(superAdminpPassword+","+adminpPassword);
 	}
