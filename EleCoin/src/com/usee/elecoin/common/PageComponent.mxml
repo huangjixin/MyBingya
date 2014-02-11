@@ -44,11 +44,33 @@
 				}
 			}
 			
+			/**
+			 * 首页
+			 */ 
+			protected function firstBtn_clickHandler(event:MouseEvent):void
+			{
+				page.page=1;
+				page.start = (page.page-1)*page.limit;
+				this.dispatchEvent(new Event("pageChange"));
+			}
+			
+			/**
+			 * 尾页
+			 */ 
+			protected function endBtn_clickHandler(event:MouseEvent):void
+			{
+				page.page= page.total;
+				page.start = (page.page-1)*page.limit;
+				this.dispatchEvent(new Event("pageChange"));
+			}
+			
 		]]>
 	</fx:Script>
 	<s:HGroup verticalAlign="middle">
+		<s:Button id="firstBtn" label="首页" click="firstBtn_clickHandler(event)"/>
 		<s:Button id="lastBtn" label="上一页" click="lastBtn_clickHandler(event)"/>
 		<s:Button id="nextBtn" label="下一页" click="nextBtn_clickHandler(event)"/>
+		<s:Button id="endBtn" label="尾页" click="endBtn_clickHandler(event)"/>
 		<s:Label text="跳转到"/>
 		<s:TextInput id="pageNumInput" width="30" enter="pageNumInput_enterHandler(event)"
 					 focusThickness="0" restrict="0-9"/>
