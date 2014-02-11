@@ -47,9 +47,9 @@
 			targetPackage="com.bingya.dao.system" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-<!-- 		<table tableName="tb_user" domainObjectName="User" /> -->
+			<table tableName="tb_user" domainObjectName="User" />
 <!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
-	 		<table tableName="tb_menu" domainObjectName="Menu" />
+<!-- 	 		<table tableName="tb_menu" domainObjectName="Menu" /> -->
 <!-- 		<table tableName="tb_role_menu" domainObjectName="RoleMenu" /> -->
 <!-- 		<table tableName="tb_role" domainObjectName="Role" /> -->
 <!-- 		<table tableName="tb_article" domainObjectName="Article" /> -->
