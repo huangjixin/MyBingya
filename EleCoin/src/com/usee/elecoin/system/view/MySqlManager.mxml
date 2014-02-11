@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
+					xmlns:s="library://ns.adobe.com/flex/spark"
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					xmlns:common="com.usee.elecoin.common.*"
+					width="100%" height="100%" label="MySql管理"
+					name="MySqlManager"
+					creationComplete="navigatorcontent1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.usee.elecoin.system.controller.MySqlRemoteServerEvent;
+			import com.usee.elecoin.system.model.MySqlRemoteServerProxy;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			import spark.formatters.DateTimeFormatter;
+			
+			private var mySqlProxy:MySqlRemoteServerProxy = new MySqlRemoteServerProxy();
+			
+			protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):void
+			{
+				mySqlProxy.addEventListener(MySqlRemoteServerEvent.backupFault,onbackupFault);
+				mySqlProxy.addEventListener(MySqlRemoteServerEvent.backupResult,onbackupResult);
+				mySqlProxy.addEventListener(MySqlRemoteServerEvent.restoreFault,onrestoreFault);
+				mySqlProxy.addEventListener(MySqlRemoteServerEvent.restoreResult,onrestoreResult);
+			}
+			
+			/**
+			 * 还原数据库
+			 */ 
+			protected function restoreBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			/**
+			 * 备份数据库
+			 */
+			protected function backupBtn_clickHandler(event:MouseEvent):void
+			{
+				mySqlProxy.backup();
+			}
+			
+			
+			
+			protected function onbackupFault(event:MySqlRemoteServerEvent):void
+			{
+				Alert.show(event.object.toString());
+			}
+			
+			protected function onbackupResult(event:MySqlRemoteServerEvent):void
+			{
+				var backupDbString:String = event.object as String;
+				var file:File = new File();
+				var date:Date = new Date();
+				var df:DateTimeFormatter = new DateTimeFormatter();
+				df.dateTimePattern = "yyyyMMddHHmmss";
+				file.save(backupDbString,df.format(date)+".sql");
+			}
+			
+			protected function onrestoreFault(event:MySqlRemoteServerEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function onrestoreResult(event:MySqlRemoteServerEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+	</fx:Declarations>
+	<s:HGroup width="100%" height="100%">
+		<s:Button id="backupBtn" label="备份" click="backupBtn_clickHandler(event)"/>
+		<s:Button id="restoreBtn" label="还原" click="restoreBtn_clickHandler(event)"/>
+	</s:HGroup>
+</s:NavigatorContent>

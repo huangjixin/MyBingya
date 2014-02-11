@@ -1,4 +1,5 @@
 import com.usee.elecoin.system.view.MenuManager;
+import com.usee.elecoin.system.view.MySqlManager;
 import com.usee.elecoin.system.view.RoleManager;
 import com.usee.elecoin.system.view.UserManager;
 
@@ -61,7 +62,10 @@ protected function loadMenuNav(container:Container):void
 		}else if(xml.@name == "菜单管理"){
 			var menuManager:MenuManager = new MenuManager();
 			container.addElement(menuManager);
-		} 
+		}else if(xml.@name == "MySql管理"){
+			var mySqlManager:MySqlManager = new MySqlManager();
+			container.addElement(mySqlManager);
+		}  
 	}
 }
 
