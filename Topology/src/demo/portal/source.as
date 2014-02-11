@@ -695,9 +695,9 @@ public function addEventListenerForNodes() : void
 		var node:Node = obj as Node;
 		var mappingid:String = node.getClient("MAPPINGID");
 		var type:String = node.getClient("type");
-//		Alert.show("this.hasSubnetwork的值是:"+this.hasSubnetwork);
-		if(mappingid != null && mappingid != "" && this.hasSubnetwork){
-//			Alert.show("有没有弹出子图窗体");
+		Alert.show("this.hasSubnetwork的值是:"+hasSubnetwork+",资源id的值是："+mappingid);
+		if(mappingid != null && mappingid != "" && hasSubnetwork){
+			Alert.show("资源id是"+mappingid);
 			var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
 			netWorkGroup.resourceid = mappingid;
 			netWorkGroup.width = 800;
