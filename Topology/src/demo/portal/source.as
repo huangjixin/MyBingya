@@ -695,7 +695,9 @@ public function addEventListenerForNodes() : void
 		var node:Node = obj as Node;
 		var mappingid:String = node.getClient("MAPPINGID");
 		var type:String = node.getClient("type");
+//		Alert.show("this.hasSubnetwork的值是:"+this.hasSubnetwork);
 		if(mappingid != null && mappingid != "" && this.hasSubnetwork){
+//			Alert.show("有没有弹出子图窗体");
 			var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
 			netWorkGroup.resourceid = mappingid;
 			netWorkGroup.width = 800;
@@ -704,6 +706,7 @@ public function addEventListenerForNodes() : void
 			netWorkGroup.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,function onMouseDownOutside(event:FlexMouseEvent):void{
 				PopUpManager.removePopUp(netWorkGroup);
 			});
+			return;
 		}
 		if (mappingid != null && mappingid != "" && type != null && type != "")
 		{
