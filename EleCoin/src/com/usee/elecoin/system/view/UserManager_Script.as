@@ -179,7 +179,13 @@ protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 		for each(var accessor:XML in xml..accessor){
 			var name:String= accessor.@name;
 			var type:String= accessor.@type;
-			excelFile.sheets.addItem(generateSheet(0,j,name));  
+			var zh_cnName:String = User.object[name];
+			if(zh_cnName){
+				excelFile.sheets.addItem(generateSheet(0,j,zh_cnName));
+			}else{
+				excelFile.sheets.addItem(generateSheet(0,j,name));
+			}
+			  
 			excelFile.sheets.addItem(generateSheet(i,j,obj[name]));
 			j += 1;  
 		}
