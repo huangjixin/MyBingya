@@ -92,15 +92,15 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String insert(User entity) {
-		// entity.setCreatedate(new Date());
-		// Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		// String password = encoder.encodePassword(entity.getPassword(), null);
-		// entity.setPassword(password);
-		// if(entity.getId()==null||"".equals(entity.getId())){
-		// int count = userMapper.countByExample(new UserExample());
-		//
-		// }
-		// entity.setId(new Date().getTime()+"");
+		 entity.setCreatedate(new Date());
+		 Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		 String password = encoder.encodePassword(entity.getPassword(), null);
+		 entity.setPassword(password);
+		 if(entity.getId()==null||"".equals(entity.getId())){
+		 int count = userMapper.countByExample(new UserExample());
+		 entity.setId(count+"");
+		 }
+		 
 		int i = userMapper.insert(entity);
 		return i + "";
 	}
@@ -187,6 +187,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User login(String username, String password) {
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		password = encoder.encodePassword(password, null);
 		UserExample userExample = new UserExample();
 		userExample.createCriteria().andUsernameEqualTo(username)
 				.andPasswordEqualTo(password);
@@ -210,4 +212,10 @@ public class UserServiceImpl implements IUserService {
 		}
 	}
 
+	public static void main(String[] args) {
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String superAdminpPassword = encoder.encodePassword("superAdmin", null);
+		String adminpPassword = encoder.encodePassword("admin", null);
+		System.out.println(superAdminpPassword+","+adminpPassword);
+	}
 }
