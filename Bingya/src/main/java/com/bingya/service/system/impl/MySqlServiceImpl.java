@@ -64,17 +64,17 @@ public class MySqlServiceImpl implements IMySqlService {
 		}
 		outStr = sb.toString();
 		// 要用来做导入用的sql目标文件：
-		FileOutputStream fout = new FileOutputStream("d:/aa.sql"); // 备份出来的文件名称
-		OutputStreamWriter writer = new OutputStreamWriter(fout, "utf8");
-		writer.write(outStr);
-		// 注：这里如果用缓冲方式写入文件的话，会导致中文乱码，用flush()方法则可以避免
-		writer.flush();
-		// 别忘记关闭输入输出流
-		in.close();
-		xx.close();
-		br.close();
-		writer.close();
-		fout.close();
+//		FileOutputStream fout = new FileOutputStream("d:/aa.sql"); // 备份出来的文件名称
+//		OutputStreamWriter writer = new OutputStreamWriter(fout, "utf8");
+//		writer.write(outStr);
+//		// 注：这里如果用缓冲方式写入文件的话，会导致中文乱码，用flush()方法则可以避免
+//		writer.flush();
+//		// 别忘记关闭输入输出流
+//		in.close();
+//		xx.close();
+//		br.close();
+//		writer.close();
+//		fout.close();
 		return outStr;
 	}
 
