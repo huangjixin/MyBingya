@@ -38,7 +38,6 @@ package com.usee.elecoin.system.model
 		private function backupResult(event:ResultEvent):void
 		{
 			dispatchEvent(new MySqlRemoteServerEvent(MySqlRemoteServerEvent.backupResult,event.result)); 
-			Alert.show(event.result.toString());
 		}
 		
 		private function backupFault(event:FaultEvent):void  
