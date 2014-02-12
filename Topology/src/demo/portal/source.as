@@ -2,6 +2,7 @@ import demo.TopologyService;
 import demo.index.NetWorkGroup;
 
 import flash.display.Bitmap;
+import flash.display.DisplayObject;
 import flash.display.Loader;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
@@ -698,7 +699,7 @@ public function addEventListenerForNodes() : void
 		Alert.show("this.hasSubnetwork的值是:"+hasSubnetwork+",资源id的值是："+mappingid);
 		if(mappingid != null && mappingid != "" && hasSubnetwork){
 			Alert.show("资源id是"+mappingid);
-			var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
+			var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,NetWorkGroup) as NetWorkGroup;
 			netWorkGroup.resourceid = mappingid;
 			netWorkGroup.width = 800;
 			netWorkGroup.height = 370;
