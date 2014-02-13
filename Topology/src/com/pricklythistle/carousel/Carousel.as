@@ -6,6 +6,8 @@ package com.pricklythistle.carousel
 	//#
 	//##################################################################
 	
+	import demo.index.IndexItemRenderer;
+	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -40,7 +42,8 @@ package com.pricklythistle.carousel
 			//set defaults
 			
 			_rotation = 0;
-			_itemRenderer = new ClassFactory(com.pricklythistle.carousel.CarouselRenderer);
+//			_itemRenderer = new ClassFactory(com.pricklythistle.carousel.CarouselRenderer);
+			_itemRenderer = new ClassFactory(IndexItemRenderer);
 			
 			_itemWidth = 200;
 			_itemHeight = 150;
@@ -138,7 +141,7 @@ package com.pricklythistle.carousel
 				}
 			}
 			
-			if(_selectedVO.angleOffset != rotation)
+			if(_selectedVO && _selectedVO.angleOffset != rotation)
 			{
 				//rotate to selected item with a tween			
 				var targetRotation:int = -_selectedVO.angleOffset;
@@ -200,7 +203,8 @@ package com.pricklythistle.carousel
 				}
 				
 				//refresh order of renderers (order by z)
-				_renderers.refresh();
+				if(_renderers)
+					_renderers.refresh();
 				
 				var currentIndex:int;
 				for each (currentVO in _renderers)

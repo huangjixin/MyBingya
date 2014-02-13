@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300" 
-	mouseOver="onMouseOver(event)" mouseOut="onMouseOut(event)"
-	cornerRadius="5" backgroundAlpha="1" backgroundColor="0xBBBBBB" borderStyle="solid" borderColor="0x666666">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   width="400" height="300" backgroundAlpha="0.5" backgroundColor="0xffffff"
+		   borderColor="0x666666" borderStyle="solid" cornerRadius="0" mouseOut="onMouseOut(event)"
+		   mouseOver="onMouseOver(event)" xmlns:filters="org.gonta.filters.*">
 		
 	<mx:Script>
 		<![CDATA[
@@ -21,12 +22,14 @@
 			
 			private function onMouseOver(e:Event):void
 			{
-				this.filters = [new GlowFilter()];
+//				this.filters = [new GlowFilter(0xfff000)];
+				this.filters.push(new GlowFilter(0xfff000));
 			}
 			
 			private function onMouseOut(e:Event):void
 			{
-				this.filters = [];
+				this.filters.pop();
+//				this.filters = [];
 			}
 			
 			override protected function commitProperties():void
@@ -36,7 +39,7 @@
 				if(_dataUpdate)
 				{
 					_dataUpdate = false;
-					displayImage.source = imageVO(data).imagePath;	
+					displayImage.source = imageVO(data).source;	
 				}
 			}
 			
@@ -85,6 +88,9 @@
 		]]>
 	</mx:Script>
 	
-	<mx:Image id="displayImage" minHeight="0" minWidth="0" complete="onComplete(event)" />
-
+	<mx:Image id="displayImage" minWidth="0" minHeight="0" complete="onComplete(event)">
+	</mx:Image>
+	<mx:filters>  
+		<filters:WetFloorFilter y="{this.height}" height="30" alpha=".5"/>  
+	</mx:filters>
 </mx:Canvas>
