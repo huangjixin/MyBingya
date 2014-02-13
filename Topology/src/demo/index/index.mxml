@@ -5,37 +5,30 @@
 			   xmlns:local="*"
 			   xmlns:layouts="ws.tink.spark.layouts.*"
 			   xmlns:controls="ws.tink.spark.controls.*"
-			   minWidth="0" minHeight="0" backgroundColor="#3D3D3D"
-			   creationComplete="creationCompleteHandler(event)" xmlns:index="demo.index.*" xmlns:ns="http://www.servasoftware.com/2009/twaver/flex">
+			   minWidth="0" minHeight="0" 
+			   backgroundColor="#3D3D3D"
+			   creationComplete="creationCompleteHandler(event)"
+			   xmlns:index="demo.index.*" 
+			   xmlns:ns="http://www.servasoftware.com/2009/twaver/flex" 
+			   xmlns:carousel="com.pricklythistle.carousel.*"
+			   width="800">
 	<fx:Script>
 		<![CDATA[
 			import spark.effects.Fade;
-			
-			protected function angleSlider_changeHandler(event:Event):void
-			{
-				rotate3D1.angleYTo=angleSlider.value;
-				rotate3D1.play();
-			}
-			
 		]]>
 	</fx:Script>
 	<fx:Script source="index_actionScript.as">
 	</fx:Script>
 	<fx:Declarations>
 		<fx:XML id="licenseXML" source="demo/license.xml"/>
-		<s:Rotate3D id="rotate3D1" target="{img0}" angleYTo="-10" autoCenterTransform="true"/>
-		<s:Rotate3D id="rotate3D2" target="{img2}" angleYTo="10" autoCenterTransform="true"/>
-		<s:CrossFade id="crossFade0" targets="{[img0]}" duration="1000" />
-		<s:CrossFade id="crossFade1" targets="{[img1]}" duration="1000" />
-		<s:CrossFade id="crossFade2" targets="{[img2]}" duration="1000" />
 	</fx:Declarations>
 	<s:VGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 		<!--<s:List id="list" width="90%" height="300" borderVisible="false"
 				contentBackgroundColor="#202020"
-				creationComplete="list_creationCompleteHandler(event)"
-				doubleClick="list_doubleClickHandler(event)" doubleClickEnabled="true"
-				horizontalCenter="0" rendererAdd="list_rendererAddHandler(event)"
-				skinClass="demo.index.skins.ListSkin" verticalCenter="0">
+				doubleClickEnabled="true"
+				horizontalCenter="0"
+				skinClass="demo.index.skins.ListSkin" verticalCenter="0"
+				dataProvider="{arrayList}">
 			<s:layout>
 				<layouts:CoverflowLayout id="coverflowLayout" depthColor="0xffffff"
 										 depthColorAlpha="0" duration="700"
@@ -59,23 +52,13 @@
 				</fx:Component>
 			</s:itemRenderer>
 		</s:List>-->
-		<s:Group>
-			<s:HGroup>
-				<s:Image id="img0" width="400" height="400"/>
-				<s:Image id="img2" width="400" height="400"/>
-			</s:HGroup>
-			
-			<s:Group width="410" height="410" horizontalCenter="0" verticalCenter="0">
-				<s:Rect width="100%" height="100%">
-					<s:fill>
-						<s:SolidColor color="0x0"/>
-					</s:fill>
-				</s:Rect>
-				<s:Image id="img1" top="10" bottom="10" left="10" right="10"/>
-			</s:Group>
-		</s:Group>
+		<carousel:Carousel id="carousel" width="100%" height="100%"
+						   dataprovider="{arrayList}" maxItems="{arrayList.length}" elevation="0" 
+						   itemWidth="120" itemHeight="100" duration="500" 
+						   frontScale="2" backScale="0.5"/>
+	</s:VGroup>
+	<s:VGroup horizontalAlign="center" verticalAlign="middle" verticalCenter="120" width="100%">
 		<s:Label color="0xffffff" text="{(this.currentIndex+1)+'/'+this.arrayList.length}"/>
-		<s:HSlider id="angleSlider" minimum="-360" maximum="360" value="0" change="angleSlider_changeHandler(event)"/>
 		<s:List id="navList" borderVisible="false" selectedIndex="{this.currentIndex}"
 				contentBackgroundAlpha="0" itemRenderer="demo.index.NavItemRenderer" dataProvider="{this.arrayList}">
 			<s:layout>
@@ -83,9 +66,9 @@
 			</s:layout>
 		</s:List>
 	</s:VGroup>
-	<s:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
+	<!--<s:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
 		<s:filters>
 			<s:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
 		</s:filters>
-	</s:Label>
+	</s:Label>-->
 </s:Application>

@@ -1,3 +1,5 @@
+import com.imageVO;
+
 import demo.TopologyService;
 import demo.index.IndexItemRenderer;
 import demo.index.NetWorkGroup;
@@ -57,7 +59,7 @@ private var username:String;
 private var resourceId:String;
 
 [Bindable]
-private var arrayList:ArrayList;
+private var arrayList:ArrayCollection;
 
 private var statePicArray:ArrayList = new ArrayList();
 
@@ -82,13 +84,8 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	initParameters();
 //	getPicAsBitmapData();
 	
-	img0.source = arrayList.getItemAt(0).source;
-	img1.source = arrayList.getItemAt(1).source;
-	img2.source = arrayList.getItemAt(2).source;
 	currentIndex= 1;
 	
-	rotate3D1.play();
-	rotate3D2.play();
 	timer.start();
 	timer.addEventListener(TimerEvent.TIMER,onTimer);
 }
@@ -97,16 +94,16 @@ protected function creationCompleteHandler(event:FlexEvent):void
  * 初始化函数。
  */ 
 private function initParameters():void{
-	arrayList = new ArrayList();
+	arrayList = new ArrayCollection();
 	var arrayStr:String = FlexGlobals.topLevelApplication.parameters.picArray;
 	if(arrayStr){
 		var picArray:Array = arrayStr.split(",");
-		var obj:Object;
+		var imageVo:imageVO;
 		for (var i:int = 0; i < picArray.length; i++) 
 		{
-			obj = {};
-			obj.source=picArray[i];
-			arrayList.addItem(obj);
+			imageVo = new imageVO();
+			imageVo.source=picArray[i];
+			arrayList.addItem(imageVo);
 		}
 	}
 	
@@ -117,8 +114,8 @@ private function initParameters():void{
 		var stateArray:Array = arrayStr.split(",");
 		for (j = 0; j < stateArray.length; j++) 
 		{
-			obj =arrayList.getItemAt(j);
-			obj.statePic = stateArray[j];
+			imageVo =arrayList.getItemAt(j) as imageVO;
+			imageVo.statePic = stateArray[j];
 		}
 	}
 	
@@ -127,8 +124,8 @@ private function initParameters():void{
 		var healthArray:Array = arrayStr.split(",");
 		for (j = 0; j < healthArray.length; j++) 
 		{
-			obj =arrayList.getItemAt(j);
-			obj.healthPic = healthArray[j];
+			imageVo =arrayList.getItemAt(j) as imageVO;
+			imageVo.healthPic = healthArray[j];
 		}
 	} 
 	
@@ -137,8 +134,8 @@ private function initParameters():void{
 		var labelArray:Array = arrayStr.split(",");
 		for (j = 0; j < labelArray.length; j++) 
 		{
-			obj =arrayList.getItemAt(j);
-			obj.label = labelArray[j];
+			imageVo =arrayList.getItemAt(j) as imageVO;
+			imageVo.label = labelArray[j];
 		}
 	}
 	
@@ -147,8 +144,8 @@ private function initParameters():void{
 		var ridsArray:Array = arrayStr.split(",");
 		for (j = 0; j < ridsArray.length; j++) 
 		{
-			obj =arrayList.getItemAt(j);
-			obj.rid = ridsArray[j];
+			imageVo =arrayList.getItemAt(j) as imageVO;
+			imageVo.rid = ridsArray[j];
 		}
 	}
 }
@@ -187,59 +184,6 @@ protected function onTimer(event:TimerEvent):void
 	
 	if(currentIndex>arrayList.length-1){
 		currentIndex=0;
-	}
-	
-	var img0BitmapData:BitmapData;
-	var img1BitmapData:BitmapData;
-	var img2BitmapData:BitmapData;
-	if(currentIndex == 0){
-//		img0BitmapData = arrayList.getItemAt(arrayList.length-1) as BitmapData;
-//		img0.source = img0BitmapData;
-//		crossFade0.bitmapTo = img0BitmapData;
-//		crossFade0.play();
-		img0.source = arrayList.getItemAt(arrayList.length-1).source;
-//		img1BitmapData= arrayList.getItemAt(currentIndex) as BitmapData;
-//		img1.source = img1BitmapData;
-//		crossFade1.bitmapTo = img1BitmapData;
-//		crossFade1.play();
-		img1.source = arrayList.getItemAt(currentIndex).source;
-//		img2BitmapData = arrayList.getItemAt(currentIndex+1) as BitmapData;
-//		img2.source = img2BitmapData;
-//		crossFade2.bitmapTo = img2BitmapData;
-//		crossFade2.play();
-		img2.source = arrayList.getItemAt(currentIndex+1).source;
-	}else if(currentIndex == arrayList.length-1){
-//		img0BitmapData = arrayList.getItemAt(currentIndex-1) as BitmapData;
-//		img0.source = img0BitmapData;
-//		crossFade0.bitmapTo = img0BitmapData;
-//		crossFade0.play();
-		img0.source = arrayList.getItemAt(currentIndex-1).source;
-//		img1BitmapData= arrayList.getItemAt(currentIndex) as BitmapData;
-//		img1.source = img1BitmapData;
-//		crossFade1.bitmapTo = img1BitmapData;
-//		crossFade1.play();
-		img1.source = arrayList.getItemAt(currentIndex).source;
-//		img2BitmapData = arrayList.getItemAt(0) as BitmapData;
-//		img2.source = img2BitmapData;
-//		crossFade2.bitmapTo = img2BitmapData;
-//		crossFade2.play();
-		img2.source = arrayList.getItemAt(0).source;
-	}else{
-//		img0BitmapData = arrayList.getItemAt(currentIndex-1) as BitmapData;
-//		crossFade0.bitmapTo = img0BitmapData;
-//		crossFade0.play();
-//		img0.source = img0BitmapData;
-		img0.source = arrayList.getItemAt(currentIndex-1).source;
-//		img1BitmapData= arrayList.getItemAt(currentIndex) as BitmapData;
-//		img1.source = img1BitmapData;
-//		crossFade1.bitmapTo = img1BitmapData;
-//		crossFade1.play();
-		img1.source = arrayList.getItemAt(currentIndex).source;
-//		img2BitmapData = arrayList.getItemAt(currentIndex-1) as BitmapData;
-//		img2.source = img2BitmapData;
-//		crossFade2.bitmapTo = img2BitmapData;
-//		crossFade2.play();
-		img2.source = arrayList.getItemAt(currentIndex-1).source;
 	}
 }
 
