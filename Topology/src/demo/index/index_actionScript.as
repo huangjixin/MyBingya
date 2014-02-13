@@ -202,6 +202,17 @@ protected function onMouseOut(event:MouseEvent):void
  */ 
 private function onItemClick(event:ItemClickEvent):void
 {
+	/*if(carousel.selectedIndex == event.index){
+		var indexItemrenderer:IndexItemRenderer = event.currentTarget as IndexItemRenderer;
+		var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
+		netWorkGroup.resourceid = carousel.dataprovider.getItemAt(event.index).rid;
+		netWorkGroup.width = 800;
+		netWorkGroup.height = 370;
+		PopUpManager.centerPopUp(netWorkGroup);
+		netWorkGroup.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,function onMouseDownOutside(event:FlexMouseEvent):void{
+			PopUpManager.removePopUp(netWorkGroup);
+		}
+	});*/
 	/*if(list.selectedIndex == event.index){
 		var indexItemrenderer:IndexItemRenderer = event.currentTarget as IndexItemRenderer;
 		var bitImg:BitmapImage = indexItemrenderer.img;
