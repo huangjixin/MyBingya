@@ -63,6 +63,7 @@
 			</mx:ViewStack>
 		</s:VGroup>
 		<s:Button id="logoutBtn" right="10" top="10" label="退出" click="logoutBtn_clickHandler(event)"/>
+		<s:Button id="updatePasswordBtn" right="10" top="10" label="修改密码"/>
 	</s:Group>
 	<s:Group includeIn="login" width="100%" height="100%">
 		<s:Rect width="100%" height="100%">
