@@ -7,6 +7,7 @@ package com.pricklythistle.carousel
 	//##################################################################
 	
 	import demo.index.IndexItemRenderer;
+	import demo.index.index;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -18,6 +19,7 @@ package com.pricklythistle.carousel
 	import mx.collections.SortField;
 	import mx.containers.Canvas;
 	import mx.core.ClassFactory;
+	import mx.core.FlexGlobals;
 	import mx.core.IDataRenderer;
 	import mx.core.IFactory;
 	import mx.effects.Move;
@@ -25,10 +27,13 @@ package com.pricklythistle.carousel
 	import mx.effects.Tween;
 	import mx.effects.easing.Exponential;
 	import mx.events.EffectEvent;
+	import mx.events.ItemClickEvent;
+	
+	import spark.events.IndexChangeEvent;
 
+	[Event(name="change", type="spark.events.IndexChangeEvent")]
 	public class Carousel extends Canvas
 	{
-		
 		private var _renderers:ArrayCollection;
 		private var _selectedVO:CarouselVO;
 		private var _tweenPlaying:Boolean = true;
@@ -63,6 +68,17 @@ package com.pricklythistle.carousel
 			this.verticalScrollPolicy = "off";
 		}
 		
+		[Bindable]
+		public function get itemZoom():Boolean
+		{
+			return _itemZoom;
+		}
+
+		public function set itemZoom(value:Boolean):void
+		{
+			_itemZoom = value;
+		}
+
 		override protected function createChildren():void
 		{
 			super.createChildren();
@@ -115,7 +131,7 @@ package com.pricklythistle.carousel
 					var currentRenderer:IDataRenderer = _itemRenderer.newInstance();
 					var currentSprite:Sprite = currentRenderer as Sprite;
 					currentRenderer.data = currentItem;
-					currentSprite.addEventListener(MouseEvent.CLICK,itemClicked);
+					currentSprite.addEventListener(MouseEvent.MOUSE_DOWN,itemClicked);
 					currentSprite.buttonMode = true;
 					
 					currentVO = new CarouselVO();
@@ -254,14 +270,22 @@ package com.pricklythistle.carousel
 		
 		private function itemClicked(e:MouseEvent):void
 		{
+			var changeEvent:IndexChangeEvent = new IndexChangeEvent(IndexChangeEvent.CHANGE,true);
+			changeEvent.oldIndex = selectedIndex;
+			
+			var indexApp:index = index(FlexGlobals.topLevelApplication);
 			if(selectedItem != e.currentTarget.data)
 			{
 				selectedItem = e.currentTarget.data;
-			} else if(!_itemZoom){
+				indexApp.navList.selectedIndex = indexApp.currentIndex = selectedIndex;
+			}else {
+				indexApp.navList.selectedIndex = indexApp.currentIndex = changeEvent.newIndex = selectedIndex;
+				indexApp.onItemClick(changeEvent);
+			} /*else if(!_itemZoom){
 				zoomItem(true);
 			} else {
 				zoomItem(false);
-			}
+			}*/
 		}
 		
 		public function next():void
@@ -375,6 +399,7 @@ package com.pricklythistle.carousel
 	    	invalidateDisplayList();
 	    	invalidateProperties();
 	    }
+		[Bindable]
 	    public function get selectedIndex():int
 	    {
 	    	return _selectedIndex;
