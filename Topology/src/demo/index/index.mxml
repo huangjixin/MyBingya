@@ -15,6 +15,8 @@
 	<fx:Script>
 		<![CDATA[
 			import spark.effects.Fade;
+			import spark.events.IndexChangeEvent;
+			
 		]]>
 	</fx:Script>
 	<fx:Script source="index_actionScript.as">
@@ -65,20 +67,21 @@
 		<carousel:Carousel id="carousel" width="100%" height="100%"
 						   dataprovider="{arrayList}" maxItems="{arrayList.length}" elevation="0" 
 						   itemWidth="120" itemHeight="100" duration="600" 
-						   frontScale="2" backScale="0.5" ItemClick="onItemClick(event)"/>
+						   frontScale="2" backScale="0.5" mouseOver="onMouseOver(event)" mouseOut="onMouseOut(event)"/>
 	</s:VGroup>
 	<s:VGroup horizontalAlign="center" verticalAlign="middle" verticalCenter="120" width="100%">
 		<s:Label color="0xffffff" text="{(this.currentIndex+1)+'/'+this.arrayList.length}"/>
 		<s:List id="navList" borderVisible="false" selectedIndex="{this.currentIndex}"
-				contentBackgroundAlpha="0" itemRenderer="demo.index.NavItemRenderer" dataProvider="{this.arrayList}">
+				contentBackgroundAlpha="0" itemRenderer="demo.index.NavItemRenderer" dataProvider="{this.arrayList}"
+				change="navList_changeHandler(event)">
 			<s:layout>
 				<s:HorizontalLayout gap="10"/>
 			</s:layout>
 		</s:List>
 	</s:VGroup>
-	<!--<s:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
+	<s:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
 		<s:filters>
 			<s:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
 		</s:filters>
-	</s:Label>-->
+	</s:Label>
 </s:Application>

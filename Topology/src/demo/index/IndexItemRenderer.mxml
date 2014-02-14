@@ -110,9 +110,11 @@
 			
 			<s:HGroup right="4" bottom="4" color="0xffffff">
 				<s:Label text="状态"/>
-				<s:Image source="@Embed(source='demo/index/images/MonitorPortal_sad.png')"/>
+				<s:Image source="{data.healthPic}"/>
+<!--				<s:Image source="@Embed(source='demo/index/images/MonitorPortal_sad.png')"/>-->
 				<s:Label text="预警"/>
-				<s:Image source="@Embed(source='demo/index/images/MonitorPortal_smile.png')"/>
+				<!--<s:Image source="@Embed(source='demo/index/images/MonitorPortal_smile.png')"/>-->
+				<s:Image source="{data.statePic}"/>
 			</s:HGroup>
 		</s:Group>
 	</s:Group>

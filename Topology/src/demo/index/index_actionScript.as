@@ -41,6 +41,7 @@ import spark.effects.easing.Elastic;
 import spark.effects.easing.Linear;
 import spark.effects.easing.Power;
 import spark.effects.easing.Sine;
+import spark.events.IndexChangeEvent;
 import spark.events.RendererExistenceEvent;
 import spark.primitives.BitmapImage;
 
@@ -84,10 +85,12 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	initParameters();
 //	getPicAsBitmapData();
 	
-	currentIndex= 1;
+	currentIndex= 0;
 	
 	timer.start();
 	timer.addEventListener(TimerEvent.TIMER,onTimer);
+	
+//	this.addEventListener(ItemClickEvent.ITEM_CLICK,onItemClick,true);
 }
 
 /**
@@ -175,9 +178,15 @@ public function onLoaderComplete():Function {
 	return fun;
 }
 
+protected function navList_changeHandler(event:IndexChangeEvent):void
+{
+	carousel.selectedIndex = event.newIndex;
+	currentIndex = event.newIndex;
+}
+
 private var reverse:Boolean;
 [Bindable]
-private var currentIndex:int=-1;
+public var currentIndex:int=-1;
 protected function onTimer(event:TimerEvent):void
 {
 	currentIndex++;
@@ -185,6 +194,7 @@ protected function onTimer(event:TimerEvent):void
 	if(currentIndex>arrayList.length-1){
 		currentIndex=0;
 	}
+	carousel.selectedIndex = currentIndex;
 }
 
 protected function onMouseOver(event:MouseEvent):void
@@ -200,19 +210,19 @@ protected function onMouseOut(event:MouseEvent):void
 /**
  * 获取当前项，弹出来。
  */ 
-private function onItemClick(event:ItemClickEvent):void
+public function onItemClick(event:IndexChangeEvent):void
 {
-	/*if(carousel.selectedIndex == event.index){
+	if(carousel.selectedIndex == event.newIndex){
 		var indexItemrenderer:IndexItemRenderer = event.currentTarget as IndexItemRenderer;
-		var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(this,NetWorkGroup) as NetWorkGroup;
-		netWorkGroup.resourceid = carousel.dataprovider.getItemAt(event.index).rid;
+		var netWorkGroup:NetWorkGroup = PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,NetWorkGroup) as NetWorkGroup;
+		netWorkGroup.resourceid = carousel.dataprovider.getItemAt(event.newIndex).rid;
 		netWorkGroup.width = 800;
 		netWorkGroup.height = 370;
 		PopUpManager.centerPopUp(netWorkGroup);
 		netWorkGroup.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,function onMouseDownOutside(event:FlexMouseEvent):void{
 			PopUpManager.removePopUp(netWorkGroup);
-		}
-	});*/
+		})
+	}
 	/*if(list.selectedIndex == event.index){
 		var indexItemrenderer:IndexItemRenderer = event.currentTarget as IndexItemRenderer;
 		var bitImg:BitmapImage = indexItemrenderer.img;
