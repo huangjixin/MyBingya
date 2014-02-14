@@ -143,7 +143,6 @@ public function init() : void
 	}else{
 		this.hasSubnetwork = false;
 	}
-	trace(hasSubnet);
 	
 	Utils.registerImageByClass("sad", sad);
 	Utils.registerImageByClass("smile", smile);

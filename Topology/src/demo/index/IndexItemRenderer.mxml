@@ -5,10 +5,14 @@
 				xmlns:filters="org.gonta.filters.*"
 				xmlns:ns="http://www.servasoftware.com/2009/twaver/flex"
 				autoDrawBackground="false"
-				mouseDown="itemrenderer1_mouseDownHandler(event)" toolTip="{data.label}">
+				mouseDown="itemrenderer1_mouseDownHandler(event)" toolTip="{data.label}"
+				creationComplete="onComplete(event)">
 	<!--<fx:Script source="IndexItemRenderer_Script.as"/> creationComplete="init();"-->
 	<fx:Script>
 		<![CDATA[
+			import com.imageVO;
+			
+			import mx.controls.Alert;
 			import mx.events.ItemClickEvent;
 			
 			private var _data:Object;
@@ -21,7 +25,6 @@
 				e.item = data;
 				e.index = itemIndex;
 				dispatchEvent(e);
-
 			}
 			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 			{
@@ -54,10 +57,29 @@
 			
 			
 			private var _imageComplete:Boolean = false;
+			private var timer:Timer;
 			private function onComplete(e:Event):void
 			{
 				_imageComplete = true;
+				timer = new Timer(120000);
+				timer.start();
+				timer.addEventListener(TimerEvent.TIMER,onTimer);
 			}
+			
+			protected function onTimer(event:TimerEvent):void
+			{
+				var imgVo:imageVO = imageVO(data);
+				var loader:Loader;
+				loader = new Loader();
+				loader.load(new URLRequest(encodeURI(imgVo.healthPic)));
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function onLoaderComplete(event:Event):void{
+					healthPicImg.source = (event.currentTarget.content as Bitmap).bitmapData;
+				});
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,function onLoadhealthPicImgError(event:IOErrorEvent):void{
+					Alert.show("找不到图片");
+				});
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -110,11 +132,11 @@
 			
 			<s:HGroup right="4" bottom="4" color="0xffffff">
 				<s:Label text="状态"/>
-				<s:Image source="{data.healthPic}"/>
+				<s:Image id="healthPicImg" source="{data.healthPic}"/>
 <!--				<s:Image source="@Embed(source='demo/index/images/MonitorPortal_sad.png')"/>-->
 				<s:Label text="预警"/>
 				<!--<s:Image source="@Embed(source='demo/index/images/MonitorPortal_smile.png')"/>-->
-				<s:Image source="{data.statePic}"/>
+				<s:Image id="statePicImg" source="{data.statePic}"/>
 			</s:HGroup>
 		</s:Group>
 	</s:Group>

@@ -73,7 +73,7 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	Utils.validateLicense(this.licenseXML);
 	username = FlexGlobals.topLevelApplication.parameters.uName;
 	resourceId = FlexGlobals.topLevelApplication.parameters.resourceId;
-	//				registerImages();
+	//registerImages();
 	Utils.registerImageByClass("sad", sad);
 	Utils.registerImageByClass("smile", smile);
 	Utils.registerImageByClass("bg400", bg400);
@@ -89,8 +89,6 @@ protected function creationCompleteHandler(event:FlexEvent):void
 	
 	timer.start();
 	timer.addEventListener(TimerEvent.TIMER,onTimer);
-	
-//	this.addEventListener(ItemClickEvent.ITEM_CLICK,onItemClick,true);
 }
 
 /**
@@ -149,6 +147,24 @@ private function initParameters():void{
 		{
 			imageVo =arrayList.getItemAt(j) as imageVO;
 			imageVo.rid = ridsArray[j];
+		}
+	}
+	
+	arrayStr = FlexGlobals.topLevelApplication.parameters.bgArray;
+	
+	if(arrayStr){
+		var bgArray:Array = arrayStr.split(",");
+		var loader:Loader;
+		for (j = 0; j < bgArray.length; j++) 
+		{
+			var bgSource:String = String(bgArray[j]);
+			loader = new Loader();
+			loader.load(new URLRequest(encodeURI(bgSource)));
+			
+			var index:int = bgSource.lastIndexOf("/");
+			var dotindex:int = bgSource.lastIndexOf(".");
+			var picName:String = bgSource.substring(index+1,dotindex);
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoaderTypeListComplete(picName));
 		}
 	}
 }
