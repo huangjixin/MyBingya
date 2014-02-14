@@ -32,11 +32,17 @@
 		<vo:User id="user" username="{usernameInput.text}" password="{passwordInput.text}"/>
 	</fx:Declarations>
 	<s:Form horizontalCenter="0" verticalCenter="0">
-		<s:FormItem label="账号">
+		<s:layout>
+			<s:FormLayout gap="5"/>
+		</s:layout>
+		<s:FormItem label="账号：">
 			<s:TextInput id="usernameInput" text="{user.username}"/>
 		</s:FormItem>
-		<s:FormItem label="密码">
+		<s:FormItem label="密码：">
 			<s:TextInput id="passwordInput" text="{user.password}"/>
+		</s:FormItem>
+		<s:FormItem label="描述信息：">
+			<s:TextArea width="225" height="79" text="{user.description}"/>
 		</s:FormItem>
 		<!--<s:FormItem label="密码确认">
 			<s:TextInput id="passwordConfirmInput" text="{user.password}"/>
