@@ -144,6 +144,9 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public String update(User entity) {
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String password = encoder.encodePassword(entity.getPassword(), null);
+		entity.setPassword(password);
 		int i = userMapper.updateByPrimaryKey(entity);
 		return i + "";
 	}
