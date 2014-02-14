@@ -133,5 +133,11 @@ package com.usee.elecoin.system.model.business
 			call.addResponder(_responder);  
 		}
 		
+		public function  getRolesById(id:String):void
+		{
+			var call:Object = _service.getRolesById(id);  
+			call.addResponder(_responder);  
+		}
+		
 	}//类结束
 }//包结束

@@ -193,5 +193,27 @@ package com.usee.elecoin.system.model
 		{  
 			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.selectAllFault,event.fault));
 		} 
+		
+		
+		/**
+		 * 删除用户
+		 * @param id
+		 * 
+		 */
+		public function  getRolesById(id:String):void
+		{  
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(getRolesByIdResult, getRolesByIdFault));  
+			delegate.getRolesById(id);
+		}
+		
+		private function getRolesByIdResult(event:ResultEvent):void
+		{
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.getRolesByIdResult,event.result)); 
+		}
+		
+		private function getRolesByIdFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.getRolesByIdFault,event.fault));
+		} 
 	}
 }
