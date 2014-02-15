@@ -145,9 +145,10 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public String update(User entity) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		String password = encoder.encodePassword(entity.getPassword(), null);
+		String password = entity.getPassword();
+		password = encoder.encodePassword(password, null);
 		entity.setPassword(password);
-		int i = userMapper.updateByPrimaryKey(entity);
+		int i = userMapper.updateByExample(entity,null);
 		return i + "";
 	}
 
@@ -221,6 +222,29 @@ public class UserServiceImpl implements IUserService {
 			return str;
 		}
 	}
+	
+	@Override
+	public String bandUserRole(String userid, String roleid) {
+		UserRoleExample userRoleExample = new UserRoleExample();
+		userRoleExample.createCriteria().andUserIdEqualTo(userid);
+		List<UserRole>userRoles = userRoleMapper.selectByExample(userRoleExample);
+		
+		UserRole userRole = null;
+		if(null != userMapper && userRoles.size()>0){//更新
+			userRole = userRoles.get(0);
+			userRole.setRoleId(roleid);
+			userRoleMapper.updateByExample(userRole, null);
+		}else{//新建
+			int count = userRoleMapper.countByExample(null);
+			userRole = new UserRole();
+			userRole.setId(count+1+"");
+			userRole.setUserId(userid);
+			userRole.setRoleId(roleid);
+			userRoleMapper.insert(userRole);
+		}
+		
+		return userRole.getId();
+	}
 
 	public static void main(String[] args) {
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -228,4 +252,5 @@ public class UserServiceImpl implements IUserService {
 		String adminpPassword = encoder.encodePassword("admin", null);
 		System.out.println(superAdminpPassword+","+adminpPassword);
 	}
+
 }

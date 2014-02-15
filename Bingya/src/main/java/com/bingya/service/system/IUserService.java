@@ -30,4 +30,11 @@ public interface IUserService extends IGenericService<User, Integer> {
 	 * @return
 	 */
 	String getMenuByUserId(String id);
+	/**
+	 * 绑定用户和角色
+	 * @param userid
+	 * @param roleid
+	 * @return
+	 */
+	String bandUserRole(String userid,String roleid);
 }
