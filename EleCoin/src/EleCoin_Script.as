@@ -53,19 +53,6 @@ protected function application1_creationCompleteHandler(event:FlexEvent):void
 	//				userService.login("admin","123");
 	
 	userProxy.addEventListener(UserRemoteServerEvent.loginResult,onloginResult);
-	
-	/*var file:File = new File(); 
-	var sqlFilter:FileFilter = new FileFilter("SQL", "*.sql;"); 
-	file.browseForOpen("请选择备份文件",[sqlFilter]);
-	
-	file.addEventListener(Event.SELECT, dirSelected); 
-	
-	function dirSelected(e:Event):void {
-		var myFileStream:FileStream = new FileStream(); 
-		myFileStream.open(file, FileMode.READ); 
-		var sqlFile:String = myFileStream.readUTFBytes(myFileStream.bytesAvailable);
-		myFileStream.close(); 
-	}*/
 }
 
 //-------------------------------------------------------------------------

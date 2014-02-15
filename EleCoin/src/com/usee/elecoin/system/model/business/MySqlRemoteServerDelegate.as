@@ -64,9 +64,9 @@ package com.usee.elecoin.system.model.business
 		 * @param password
 		 * 
 		 */
-		public function  restore(path:String):void
+		public function  restore(path:String,isPath:Boolean = false):void
 		{
-			var call:Object = _service.backup(path);  
+			var call:Object = _service.restore(path,isPath);  
 			call.addResponder(_responder);  
 		}
 		

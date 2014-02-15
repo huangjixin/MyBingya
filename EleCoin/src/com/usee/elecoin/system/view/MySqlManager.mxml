@@ -31,8 +31,19 @@
 			 */ 
 			protected function restoreBtn_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
+				var file:File = new File(); 
+				var sqlFilter:FileFilter = new FileFilter("SQL", "*.sql;"); 
+				file.browseForOpen("请选择备份文件",[sqlFilter]);
 				
+				file.addEventListener(Event.SELECT, dirSelected); 
+				
+				function dirSelected(e:Event):void {
+					var myFileStream:FileStream = new FileStream(); 
+					myFileStream.open(file, FileMode.READ); 
+					var sqlFile:String = myFileStream.readUTFBytes(myFileStream.bytesAvailable);
+					myFileStream.close(); 
+					restore(sqlFile);
+				}
 			}
 			
 			/**
@@ -60,16 +71,19 @@
 				file.save(backupDbString,df.format(date)+".sql");
 			}
 			
+			protected function restore(backupDbString:String):void
+			{
+				mySqlProxy.restore(backupDbString);
+			}
+
 			protected function onrestoreFault(event:MySqlRemoteServerEvent):void
 			{
-				// TODO Auto-generated method stub
-				
+				Alert.show(event.object.toString());
 			}
 			
 			protected function onrestoreResult(event:MySqlRemoteServerEvent):void
 			{
-				// TODO Auto-generated method stub
-				
+				Alert.show("还原成功");
 			}
 			
 		]]>
