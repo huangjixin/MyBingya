@@ -36,5 +36,5 @@ public interface IUserService extends IGenericService<User, Integer> {
 	 * @param roleid
 	 * @return
 	 */
-	String bandUserRole(String userid,String roleid);
+	String connectUserRole(String userid,String roleid);
 }

@@ -148,7 +148,7 @@ public class UserServiceImpl implements IUserService {
 		String password = entity.getPassword();
 		password = encoder.encodePassword(password, null);
 		entity.setPassword(password);
-		int i = userMapper.updateByExample(entity,null);
+		int i = userMapper.updateByPrimaryKey(entity);
 		return i + "";
 	}
 
@@ -224,7 +224,7 @@ public class UserServiceImpl implements IUserService {
 	}
 	
 	@Override
-	public String bandUserRole(String userid, String roleid) {
+	public String connectUserRole(String userid, String roleid) {
 		UserRoleExample userRoleExample = new UserRoleExample();
 		userRoleExample.createCriteria().andUserIdEqualTo(userid);
 		List<UserRole>userRoles = userRoleMapper.selectByExample(userRoleExample);
