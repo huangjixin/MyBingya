@@ -8,12 +8,14 @@
 					name="UserManager">
 	<fx:Script>
 		<![CDATA[
+			import spark.events.GridSelectionEvent;
 			import spark.formatters.DateTimeFormatter;
 			private function createdateLabelFunction(item:Object, column:GridColumn):String{
 				var dateFormat:DateTimeFormatter = new DateTimeFormatter();
 				dateFormat.dateTimePattern = "yyyy-MM-dd HH:mm:ss";
 				return dateFormat.format(item.createdate);
 			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -33,7 +35,7 @@
 						  enabled="{dataGrid.selectedItem != null}"/>
 				<s:Button id="exportExcelBtn" label="导出Excel" click="exportExcelBtn_clickHandler(event)"/>
 			</s:HGroup>
-			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}">
+			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}" selectionChange="dataGrid_selectionChangeHandler(event)">
 				<s:columns>
 					<s:ArrayList>
 						<s:GridColumn dataField="username" headerText="用户名"></s:GridColumn>
@@ -42,6 +44,13 @@
 					</s:ArrayList>
 				</s:columns>
 			</s:DataGrid>
+			<s:HGroup verticalAlign="middle">
+				<s:Label text="角色绑定："/>
+				<!--<s:ComboBox id="rolesComboBox" dataProvider="{roles}" labelField="name"/>-->
+				<s:DropDownList id="rolesComboBox" dataProvider="{roles}" labelField="name"></s:DropDownList>
+				<s:Button id="bindRoleBtn" label="绑定角色"
+						  enabled="{dataGrid.selectedItem != null}"/>
+			</s:HGroup>
 			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>
 	</s:HGroup>

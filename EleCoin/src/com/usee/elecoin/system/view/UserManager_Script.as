@@ -1,8 +1,11 @@
 import com.as3xls.xls.ExcelFile;
 import com.as3xls.xls.Sheet;
 import com.usee.elecoin.common.Page;
+import com.usee.elecoin.system.controller.RoleRemoteServerEvent;
 import com.usee.elecoin.system.controller.UserRemoteServerEvent;
+import com.usee.elecoin.system.model.RoleRemoteServerProxy;
 import com.usee.elecoin.system.model.UserRemoteServerProxy;
+import com.usee.elecoin.system.model.vo.Role;
 import com.usee.elecoin.system.model.vo.User;
 import com.usee.elecoin.system.view.UserForm;
 
@@ -21,8 +24,17 @@ import mx.controls.Alert;
 import mx.events.FlexEvent;
 import mx.managers.PopUpManager;
 
+import spark.events.GridSelectionEvent;
+
+/**
+ * 用户代理 
+ */
 private var userProxy:UserRemoteServerProxy = new UserRemoteServerProxy();
+private var roleProxy:RoleRemoteServerProxy = new RoleRemoteServerProxy();
 private var userForm:UserForm;
+
+[Bindable]
+private var roles:ArrayCollection;
 
 protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):void
 {
@@ -38,6 +50,13 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	userProxy.addEventListener(UserRemoteServerEvent.deleteByPrimaryKeyFault,ondeleteByPrimaryKeyFault);
 	userProxy.addEventListener(UserRemoteServerEvent.selectAllResult,onselectAllResult);
 	userProxy.addEventListener(UserRemoteServerEvent.selectAllFault,onselectAllFault);
+	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdResult,ongetRolesByIdResult);
+	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdFault,ongetRolesByIdFault);
+	
+	roleProxy.selectAll();
+//	this.rolesComboBox.textInput.editable = false;
+	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllResult,onroleProxyselectAllResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllFault,onroleProxyselectAllFault);
 }
 
 /**
@@ -99,11 +118,9 @@ protected function addBtn_clickHandler(event:MouseEvent):void
 protected function onconfirmBtnClick(event:MouseEvent):void
 {
 	var user:User = userForm.user;
-	if(user.id && user.id!=""){
-	
+	if(user.id && user.id!=""){//如果user有id就是为更新动作，否则就是新增。
+		userProxy.update(user);
 	}else{
-//		user.createdate = new Date();
-//		user.id = new Date().time+"";
 		userProxy.insert(user);
 	}
 }
@@ -188,6 +205,65 @@ private var sheet:Sheet;
 protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 {
 	userProxy.selectAll();
+}
+
+/**
+ * 查看具体的条目信息,查询相应的角色。
+ * @param event
+ * 
+ */
+protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent):void
+{
+	var user:User = dataGrid.selectedItem as User;
+	if(user){
+		userProxy.getRolesById(user.id);
+	}
+}
+
+protected function ongetRolesByIdFault(event:UserRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function ongetRolesByIdResult(event:UserRemoteServerEvent):void
+{
+	var roles:ArrayCollection = event.object as ArrayCollection;
+	if(roles){
+		if(roles.length > 0){
+			var role:Role = roles[0] as Role;
+			if(this.roles && this.roles.length>0){
+				var flag:Boolean;
+				for (var i:int = 0; i < this.roles.length; i++) 
+				{
+					if(role.id == this.roles[i].id){
+						flag = true;
+						break;
+					}
+				}
+				
+				if(flag){
+					this.rolesComboBox.selectedIndex = i;
+				}
+			}
+		}else{
+			this.rolesComboBox.selectedIndex = -1;
+		}
+	}else{
+		this.rolesComboBox.selectedIndex = -1;
+	}
+}
+
+protected function onroleProxyselectAllFault(event:RoleRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function onroleProxyselectAllResult(event:RoleRemoteServerEvent):void
+{
+	var roles:ArrayCollection = event.object as ArrayCollection;
+	if(roles){
+		this.roles = roles;
+	}
 }
 
 //------------------------------------------------------------------------------------------

@@ -66,9 +66,9 @@ package com.usee.elecoin.system.model.business
 		 * @param Role
 		 * 
 		 */
-		public function  insert( Role:Role):void
+		public function  insert( role:Role):void
 		{
-			var call:Object = _service.insert( Role);  
+			var call:Object = _service.insert( role);  
 			call.addResponder(_responder);  
 		}
 		
@@ -77,9 +77,9 @@ package com.usee.elecoin.system.model.business
 		 * @param Role
 		 * 
 		 */
-		public function  update( Role:Role):void
+		public function  update( role:Role):void
 		{
-			var call:Object = _service.update( Role);  
+			var call:Object = _service.update( role);  
 			call.addResponder(_responder);  
 		}
 		

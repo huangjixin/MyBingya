@@ -52,10 +52,10 @@ package com.usee.elecoin.system.model
 		 * @param id
 		 * 
 		 */
-		public function  insert( Role:Role):void
+		public function  insert( role:Role):void
 		{  
 			var delegate:RoleRemoteServerDelegate = new RoleRemoteServerDelegate(new Responder(insertResult, insertFault));  
-			delegate.insert( Role);
+			delegate.insert( role);
 		}
 		
 		private function insertResult(event:ResultEvent):void
@@ -73,10 +73,10 @@ package com.usee.elecoin.system.model
 		 * @param id
 		 * 
 		 */
-		public function  update( Role:Role):void
+		public function  update( role:Role):void
 		{  
 			var delegate:RoleRemoteServerDelegate = new RoleRemoteServerDelegate(new Responder(updateResult, updateFault));  
-			delegate.update( Role);
+			delegate.update( role);
 		}
 		
 		private function updateResult(event:ResultEvent):void
