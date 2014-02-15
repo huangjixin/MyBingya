@@ -3,6 +3,8 @@
  */
 package com.bingya.service.system.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import com.bingya.domain.system.Role;
 import com.bingya.domain.system.RoleExample;
 import com.bingya.domain.system.RoleMenu;
 import com.bingya.domain.system.RoleMenuExample;
+import com.bingya.domain.system.UserExample;
 import com.bingya.domain.system.UserRole;
 import com.bingya.domain.system.UserRoleExample;
 import com.bingya.service.system.IMenuService;
@@ -84,7 +87,17 @@ public class RoleServiceImpl implements IRoleService {
 	 */
 	@Override
 	public String insert(Role entity) {
-		int i = roleMapper.insertSelective(entity);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// 格式化日期
+		String dateStr = sdf.format(date);
+
+		entity.setCreatedate(dateStr);
+		if (entity.getId() == null || "".equals(entity.getId())) {
+			int count = roleMapper.countByExample(new RoleExample());
+			entity.setId(count + 1 + "");
+		}
+		roleMapper.insertSelective(entity);
 		return entity.getId();
 	}
 
