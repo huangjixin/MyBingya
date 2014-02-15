@@ -40,9 +40,9 @@ package com.usee.elecoin.system.controller
 		public static const getRolesByIdResult:String = "getRolesByIdResult";
 		public static const getRolesByIdFault:String = "getRolesByIdFault";
 		
-		public static const bandUserRole:String = "bandUserRole";
-		public static const bandUserRoleResult:String = "bandUserRoleResult";
-		public static const bandUserRoleFault:String = "bandUserRoleFault";
+		public static const connectUserRole:String = "connectUserRole";
+		public static const connectUserRoleResult:String = "connectUserRoleResult";
+		public static const connectUserRoleFault:String = "connectUserRoleFault";
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 		// public 公有变量声明处
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

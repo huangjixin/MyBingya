@@ -221,20 +221,20 @@ package com.usee.elecoin.system.model
 		 * @param id
 		 * 
 		 */
-		public function  bandUserRole(userid:String, roleid:String):void
+		public function  connectUserRole(userid:String, roleid:String):void
 		{  
-			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(bandUserRoleResult, bandUserRoleFault));  
-			delegate.bandUserRole(userid, roleid);
+			var delegate:UserRemoteServerDelegate = new UserRemoteServerDelegate(new Responder(connectUserRoleResult, connectUserRoleFault));  
+			delegate.connectUserRole(userid, roleid);
 		}
 		
-		private function bandUserRoleResult(event:ResultEvent):void
+		private function connectUserRoleResult(event:ResultEvent):void
 		{
-			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.bandUserRoleResult,event.result)); 
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.connectUserRoleResult,event.result)); 
 		}
 		
-		private function bandUserRoleFault(event:FaultEvent):void  
+		private function connectUserRoleFault(event:FaultEvent):void  
 		{  
-			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.bandUserRoleFault,event.fault));
+			dispatchEvent(new UserRemoteServerEvent(UserRemoteServerEvent.connectUserRoleFault,event.fault));
 		} 
 	}
 }

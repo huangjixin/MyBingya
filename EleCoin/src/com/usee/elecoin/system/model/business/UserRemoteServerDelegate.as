@@ -139,9 +139,9 @@ package com.usee.elecoin.system.model.business
 			call.addResponder(_responder);  
 		}
 		
-		public function  bandUserRole( userid:String, roleid:String):void
+		public function  connectUserRole( userid:String, roleid:String):void
 		{
-			var call:Object = _service.bandUserRole(userid, roleid);  
+			var call:Object = _service.connectUserRole(userid, roleid);  
 			call.addResponder(_responder);  
 		}
 		

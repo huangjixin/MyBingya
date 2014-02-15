@@ -52,8 +52,8 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	userProxy.addEventListener(UserRemoteServerEvent.selectAllFault,onselectAllFault);
 	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdResult,ongetRolesByIdResult);
 	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdFault,ongetRolesByIdFault);
-	userProxy.addEventListener(UserRemoteServerEvent.bandUserRoleResult,onbandUserRoleResult);
-	userProxy.addEventListener(UserRemoteServerEvent.bandUserRoleFault,onbandUserRoleFault);
+	userProxy.addEventListener(UserRemoteServerEvent.connectUserRoleResult,onconnectUserRoleResult);
+	userProxy.addEventListener(UserRemoteServerEvent.connectUserRoleFault,onconnectUserRoleFault);
 	
 	
 	roleProxy.selectAll();
@@ -281,15 +281,15 @@ protected function bindRoleBtn_clickHandler(event:MouseEvent):void
 		return;
 	}
 	var user:User = this.dataGrid.selectedItem as User;
-	userProxy.bandUserRole(user.id,role.id);
+	userProxy.connectUserRole(user.id,role.id);
 }
 
-protected function onbandUserRoleFault(event:UserRemoteServerEvent):void
+protected function onconnectUserRoleFault(event:UserRemoteServerEvent):void
 {
 	Alert.show(event.object.toString());
 }
 
-protected function onbandUserRoleResult(event:UserRemoteServerEvent):void
+protected function onconnectUserRoleResult(event:UserRemoteServerEvent):void
 {
 	Alert.show("绑定角色成功");
 }
