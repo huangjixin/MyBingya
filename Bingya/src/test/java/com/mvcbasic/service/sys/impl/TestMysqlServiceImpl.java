@@ -28,7 +28,7 @@ public class TestMysqlServiceImpl {
 
 	@Test
 	public void testRestore() {
-		mySqlService.restore("E:/game_workspace/Bingya/src/main/resources/aa.sql");
+		mySqlService.restore("E:/game_workspace/Bingya/src/main/resources/aa.sql",true);
 		fail("尚未实现");
 	}
 
