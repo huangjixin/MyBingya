@@ -49,7 +49,7 @@
 				<!--<s:ComboBox id="rolesComboBox" dataProvider="{roles}" labelField="name"/>-->
 				<s:DropDownList id="rolesComboBox" dataProvider="{roles}" labelField="name"></s:DropDownList>
 				<s:Button id="bindRoleBtn" label="绑定角色"
-						  enabled="{dataGrid.selectedItem != null}"/>
+						  enabled="{dataGrid.selectedItem != null}" click="bindRoleBtn_clickHandler(event)"/>
 			</s:HGroup>
 			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>

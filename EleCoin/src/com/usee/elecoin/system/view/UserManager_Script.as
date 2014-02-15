@@ -52,6 +52,9 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	userProxy.addEventListener(UserRemoteServerEvent.selectAllFault,onselectAllFault);
 	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdResult,ongetRolesByIdResult);
 	userProxy.addEventListener(UserRemoteServerEvent.getRolesByIdFault,ongetRolesByIdFault);
+	userProxy.addEventListener(UserRemoteServerEvent.bandUserRoleResult,onbandUserRoleResult);
+	userProxy.addEventListener(UserRemoteServerEvent.bandUserRoleFault,onbandUserRoleFault);
+	
 	
 	roleProxy.selectAll();
 //	this.rolesComboBox.textInput.editable = false;
@@ -266,6 +269,30 @@ protected function onroleProxyselectAllResult(event:RoleRemoteServerEvent):void
 	}
 }
 
+/**
+ * 绑定角色。 
+ * @param event
+ * 
+ */
+protected function bindRoleBtn_clickHandler(event:MouseEvent):void
+{
+	var role:Role = this.rolesComboBox.selectedItem as Role;
+	if(!role){
+		return;
+	}
+	var user:User = this.dataGrid.selectedItem as User;
+	userProxy.bandUserRole(user.id,role.id);
+}
+
+protected function onbandUserRoleFault(event:UserRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function onbandUserRoleResult(event:UserRemoteServerEvent):void
+{
+	Alert.show("绑定角色成功");
+}
 //------------------------------------------------------------------------------------------
 //--- 逻辑函数
 //------------------------------------------------------------------------------------------
@@ -293,7 +320,7 @@ private function exportExcel(arrayCol:IList):void
 	var mbytes:ByteArray = excelFile.saveToByteArray(); 
 	
 	var stream:FileStream = new FileStream(); 
-	var docsDir:File = File.documentsDirectory.resolvePath("abc.xls"); // 定死文件名
+	var docsDir:File = File.documentsDirectory.resolvePath("用户列表.xls"); // 定死文件名
 	try
 	{
 		docsDir.browseForSave("Save As");
