@@ -2,11 +2,9 @@ import com.as3xls.xls.ExcelFile;
 import com.as3xls.xls.Sheet;
 import com.usee.elecoin.common.Page;
 import com.usee.elecoin.system.controller.RoleRemoteServerEvent;
-import com.usee.elecoin.system.controller.UserRemoteServerEvent;
 import com.usee.elecoin.system.model.RoleRemoteServerProxy;
-import com.usee.elecoin.system.model.UserRemoteServerProxy;
 import com.usee.elecoin.system.model.vo.Role;
-import com.usee.elecoin.system.model.vo.User;
+import com.usee.elecoin.system.model.vo.Role;
 import com.usee.elecoin.system.view.RoleForm;
 
 import flash.events.Event;
@@ -26,10 +24,6 @@ import mx.managers.PopUpManager;
 
 import spark.events.GridSelectionEvent;
 
-/**
- * 用户代理 
- */
-private var userProxy:UserRemoteServerProxy = new UserRemoteServerProxy();
 private var roleProxy:RoleRemoteServerProxy = new RoleRemoteServerProxy();
 private var roleForm:RoleForm;
 
@@ -40,16 +34,16 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 {
 	roleProxy.query(this.page);
 	
-	roleProxy.addEventListener(UserRemoteServerEvent.queryResult,onqueryResult);
-	roleProxy.addEventListener(UserRemoteServerEvent.queryFault,onqueryFault);
-	roleProxy.addEventListener(UserRemoteServerEvent.insertResult,oninsertResult);
-	roleProxy.addEventListener(UserRemoteServerEvent.insertFault,oninsertFault);
-	roleProxy.addEventListener(UserRemoteServerEvent.updateResult,onupdateResult);
-	roleProxy.addEventListener(UserRemoteServerEvent.updateFault,onupdateFault);
-	roleProxy.addEventListener(UserRemoteServerEvent.deleteByPrimaryKeyResult,ondeleteByPrimaryKeyResult);
-	roleProxy.addEventListener(UserRemoteServerEvent.deleteByPrimaryKeyFault,ondeleteByPrimaryKeyFault);
-	roleProxy.addEventListener(UserRemoteServerEvent.selectAllResult,onselectAllResult);
-	roleProxy.addEventListener(UserRemoteServerEvent.selectAllFault,onselectAllFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.queryResult,onqueryResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.queryFault,onqueryFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.insertResult,oninsertResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.insertFault,oninsertFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.updateResult,onupdateResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.updateFault,onupdateFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.deleteByPrimaryKeyResult,ondeleteByPrimaryKeyResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.deleteByPrimaryKeyFault,ondeleteByPrimaryKeyFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllResult,onselectAllResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllFault,onselectAllFault);
 	
 }
 
@@ -58,7 +52,7 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
  * @param event
  * 
  */
-protected function onqueryResult(event:UserRemoteServerEvent):void
+protected function onqueryResult(event:RoleRemoteServerEvent):void
 {
 	this.page = event.object as Page;
 }
@@ -68,7 +62,7 @@ protected function onqueryResult(event:UserRemoteServerEvent):void
  * @param event
  * 
  */
-protected function onqueryFault(event:UserRemoteServerEvent):void
+protected function onqueryFault(event:RoleRemoteServerEvent):void
 {
 	Alert.show(event.object.toString());
 }
@@ -85,7 +79,7 @@ protected function pagecomponent1_pageChangeHandler(event:Event):void
  */
 protected function queryBtn_clickHandler(event:MouseEvent):void
 {
-	userProxy.query(this.page,keyInput.text);
+	roleProxy.query(this.page,keyInput.text);
 }
 
 /**
@@ -115,12 +109,12 @@ protected function onconfirmBtnClick(event:MouseEvent):void
 	}
 }
 
-protected function oninsertFault(event:UserRemoteServerEvent):void
+protected function oninsertFault(event:RoleRemoteServerEvent):void
 {
 	Alert.show(event.object.toString());
 }
 
-protected function oninsertResult(event:UserRemoteServerEvent):void
+protected function oninsertResult(event:RoleRemoteServerEvent):void
 {
 	PopUpManager.removePopUp(roleForm);
 	keyInput.text = "";
