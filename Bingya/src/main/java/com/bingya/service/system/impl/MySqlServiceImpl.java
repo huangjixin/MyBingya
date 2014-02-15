@@ -84,7 +84,7 @@ public class MySqlServiceImpl implements IMySqlService {
 	 * @see com.bingya.service.system.IMySqlService#restore()
 	 */
 	@Override
-	public Boolean restore(String path) {
+	public Boolean restore(String filPath,Boolean isPath) {
 		try {
 			String fPath = "D:\\aa.sql"; // 备份文件
 			Runtime rt = Runtime.getRuntime();
@@ -103,19 +103,24 @@ public class MySqlServiceImpl implements IMySqlService {
 			String inStr;
 			StringBuffer sb = new StringBuffer("");
 			String outStr;
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(path), "utf8"));
-			while ((inStr = br.readLine()) != null) {
-				sb.append(inStr + "\r\n");
+			if (isPath) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						new FileInputStream(filPath), "utf8"));
+				while ((inStr = br.readLine()) != null) {
+					sb.append(inStr + "\r\n");
+				}
+				outStr = sb.toString();
+			} else {
+				outStr = filPath;
 			}
-			outStr = sb.toString();
+			
 			OutputStreamWriter writer = new OutputStreamWriter(out, "utf8");
 			writer.write(outStr);
 			// 注：这里如果用缓冲方式写入文件的话，会导致中文乱码，用flush()方法则可以避免
 			writer.flush();
 			// 别忘记关闭输入输出流
 			out.close();
-			br.close();
+//			br.close();
 			writer.close();
 			
 			return true;

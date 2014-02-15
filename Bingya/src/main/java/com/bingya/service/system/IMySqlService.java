@@ -11,5 +11,5 @@ public interface IMySqlService {
 	/**
 	 * 还原数据库
 	 */
-	Boolean restore(String path);
+	Boolean restore(String filPath,Boolean isPath);
 }
