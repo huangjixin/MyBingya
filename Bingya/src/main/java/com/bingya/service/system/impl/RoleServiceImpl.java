@@ -146,8 +146,11 @@ public class RoleServiceImpl implements IRoleService {
 	 */
 	@Override
 	public Page query(Page page, String key, String orderCondition) {
-		key = "%" + key + "%";
 		RoleExample roleExample = new RoleExample();
+		if (null != key && !"".equals(key)) {
+			key = "%" + key + "%";
+			roleExample.createCriteria().andNameLike(key);
+		}
 		// roleExample.createCriteria().andDescriptionLike(key);
 		roleExample.setPage(page);
 		int total = roleMapper.countByExample(roleExample);
