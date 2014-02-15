@@ -9,6 +9,7 @@ package com.usee.elecoin.system.model.vo
 		private var _description:String;  
 		private var _createdate:String;  
 		
+		public static var object:Object = {"id":"id","name":"角色名","description":"描述","createdate":"登记日期"};
 		public function Role()  
 		{  
 			

@@ -2,9 +2,42 @@
 <s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
 					xmlns:s="library://ns.adobe.com/flex/spark"
 					xmlns:mx="library://ns.adobe.com/flex/mx"
-					width="100%" height="100%" label="角色管理" name="RoleManager">
+					xmlns:common="com.usee.elecoin.common.*"
+					width="100%" height="100%" label="角色管理" name="RoleManager"
+					creationComplete="navigatorcontent1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+		]]>
+	</fx:Script>
 	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<common:Page id="page" limit="3"/>
 	</fx:Declarations>
-	<s:Label text="角色管理"/>
+	<fx:Script source="RoleManager_Script.as"/>
+	<s:HGroup width="100%" height="100%">
+		<s:VGroup width="100%" height="100%">
+			<s:HGroup verticalAlign="middle">
+				<s:Label text="角色名查询："/>
+				<s:TextInput id="keyInput" enter="queryBtn_clickHandler(null)"/>
+				<s:Button id="queryBtn" label="查询" click="queryBtn_clickHandler(event)"/>
+				<s:Button id="addBtn" label="新增" click="addBtn_clickHandler(event)"/>
+				<s:Button id="updateBtn" label="修改" click="updateBtn_clickHandler(event)"
+						  enabled="{dataGrid.selectedItem != null}"/>
+				<s:Button id="deleteBtn" label="删除" click="deleteBtn_clickHandler(event)"
+						  enabled="{dataGrid.selectedItem != null}"/>
+				<s:Button id="exportExcelBtn" label="导出Excel"
+						  click="exportExcelBtn_clickHandler(event)"/>
+			</s:HGroup>
+			<s:DataGrid id="dataGrid" width="100%" height="100%" dataProvider="{page.rows}"
+						selectionChange="dataGrid_selectionChangeHandler(event)">
+				<s:columns>
+					<s:ArrayList>
+						<s:GridColumn dataField="id" headerText="id"></s:GridColumn>
+						<s:GridColumn dataField="name" headerText="角色名"></s:GridColumn>
+						<s:GridColumn dataField="createdate" headerText="登记日期"></s:GridColumn>
+					</s:ArrayList>
+				</s:columns>
+			</s:DataGrid>
+			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
+		</s:VGroup>
+	</s:HGroup>
 </s:NavigatorContent>
