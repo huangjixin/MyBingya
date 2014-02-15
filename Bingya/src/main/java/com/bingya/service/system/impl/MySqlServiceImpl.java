@@ -103,8 +103,9 @@ public class MySqlServiceImpl implements IMySqlService {
 			String inStr;
 			StringBuffer sb = new StringBuffer("");
 			String outStr;
+			BufferedReader br = null;
 			if (isPath) {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
+				br = new BufferedReader(new InputStreamReader(
 						new FileInputStream(filPath), "utf8"));
 				while ((inStr = br.readLine()) != null) {
 					sb.append(inStr + "\r\n");
@@ -120,7 +121,8 @@ public class MySqlServiceImpl implements IMySqlService {
 			writer.flush();
 			// 别忘记关闭输入输出流
 			out.close();
-//			br.close();
+			if(null != br)
+				br.close();
 			writer.close();
 			
 			return true;
