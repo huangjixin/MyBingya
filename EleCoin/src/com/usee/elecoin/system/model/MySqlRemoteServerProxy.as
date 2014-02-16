@@ -60,13 +60,11 @@ package com.usee.elecoin.system.model
 		private function restoreResult(event:ResultEvent):void
 		{
 			dispatchEvent(new MySqlRemoteServerEvent(MySqlRemoteServerEvent.restoreResult,event.result)); 
-			Alert.show(event.result.toString());
 		}
 		
 		private function restoreFault(event:FaultEvent):void  
 		{  
 			dispatchEvent(new MySqlRemoteServerEvent(MySqlRemoteServerEvent.restoreFault,event.fault));
-			Alert.show(event.fault.toString());
 		} 
 		
 	}
