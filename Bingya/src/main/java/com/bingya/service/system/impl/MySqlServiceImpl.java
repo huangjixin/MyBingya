@@ -42,6 +42,7 @@ public class MySqlServiceImpl implements IMySqlService {
 		String mysqlCmd = configInfo.getMysqlPath();
 		mysqlCmd+=File.separator+"bin"+File.separator+"mysqldump";
 		mysqlCmd+=" -u"+configInfo.getDbUsername();
+		mysqlCmd+=" --default-character-set=utf8";
 		mysqlCmd+=" -p"+configInfo.getDbPassword();
 		mysqlCmd+="  "+configInfo.getDbname();
 		// 调用 mysql 的 cmd:
