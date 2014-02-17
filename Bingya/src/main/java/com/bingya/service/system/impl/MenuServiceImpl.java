@@ -250,6 +250,7 @@ public class MenuServiceImpl implements IMenuService {
 			RoleMenuExample roleMenuExample = new RoleMenuExample();
 			roleMenuExample.createCriteria().andRoleIdEqualTo(roleId);
 			roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
+			List<Menu> toBeRemovedList = new ArrayList<Menu>();
 			for (Menu menu : list) {
 				Boolean flag = false;
 				for (RoleMenu roleMenu : roleMenus) {
@@ -259,8 +260,11 @@ public class MenuServiceImpl implements IMenuService {
 					}
 				}
 				if (false == flag) {
-					list.remove(menu);
+					toBeRemovedList.add(menu);
 				}
+			}
+			for (Menu menu : toBeRemovedList) {
+				list.remove(menu);
 			}
 		}
 
