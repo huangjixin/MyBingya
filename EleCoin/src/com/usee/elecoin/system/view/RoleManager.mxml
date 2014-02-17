@@ -7,6 +7,7 @@
 					creationComplete="navigatorcontent1_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -39,6 +40,17 @@
 			</s:DataGrid>
 			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>
-		<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="200" height="90%" dataProvider="{menuTreeXml}"/>
+		<s:VGroup width="250" height="100%">
+			<!--<s:Button id="authorizeBtn" label="授权管理"
+					  click="authorizeBtn_clickHandler(event)"/>-->
+			<s:HGroup verticalAlign="middle" width="100%" height="100%">
+				<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{menuTreeXml}"/>
+				<s:VGroup>
+					<s:Button label="&gt;&gt;"/>
+					<s:Button label="&lt;&lt;"/>
+				</s:VGroup>
+				<mx:Tree id="authorizedTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{authorizedTreeXml}"/>
+			</s:HGroup>
+		</s:VGroup>
 	</s:HGroup>
 </s:NavigatorContent>

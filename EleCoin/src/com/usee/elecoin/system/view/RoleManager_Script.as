@@ -34,6 +34,9 @@ private var roleForm:RoleForm;
 private var roles:ArrayCollection;
 
 [Bindable]
+private var authorizedTreeXml:Object;
+
+[Bindable]
 private var menuTreeXml:Object;
 
 protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):void
@@ -53,6 +56,12 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	
 	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlResult,onserializMenuToXmlResult);
 	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlFault,onserializMenuToXmlFault);
+	var menuProxy1:MenuRemoteServerProxy = new MenuRemoteServerProxy();
+	menuProxy1.serializMenuToXml(null);
+	menuProxy1.addEventListener(MenuRemoteServerEvent.serializMenuToXmlResult,function serializMenuToXmlResult(event:MenuRemoteServerEvent):void{
+		var xmlStr:String = event.object as String;
+		menuTreeXml = new XML(xmlStr);
+	});
 }
 
 /**
@@ -208,9 +217,14 @@ protected function onserializMenuToXmlFault(event:MenuRemoteServerEvent):void
 protected function onserializMenuToXmlResult(event:MenuRemoteServerEvent):void
 {
 	var xmlStr:String = event.object as String;
-	menuTreeXml = new XML(xmlStr);
+	authorizedTreeXml = new XML(xmlStr);
 }
 
+protected function authorizeBtn_clickHandler(event:MouseEvent):void
+{
+	// TODO Auto-generated method stub
+	
+}
 //---------------------------------------------------------------------
 //-- 导出excel
 //---------------------------------------------------------------------
