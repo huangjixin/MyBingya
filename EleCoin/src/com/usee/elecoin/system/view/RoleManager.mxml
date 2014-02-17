@@ -39,5 +39,6 @@
 			</s:DataGrid>
 			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>
+		<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="200" height="90%" dataProvider="{menuTreeXml}"/>
 	</s:HGroup>
 </s:NavigatorContent>

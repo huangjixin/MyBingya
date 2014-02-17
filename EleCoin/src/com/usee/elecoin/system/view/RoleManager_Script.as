@@ -1,9 +1,10 @@
 import com.as3xls.xls.ExcelFile;
 import com.as3xls.xls.Sheet;
 import com.usee.elecoin.common.Page;
+import com.usee.elecoin.system.controller.MenuRemoteServerEvent;
 import com.usee.elecoin.system.controller.RoleRemoteServerEvent;
+import com.usee.elecoin.system.model.MenuRemoteServerProxy;
 import com.usee.elecoin.system.model.RoleRemoteServerProxy;
-import com.usee.elecoin.system.model.vo.Role;
 import com.usee.elecoin.system.model.vo.Role;
 import com.usee.elecoin.system.view.RoleForm;
 
@@ -24,11 +25,16 @@ import mx.managers.PopUpManager;
 
 import spark.events.GridSelectionEvent;
 
+private var menuProxy:MenuRemoteServerProxy = new MenuRemoteServerProxy();
+
 private var roleProxy:RoleRemoteServerProxy = new RoleRemoteServerProxy();
 private var roleForm:RoleForm;
 
 [Bindable]
 private var roles:ArrayCollection;
+
+[Bindable]
+private var menuTreeXml:Object;
 
 protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):void
 {
@@ -45,6 +51,8 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllResult,onselectAllResult);
 	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllFault,onselectAllFault);
 	
+	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlResult,onserializMenuToXmlResult);
+	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlFault,onserializMenuToXmlFault);
 }
 
 /**
@@ -180,6 +188,33 @@ protected function onselectAllResult(event:RoleRemoteServerEvent):void
 }
 
 /**
+ * 查看具体的条目信息,查询相应的角色。
+ * @param event
+ * 
+ */
+protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent):void
+{
+	var role:Role = dataGrid.selectedItem as Role;
+	if(role){
+		menuProxy.serializMenuToXml(role.id);
+	}
+}
+
+protected function onserializMenuToXmlFault(event:MenuRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function onserializMenuToXmlResult(event:MenuRemoteServerEvent):void
+{
+	var xmlStr:String = event.object as String;
+	menuTreeXml = new XML(xmlStr);
+}
+
+//---------------------------------------------------------------------
+//-- 导出excel
+//---------------------------------------------------------------------
+/**
  * 导出excel 
  * @param event
  * 
@@ -189,19 +224,6 @@ private var sheet:Sheet;
 protected function exportExcelBtn_clickHandler(event:MouseEvent):void
 {
 	roleProxy.selectAll();
-}
-
-/**
- * 查看具体的条目信息,查询相应的角色。
- * @param event
- * 
- */
-protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent):void
-{
-	var role:Role = dataGrid.selectedItem as Role;
-	if(role){
-//		roleProxy.getRolesById(role.id);
-	}
 }
 
 //------------------------------------------------------------------------------------------

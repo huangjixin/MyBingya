@@ -1,20 +1,22 @@
 import com.usee.elecoin.common.Page;
-import com.usee.elecoin.system.controller.UserRemoteServerEvent;
-import com.usee.elecoin.system.model.UserRemoteServerProxy;
+import com.usee.elecoin.system.controller.MenuRemoteServerEvent;
+import com.usee.elecoin.system.model.MenuRemoteServerProxy;
 
 import flash.events.Event;
 
 import mx.controls.Alert;
 import mx.events.FlexEvent;
 
-private var userProxy:UserRemoteServerProxy = new UserRemoteServerProxy();
+private var menuProxy:MenuRemoteServerProxy = new MenuRemoteServerProxy();
 
+[Bindable]
+private var treeXMLSource:Object;
 protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):void
 {
-	userProxy.query(this.page);
+	menuProxy.serializMenuToXml();
 	
-	userProxy.addEventListener(UserRemoteServerEvent.queryResult,onqueryResult);
-	userProxy.addEventListener(UserRemoteServerEvent.queryFault,onqueryFault);
+	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlResult,onserializMenuToXmlResult);
+	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlFault,onserializMenuToXmlFault);
 }
 
 /**
@@ -22,9 +24,10 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
  * @param event
  * 
  */
-protected function onqueryResult(event:UserRemoteServerEvent):void
+protected function onserializMenuToXmlResult(event:MenuRemoteServerEvent):void
 {
-	this.page = event.object as Page;
+	var xmlStr:String = event.object as String;
+	treeXMLSource = new XML(xmlStr);
 }
 
 /**
@@ -32,7 +35,7 @@ protected function onqueryResult(event:UserRemoteServerEvent):void
  * @param event
  * 
  */
-protected function onqueryFault(event:UserRemoteServerEvent):void
+protected function onserializMenuToXmlFault(event:MenuRemoteServerEvent):void
 {
 	Alert.show(event.object.toString());
 }
