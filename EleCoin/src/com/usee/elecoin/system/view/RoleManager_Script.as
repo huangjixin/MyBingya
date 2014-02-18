@@ -53,6 +53,10 @@ protected function navigatorcontent1_creationCompleteHandler(event:FlexEvent):vo
 	roleProxy.addEventListener(RoleRemoteServerEvent.deleteByPrimaryKeyFault,ondeleteByPrimaryKeyFault);
 	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllResult,onselectAllResult);
 	roleProxy.addEventListener(RoleRemoteServerEvent.selectAllFault,onselectAllFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.connectRoleMenusResult,connectRoleMenusResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.connectRoleMenusFault,connectRoleMenusFault);
+	roleProxy.addEventListener(RoleRemoteServerEvent.disconnectRoleMenuResult,connectRoleMenusResult);
+	roleProxy.addEventListener(RoleRemoteServerEvent.disconnectRoleMenuFault,connectRoleMenusFault);
 	
 	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlResult,onserializMenuToXmlResult);
 	menuProxy.addEventListener(MenuRemoteServerEvent.serializMenuToXmlFault,onserializMenuToXmlFault);
@@ -201,7 +205,7 @@ protected function onselectAllResult(event:RoleRemoteServerEvent):void
  * @param event
  * 
  */
-protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent):void
+protected function dataGrid_selectionChangeHandler(event:GridSelectionEvent =null):void
 {
 	var role:Role = dataGrid.selectedItem as Role;
 	if(role){
@@ -242,21 +246,33 @@ protected function authorizeBtn_clickHandler(event:MouseEvent):void
 	arryco = new ArrayCollection();
 	
 	if(item.hasComplexContent()){
-		arryco.addItem(item.@id);
+		arryco.addItem(""+item.@id);
 		var xmllist:XMLList = item.children();
 		for (var i:int = 0; i < xmllist.length(); i++) 
 		{
 			var xml:XML = xmllist[i];
-			arryco.addItem(xml.@id);
+			arryco.addItem(""+xml.@id);
 		}
 		trace(arryco.toString());
 	}else{
-		arryco.addItem(item.@parentId);
-		arryco.addItem(item.@id);
+		arryco.addItem(""+item.@parentId);
+		arryco.addItem(""+item.@id);
 		trace(arryco.toString());
 	}
+	
+	roleProxy.connectRoleMenus(role.id,arryco);
 }
 
+
+protected function connectRoleMenusFault(event:RoleRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function connectRoleMenusResult(event:RoleRemoteServerEvent):void
+{
+	dataGrid_selectionChangeHandler();
+}
 /**
  * 
  * @param event
@@ -264,8 +280,39 @@ protected function authorizeBtn_clickHandler(event:MouseEvent):void
  */
 protected function reauthorizeBtn_clickHandler(event:MouseEvent):void
 {
-	// TODO Auto-generated method stub
+	var role:Role = dataGrid.selectedItem as Role;
+	if(!role){
+		return;
+	}
 	
+	var item:XML = authorizedTree.selectedItem as XML;
+	var arryco:ArrayCollection;
+	arryco = new ArrayCollection();
+	
+	if(item.hasComplexContent()){
+		arryco.addItem(""+item.@id);
+		var xmllist:XMLList = item.children();
+		for (var i:int = 0; i < xmllist.length(); i++) 
+		{
+			var xml:XML = xmllist[i];
+			arryco.addItem(""+xml.@id);
+		}
+	}else{
+		arryco.addItem(""+item.@parentId);
+		arryco.addItem(""+item.@id);
+	}
+	
+	roleProxy.disconnectRoleMenu(role.id,arryco);
+}
+
+protected function disconnectRoleMenuFault(event:RoleRemoteServerEvent):void
+{
+	Alert.show(event.object.toString());
+}
+
+protected function disconnectRoleMenuResult(event:RoleRemoteServerEvent):void
+{
+	dataGrid_selectionChangeHandler();
 }
 //---------------------------------------------------------------------
 //-- 导出excel

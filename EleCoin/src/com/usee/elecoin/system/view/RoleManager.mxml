@@ -46,9 +46,9 @@
 			<s:HGroup verticalAlign="middle" width="100%" height="100%">
 				<mx:Tree id="authorizedTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{authorizedTreeXml}"/>
 				<s:VGroup>
-					<s:Button id="reauthorizeBtn" label="&lt;&lt;" width="48" click="reauthorizeBtn_clickHandler(event)"
+					<s:Button id="reauthorizeBtn" label="&gt;&gt;" width="48" click="reauthorizeBtn_clickHandler(event)"
 							  enabled="{authorizedTree.selectedItem != null}"/>
-					<s:Button id="authorizeBtn" label="&gt;&gt;" width="48" click="authorizeBtn_clickHandler(event)" 
+					<s:Button id="authorizeBtn" label="&lt;&lt;" width="48" click="authorizeBtn_clickHandler(event)" 
 							  enabled="{dataGrid.selectedItem != null &amp;&amp; menuTree.selectedItem != null}"/>
 				</s:VGroup>
 				<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{menuTreeXml}"/>
