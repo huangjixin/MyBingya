@@ -217,10 +217,46 @@ protected function onserializMenuToXmlFault(event:MenuRemoteServerEvent):void
 protected function onserializMenuToXmlResult(event:MenuRemoteServerEvent):void
 {
 	var xmlStr:String = event.object as String;
-	authorizedTreeXml = new XML(xmlStr);
+	var xml:XML = new XML(xmlStr);
+	if(xml.hasComplexContent()){
+		authorizedTreeXml = new XML(xmlStr);
+	}else{
+		authorizedTreeXml = null;
+	}
+	
 }
 
+/**
+ * 授权。 
+ * @param event
+ * 
+ */
 protected function authorizeBtn_clickHandler(event:MouseEvent):void
+{
+	var role:Role = dataGrid.selectedItem as Role;
+	if(!role){
+		return;
+	}
+	var item:XML = menuTree.selectedItem as XML;
+	if(item.hasComplexContent()){
+		var xmllist:XMLList = item.children();
+		for (var i:int = 0; i < xmllist.length(); i++) 
+		{
+			var xml:XML = xmllist[i];
+			
+		}
+		
+	}else{
+		
+	}
+}
+
+/**
+ * 
+ * @param event
+ * 
+ */
+protected function reauthorizeBtn_clickHandler(event:MouseEvent):void
 {
 	// TODO Auto-generated method stub
 	

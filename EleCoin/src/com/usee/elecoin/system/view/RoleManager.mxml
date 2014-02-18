@@ -40,16 +40,18 @@
 			</s:DataGrid>
 			<common:PageComponent page="{page}" pageChange="pagecomponent1_pageChangeHandler(event)"/>
 		</s:VGroup>
-		<s:VGroup width="250" height="100%">
+		<s:VGroup width="100%" height="100%">
 			<!--<s:Button id="authorizeBtn" label="授权管理"
 					  click="authorizeBtn_clickHandler(event)"/>-->
 			<s:HGroup verticalAlign="middle" width="100%" height="100%">
-				<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{menuTreeXml}"/>
-				<s:VGroup>
-					<s:Button label="&gt;&gt;"/>
-					<s:Button label="&lt;&lt;"/>
-				</s:VGroup>
 				<mx:Tree id="authorizedTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{authorizedTreeXml}"/>
+				<s:VGroup>
+					<s:Button id="reauthorizeBtn" label="&lt;&lt;" width="48" click="reauthorizeBtn_clickHandler(event)"
+							  enabled="{authorizedTree.selectedItem != null}"/>
+					<s:Button id="authorizeBtn" label="&gt;&gt;" width="48" click="authorizeBtn_clickHandler(event)" 
+							  enabled="{dataGrid.selectedItem != null &amp;&amp; menuTree.selectedItem != null}"/>
+				</s:VGroup>
+				<mx:Tree id="menuTree" labelField="@name" showRoot="false" width="100%" height="90%" dataProvider="{menuTreeXml}"/>
 			</s:HGroup>
 		</s:VGroup>
 	</s:HGroup>

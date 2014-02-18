@@ -23,6 +23,14 @@ package com.usee.elecoin.system.controller
 		public static const selectAll:String = "selectAll";
 		public static const selectAllResult:String = "selectAllResult";
 		public static const selectAllFault:String = "selectAllFault";
+
+		public static const connectRoleMenus:String = "connectRoleMenus";
+		public static const connectRoleMenusResult:String = "connectRoleMenusResult";
+		public static const connectRoleMenusFault:String = "connectRoleMenusFault";
+
+		public static const disconnectRoleMenu:String = "disconnectRoleMenu";
+		public static const disconnectRoleMenuResult:String = "disconnectRoleMenuResult";
+		public static const disconnectRoleMenuFault:String = "disconnectRoleMenuFault";
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 		// public 公有变量声明处
 		//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

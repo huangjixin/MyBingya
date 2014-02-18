@@ -8,6 +8,7 @@ package com.usee.elecoin.system.model
 	
 	import flash.events.EventDispatcher;
 	
+	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.rpc.Responder;
 	import mx.rpc.events.FaultEvent;
@@ -110,11 +111,6 @@ package com.usee.elecoin.system.model
 			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.deleteByPrimaryKeyFault,event.fault));
 		} 
 		
-		/**
-		 * 删除用户
-		 * @param id
-		 * 
-		 */
 		public function   selectAll():void
 		{  
 			var delegate:RoleRemoteServerDelegate = new RoleRemoteServerDelegate(new Responder(selectAllResult, selectAllFault));  
@@ -129,6 +125,38 @@ package com.usee.elecoin.system.model
 		private function selectAllFault(event:FaultEvent):void  
 		{  
 			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.selectAllFault,event.fault));
+		} 
+		
+		public function  connectRoleMenus( roleid:String,menuIds:ArrayCollection):void
+		{  
+			var delegate:RoleRemoteServerDelegate = new RoleRemoteServerDelegate(new Responder(connectRoleMenusResult, connectRoleMenusFault));  
+			delegate.connectRoleMenus(roleid,menuIds);
+		}
+		
+		private function connectRoleMenusResult(event:ResultEvent):void
+		{
+			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.connectRoleMenusResult,event.result)); 
+		}
+		
+		private function connectRoleMenusFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.connectRoleMenusFault,event.fault));
+		} 
+		
+		public function   disconnectRoleMenu(roleid:String,menuIds:ArrayCollection):void
+		{  
+			var delegate:RoleRemoteServerDelegate = new RoleRemoteServerDelegate(new Responder(disconnectRoleMenuResult, disconnectRoleMenuFault));  
+			delegate.disconnectRoleMenu(roleid,menuIds);
+		}
+		
+		private function disconnectRoleMenuResult(event:ResultEvent):void
+		{
+			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.disconnectRoleMenuResult,event.result)); 
+		}
+		
+		private function disconnectRoleMenuFault(event:FaultEvent):void  
+		{  
+			dispatchEvent(new RoleRemoteServerEvent(RoleRemoteServerEvent.disconnectRoleMenuFault,event.fault));
 		} 
 	}
 }

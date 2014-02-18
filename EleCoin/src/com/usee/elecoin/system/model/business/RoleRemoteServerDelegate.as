@@ -9,6 +9,7 @@ package com.usee.elecoin.system.model.business
 	import com.usee.elecoin.common.Page;
 	import com.usee.elecoin.system.model.vo.Role;
 	
+	import mx.collections.ArrayCollection;
 	import mx.rpc.IResponder;
 	import mx.rpc.remoting.mxml.RemoteObject;
 
@@ -102,6 +103,18 @@ package com.usee.elecoin.system.model.business
 		public function  selectAll():void
 		{
 			var call:Object = _service.selectAll();  
+			call.addResponder(_responder);  
+		}
+		
+		public function  connectRoleMenus( roleid:String,menuIds:ArrayCollection):void
+		{
+			var call:Object = _service.connectRoleMenus( roleid,menuIds);  
+			call.addResponder(_responder);  
+		}
+		
+		public function  disconnectRoleMenu(roleid:String,menuIds:ArrayCollection):void
+		{
+			var call:Object = _service.disconnectRoleMenu(roleid,menuIds);  
 			call.addResponder(_responder);  
 		}
 		
