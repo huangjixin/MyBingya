@@ -198,7 +198,7 @@ public class RoleServiceImpl implements IRoleService {
 			roleMenuExample.createCriteria().andRoleIdEqualTo(roleid).andMenuIdEqualTo(menuId);
 			List<RoleMenu> roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
 			if(roleMenus.size()==0){
-				int count = roleMenuMapper.countByExample(null);
+				int count = roleMenuMapper.countByExample(new RoleMenuExample());
 				RoleMenu roleMenu = new RoleMenu();
 				roleMenu.setMenuId(menuId);
 				roleMenu.setRoleId(roleid);
