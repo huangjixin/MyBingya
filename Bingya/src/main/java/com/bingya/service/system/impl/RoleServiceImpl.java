@@ -191,6 +191,37 @@ public class RoleServiceImpl implements IRoleService {
 		}
 	}
 
+	@Override
+	public void connectRoleMenus(String roleid, List<String> menuIds) {
+		for (String menuId : menuIds) {
+			RoleMenuExample roleMenuExample = new RoleMenuExample();
+			roleMenuExample.createCriteria().andRoleIdEqualTo(roleid).andMenuIdEqualTo(menuId);
+			List<RoleMenu> roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
+			if(roleMenus.size()==0){
+				int count = roleMenuMapper.countByExample(null);
+				RoleMenu roleMenu = new RoleMenu();
+				roleMenu.setMenuId(menuId);
+				roleMenu.setRoleId(roleid);
+				roleMenu.setId(count+1+"");
+				roleMenuMapper.insert(roleMenu);
+			}
+		}
+	}
+
+	@Override
+	public void disconnectRoleMenu(String roleid, List<String> menuIds) {
+		for (String menuId : menuIds) {
+			RoleMenuExample roleMenuExample = new RoleMenuExample();
+			roleMenuExample.createCriteria().andRoleIdEqualTo(roleid).andMenuIdEqualTo(menuId);
+			List<RoleMenu> roleMenus = roleMenuMapper.selectByExample(roleMenuExample);
+			if(roleMenus.size()>0){
+				for (RoleMenu roleMenu : roleMenus) {
+					roleMenuMapper.deleteByPrimaryKey(roleMenu.getId());
+				}
+			}
+		}
+	}
+
 	// ---------------------------------------------------
 	// public 公有方法
 	// ---------------------------------------------------

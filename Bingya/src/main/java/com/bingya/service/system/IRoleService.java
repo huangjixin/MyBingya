@@ -33,4 +33,19 @@ public interface IRoleService extends IGenericService<Role, String> {
 	 * @return
 	 */
 	Role getRoleByUserid(String userId);
+	
+	/**
+	 * 绑定角色和菜单
+	 * @param roleid
+	 * @param menuIds
+	 */
+	void connectRoleMenus(String roleid,List<String>menuIds);
+	
+	/**
+	 * 断开角色和菜单的关联
+	 * @param roleid
+	 * @param menuIds
+	 * @return
+	 */
+	void disconnectRoleMenu(String roleid,List<String>menuIds);
 }
