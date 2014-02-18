@@ -238,16 +238,22 @@ protected function authorizeBtn_clickHandler(event:MouseEvent):void
 		return;
 	}
 	var item:XML = menuTree.selectedItem as XML;
+	var arryco:ArrayCollection;
+	arryco = new ArrayCollection();
+	
 	if(item.hasComplexContent()){
+		arryco.addItem(item.@id);
 		var xmllist:XMLList = item.children();
 		for (var i:int = 0; i < xmllist.length(); i++) 
 		{
 			var xml:XML = xmllist[i];
-			
+			arryco.addItem(xml.@id);
 		}
-		
+		trace(arryco.toString());
 	}else{
-		
+		arryco.addItem(item.@parentId);
+		arryco.addItem(item.@id);
+		trace(arryco.toString());
 	}
 }
 
