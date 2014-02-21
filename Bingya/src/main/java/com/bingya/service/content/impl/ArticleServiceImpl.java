@@ -1,19 +1,23 @@
 /**
  * 
  */
-package com.bingya.service.impl;
+package com.bingya.service.content.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingya.dao.system.ArticleMapper;
 import com.bingya.dao.system.CommentMapper;
+import com.bingya.domain.system.Article;
+import com.bingya.domain.system.ArticleExample;
 import com.bingya.domain.system.Comment;
 import com.bingya.domain.system.CommentExample;
-import com.bingya.service.ICommentService;
+import com.bingya.service.content.IArticleService;
 import com.bingya.util.Page;
 
 /**
@@ -21,11 +25,15 @@ import com.bingya.util.Page;
  * 
  */
 @Transactional
-@Service(value = "commentService")
-public class CommentServiceImpl implements ICommentService {
+@Service(value = "articleService")
+@RemotingDestination(value = "articleServiceImpl", channels = { "my-amf" })
+public class ArticleServiceImpl implements IArticleService {
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
 	// ---------------------------------------------------
+	@Resource
+	private ArticleMapper articleMapper;
+
 	@Resource
 	private CommentMapper commentMapper;
 
@@ -44,12 +52,20 @@ public class CommentServiceImpl implements ICommentService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.Integer)
+	 * com.bingya.service.IGenericService#deleteByPrimaryKey(java.lang.String)
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		// --先删除子表数据。
+		CommentExample commentExample = new CommentExample();
+		commentExample.createCriteria().andTbArticleIdEqualTo(id);
+		List<Comment> commentss = commentMapper.selectByExample(commentExample);
+		for (Comment comment : commentss) {
+			commentMapper.deleteByPrimaryKey(comment.getId());
+		}
+
 		// 外键删除完毕；
-		int i = commentMapper.deleteByPrimaryKey(id);
+		int i = articleMapper.deleteByPrimaryKey(id);
 		return i;
 	}
 
@@ -59,9 +75,15 @@ public class CommentServiceImpl implements ICommentService {
 	 * @see com.bingya.service.IGenericService#insert(java.io.Serializable)
 	 */
 	@Override
-	public String insert(Comment entity) {
-		int i = commentMapper.insertSelective(entity);
-		return ""+i;
+	public String insert(Article entity) {
+//		Date date = new Date();
+//		Long time = date.getTime();
+		if(entity.getId()==null||"".equals(entity.getId())){
+			 int count = articleMapper.countByExample(new ArticleExample());
+			 entity.setId(count+1+"");
+		}
+		articleMapper.insertSelective(entity);
+		return entity.getId();
 	}
 
 	/*
@@ -70,19 +92,19 @@ public class CommentServiceImpl implements ICommentService {
 	 * @see com.bingya.service.IGenericService#selectAll()
 	 */
 	@Override
-	public List<Comment> selectAll() {
-		return commentMapper.selectByExample(null);
+	public List<Article> selectAll() {
+		return articleMapper.selectByExample(null);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.Integer)
+	 * com.bingya.service.IGenericService#selectByPrimaryKey(java.lang.String)
 	 */
 	@Override
-	public Comment selectByPrimaryKey(String id) {
-		return commentMapper.selectByPrimaryKey(id);
+	public Article selectByPrimaryKey(String id) {
+		return articleMapper.selectByPrimaryKey(id);
 	}
 
 	/*
@@ -91,8 +113,8 @@ public class CommentServiceImpl implements ICommentService {
 	 * @see com.bingya.service.IGenericService#update(java.io.Serializable)
 	 */
 	@Override
-	public String update(Comment entity) {
-		return commentMapper.updateByExampleSelective(entity, null)+"";
+	public String update(Article entity) {
+		return articleMapper.updateByExampleSelective(entity, null)+"";
 	}
 
 	/*
@@ -104,12 +126,12 @@ public class CommentServiceImpl implements ICommentService {
 	@Override
 	public Page query(Page page, String key, String orderCondition) {
 		key = "%" + key + "%";
-		CommentExample commentExample = new CommentExample();
-		// commentExample.createCriteria().andDescriptionLike(key);
-		commentExample.setPage(page);
-		int total = commentMapper.countByExample(commentExample);
+		ArticleExample articleExample = new ArticleExample();
+		// articleExample.createCriteria().andDescriptionLike(key);
+		articleExample.setPage(page);
+		int total = articleMapper.countByExample(articleExample);
 		page.setTotal(total);
-		List<Comment> list = commentMapper.selectByExample(commentExample);
+		List<Article> list = articleMapper.selectByExample(articleExample);
 		page.setRows(list);
 		return page;
 	}

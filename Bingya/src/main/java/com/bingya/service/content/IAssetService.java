@@ -1,11 +1,12 @@
 /**
  * 
  */
-package com.bingya.service;
+package com.bingya.service.content;
 
 import java.util.List;
 
 import com.bingya.domain.system.Asset;
+import com.bingya.service.IGenericService;
 import com.bingya.service.domain.AssetBusiDomain;
 import com.bingya.util.Page;
 

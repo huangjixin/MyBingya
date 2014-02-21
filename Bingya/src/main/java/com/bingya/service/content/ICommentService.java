@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.bingya.service;
+package com.bingya.service.content;
 
 import com.bingya.domain.system.Comment;
+import com.bingya.service.IGenericService;
 
 /**
  * @author huangjixin

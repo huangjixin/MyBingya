@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bingya.service.impl;
+package com.bingya.service.content.impl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bingya.dao.system.AssetMapper;
 import com.bingya.domain.system.Asset;
 import com.bingya.domain.system.AssetExample;
-import com.bingya.service.IAssetService;
+import com.bingya.service.content.IAssetService;
 import com.bingya.service.domain.AssetBusiDomain;
 import com.bingya.util.DeleteFileUtil;
 import com.bingya.util.Page;

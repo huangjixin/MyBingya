@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bingya.service.ICategoryService;
+import com.bingya.service.content.ICategoryService;
 import com.bingya.util.Page;
 
 /**

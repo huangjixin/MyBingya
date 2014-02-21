@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.bingya.domain.system.Asset;
-import com.bingya.service.IAssetService;
+import com.bingya.service.content.IAssetService;
 
 /**
  * 

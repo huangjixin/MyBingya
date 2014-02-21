@@ -1,13 +1,14 @@
 /**
  * 
  */
-package com.bingya.service;
+package com.bingya.service.content;
 
 import java.util.List;
 
 import org.json.JSONObject;
 
 import com.bingya.domain.system.Category;
+import com.bingya.service.IGenericService;
 
 /**
  * @author huangjixin

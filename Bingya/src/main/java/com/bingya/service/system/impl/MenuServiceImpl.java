@@ -24,6 +24,7 @@ import com.bingya.domain.system.Menu;
 import com.bingya.domain.system.MenuExample;
 import com.bingya.domain.system.RoleMenu;
 import com.bingya.domain.system.RoleMenuExample;
+import com.bingya.domain.system.UserExample;
 import com.bingya.service.system.IMenuService;
 import com.bingya.util.Page;
 
@@ -87,13 +88,17 @@ public class MenuServiceImpl implements IMenuService {
 	 */
 	@Override
 	public String insert(Menu entity) {
-		Date date = new Date();
-		Long time = date.getTime();
+//		Date date = new Date();
+//		Long time = date.getTime();
 		// entity.setId(time);
+		if(entity.getId()==null||"".equals(entity.getId())){
+			 int count = menuMapper.countByExample(new MenuExample());
+			 entity.setId(count+1+"");
+		}
 		if ("".equals(entity.getParentid())) {
 			entity.setParentid(null);
 		}
-		int i = menuMapper.insertSelective(entity);
+		menuMapper.insertSelective(entity);
 
 		return entity.getId();
 	}

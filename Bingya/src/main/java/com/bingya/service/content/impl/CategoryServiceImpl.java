@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bingya.service.impl;
+package com.bingya.service.content.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.json.JSONObject;
+import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,7 @@ import com.bingya.domain.system.Article;
 import com.bingya.domain.system.ArticleExample;
 import com.bingya.domain.system.Category;
 import com.bingya.domain.system.CategoryExample;
-import com.bingya.service.ICategoryService;
+import com.bingya.service.content.ICategoryService;
 import com.bingya.util.Page;
 
 import flexjson.JSONException;
@@ -29,6 +30,7 @@ import flexjson.JSONException;
  */
 @Transactional
 @Service(value = "categoryService")
+@RemotingDestination(value = "categoryServiceImpl", channels = { "my-amf" })
 public class CategoryServiceImpl implements ICategoryService {
 	// ---------------------------------------------------
 	// 常量（全部大写，用下划线分割），变量 （先常后私）
