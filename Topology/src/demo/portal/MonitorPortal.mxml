@@ -57,10 +57,10 @@
 					backgroundColor="#00ffffff" horizontalScrollPolicy="auto"
 					verticalScrollPolicy="auto"/>
 	</mx:HBox>
-	<mx:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
+	<!--<mx:Label text="待去掉的水印" horizontalCenter="0" verticalCenter="0" fontSize="30" color="0xffffff" fontFamily="微软雅黑">
 		<mx:filters>
 			<mx:GlowFilter knockout="true" blurX="20" blurY="20" color="0x00ffff"/>
 		</mx:filters>
-	</mx:Label>
+	</mx:Label>-->
 	<!--<s:Image id="img" horizontalCenter="0" verticalCenter="0"/>-->
 </mx:Application>
