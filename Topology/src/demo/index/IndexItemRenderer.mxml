@@ -61,7 +61,7 @@
 			private function onComplete(e:Event):void
 			{
 				_imageComplete = true;
-				timer = new Timer(120000);
+				timer = new Timer(30000);
 				timer.start();
 				timer.addEventListener(TimerEvent.TIMER,onTimer);
 			}
@@ -71,15 +71,28 @@
 				var imgVo:imageVO = imageVO(data);
 				var loader:Loader;
 				loader = new Loader();
-				loader.load(new URLRequest(encodeURI(imgVo.healthPic)));
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function onLoaderComplete(event:Event):void{
-					healthPicImg.source = (event.currentTarget.content as Bitmap).bitmapData;
-				});
-				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,function onLoadhealthPicImgError(event:IOErrorEvent):void{
-					Alert.show("找不到图片");
-				});
+				loader.load(new URLRequest(encodeURI(imgVo.healthPic+"?ID="+Math.random())));
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoaderComplete);
+				var loader1:Loader;
+				loader1 = new Loader();
+				loader1.load(new URLRequest(encodeURI(imgVo.statePic+"?ID="+Math.random())));
+				loader1.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoaderComplete1);
+				
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onLoadImgError); 
+				loader1.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onLoadImgError); 
 			}
 			
+			protected function onLoadImgError(event:IOErrorEvent):void{
+//				Alert.show("找不到图片");
+			}
+			
+			protected function onLoaderComplete(event:Event):void{
+				healthPicImg.source = (event.currentTarget.content as Bitmap).bitmapData;
+			}
+			
+			protected function onLoaderComplete1(event:Event):void{
+				statePicImg.source = (event.currentTarget.content as Bitmap).bitmapData;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -132,11 +145,11 @@
 			
 			<s:HGroup right="4" bottom="4" color="0xffffff">
 				<s:Label text="状态"/>
-				<s:Image id="healthPicImg" source="{data.healthPic}"/>
+				<s:Image id="statePicImg" source="{data.statePic}"/>
 <!--				<s:Image source="@Embed(source='demo/index/images/MonitorPortal_sad.png')"/>-->
 				<s:Label text="预警"/>
 				<!--<s:Image source="@Embed(source='demo/index/images/MonitorPortal_smile.png')"/>-->
-				<s:Image id="statePicImg" source="{data.statePic}"/>
+				<s:Image id="healthPicImg" source="{data.healthPic}"/>
 			</s:HGroup>
 		</s:Group>
 	</s:Group>
