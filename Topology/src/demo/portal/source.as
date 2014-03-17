@@ -247,7 +247,8 @@ public function _getMSData_result(event:ResultEvent) : void
  */
 public function displayMSViewData(event:ResultEvent) : void
 {
-	var result:String = getMSDataService.lastResult as String;
+//	var result:String = getMSDataService.lastResult as String;
+	var result:String = event.result as String;
 	doDisplayMSViewData(result);
 	return;
 }
@@ -333,7 +334,8 @@ public function addAlarm(K1K:Object, elementID:Object, alarmSeverity:AlarmSeveri
 
 public function _getAlertList_result(event:ResultEvent) : void
 {
-	var result:String = getAlertListService.lastResult.toString();
+//	var result:String = getAlertListService.lastResult.toString();
+	var result:String = event.result as String;
 	processAlertLists(result);
 	return;
 }
@@ -393,14 +395,6 @@ public function renderAlert(resourceid:String, availability:int, health:int, typ
 		return;
 	}
 	
-	/*if (type == "WEBLOGIC-server")
-	{
-	}
-	else
-	{
-		
-	}*/
-	
 	alarm = new Alarm("HEALTH_" + dataIdString, dataIdString);
 	if (health == 1)
 	{
@@ -434,10 +428,6 @@ public function renderAlert(resourceid:String, availability:int, health:int, typ
 		follower.image = "smile";
 	}
 	
-	/* if (type == "WEBLOGIC-server")
-	{
-	follower.image = "smile";
-	} */ 
 	network.elementBox.add(follower);
 	return;
 }
