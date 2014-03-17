@@ -67,7 +67,7 @@
 		<carousel:Carousel id="carousel" width="100%" height="100%"
 						   dataprovider="{arrayList}" maxItems="{arrayList.length}" elevation="0" 
 						   itemWidth="160" itemHeight="120" duration="600" 
-						   frontScale="2.5" backScale="0.5" mouseOver="onMouseOver(event)" mouseOut="onMouseOut(event)"/>
+						   frontScale="2.2" backScale="0.5" mouseOver="onMouseOver(event)" mouseOut="onMouseOut(event)"/>
 	</s:VGroup>
 	<s:VGroup horizontalAlign="center" verticalAlign="middle" verticalCenter="120" width="100%">
 		<s:Label color="0xffffff" text="{(this.currentIndex+1)+'/'+this.arrayList.length}"/>

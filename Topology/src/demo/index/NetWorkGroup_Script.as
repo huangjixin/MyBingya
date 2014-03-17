@@ -201,7 +201,7 @@ public function addExternalInfo(msdataString:String) : void
 	this.resids = resoureidStr;
 	
 	getAlertListService.send();
-	processAlertLists(this.alertStr)
+//	processAlertLists(this.alertStr);
 	return;
 }
 
@@ -215,8 +215,10 @@ public function addAlarm(K1K:Object, elementID:Object, alarmSeverity:AlarmSeveri
 
 public function _getAlertList_result(event:ResultEvent) : void
 {
-	var result:String = getAlertListService.lastResult.toString();
+	var result:String = event.result as String;
+//	var result:String = getAlertListService.lastResult.toString();
 	processAlertLists(result);
+	
 	return;
 }
 
@@ -225,12 +227,13 @@ public function _getAlertList_result(event:ResultEvent) : void
  */ 
 public function processAlertLists(result:String) : void
 {
+//	Alert.show(result,"返回的告警对象xml字符串");
 	var alertVoXml:XML = null;
 	var _loc_3:XML = XML(result);
 	for each (alertVoXml in _loc_3..AlertVO)
 	{
-		
-		renderAlert(alertVoXml.resourceid, alertVoXml.AVAILABILITY, alertVoXml.HEALTH, alertVoXml.type);
+		var availability:int = new int(alertVoXml.AVAILABILITY);
+		renderAlert(alertVoXml.resourceid, availability, alertVoXml.HEALTH as int, alertVoXml.type);
 	}
 	if (timer != null)
 	{
@@ -241,6 +244,9 @@ public function processAlertLists(result:String) : void
 	return;
 }
 
+/**
+ * 显示告警。
+ */ 
 /**
  * 显示告警。
  */ 
@@ -275,14 +281,6 @@ public function renderAlert(resourceid:String, availability:int, health:int, typ
 		return;
 	}
 	
-	/*if (type == "WEBLOGIC-server")
-	{
-	}
-	else
-	{
-	
-	}*/
-	
 	alarm = new Alarm("HEALTH_" + dataIdString, dataIdString);
 	if (health == 1)
 	{
@@ -307,6 +305,9 @@ public function renderAlert(resourceid:String, availability:int, health:int, typ
 	follower.layerID = _loc_7.layerID;
 	follower.host = _loc_7;
 	
+	/*if(type == "MSSQL-DB-server"){
+		Alert.show("availability的值是（0为伤脸，非零为笑脸）："+availability);
+	}*/
 	if (availability == 0)
 	{
 		follower.image = "sad";
@@ -316,14 +317,9 @@ public function renderAlert(resourceid:String, availability:int, health:int, typ
 		follower.image = "smile";
 	}
 	
-	/* if (type == "WEBLOGIC-server")
-	{
-	follower.image = "smile";
-	} */ 
 	network.elementBox.add(follower);
 	return;
 }
-
 /**
  * 注册告警颜色。
  */ 
