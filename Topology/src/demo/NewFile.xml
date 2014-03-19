@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AlertVOs>
+	<AlertVO>
+		<resourceid>10000182</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>Windows 2003</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000101</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>UrlMonitor</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000108</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>MSSQL-DB-server</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000107</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>IIS-server</type>
+	</AlertVO>
+</AlertVOs>
+<AlertVOs>
+	<AlertVO>
+		<resourceid>10000182</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>Windows 2003</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000101</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>UrlMonitor</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000108</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>MSSQL-DB-server</type>
+	</AlertVO>
+	<AlertVO>
+		<resourceid>10000107</resourceid>
+		<AVAILABILITY>1</AVAILABILITY>
+		<HEALTH>5</HEALTH>
+		<type>IIS-server</type>
+	</AlertVO>
+</AlertVOs>

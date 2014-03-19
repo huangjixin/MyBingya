@@ -12,7 +12,7 @@
 		  import twaver.SubNetwork;
 		  import twaver.Utils;
          function init():void{
-            var loader:Loader = new Loader();
+            /* var loader:Loader = new Loader();
             var url:String = 'subnetwork_2.png';
             loader.load(new URLRequest(encodeURI(url)));
             var picName:String = 'subnetwork_2.png';
@@ -26,7 +26,7 @@
                 subNetworkA.setLocation(20,20);
 			   subNetworkA.alarmState.increaseNewAlarm(AlarmSeverity.CRITICAL);
                network.elementBox.add(node);
-            });
+            }); */
          }
       ]]>
    </fx:Script>
