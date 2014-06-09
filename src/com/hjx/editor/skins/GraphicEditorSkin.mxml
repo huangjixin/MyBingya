@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:graphic="com.hjx.graphic.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.hjx.editor.GraphicEditor")]
+	</fx:Metadata>
+	<s:Scroller id="graphScroller" width="100%" height="100%" verticalScrollPolicy="auto" horizontalScrollPolicy="auto">
+		<graphic:Graph id="graph" width="100%" height="100%">
+			<s:Rect top="0" bottom="0" left="0" right="0">
+				<s:fill>
+					<s:SolidColor color="0" alpha="0"/>
+				</s:fill>
+			</s:Rect>
+		</graphic:Graph>
+	</s:Scroller>
+	<s:Group id="adornersGroup" width="100%" height="100%"/>
+</s:Skin>
