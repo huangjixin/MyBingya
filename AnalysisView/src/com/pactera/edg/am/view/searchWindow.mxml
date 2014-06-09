@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" close="{PopUpManager.removePopUp(this);}" creationComplete="{initSearchWindow();}">
+	<mx:Script><![CDATA[
+        import flash.events.*;
+        import mx.containers.*;
+        import mx.controls.*;
+        import mx.core.*;
+        import mx.events.*;
+        import mx.managers.*;
+
+
+        public function FocusInHandler(event:FocusEvent) : void
+        {
+            context.editable = true;
+            context.text = "";
+            context.clearStyle("color");
+            context.clearStyle("fontStyle");
+            context.setStyle("fontStyle", "normal");
+            this.addEventListener(KeyboardEvent.KEY_DOWN, keyEventHandler);
+            return;
+        }// end function
+
+        public function keyEventHandler(event:KeyboardEvent) : void
+        {
+            if (event.keyCode == 13)
+            {
+                startSearch();
+            }
+            return;
+        }// end function
+
+        public function initSearchWindow() : void
+        {
+            context.editable = false;
+            context.setStyle("color", 11187123);
+            context.setStyle("fontStyle", "italic");
+            context.addEventListener(FocusEvent.FOCUS_IN, FocusInHandler);
+            return;
+        }// end function
+
+        public function startSearch() : void
+        {
+            var _loc_1:* = context.text;
+            if (_loc_1.replace(/^\s*|\s*$""^\s*|\s*$/g, "").split(" ").join("") == "" || _loc_1 == "搜索...")
+            {
+                Alert.show("请输入搜索关键字");
+            }
+            else
+            {
+                callBackFun.call(mainApp, _loc_1);
+            }
+            return;
+        }// end function
+        [Bindable]
+        [@Embed(source='com/pactera/edg/am/view/search_gif.png')]
+        private var searchIcon:Class;
+        
+        public var mainApp:UIComponent;
+        public var callBackFun:Function;
+    ]]></mx:Script>
+
+	<mx:HBox horizontalGap="0">
+		<mx:TextInput id="context" text="请输入搜索关键字..." editable="false" width="221" height="25" borderThickness="0"/>
+		<mx:Button id="submit" width="20" height="25" label="" icon="{searchIcon}" click="{startSearch();}"/>
+	</mx:HBox>
+
+</mx:TitleWindow>

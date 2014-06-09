@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100" height="100" close="searchWinClose()"
+	styleName="searchDetailStyle"
+	showCloseButton="true"
+	horizontalScrollPolicy="auto"
+	verticalScrollPolicy="auto"
+	>
+	<mx:Script><![CDATA[
+	   
+	    //import com.pactera.edg.am.view.*;
+	    import com.pactera.edg.am.view.model.*;
+	    import mx.events.*;
+	    import mx.core.*;
+	    import mx.containers.*;
+	    import mx.controls.*;
+	    
+	    public var modelView:ModelView;
+	    [Bindable]
+	    public var matchModels:Array=[];
+	    
+	    private function handleDoubleClick(event:ListEvent) : void
+        {
+            var _loc_6:Number = NaN;
+            var _loc_7:Number = NaN;
+            var _loc_8:Number = NaN;
+            var _loc_9:Number = NaN;
+            var _loc_10:Number = NaN;
+            var _loc_11:Number = NaN;
+            var _loc_2:* = this.list.selectedItem as DisplayElement;
+            _loc_2.myObject.setAnalysisModelClickEffect(_loc_2);
+            var _loc_3:* = new Point(0, 0);
+            _loc_3 = _loc_2.localToGlobal(_loc_3);
+            _loc_3 = this.modelView.parent.globalToLocal(_loc_3);
+            var _loc_4:* = (this.modelView.parent as Canvas).horizontalScrollPosition;
+            if (_loc_3.x > 0)
+            {
+                _loc_6 = _loc_3.x + _loc_2.width + _loc_4;
+                _loc_7 = this.modelView.parent.width;
+                if (_loc_6 > _loc_7)
+                {
+                    (this.modelView.parent as Canvas).horizontalScrollPosition = _loc_6 - _loc_7;
+                }
+            }
+            else
+            {
+                _loc_8 = _loc_3.x + _loc_4;
+                (this.modelView.parent as Canvas).horizontalScrollPosition = _loc_8;
+            }
+            var _loc_5:* = (this.modelView.parent as Canvas).verticalScrollPosition;
+            if (_loc_3.y > 0)
+            {
+                _loc_9 = _loc_3.y + _loc_2.height + _loc_5 + 20;
+                _loc_10 = this.modelView.parent.height;
+                if (_loc_9 > _loc_10)
+                {
+                    (this.modelView.parent as Canvas).verticalScrollPosition = _loc_9 - _loc_10;
+                }
+            }
+            else
+            {
+                _loc_11 = _loc_3.y + _loc_5;
+                (this.modelView.parent as Canvas).verticalScrollPosition = _loc_11;
+            }
+            return;
+        }// end function
+		  override protected function updateDisplayList(param1:Number, param2:Number) : void
+	        {
+	            super.updateDisplayList(param1, param2);
+	            var _loc_3:* = param1;
+	            var _loc_4:* = param2 - 20;
+	            this.list.setActualSize(_loc_3, _loc_4);
+	            return;
+	        }// end function
+	        
+	
+         private function searchWinClose() : void
+        {
+            this.includeInLayout = false;
+            this.visible = false;
+            var _loc_1:* = this.modelView.parent as Canvas;
+            _loc_1.move(0, 0);
+            _loc_1.percentHeight = 100;
+            _loc_1.percentWidth = 100;
+            _loc_1.invalidateDisplayList();
+            this.modelView.move(0, 0);
+            return;
+        }// end function
+        
+    ]]></mx:Script>
+	<mx:List id="list" itemClick="handleDoubleClick(event)"  rollOverColor="15724527" selectionColor="13563796" 
+		labelField="modelName" dataProvider="{matchModels}">
+	</mx:List>
+	
+		<mx:Style>
+        .searchDetailStyle
+        {
+            paddingTop : 0;
+            borderThicknessRight : 0;
+            borderColor : 14082022;
+            paddingLeft : 0;
+            paddingRight : 0;
+            borderThicknessLeft : 0;
+            headerHeight : 20;
+            borderThicknessBottom : 0;
+            borderThicknessTop : 0;
+            borderAlpha : 0.5;
+            paddingBottom : 0;
+            backgroundColor : 16777215;
+        }
+    </mx:Style>
+</mx:TitleWindow>

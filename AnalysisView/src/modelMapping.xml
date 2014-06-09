@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<view name="datamap">
+	    <imageMapping>
+		    <zoomin url="../images/icons/zoom_in.png" />
+		    <zoomout url="../images/icons/zoom_out.png" />
+		    <fullScreen url="../images/icons/arrow_out.png" />
+		    <normalScreen url="../images/icons/arrow_in.png" />
+	    </imageMapping>
+		<dataMapping>
+			<type name="webservice"
+				url="../services/datamap?wsdl" />
+			<method initfunc="getSystemDataMap" tipfunc="getStat"
+				linedcfunc="getSchemaDataMap" savefunc="savePos" linkNodesfunc="getSystemRelation" />
+		</dataMapping>
+		<viewMapping>
+			<isOpen value="false" />
+		</viewMapping>
+		<nodeMapping>
+			<node node="nodes.node" mdid="mdid" mdcode="mdcode"
+				mdname="mdname" mdmodelcode="mdmodelcode" mdtip="mdcode"
+				mdcolor="mdcolor" mdtype="mdtype" parentmdid="parentmdid"
+				parentmdmodel="parentmdmodel" />
+			<transformer node="transformers.transformer"
+				frommdid="frommdid" tomdid="tomdid" fromstyle="fromstyle"
+				tostyle="tostyle" transtypeid="typeid" />
+		</nodeMapping>
+		<modelMapping>
+			<model modelName="SystemLevel" typeClass="SystemLevel"
+				gridClass="com.pactera.edg.am.view.grid.OpenGrid"
+				modelClass="com.pactera.edg.am.view.model.DataMapComModel"
+				extender="com.pactera.edg.am.view.extender.DataMapComModelExtender"
+			    rightMenu="com.pactera.edg.am.view.handler.DataMapComModelContextMenu">
+			</model>
+			<model modelName="System" typeClass="System"
+				gridClass="com.pactera.edg.am.view.grid.CloseGrid"
+				modelClass="com.pactera.edg.am.view.model.BasicModel"
+				extender="com.pactera.edg.am.view.extender.BasicModelExtender"
+				rightMenu="com.pactera.edg.am.view.handler.BasicModelContextMenu">
+			</model>
+			<model modelName="Schema" typeClass="System"
+				gridClass="com.pactera.edg.am.view.grid.CloseGrid"
+				modelClass="com.pactera.edg.am.view.model.BasicModel"
+				extender="com.pactera.edg.am.view.extender.BasicModelExtender"
+				rightMenu="com.pactera.edg.am.view.handler.BasicModelContextMenu">
+			</model>
+		</modelMapping>
+	</view>
+</root>

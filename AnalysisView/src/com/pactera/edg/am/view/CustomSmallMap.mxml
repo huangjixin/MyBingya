@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="240" height="180" layout="absolute"
+	  showCloseButton="true"
+	  styleName="customPopUp"
+	 close="onClose(event)">
+	<mx:Script><![CDATA[
+        import mx.containers.*;
+        import mx.core.*;
+        import mx.events.*;
+        import mx.managers.*;
+        import mx.styles.*;
+
+
+        public function onClose(event:CloseEvent) : void
+        {
+            PopUpManager.removePopUp(this);
+            return;
+        }// end function
+    ]]></mx:Script>
+
+
+	<mx:Style>
+        .customPopUp
+        {
+            borderColor : 0;
+            paddingLeft : 0;
+            paddingBottom : 0;
+            borderAlpha : 0.5;
+            paddingTop : 0;
+            borderThicknessRight : 0;
+            color : 16777215;
+            paddingRight : 0;
+            borderThicknessLeft : 0;
+            headerHeight : 20;
+            borderThicknessBottom : 0;
+            borderThicknessTop : 0;
+            backgroundColor : 13030375;
+            borderStyle : solid;
+        }
+    </mx:Style>
+</mx:TitleWindow>

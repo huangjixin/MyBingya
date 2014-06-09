@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="300" height="100" creationComplete="initBar()">
+		<mx:Script><![CDATA[
+	import mx.containers.*;
+    import mx.controls.*;
+    import mx.core.*;
+    import mx.events.*;
+    import mx.managers.*;
+
+
+		 		 private var _btnLabel:String;
+		 		 //回调函数，外部设置
+		         public var callBack:Function;
+		         
+		  	 	private function initBar() : void
+		        {
+		            this.loaderButton.enabled = false;
+		            this.loaderButton.label = this._btnLabel;
+		            if (this.callBack != null)
+		            {
+		                this.callBack();
+		            }
+		            //zzg 2011-12-14 新增初始化完成事件
+		            //this.dispatchEvent(new InitBarCmpEvent());
+		            return;
+		        }// end function
+		         public function closeProcessBar() : void
+		        {
+		            PopUpManager.removePopUp(this);
+		            return;
+		        }// end function
+		        
+		       public function set btnLabel(param1:String) : void
+		        {
+		            this._btnLabel = param1;
+		            return;
+		        }// end function
+        
+//        	<mx:Metadata>
+//	        [Event(name="InitBarComplete", type="InitBarCmpEvent")]
+//	    </mx:Metadata>
+	    
+		  ]]></mx:Script>
+	
+		<mx:Button id="loaderButton"
+			verticalCenter = "0"
+		    horizontalCenter = "0"
+		    styleName="loadButton"
+		    height="20"
+		    width="180"
+		    buttonMode="true" />
+</mx:Canvas>

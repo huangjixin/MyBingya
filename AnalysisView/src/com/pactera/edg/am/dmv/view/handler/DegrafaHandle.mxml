@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns="http://www.degrafa.com/2007"
+	 rollOver="onRollOver(event)"
+	 rollOut="onRollOut(event)"
+	 implements="com.roguedevelopment.objecthandles.IHandle"
+>
+	    <mx:Script>
+        	<![CDATA[
+        import com.degrafa.*;
+	    import com.degrafa.core.*;
+	    import com.degrafa.geometry.*;
+	    import com.degrafa.paint.*;
+	    import com.degrafa.transform.*;
+	    import com.roguedevelopment.objecthandles.*;
+	    import flash.events.*;
+	    import flash.utils.*;
+	    import mx.binding.*;
+	    import mx.containers.*;
+	    import mx.core.*;
+	    import mx.events.*;
+	    import mx.managers.*;
+			    [Bindable]
+			    [Embed(source="com/pactera/edg/am/view/handler/degrafaHandle_imageCursor.png")]
+			     private var imageCursor:Class;
+			      [Bindable]
+			     private var _descriptor:HandleDescription;
+			     [Bindable]
+			     private var _targetModel:Object;
+			      [Bindable]
+			     protected var isOver:Boolean = false;
+			      [Bindable]
+       			 private var angleOffset:Number = 0;
+
+			       
+		 		protected function onRollOver(event:MouseEvent) : void
+		        {
+		            this.isOver = true;
+		            //zzg 2011-12-20 
+		            //考虑到拖放定位对位置比较敏感，目前的图标光标会产生位置偏移，不利于用户感知，故暂时去掉图标部分。
+		             CursorManager.removeAllCursors();
+		            //CursorManager.setCursor(this.imageCursor);
+		            return;
+		        }// end function
+		 		protected function onRollOut(event:MouseEvent) : void
+		        {
+		            this.isOver = false;
+		            CursorManager.removeAllCursors();
+		            return;
+		        }// end function
+		        /*
+					MOVE : uint = 32
+					NO_ROLE : uint = 0
+					RESIZE_DOWN : uint = 2
+					RESIZE_LEFT : uint = 4
+					RESIZE_RIGHT : uint = 8
+					RESIZE_UP : uint = 1
+					ROTATE : uint = 16
+		        */
+		        private function descriptorIsResize():Object
+		        {
+		        	return (_descriptor.role & 15) ;
+		        }
+		        private function descriptorIsMove():Boolean
+		        {
+		        	return (_descriptor.role & HandleRoles.MOVE) > 0 ;
+		        }
+        
+                private function  descriptorIsRotate():Boolean
+                {
+                	return (_descriptor.role & HandleRoles.ROTATE) > 0;
+                }
+
+//		public function get targetModel():Object
+//		{
+//			return _targetModel;
+//		}
+//		public function set targetModel(value:Object):void
+//		{
+//			_targetModel = value;
+//		}
+//		
+		        public  function get targetModel() : Object
+		        {
+		            return _targetModel;
+		        }// end function
+		        public function set targetModel(param1:Object) : void
+		        {
+		            var _loc_2:* = this._targetModel;
+		            if (_loc_2 !== param1)
+		            {
+		                this._targetModel = param1;
+		                this.dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "targetModel", _loc_2, param1));
+		            }
+		            return;
+		        }// end function
+        
+		        public function get handleDescriptor() : HandleDescription
+		        {
+		            return _descriptor;
+		        }// end function
+		        public function set handleDescriptor(param1:HandleDescription) : void
+		        {
+		            _descriptor = param1;
+		            switch(_descriptor.role)
+		            {
+		                case HandleRoles.RESIZE_DOWN:
+		                {
+		                    angleOffset = 180;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_LEFT:
+		                {
+		                    angleOffset = -90;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_RIGHT:
+		                {
+		                    angleOffset = 90;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_UP | HandleRoles.RESIZE_RIGHT:
+		                {
+		                    angleOffset = 45;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_UP | HandleRoles.RESIZE_LEFT:
+		                {
+		                    angleOffset = -45;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_DOWN | HandleRoles.RESIZE_RIGHT:
+		                {
+		                    angleOffset = 135;
+		                    break;
+		                }
+		                case HandleRoles.RESIZE_DOWN | HandleRoles.RESIZE_LEFT:
+		                {
+		                    angleOffset = -135;
+		                    break;
+		                }
+		                default:
+		                {
+		                    break;
+		                }
+		            }
+		            return;
+       		 }// end function
+        
+                public function redraw() : void
+		        {
+		            invalidateDisplayList();
+		            return;
+		        }// end function
+        
+            ]]>
+        </mx:Script>
+        <GeometryComposition id="_DegrafaHandle_GeometryComposition1"
+        	graphicsTarget="{[this]}" >
+          <fills>
+          	<SolidFill id="theFill" alpha = "1" color="{isOver ? (39168) : (0)}" />
+          	<SolidFill id="theFillLine" alpha = "0" color="{isOver ? (39168) : (0)}" />
+          	<SolidFill id="invisibleFill" alpha = "0" color="16777215" />
+          </fills>
+          <strokes>
+          	<SolidStroke id="theStroke"  alpha = "1" weight = "0.05" color="{isOver ? (26112) : (0)}"/>
+            <SolidStroke id="theStrokeLine"  alpha = "1" weight = "0.05" color="{isOver ? (26112) : (0)}"/>
+          </strokes>
+          <geometry>
+          	<Polygon id="_DegrafaHandle_Polygon1" 
+          		fill="{theFillLine}" 
+          		stroke="{theStroke}" 
+          		visible="{descriptorIsResize() > 0 ? (true) : (false)}" >
+          		   <GraphicPoint x = "-5" y = "5"/>
+          		    <GraphicPoint x = "5" y = "5"/>
+          		     <GraphicPoint x = "0" y = "-5"/>
+          		     <transform>
+          		     	<RotateTransform id="_DegrafaHandle_RotateTransform1" angle="{_targetModel.rotation + angleOffset}" />
+          		     </transform>
+          	</Polygon>
+          	<Polygon id="_DegrafaHandle_Polygon2" 
+          		fill="{theFill}" 
+          		stroke="{theStroke}" 
+          		visible="{descriptorIsMove() ? (true) : (false)}">
+          			<GraphicPoint x="-0.1" y="-0.1" />
+          			<GraphicPoint x="-0.1" y="-7" />
+          			<GraphicPoint x="-3" y="-7" />
+          			<GraphicPoint x="0" y="-11" />
+          			<GraphicPoint x="3" y="-7" />
+          			<GraphicPoint x="0.1" y="-7" />
+          			<GraphicPoint x="0.1" y="-0.1" />
+          			<GraphicPoint x="7" y="-0.1" />
+          			<GraphicPoint x="7" y="-3" />
+          			<GraphicPoint x="11" y="0" />
+          			<GraphicPoint x="7" y="3" />
+          			<GraphicPoint x="7" y="0.1" />
+          			<GraphicPoint x="0.1" y="0.1" />
+          			<GraphicPoint x="0.1" y="7" />
+          			<GraphicPoint x="3" y="7" />
+          			<GraphicPoint x="0" y="11" />
+          			<GraphicPoint x="-3" y="7" />
+          			<GraphicPoint x="-0.1" y="7" />
+          			<GraphicPoint x="-0.1" y="0.1" />
+          			<GraphicPoint x="-7" y="0.1" />
+          			<GraphicPoint x="-7" y="3" />
+          			<GraphicPoint x="-11" y="0" />
+          			<GraphicPoint x="-7" y="-3" />
+          			<GraphicPoint x="-7" y="-0.1" />
+          			<transform>
+          				<RotateTransform id="_DegrafaHandle_RotateTransform2" angle="{_targetModel.rotation + angleOffset}"/>
+          		 	</transform>
+          	</Polygon>
+          	<Polygon id="_DegrafaHandle_Polygon3"
+          		fill="{invisibleFill}"
+          		visible="{descriptorIsMove() > 0 ? (true) : (false)}"
+          		>
+          			<GraphicPoint x="0" y="-11" />
+          			<GraphicPoint x="11" y="0" />
+          			<GraphicPoint x="0" y="11" />
+          			<GraphicPoint x="-11" y="0" /> 
+          			<transform>
+          		<RotateTransform id="_DegrafaHandle_RotateTransform3" angle="{_targetModel.rotation + angleOffset}" />
+          		 </transform>
+          	</Polygon>
+          	<Polygon id="_DegrafaHandle_Polygon4"
+          		 fill="{theFill}"
+          		 stroke="{theStroke}"
+          		 visible="{descriptorIsRotate() ? (true) : (false)}"
+          		 >
+               	    <GraphicPoint x="1" y="-4" />
+               		<GraphicPoint x="2" y="-4" />
+               		<GraphicPoint x="5" y="-1" />
+               		<GraphicPoint x="5" y="2" />
+               		<GraphicPoint x="3" y="4" />
+               		<GraphicPoint x="4" y="5" />
+               		<GraphicPoint x="1" y="5" />
+               		<GraphicPoint x="1" y="2" />
+               		<GraphicPoint x="2" y="3" />
+               		<GraphicPoint x="4" y="1" />
+               		<GraphicPoint x="4" y="0" />
+               		<GraphicPoint x="1" y="-3" />
+               		<transform>
+               			<RotateTransform id="_DegrafaHandle_RotateTransform4" angle="{_targetModel.rotation + angleOffset}" />
+                 	</transform>
+          	</Polygon>
+          	<Polygon id="_DegrafaHandle_Polygon5"
+          		fill="{theFill}"
+          		stroke="{theStroke}"
+          		visible="{descriptorIsRotate() ? (true) : (false)}"
+          		>
+          			<GraphicPoint x="-1" y="4" />
+          			<GraphicPoint x="-2" y="4" />
+          			<GraphicPoint x="-5" y="1" />
+          			<GraphicPoint x="-5" y="-2" />
+          			<GraphicPoint x="-3" y="-4" />
+          			<GraphicPoint x="-4" y="-5" />
+          			<GraphicPoint x="-1" y="-5" />
+          			<GraphicPoint x="-1" y="-2" />
+          			<GraphicPoint x="-2" y="-3" />
+          		    <GraphicPoint x="-4" y="-1" />
+          		    <GraphicPoint x="-4" y="0" />
+          		    <GraphicPoint x="-1" y="3" />
+          		    <transform>
+          		      <RotateTransform id="_DegrafaHandle_RotateTransform5" angle="{_targetModel.rotation + angleOffset}"/>
+          		    </transform>
+          	</Polygon>
+          	<Circle id="_DegrafaHandle_Circle1" radius = "5" 
+          		fill="{invisibleFill}" 
+          		visible="{descriptorIsRotate() ? (true) : (false)}"
+          		/>
+          </geometry>
+        </GeometryComposition>
+        
+</mx:Canvas>

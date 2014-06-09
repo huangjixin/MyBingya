@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StateClientSkin
+ xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns="http://www.degrafa.com/2007"
+    width="8"
+    height="8"
+     > 
+    <mx:Script>
+        <![CDATA[
+        
+            
+                ]]>
+    </mx:Script>
+    <fills>
+	    <LinearGradientFill id="trackFill" baseOrientation = "vertical">
+	    	<GradientStop color = "9934743" ratio = "0" />
+	    	<GradientStop color = "15658734" ratio = "1" />
+	    </LinearGradientFill>
+    </fills>
+    <geometry>
+    	<GeometryGroup>
+    	   <RoundedRectangle id="_TrackSkin_RoundedRectangle1" cornerRadius = "4"
+    	                     width="{skinWidth}"   
+    	                     height="{skinHeight}"
+    	                     fill="{trackFill}"
+    	                     />
+    	</GeometryGroup>
+    </geometry>
+</StateClientSkin>

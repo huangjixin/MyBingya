@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:view="com.pactera.edg.am.view.*"
+				applicationComplete="applicationComplete(event)" backgroundColor="#00d6dde7"
+				layout="absolute">
+	<mx:Script><![CDATA[
+        import com.pactera.edg.am.factory.*;
+        import com.pactera.edg.am.system.*;
+        import com.pactera.edg.am.utilities.*;
+        import com.pactera.edg.am.view.*;
+        import flash.events.*;
+        import mx.containers.*;
+        import mx.core.*;
+        import mx.events.*;
+        import mx.managers.*;
+        import mx.rpc.events.*;
+        import mx.rpc.http.mxml.*;
+        import mx.styles.*;
+        import skins.*;
+
+        private var  hs:HTTPService;
+        private var  loadDataWin:ProgressBarCanvas = null;
+        private var  timeGetData:Number;
+        private var  timeStart:Number;
+        private var  _embed_css__1343659332:Class;
+        private var  mv:ModelView;
+        private var  _analysType:String;
+        private var  date:Date;
+        private var  _id:String;
+        private var  detailInfoWin:CustomPopUpWin = null;
+        private var  searchPanel:SearchInfo = null;
+
+
+        public function getAnalysType() : String
+        {
+            return this._analysType;
+        }// end function
+
+        public function onFault(event:FaultEvent) : void
+        {
+            var _loc_2:* = event.type + " (" + event.fault.faultCode + ")";
+            var _loc_3:* = event.fault.faultString;
+            trace(_loc_2 + _loc_3);
+            return;
+        }// end function
+
+        public function applicationComplete(event:FlexEvent) : void
+        {
+            this.onApplicationComplete(event);
+            return;
+        }// end function
+
+        public function setAnalysType(param1:String) : void
+        {
+            this._analysType = param1;
+            return;
+        }// end function
+
+        public function getId() : String
+        {
+            return this._id;
+        }// end function
+
+        public function onPanelScroll(event:ScrollEvent) : void
+        {
+            var _loc_2:* = event.target as Canvas;
+            this.mv.invalidateDisplayList();
+            trace("[AnalysisView.mxml] onPanelScroll...this.mv.invalidateDisplayList()");
+            return;
+        }// end function
+
+        public function setId(param1:String) : void
+        {
+            this._id = param1;
+            return;
+        }// end function
+
+        public function setDefaultModelSelected(event:FlexEvent) : void
+        {
+            this.date = new Date();
+            var _loc_2:* = this.date.getTime();
+            trace("显示时间" + (_loc_2 - this.timeGetData) + "毫秒");
+            this.contextMeua.modelView = this.mv;
+            var _loc_3:* = event.target as ModelView;
+            var _loc_4:* = _loc_3.analysicStartModel;
+            if (_loc_3.analysicStartModel != null)
+            {
+                _loc_4.myObject.setAnalysisModelClickEffect(_loc_4);
+            }
+            _loc_3.removeEventListener(FlexEvent.CREATION_COMPLETE, this.setDefaultModelSelected);
+            return;
+        }// end function
+
+        public function dowebservice() : void
+        {
+            var _loc_1:MyWebservice = null;
+            var _loc_2:Array = null;
+            var _loc_3:* = ApplicationConfig.getInstance().modelFactory;
+            if (_loc_3.getDataMapping().typename == "webservice")
+            {
+                _loc_1 = new MyWebservice(_loc_3.getDataMapping().url);
+                _loc_2 = new Array();
+                _loc_2.push(_loc_3.analysisModelId);
+                _loc_1.send(_loc_3.getDataMapping().initfunc, _loc_2);
+                _loc_1.onCompleteResult = this.onresult;
+            }
+            return;
+        }// end function
+
+        public function _AnalysisView_HTTPService1_i() : HTTPService
+        {
+            var _loc_1:* = new HTTPService();
+            this.hs = _loc_1;
+            _loc_1.url = "../test.xml";
+            _loc_1.method = "POST";
+            _loc_1.contentType = "application/xml";
+            _loc_1.resultFormat = "e4x";
+            _loc_1.addEventListener("result", this.__hs_result);
+            _loc_1.addEventListener("fault", this.__hs_fault);
+            _loc_1.initialized(this, "hs");
+            return _loc_1;
+        }// end function
+
+        public function onresult(param1:XML) : void
+        {
+            this.loadDataWin.closeProcessBar();
+            this.mv = new ModelView();
+            this.mVbox.addChild(this.mv);
+            var _loc_2:* = XMLList(param1);
+            this.mv.setAnalysType(this.getAnalysType());
+            this.mv.modelXml = _loc_2[0];
+            _loc_2 = null;
+            this.mv.addEventListener(FlexEvent.CREATION_COMPLETE, this.setDefaultModelSelected);
+            return;
+        }// end function
+
+        public function searchClick(event:Event) : void
+        {
+            var _loc_2:MyUIComponent = null;
+            var _loc_3:Array = null;
+            if (event.target as MyUIComponent)
+            {
+                _loc_2 = event.target as MyUIComponent;
+                _loc_3 = _loc_2.getMatchModels();
+                this.searchPanel.matchModels = _loc_3;
+                this.searchPanel.modelView = this.mv;
+                this.mVbox.percentHeight = 100;
+                this.mVbox.percentWidth = 80;
+                this.searchPanel.title = "共查询到" + _loc_3.length + "条记录";
+                this.searchPanel.move(0, 0);
+                this.searchPanel.includeInLayout = true;
+                this.searchPanel.visible = true;
+                this.mVbox.move(this.searchPanel.width, 0);
+            }
+            return;
+        }// end function
+
+        public function resultXml(event:ResultEvent) : void
+        {
+            this.loadDataWin.closeProcessBar();
+            this.date = new Date();
+            this.timeGetData = this.date.getTime();
+            trace("获取数据时间" + (this.timeGetData - this.timeStart) + "毫秒");
+            var _loc_2:* = XML(event.result);
+            this.mv = new ModelView();
+            this.mVbox.addChild(this.mv);
+            var _loc_3:* = XMLList(_loc_2);
+            this.mv.setAnalysType(this.getAnalysType());
+            this.mv.modelXml = _loc_3[0];
+            _loc_2 = null;
+            _loc_3 = null;
+            this.mv.addEventListener(FlexEvent.CREATION_COMPLETE, this.setDefaultModelSelected, false, 0, true);
+            return;
+        }// end function
+
+        public function onApplicationComplete(event:FlexEvent) : void
+        {
+            this.initApp();
+            return;
+        }// end function
+
+        public function __hs_fault(event:FaultEvent) : void
+        {
+            this.onFault(event);
+            return;
+        }// end function
+
+        public function panelClick(event:MouseEvent) : void
+        {
+            if (event.target as Canvas || event.target as ModelComponent || event.target as ModelView)
+            {
+                this.mv.clearAllSelected();
+                this.mv.clickedModles = null;
+                this.mv.clickedModles = new Object();
+                this.mv.recoverModels();
+                this.mv.initAllModelbisAnalysicLinkModel(this.mv.getModels());
+            }
+            return;
+        }// end function
+
+        public function initMouseWheel() : void
+        {
+            MouseWheelEnabler.init(stage);
+            return;
+        }// end function
+
+        public function __hs_result(event:ResultEvent) : void
+        {
+            this.resultXml(event);
+            return;
+        }// end function
+
+        public function initApp() : void
+        {
+            var factory:ModelFactory;
+            var appBgColor:String;
+            var panelBgColor:String;
+            var mVboxBgColor:String;
+            if (Application.application.parameters != null && Application.application.parameters.isCustomColor == "1")
+            {
+                appBgColor = Application.application.parameters.appBgColor;
+                panelBgColor = Application.application.parameters.panelBgColor;
+                mVboxBgColor = Application.application.parameters.mVboxBgColor;
+                Application.application.setStyle("backgroundColor", appBgColor);
+                this.panel.setStyle("backgroundColor", panelBgColor);
+                this.mVbox.setStyle("backgroundColor", mVboxBgColor);
+            }
+            factory = ApplicationConfig.getInstance().modelFactory;
+            this.detailInfoWin = CustomPopUpWin(PopUpManager.createPopUp(this, CustomPopUpWin, false));
+            this.detailInfoWin.includeInLayout = false;
+            this.detailInfoWin.visible = false;
+            factory.detailInfoWin = this.detailInfoWin;
+            this.addEventListener(MyUIComponent.SEARCH_RESULT, this.searchClick);
+            this.searchPanel = new SearchInfo();
+            this.panel.addChild(this.searchPanel);
+            this.searchPanel.includeInLayout = false;
+            this.searchPanel.visible = false;
+            this.searchPanel.percentWidth = 20;
+            this.searchPanel.percentHeight = 100;
+            this.loadDataWin = ProgressBarCanvas(PopUpManager.createPopUp(this, ProgressBarCanvas, true));
+            this.loadDataWin.btnLabel = "数据正在载入，请稍侯…";
+            this.loadDataWin.callBack = function () : void
+            {
+                if (factory.isDebug)
+                {
+                    hs.send();
+                    date = new Date();
+                    timeStart = date.getTime();
+                }
+                else
+                {
+                    dowebservice();
+                }
+                return;
+            }// end function
+            ;
+            PopUpManager.centerPopUp(this.loadDataWin);
+            this.initMouseWheel();
+            this.initRightClick();
+            return;
+        }// end function
+
+        public function initRightClick() : void
+        {
+            RightClickManager.regist();
+            return;
+        }// end function
+    ]]></mx:Script>
+
+	<mx:VBox bottom="0" width="100%" height="100%" horizontalAlign="left" verticalGap="1">
+		<view:MyUIComponent id="contextMeua" width="100%" height="5%" fontFamily="宋体" fontSize="12"/>
+		<mx:Canvas id="panel" width="100%" height="95%" backgroundColor="#00d6dfe6"
+				   borderStyle="none" click="{this.panelClick(event);}" fontSize="12">
+			<mx:Canvas id="mVbox" width="100%" height="100%" backgroundColor="#00d6dfe6"
+					   scroll="{this.onPanelScroll(event);}"/>
+		</mx:Canvas>
+	</mx:VBox>
+
+	<mx:Style>
+        Menu
+        {
+            cornerRadius : 0;
+            fontSize : 12;
+            skin : DgfTest;
+            backgroundAlpha : 1;
+        }
+    
+        .staticProgressBar
+        {
+            barSkin : StaticBarSkin;
+            trackSkin : TrackSkin;
+            maskSkin : ProgressMaskSkin;
+        }
+    
+        CustomLabel
+        {
+            fontSize : 12;
+        }
+    
+        .alertTitle
+        {
+            fontWeight : bold;
+            color : 16777215;
+            fontSize : 13;
+        }
+    
+        Alert
+        {
+            borderColor : 8174828;
+            backgroundColor : 16777215;
+            modalTransparencyColor : 16777215;
+            headerHeight : 30;
+            dropShadowColor : 8174828;
+            backgroundAlpha : 1;
+            themeColor : 8174828;
+            titleStyleName : alertTitle;
+            borderThicknessBottom : 0;
+            messageStyleName : alertMessage;
+            borderThicknessRight : 1;
+            buttonStyleName : alertButton;
+            color : 3289650;
+            headerColors : 8174828, 2905779;
+            borderThicknessLeft : 1;
+            paddingBottom : 20;
+            dropShadowEnable : true;
+        }
+    
+        .background
+        {
+            borderStyle : solid;
+            borderColor : 12303291;
+            backgroundColor : 16777215;
+            cornerRadius : 4;
+        }
+    
+        .loadButton
+        {
+            paddingTop : 0;
+            color : 16777215;
+            textRollOverColor : 16777215;
+            fontSize : 12;
+            disabledColor : 16777215;
+            skin : ButtonLoader_skin;
+        }
+    
+        .movingProgressBar
+        {
+            barSkin : MovingBarSkin;
+            trackSkin : TrackSkin;
+            maskSkin : ProgressMaskSkin;
+        }
+    
+        .alertButton
+        {
+            fontSize : 13;
+            fillColors : 16777215, 12247289;
+            fillAlphas : 1, 1;
+        }
+    
+        ToolTip
+        {
+            cornerRadius : 0;
+            fontSize : 12;
+            backgroundAlpha : 1;
+        }
+    
+        .alertMessage
+        {
+            color : 2263569;
+            fontFamily : 宋体;
+            fontSize : 14;
+        }
+    
+        LinkButton
+        {
+            rollOverColor : 11060463;
+            cornerRadius : 2;
+            skin : _embed_css__1343659332;
+        }
+    </mx:Style>
+</mx:Application>

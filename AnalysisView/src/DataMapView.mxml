@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:vit="com.pactera.edg.am.dmv.view.*"  
+	backgroundColor="#00d6dde7" 
+	layout="absolute" 
+	applicationComplete="initApp()"
+	preloader="com.pactera.edg.am.dmv.preload.LongTopPreloader"
+	>
+	<mx:Script>
+		<![CDATA[
+			import com.pactera.edg.am.dmv.view.handler.CustomContextMenu;
+			    import com.adobe.serialization.json.*;
+		]]>
+	</mx:Script>
+	<mx:Script><![CDATA[
+        import com.pactera.edg.am.dmv.factory.*;
+        import com.pactera.edg.am.dmv.system.*;
+        import com.pactera.edg.am.utilities.*;
+        
+        import com.pactera.edg.am.dmv.view.*;
+        
+        import flash.events.*;
+        import flash.external.*;
+        import flash.system.*;
+        import flash.text.*;
+        import flash.ui.*;
+        import flash.utils.*;
+        import mx.containers.*;
+        import mx.controls.*;
+        import mx.core.*;
+        import mx.events.*;
+        import mx.managers.*;
+        import mx.rpc.events.*;
+        import mx.rpc.http.mxml.*;
+        import mx.styles.*;
+        import skins.*;
+
+		import com.pactera.edg.am.dmv.view.MyUIComponent;
+		import com.pactera.edg.am.dmv.view.MyCustomPopUpWin;
+		
+		import com.pactera.edg.am.utilities.RightClickManager;
+		import com.pactera.edg.am.utilities.MouseWheelEnabler;
+		 
+        private var  loadDataWin:ProgressBarCanvas;
+        private var  factory:ModelFactory = null;
+        private var  mv:com.pactera.edg.am.dmv.view.ModelView;
+        private var  searchW:searchWindow;
+        private var  xmltest:XMLList;
+        private var  progress:Number = 0;
+        private var  excecuteCount:int = 0;
+        private var  detailInfoWin:MyCustomPopUpWin;
+        private var  timer:Timer;
+	    
+//	    private var hs:HTTPService;
+
+        public function saveDataMap(event:ContextMenuEvent) : void
+        {
+        	doSaveDataMap();
+        }
+        import mx.rpc.xml.*;
+        public function doSaveDataMap() : void
+        {
+            mv.getDataMapXml(mv.modelXml);
+           
+            var ws:MyWebservice = new MyWebservice(factory.getDataMapping().url);
+            var str:String=mv.modelXml.toString();
+            //zzg 2011-12-20
+            //对xml进行编码，并且要求服务器端配合调整，避免xml乱码
+            //2011-12-21 通过改进MyWebservice.as的转义函数(xmlSpecialCharsFilter),实现了底层自动兼容
+            //所以，这里无须进行encodeURI，方便后期使用
+            //str=encodeURI(str);
+            var array:Array=[];//
+            array.push(str);
+            ws.send(factory.getDataMapping().savefunc, array);
+            ws.onCompleteResultObject = function (param1:String):void
+            {
+                if (param1 == "0")
+                {
+                    Alert.show("发生错误！");
+                }
+                else if (param1 == "1")
+                {
+                    Alert.show("保存成功！");
+                }
+                return;
+            }// end function
+            ;
+            return;
+        }// end function
+
+//        public function _DataMapView_HTTPService1_i() : HTTPService
+//        {
+//            var _loc_1:* = new HTTPService();
+//            hs = _loc_1;
+//            _loc_1.url = "xml\\dataMap.xml";
+//            _loc_1.method = "POST";
+//            _loc_1.contentType = "application/xml";
+//            _loc_1.resultFormat = "e4x";
+//            _loc_1.addEventListener("result", __hs_result);
+//            _loc_1.initialized(this, "hs");
+//            return _loc_1;
+//        }
+
+        public function searchDataMap(event:ContextMenuEvent) : void
+        {
+        	doSearchDataMap();
+        }
+        public function removeSearchW():void{
+        	var _searchW:searchWindow= com.pactera.edg.am.dmv.view.searchWindow.g_searchW
+        	if (_searchW != null && _searchW.visible)
+            {
+                PopUpManager.removePopUp(_searchW);
+                _searchW=null;
+            }
+        }
+        public function doSearchDataMap() : void
+        {
+            removeSearchW();
+            searchW = searchWindow(PopUpManager.createPopUp(this, searchWindow, false));
+            PopUpManager.centerPopUp(searchW);
+            searchW.mainApp = this;
+            searchW.callBackFun = function (param1:String):void
+            {
+                ExternalInterface.call("searchMetaData", "", param1, "");
+                return;
+            }// end function
+            ;
+            com.pactera.edg.am.dmv.view.searchWindow.setSearchWindow(searchW);
+            return;
+        }// end function
+        
+
+        public function dowebservice() : void
+        {
+            var _loc_1:MyWebservice = null;
+            var _loc_2:Array = null;
+            if (factory.getDataMapping().typename == "webservice")
+            {
+                _loc_1 = new MyWebservice(factory.getDataMapping().url);
+                if (factory.dataMapType == "SystemDmType")
+                {
+                    _loc_1.send(factory.getDataMapping().initfunc);
+                }
+                else if (factory.dataMapType == "SchemaDmType")
+                {
+                    _loc_2 = String(ExternalInterface.call("getSchemaDmArg")).split("-");
+                    _loc_1.send(factory.getDataMapping().initSchemafunc, _loc_2);
+                }
+                _loc_1.onCompleteResult = onresult;
+            }
+            return;
+        }// end function
+
+        public function resultXml(event:ResultEvent) : void
+        {
+            loadDataWin.closeProcessBar();
+            //zzg 2011-12-21 增加mv
+            mv = new com.pactera.edg.am.dmv.view.ModelView();
+            panel.addChild(mv);
+            xmltest = XMLList(event.result);
+            mv.modelXml = xmltest[0];
+            mv.addEventListener(FlexEvent.CREATION_COMPLETE, mvCompleteHandler);
+            mv.setStyle("creationCompleteEffect", EffectFactroy.getIrisEffect());
+            return;
+        }// end function
+
+        public function onresult(param1:XML) : void
+        {
+            var _loc_2:Label = null;
+            var _loc_3:TextLineMetrics = null;
+            loadDataWin.closeProcessBar();
+            if (param1.toString() != "")
+            {
+                mv = new com.pactera.edg.am.dmv.view.ModelView();
+                panel.addChild(mv);
+                xmltest = XMLList(param1);
+                mv.modelXml = xmltest[0];
+                mv.addEventListener(FlexEvent.CREATION_COMPLETE, mvCompleteHandler);
+                mv.setStyle("creationCompleteEffect", EffectFactroy.getIrisEffect());
+            }
+            else
+            {
+                _loc_2 = new Label();
+                _loc_2.text = "当前没有数据地图数据!";
+                panel.addChild(_loc_2);
+                _loc_3 = _loc_2.measureText(_loc_2.text);
+                _loc_2.x = (panel.width - _loc_3.width) / 2;
+                _loc_2.y = panel.height / 2;
+            }
+            return;
+        }// end function
+
+        public function refershDataMap(event:ContextMenuEvent) : void
+        {
+            doRefershDataMap();
+        }// end function
+
+        public function doRefershDataMap() : void
+        {
+             this.removeSearchW();
+             panel.removeChild(mv);
+             initApp();
+           
+            return;
+        }// end function
+        
+        public function initMouseWheel() : void
+        {
+            MouseWheelEnabler.init(stage);
+            return;
+        }// end function
+        public function initRightClick():void{
+        	  RightClickManager.regist();
+        	  return ;
+        }
+        
+        public function addContextMenu() : void
+        {
+            var _loc_5:ContextMenuItem = null;
+            var _loc_1:* = new ContextMenu();
+            var _loc_2:* = new ContextMenuItem("查询");
+            _loc_2.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, searchDataMap);
+            _loc_1.customItems.push(_loc_2);
+            var _loc_3:* = new ContextMenuItem("刷新");
+            _loc_3.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, refershDataMap);
+            _loc_1.customItems.push(_loc_3);
+       
+            if (ExternalInterface.call("canSave"))
+            {
+                _loc_5 = new ContextMenuItem("保存设置");
+                _loc_5.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveDataMap);
+                _loc_1.customItems.push(_loc_5);
+            }
+            _loc_1.hideBuiltInItems();
+            this.contextMenu = _loc_1;
+            this.stage.showDefaultContextMenu = false;
+            return;
+        }// end function
+        
+        
+        
+////////////////////////////////////////////////
+        //增加定制菜单
+        public function addCustomContextMenuEvent():void{
+        	
+        	this.panel.addEventListener(RightClickManager.RIGHT_CLICK,onCustomRightClickHandler);
+        }
+ 
+        private function rightClickMenuItemHandler(event:MenuEvent) : void
+        {
+        	   var menuItemIdx:* = event.index;
+               var menuId:String=CustomContextMenu.rightClickMenuHandlerId[menuItemIdx]
+			    if(menuId=="searchDataMap"){//查询
+			    	 doSearchDataMap();
+			    }else if(menuId=="refershDataMap"){//刷新
+			    	 doRefershDataMap();
+			    }else if(menuId=="saveDataMap"){//保存设置
+			    	 doSaveDataMap();
+			    }
+            return;
+        }
+
+        public function onCustomRightClickHandler(event:MouseEvent):void
+        {
+        	 trace("[datamapview ...onCustomRightClickHandler]"+event.bubbles+event.eventPhase);
+            //避免事件继续冒泡，解决多个关联多谢层叠的事件干扰问题
+        	event.stopPropagation();
+        	
+        	//清除定制鼠标
+        	CursorManager.removeAllCursors();
+        	CustomContextMenu.removeRightClickMenu();
+        	  
+        	var menuItemData:String;
+          
+            
+        	menuItemData = "<root>" ; 
+        	menuItemData+="<node label=\"查询\" />" ;
+    	 	CustomContextMenu.rightClickMenuHandlerId.push("searchDataMap");
+    	
+        	menuItemData+="<node label=\"刷新\" />" ;
+            CustomContextMenu.rightClickMenuHandlerId.push("refershDataMap");
+            if (ExternalInterface.call("canSave"))
+            {
+                menuItemData+="<node label=\"保存设置\" />" ;
+                CustomContextMenu.rightClickMenuHandlerId.push("saveDataMap");
+            }
+            
+
+            
+    	 	menuItemData+="</root>";
+           
+            
+            CustomContextMenu.rightClickMenu=Menu.createMenu(this,menuItemData,false);
+  			CustomContextMenu.rightClickMenu.addEventListener("itemClick", this.rightClickMenuItemHandler);
+			CustomContextMenu.rightClickMenu.labelField = "@label";
+  			var point:Point = new Point(mouseX,mouseY);   
+		    point = localToGlobal(point);    
+		    CustomContextMenu.rightClickMenu.show(point.x,point.y);
+		    return ;
+        }
+
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+        public function panelClick(event:MouseEvent) : void
+        {
+            if (event.target as Canvas || event.target as com.pactera.edg.am.dmv.view.IContainer)
+            {
+                if (this.mv != null)
+                {
+                    myText.setFocus();
+                    myText.focusManager.hideFocus();
+                    this.mv.container.getObjectHandles().selectionManager.clearSelection();
+                    mv.clearSelected(mv.getModels());
+                }
+            }
+            return;
+        }// end function
+
+        public function mvCompleteHandler(event:FlexEvent) : void
+        {
+        	//trace("[mvCompleteHandler]:"+event.target);
+            var _loc_2:* = event.target as ModelView;
+            	//trace("[mvCompleteHandler]:--1:"+_loc_2);
+            contextMeua.modelView = _loc_2;
+             	//trace("[mvCompleteHandler]:--2:"+_loc_2);
+            return;
+        }// end function
+
+        public function fullScreenHandler(event:FullScreenEvent) : void
+        {
+            if (event.fullScreen)
+            {
+                contextMeua.setRightMenuDisable(true);
+            }
+            else
+            {
+                contextMeua.setRightMenuDisable(false);
+            }
+            return;
+        }// end function
+
+        public function hsResultHandler(event:ResultEvent) : void
+        {
+            resultXml(event);
+            return;
+        }// end function
+
+        public function initApp() : void
+        {
+			//zzg 20130723 增加颜色定制参数
+			if(Application.application.parameters!=null&&
+				Application.application.parameters.isCustomColor=="1" //需要定义颜色
+			){
+				var appBgColor:String=Application.application.parameters.appBgColor;
+				var panelBgColor:String=Application.application.parameters.panelBgColor;
+				mx.core.Application.application.setStyle('backgroundColor',appBgColor);
+				panel.setStyle('backgroundColor',panelBgColor);
+			}
+			
+            factory = ApplicationConfig.getInstance().modelFactory;
+			factory.isDebug = true;
+            detailInfoWin = MyCustomPopUpWin(PopUpManager.createPopUp(this, MyCustomPopUpWin, false));
+            detailInfoWin.includeInLayout = false;
+            detailInfoWin.visible = false;
+            factory.detailInfoWin = detailInfoWin;
+            addContextMenu();
+            addCustomContextMenuEvent();
+            
+            loadDataWin = ProgressBarCanvas(PopUpManager.createPopUp(this, ProgressBarCanvas, true));
+            loadDataWin.btnLabel = "数据正在载入，请稍侯…";
+            loadDataWin.callBack = function ():void
+            {
+                if (factory.isDebug)
+                {
+                    hs.send();
+                }
+                else
+                {
+                    dowebservice();
+                }
+                return;
+            }// end function
+            ;
+            PopUpManager.centerPopUp(loadDataWin);
+            this.stage.addEventListener(FullScreenEvent.FULL_SCREEN, fullScreenHandler);
+            
+                        //初始化鼠标滑轮
+            initMouseWheel();
+            initRightClick();
+            
+            return;
+        }// end function
+    ]]></mx:Script>
+	<mx:HTTPService id="hs" url="xml\\dataMap.xml" method="POST" contentType="application/xml" resultFormat="e4x" result="hsResultHandler(event)"/>
+	<mx:VBox width="100%" height="100%" verticalGap="1" bottom="0">
+		<vit:MyUIComponent id="contextMeua" width="100%" height="22" fontFamily="宋体" fontSize="12"/>
+		<mx:Canvas id="panel" width="100%" height="97%" fontSize="12" backgroundColor="#00deebff" borderStyle="none" click="{panelClick(event);}">
+			<mx:Button id="myText" name="myText" includeInLayout="false" visible="false"/>
+		</mx:Canvas>
+	</mx:VBox>
+
+	<mx:Style>
+        .movingProgressBar
+        {
+            maskSkin : ProgressMaskSkin;
+            trackSkin : TrackSkin;
+            barSkin : MovingBarSkin;
+        }
+    
+        ToolTip
+        {
+            cornerRadius : 0;
+            backgroundAlpha : 1;
+            fontSize : 12;
+        }
+    
+        .staticProgressBar
+        {
+            maskSkin : ProgressMaskSkin;
+            trackSkin : TrackSkin;
+            barSkin : StaticBarSkin;
+        }
+    
+        .backGroupCss
+        {
+            borderSkin : GridSkin;
+        }
+    
+        Alert
+        {
+            borderColor : 8174828;
+            messageStyleName : alertMessage;
+            modalTransparencyColor : 16777215;
+            backgroundAlpha : 1;
+            dropShadowColor : 8174828;
+            paddingBottom : 20;
+            themeColor : 8174828;
+            borderThicknessRight : 1;
+            titleStyleName : alertTitle;
+            color : 3289650;
+            borderThicknessLeft : 1;
+            headerColors : 8174828, 2905779;
+            dropShadowEnable : true;
+            headerHeight : 30;
+            borderThicknessBottom : 0;
+            buttonStyleName : alertButton;
+            backgroundColor : 16777215;
+        }
+    
+        .alertMessage
+        {
+            color : 2263569;
+            fontFamily : 宋体;
+        }
+    
+        CustomLabel
+        {
+            fontSize : 12;
+        }
+    
+        LinkButton
+        {
+        	skin : Embed(skinClass="skins.CustomLinkButtonSkin");
+            /*skin : CustomLinkButtonSkin;*/
+            cornerRadius : 2;
+            rollOverColor : 11060463;
+        }
+    
+        global
+        {
+            fontSize : 12;
+        }
+    
+        TitleWindow
+        {
+            footerColors : 13030375, 13030375;
+            borderThicknessRight : 0;
+            borderColor : 7566707;
+            cornerRadius : 4;
+            dropShadowEnabled : true;
+            borderThicknessLeft : 0;
+            headerColors : 13030375, 13030375;
+            headerHeight : 20;
+            borderThicknessBottom : 0;
+            borderThicknessTop : 0;
+            borderAlpha : 1;
+            backgroundColor : 14609407;
+        }
+    /*
+        Menu
+        {
+            cornerRadius : 0;
+            backgroundAlpha : 1;
+            fontSize : 12;
+        }
+        */
+    
+        .loadButton
+        {
+            paddingTop : 0;
+            color : 16777215;
+            skin : ClassReference("skins.ButtonLoader_skin");
+            disabledColor : 16777215;
+            textRollOverColor : 16777215;
+            fontSize : 12;
+        }
+    
+        .alertButton
+        {
+            fillAlphas : 1, 1;
+            fillColors : 16777215, 12247289;
+            fontSize : 13;
+        }
+    
+        .gradient
+        {
+            cornerRadius : 10;
+            dropShadowEnabled : true;
+            fillColors : 39423, 153;
+            borderSkin : GradientBorderSkin;
+            borderThickness : 0;
+            borderStyle : solid;
+        }
+    
+        .alertTitle
+        {
+            color : 16777215;
+            fontWeight : bold;
+            fontSize : 13;
+        }
+    </mx:Style>
+</mx:Application>

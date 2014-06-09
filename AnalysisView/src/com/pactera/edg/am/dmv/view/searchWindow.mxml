@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" close="{PopUpManager.removePopUp(this);}" 
+	 showCloseButton="true"
+	 title="查询"
+	creationComplete="{initSearchWindow();}">
+	<mx:Script><![CDATA[
+        import flash.events.*;
+        import mx.containers.*;
+        import mx.controls.*;
+        import mx.core.*;
+        import mx.events.*;
+        import mx.managers.*;
+        import com.pactera.edg.am.dmv.view.FlashImeHelperJs;
+        import com.pactera.edg.am.utilities.MouseWheelEnabler;
+
+        //定义全局变量,便于移除对象
+        public static  var g_searchW:searchWindow=null;
+        public static function setSearchWindow(_searchW:searchWindow):void
+        {
+        	g_searchW=_searchW;
+        	//兼容中文输入问题
+        	flashInputObj=g_searchW.context;
+        }
+        public function FocusInHandler(event:FocusEvent) : void
+        {
+            context.editable = true;
+            context.text = "";
+            context.clearStyle("color");
+            context.clearStyle("fontStyle");
+            context.setStyle("fontStyle", "normal");
+            this.addEventListener(KeyboardEvent.KEY_DOWN, keyEventHandler);
+            //zzg 2011-12-21，改进支持中文输入
+            this.context.addEventListener(FocusEvent.FOCUS_IN, textInputFocusInHandler);
+            this.context.addEventListener(MouseEvent.CLICK, textInputClickHandler);
+            return;
+        }// end function
+
+        public function keyEventHandler(event:KeyboardEvent) : void
+        {
+            if (event.keyCode == 13)
+            {
+                startSearch();
+            }
+            return;
+        }// end function
+
+        public function initSearchWindow() : void
+        {
+            context.editable = false;
+            context.setStyle("color", 11187123);
+            context.setStyle("fontStyle", "italic");
+            context.addEventListener(FocusEvent.FOCUS_IN, FocusInHandler);
+            return;
+        }// end function
+
+        public function startSearch() : void
+        {
+            var _loc_1:* = context.text;
+            if (_loc_1.replace(/^\s*|\s*$""^\s*|\s*$/g, "").split(" ").join("") == "" || _loc_1 == "搜索...")
+            {
+                Alert.show("请输入搜索关键字");
+            }
+            else
+            {
+                callBackFun.call(mainApp, _loc_1);
+            }
+            return;
+        }// end function
+        [Bindable]
+        [@Embed(source='com/pactera/edg/am/view/search_gif.png')]
+        private var searchIcon:Class;
+        
+        public var mainApp:UIComponent;
+        public var callBackFun:Function;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //获取js定义
+       public static var  initFlashImeBugJs:XML=FlashImeHelperJs.initFlashImeBugJs;
+ 
+ 
+ 
+        private function textInputClickHandler(e:MouseEvent):void 
+        {
+            if (this.stage.displayState == StageDisplayState.FULL_SCREEN)
+            {
+                  return;//全屏模式，不需要修复中文输入bug
+	        }
+            var wmode:String=MouseWheelEnabler.getBrowserInfo().flashWmode;
+        	//trace("wmode:"+wmode);
+        	if(wmode!=null&&wmode.toLowerCase()=="opaque"){//增加定制菜单的时候，需要修复透明flash引起的中文输入问题
+				//初始化
+				 initCallBackFunc(g_searchW.context);
+				  //定位到网页焦点,辅助输入
+				 ExternalInterface.call("fih.setFlashInputHelperFocus");
+        	}
+        }
+
+		private function textInputFocusInHandler(e:FocusEvent):void 
+		{
+			if (this.stage.displayState == StageDisplayState.FULL_SCREEN)
+            {
+                  return;//全屏模式，不需要修复中文输入bug
+	        }
+	        
+			//尝试设置中文输入法
+			if (Capabilities.hasIME)
+			{
+			    try
+			    {
+			        IME.enabled = true;
+			        IME.conversionMode = IMEConversionMode.CHINESE;
+			    }
+			    catch (error:Error)
+			    {
+			    	trace("[textInputFocusInHandler]:"+error);
+			    }
+			}
+		    
+		    var wmode:String=MouseWheelEnabler.getBrowserInfo().flashWmode;
+        	//trace("wmode:"+wmode);
+        	if(wmode!=null&&wmode.toLowerCase()=="opaque"){//增加定制菜单的时候，需要修复透明flash引起的中文输入问题
+				//初始化
+				 initCallBackFunc(g_searchW.context);
+				  //定位到网页焦点,辅助输入
+				 ExternalInterface.call("fih.setFlashInputHelperFocus");
+        	}
+		}
+		private static var isInitCBF:Boolean=false;
+		private static function initCallBackFunc(_flashInputObj:TextInput):void{
+			if(!isInitCBF){
+			    flashInputObj=_flashInputObj;
+			    if (ExternalInterface.available)
+	            {
+	            	//脚本注入
+	                ExternalInterface.call(initFlashImeBugJs, ExternalInterface.objectID);
+	                ExternalInterface.addCallback('flashInputHelperValueChange', flashInputHelperValueChange);	
+	            }
+			    isInitCBF=true;
+			}
+			return;
+		}
+		private static  var flashInputObj:TextInput;
+	    private  static function flashInputHelperValueChange(val:String) : void
+        {
+        	if(val!=null&&val.length>0){
+        		  var event_down:KeyboardEvent;
+        		  var event_up:KeyboardEvent;
+        		  var keyCode:int;
+        		  
+        		  var selectionBeginIndex:int;
+        		  var selectionEndIndex:int;
+        		  var tmpStr:String;
+        		if(val=="key_down_8"){//特殊字符传递
+        		    //Alert.show("val:"+val);
+        		    //测试发现模拟事件无法退格删除,故通过其他方法模拟
+//        		     keyCode=8;
+//        		     event_down = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
+//        		    event_down.keyCode= keyCode;
+//        			flashInputObj.dispatchEvent(event_down);
+//        			
+//        			event_up = new KeyboardEvent(KeyboardEvent.KEY_UP);
+//        		    event_up.keyCode= keyCode;
+//        			flashInputObj.dispatchEvent(event_up);
+        			
+        			 selectionBeginIndex=flashInputObj.selectionBeginIndex;//=0;
+	        		 selectionEndIndex=flashInputObj.selectionEndIndex;//=0;
+	        		 tmpStr=flashInputObj.text;
+	        		if(selectionBeginIndex!=selectionEndIndex){
+	        			flashInputObj.text=tmpStr.substring(0,selectionBeginIndex)+tmpStr.substring(selectionEndIndex);
+	        			flashInputObj.selectionBeginIndex=selectionBeginIndex;
+	        		    flashInputObj.selectionEndIndex=selectionBeginIndex;
+	        		}else{
+	        			flashInputObj.text=tmpStr.substring(0,selectionBeginIndex-1)+tmpStr.substring(selectionEndIndex);
+	        			var newIdx:int=selectionBeginIndex-1;
+	        			if(newIdx<0){
+	        				newIdx=0;
+	        			}
+	        			flashInputObj.selectionBeginIndex=newIdx;
+	        		    flashInputObj.selectionEndIndex=newIdx;
+	        		}
+	        		
+	        		
+        		}else if(val=="key_down_13"){	
+        		     keyCode=13;
+        		     event_down = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
+        		    event_down.keyCode= keyCode;
+        			flashInputObj.dispatchEvent(event_down);
+        			
+        			 event_up = new KeyboardEvent(KeyboardEvent.KEY_UP);
+        		    event_up.keyCode= keyCode;
+        			flashInputObj.dispatchEvent(event_up);	
+        		}else{
+	        		 selectionBeginIndex=flashInputObj.selectionBeginIndex;//=0;
+	        		 selectionEndIndex=flashInputObj.selectionEndIndex;//=0;
+	        		 tmpStr=flashInputObj.text;
+	        		flashInputObj.text=tmpStr.substring(0,selectionBeginIndex)+val+tmpStr.substring(selectionEndIndex);
+	        		flashInputObj.selectionBeginIndex=selectionBeginIndex+val.length;
+	        		flashInputObj.selectionEndIndex=selectionBeginIndex+val.length;
+	        	    //flashInputObj.text+=val;
+        	 	}
+        	}
+        }
+
+
+
+    ]]></mx:Script>
+
+	<mx:HBox horizontalGap="0">
+		<mx:TextInput id="context" text="请输入搜索关键字..." editable="false" width="221" height="25"/>
+		<mx:Button id="submit" width="20" height="25" label="" icon="{searchIcon}" click="{startSearch();}"/>
+	</mx:HBox>
+
+</mx:TitleWindow>

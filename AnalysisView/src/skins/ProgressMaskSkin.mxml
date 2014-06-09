@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StateClientSkin
+ xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns="http://www.degrafa.com/2007"
+    width="8"
+    height="8"
+     > 
+    <mx:Script>
+        <![CDATA[
+        
+            
+                ]]>
+    </mx:Script>
+    <fills>
+      <SolidFill id="blackFill" color = "0"/>
+    </fills>
+    <geometry>
+    	<GeometryGroup>
+    	  <RoundedRectangle id="_ProgressMaskSkin_RoundedRectangle1"
+    	  	cornerRadius = "4"
+    	  	width="{skinWidth}"
+    	  	height="{skinHeight}"
+    	  	fill="{blackFill}"
+    	  	/>
+    	</GeometryGroup>
+    </geometry>
+</StateClientSkin>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GraphicBorderSkin
+ xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns="http://www.degrafa.com/2007" added="initEffect()"> 
+     <mx:Script>
+        <![CDATA[
+
+    import mx.effects.*;
+    import mx.effects.easing.*;
+    import mx.events.*;
+    import flash.filters.GlowFilter;
+			import mx.containers.*;
+			import mx.controls.*;
+			import mx.core.*;
+    
+       // private animateDiags : AnimateProperty;
+       
+//       [Bindable]
+//       [Embed(source="skins/thickDiags.png")]
+//       private var thickDiagsPng:Class;
+
+       // private var shine:LinearGradientFill;
+       // private var diagFill:ComplexFill;
+       // private var lightBlueGradFill:LinearGradientFill;
+       // private var mainRect:RoundedRectangleComplex;
+       // private var diagsBitmapFill:BitmapFill;
+        [Bindable]
+        private var awidth:Number =0;// 180;
+        [Bindable]
+        private var aheight:Number =0;// 20;
+			[Bindable]
+			private var lightBlueGradFillColorA:String ="#336699";
+			[Bindable]
+			private var lightBlueGradFillColorB:String ="#62ABCD";
+			
+			private  function getColorVal(defaultColor:String,settingColor:String):String{
+				if(settingColor==null||settingColor.length==0){
+					return defaultColor;
+				}else{
+					return settingColor;
+				}
+			}
+      
+       //init awidth,aheight
+        override protected function updateDisplayList(param1:Number, param2:Number) : void
+        {
+			//zzg 20130723 增加颜色定制参数
+			if(Application!=null&&
+				Application.application!=null&&
+				Application.application.parameters!=null&&
+				Application.application.parameters.isCustomColor=="1" //需要定义颜色
+			){
+				lightBlueGradFillColorA=getColorVal(lightBlueGradFillColorA,Application.application.parameters.bl_lightBlueGradFillColorA);
+				lightBlueGradFillColorB=getColorVal(lightBlueGradFillColorB,Application.application.parameters.bl_lightBlueGradFillColorB);
+				
+			}
+			
+            super.updateDisplayList(param1, param2);
+            //trace("updateDisplayList..."+param1+","+param2);
+            this.awidth = param1;
+            this.aheight = param2;
+            return;
+        }// end function
+
+
+        private function initEffect() : void
+        {
+        	trace("ButtonLoader_skin.mxml initeffect...."+"name["+name+"] ("+this.skinWidth+","+this.skinHeight+")");
+            if (name == "disabledSkin")
+            {
+                this.animateDiags.play();
+            }
+            return;
+        }// end function
+        public function animateDiagsEffectEnd(event:EffectEvent) : void
+        {
+            this.animateDiags.play();
+            return;
+        }// end function
+        
+        ]]>
+    </mx:Script>
+    <mx:AnimateProperty id="animateDiags"
+		property = "offsetX"
+		fromValue = "0"
+		toValue = "24"
+		duration = "400"
+		easingFunction = "Linear.easeInOut"
+		effectEnd="animateDiagsEffectEnd(event)"
+		target="{diagsBitmapFill}"
+	/>
+	<fills>
+	    <LinearGradientFill angle="90" id="lightBlueGradFill">
+			<GradientStop color = "{lightBlueGradFillColorA}"  alpha = "1" />
+			<GradientStop color = "{lightBlueGradFillColorB}"  alpha = "1" />
+  	    </LinearGradientFill>
+  	   <LinearGradientFill angle="90" id="shine">
+		  <GradientStop color = "#FFFFFF"  alpha = "0.6" />
+		  <GradientStop color = "#FFFFFF"  alpha = "0.3" />
+	  </LinearGradientFill>
+	  <ComplexFill id="diagFill">
+	  	<LinearGradientFill id="_ButtonLoader_skin_LinearGradientFill1" derive="{lightBlueGradFill}">
+	  	</LinearGradientFill>
+	  	<BlendFill blendMode="multiply" >
+	  	  <fill>
+	  	   	<BitmapFill id="diagsBitmapFill" source="@Embed(source='skins/thickDiags.png')" />
+	  	  </fill>
+	  	</BlendFill>
+	  </ComplexFill>
+	</fills>
+	<geometry>
+		  <GeometryComposition state="upSkin">
+			    <RoundedRectangleComplex 
+			    	 id="mainRect"
+			    	 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="11"
+			    	 bottomRightRadius="11"
+			    	 fill="{lightBlueGradFill}"
+			    	 height="{aheight}"
+			    	 width="{awidth}"
+			    	 />
+			    <RoundedRectangleComplex 
+			    	id="_ButtonLoader_skin_RoundedRectangleComplex2"
+			    	 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="6"
+			    	 bottomRightRadius="6"
+			    	 x="1"
+			    	 y="1"
+			    	 fill="{shine}"
+			    	 height="{mainRect.height / 2}"
+			    	 width="{awidth - 2}"
+			     />
+		  </GeometryComposition>
+		  <GeometryComposition  state="overSkin" >
+			  	<RoundedRectangleComplex
+			  		 id="_ButtonLoader_skin_RoundedRectangleComplex3"
+			  		 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="11"
+			    	 bottomRightRadius="11"
+			    	 fill="{lightBlueGradFill}"
+			    	 height="{aheight}"
+			    	 width="{awidth}"
+			    	 />
+			  	<RoundedRectangleComplex 
+			  	  id="_ButtonLoader_skin_RoundedRectangleComplex4"
+			  	  	 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="6"
+			    	 bottomRightRadius="6"
+			         x="1"
+			    	 y="1"
+			    	 fill="{shine}"
+			    	 height="{mainRect.height / 2}"
+			    	 width="{awidth - 2}"
+			  	/>
+		  </GeometryComposition>
+		  <GeometryComposition state="downSkin">
+			   <RoundedRectangleComplex id="_ButtonLoader_skin_RoundedRectangleComplex5"
+			   		 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="11"
+			    	 bottomRightRadius="11"
+			    	 fill="{lightBlueGradFill}"
+			    	 height="{aheight}"
+			    	 width="{awidth}"
+			    />	   	
+			   	<RoundedRectangleComplex 
+			  	  id="_ButtonLoader_skin_RoundedRectangleComplex6"
+			  	  	 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="6"
+			    	 bottomRightRadius="6"
+			         x="1"
+			    	 y="1"
+			    	 fill="{shine}"
+			    	 height="{mainRect.height / 2}"
+			    	 width="{awidth - 2}"
+			  	/>
+		  </GeometryComposition>
+		  <GeometryComposition state="disabledSkin">
+		   	    <RoundedRectangleComplex id="_ButtonLoader_skin_RoundedRectangleComplex7"
+			   		 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="11"
+			    	 bottomRightRadius="11"
+			    	 fill="{diagFill}"
+			    	 height="{aheight}"
+			    	 width="{awidth}"
+			    />	   	
+			   	<RoundedRectangleComplex 
+			  	  id="_ButtonLoader_skin_RoundedRectangleComplex8"
+			  	  	 topLeftRadius="11" 
+			    	 topRightRadius="11"
+			    	 bottomLeftRadius="6"
+			    	 bottomRightRadius="6"
+			         x="1"
+			    	 y="1"
+			    	 fill="{shine}"
+			    	 height="{mainRect.height / 2}"
+			    	 width="{awidth - 2}"
+			  	/>
+		  </GeometryComposition>
+	</geometry>
+	<filters>
+	 <mx:GlowFilter
+	 	    color = "#FFFFFF"
+           alpha = "0.5"
+           blurX = "10"
+           blurY = "10"
+	 	/>
+	
+	</filters>
+</GraphicBorderSkin>

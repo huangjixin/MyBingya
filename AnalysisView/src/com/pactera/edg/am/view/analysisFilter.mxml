@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	     creationComplete="initFilter()" horizontalGap = "2">
+	<mx:Script><![CDATA[
+	    import com.pactera.edg.am.factory.*;
+        import com.pactera.edg.am.system.*;
+        import flash.events.*;
+    import flash.utils.*;
+    import mx.binding.*;
+    import mx.containers.*;
+    import mx.controls.*;
+    import mx.core.*;
+    import mx.events.*;
+    import mx.styles.*;
+    
+   public var completeFun:Function;
+   private var dataXml:XML;
+
+
+	    private function initFilter() : void
+        {
+            var _loc_3:MyWebservice = null;
+            var _loc_4:Array = null;
+            var _loc_1:ModelFactory = ApplicationConfig.getInstance().modelFactory;
+            var _loc_2:* = _loc_1.analysisModelId;
+            trace("analysisModelId:"+_loc_2);
+            if (!_loc_1.isDebug)
+            {
+            	trace("!_loc_1.isDebug");
+                if (_loc_1.getDataMapping().filterCondition == null || _loc_1.getDataMapping().filterCondition == "")
+                {
+                    return;
+                }
+                trace("url:"+_loc_1.getDataMapping().url);
+                _loc_3 = new MyWebservice(_loc_1.getDataMapping().url);
+                _loc_4 = new Array();
+                _loc_4.push(_loc_2);
+                _loc_3.send(_loc_1.getDataMapping().filterCondition, _loc_4);
+                _loc_3.onCompleteResult = this.handleResult;
+            }else{
+            	trace("_loc_1.isDebug");
+            }
+            return;
+        }// end function
+        
+        private function handleResult(param1:XML) : void
+        {
+        	trace("analysisFilter   handleResult");
+            var _loc_3:XML = null;
+            this.dataXml = param1;
+            this.systemXmlList = this.dataXml.child("nodes").children();
+            this.systemCombo.selectedIndex = 0;
+            var _loc_2:* = this.dataXml.head.mdmodelcode.toString();
+            _loc_2 = _loc_2.toLowerCase();
+            if (this.systemXmlList.length() > 0 && (_loc_2 == "table" || _loc_2 == "column"))
+            {
+                _loc_3 = XML(this.systemCombo.selectedItem);
+                this.tableXmlList = _loc_3.child("nodes").children();
+                this.tableCombo.selectedIndex = 0;
+                _loc_3 = XML(this.tableCombo.selectedItem);
+                this.columnXmlList = _loc_3.child("nodes").children();
+                this.columnCombo.selectedIndex = 0;
+                _loc_3 = XML(this.columnCombo.selectedItem);
+                this.valueXmlList = _loc_3.child("nodes").children();
+                this.valueCombo.selectedIndex = 0;
+                this.includeInLayout = true;
+                this.visible = true;
+            }
+            return;
+        }// end function
+        
+	     private function changeSystem() : void
+        {
+            var _loc_1:* = XML(this.systemCombo.selectedItem);
+            this.tableXmlList = _loc_1.child("nodes").children();
+            this.tableCombo.selectedIndex = 0;
+            _loc_1 = XML(this.tableCombo.selectedItem);
+            this.columnXmlList = _loc_1.child("nodes").children();
+            this.columnCombo.selectedIndex = 0;
+            _loc_1 = XML(this.columnCombo.selectedItem);
+            this.valueXmlList = _loc_1.child("nodes").children();
+            this.valueCombo.selectedIndex = 0;
+            return;
+        }// end function
+        
+         private function changeTable() : void
+        {
+            var _loc_1:* = XML(this.tableCombo.selectedItem);
+            this.columnXmlList = _loc_1.child("nodes").children();
+            this.columnCombo.selectedIndex = 0;
+            _loc_1 = XML(this.columnCombo.selectedItem);
+            this.valueXmlList = _loc_1.child("nodes").children();
+            this.valueCombo.selectedIndex = 0;
+            return;
+        }// end function
+        
+         private function changeColumn() : void
+        {
+            var _loc_1:* = XML(this.columnCombo.selectedItem);
+            this.valueXmlList = _loc_1.child("nodes").children();
+            this.valueCombo.selectedIndex = 0;
+            return;
+        }// end function
+        
+        
+//	    private function myItemRenderer() : IFactory
+//        {
+//            var _loc_1:* = new IFactory();
+//            _loc_1.generator = CheckBoxItemRenderer;
+//            return _loc_1;
+//        }// end function
+        
+        private function filterClick(event:MouseEvent) : void
+        {
+            this.dispatchEvent(event);
+            return;
+        }// end function
+        
+	 ]]></mx:Script>
+	 
+	 <mx:ComboBox id="systemCombo" change="changeSystem()" labelField="@name" />
+	 <mx:ComboBox id="tableCombo"  change="changeTable()" labelField="@name" />
+	 <mx:ComboBox id="columnCombo" change="changeColumn()" labelField="@name" />
+	 <mx:ComboBox id="valueCombo" itemRenderer="com.pactera.edg.am.view.CheckBoxItemRenderer" labelField="@name" />
+	 <mx:Button  id="filter" click="filterClick(event)" label="过滤分析"/>
+	 <mx:XMLList id="systemXmlList" />
+	 <mx:XMLList id="tableXmlList" 	/>
+	 <mx:XMLList id="columnXmlList" />
+	 <mx:XMLList id="valueXmlList" />
+</mx:HBox>
