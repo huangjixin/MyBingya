@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:editor="com.hjx.editor.*">
+	<fx:Metadata>
+		[HostComponent("com.hjx.editor.ResizeableAdorner")]
+	</fx:Metadata>
+	<s:Rect left="-4" right="-4" top="-4" bottom="-4">
+		<s:stroke>
+			<s:SolidColorStroke  color="0x00A8FF"/>
+		</s:stroke>
+	</s:Rect>
+	
+	<editor:ResizeHandle id="topLeftHandle" left="-8" top="-8"
+						 />
+	<editor:ResizeHandle id="topRightHandle" right="-8" top="-8"  
+						 />
+	<editor:ResizeHandle id="bottomLeftHandle" left="-8" bottom="-8" 
+						 />
+	<editor:ResizeHandle id="bottomRightHandle" right="-8" bottom="-8"
+						 />
+</s:Skin>

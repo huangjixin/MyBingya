@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.hjx.graphic.Renderer"/>
+    <classEntry path="com.hjx.graphic.Node"/>
+    <classEntry path="com.hjx.graphic.Link"/>
+    <classEntry path="com.hjx.graphic.Graph"/>
+    <classEntry path="com.hjx.graphic.SubGraph"/>
+    <classEntry path="com.hjx.graphic.skins.NodeSkin"/>
+    <classEntry path="com.hjx.graphic.skins.LinkSkin"/>
+    <classEntry path="com.hjx.graphic.skins.SubGraphSkin"/>
+    <classEntry path="com.hjx.editor.GraphicEditor"/>
+    <classEntry path="com.hjx.editor.skins.GraphicEditorSkin"/>
+    <classEntry path="com.hjx.editor.BaseAdorner"/>
+    <classEntry path="com.hjx.editor.Adorner"/>
+    <classEntry path="com.hjx.editor.ResizeableAdorner"/>
+    <classEntry path="com.hjx.editor.skins.ResizeableAdornerSkin"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
