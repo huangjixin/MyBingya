@@ -23,6 +23,7 @@ package com.hjx.editor
 	import mx.events.SandboxMouseEvent;
 	import mx.graphics.SolidColor;
 	import mx.graphics.SolidColorStroke;
+	import mx.managers.DragManager;
 	
 	import spark.components.Group;
 	import spark.components.supportClasses.ScrollBarBase;
@@ -172,8 +173,14 @@ package com.hjx.editor
 			
 			var renderer:Renderer = getRenderer(event.target)
 			if(renderer){
-//				this.setSelected(renderer, !this.isSelected(renderer));
-				this.setSelected(renderer, true);
+				if(event.ctrlKey){
+					this.setSelected(renderer, !this.isSelected(renderer));
+				}else{
+					if(!isSelected(renderer)){
+						this.selectOnly(renderer);
+					}
+				}
+				
 				if(this.isSelected(renderer)){
 					displayObject.addEventListener(MouseEvent.MOUSE_UP, rendererMouseUpHandler, true);  
 					displayObject.addEventListener(MouseEvent.MOUSE_MOVE, rendererMouseDragHandler, true);  
@@ -193,7 +200,7 @@ package com.hjx.editor
 			systemManager.deployMouseShields(true);  
 		}
 		
-		protected function rendererMouseDragHandler(event:Event):void
+		protected function rendererMouseDragHandler(event:MouseEvent):void
 		{
 			var currentX:Number = this.graph.mouseX;  
 			var currentY:Number = this.graph.mouseY;
@@ -215,6 +222,7 @@ package com.hjx.editor
 				return;
 			}
 			
+			isDragging = true;
 			for each (var selectedRenderer:Renderer in getSelectedObjects()) 
 			{
 				translate(selectedRenderer, new Point(currentX - this.lastX, currentY - this.lastY));
@@ -223,10 +231,24 @@ package com.hjx.editor
 				}
 			}
 			
+			validateNow();
+			if (this.allowReparenting) 
+			{
+				this.trackCurrentSubgraph(event);
+				playDraggingMoveAdorner();
+				var graph:Graph = this.currentSubgraph == null ? this.graph : this.currentSubgraph.graph;
+				reparent(this.selectedObjects, graph);
+			}
+			
 		}
 		
 		protected function rendererMouseUpHandler(event:Event):void
 		{
+			
+			isDragging = false;
+			
+			playDraggingMoveAdorner();
+			
 			var displayObject:DisplayObject = systemManager.getSandboxRoot();
 			displayObject.removeEventListener(MouseEvent.MOUSE_UP, this.rendererMouseUpHandler, true);
 			displayObject.removeEventListener(MouseEvent.MOUSE_MOVE, this.rendererMouseDragHandler, true);
@@ -315,6 +337,243 @@ package com.hjx.editor
 				renderer.setX(renderer, renderer.getX(renderer) + point.x);
 				renderer.setY(renderer, renderer.getY(renderer) + point.y);
 			}
+		}
+		
+		
+		
+		internal function trackCurrentSubgraph(event:MouseEvent):void
+		{
+			var subGraph:SubGraph=null;
+			var flag:Boolean =false;
+			var objectsUnderPoint:Array = this.graph.stage.getObjectsUnderPoint(new Point(event.stageX, event.stageY));
+			var length:int = (objectsUnderPoint.length - 1);
+			while (length >= 0) 
+			{
+				subGraph = getRenderer(objectsUnderPoint[length]) as SubGraph;
+				
+				if (subGraph && !subGraph.collapsed && GraphicEditor.getEditor(subGraph)) 
+				{
+					flag = false;
+					if (!DragManager.isDragging) 
+					{
+						var displayObje:DisplayObject = subGraph;
+						while (displayObje != null) 
+						{
+							if (displayObje is Renderer && this.isSelected(Renderer(displayObje))) 
+							{
+								flag = true;
+							}
+							displayObje = displayObje.parent;
+						}
+					}
+					if (!flag) 
+					{
+						this.currentSubgraph = subGraph;
+						return;
+					}
+				}
+				--length;
+			}
+			this.currentSubgraph = null;
+			return;
+		}
+		
+		internal function resetCurrentSubgraph():void
+		{
+			this.clearCurrentSubgraph();
+		}
+		
+		internal function clearCurrentSubgraph():void
+		{
+			this.currentSubgraph = null;
+			return;
+		}
+		
+		//为鼠标下的子图画框框。
+		internal function playDraggingMoveAdorner():void
+		{
+			if(DragManager.isDragging || isDragging){
+				if(currentSubgraph){
+					var rect:Rectangle = currentSubgraph.getBounds(adornersGroup);
+					adornersGroup.graphics.clear();
+					adornersGroup.graphics.lineStyle(2,0xff0000);
+					adornersGroup.graphics.drawRect(rect.x+2,rect.y+2,rect.width-4,rect.height-4);
+				}else{
+					adornersGroup.graphics.clear();
+				}
+			}else{
+				adornersGroup.graphics.clear();
+			}
+		}
+		
+		/**
+		 * 重新定义父亲。 
+		 * @param seleObjs
+		 * @param graph
+		 * @return 
+		 * 
+		 */
+		public function reparent(seleObjs:Vector.<Renderer>, graph:Graph):Boolean
+		{
+			var reparentd:Boolean;
+			
+			for each (var renderer:Renderer in seleObjs) 
+			{
+				if (renderer.parent == graph) 
+				{
+					continue;
+				}
+				if (!Graph(graph).allowReparenting) 
+				{
+					continue;
+				}
+				
+				var point:Point = new Point(renderer.getX(renderer), renderer.getY(renderer));
+				point = renderer.parent.localToGlobal(point);
+				point = graph.globalToLocal(point);
+				
+				var link:Link = renderer as Link;
+				if(link){
+					link.fallbackStartPoint = graph.globalToLocal(link.parent.localToGlobal(link.fallbackStartPoint));
+					link.fallbackEndPoint = graph.globalToLocal(link.parent.localToGlobal(link.fallbackEndPoint));
+				}
+				
+				Graph(renderer.parent).removeElement(renderer);
+				if (!(renderer is Link)) 
+				{
+					renderer.setX(renderer, point.x);
+					renderer.setY(renderer, point.y);
+				}
+				graph.addElement(renderer);
+				var node:Node = renderer as Node;
+				var sub:SubGraph = renderer as SubGraph;
+				if (node) 
+				{
+					var length:int=0;
+					var links:Vector.<Link> = node.getLinks();
+					for each (link in links) 
+					{
+						reparentLink(link);
+					}
+					/*if (loc6) 
+					{
+					reparentIntergraphLinks(loc6);
+					}*/
+				}
+				reparentd = true;
+			}
+			return reparentd;
+		}
+		
+		
+		private static function reparentLink(link:Link):void
+		{
+			var graph:Graph=link.parent as Graph;
+			if (!graph) 
+			{
+				return;
+			}
+			var startNode:Renderer=link.startNode;
+			var endNode:Renderer=link.endNode;
+			
+			if (startNode == null) 
+			{
+				startNode = link;
+			}
+			if (endNode == null) 
+			{
+				endNode = link;
+			}
+			if (startNode && endNode) 
+			{
+				var lowestCommonGraph:Graph = getLowestCommonGraph(startNode, endNode);
+				if (lowestCommonGraph == null) 
+				{
+					return;
+				}
+				var editor:GraphicEditor = GraphicEditor.getEditor(link);
+				if (lowestCommonGraph == graph) 
+				{
+					if (!(startNode == null) && !(startNode.parent == null) && !(startNode.parent == graph) || 
+						!(endNode == null) && !(endNode.parent == null) && !(endNode.parent == graph)) 
+					{
+						var index:int = -1;
+						if (startNode != null) 
+						{
+							var renderer:Renderer = startNode;
+							var nodeGrpah:Graph;
+							while (!(renderer == null) && !(renderer.parent == graph)) 
+							{
+								nodeGrpah = renderer.parent as Graph;
+								if (nodeGrpah.owningSubGraph) 
+								{
+									renderer = nodeGrpah.owningSubGraph;
+									continue;
+								}
+								break;
+							}
+							if (renderer != null) 
+							{
+								index = graph.getElementIndex(renderer);
+							}
+						}
+						if (endNode != null) 
+						{
+							renderer = endNode;
+							while (!(renderer == null) && !(renderer.parent == graph)) 
+							{
+								nodeGrpah = renderer.parent as Graph;
+								if (nodeGrpah.owningSubGraph) 
+								{
+									renderer = nodeGrpah.owningSubGraph;
+									continue;
+								}
+								break;
+							}
+							if (renderer != null) 
+							{
+								index = Math.max(index, graph.getElementIndex(renderer));
+							}
+						}
+						if (index > graph.getElementIndex(link)) 
+						{
+							/*if (loc5) 
+							{
+							if (!loc5.dispatchEditorEvent(com.ibm.ilog.elixir.diagram.editor.DiagramEditorEvent.EDITOR_CHANGE_ZORDER, arg1)) 
+							{
+							return;
+							}
+							}*/
+							graph.setElementIndex(link, index);
+						}
+					}
+				}
+				else 
+				{
+					/*if (loc5) 
+					{
+					if (!loc5.dispatchEditorEvent(com.ibm.ilog.elixir.diagram.editor.DiagramEditorEvent.EDITOR_REPARENT, arg1)) 
+					{
+					return;
+					}
+					}*/
+					graph.removeElement(link);
+					/*if ((loc6 = link.intermediatePoints).length != 0) 
+					{
+					loc7 = 0;
+					while (loc7 < loc6.length) 
+					{
+					loc6[loc7] = loc2.globalToLocal(loc1.localToGlobal(loc6[loc7]));
+					++loc7;
+					}
+					arg1.intermediatePoints = loc6;
+					}*/
+					link.fallbackStartPoint = lowestCommonGraph.globalToLocal(graph.localToGlobal(link.fallbackStartPoint));
+					link.fallbackEndPoint = lowestCommonGraph.globalToLocal(graph.localToGlobal(link.fallbackEndPoint));
+					lowestCommonGraph.addElement(link);
+				}
+			}
+			return;
 		}
 		
 		/**

@@ -14,12 +14,12 @@
 	name=endArrow, type=spark.primitives.Path, required=false
 	-->
 	<fx:Declarations>
-		<mx:SolidColorStroke id="strokecolor" caps="none" color="{0xffffff}"
+		<mx:SolidColorStroke id="strokecolor" caps="none" color="{0x0}"
 							 weight="{2}"/>
-		<mx:SolidColor id="fillcolor" color="{0xffffff}"/>
+		<mx:SolidColor id="fillcolor" color="{0x0}"/>
 	</fx:Declarations>
 	
-	<s:Group id="base" includeInLayout="false">
+	<s:Group id="base">
 		<s:Path id="path" data="M 0 0 L 0 0" stroke="{strokecolor}"/>
 		<s:Path id="startArrow" data="M -10 -5 l 10 5 l -10 5 Z" fill="{fillcolor}"/>
 		<!-- data path must be relative to (0,0) because arrow are centered on path end/start points-->

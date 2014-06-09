@@ -9,6 +9,8 @@ package com.hjx.graphic
 	public class Graph extends Group
 	{
 		
+		private var _allowReparenting:Boolean =  true;
+
 		private var _owningSubGraph:SubGraph;
 		
 		private var _subgraphs:Vector.<SubGraph>;
@@ -26,6 +28,16 @@ package com.hjx.graphic
 			addEventListener(ElementExistenceEvent.ELEMENT_ADD,elementAddedHandler);
 			addEventListener(ElementExistenceEvent.ELEMENT_REMOVE,elementRemovedHandler);
 			
+		}
+		
+		public function get allowReparenting():Boolean
+		{
+			return _allowReparenting;
+		}
+		
+		public function set allowReparenting(value:Boolean):void
+		{
+			_allowReparenting = value;
 		}
 		
 		public function get owningSubGraph():SubGraph

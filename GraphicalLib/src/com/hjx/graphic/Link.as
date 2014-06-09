@@ -11,6 +11,8 @@ package com.hjx.graphic
 	import mx.graphics.SolidColorStroke;
 	
 	import spark.primitives.Path;
+	
+	import ws.tink.spark.graphics.SolidColorDash;
 
 	/**
 	 * @date 2014-6-3,@author 黄记新
@@ -81,7 +83,7 @@ package com.hjx.graphic
 		
 		private var _shapePoints:Vector.<Point>;
 		
-		private var _strokeWidth:Number = 1;
+		private var _strokeWidth:Number = 2;
 		private var _strokeWidthChange:Boolean;
 		private var _radius:Number = 5;
 		private var _radiusChange:Boolean;
@@ -647,7 +649,7 @@ package com.hjx.graphic
 								path.stroke = new SolidColorStroke(0,this._strokeWidth,0.6);
 							}
 						}
-					}/*else if(this._dashStyle == DashStyle.DASH){
+					}else if(this._dashStyle == DashStyle.DASH){
 						if(!path.stroke || path.stroke is SolidColorStroke){
 							color = getStyle("strokeColor");
 							if(styleManager.isValidStyleValue(color)){
@@ -656,7 +658,7 @@ package com.hjx.graphic
 								path.stroke = new SolidColorDash(_dash,_dash,0x808080,this._strokeWidth,0.6);
 							}
 						}
-					}*/
+					}
 					/*if (this._curved) 
 					{
 					this.configureCurvedPath(this.path);
@@ -697,6 +699,9 @@ package com.hjx.graphic
 			var radian:Number;
 			if (this.startArrow) 
 			{
+				this._startArrowVisible= getStyle("startArrowVisible");
+				this._endArrowVisible = getStyle("endArrowVisible");
+				
 				if ((this._startArrowVisible && this._endArrowVisible) || this._startArrowVisible) 
 				{
 					point1 = this._shapePoints[0];
