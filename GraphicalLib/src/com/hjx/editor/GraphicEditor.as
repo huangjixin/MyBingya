@@ -2,9 +2,11 @@ package com.hjx.editor
 {
 	import com.hjx.graphic.Graph;
 	import com.hjx.graphic.Link;
+	import com.hjx.graphic.LinkConnectionArea;
 	import com.hjx.graphic.Node;
 	import com.hjx.graphic.Renderer;
 	import com.hjx.graphic.SubGraph;
+	import com.hjx.utils.CloneUtil;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -159,6 +161,8 @@ package com.hjx.editor
 		 */
 		internal function mouseDownHandler(event:MouseEvent):void
 		{
+			this.graph.setFocus();
+			
 			if(getScrollerBase(event.target))
 				return;
 			this.startX = graph.mouseX;  
@@ -214,6 +218,9 @@ package com.hjx.editor
 			for each (var selectedRenderer:Renderer in getSelectedObjects()) 
 			{
 				translate(selectedRenderer, new Point(currentX - this.lastX, currentY - this.lastY));
+				if(selectedRenderer is Node){
+					Node(selectedRenderer).invalidateLinkShape();
+				}
 			}
 			
 		}
@@ -359,6 +366,64 @@ package com.hjx.editor
 				displayObjectContainer = displayObjectContainer.parent;
 			}
 			return null;
+		}
+		
+		public static function getLowestCommonGraph(renderer1:Renderer, renderer2:Renderer):Graph
+		{
+			if (renderer1 == null || renderer2 == null) 
+			{
+				throw new ArgumentError("参数不得为null");
+			}
+			var graph1:Graph=renderer1.parent as Graph;
+			var graph2:Graph=renderer2.parent as Graph;
+			if (graph1 == null || graph2 == null) 
+			{
+				return null;
+			}
+			if (graph1 == graph2) 
+			{
+				return graph1;
+			}
+			if (isGraphAncestorOf(graph1, graph2)) 
+			{
+				return graph1;
+			}
+			if (isGraphAncestorOf(graph2, graph1)) 
+			{
+				return graph2;
+			}
+			if (graph1.owningSubGraph == null) 
+			{
+				return graph1;
+			}
+			return getLowestCommonGraph(graph1.owningSubGraph, renderer2);
+		}
+		
+		internal static function isGraphAncestorOf(graph1:Graph, graph2:Graph):Boolean
+		{
+			var graph:Graph;
+			if (graph2.owningSubGraph == null) 
+			{
+				graph = graph2.parent as Graph;
+			}
+			else 
+			{
+				graph = graph2.owningSubGraph.parent as  Graph;
+			}
+			while (graph != null) 
+			{
+				if (graph == graph1) 
+				{
+					return true;
+				}
+				if (graph.owningSubGraph != null) 
+				{
+					graph = graph.owningSubGraph.parent as  Graph;
+					continue;
+				}
+				graph = graph.parent as Graph;
+			}
+			return false;
 		}
 		/**
 		 * 坐标转换。 
@@ -506,6 +571,44 @@ package com.hjx.editor
 			return Adorner(this.adorners[renderer]);
 		} 
 		
+		
+		public function createLink(startNodeConnectingArea:String = LinkConnectionArea.CENTER,
+								   endNodeConnectingArea:String = LinkConnectionArea.CENTER):Link
+		{
+			var link:Link=null;
+			if (this.linkPrototype == null) 
+			{
+				link = new Link();
+			}
+			else 
+			{
+				link = Link(CloneUtil.clone(this.linkPrototype));
+			}
+			link.startConnectionArea = startNodeConnectingArea;
+			link.endConnectionArea = endNodeConnectingArea;
+			return link;
+		}
+		
+		/**
+		 * 链接节点。 
+		 * 
+		 */
+		public function connectNodes(startNodeConnectingArea:String = LinkConnectionArea.CENTER,
+									 endNodeConnectingArea:String = LinkConnectionArea.CENTER):void
+		{
+			var selObjs:Vector.<Renderer> = getSelectedObjects();
+			if (selObjs.length == 2) {
+				if ((selObjs[0] is Node) && (selObjs[1] is Node)) {
+					var link:Link = createLink(startNodeConnectingArea,endNodeConnectingArea);
+					if (link) {
+						link.startNode = Node(selObjs[0]);
+						link.endNode = Node(selObjs[1]);
+						var linkParent:Graph = GraphicEditor.getLowestCommonGraph(link.startNode, link.endNode);
+						linkParent.addElement(link);
+					}            
+				}
+			}        
+		}
 		/**
 		 * 当graph被实例化的时候，赋值mxml内容。 
 		 * @param partName
