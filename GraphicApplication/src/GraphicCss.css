@@ -1,0 +1,36 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace graphic "com.hjx.graphic.*";
+@namespace editor "com.hjx.editor.*";
+
+graphic|Node{
+	skinClass:ClassReference("com.hjx.graphic.skins.NodeSkin");
+	
+	/**默认边饰器**/
+	adornerClass:ClassReference("com.hjx.editor.ResizeableAdorner")
+}
+
+graphic|Link{
+	skinClass:ClassReference("com.hjx.graphic.skins.LinkSkin");
+}
+
+graphic|SubGraph{
+	skinClass:ClassReference("com.hjx.graphic.skins.SubGraphSkin");
+}
+
+/*************************	边饰器 	***********************************/
+/**边饰器缩放句柄**/
+editor|ResizeableAdorner{
+	skinClass:ClassReference("com.hjx.editor.skins.ResizeableAdornerSkin");
+}
+
+/**边饰器缩放句柄**/
+editor|ResizeHandle{
+	skinClass:ClassReference("com.hjx.editor.skins.ResizeHandleSkin");
+}
+
+editor|GraphicEditor{
+	skinClass:ClassReference("com.hjx.editor.skins.GraphicEditorSkin");
+}
+
