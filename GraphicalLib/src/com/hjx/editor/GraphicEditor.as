@@ -15,6 +15,7 @@ package com.hjx.editor
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
 	import mx.core.IVisualElement;
@@ -109,6 +110,7 @@ package com.hjx.editor
 			this.adorners = new Dictionary();
 			
 			this.addEventListener(MouseEvent.MOUSE_DOWN, this.mouseDownHandler);
+			this.addEventListener(KeyboardEvent.KEY_DOWN, editorKeyDownHandler);
 			
 		}
 		
@@ -776,6 +778,122 @@ package com.hjx.editor
 				}
 				this.updateAdorner(renderer);
 			}
+			return;
+		}
+		
+		/**
+		 * 清理。 
+		 * 
+		 */
+		public function clear():void
+		{
+			//			this.finishTextEditing(true);
+			this.deselectAll();
+			//			this.unhighlightAll();
+			this.graph.removeAllElements();
+			this.selectedObjects = new Vector.<Renderer>();
+			this.adorners = new Dictionary();
+			this._currentSubgraph = null;
+			//			this.textEditingAdorner = null;
+			//			this.textPart = null;
+			if (this.adornersGroup != null) 
+			{
+				this.adornersGroup.removeAllElements();
+			}
+			return;
+		}
+		
+		internal function editorKeyDownHandler(event:KeyboardEvent):void
+		{
+			switch(event.keyCode)
+			{
+				case Keyboard.DELETE:
+				{
+					deleteSelection();
+					break;
+				}
+					
+				default:
+				{
+					break;
+				}
+			}
+		}
+		
+		public function deleteSelection():void
+		{
+			if(getSelectedObjects().length>0){
+				
+			}
+			this.reallyDeleteSelection(this.selectedObjects);
+			return;
+		}
+		
+		/**
+		 * 真正实现删除节点的方法。 
+		 * @param selectedObjs
+		 * 
+		 */
+		internal function reallyDeleteSelection(selectedObjs:Vector.<Renderer>):void
+		{
+			var objects:Vector.<Renderer> = selectedObjs.concat();
+			for each (var renderer:Renderer in objects) 
+			{
+				if (renderer is Node) 
+				{
+					var links:Vector.<Link>=Node(renderer).getLinks();
+					for each (var link:Link in links) 
+					{
+						
+						this.deleteRenderer(link);
+					}
+				}
+				this.deleteRenderer(renderer);
+			}
+			return;
+		}
+		
+		internal function deleteRenderer(renderer:Renderer):void
+		{
+			var link:Link= renderer as Link;
+			if (link != null) 
+			{
+				var index:int = -1;
+				if(link.startNode){
+					index = link.startNode.incomingLinks.indexOf(link);
+					link.startNode.incomingLinks.splice(index,1);
+					index = link.startNode.outgoingLinks.indexOf(link);
+					link.startNode.outgoingLinks.splice(index,1);
+				}
+				if(link.endNode){
+					index = link.endNode.incomingLinks.indexOf(link);
+					link.endNode.incomingLinks.splice(index,1);
+					index = link.endNode.outgoingLinks.indexOf(link);
+					link.endNode.outgoingLinks.splice(index,1);
+				}
+				/*this.disconnectLink(loc1, true);
+				this.disconnectLink(loc1, false);*/
+			}
+			var node:Node = renderer as Node;
+			if(node){
+				node.clearLinks();
+			}
+			/*if (!(this.textEditingAdorner == null) && this.textEditingAdorner.adornedObject == arg1) 
+			{
+			this.finishTextEditing(true);
+			}
+			this.setHighlighted(arg1, false);*/
+			this.setSelected(renderer, false);
+			if (renderer.parent != null) 
+			{
+				Graph(renderer.parent).removeElement(renderer);
+			}
+			return;
+		}
+		
+		public function deselectAll():void
+		{
+			this.deselectAllExcept();
 			return;
 		}
 		
