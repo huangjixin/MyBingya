@@ -45,7 +45,7 @@ public class PaginationPlugin extends PluginAdapter {
 		XmlElement pageStart = new XmlElement("if");
 		pageStart.addAttribute(new Attribute("test", "page != null"));
 		XmlElement pageDialect1 = new XmlElement("if");
-		pageDialect1.addAttribute(new Attribute("test", "dialect == 'oralce'"));
+		pageDialect1.addAttribute(new Attribute("test", "dialect == 'oracle'"));
 		pageStart.addElement(pageDialect1);
 		pageDialect1.addElement(new TextElement(
 				"select * from ( select row_.*, rownum rownum_ from ( "));
@@ -59,7 +59,7 @@ public class PaginationPlugin extends PluginAdapter {
 		XmlElement pageEnd = new XmlElement("if");
 		pageEnd.addAttribute(new Attribute("test", "page != null"));
 		XmlElement pageDialect2 = new XmlElement("if");
-		pageDialect2.addAttribute(new Attribute("test", "dialect == 'oralce'"));
+		pageDialect2.addAttribute(new Attribute("test", "dialect == 'oracle'"));
 		pageEnd.addElement(pageDialect2);
 		pageDialect2.addElement(new TextElement(
 				"<![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.limit} ]]>"));
