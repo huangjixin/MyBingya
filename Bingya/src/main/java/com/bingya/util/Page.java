@@ -47,7 +47,7 @@ public class Page{
 	}
 
 	public int getTotal() {
-		return (int)((total / limit) + (total % limit > 0 ? 1 : 0));
+		return total;
 	}
 
 	public void setTotal(int total) {
