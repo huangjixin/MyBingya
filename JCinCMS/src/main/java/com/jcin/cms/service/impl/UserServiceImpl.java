@@ -8,12 +8,13 @@
 /**
  * 
  */
-package com.jcin.cms.service;
+package com.jcin.cms.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.domain.User;
+import com.jcin.cms.service.IUserService;
 import com.jcin.cms.utils.Page;
 
 /**
