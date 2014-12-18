@@ -22,7 +22,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="userService")
 public class UserServiceImpl implements IUserService {
 	/*
 	 * (non-Javadoc)
