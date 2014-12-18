@@ -34,17 +34,18 @@ import com.jcin.cms.domain.User;
 public class UserController {
 	@RequestMapping("/list")
 	public String list() {
-		return "list";
+		return "/user/list";
 	}
 
-	@RequestMapping(value = "/create")
+	@RequestMapping(value = "/new")
 	@ResponseBody
 	public String create(@Valid User user, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-//		userService.insert(user);
+		// userService.insert(user);
 		return null;
 	}
+
 	/**
 	 * @param args
 	 */
