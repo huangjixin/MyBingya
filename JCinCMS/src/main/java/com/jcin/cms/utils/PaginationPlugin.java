@@ -61,16 +61,18 @@ public class PaginationPlugin extends PluginAdapter {
 		XmlElement pageDialect2 = new XmlElement("if");
 		pageDialect2.addAttribute(new Attribute("test", "dialect == 'oracle'"));
 		pageEnd.addElement(pageDialect2);
-		pageDialect2.addElement(new TextElement(
-				"<![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>"));
-		
-		//----- mysql语句。
+		pageDialect2
+				.addElement(new TextElement(
+						"<![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>"));
+
+		// ----- mysql语句。
 		XmlElement mysqlDialect = new XmlElement("if");
 		mysqlDialect.addAttribute(new Attribute("test", "dialect == 'mysql'"));
 		pageEnd.addElement(mysqlDialect);
-		mysqlDialect.addElement(new TextElement("limit #{page.start} , #{page.pageSize}"));
+		mysqlDialect.addElement(new TextElement(
+				"limit #{page.start} , #{page.pageSize}"));
 		paginationSuffixElement.addElement(pageEnd);
-		
+
 		parentElement.addElement(paginationSuffixElement);
 
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
@@ -112,21 +114,20 @@ public class PaginationPlugin extends PluginAdapter {
 		Method method = new Method();
 		method.setVisibility(JavaVisibility.PUBLIC);
 		method.setName("set" + camel);
-		method.addParameter(new Parameter(new FullyQualifiedJavaType(
-				"String"), name));
+		method.addParameter(new Parameter(new FullyQualifiedJavaType("String"),
+				name));
 		method.addBodyLine("this." + name + "=" + name + ";");
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
 		topLevelClass.addMethod(method);
 		method = new Method();
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(new FullyQualifiedJavaType(
-				"String"));
+		method.setReturnType(new FullyQualifiedJavaType("String"));
 		method.setName("get" + camel);
 		method.addBodyLine("return " + name + ";");
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
 		topLevelClass.addMethod(method);
 	}
-	
+
 	/**
 	 * @param topLevelClass
 	 * @param introspectedTable
@@ -155,7 +156,8 @@ public class PaginationPlugin extends PluginAdapter {
 		topLevelClass.addMethod(method);
 		method = new Method();
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(new FullyQualifiedJavaType("com.jcin.cms.utils.Page"));
+		method.setReturnType(new FullyQualifiedJavaType(
+				"com.jcin.cms.utils.Page"));
 		method.setName("get" + camel);
 		method.addBodyLine("return " + name + ";");
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
@@ -165,16 +167,18 @@ public class PaginationPlugin extends PluginAdapter {
 	/**
 	 * This plugin is always valid - no properties are required
 	 */
+	@Override
 	public boolean validate(List<String> warnings) {
 		return true;
 	}
-	
+
 	public static void generate() {
-		String config = PaginationPlugin.class.getClassLoader().getResource(
-				"generatorConfig.xml").getFile();
+		String config = PaginationPlugin.class.getClassLoader()
+				.getResource("generatorConfig.xml").getFile();
 		String[] arg = { "-configfile", config, "-overwrite" };
 		ShellRunner.main(arg);
 	}
+
 	public static void main(String[] args) {
 		generate();
 	}
