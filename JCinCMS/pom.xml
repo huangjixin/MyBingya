@@ -5,7 +5,7 @@
 	<artifactId>JCinCMS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>JCinCMS Maven Webapp</name>
+	<name>JCinCMS</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring-version>4.0.2.RELEASE</spring-version>
