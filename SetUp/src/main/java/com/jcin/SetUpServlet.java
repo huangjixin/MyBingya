@@ -101,7 +101,7 @@ public class SetUpServlet extends HttpServlet {
 
 		String password = request.getParameter("password");
 		if (password == null || "".equals(password)) {
-			password = "qwer123456";
+			password = "root";
 		}
 
 		String dbdriver = "com.mysql.jdbc.Driver";

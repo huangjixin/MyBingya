@@ -126,7 +126,7 @@
 
 					<tr>
 						<th class="tbopt">&nbsp;数据库密码:</th>
-						<td><input type="password" name="password" value="qwer123456"
+						<td><input type="password" name="password" value="root"
 							size="35" class="txt" id="password"></td>
 						<td>&nbsp;</td>
 					</tr>
