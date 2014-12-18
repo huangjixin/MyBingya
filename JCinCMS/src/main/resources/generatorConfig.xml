@@ -11,12 +11,12 @@
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<!-- 想要mybaits代码生成器生成Example类换个名字，是通过插件实现的，即下面的这个插件配置参数很关键。 -->
-<!-- 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> -->
-<!-- 			<property name="searchString" value="Example$" /> -->
-<!-- 			<property name="replaceString" value="Criteria" /> -->
-<!-- 		</plugin> -->
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
 
-		<plugin type="org.mybatis.plugin.PaginationPlugin" />
+		<plugin type="com.jcin.cms.utils.PaginationPlugin" />
 
 		<commentGenerator>
 			<property name="suppressDate" value="false" />
@@ -24,7 +24,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://10.45.47.168:3306/tair_monitor" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/jcincms" userId="root"
 			password="root">
 		</jdbcConnection>
 
@@ -32,22 +32,29 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.ztesoft.cached.atom.vo"
+		<javaModelGenerator targetPackage="com.jcin.cms.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.ztesoft.cached.atom"
+		<sqlMapGenerator targetPackage="com.jcin.cms.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.ztesoft.cached.atom" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-			<table tableName="userinfo" domainObjectName="Userinfo" />
-			<table tableName="groupinfo" domainObjectName="Groupinfo" />
+		<table tableName="tb_article" domainObjectName="Article" />
+		<table tableName="tb_assets" domainObjectName="Assets" />
+		<table tableName="tb_category" domainObjectName="Category" />
+		<table tableName="tb_comment" domainObjectName="Comment" />
+		<table tableName="tb_menu" domainObjectName="Menu" />
+		<table tableName="tb_role" domainObjectName="Role" />
+		<table tableName="tb_role_menu" domainObjectName="RoleMenu" />
+		<table tableName="tb_user" domainObjectName="User" />
+		<table tableName="tb_user_role" domainObjectName="UserRole" />
 	</context>
 </generatorConfiguration>
