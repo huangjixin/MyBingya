@@ -10,6 +10,7 @@
  */
 package com.jcin.cms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -56,6 +57,7 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	@Transactional
 	public int insert(Article record) {
+		record.setCreatedate(new Date());
 		int result = articleMapper.insert(record);
 		return result;
 	}

@@ -57,6 +57,7 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	@Transactional
 	public int insert(Role record) {
+		record.setCreatedate(new Date());
 		record.setId(new Date().getTime() + "");
 		int result = roleMapper.insert(record);
 		return result;
