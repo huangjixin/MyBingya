@@ -10,6 +10,7 @@
  */
 package com.jcin.cms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -53,6 +54,7 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	@Transactional
 	public int insert(Role record) {
+		record.setId(new Date().getTime() + "");
 		int result = roleMapper.insert(record);
 		return result;
 	}
