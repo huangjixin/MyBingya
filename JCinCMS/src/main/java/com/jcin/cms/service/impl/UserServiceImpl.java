@@ -10,10 +10,16 @@
  */
 package com.jcin.cms.service.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.dao.UserMapper;
 import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.service.IUserService;
 import com.jcin.cms.utils.Page;
 
@@ -22,8 +28,11 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service(value="userService")
+@Service(value = "userService")
 public class UserServiceImpl implements IUserService {
+	@Resource
+	private UserMapper userMapper;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -32,8 +41,8 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = userMapper.deleteByPrimaryKey(id);
+		return result;
 	}
 
 	/*
@@ -44,8 +53,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public int insert(User record) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = userMapper.insert(record);
+		return result;
 	}
 
 	/*
@@ -55,8 +64,12 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public Page select(Page page) {
-		// TODO Auto-generated method stub
-		return null;
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.setPage(page);
+		@SuppressWarnings("rawtypes")
+		List list = userMapper.selectByExample(userCriteria);
+		page.setRows(list);
+		return page;
 	}
 
 	/*
@@ -67,8 +80,8 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public User selectByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userMapper.selectByPrimaryKey(id);
+		return user;
 	}
 
 	/*
@@ -79,8 +92,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public int update(User record) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = userMapper.updateByPrimaryKeySelective(record);
+		return result;
 	}
 
 }
