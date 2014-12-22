@@ -23,7 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.Role;
 
 /**
  * @author 黄记新
@@ -31,19 +31,19 @@ import com.jcin.cms.domain.User;
  * 
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/role")
+public class RoleController {
 	@RequestMapping("/list")
 	public String list() {
-		return "/user/list";
+		return "/role/list";
 	}
 
 	@RequestMapping(value = "/new")
 	@ResponseBody
-	public String create(@Valid User user, BindingResult bindingResult,
+	public String create(@Valid Role role, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		// userService.insert(user);
+		// roleService.insert(role);
 		httpServletResponse.setContentType("text/html");
 		PrintWriter out = httpServletResponse.getWriter();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
@@ -64,11 +64,11 @@ public class UserController {
 	@ResponseBody
 	public void test(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		User user = new User();
-		user.setUsername("eteste");
+		Role role = new Role();
+		role.setName("eteste");
 		httpServletResponse.setContentType("text/javascript");
 		PrintWriter out = httpServletResponse.getWriter();
-		out.print(user);
+		out.print(role);
 		out.flush();
 		out.close();
 	}
