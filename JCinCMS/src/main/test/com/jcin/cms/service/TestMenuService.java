@@ -2,16 +2,16 @@
  * 中兴软创<br/>
  * 一句话描述该类：<br/>
  * @author 黄记新
- * @date 2014-12-22,下午4:13:42
+ * @date 2014-12-18,下午7:51:09
  *
  */
 package com.jcin.cms.service;
 
-import static org.junit.Assert.fail;
-
 import java.util.Date;
 
 import javax.annotation.Resource;
+
+import junit.framework.TestCase;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,8 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.domain.Role;
-import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.Menu;
+import com.jcin.cms.domain.Menu;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // 指定测试用例的运行器 这里是指定了Junit4
@@ -33,37 +33,24 @@ import com.jcin.cms.domain.User;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 // 这里的事务关联到配置文件中的事务控制器（transactionManager =
 // "transactionManager"），同时指定自动回滚（defaultRollback = true）。这样做操作的数据才不会污染数据库！
-public class TestRoleService {
+public class TestMenuService extends TestCase {
 	@Resource
-	private IRoleService roleService;
-	@Test
-	public void testDeleteByPrimaryKey() {
-		fail("Not yet implemented");
-	}
+	private IMenuService menuService;
 
 	@Test
 	public void testInsert() {
-		Role role = new Role();
-		role.setName("123456");
-		role.setId(new Date().getTime() + "");
-
-		int result = roleService.insert(role);
+		Menu menu = new Menu();
+		menu.setName("用户");
+		menu.setId(new Date().getTime() + "");
+		menu.setParentid("1419246357634");
+		int result = menuService.insert(menu);
 		Assert.assertEquals(1, result);
 	}
 
-	@Test
-	public void testSelect() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSelectByPrimaryKey() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	public void testDeleteByPrimaryKey() {
+//		int result = menuService.deleteByPrimaryKey("1419213655697");
+//		Assert.assertEquals(1, result);
+//	}
 
 }
