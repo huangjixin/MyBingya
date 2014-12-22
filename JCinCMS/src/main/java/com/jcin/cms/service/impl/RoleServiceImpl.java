@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,8 @@ import com.jcin.cms.utils.Page;
  */
 @Service(value = "roleService")
 public class RoleServiceImpl implements IRoleService {
+	private static Logger logger = Logger.getLogger(RoleServiceImpl.class.getName());
+	
 	@Resource
 	private RoleMapper roleMapper;
 

@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,8 @@ import com.jcin.cms.utils.Page;
  */
 @Service(value = "menuService")
 public class MenuServiceImpl implements IMenuService {
+	private static Logger logger = Logger.getLogger(MenuServiceImpl.class.getName());
+	
 	@Resource
 	private MenuMapper menuMapper;
 
