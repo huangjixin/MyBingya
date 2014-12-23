@@ -17,40 +17,39 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="登录">
-<meta http-equiv="description" content="This is my page">
+<meta http-equiv="description" content="login">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href="<%=basePath%>bootstrap/css/bootstrap.css" rel="stylesheet">
+<script src="<%=basePath%>js/jquery.min.js"></script>
+<script src="<%=basePath%>bootstrap/js/bootstrap.js"></script>
+<style type="text/css">
+.modal-footer {
+	border-top: 0px;
+}
+</style>
 </head>
 
 <body>
-	<div class="container-fluid">
-		<form class="form-horizontal" method="post">
-			<fieldset>
-				<legend>用户登陆</legend>
-				<div class="control-group">
-					<label class="control-label" for="username">用户名</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" id="username"
-							name="username">
-					</div>
+	<div class="container"
+		style="text-align: center;">
+		<div class="modal-body" style="text-align: center;">
+			<form class="form col-md-12 center-block"
+				action="<%=basePath%>/login/validatelogin">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg" id="username"
+						name="username" placeholder="用户名">
 				</div>
-				<div class="control-group">
-					<label class="control-label" for="password">密码</label>
-					<div class="controls">
-						<input type="password" class="input-xlarge" id="password"
-							name="password">
-					</div>
+				<div class="form-group">
+					<input type="password" class="form-control input-lg" id="password"
+						name="password" placeholder="密码">
 				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">登陆</button>
+				<div class="form-group">
+					<button class="btn btn-primary btn-lg btn-block">登录</button>
 				</div>
-			</fieldset>
-		</form>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
