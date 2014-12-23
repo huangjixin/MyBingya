@@ -12,7 +12,6 @@ package com.jcin.cms.service;
 
 import java.io.Serializable;
 
-import com.jcin.cms.domain.User;
 import com.jcin.cms.utils.Page;
 
 /**
