@@ -31,7 +31,7 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "userService")
-public class UserServiceImpl extends BaseServiceImpl<User, String> implements
+public class UserServiceImpl implements
 		IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class
 			.getName());
@@ -47,8 +47,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
-		super.deleteByPrimaryKey(id);
-		
+//		super.deleteByPrimaryKey(id);
+
 		int result = userMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -61,8 +61,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	@Transactional
 	public int insert(User record) {
-		super.insert(record);
-		
+//		super.insert(record);
+
 		record.setCreatedate(new Date());
 		int result = userMapper.insert(record);
 		return result;
@@ -75,8 +75,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	public Page select(Page page) {
-		super.select(page);
-		
+//		super.select(page);
+
 		UserCriteria userCriteria = new UserCriteria();
 		userCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -95,8 +95,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	public User selectByPrimaryKey(String id) {
-		super.selectByPrimaryKey(id);
-		
+//		super.selectByPrimaryKey(id);
+
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
 	}
@@ -109,10 +109,24 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	@Transactional
 	public int update(User record) {
-		super.update(record);
-		
+//		super.update(record);
+
 		int result = userMapper.updateByPrimaryKeySelective(record);
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.IUserService#validateLogin(String)
+	 */
+	@Override
+	public List<User> validateLogin(String username, String password) {
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.createCriteria().andUsernameEqualTo(username)
+				.andPasswordEqualTo(password);
+		List<User> users = userMapper.selectByExample(userCriteria);
+		return users;
 	}
 
 }
