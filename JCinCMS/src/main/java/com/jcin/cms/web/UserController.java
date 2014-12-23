@@ -35,8 +35,8 @@ import com.jcin.cms.service.IUserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-//	@Resource
-//	private IUserService userService;
+	@Resource
+	private IUserService userService;
 
 	@RequestMapping("/list")
 	public String list() {
