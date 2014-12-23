@@ -12,7 +12,7 @@ import java.util.List;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.utils.Page;
 
-public interface IUserService  {
+public interface IUserService extends IBaseService<User, String> {
 	int deleteByPrimaryKey(String id);
 
 	int insert(User record);

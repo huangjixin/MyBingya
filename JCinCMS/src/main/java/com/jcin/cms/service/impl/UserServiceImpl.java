@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.UserMapper;
+import com.jcin.cms.domain.Role;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.service.IUserService;
@@ -31,7 +32,7 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "userService")
-public class UserServiceImpl implements
+public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class
 			.getName());
