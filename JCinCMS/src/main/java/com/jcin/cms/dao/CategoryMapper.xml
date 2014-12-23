@@ -6,6 +6,8 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="parentId" property="parentid" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="DATE" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, description, parentId
+    id, name, description, parentId, updateDate, createDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.CategoryCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -102,9 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.jcin.cms.domain.Category" >
     insert into tb_category (id, name, description, 
-      parentId)
+      parentId, updateDate, createDate
+      )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{parentid,jdbcType=VARCHAR})
+      #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE}, #{createdate,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Category" >
     insert into tb_category
@@ -121,6 +125,12 @@
       <if test="parentid != null" >
         parentId,
       </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,6 +144,12 @@
       </if>
       <if test="parentid != null" >
         #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -158,6 +174,12 @@
       <if test="record.parentid != null" >
         parentId = #{record.parentid,jdbcType=VARCHAR},
       </if>
+      <if test="record.updatedate != null" >
+        updateDate = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.createdate != null" >
+        createDate = #{record.createdate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -168,7 +190,9 @@
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      parentId = #{record.parentid,jdbcType=VARCHAR}
+      parentId = #{record.parentid,jdbcType=VARCHAR},
+      updateDate = #{record.updatedate,jdbcType=DATE},
+      createDate = #{record.createdate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,6 +209,12 @@
       <if test="parentid != null" >
         parentId = #{parentid,jdbcType=VARCHAR},
       </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -192,7 +222,9 @@
     update tb_category
     set name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      parentId = #{parentid,jdbcType=VARCHAR}
+      parentId = #{parentid,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=DATE},
+      createDate = #{createdate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

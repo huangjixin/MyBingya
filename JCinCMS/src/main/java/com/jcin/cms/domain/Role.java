@@ -12,6 +12,8 @@ public class Role implements Serializable {
 
     private Date createdate;
 
+    private Date updatedate;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -44,5 +46,13 @@ public class Role implements Serializable {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public Date getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(Date updatedate) {
+        this.updatedate = updatedate;
     }
 }

@@ -10,6 +10,7 @@
     <result column="tb_category_id" property="tbCategoryId" jdbcType="VARCHAR" />
     <result column="createDate" property="createdate" jdbcType="DATE" />
     <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, author, content, description, tb_category_id, createDate, source
+    id, title, author, content, description, tb_category_id, createDate, source, updateDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.ArticleCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -107,10 +108,12 @@
   <insert id="insert" parameterType="com.jcin.cms.domain.Article" >
     insert into tb_article (id, title, author, 
       content, description, tb_category_id, 
-      createDate, source)
+      createDate, source, updateDate
+      )
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{tbCategoryId,jdbcType=VARCHAR}, 
-      #{createdate,jdbcType=DATE}, #{source,jdbcType=VARCHAR})
+      #{createdate,jdbcType=DATE}, #{source,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Article" >
     insert into tb_article
@@ -139,6 +142,9 @@
       <if test="source != null" >
         source,
       </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -164,6 +170,9 @@
       </if>
       <if test="source != null" >
         #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -200,6 +209,9 @@
       <if test="record.source != null" >
         source = #{record.source,jdbcType=VARCHAR},
       </if>
+      <if test="record.updatedate != null" >
+        updateDate = #{record.updatedate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,7 +226,8 @@
       description = #{record.description,jdbcType=VARCHAR},
       tb_category_id = #{record.tbCategoryId,jdbcType=VARCHAR},
       createDate = #{record.createdate,jdbcType=DATE},
-      source = #{record.source,jdbcType=VARCHAR}
+      source = #{record.source,jdbcType=VARCHAR},
+      updateDate = #{record.updatedate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,6 +256,9 @@
       <if test="source != null" >
         source = #{source,jdbcType=VARCHAR},
       </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=DATE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -254,7 +270,8 @@
       description = #{description,jdbcType=VARCHAR},
       tb_category_id = #{tbCategoryId,jdbcType=VARCHAR},
       createDate = #{createdate,jdbcType=DATE},
-      source = #{source,jdbcType=VARCHAR}
+      source = #{source,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

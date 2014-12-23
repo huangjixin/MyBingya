@@ -20,6 +20,8 @@ public class Article implements Serializable {
 
     private String source;
 
+    private Date updatedate;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -84,5 +86,13 @@ public class Article implements Serializable {
 
     public void setSource(String source) {
         this.source = source == null ? null : source.trim();
+    }
+
+    public Date getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(Date updatedate) {
+        this.updatedate = updatedate;
     }
 }

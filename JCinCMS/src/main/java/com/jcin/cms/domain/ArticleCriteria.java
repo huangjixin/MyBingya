@@ -703,6 +703,66 @@ public class ArticleCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andUpdatedateIsNull() {
+            addCriterion("updateDate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateIsNotNull() {
+            addCriterion("updateDate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate =", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate <>", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateGreaterThan(Date value) {
+            addCriterionForJDBCDate("updateDate >", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate >=", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateLessThan(Date value) {
+            addCriterionForJDBCDate("updateDate <", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate <=", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateIn(List<Date> values) {
+            addCriterionForJDBCDate("updateDate in", values, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("updateDate not in", values, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("updateDate between", value1, value2, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("updateDate not between", value1, value2, "updatedate");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;

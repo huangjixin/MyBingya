@@ -6,6 +6,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="updateDate" property="updatedate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, description, createDate
+    id, name, description, createDate, updateDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.RoleCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -102,9 +103,9 @@
   </delete>
   <insert id="insert" parameterType="com.jcin.cms.domain.Role" >
     insert into tb_role (id, name, description, 
-      createDate)
+      createDate, updateDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{createdate,jdbcType=DATE})
+      #{createdate,jdbcType=DATE}, #{updatedate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Role" >
     insert into tb_role
@@ -121,6 +122,9 @@
       <if test="createdate != null" >
         createDate,
       </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,6 +138,9 @@
       </if>
       <if test="createdate != null" >
         #{createdate,jdbcType=DATE},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -158,6 +165,9 @@
       <if test="record.createdate != null" >
         createDate = #{record.createdate,jdbcType=DATE},
       </if>
+      <if test="record.updatedate != null" >
+        updateDate = #{record.updatedate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -168,7 +178,8 @@
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      createDate = #{record.createdate,jdbcType=DATE}
+      createDate = #{record.createdate,jdbcType=DATE},
+      updateDate = #{record.updatedate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,6 +196,9 @@
       <if test="createdate != null" >
         createDate = #{createdate,jdbcType=DATE},
       </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=DATE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -192,7 +206,8 @@
     update tb_role
     set name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=DATE}
+      createDate = #{createdate,jdbcType=DATE},
+      updateDate = #{updatedate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

@@ -18,6 +18,10 @@ public class User implements Serializable {
 
     private Date createdate;
 
+    private Date updatedate;
+
+    private String ip;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -74,5 +78,21 @@ public class User implements Serializable {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public Date getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(Date updatedate) {
+        this.updatedate = updatedate;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip == null ? null : ip.trim();
     }
 }

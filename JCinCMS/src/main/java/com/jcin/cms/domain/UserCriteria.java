@@ -613,6 +613,136 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andUpdatedateIsNull() {
+            addCriterion("updateDate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateIsNotNull() {
+            addCriterion("updateDate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate =", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate <>", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateGreaterThan(Date value) {
+            addCriterionForJDBCDate("updateDate >", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate >=", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateLessThan(Date value) {
+            addCriterionForJDBCDate("updateDate <", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("updateDate <=", value, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateIn(List<Date> values) {
+            addCriterionForJDBCDate("updateDate in", values, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("updateDate not in", values, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("updateDate between", value1, value2, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("updateDate not between", value1, value2, "updatedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpIsNull() {
+            addCriterion("ip is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpIsNotNull() {
+            addCriterion("ip is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpEqualTo(String value) {
+            addCriterion("ip =", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpNotEqualTo(String value) {
+            addCriterion("ip <>", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpGreaterThan(String value) {
+            addCriterion("ip >", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpGreaterThanOrEqualTo(String value) {
+            addCriterion("ip >=", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpLessThan(String value) {
+            addCriterion("ip <", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpLessThanOrEqualTo(String value) {
+            addCriterion("ip <=", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpLike(String value) {
+            addCriterion("ip like", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpNotLike(String value) {
+            addCriterion("ip not like", value, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpIn(List<String> values) {
+            addCriterion("ip in", values, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpNotIn(List<String> values) {
+            addCriterion("ip not in", values, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpBetween(String value1, String value2) {
+            addCriterion("ip between", value1, value2, "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpNotBetween(String value1, String value2) {
+            addCriterion("ip not between", value1, value2, "ip");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -630,6 +760,11 @@ public class UserCriteria {
 
         public Criteria andDescriptionLikeInsensitive(String value) {
             addCriterion("upper(description) like", value.toUpperCase(), "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andIpLikeInsensitive(String value) {
+            addCriterion("upper(ip) like", value.toUpperCase(), "ip");
             return (Criteria) this;
         }
     }
