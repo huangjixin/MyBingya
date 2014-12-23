@@ -82,6 +82,8 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 		@SuppressWarnings("rawtypes")
 		List list = commentMapper.selectByExample(commentCriteria);
 		page.setRows(list);
+		int total = commentMapper.countByExample(commentCriteria);
+		page.setTotal(total);
 		return page;
 	}
 

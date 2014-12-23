@@ -83,6 +83,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		@SuppressWarnings("rawtypes")
 		List list = roleMapper.selectByExample(roleCriteria);
 		page.setRows(list);
+		int total = roleMapper.countByExample(roleCriteria);
+		page.setTotal(total);
 		return page;
 	}
 

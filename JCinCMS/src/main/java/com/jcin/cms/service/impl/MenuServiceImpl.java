@@ -82,6 +82,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		@SuppressWarnings("rawtypes")
 		List list = menuMapper.selectByExample(menuCriteria);
 		page.setRows(list);
+		int total = menuMapper.countByExample(menuCriteria);
+		page.setTotal(total);
 		return page;
 	}
 

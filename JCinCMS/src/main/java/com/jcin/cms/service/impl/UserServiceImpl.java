@@ -82,6 +82,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		@SuppressWarnings("rawtypes")
 		List list = userMapper.selectByExample(userCriteria);
 		page.setRows(list);
+		int total = userMapper.countByExample(userCriteria);
+		page.setTotal(total);
 		return page;
 	}
 

@@ -84,6 +84,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 		@SuppressWarnings("rawtypes")
 		List list = articleMapper.selectByExample(articleCriteria);
 		page.setRows(list);
+		int total = articleMapper.countByExample(articleCriteria);
+		page.setTotal(total);
 		return page;
 	}
 

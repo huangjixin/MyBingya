@@ -84,6 +84,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		@SuppressWarnings("rawtypes")
 		List list = categoryMapper.selectByExample(categoryCriteria);
 		page.setRows(list);
+		int total = categoryMapper.countByExample(categoryCriteria);
+		page.setTotal(total);
+		
 		return page;
 	}
 

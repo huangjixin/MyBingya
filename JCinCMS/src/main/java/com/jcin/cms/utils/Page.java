@@ -13,6 +13,7 @@ import java.util.List;
 public class Page{
 	protected int limit = 20; //每页显示条数
 	protected int start = 0;  //起始行号
+	protected int pageSize = 10; //每页显示条数
 	protected int total = -1; //总数
 	protected List rows = new ArrayList(); //结果集
 	protected int page = 1;   //第几页
@@ -21,6 +22,13 @@ public class Page{
 
 	//-- 访问查询结果函数 --//
 
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 	
 	public int getLimit() {
 		return limit;
