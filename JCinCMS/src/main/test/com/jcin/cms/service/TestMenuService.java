@@ -40,9 +40,9 @@ public class TestMenuService extends TestCase {
 	@Test
 	public void testInsert() {
 		Menu menu = new Menu();
-		menu.setName("用户");
+		menu.setName("操作日志");
 		menu.setId(new Date().getTime() + "");
-		menu.setParentid("1419246357634");
+		menu.setParentid("1419246739429");
 		int result = menuService.insert(menu);
 		Assert.assertEquals(1, result);
 	}
