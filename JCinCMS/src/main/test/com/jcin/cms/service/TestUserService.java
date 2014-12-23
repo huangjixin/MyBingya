@@ -7,8 +7,6 @@
  */
 package com.jcin.cms.service;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import junit.framework.TestCase;
@@ -22,6 +20,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.domain.User;
+import com.jcin.cms.utils.Page;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // 指定测试用例的运行器 这里是指定了Junit4
@@ -41,7 +40,7 @@ public class TestUserService extends TestCase {
 		User user = new User();
 		user.setPassword("123456");
 		user.setUsername("123456");
-		user.setId(new Date().getTime() + "");
+//		user.setId(new Date().getTime() + "");
 
 		int result = userService.insert(user);
 		Assert.assertEquals(1, result);
@@ -51,6 +50,13 @@ public class TestUserService extends TestCase {
 	public void testDeleteByPrimaryKey() {
 		int result = userService.deleteByPrimaryKey("1419213655697");
 		Assert.assertEquals(1, result);
+	}
+
+	@Test
+	public void testSelect() {
+		Page page = new Page();
+		page = userService.select(page);
+		Assert.assertNotNull(page.getRows());
 	}
 
 }
