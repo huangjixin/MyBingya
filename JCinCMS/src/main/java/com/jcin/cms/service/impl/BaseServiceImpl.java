@@ -11,8 +11,11 @@
 package com.jcin.cms.service.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Date;
 
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.Page;
@@ -46,7 +49,25 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public int insert(T record) {
-		// TODO Auto-generated method stub
+		@SuppressWarnings("rawtypes")
+		Class clazz = record.getClass();
+		try {
+			Method method = clazz.getDeclaredMethod("setId",String.class);
+			method.invoke(record, new Date().getTime() + "");
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
