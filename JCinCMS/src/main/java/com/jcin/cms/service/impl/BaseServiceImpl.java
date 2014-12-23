@@ -52,8 +52,16 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		try {
-			Method method = clazz.getDeclaredMethod("setId",String.class);
+			Method method = clazz.getDeclaredMethod("setId", String.class);
 			method.invoke(record, new Date().getTime() + "");
+
+			Method createDatemethod = clazz.getDeclaredMethod("setCreatedate",
+					Date.class);
+			createDatemethod.invoke(record, new Date());
+
+			Method updateDatemethod = clazz.getDeclaredMethod("setUpdatedate",
+					Date.class);
+			updateDatemethod.invoke(record, new Date());
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
@@ -85,7 +93,30 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public int update(T record) {
-		// TODO Auto-generated method stub
+		@SuppressWarnings("rawtypes")
+		Class clazz = record.getClass();
+		Method updateDatemethod;
+		try {
+			updateDatemethod = clazz.getDeclaredMethod("setUpdatedate",
+					Date.class);
+			updateDatemethod.invoke(record, new Date());
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 
