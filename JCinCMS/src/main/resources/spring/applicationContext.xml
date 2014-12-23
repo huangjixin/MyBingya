@@ -24,7 +24,7 @@
 		<property name="timeBetweenEvictionRunsMillis" value="1800000" />
 		<property name="numTestsPerEvictionRun" value="3" />
 		<property name="minEvictableIdleTimeMillis" value="1800000" />
-		<!-- 请注意用MySQL要改成SELECT 1 oracle:select 1 from dual-->
+		<!-- 请注意用MySQL要改成SELECT 1 oracle:select 1 from dual -->
 		<property name="validationQuery" value="SELECT 1" />
 	</bean>
 
@@ -45,14 +45,15 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+<!-- 	<aop:aspectj-autoproxy proxy-target-class="true" /> -->
 	<!-- 声明式事务配置，transaction-manager属性值默认为 transactionManager -->
-	<tx:annotation-driven />
+	<tx:annotation-driven  transaction-manager="transactionManager"/>
 
 	<!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) 扫描类包，将标注spring注解的类自动转化成Bean，同时完成Bean的注入 -->
 	<context:component-scan base-package="com.jcin.cms">
 		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+		expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 	<!-- enable autowire -->
