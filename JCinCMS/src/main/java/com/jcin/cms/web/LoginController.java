@@ -7,36 +7,66 @@
  */
 package com.jcin.cms.web;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jcin.cms.domain.User;
+import com.jcin.cms.service.IUserService;
+import com.jcin.cms.service.impl.UserServiceImpl;
 import com.jcin.cms.web.vo.LoginResponse;
 
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
-
+//	@Resource
+//	private IUserService userService;
+	
 	@RequestMapping
-	public String login(@Valid User user, BindingResult bindingResult,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String login(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		LoginResponse loginResponse = LoginResponse.getInstance();
-		HttpSession session = httpServletRequest.getSession();
-
-		session.setAttribute("loginInfo", loginResponse);
-		return "login";
+		return "view/login";
 	}
 
-	@RequestMapping
-	public String logout() {
-		return "logout";
+	@RequestMapping(value = "/validatelogin")
+	public ModelAndView validateLogin(@Valid @NotNull User user,
+			BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+//		List<User> list = iuserService.validateLogin(user.getUsername(),
+//				user.getPassword());
+//		if (list.size() == 0) {
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("loginInfo", "用户名或者密码错误。");
+//			return new ModelAndView("view/login", map);
+//		}
+//
+//		LoginResponse loginResponse = LoginResponse.getInstance();
+//		HttpSession session = httpServletRequest.getSession();
+//
+//		session.setAttribute("loginInfo", loginResponse);
+
+		return new ModelAndView("index");
 	}
+
+	// @RequestMapping
+	// public String logout() {
+	// return "logout";
+	// }
 }
