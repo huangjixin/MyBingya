@@ -8,16 +8,15 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Role;
-import com.jcin.cms.utils.Page;
 
-public interface IRoleService {
-	int deleteByPrimaryKey(String id);
-
-	int insert(Role record);
-
-	Page select(Page page);
-
-	Role selectByPrimaryKey(String id);
-
-	int update(Role record);
+public interface IRoleService  extends IBaseService<Role, String>{
+//	int deleteByPrimaryKey(String id);
+//
+//	int insert(Role record);
+//
+//	Page select(Page page);
+//
+//	Role selectByPrimaryKey(String id);
+//
+//	int update(Role record);
 }

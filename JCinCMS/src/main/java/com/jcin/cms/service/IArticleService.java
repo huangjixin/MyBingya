@@ -8,16 +8,15 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Article;
-import com.jcin.cms.utils.Page;
 
-public interface IArticleService {
-	int deleteByPrimaryKey(String id);
-
-	int insert(Article record);
-
-	Page select(Page page);
-
-	Article selectByPrimaryKey(String id);
-
-	int update(Article record);
+public interface IArticleService extends IBaseService<Article, String>{
+//	int deleteByPrimaryKey(String id);
+//
+//	int insert(Article record);
+//
+//	Page select(Page page);
+//
+//	Article selectByPrimaryKey(String id);
+//
+//	int update(Article record);
 }

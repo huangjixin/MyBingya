@@ -10,7 +10,6 @@
  */
 package com.jcin.cms.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,7 +30,8 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "categoryService")
-public class CategoryServiceImpl implements ICategoryService {
+public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
+		implements ICategoryService {
 	private static Logger logger = Logger.getLogger(CategoryServiceImpl.class
 			.getName());
 
@@ -47,6 +47,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+
 		int result = categoryMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -61,6 +63,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Override
 	@Transactional
 	public int insert(Category record) {
+		super.insert(record);
+
 		int result = categoryMapper.insert(record);
 		return result;
 	}
@@ -73,6 +77,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+
 		CategoryCriteria categoryCriteria = new CategoryCriteria();
 		categoryCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -90,6 +96,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	 */
 	@Override
 	public Category selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+
 		Category category = categoryMapper.selectByPrimaryKey(id);
 		return category;
 	}
@@ -104,6 +112,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Override
 	@Transactional
 	public int update(Category record) {
+		super.update(record);
+
 		int result = categoryMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}

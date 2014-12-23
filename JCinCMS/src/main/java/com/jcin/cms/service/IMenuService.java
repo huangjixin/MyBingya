@@ -8,16 +8,16 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Menu;
-import com.jcin.cms.utils.Page;
 
-public interface IMenuService {
-	int deleteByPrimaryKey(String id);
 
-	int insert(Menu record);
-
-	Page select(Page page);
-
-	Menu selectByPrimaryKey(String id);
-
-	int update(Menu record);
+public interface IMenuService  extends IBaseService<Menu, String>{
+//	int deleteByPrimaryKey(String id);
+//
+//	int insert(Menu record);
+//
+//	Page select(Page page);
+//
+//	Menu selectByPrimaryKey(String id);
+//
+//	int update(Menu record);
 }

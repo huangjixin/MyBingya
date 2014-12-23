@@ -30,9 +30,11 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "commentService")
-public class CommentServiceImpl implements ICommentService {
-	private static Logger logger = Logger.getLogger(CommentServiceImpl.class.getName());
-	
+public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
+		implements ICommentService {
+	private static Logger logger = Logger.getLogger(CommentServiceImpl.class
+			.getName());
+
 	@Resource
 	private CommentMapper commentMapper;
 
@@ -40,10 +42,13 @@ public class CommentServiceImpl implements ICommentService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.ICommentService#deleteByPrimaryKey((java.lang.String))
+	 * com.jcin.cms.service.ICommentService#deleteByPrimaryKey((java.lang.String
+	 * ))
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+
 		int result = commentMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -51,11 +56,14 @@ public class CommentServiceImpl implements ICommentService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.ICommentService#insert(com.jcin.cms.domain.Comment)
+	 * @see
+	 * com.jcin.cms.service.ICommentService#insert(com.jcin.cms.domain.Comment)
 	 */
 	@Override
 	@Transactional
 	public int insert(Comment record) {
+		super.insert(record);
+
 		int result = commentMapper.insert(record);
 		return result;
 	}
@@ -67,6 +75,8 @@ public class CommentServiceImpl implements ICommentService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+
 		CommentCriteria commentCriteria = new CommentCriteria();
 		commentCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -83,6 +93,8 @@ public class CommentServiceImpl implements ICommentService {
 	 */
 	@Override
 	public Comment selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+
 		Comment comment = commentMapper.selectByPrimaryKey(id);
 		return comment;
 	}
@@ -90,11 +102,14 @@ public class CommentServiceImpl implements ICommentService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.ICommentService#update(com.jcin.cms.domain.Comment)
+	 * @see
+	 * com.jcin.cms.service.ICommentService#update(com.jcin.cms.domain.Comment)
 	 */
 	@Override
 	@Transactional
 	public int update(Comment record) {
+		super.update(record);
+
 		int result = commentMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}

@@ -31,9 +31,11 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "userService")
-public class UserServiceImpl implements IUserService {
-	private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
-	
+public class UserServiceImpl extends BaseServiceImpl<User, String> implements
+		IUserService {
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class
+			.getName());
+
 	@Resource
 	private UserMapper userMapper;
 
@@ -45,6 +47,8 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+		
 		int result = userMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -57,6 +61,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public int insert(User record) {
+		super.insert(record);
+		
 		record.setCreatedate(new Date());
 		int result = userMapper.insert(record);
 		return result;
@@ -69,6 +75,8 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+		
 		UserCriteria userCriteria = new UserCriteria();
 		userCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -85,6 +93,8 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public User selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+		
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
 	}
@@ -97,6 +107,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public int update(User record) {
+		super.update(record);
+		
 		int result = userMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}

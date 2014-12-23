@@ -8,16 +8,15 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.User;
-import com.jcin.cms.utils.Page;
 
-public interface IUserService {
-	int deleteByPrimaryKey(String id);
-
-	int insert(User record);
-
-	Page select(Page page);
-
-	User selectByPrimaryKey(String id);
-
-	int update(User record);
+public interface IUserService extends IBaseService<User, String> {
+	// int deleteByPrimaryKey(String id);
+	//
+	// int insert(User record);
+	//
+	// Page select(Page page);
+	//
+	// User selectByPrimaryKey(String id);
+	//
+	// int update(User record);
 }

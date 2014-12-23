@@ -8,16 +8,15 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Comment;
-import com.jcin.cms.utils.Page;
 
-public interface ICommentService {
-	int deleteByPrimaryKey(String id);
-
-	int insert(Comment record);
-
-	Page select(Page page);
-
-	Comment selectByPrimaryKey(String id);
-
-	int update(Comment record);
+public interface ICommentService extends IBaseService<Comment, String>{
+//	int deleteByPrimaryKey(String id);
+//
+//	int insert(Comment record);
+//
+//	Page select(Page page);
+//
+//	Comment selectByPrimaryKey(String id);
+//
+//	int update(Comment record);
 }

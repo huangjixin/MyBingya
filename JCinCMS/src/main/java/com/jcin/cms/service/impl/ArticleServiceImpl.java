@@ -31,9 +31,11 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "articleService")
-public class ArticleServiceImpl implements IArticleService {
-	private static Logger logger = Logger.getLogger(ArticleServiceImpl.class.getName());
-	
+public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
+		implements IArticleService {
+	private static Logger logger = Logger.getLogger(ArticleServiceImpl.class
+			.getName());
+
 	@Resource
 	private ArticleMapper articleMapper;
 
@@ -41,10 +43,13 @@ public class ArticleServiceImpl implements IArticleService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IArticleService#deleteByPrimaryKey((java.lang.String))
+	 * com.jcin.cms.service.IArticleService#deleteByPrimaryKey((java.lang.String
+	 * ))
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+
 		int result = articleMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -52,11 +57,14 @@ public class ArticleServiceImpl implements IArticleService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.IArticleService#insert(com.jcin.cms.domain.Article)
+	 * @see
+	 * com.jcin.cms.service.IArticleService#insert(com.jcin.cms.domain.Article)
 	 */
 	@Override
 	@Transactional
 	public int insert(Article record) {
+		super.insert(record);
+
 		record.setCreatedate(new Date());
 		int result = articleMapper.insert(record);
 		return result;
@@ -69,6 +77,8 @@ public class ArticleServiceImpl implements IArticleService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+
 		ArticleCriteria articleCriteria = new ArticleCriteria();
 		articleCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -85,6 +95,8 @@ public class ArticleServiceImpl implements IArticleService {
 	 */
 	@Override
 	public Article selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+
 		Article article = articleMapper.selectByPrimaryKey(id);
 		return article;
 	}
@@ -92,11 +104,14 @@ public class ArticleServiceImpl implements IArticleService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.IArticleService#update(com.jcin.cms.domain.Article)
+	 * @see
+	 * com.jcin.cms.service.IArticleService#update(com.jcin.cms.domain.Article)
 	 */
 	@Override
 	@Transactional
 	public int update(Article record) {
+		super.update(record);
+
 		int result = articleMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}

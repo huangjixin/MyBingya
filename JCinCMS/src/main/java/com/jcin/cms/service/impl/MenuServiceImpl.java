@@ -31,9 +31,11 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "menuService")
-public class MenuServiceImpl implements IMenuService {
-	private static Logger logger = Logger.getLogger(MenuServiceImpl.class.getName());
-	
+public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
+		IMenuService {
+	private static Logger logger = Logger.getLogger(MenuServiceImpl.class
+			.getName());
+
 	@Resource
 	private MenuMapper menuMapper;
 
@@ -45,6 +47,8 @@ public class MenuServiceImpl implements IMenuService {
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+
 		int result = menuMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -57,6 +61,8 @@ public class MenuServiceImpl implements IMenuService {
 	@Override
 	@Transactional
 	public int insert(Menu record) {
+		super.insert(record);
+
 		record.setCreatedate(new Date());
 		int result = menuMapper.insert(record);
 		return result;
@@ -69,6 +75,8 @@ public class MenuServiceImpl implements IMenuService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+
 		MenuCriteria menuCriteria = new MenuCriteria();
 		menuCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -85,6 +93,8 @@ public class MenuServiceImpl implements IMenuService {
 	 */
 	@Override
 	public Menu selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+
 		Menu menu = menuMapper.selectByPrimaryKey(id);
 		return menu;
 	}
@@ -97,6 +107,8 @@ public class MenuServiceImpl implements IMenuService {
 	@Override
 	@Transactional
 	public int update(Menu record) {
+		super.update(record);
+
 		int result = menuMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}

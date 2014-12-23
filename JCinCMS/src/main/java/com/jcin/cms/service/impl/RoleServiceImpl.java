@@ -31,9 +31,11 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "roleService")
-public class RoleServiceImpl implements IRoleService {
-	private static Logger logger = Logger.getLogger(RoleServiceImpl.class.getName());
-	
+public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
+		IRoleService {
+	private static Logger logger = Logger.getLogger(RoleServiceImpl.class
+			.getName());
+
 	@Resource
 	private RoleMapper roleMapper;
 
@@ -45,6 +47,8 @@ public class RoleServiceImpl implements IRoleService {
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
+
 		int result = roleMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -57,6 +61,8 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	@Transactional
 	public int insert(Role record) {
+		super.insert(record);
+
 		record.setCreatedate(new Date());
 		record.setId(new Date().getTime() + "");
 		int result = roleMapper.insert(record);
@@ -70,6 +76,8 @@ public class RoleServiceImpl implements IRoleService {
 	 */
 	@Override
 	public Page select(Page page) {
+		super.select(page);
+
 		RoleCriteria roleCriteria = new RoleCriteria();
 		roleCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
@@ -86,6 +94,8 @@ public class RoleServiceImpl implements IRoleService {
 	 */
 	@Override
 	public Role selectByPrimaryKey(String id) {
+		super.selectByPrimaryKey(id);
+
 		Role role = roleMapper.selectByPrimaryKey(id);
 		return role;
 	}
@@ -98,6 +108,8 @@ public class RoleServiceImpl implements IRoleService {
 	@Override
 	@Transactional
 	public int update(Role record) {
+		super.update(record);
+
 		int result = roleMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}
