@@ -35,9 +35,9 @@ import com.jcin.cms.web.vo.LoginResponse;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
-//	@Resource
-//	private IUserService userService;
-	
+	@Resource
+	private IUserService userService;
+
 	@RequestMapping
 	public String login(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -49,24 +49,24 @@ public class LoginController {
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-//		List<User> list = iuserService.validateLogin(user.getUsername(),
-//				user.getPassword());
-//		if (list.size() == 0) {
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("loginInfo", "用户名或者密码错误。");
-//			return new ModelAndView("view/login", map);
-//		}
-//
-//		LoginResponse loginResponse = LoginResponse.getInstance();
-//		HttpSession session = httpServletRequest.getSession();
-//
-//		session.setAttribute("loginInfo", loginResponse);
+		List<User> list = userService.validateLogin(user.getUsername(),
+				user.getPassword());
+		if (list.size() == 0) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("loginInfo", "用户名或者密码错误。");
+			return new ModelAndView("view/login", map);
+		}
+
+		LoginResponse loginResponse = LoginResponse.getInstance();
+		HttpSession session = httpServletRequest.getSession();
+
+		session.setAttribute("loginInfo", loginResponse);
 
 		return new ModelAndView("index");
 	}
 
-	// @RequestMapping
-	// public String logout() {
-	// return "logout";
-	// }
+	@RequestMapping(value = "/logout")
+	public String logout() {
+		return "logout";
+	}
 }
