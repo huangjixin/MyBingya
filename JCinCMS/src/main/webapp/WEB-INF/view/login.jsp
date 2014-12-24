@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -18,6 +19,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="登录">
 <meta http-equiv="description" content="login">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -36,7 +38,7 @@
 		style="text-align: center;">
 		<div class="modal-body" style="text-align: center;">
 			<form class="form col-md-12 center-block"
-				action="<%=basePath%>/login/validatelogin">
+				action="<%=basePath%>/login/validatelogin" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control input-lg" id="username"
 						name="username" placeholder="用户名">
@@ -47,6 +49,9 @@
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary btn-lg btn-block">登录</button>
+				</div>
+				<div class="form-group">
+					<h4>${loginInfo}</h4>
 				</div>
 			</form>
 		</div>
