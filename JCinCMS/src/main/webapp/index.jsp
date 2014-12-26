@@ -31,6 +31,20 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/js/jquery-easyui/demo/demo.css">
 <style type="text/css">
+body {
+	height: 100%;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+.box {
+	height: 100%;
+	background: #ff0000;
+	position: absolute;
+	width: 100%;
+}
+
 #header {
 	height: 100px;
 	background-image: url(images/headerBG.gif);
@@ -60,26 +74,33 @@
 	<!-- 	<div region="east" iconCls="icon-reload" title="" split="false" -->
 	<!-- 		style="width:100px;"></div> -->
 	<div region="west" split="false" title="" style="width:180px;">
-		<ul class="easyui-tree" id="tree" data-options="animate:true,lines:true">
+		<ul class="easyui-tree" id="tree"
+			data-options="animate:true,lines:true">
 			<li><span>My Documents</span>
 				<ul>
 					<li data-options="state:'closed'"><span>Photos</span>
 						<ul>
-							<li><span>Friend</span></li>
-							<li><span>Wife</span></li>
-							<li><span>Company</span></li>
-						</ul></li>
+							<li><span>Friend</span>
+							</li>
+							<li><span>Wife</span>
+							</li>
+							<li><span>Company</span>
+							</li>
+						</ul>
+					</li>
 					<li><span>Program Files</span>
 						<ul>
 							<li>Intel</li>
 							<li>Java</li>
 							<li>Microsoft Office</li>
 							<li>Games</li>
-						</ul></li>
+						</ul>
+					</li>
 					<li>index.html</li>
 					<li>about.html</li>
 					<li>welcome.html</li>
-				</ul></li>
+				</ul>
+			</li>
 		</ul>
 		<!-- 		<ul class="easyui-tree" -->
 		<!-- 			data-options="url:'menu_tree.json',method:'get',animate:true,lines:true"></ul> -->
