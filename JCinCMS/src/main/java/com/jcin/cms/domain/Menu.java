@@ -20,6 +20,8 @@ public class Menu implements Serializable {
 
     private Date updatedate;
 
+    private String url;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -84,5 +86,13 @@ public class Menu implements Serializable {
 
     public void setUpdatedate(Date updatedate) {
         this.updatedate = updatedate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 }

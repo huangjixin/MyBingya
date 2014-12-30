@@ -10,6 +10,7 @@
     <result column="createDate" property="createdate" jdbcType="DATE" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="updateDate" property="updatedate" jdbcType="DATE" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, description, path, parentId, createDate, icon, updateDate
+    id, name, description, path, parentId, createDate, icon, updateDate, url
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.MenuCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -107,10 +108,10 @@
   <insert id="insert" parameterType="com.jcin.cms.domain.Menu" >
     insert into tb_menu (id, name, description, 
       path, parentId, createDate, 
-      icon, updateDate)
+      icon, updateDate, url)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{path,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, 
-      #{icon,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE})
+      #{icon,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Menu" >
     insert into tb_menu
@@ -139,6 +140,9 @@
       <if test="updatedate != null" >
         updateDate,
       </if>
+      <if test="url != null" >
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -164,6 +168,9 @@
       </if>
       <if test="updatedate != null" >
         #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -200,6 +207,9 @@
       <if test="record.updatedate != null" >
         updateDate = #{record.updatedate,jdbcType=DATE},
       </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,7 +224,8 @@
       parentId = #{record.parentid,jdbcType=VARCHAR},
       createDate = #{record.createdate,jdbcType=DATE},
       icon = #{record.icon,jdbcType=VARCHAR},
-      updateDate = #{record.updatedate,jdbcType=DATE}
+      updateDate = #{record.updatedate,jdbcType=DATE},
+      url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,6 +254,9 @@
       <if test="updatedate != null" >
         updateDate = #{updatedate,jdbcType=DATE},
       </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -254,7 +268,8 @@
       parentId = #{parentid,jdbcType=VARCHAR},
       createDate = #{createdate,jdbcType=DATE},
       icon = #{icon,jdbcType=VARCHAR},
-      updateDate = #{updatedate,jdbcType=DATE}
+      updateDate = #{updatedate,jdbcType=DATE},
+      url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

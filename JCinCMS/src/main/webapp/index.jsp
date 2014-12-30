@@ -69,8 +69,8 @@ body {
 	<!-- 		style="height:30px;"></div> -->
 	<!-- 	<div region="east" iconCls="icon-reload" title="" split="false" -->
 	<!-- 		style="width:100px;"></div> -->
-	<div region="west" split="false" title="" style="width:180px;">
-		<!-- data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
+	<div region="west" split="true" title="" style="width:180px;">
+		<!--数据源属性 data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
 		<table id="tgrid" title="" class="easyui-treegrid"
 			data-options="
 								url: 'menu/getMenu',
