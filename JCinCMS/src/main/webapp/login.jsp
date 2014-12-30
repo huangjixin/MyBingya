@@ -29,7 +29,7 @@
 
 <body>
 	<div class="container" style="margin-top:100px">
-		<form action="login.jspx" method="post" class="well"
+		<form action="login/validatelogin" method="post" class="well"
 			style="width:220px;margin:0px auto;">
 			<h3>系统登录</h3>
 			<label>用户名:</label> <input type="text" name="username"

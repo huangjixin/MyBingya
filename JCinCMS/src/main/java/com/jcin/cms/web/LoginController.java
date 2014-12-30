@@ -18,18 +18,15 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jcin.cms.domain.User;
 import com.jcin.cms.service.IUserService;
-import com.jcin.cms.service.impl.UserServiceImpl;
 import com.jcin.cms.web.vo.LoginResponse;
 
 @Controller
@@ -45,15 +42,18 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/validatelogin")
-	public ModelAndView validateLogin(@Valid @NotNull User user,
+	public Object validateLogin(@Valid @NotNull User user,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		ModelAndView modelAndView = new ModelAndView();
+
 		List<User> list = userService.validateLogin(user.getUsername(),
 				user.getPassword());
 		if (list.size() == 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("loginInfo", "用户名或者密码错误。");
+			modelAndView.addObject(map);
 			return new ModelAndView("view/login", map);
 		}
 
@@ -62,11 +62,36 @@ public class LoginController {
 
 		session.setAttribute("loginInfo", loginResponse);
 
-		return new ModelAndView("index");
+		return new ModelAndView(new RedirectView(
+				httpServletRequest.getContextPath()));
 	}
 
 	@RequestMapping(value = "/logout")
 	public String logout() {
 		return "logout";
+	}
+
+	@RequestMapping(value = "/validatelogout")
+	public ModelAndView validateLogout(@Valid @NotNull User user,
+			BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		List<User> list = userService.validateLogin(user.getUsername(),
+				user.getPassword());
+		if (list.size() == 0) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("loginInfo", "用户名或者密码错误。");
+			modelAndView.addObject(map);
+			return modelAndView;
+		}
+
+		LoginResponse loginResponse = LoginResponse.getInstance();
+		HttpSession session = httpServletRequest.getSession();
+
+		session.setAttribute("loginInfo", loginResponse);
+
+		return new ModelAndView(new RedirectView("view/login"));
 	}
 }
