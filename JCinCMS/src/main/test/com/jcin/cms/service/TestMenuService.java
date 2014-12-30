@@ -8,6 +8,7 @@
 package com.jcin.cms.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.domain.Menu;
 import com.jcin.cms.domain.Menu;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,11 +40,18 @@ public class TestMenuService extends TestCase {
 	@Test
 	public void testInsert() {
 		Menu menu = new Menu();
-		menu.setName("操作日志");
+		menu.setName("密码修改");
 		menu.setId(new Date().getTime() + "");
-		menu.setParentid("1419246739429");
+		menu.setParentid("1419930903603");
 		int result = menuService.insert(menu);
 		Assert.assertEquals(1, result);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testGetMenuTree() {
+		List list = menuService.getMenuTree();
+		Assert.assertNotNull(list);
 	}
 
 //	@Test

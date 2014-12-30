@@ -74,24 +74,26 @@ public class MenuController {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/getMenu")
 	@ResponseBody
-	public void getMenu(HttpServletRequest httpServletRequest,
+	public List getMenu(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		List<Menu> list = new ArrayList<Menu>();
-		Menu menu = new Menu();
-		menu.setId("12");
-		menu.setName("123");
-		list.add(menu);
-		PrintWriter out = httpServletResponse.getWriter();
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(list);
-		System.out.println(json);
-		out.print(json);
-		out.flush();
-		out.close();
+		List list =	menuService.getMenuTree();
+//		List list = new ArrayList<Menu>();
+//		Menu menu = new Menu();
+//		menu.setId("12");
+//		menu.setName("123");
+//		list.add(menu);
+//		PrintWriter out = httpServletResponse.getWriter();
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = mapper.writeValueAsString(list);
+//		System.out.println(json);
+//		out.print(json);
+//		out.flush();
+//		out.close();
 
-		// return list;
+		 return list;
 	}
 
 	/**

@@ -70,11 +70,10 @@ body {
 	<!-- 	<div region="east" iconCls="icon-reload" title="" split="false" -->
 	<!-- 		style="width:100px;"></div> -->
 	<div region="west" split="false" title="" style="width:180px;">
-
+		<!-- data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
 		<table id="tgrid" title="" class="easyui-treegrid"
 			data-options="
-								data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}],
-								url: 'menu_tree.json',
+								url: 'menu/getMenu',
 								method: 'get',
 								rownumbers: false,
 								idField: 'id',
@@ -89,23 +88,22 @@ body {
 				</tr>
 			</thead>
 		</table>
-		<table title="Folder Browser" class="easyui-treegrid"
-			data-options="
-						data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}],
-		                url: 'menu_tree.json',
-		                method: 'get',
-		                rownumbers: false,
-		                idField: 'id',
-		                treeField: 'name'
-		                fit:true,
-		                fitColumns:true
-		            ">
-			<thead>
-				<tr>
-					<th data-options="field:'name'" width="220">Name</th>
-				</tr>
-			</thead>
-		</table>
+		<!-- 		<table title="Folder Browser" class="easyui-treegrid" -->
+		<!-- 			data-options=" -->
+		<!-- 		                url: 'menu/getMenu', -->
+		<!-- 		                method: 'get', -->
+		<!-- 		                rownumbers: false, -->
+		<!-- 		                idField: 'id', -->
+		<!-- 		                treeField: 'name' -->
+		<!-- 		                fit:true, -->
+		<!-- 		                fitColumns:true -->
+		<!-- 		            "> -->
+		<!-- 			<thead> -->
+		<!-- 				<tr> -->
+		<!-- 					<th data-options="field:'name'" width="220">Name</th> -->
+		<!-- 				</tr> -->
+		<!-- 			</thead> -->
+		<!-- 		</table> -->
 	</div>
 	<div region="center" title="" style="padding:5px;background:#eee;">
 

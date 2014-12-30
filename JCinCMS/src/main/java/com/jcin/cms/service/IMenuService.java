@@ -7,17 +7,28 @@
  */
 package com.jcin.cms.service;
 
+import java.util.List;
+
 import com.jcin.cms.domain.Menu;
 
+public interface IMenuService extends IBaseService<Menu, String> {
+	// int deleteByPrimaryKey(String id);
+	//
+	// int insert(Menu record);
+	//
+	// Page select(Page page);
+	//
+	// Menu selectByPrimaryKey(String id);
+	//
+	// int update(Menu record);
 
-public interface IMenuService  extends IBaseService<Menu, String>{
-//	int deleteByPrimaryKey(String id);
-//
-//	int insert(Menu record);
-//
-//	Page select(Page page);
-//
-//	Menu selectByPrimaryKey(String id);
-//
-//	int update(Menu record);
+	/**
+	 * 根据角色id查询菜单，参数为null查询全部菜单。
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	List getMenuTree();
+
+	List<Menu> getByParentId(String id);
 }
