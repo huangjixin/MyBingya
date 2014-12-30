@@ -17,19 +17,19 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="首页">
-<meta http-equiv="description" content="This is my page">
+<meta http-equiv="description" content="login,登录">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
+<script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-easyui/dwrloader.js"></script>
+	src="js/jquery-easyui/jquery.easyui.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/js/jquery-easyui/themes/default/easyui.css">
+	href="js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/js/jquery-easyui/themes/icon.css">
+	href="js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/js/jquery-easyui/demo/demo.css">
+	href="js/jquery-easyui/themes/icon.css">
+
 <style type="text/css">
 body {
 	height: 100%;
@@ -53,11 +53,7 @@ body {
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-		$('#tree').tree({
-			onClick : function(node) {
-				alert(row.name);
-			}
-		});
+
 	});
 </script>
 </head>
@@ -74,71 +70,42 @@ body {
 	<!-- 	<div region="east" iconCls="icon-reload" title="" split="false" -->
 	<!-- 		style="width:100px;"></div> -->
 	<div region="west" split="false" title="" style="width:180px;">
-		<ul class="easyui-tree" id="tree"
-			data-options="animate:true,lines:true">
-			<li><span>My Documents</span>
-				<ul>
-					<li data-options="state:'closed'"><span>Photos</span>
-						<ul>
-							<li><span>Friend</span>
-							</li>
-							<li><span>Wife</span>
-							</li>
-							<li><span>Company</span>
-							</li>
-						</ul>
-					</li>
-					<li><span>Program Files</span>
-						<ul>
-							<li>Intel</li>
-							<li>Java</li>
-							<li>Microsoft Office</li>
-							<li>Games</li>
-						</ul>
-					</li>
-					<li>index.html</li>
-					<li>about.html</li>
-					<li>welcome.html</li>
-				</ul>
-			</li>
-		</ul>
-		<!-- 		<ul class="easyui-tree" -->
-		<!-- 			data-options="url:'menu_tree.json',method:'get',animate:true,lines:true"></ul> -->
-		<!-- 		<table id="tgrid" title="" class="easyui-treegrid" -->
-		<!-- 			data-options=" -->
-		<!-- 						data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
-		<!-- 						url: 'menu_tree.json', -->
-		<!-- 						method: 'get', -->
-		<!-- 						rownumbers: false, -->
-		<!-- 						idField: 'id', -->
-		<!-- 						treeField: 'name', -->
-		<!-- 						showHeader: false, -->
-		<!-- 						fit:true, -->
-		<!-- 						fitColumns:true -->
-		<!-- 					"> -->
-		<!-- 			<thead> -->
-		<!-- 				<tr> -->
-		<!-- 					<th id="nameFieldTh" data-options="field:'name'" width="100%">Name</th> -->
-		<!-- 				</tr> -->
-		<!-- 			</thead> -->
-		<!-- 		</table> -->
-		<!-- 		<table title="Folder Browser" class="easyui-treegrid" -->
-		<!-- 			data-options=" -->
-		<!-- 				data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
-		<!--                 url: 'menu_tree.json', -->
-		<!--                 method: 'get', -->
-		<!--                 rownumbers: false, -->
-		<!--                 idField: 'id', -->
-		<!--                 treeField: 'name' -->
-		<!--                 fit:true, -->
-		<!--                 fitColumns:true -->
-		<!--             "> -->
-		<!-- 			<thead> -->
-		<!-- 				<tr> -->
-		<!-- 					<th data-options="field:'name'" width="220">Name</th> -->
-		<!-- 				</tr> -->
-		<!-- 			</thead> -->
-		<!-- 		</table> -->
+
+		<table id="tgrid" title="" class="easyui-treegrid"
+			data-options="
+								data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}],
+								url: 'menu_tree.json',
+								method: 'get',
+								rownumbers: false,
+								idField: 'id',
+								treeField: 'name',
+								showHeader: false,
+								fit:true,
+								fitColumns:true
+							">
+			<thead>
+				<tr>
+					<th id="nameFieldTh" data-options="field:'name'" width="100%">Name</th>
+				</tr>
+			</thead>
+		</table>
+		<table title="Folder Browser" class="easyui-treegrid"
+			data-options="
+						data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}],
+		                url: 'menu_tree.json',
+		                method: 'get',
+		                rownumbers: false,
+		                idField: 'id',
+		                treeField: 'name'
+		                fit:true,
+		                fitColumns:true
+		            ">
+			<thead>
+				<tr>
+					<th data-options="field:'name'" width="220">Name</th>
+				</tr>
+			</thead>
+		</table>
 	</div>
 	<div region="center" title="" style="padding:5px;background:#eee;">
 
