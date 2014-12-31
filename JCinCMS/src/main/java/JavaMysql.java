@@ -21,7 +21,7 @@ public class JavaMysql {
 
 	public static void backup(String sql) {
 
-		Properties pros = getPprVue("db.properties");
+		Properties pros = getPprVue("spring/db.properties");
 
 		// 这里是读取的属性文件，也可以直接使用
 
@@ -91,7 +91,7 @@ public class JavaMysql {
 	}
 
 	public static void load(String filename) {
-		Properties pros = getPprVue("db.properties");
+		Properties pros = getPprVue("spring/db.properties");
 
 		// 这里是读取的属性文件，也可以直接使用
 
@@ -124,7 +124,7 @@ public class JavaMysql {
 	}
 
 	public static void main(String[] args) throws IOException {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss");
 		backup(simpleDateFormat.format(new Date())+".sql");
 
 		// load("xx.sql");
