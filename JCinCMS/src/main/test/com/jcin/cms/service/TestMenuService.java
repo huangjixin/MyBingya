@@ -40,19 +40,20 @@ public class TestMenuService extends TestCase {
 	@Test
 	public void testInsert() {
 		Menu menu = new Menu();
-		menu.setName("密码修改");
+		menu.setName("菜单管理");
 		menu.setId(new Date().getTime() + "");
-		menu.setParentid("1419930903603");
+		menu.setUrl("menu/list");
+//		menu.setParentid("1419930903603");
 		int result = menuService.insert(menu);
 		Assert.assertEquals(1, result);
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@Test
-	public void testGetMenuTree() {
-		List list = menuService.getMenuTree();
-		Assert.assertNotNull(list);
-	}
+//	@SuppressWarnings("rawtypes")
+//	@Test
+//	public void testGetMenuTree() {
+//		List list = menuService.getMenuTree();
+//		Assert.assertNotNull(list);
+//	}
 
 //	@Test
 //	public void testDeleteByPrimaryKey() {

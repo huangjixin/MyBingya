@@ -53,25 +53,38 @@ body {
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-
+		$('#tgrid').treegrid({
+			onClickRow : function(row) {
+				doLink(row.url);
+			}
+		});
 	});
+
+	//打开连接。
+	function doLink(url) {
+		if (url == null) {
+			return;
+		}
+		$("#ifrContentArea").attr("src", url);
+	}
 </script>
 </head>
 
-<body class="easyui-layout">
+<body class="easyui-layout" fit="true">
 	<div region="north" title="" split="false" id="header"
 		style="height:100px;">
 		<!-- 		<div id="header" > -->
 		<!-- 			<h1></h1> -->
 		<!-- 		</div> -->
 	</div>
-	<!-- 	<div region="south" title="" split="false" -->
-	<!-- 		style="height:30px;"></div> -->
-	<!-- 	<div region="east" iconCls="icon-reload" title="" split="false" -->
-	<!-- 		style="width:100px;"></div> -->
+	<!-- 	<div region="south" title="" split="false"
+			style="height:30px;"></div>
+		<div region="east" iconCls="icon-reload" title="" split="false"
+	 		style="width:100px;"></div> -->
 	<div region="west" split="true" title="" style="width:180px;">
 		<!--数据源属性 data:[{id:2,name:'Tair'},{id:2,name:'Tair'},{id:2,name:'Tair'}], -->
 		<table id="tgrid" title="" class="easyui-treegrid"
+			style="padding: 1px;"
 			data-options="
 								url: 'menu/getMenu',
 								method: 'get',
@@ -88,25 +101,10 @@ body {
 				</tr>
 			</thead>
 		</table>
-		<!-- 		<table title="Folder Browser" class="easyui-treegrid" -->
-		<!-- 			data-options=" -->
-		<!-- 		                url: 'menu/getMenu', -->
-		<!-- 		                method: 'get', -->
-		<!-- 		                rownumbers: false, -->
-		<!-- 		                idField: 'id', -->
-		<!-- 		                treeField: 'name' -->
-		<!-- 		                fit:true, -->
-		<!-- 		                fitColumns:true -->
-		<!-- 		            "> -->
-		<!-- 			<thead> -->
-		<!-- 				<tr> -->
-		<!-- 					<th data-options="field:'name'" width="220">Name</th> -->
-		<!-- 				</tr> -->
-		<!-- 			</thead> -->
-		<!-- 		</table> -->
 	</div>
-	<div region="center" title="" style="padding:5px;background:#eee;">
-
+	<div region="center" title="" style="padding:1px;background:#ffffff;">
+		<iframe id="ifrContentArea" scrolling="auto" frameborder="0"
+			style="width: 100%; height: 100%;"></iframe>
 	</div>
 </body>
 </html>

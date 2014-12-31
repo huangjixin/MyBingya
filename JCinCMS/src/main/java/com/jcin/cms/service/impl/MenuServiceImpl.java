@@ -153,6 +153,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		jsonObject.put("id", menu.getId());
 		jsonObject.put("parentid", menu.getParentid());
 		jsonObject.put("name", menu.getName());
+		jsonObject.put("url", menu.getUrl());
+		jsonObject.put("createdate", menu.getCreatedate());
+		jsonObject.put("description", menu.getDescription());
+		jsonObject.put("updatedate", menu.getUpdatedate());
 		
 		List list = searialChild(menu);
 		if (null != list) {

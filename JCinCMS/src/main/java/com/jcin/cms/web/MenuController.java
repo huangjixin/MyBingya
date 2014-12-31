@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jcin.cms.domain.Menu;
@@ -54,23 +55,10 @@ public class MenuController {
 
 	@RequestMapping(value = "/new")
 	@ResponseBody
-	public String create(@Valid User user, BindingResult bindingResult,
+	public String create(@Valid Menu menu, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		// userService.insert(user);
-		httpServletResponse.setContentType("text/html");
-		PrintWriter out = httpServletResponse.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		menuService.insert(menu);
 		return null;
 	}
 
@@ -79,21 +67,19 @@ public class MenuController {
 	@ResponseBody
 	public List getMenu(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		List list =	menuService.getMenuTree();
-//		List list = new ArrayList<Menu>();
-//		Menu menu = new Menu();
-//		menu.setId("12");
-//		menu.setName("123");
-//		list.add(menu);
-//		PrintWriter out = httpServletResponse.getWriter();
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = mapper.writeValueAsString(list);
-//		System.out.println(json);
-//		out.print(json);
-//		out.flush();
-//		out.close();
+		List list = menuService.getMenuTree();
+		return list;
+	}
 
-		 return list;
+	@RequestMapping(value = "/deleteById")
+	@ResponseBody
+	public int deleteById(
+			@RequestParam(value = "id", required = true) String id,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		int result = menuService.deleteByPrimaryKey(id);
+
+		return result;
 	}
 
 	/**
