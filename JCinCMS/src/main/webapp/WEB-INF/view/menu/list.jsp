@@ -23,6 +23,7 @@
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -60,9 +61,14 @@
 }
 </style>
 <script type="text/javascript">
+	$().ready(function() {
+		// 绑定表单提交事件处理器
+		submitListener()
+	});
+
 	//单元格嵌入按钮。
 	function formatterWithBtn(value, rec) {
-		var btn = '<input type="button" onclick="add()" value="新增" /> <input type="button" onclick="update(1)" value="修改" /> <input type="button" onclick="deleteRows(1)" value="删除" />';
+		var btn = '<input type="button" onclick="add()" value="新增" /> <input type="button" onclick="update(1)" value="修改" /> <input type="button" onclick="deleteRows(\"+rec+\")" value="删除" />';
 		return btn;
 	}
 
@@ -83,13 +89,17 @@
 	//删除；
 	//number:1删除一条。
 	//number:不为null删除数组。
-	function deleteRows(number) {
-		var row = null;
-		row = $('#tgrid').treegrid("getSelected");
-		var pam = {
-			id : row.id
-		};
+	function deleteRows(row) {
+		var curKeyIndex = -1;
+		if (row == null) {
+			row = $('#tgrid').treegrid("getSelected");
+			curKeyIndex = $('#tgrid').datagrid("getRowIndex", row);
+		}
+
 		if (row != null) {
+			var pam = {
+				id : row.id
+			};
 			$.ajax({
 				cache : true,
 				type : "POST",
@@ -101,6 +111,10 @@
 				},
 				success : function(data) {
 					$("#tgrid").treegrid('reload'); // 重新加载;
+					if (curKeyIndex > 0) {
+						$("#tgrid").datagrid("selectRow", 0);
+					}
+
 				}
 			});
 		}
@@ -121,29 +135,51 @@
 		}
 	}
 
-	function toListView(edit) {
+	function toListView() {
 		$('#listView').show();
 		$('#editView').hide();
 	}
 
-	function toEditViewView(edit) {
+	function toEditViewView() {
 		$('#editView').show();
 		$('#listView').hide();
 	}
+	
+	function refresh(){
+		$("#tgrid").treegrid("reload");
+	}
 
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : 'menu/new',
-		data : $('#menuForm').serialize(),// 你的formid
-		async : false,
-		error : function(request) {
-			alert("连接失败");
-		},
-		success : function(data) {
-			//                     $("#commonLayout_appcreshi").parent().html(data);
-		}
-	});
+	function submitListener(submitType) {
+		$('#menuForm').submit(function() {
+			var str = $('#menuForm').formSerialize(); // registerForm为form id
+			$.ajax({
+				cache : true,
+				type : "POST",
+				url : 'menu/new',
+				data : str,// 你的formid
+				async : false,
+				error : function(request) {
+					$("#editResult").html("连接成功");
+				},
+				success : function(data) {
+					if (submitType == null) {
+						$("#editResult").html("保存成功");
+						// 						$("#tgrid").treegrid("reload");
+					} else if (submitType == "1") {
+						$('#menuForm').clearForm();
+						toListView();
+						$("#tgrid").treegrid("reload");
+					} else if (submitType == "2") {
+						// 						$('#menuForm').clearForm();
+						toListView();
+						// 						$("#tgrid").treegrid("reload");
+					}
+				}
+			});
+			// 为了防止普通浏览器进行表单提交和产生页面导航（防止页面刷新？）返回false
+			return false;
+		});
+	}
 </script>
 </head>
 
@@ -153,7 +189,8 @@
 			<div id="toolBar" style="width: 100%;">
 				<div>
 					<input type="button" value="新增" onclick="toEditViewView();" /> <input
-						type="button" value="删除" onclick="deleteRows(1)"/>
+						type="button" value="删除" onclick="deleteRows()" /> <input
+						type="button" value="刷新" onclick="refresh()" />
 				</div>
 			</div>
 			<table id="tgrid" title="" class="easyui-treegrid"
@@ -187,7 +224,7 @@
 			</table>
 		</div>
 		<div id="editView" style="display: none;">
-			<form id="menuForm" action="#">
+			<form id="menuForm">
 				<table width="100%" id="ListArea" border="1px;"
 					bordercolor="#C5C5C5" align="center" cellpadding="0"
 					cellspacing="0" style="border-collapse: collapse;">
@@ -198,24 +235,24 @@
 						</tr>
 						<tr class="tr1">
 							<th class="th1">名称:</th>
-							<td class="td1"><input type="text" name="nameInput"
-								id="nameInput" value="localhost" size="35"></td>
+							<td class="td1"><input type="text" name="name" id="name"
+								value="localhost" size="35"></td>
 							<th class="th1">连接URL:</th>
-							<td class="td1" colSpan="3"><input type="text"
-								name="urlInput" id="urlInput" value="localhost" size="35">
+							<td class="td1" colSpan="3"><input type="text" name="url"
+								id="url" value="" size="35">
 							</td>
 						</tr>
 
 						<tr class="tr1">
 							<th class="th1">描述:</th>
 							<td class="td1" colSpan="3" style="padding: 4px;"><textarea
-									id="descriptionInput" style="width: 520px;height: 100px;"></textarea>
+									id="description" style="width: 520px;height: 100px;"></textarea>
 							</td>
 						</tr>
 						<tr class="tr1">
 							<td class="td1" colSpan="4" style="padding: 4px;">&nbsp;&nbsp;&nbsp;&nbsp;<input
-								type="submit" value="保存" /><input type="submit" value="保存并返回" /><input
-								type="submit" value="保存并新增" /></td>
+								type="submit" value="保存" onclick="submitListener();"/>
+								<h1 id="editResult"></h1></td>
 						</tr>
 					</tbody>
 
