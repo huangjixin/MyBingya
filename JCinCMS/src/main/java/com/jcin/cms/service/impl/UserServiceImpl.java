@@ -62,7 +62,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	@Transactional
 	public int insert(User record) {
-//		super.insert(record);
+		super.insert(record);
 
 		record.setCreatedate(new Date());
 		int result = userMapper.insert(record);
@@ -110,9 +110,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	@Transactional
 	public int update(User record) {
-//		super.update(record);
+		super.update(record);
 
-		int result = userMapper.updateByPrimaryKeySelective(record);
+		int result = userMapper.updateByExample(record, new UserCriteria());
 		return result;
 	}
 

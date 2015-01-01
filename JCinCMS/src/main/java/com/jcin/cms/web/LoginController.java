@@ -20,8 +20,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -42,28 +44,28 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/validatelogin")
-	public Object validateLogin(@Valid @NotNull User user,
+	@ResponseBody
+	public Map validateLogin(@Valid User user,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		ModelAndView modelAndView = new ModelAndView();
-
+		ModelMap modelMap = new ModelMap();
 		List<User> list = userService.validateLogin(user.getUsername(),
 				user.getPassword());
 		if (list.size() == 0) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("loginInfo", "用户名或者密码错误。");
-			modelAndView.addObject(map);
-			return new ModelAndView("view/login", map);
+			modelMap.put("loginResult", "error");
+			modelMap.put("loginInfo", "用户名或者密码错误。");
+			return modelMap;
 		}
-
+		String ip = httpServletRequest.getRemoteAddr(); 
+		user.setIp("localhost");
+		int i =userService.update(user);
 		LoginResponse loginResponse = LoginResponse.getInstance();
 		HttpSession session = httpServletRequest.getSession();
 
 		session.setAttribute("loginInfo", loginResponse);
-
-		return new ModelAndView(new RedirectView(
-				httpServletRequest.getContextPath()));
+		modelMap.put("loginResult", "success");
+		return modelMap;
 	}
 
 	@RequestMapping(value = "/logout")
@@ -72,7 +74,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/validatelogout")
-	public ModelAndView validateLogout(@Valid @NotNull User user,
+	public ModelAndView validateLogout(@Valid User user,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {

@@ -62,10 +62,9 @@
 </style>
 <script type="text/javascript">
 	$().ready(function() {
-		// 绑定表单提交事件处理器
-		submitListener()
 	});
 
+	var curKeyIndex = -1;
 	//单元格嵌入按钮。
 	function formatterWithBtn(value, rec) {
 		var btn = '<input type="button" onclick="add()" value="新增" /> <input type="button" onclick="update(1)" value="修改" /> <input type="button" onclick="deleteRows(\"+rec+\")" value="删除" />';
@@ -90,7 +89,6 @@
 	//number:1删除一条。
 	//number:不为null删除数组。
 	function deleteRows(row) {
-		var curKeyIndex = -1;
 		if (row == null) {
 			row = $('#tgrid').treegrid("getSelected");
 			curKeyIndex = $('#tgrid').datagrid("getRowIndex", row);
@@ -111,10 +109,6 @@
 				},
 				success : function(data) {
 					$("#tgrid").treegrid('reload'); // 重新加载;
-					if (curKeyIndex > 0) {
-						$("#tgrid").datagrid("selectRow", 0);
-					}
-
 				}
 			});
 		}
@@ -144,41 +138,49 @@
 		$('#editView').show();
 		$('#listView').hide();
 	}
-	
-	function refresh(){
+
+	function refresh() {
 		$("#tgrid").treegrid("reload");
 	}
 
-	function submitListener(submitType) {
-		$('#menuForm').submit(function() {
-			var str = $('#menuForm').formSerialize(); // registerForm为form id
-			$.ajax({
-				cache : true,
-				type : "POST",
-				url : 'menu/new',
-				data : str,// 你的formid
-				async : false,
-				error : function(request) {
-					$("#editResult").html("连接成功");
-				},
-				success : function(data) {
-					if (submitType == null) {
-						$("#editResult").html("保存成功");
-						// 						$("#tgrid").treegrid("reload");
-					} else if (submitType == "1") {
-						$('#menuForm').clearForm();
-						toListView();
-						$("#tgrid").treegrid("reload");
-					} else if (submitType == "2") {
-						// 						$('#menuForm').clearForm();
-						toListView();
-						// 						$("#tgrid").treegrid("reload");
-					}
+	function submitListener() {
+		var str = $('#menuForm').formSerialize(); // registerForm为form id
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : 'menu/new',
+			data : str,// 你的formid
+			async : false,
+			error : function(request) {
+				$("#editResult").html("连接失败");
+			},
+			success : function(data) {
+				$("#editResult").html("保存成功");
+				if (submitType == null) {
+					$("#editResult").html("保存成功");
+				} else if (submitType == 1) {
+					// 					$('#menuForm').clearForm();
+					// 					toListView();
+					// 					$("#tgrid").treegrid("reload");
+				} else if (submitType == 2) {
+					$("#editResult").html("保存成功");
+					// 					$.ajaxForm("#menuForm").clearForm();
+					// 					toListView();
 				}
-			});
-			// 为了防止普通浏览器进行表单提交和产生页面导航（防止页面刷新？）返回false
-			return false;
+			}
 		});
+	}
+
+	function clearForm() {
+		$("#name").val("");
+		$("#url").val("");
+		$("#description").val("");
+	}
+
+	function ontgridLoadSuccess(data) {
+		if (curKeyIndex > 0) {
+			$("#tgrid").treegrid("select", 0);
+		}
 	}
 </script>
 </head>
@@ -202,7 +204,8 @@
 								treeField: 'name',
 								showHeader: true,
 								fit:true,
-								fitColumns:true
+								fitColumns:true,
+								onLoadSuccess : ontgridLoadSuccess
 							">
 				<thead>
 					<tr>
@@ -224,7 +227,7 @@
 			</table>
 		</div>
 		<div id="editView" style="display: none;">
-			<form id="menuForm">
+			<form id="menuForm" onsubmit="return false;">
 				<table width="100%" id="ListArea" border="1px;"
 					bordercolor="#C5C5C5" align="center" cellpadding="0"
 					cellspacing="0" style="border-collapse: collapse;">
@@ -251,7 +254,9 @@
 						</tr>
 						<tr class="tr1">
 							<td class="td1" colSpan="4" style="padding: 4px;">&nbsp;&nbsp;&nbsp;&nbsp;<input
-								type="submit" value="保存" onclick="submitListener();"/>
+								type="button" value="保存" id="btn_login"
+								onclick="submitListener();" /> <input type="button"
+								value="清除表单" id="btn_clearForm" onclick="clearForm();" />
 								<h1 id="editResult"></h1></td>
 						</tr>
 					</tbody>
