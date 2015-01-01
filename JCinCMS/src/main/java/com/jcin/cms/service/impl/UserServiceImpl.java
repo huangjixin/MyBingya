@@ -112,7 +112,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	public int update(User record) {
 		super.update(record);
 
-		int result = userMapper.updateByExample(record, new UserCriteria());
+		int result = userMapper.updateByPrimaryKey(record);
 		return result;
 	}
 

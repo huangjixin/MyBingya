@@ -62,7 +62,7 @@ public class TestUserService extends TestCase {
 	@Test
 	public void testUpdate() {
 		User user = userService.selectByPrimaryKey("1");
-		user.setId("localhost");
+		user.setIp("localhost");
 		int i  = userService.update(user);
 		Assert.assertEquals(1, 0);
 	}
