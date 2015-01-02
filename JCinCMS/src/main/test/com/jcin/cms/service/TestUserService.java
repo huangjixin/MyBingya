@@ -26,9 +26,9 @@ import com.jcin.cms.utils.Page;
 // 指定测试用例的运行器 这里是指定了Junit4
 @ContextConfiguration(locations = { "classpath:spring/applicationContext.xml" })
 // 指定Spring的配置文件 /为classpath下
-@Transactional
-// // 这个非常关键，如果不加入这个注解配置，事务控制就会完全失效！
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
+//@Transactional
+//// // 这个非常关键，如果不加入这个注解配置，事务控制就会完全失效！
+//@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 // 这里的事务关联到配置文件中的事务控制器（transactionManager =
 // "transactionManager"），同时指定自动回滚（defaultRollback = true）。这样做操作的数据才不会污染数据库！
 public class TestUserService extends TestCase {
@@ -62,9 +62,9 @@ public class TestUserService extends TestCase {
 	@Test
 	public void testUpdate() {
 		User user = userService.selectByPrimaryKey("1");
-		user.setIp("localhost");
+		user.setIp("123456");
 		int i  = userService.update(user);
-		Assert.assertEquals(1, 0);
+		Assert.assertEquals(1, i);
 	}
 
 }
