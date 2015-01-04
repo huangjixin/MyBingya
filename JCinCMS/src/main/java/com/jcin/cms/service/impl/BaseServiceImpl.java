@@ -62,7 +62,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		String opeName = Thread.currentThread().getStackTrace()[1]
 				.getMethodName();// 具体使用数组的那个元素和JVM的实现有关，我在SUN
 									// JDK6下面测试的是第二个元素，具体说明可以查看Thread.getStackTrace方法的javadoc
-		operationlog.setName(entityClass.getName() + "." + opeName);
+		operationlog.setName(entityClass.getName() + "." + opeName+" 刪除成功");
 		if (LoginResponse.user != null) {
 			operationlog.setOperator(LoginResponse.user.getUsername());
 		}
@@ -76,7 +76,6 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	@Override
 	@SuppressWarnings("unchecked")
 	public int insert(T record) {
-		String test = "d";
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		try {
@@ -100,7 +99,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			String opeName = Thread.currentThread().getStackTrace()[1]
 					.getMethodName();// 具体使用数组的那个元素和JVM的实现有关，我在SUN
 										// JDK6下面测试的是第二个元素，具体说明可以查看Thread.getStackTrace方法的javadoc
-			operationlog.setName(entityClass.getName() + "." + opeName);
+			operationlog.setName(entityClass.getName() + "." + opeName+" 添加成功");
 			if (LoginResponse.user != null) {
 				operationlog.setOperator(LoginResponse.user.getUsername());
 			}
@@ -136,6 +135,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int update(T record) {
 		@SuppressWarnings("rawtypes")
@@ -151,7 +151,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			String opeName = Thread.currentThread().getStackTrace()[1]
 					.getMethodName();// 具体使用数组的那个元素和JVM的实现有关，我在SUN
 										// JDK6下面测试的是第二个元素，具体说明可以查看Thread.getStackTrace方法的javadoc
-			operationlog.setName(entityClass.getName() + "." + opeName);
+			operationlog.setName(entityClass.getName() + "." + opeName+" 更新成功");
 			if (LoginResponse.user != null) {
 				operationlog.setOperator(LoginResponse.user.getUsername());
 			}

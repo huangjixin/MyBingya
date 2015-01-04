@@ -53,9 +53,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
-		super.deleteByPrimaryKey(id);
-
 		int result = menuMapper.deleteByPrimaryKey(id);
+//		super.deleteByPrimaryKey(id);
 		return result;
 	}
 
@@ -156,7 +155,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		jsonObject.put("createdate", menu.getCreatedate());
 		jsonObject.put("description", menu.getDescription());
 		jsonObject.put("updatedate", menu.getUpdatedate());
-		
+
 		List list = searialChild(menu);
 		if (null != list) {
 			jsonObject.put("children", list);

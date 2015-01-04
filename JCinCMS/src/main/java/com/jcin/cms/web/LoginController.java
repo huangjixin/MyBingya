@@ -7,6 +7,7 @@
  */
 package com.jcin.cms.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.domain.User;
+import com.jcin.cms.service.IOpeLogService;
 import com.jcin.cms.service.IUserService;
 import com.jcin.cms.web.vo.LoginResponse;
 
@@ -36,6 +39,9 @@ import com.jcin.cms.web.vo.LoginResponse;
 public class LoginController {
 	@Resource
 	private IUserService userService;
+	
+	@Resource
+	private IOpeLogService opeLogService;
 
 	@RequestMapping
 	public String login(HttpServletRequest httpServletRequest,
@@ -66,6 +72,20 @@ public class LoginController {
 
 		session.setAttribute("loginInfo", loginResponse);
 		modelMap.put("loginResult", "success");
+		
+		//操作日志。
+		Operationlog operationlog = new Operationlog();
+		operationlog.setId(new Date().getTime() + "");
+		String opeName = Thread.currentThread().getStackTrace()[1]
+				.getMethodName();
+		operationlog.setName(LoginController.class.getName() + "." + opeName+" 登录成功");
+		if (LoginResponse.user != null) {
+			operationlog.setOperator(LoginResponse.user.getUsername());
+		}
+
+		operationlog.setCreatedate(new Date());
+		opeLogService.insert(operationlog);
+		
 		return modelMap;
 	}
 

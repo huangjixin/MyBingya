@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.OperationlogMapper;
-import com.jcin.cms.dao.UserMapper;
 import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.domain.OperationlogCriteria;
 import com.jcin.cms.service.IOpeLogService;
@@ -36,7 +35,7 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		implements IOpeLogService {
 	private static Logger logger = Logger.getLogger(OpeLogServiceImpl.class
 			.getName());
-	
+
 	@Resource
 	private OperationlogMapper operationlogMapper;
 
@@ -44,12 +43,12 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IOperationlogService#deleteByPrimaryKey((java.lang.String
-	 * ))
+	 * com.jcin.cms.service.IOperationlogService#deleteByPrimaryKey((java.lang
+	 * .String ))
 	 */
 	@Override
 	public int deleteByPrimaryKey(String id) {
-		super.deleteByPrimaryKey(id);
+		// super.deleteByPrimaryKey(id);
 
 		int result = operationlogMapper.deleteByPrimaryKey(id);
 		return result;
@@ -59,12 +58,13 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IOperationlogService#insert(com.jcin.cms.domain.Operationlog)
+	 * com.jcin.cms.service.IOperationlogService#insert(com.jcin.cms.domain.
+	 * Operationlog)
 	 */
 	@Override
 	@Transactional
 	public int insert(Operationlog record) {
-		super.insert(record);
+		// super.insert(record);
 
 		record.setCreatedate(new Date());
 		int result = operationlogMapper.insert(record);
@@ -74,7 +74,8 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.IOperationlogService#select(com.jcin.cms.utils.Page)
+	 * @see
+	 * com.jcin.cms.service.IOperationlogService#select(com.jcin.cms.utils.Page)
 	 */
 	@Override
 	public Page select(Page page) {
@@ -94,7 +95,8 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IOperationlogService#selectByPrimaryKey(java.lang.String)
+	 * com.jcin.cms.service.IOperationlogService#selectByPrimaryKey(java.lang
+	 * .String)
 	 */
 	@Override
 	public Operationlog selectByPrimaryKey(String id) {
@@ -108,12 +110,13 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IOperationlogService#update(com.jcin.cms.domain.Operationlog)
+	 * com.jcin.cms.service.IOperationlogService#update(com.jcin.cms.domain.
+	 * Operationlog)
 	 */
 	@Override
 	@Transactional
 	public int update(Operationlog record) {
-		super.update(record);
+		// super.update(record);
 
 		int result = operationlogMapper.updateByPrimaryKeySelective(record);
 		return result;

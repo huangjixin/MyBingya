@@ -1,26 +1,25 @@
 package com.jcin.cms.utils;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 分页查询时的辅助工具类
+ * 
  * @author linzongxue
- *
+ * 
  */
 @SuppressWarnings("rawtypes")
-public class Page{
-	protected int limit = 20; //每页显示条数
-	protected int start = 0;  //起始行号
-	protected int pageSize = 10; //每页显示条数
-	protected int total = -1; //总数
-	protected List rows = new ArrayList(); //结果集
-	protected int page = 1;   //第几页
-//	protected int pages = 0; //总页面码, jqGrid要求给出总页数，超级无聊
+public class Page {
+	protected int limit = 20; // 每页显示条数
+	protected int start = 0; // 起始行号
+	protected int pageSize = 10; // 每页显示条数
+	protected int total = -1; // 总数
+	protected List rows = new ArrayList(); // 结果集
+	protected int page = 1; // 第几页
+	// protected int pages = 0; //总页面码, jqGrid要求给出总页数，超级无聊
 
-
-	//-- 访问查询结果函数 --//
+	// -- 访问查询结果函数 --//
 
 	public int getPageSize() {
 		return pageSize;
@@ -29,7 +28,7 @@ public class Page{
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	
+
 	public int getLimit() {
 		return limit;
 	}
@@ -70,8 +69,8 @@ public class Page{
 		this.page = page;
 	}
 
-//
-//	public int getPages() {
-//		return (int)((total / limit) + (total % limit > 0 ? 1 : 0));
-//	}
+	//
+	// public int getPages() {
+	// return (int)((total / limit) + (total % limit > 0 ? 1 : 0));
+	// }
 }

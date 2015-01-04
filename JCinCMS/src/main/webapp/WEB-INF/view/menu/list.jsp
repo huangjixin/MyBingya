@@ -16,8 +16,8 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
+<meta http-equiv="keywords" content="menu,menu list">
+<meta http-equiv="description" content="菜单列表">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
@@ -234,16 +234,17 @@
 					<tbody>
 						<tr class="tr1">
 							<td class="td1" colSpan="4">&nbsp;&nbsp;&nbsp;&nbsp;<input
-								type="button" value="返回" onclick="toListView();" /></td>
+								type="button" value="返回" onclick="toListView();" />
+							</td>
 						</tr>
 						<tr class="tr1">
 							<th class="th1">名称:</th>
 							<td class="td1"><input type="text" name="name" id="name"
-								value="localhost" size="35"></td>
+								value="localhost" size="35">
+							</td>
 							<th class="th1">连接URL:</th>
 							<td class="td1" colSpan="3"><input type="text" name="url"
-								id="url" value="" size="35">
-							</td>
+								id="url" value="" size="35"></td>
 						</tr>
 
 						<tr class="tr1">
@@ -257,7 +258,8 @@
 								type="button" value="保存" id="btn_login"
 								onclick="submitListener();" /> <input type="button"
 								value="清除表单" id="btn_clearForm" onclick="clearForm();" />
-								<h1 id="editResult"></h1></td>
+								<h1 id="editResult"></h1>
+							</td>
 						</tr>
 					</tbody>
 
