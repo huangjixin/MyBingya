@@ -57,10 +57,11 @@ public class LoginController {
 			modelMap.put("loginInfo", "用户名或者密码错误。");
 			return modelMap;
 		}
-		String ip = httpServletRequest.getRemoteAddr(); 
-		user.setIp("localhost");
-		int i =userService.update(user);
+		String ip = httpServletRequest.getRemoteHost(); 
+		user.setIp(ip);
+		userService.update(user);
 		LoginResponse loginResponse = LoginResponse.getInstance();
+		LoginResponse.user = user;
 		HttpSession session = httpServletRequest.getSession();
 
 		session.setAttribute("loginInfo", loginResponse);
@@ -78,21 +79,13 @@ public class LoginController {
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		ModelAndView modelAndView = new ModelAndView();
+//		ModelMap modelMap = new ModelMap();
 
-		List<User> list = userService.validateLogin(user.getUsername(),
-				user.getPassword());
-		if (list.size() == 0) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("loginInfo", "用户名或者密码错误。");
-			modelAndView.addObject(map);
-			return modelAndView;
-		}
-
-		LoginResponse loginResponse = LoginResponse.getInstance();
+		LoginResponse.user = null;
+		
 		HttpSession session = httpServletRequest.getSession();
 
-		session.setAttribute("loginInfo", loginResponse);
+		session.setAttribute("loginInfo", null);
 
 		return new ModelAndView(new RedirectView("view/login"));
 	}
