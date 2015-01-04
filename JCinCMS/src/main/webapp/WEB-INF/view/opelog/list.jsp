@@ -71,10 +71,10 @@
 		<div id="toolBar" style="width: 100%;">
 			<input type="button" value="删除" onclick="deleteRows()" />
 		</div>
-		<div style="width: 100%;height:100%;">
+		<div style="width: 100%;height:320px;">
 			<table id="tgrid" title="" class="easyui-datagrid"
 				data-options="
-								pageSize : 20,
+								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
 								nowrap : true,
 								striped : true,

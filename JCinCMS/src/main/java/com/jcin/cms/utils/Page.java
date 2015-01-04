@@ -18,7 +18,7 @@ public class Page {
 	protected List rows = new ArrayList(); // 结果集
 	protected int page = 1; // 第几页
 	// protected int pages = 0; //总页面码, jqGrid要求给出总页数，超级无聊
-
+	protected String desc = "false";
 	// -- 访问查询结果函数 --//
 
 	public int getPageSize() {

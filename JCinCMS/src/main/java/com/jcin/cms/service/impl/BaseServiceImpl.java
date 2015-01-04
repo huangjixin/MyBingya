@@ -60,8 +60,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		Operationlog operationlog = new Operationlog();
 		operationlog.setId(new Date().getTime() + "");
 		String opeName = Thread.currentThread().getStackTrace()[1]
-				.getMethodName();// 具体使用数组的那个元素和JVM的实现有关，我在SUN
-									// JDK6下面测试的是第二个元素，具体说明可以查看Thread.getStackTrace方法的javadoc
+				.getMethodName();
 		operationlog.setName(entityClass.getName() + "." + opeName+" 刪除成功");
 		if (LoginResponse.user != null) {
 			operationlog.setOperator(LoginResponse.user.getUsername());

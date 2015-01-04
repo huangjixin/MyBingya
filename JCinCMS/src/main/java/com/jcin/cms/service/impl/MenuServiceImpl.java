@@ -54,7 +54,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	@Override
 	public int deleteByPrimaryKey(String id) {
 		int result = menuMapper.deleteByPrimaryKey(id);
-//		super.deleteByPrimaryKey(id);
+		super.deleteByPrimaryKey(id);
 		return result;
 	}
 
