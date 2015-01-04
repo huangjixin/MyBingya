@@ -96,6 +96,8 @@
 							width="100%">名称</th>
 						<th id="urlFieldTh" data-options="field:'url',align:'center'"
 							width="100%">连接的URL</th>
+						<th id="createDateFieldTh" data-options="field:'createDate',align:'center'"
+							width="100%">修改日期</th>
 					</tr>
 				</thead>
 			</table>
