@@ -58,4 +58,6 @@
 
 	<!-- enable autowire -->
 	<context:annotation-config />
+	
+<!-- 	<aop:config></aop:config> -->
 </beans>

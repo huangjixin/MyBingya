@@ -69,7 +69,6 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	public int insert(Menu record) {
 		super.insert(record);
 
-		record.setCreatedate(new Date());
 		int result = menuMapper.insert(record);
 		return result;
 	}
