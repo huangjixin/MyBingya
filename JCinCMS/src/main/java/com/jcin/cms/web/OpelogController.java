@@ -35,7 +35,7 @@ import com.jcin.cms.utils.Page;
  */
 @Controller
 @RequestMapping("/opelog")
-public class OpelogController extends BaseController{
+public class OpelogController extends BaseController {
 	@Resource
 	private IOpeLogService opeLogService;
 
@@ -49,7 +49,8 @@ public class OpelogController extends BaseController{
 	public Page select(@Valid Page page, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest, httpServletResponse);
+		super.select(page, bindingResult, uiModel, httpServletRequest,
+				httpServletResponse);
 
 		page = opeLogService.select(page);
 		return page;
@@ -58,10 +59,15 @@ public class OpelogController extends BaseController{
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(
-			@RequestParam(value = "id", required = true) String id,
+			@RequestParam(value = "idstring") String idstring,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		int result = opeLogService.deleteByPrimaryKey(id);
+
+		String[] ids = idstring.split(",");
+		int result = 0;
+		for (String idStr : ids) {
+			result = opeLogService.deleteByPrimaryKey(idStr);
+		}
 
 		return result;
 	}

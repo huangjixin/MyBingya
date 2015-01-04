@@ -30,8 +30,7 @@
 	href="js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/common.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
 <style type="text/css">
 .table {
 	border-collapse: collapse;
@@ -63,12 +62,71 @@
 <script type="text/javascript">
 	$().ready(function() {
 	});
+
+	// 移除条目；
+	function deleteRows() {
+		//单行删除。
+		//	var row = $('#dgUser').datagrid("getSelected");
+		//	var pam = {
+		//		staffId : row.staffId
+		//	};
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null) {
+			return;
+		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
+		}
+
+		var pamameter = {
+			idstring : string
+		};
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : 'opelog/deleteById',
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tgrid").datagrid('reload'); // 重新加载;
+			}
+		});
+		//     if (row.length>0) {  
+		//         $.messager.confirm('Confirm', '确定删除用户?', function(r) {  
+		//             if (r) {  
+		//             	var pam = {
+		//                 		staffId : string
+		//                 	};
+		//             	Ajax.getSy().remoteCall("UserInfoService", "deleteByKey", [ pam ],
+		//             			function(reply) {
+		//             				if (reply) {
+		//             					var result = reply.getResult();
+		//             					if (result != 0) {
+		//             						$("#dgUser").datagrid('reload'); // 重新加载
+		//             					}
+		//             				}
+		//             			});
+		//             }  
+		//         });  
+		//     } 
+	}
 </script>
 </head>
 
 <body class="easyui-layout" fit="true">
 	<div region="center" title="" style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="width: 100%;">
+		<div id="toolBar" style="width: 100%;padding: 5px;border: 1px;">
 			<input type="button" value="删除" onclick="deleteRows()" />
 		</div>
 		<div style="width: 100%;height:320px;">
@@ -83,6 +141,8 @@
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
+								selectOnCheck: true,
+								checkOnSelect: true,
 								rownumbers: false,
 								treeField: 'name',
 								showHeader: true,
@@ -92,12 +152,13 @@
 							">
 				<thead>
 					<tr>
+						<th field="ck" data-options="checkbox:true"></th>
 						<th id="nameFieldTh" data-options="field:'name',align:'left'"
 							width="100%">名称</th>
 						<th id="urlFieldTh" data-options="field:'url',align:'center'"
 							width="100%">连接的URL</th>
-						<th id="createDateFieldTh" data-options="field:'createDate',align:'center'"
-							width="100%">修改日期</th>
+						<th id="createDateFieldTh"
+							data-options="field:'createDate',align:'center'" width="100%">修改日期</th>
 					</tr>
 				</thead>
 			</table>

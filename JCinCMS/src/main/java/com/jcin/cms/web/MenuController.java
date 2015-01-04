@@ -74,10 +74,15 @@ public class MenuController {
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(
-			@RequestParam(value = "id", required = true) String id,
+			@RequestParam(value = "idstring", required = true) String idstring,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		int result = menuService.deleteByPrimaryKey(id);
+
+		String[] ids = idstring.split(",");
+		int result = 0;
+		for (String idStr : ids) {
+			result = menuService.deleteByPrimaryKey(idStr);
+		}
 
 		return result;
 	}

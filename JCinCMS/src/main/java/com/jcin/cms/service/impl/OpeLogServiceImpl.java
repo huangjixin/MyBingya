@@ -80,9 +80,9 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	@Override
 	public Page select(Page page) {
 		super.select(page);
-
+		//setOrderByClause("SER_NO  asc , ORG_ID desc");  
 		OperationlogCriteria articleCriteria = new OperationlogCriteria();
-		articleCriteria.setOrderByClause("order by id desc");
+		articleCriteria.setOrderByClause("id desc");
 		articleCriteria.setPage(page);
 		@SuppressWarnings("rawtypes")
 		List list = operationlogMapper.selectByExample(articleCriteria);

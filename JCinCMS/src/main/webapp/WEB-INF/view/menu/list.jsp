@@ -88,15 +88,26 @@
 	//删除；
 	//number:1删除一条。
 	//number:不为null删除数组。
-	function deleteRows(row) {
+	function deleteRows() {
+		//多行删除。
+		var row = $("#tgrid").treegrid('getSelections');
 		if (row == null) {
-			row = $('#tgrid').treegrid("getSelected");
-			curKeyIndex = $('#tgrid').datagrid("getRowIndex", row);
+			return;
+		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
 		}
 
 		if (row != null) {
 			var pam = {
-				id : row.id
+				idstring : string
 			};
 			$.ajax({
 				cache : true,
@@ -111,21 +122,6 @@
 					$("#tgrid").treegrid('reload'); // 重新加载;
 				}
 			});
-		}
-
-		if ('1' == number) {
-
-		} else {
-			// 			var i = 0;
-			// 			var string = "";
-			// 			for (i; i < row.length; i++) {
-			// 				string += row[i].staffId;
-			// 				if (i < row.length - 1) {
-			// 					string += ',';
-			// 				} else {
-			// 					break;
-			// 				}
-			// 			}
 		}
 	}
 
@@ -195,6 +191,8 @@
 						type="button" value="刷新" onclick="refresh()" />
 				</div>
 			</div>
+<!-- 			<ul id="tt" class="easyui-tree" -->
+<!-- 				data-options="url:'menu/getMenu',method:'get',animate:true,checkbox:true"></ul> -->
 			<table id="tgrid" title="" class="easyui-treegrid"
 				data-options="
 								url: 'menu/getMenu',
@@ -203,12 +201,17 @@
 								idField: 'id',
 								treeField: 'name',
 								showHeader: true,
+								lines: true,
+								singleSelect : false,
+								selectOnCheck: true,
+								checkOnSelect: true,
 								fit:true,
 								fitColumns:true,
 								onLoadSuccess : ontgridLoadSuccess
 							">
 				<thead>
 					<tr>
+						<th field="ck" data-options="checkbox:true"></th>
 						<th id="nameFieldTh" data-options="field:'name',align:'left'"
 							width="100%">名称</th>
 						<th id="urlFieldTh" data-options="field:'url',align:'center'"
