@@ -7,9 +7,9 @@
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="parentId" property="parentid" jdbcType="VARCHAR" />
-    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
-    <result column="updateDate" property="updatedate" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
     <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -111,8 +111,8 @@
       icon, updateDate, url
       )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{path,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      #{path,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{icon,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Menu" >
@@ -163,13 +163,13 @@
         #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=VARCHAR},
+        #{createdate,jdbcType=TIMESTAMP},
       </if>
       <if test="icon != null" >
         #{icon,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        #{updatedate,jdbcType=VARCHAR},
+        #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
@@ -201,13 +201,13 @@
         parentId = #{record.parentid,jdbcType=VARCHAR},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=VARCHAR},
+        createDate = #{record.createdate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.icon != null" >
         icon = #{record.icon,jdbcType=VARCHAR},
       </if>
       <if test="record.updatedate != null" >
-        updateDate = #{record.updatedate,jdbcType=VARCHAR},
+        updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.url != null" >
         url = #{record.url,jdbcType=VARCHAR},
@@ -224,9 +224,9 @@
       description = #{record.description,jdbcType=VARCHAR},
       path = #{record.path,jdbcType=VARCHAR},
       parentId = #{record.parentid,jdbcType=VARCHAR},
-      createDate = #{record.createdate,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=TIMESTAMP},
       icon = #{record.icon,jdbcType=VARCHAR},
-      updateDate = #{record.updatedate,jdbcType=VARCHAR},
+      updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
       url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,13 +248,13 @@
         parentId = #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=VARCHAR},
+        createDate = #{createdate,jdbcType=TIMESTAMP},
       </if>
       <if test="icon != null" >
         icon = #{icon,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        updateDate = #{updatedate,jdbcType=VARCHAR},
+        updateDate = #{updatedate,jdbcType=TIMESTAMP},
       </if>
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
@@ -268,9 +268,9 @@
       description = #{description,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
       parentId = #{parentid,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
       icon = #{icon,jdbcType=VARCHAR},
-      updateDate = #{updatedate,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP},
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

@@ -67,7 +67,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 	public int insert(Article record) {
 		super.insert(record);
 
-		record.setCreatedate(new Date().getTime()+"");
+//		record.setCreatedate(new Date().getTime());
 		int result = articleMapper.insert(record);
 		return result;
 	}

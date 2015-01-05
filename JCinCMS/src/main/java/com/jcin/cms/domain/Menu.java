@@ -1,6 +1,7 @@
 package com.jcin.cms.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Menu implements Serializable {
     private String id;
@@ -13,11 +14,11 @@ public class Menu implements Serializable {
 
     private String parentid;
 
-    private String createdate;
+    private Date createdate;
 
     private String icon;
 
-    private String updatedate;
+    private Date updatedate;
 
     private String url;
 
@@ -63,12 +64,12 @@ public class Menu implements Serializable {
         this.parentid = parentid == null ? null : parentid.trim();
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate == null ? null : createdate.trim();
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 
     public String getIcon() {
@@ -79,12 +80,12 @@ public class Menu implements Serializable {
         this.icon = icon == null ? null : icon.trim();
     }
 
-    public String getUpdatedate() {
+    public Date getUpdatedate() {
         return updatedate;
     }
 
-    public void setUpdatedate(String updatedate) {
-        this.updatedate = updatedate == null ? null : updatedate.trim();
+    public void setUpdatedate(Date updatedate) {
+        this.updatedate = updatedate;
     }
 
     public String getUrl() {

@@ -2,6 +2,7 @@ package com.jcin.cms.domain;
 
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserCriteria {
@@ -535,62 +536,52 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateEqualTo(String value) {
+        public Criteria andCreatedateEqualTo(Date value) {
             addCriterion("createDate =", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotEqualTo(String value) {
+        public Criteria andCreatedateNotEqualTo(Date value) {
             addCriterion("createDate <>", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateGreaterThan(String value) {
+        public Criteria andCreatedateGreaterThan(Date value) {
             addCriterion("createDate >", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateGreaterThanOrEqualTo(String value) {
+        public Criteria andCreatedateGreaterThanOrEqualTo(Date value) {
             addCriterion("createDate >=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLessThan(String value) {
+        public Criteria andCreatedateLessThan(Date value) {
             addCriterion("createDate <", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLessThanOrEqualTo(String value) {
+        public Criteria andCreatedateLessThanOrEqualTo(Date value) {
             addCriterion("createDate <=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLike(String value) {
-            addCriterion("createDate like", value, "createdate");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateNotLike(String value) {
-            addCriterion("createDate not like", value, "createdate");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateIn(List<String> values) {
+        public Criteria andCreatedateIn(List<Date> values) {
             addCriterion("createDate in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotIn(List<String> values) {
+        public Criteria andCreatedateNotIn(List<Date> values) {
             addCriterion("createDate not in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateBetween(String value1, String value2) {
+        public Criteria andCreatedateBetween(Date value1, Date value2) {
             addCriterion("createDate between", value1, value2, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotBetween(String value1, String value2) {
+        public Criteria andCreatedateNotBetween(Date value1, Date value2) {
             addCriterion("createDate not between", value1, value2, "createdate");
             return (Criteria) this;
         }
@@ -605,62 +596,52 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateEqualTo(String value) {
+        public Criteria andUpdatedateEqualTo(Date value) {
             addCriterion("updateDate =", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateNotEqualTo(String value) {
+        public Criteria andUpdatedateNotEqualTo(Date value) {
             addCriterion("updateDate <>", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateGreaterThan(String value) {
+        public Criteria andUpdatedateGreaterThan(Date value) {
             addCriterion("updateDate >", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateGreaterThanOrEqualTo(String value) {
+        public Criteria andUpdatedateGreaterThanOrEqualTo(Date value) {
             addCriterion("updateDate >=", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateLessThan(String value) {
+        public Criteria andUpdatedateLessThan(Date value) {
             addCriterion("updateDate <", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateLessThanOrEqualTo(String value) {
+        public Criteria andUpdatedateLessThanOrEqualTo(Date value) {
             addCriterion("updateDate <=", value, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateLike(String value) {
-            addCriterion("updateDate like", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateNotLike(String value) {
-            addCriterion("updateDate not like", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateIn(List<String> values) {
+        public Criteria andUpdatedateIn(List<Date> values) {
             addCriterion("updateDate in", values, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateNotIn(List<String> values) {
+        public Criteria andUpdatedateNotIn(List<Date> values) {
             addCriterion("updateDate not in", values, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateBetween(String value1, String value2) {
+        public Criteria andUpdatedateBetween(Date value1, Date value2) {
             addCriterion("updateDate between", value1, value2, "updatedate");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedateNotBetween(String value1, String value2) {
+        public Criteria andUpdatedateNotBetween(Date value1, Date value2) {
             addCriterion("updateDate not between", value1, value2, "updatedate");
             return (Criteria) this;
         }
@@ -752,16 +733,6 @@ public class UserCriteria {
 
         public Criteria andDescriptionLikeInsensitive(String value) {
             addCriterion("upper(description) like", value.toUpperCase(), "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateLikeInsensitive(String value) {
-            addCriterion("upper(createDate) like", value.toUpperCase(), "createdate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateLikeInsensitive(String value) {
-            addCriterion("upper(updateDate) like", value.toUpperCase(), "updatedate");
             return (Criteria) this;
         }
 

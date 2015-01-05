@@ -144,8 +144,8 @@
 	function search() {
 		var queryParams = {};
 
-		if ($("#nameInput").val() != "") {
-			queryParams.name = $("#nameInput").val();
+		if ($("#usernameInput").val() != "") {
+			queryParams.username = $("#usernameInput").val();
 		}
 
 		if ($("#operatorInput").val() != "") {
@@ -165,7 +165,7 @@
 
 	//清除
 	function clearSearch() {
-		$("#nameInput").val("");
+		$("#usernameInput").val("");
 		$("#operatorInput").val("");
 		$("#ipInput").val("");
 	}
@@ -195,7 +195,7 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="删除" onclick="deleteRows()" /> <label>名称:</label><input
-				id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+				id="usernameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<label>操作人:</label><input id="operatorInput"
 				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>IP:</label><input
 				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">

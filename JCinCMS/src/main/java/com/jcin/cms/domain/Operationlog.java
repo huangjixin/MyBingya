@@ -1,6 +1,7 @@
 package com.jcin.cms.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Operationlog implements Serializable {
     private String id;
@@ -11,7 +12,7 @@ public class Operationlog implements Serializable {
 
     private String ip;
 
-    private String createdate;
+    private Date createdate;
 
     private String description;
 
@@ -49,12 +50,12 @@ public class Operationlog implements Serializable {
         this.ip = ip == null ? null : ip.trim();
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate == null ? null : createdate.trim();
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 
     public String getDescription() {

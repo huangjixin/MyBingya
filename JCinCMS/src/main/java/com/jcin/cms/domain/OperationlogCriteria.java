@@ -2,6 +2,7 @@ package com.jcin.cms.domain;
 
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OperationlogCriteria {
@@ -415,62 +416,52 @@ public class OperationlogCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateEqualTo(String value) {
+        public Criteria andCreatedateEqualTo(Date value) {
             addCriterion("createDate =", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotEqualTo(String value) {
+        public Criteria andCreatedateNotEqualTo(Date value) {
             addCriterion("createDate <>", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateGreaterThan(String value) {
+        public Criteria andCreatedateGreaterThan(Date value) {
             addCriterion("createDate >", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateGreaterThanOrEqualTo(String value) {
+        public Criteria andCreatedateGreaterThanOrEqualTo(Date value) {
             addCriterion("createDate >=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLessThan(String value) {
+        public Criteria andCreatedateLessThan(Date value) {
             addCriterion("createDate <", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLessThanOrEqualTo(String value) {
+        public Criteria andCreatedateLessThanOrEqualTo(Date value) {
             addCriterion("createDate <=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateLike(String value) {
-            addCriterion("createDate like", value, "createdate");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateNotLike(String value) {
-            addCriterion("createDate not like", value, "createdate");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateIn(List<String> values) {
+        public Criteria andCreatedateIn(List<Date> values) {
             addCriterion("createDate in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotIn(List<String> values) {
+        public Criteria andCreatedateNotIn(List<Date> values) {
             addCriterion("createDate not in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateBetween(String value1, String value2) {
+        public Criteria andCreatedateBetween(Date value1, Date value2) {
             addCriterion("createDate between", value1, value2, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedateNotBetween(String value1, String value2) {
+        public Criteria andCreatedateNotBetween(Date value1, Date value2) {
             addCriterion("createDate not between", value1, value2, "createdate");
             return (Criteria) this;
         }
@@ -562,11 +553,6 @@ public class OperationlogCriteria {
 
         public Criteria andIpLikeInsensitive(String value) {
             addCriterion("upper(ip) like", value.toUpperCase(), "ip");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedateLikeInsensitive(String value) {
-            addCriterion("upper(createDate) like", value.toUpperCase(), "createdate");
             return (Criteria) this;
         }
 

@@ -83,7 +83,7 @@ public class LoginController {
 			operationlog.setOperator(LoginResponse.user.getUsername());
 		}
 
-		operationlog.setCreatedate(new Date()+"");
+		operationlog.setCreatedate(new Date());
 		opeLogService.insert(operationlog);
 		
 		return modelMap;

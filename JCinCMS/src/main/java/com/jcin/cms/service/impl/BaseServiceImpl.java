@@ -66,7 +66,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			operationlog.setOperator(LoginResponse.user.getUsername());
 		}
 
-		operationlog.setCreatedate(new Date()+"");
+		operationlog.setCreatedate(new Date());
 		operationlogMapper.insert(operationlog);
 
 		return 0;
@@ -103,7 +103,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 				operationlog.setOperator(LoginResponse.user.getUsername());
 			}
 
-			operationlog.setCreatedate(new Date()+"");
+			operationlog.setCreatedate(new Date());
 			operationlogMapper.insert(operationlog);
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 				operationlog.setOperator(LoginResponse.user.getUsername());
 			}
 
-			operationlog.setCreatedate(new Date()+"");
+			operationlog.setCreatedate(new Date());
 			operationlogMapper.insert(operationlog);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
