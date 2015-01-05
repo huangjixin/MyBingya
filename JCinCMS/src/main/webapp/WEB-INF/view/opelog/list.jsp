@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>菜单列表</title>
+<title>操作日志</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -65,11 +65,6 @@
 
 	// 移除条目；
 	function deleteRows() {
-		//单行删除。
-		//	var row = $('#dgUser').datagrid("getSelected");
-		//	var pam = {
-		//		staffId : row.staffId
-		//	};
 		//多行删除。
 		var row = $('#tgrid').datagrid('getSelections');
 		if (row == null) {
@@ -102,24 +97,19 @@
 				$("#tgrid").datagrid('reload'); // 重新加载;
 			}
 		});
-		//     if (row.length>0) {  
-		//         $.messager.confirm('Confirm', '确定删除用户?', function(r) {  
-		//             if (r) {  
-		//             	var pam = {
-		//                 		staffId : string
-		//                 	};
-		//             	Ajax.getSy().remoteCall("UserInfoService", "deleteByKey", [ pam ],
-		//             			function(reply) {
-		//             				if (reply) {
-		//             					var result = reply.getResult();
-		//             					if (result != 0) {
-		//             						$("#dgUser").datagrid('reload'); // 重新加载
-		//             					}
-		//             				}
-		//             			});
-		//             }  
-		//         });  
-		//     } 
+	}
+	
+	function search(){
+		var queryParams = $("#tgrid").datagrid("options").queryParams;
+		if($("#nameInput").val()!=""){
+			queryParams.name = $("#nameInput").val();
+		}
+        
+        if($("#operatorInput").val()!=""){
+			queryParams.operator = $("#operatorInput").val();
+		}
+		
+        $("#tgrid").datagrid("reload");
 	}
 </script>
 </head>
@@ -128,6 +118,10 @@
 	<div region="center" title="" style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="width: 100%;padding: 5px;border: 1px;">
 			<input type="button" value="删除" onclick="deleteRows()" />
+			<label>名称:</label><input id="nameInput">
+			<label>操作人:</label><input id="operatorInput">
+			<label>IP:</label><input id="ipInput">
+			<input type="button" value="searchBtn" onclick="search()" />
 		</div>
 		<div style="width: 100%;height:320px;">
 			<table id="tgrid" title="" class="easyui-datagrid"

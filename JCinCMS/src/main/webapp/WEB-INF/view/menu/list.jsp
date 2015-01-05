@@ -126,6 +126,7 @@
 	}
 
 	function toListView() {
+		$("#editResult").html("");
 		$('#listView').show();
 		$('#editView').hide();
 	}
@@ -140,6 +141,7 @@
 	}
 
 	function submitListener() {
+		$("#editResult").html("");
 		var str = $('#menuForm').formSerialize(); // registerForm为form id
 		$.ajax({
 			cache : true,
@@ -152,17 +154,6 @@
 			},
 			success : function(data) {
 				$("#editResult").html("保存成功");
-				if (submitType == null) {
-					$("#editResult").html("保存成功");
-				} else if (submitType == 1) {
-					// 					$('#menuForm').clearForm();
-					// 					toListView();
-					// 					$("#tgrid").treegrid("reload");
-				} else if (submitType == 2) {
-					$("#editResult").html("保存成功");
-					// 					$.ajaxForm("#menuForm").clearForm();
-					// 					toListView();
-				}
 			}
 		});
 	}

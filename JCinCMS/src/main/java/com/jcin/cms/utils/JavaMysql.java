@@ -42,7 +42,7 @@ public class JavaMysql {
 		}
 
 		StringBuffer sb = new StringBuffer();
-		// 注意需要在windows环境变量里面加入mysql的bin路径；
+
 		sb.append(mysqlpaths);
 		sb.append("mysqldump ");
 		sb.append("--opt ");
@@ -64,8 +64,7 @@ public class JavaMysql {
 		sb.append(databaseName);
 		Runtime cmd = Runtime.getRuntime();
 		try {
-			String str = "C://Program Files//MySQL//MySQL Server 5.6//bin//mysqldump --opt -h localhost --user=root --password=qwer123456 --lock-all-tables=true --result-file=D://MySQl//2014_12_31_01_59_10.sql --default-character-set=utf8 jcincms";
-			cmd.exec(sb.toString());
+			Process p = cmd.exec(sb.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -103,10 +102,7 @@ public class JavaMysql {
 
 		// 得到MYSQL的用户名密码后调用 mysql 的 cmd:
 
-		String mysqlpaths = "C:" + File.separator + "Program Files"
-				+ File.separator + "MySQL" + File.separator
-				+ "MySQL Server 5.6" + File.separator + "bin";
-		// pros.getProperty("database.mysqlpath");
+		String mysqlpaths = pros.getProperty("database.mysqlpath");
 		String sqlpath = pros.getProperty("database.export");
 		String filepath = sqlpath + filename; // 备份的路径地址
 
@@ -129,9 +125,8 @@ public class JavaMysql {
 	}
 
 	public static void main(String[] args) throws IOException {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy_MM_dd_hh_mm_ss");
-		backup(simpleDateFormat.format(new Date()) + ".sql");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss");
+		backup(simpleDateFormat.format(new Date())+".sql");
 
 		// load("xx.sql");
 	}
