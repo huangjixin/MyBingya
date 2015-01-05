@@ -163,7 +163,7 @@
 	//格式化用户状态显示。
 	function formatDate(val, row) {
 		var date = new Date();
-		date.setTime(Date.parse(val));
+		date.setTime(val);
 		var result = date.format("yyyy-MM-dd hh:mm:ss");
 
 		return result;
