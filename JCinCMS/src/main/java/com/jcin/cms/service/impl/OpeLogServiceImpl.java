@@ -67,7 +67,7 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	public int insert(Operationlog record) {
 		// super.insert(record);
 
-		record.setCreatedate(new Date());
+		record.setCreatedate(new Date()+"");
 		int result = operationlogMapper.insert(record);
 		return result;
 	}

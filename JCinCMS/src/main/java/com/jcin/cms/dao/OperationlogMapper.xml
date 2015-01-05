@@ -6,7 +6,7 @@
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
-    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -107,7 +107,7 @@
       ip, createDate, description
       )
     values (#{id,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{ip,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{description,jdbcType=VARCHAR}
+      #{ip,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Operationlog" >
@@ -146,7 +146,7 @@
         #{ip,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -175,7 +175,7 @@
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=DATE},
+        createDate = #{record.createdate,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
@@ -191,7 +191,7 @@
       operator = #{record.operator,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       ip = #{record.ip,jdbcType=VARCHAR},
-      createDate = #{record.createdate,jdbcType=DATE},
+      createDate = #{record.createdate,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +210,7 @@
         ip = #{ip,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=DATE},
+        createDate = #{createdate,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
     set operator = #{operator,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=DATE},
+      createDate = #{createdate,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

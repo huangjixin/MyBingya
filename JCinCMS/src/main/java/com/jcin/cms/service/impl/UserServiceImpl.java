@@ -65,7 +65,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	public int insert(User record) {
 		super.insert(record);
 
-		record.setCreatedate(new Date());
+//		record.setCreatedate(new Date());
 		int result = userMapper.insert(record);
 		return result;
 	}

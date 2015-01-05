@@ -22,10 +22,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.service.IUserService;
+import com.jcin.cms.utils.Page;
 
 /**
  * @author 黄记新
@@ -34,7 +37,7 @@ import com.jcin.cms.service.IUserService;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 	@Resource
 	private IUserService userService;
 
@@ -43,6 +46,39 @@ public class UserController {
 		return "view/user/list";
 	}
 
+	@RequestMapping(value = "/select")
+	@ResponseBody
+	public Page select(@Valid Page page, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		super.select(page, bindingResult, uiModel, httpServletRequest,
+				httpServletResponse);
+		// 接收前台查询参数
+		String name = httpServletRequest.getParameter("username");
+		UserCriteria operationlogCriteria = new UserCriteria();
+		UserCriteria.Criteria criteria = operationlogCriteria.createCriteria();
+		operationlogCriteria.setPage(page);
+		if (null != name) {
+			criteria.andUsernameLike("%" + name + "%");
+		}
+		page = userService.select(operationlogCriteria);
+		return page;
+	}
+
+	@RequestMapping(value = "/deleteById")
+	@ResponseBody
+	public int deleteById(@RequestParam(value = "idstring") String idstring,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+
+		String[] ids = idstring.split(",");
+		int result = 0;
+		for (String idStr : ids) {
+			result = userService.deleteByPrimaryKey(idStr);
+		}
+
+		return result;
+	}
 	@RequestMapping(value = "/new")
 	@ResponseBody
 	public String create(@Valid User user, BindingResult bindingResult,

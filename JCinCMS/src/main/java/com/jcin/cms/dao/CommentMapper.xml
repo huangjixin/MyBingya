@@ -6,8 +6,8 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="tb_article_id" property="tbArticleId" jdbcType="VARCHAR" />
     <result column="parentId" property="parentid" jdbcType="VARCHAR" />
-    <result column="updateDate" property="updatedate" jdbcType="DATE" />
-    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="updateDate" property="updatedate" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -107,7 +107,7 @@
       parentId, updateDate, createDate
       )
     values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tbArticleId,jdbcType=VARCHAR}, 
-      #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE}, #{createdate,jdbcType=DATE}
+      #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Comment" >
@@ -146,10 +146,10 @@
         #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        #{updatedate,jdbcType=DATE},
+        #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -175,10 +175,10 @@
         parentId = #{record.parentid,jdbcType=VARCHAR},
       </if>
       <if test="record.updatedate != null" >
-        updateDate = #{record.updatedate,jdbcType=DATE},
+        updateDate = #{record.updatedate,jdbcType=VARCHAR},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=DATE},
+        createDate = #{record.createdate,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -191,8 +191,8 @@
       content = #{record.content,jdbcType=VARCHAR},
       tb_article_id = #{record.tbArticleId,jdbcType=VARCHAR},
       parentId = #{record.parentid,jdbcType=VARCHAR},
-      updateDate = #{record.updatedate,jdbcType=DATE},
-      createDate = #{record.createdate,jdbcType=DATE}
+      updateDate = #{record.updatedate,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,10 +210,10 @@
         parentId = #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        updateDate = #{updatedate,jdbcType=DATE},
+        updateDate = #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=DATE},
+        createDate = #{createdate,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -223,8 +223,8 @@
     set content = #{content,jdbcType=VARCHAR},
       tb_article_id = #{tbArticleId,jdbcType=VARCHAR},
       parentId = #{parentid,jdbcType=VARCHAR},
-      updateDate = #{updatedate,jdbcType=DATE},
-      createDate = #{createdate,jdbcType=DATE}
+      updateDate = #{updatedate,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >

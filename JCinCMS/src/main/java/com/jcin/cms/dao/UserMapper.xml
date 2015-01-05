@@ -8,8 +8,8 @@
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
-    <result column="createDate" property="createdate" jdbcType="DATE" />
-    <result column="updateDate" property="updatedate" jdbcType="DATE" />
+    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="VARCHAR" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -112,7 +112,7 @@
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{createdate,jdbcType=DATE}, #{updatedate,jdbcType=DATE}, #{ip,jdbcType=VARCHAR}
+      #{createdate,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.User" >
@@ -166,10 +166,10 @@
         #{enabled,jdbcType=BIT},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        #{updatedate,jdbcType=DATE},
+        #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="ip != null" >
         #{ip,jdbcType=VARCHAR},
@@ -204,10 +204,10 @@
         enabled = #{record.enabled,jdbcType=BIT},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=DATE},
+        createDate = #{record.createdate,jdbcType=VARCHAR},
       </if>
       <if test="record.updatedate != null" >
-        updateDate = #{record.updatedate,jdbcType=DATE},
+        updateDate = #{record.updatedate,jdbcType=VARCHAR},
       </if>
       <if test="record.ip != null" >
         ip = #{record.ip,jdbcType=VARCHAR},
@@ -225,8 +225,8 @@
       status = #{record.status,jdbcType=SMALLINT},
       description = #{record.description,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=BIT},
-      createDate = #{record.createdate,jdbcType=DATE},
-      updateDate = #{record.updatedate,jdbcType=DATE},
+      createDate = #{record.createdate,jdbcType=VARCHAR},
+      updateDate = #{record.updatedate,jdbcType=VARCHAR},
       ip = #{record.ip,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -251,10 +251,10 @@
         enabled = #{enabled,jdbcType=BIT},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=DATE},
+        createDate = #{createdate,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        updateDate = #{updatedate,jdbcType=DATE},
+        updateDate = #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="ip != null" >
         ip = #{ip,jdbcType=VARCHAR},
@@ -269,8 +269,8 @@
       status = #{status,jdbcType=SMALLINT},
       description = #{description,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=BIT},
-      createDate = #{createdate,jdbcType=DATE},
-      updateDate = #{updatedate,jdbcType=DATE},
+      createDate = #{createdate,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

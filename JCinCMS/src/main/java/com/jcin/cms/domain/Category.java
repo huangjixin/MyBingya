@@ -1,7 +1,6 @@
 package com.jcin.cms.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Category implements Serializable {
     private String id;
@@ -12,9 +11,9 @@ public class Category implements Serializable {
 
     private String parentid;
 
-    private Date updatedate;
+    private String updatedate;
 
-    private Date createdate;
+    private String createdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -50,19 +49,19 @@ public class Category implements Serializable {
         this.parentid = parentid == null ? null : parentid.trim();
     }
 
-    public Date getUpdatedate() {
+    public String getUpdatedate() {
         return updatedate;
     }
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
+    public void setUpdatedate(String updatedate) {
+        this.updatedate = updatedate == null ? null : updatedate.trim();
     }
 
-    public Date getCreatedate() {
+    public String getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate == null ? null : createdate.trim();
     }
 }

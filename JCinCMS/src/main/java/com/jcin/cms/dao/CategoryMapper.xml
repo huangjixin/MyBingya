@@ -6,8 +6,10 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="parentId" property="parentid" jdbcType="VARCHAR" />
-    <result column="updateDate" property="updatedate" jdbcType="DATE" />
-    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="updateDate" property="updatedate" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.domain.Category" extends="BaseResultMap" >
+    <result column="createDate" property="createdate" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,8 +70,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, description, parentId, updateDate, createDate
+    id, name, description, parentId, updateDate
   </sql>
+  <sql id="Blob_Column_List" >
+    createDate
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jcin.cms.domain.CategoryCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.CategoryCriteria" >
     <include refid="OracleDialectPrefix" />
     select
@@ -86,9 +107,11 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from tb_category
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -107,7 +130,7 @@
       parentId, updateDate, createDate
       )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=DATE}, #{createdate,jdbcType=DATE}
+      #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{createdate,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.Category" >
@@ -146,10 +169,10 @@
         #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        #{updatedate,jdbcType=DATE},
+        #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=DATE},
+        #{createdate,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -175,12 +198,24 @@
         parentId = #{record.parentid,jdbcType=VARCHAR},
       </if>
       <if test="record.updatedate != null" >
-        updateDate = #{record.updatedate,jdbcType=DATE},
+        updateDate = #{record.updatedate,jdbcType=VARCHAR},
       </if>
       <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=DATE},
+        createDate = #{record.createdate,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_category
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=VARCHAR},
+      updateDate = #{record.updatedate,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -191,8 +226,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       parentId = #{record.parentid,jdbcType=VARCHAR},
-      updateDate = #{record.updatedate,jdbcType=DATE},
-      createDate = #{record.createdate,jdbcType=DATE}
+      updateDate = #{record.updatedate,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,12 +244,21 @@
         parentId = #{parentid,jdbcType=VARCHAR},
       </if>
       <if test="updatedate != null" >
-        updateDate = #{updatedate,jdbcType=DATE},
+        updateDate = #{updatedate,jdbcType=VARCHAR},
       </if>
       <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=DATE},
+        createDate = #{createdate,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jcin.cms.domain.Category" >
+    update tb_category
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jcin.cms.domain.Category" >
@@ -223,8 +266,7 @@
     set name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       parentId = #{parentid,jdbcType=VARCHAR},
-      updateDate = #{updatedate,jdbcType=DATE},
-      createDate = #{createdate,jdbcType=DATE}
+      updateDate = #{updatedate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >
