@@ -11,7 +11,6 @@
 package com.jcin.cms.web;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jcin.cms.domain.OperationlogCriteria;
 import com.jcin.cms.service.IOpeLogService;
 import com.jcin.cms.utils.Page;
 
@@ -51,15 +51,27 @@ public class OpelogController extends BaseController {
 			HttpServletResponse httpServletResponse) {
 		super.select(page, bindingResult, uiModel, httpServletRequest,
 				httpServletResponse);
+		// 接收前台查询参数
+		String name = httpServletRequest.getParameter("name");
+		String operator = httpServletRequest.getParameter("operator");
+		OperationlogCriteria operationlogCriteria = new OperationlogCriteria();
+		OperationlogCriteria.Criteria criteria = operationlogCriteria
+				.createCriteria();
+		operationlogCriteria.setPage(page);
+		if (null != name) {
+			criteria.andNameLike("%" + name + "%");
+		}
+		if (null != operator) {
+			criteria.andOperatorLike("%" + operator + "%");
+		}
 
-		page = opeLogService.select(page);
+		page = opeLogService.select(operationlogCriteria);
 		return page;
 	}
 
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
-	public int deleteById(
-			@RequestParam(value = "idstring") String idstring,
+	public int deleteById(@RequestParam(value = "idstring") String idstring,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 

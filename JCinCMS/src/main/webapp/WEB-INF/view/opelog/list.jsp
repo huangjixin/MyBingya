@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -60,6 +61,27 @@
 }
 </style>
 <script type="text/javascript">
+	Date.prototype.format = function(format) {
+		var o = {
+			"M+" : this.getMonth() + 1, //month
+			"d+" : this.getDate(), //day
+			"h+" : this.getHours(), //hour
+			"m+" : this.getMinutes(), //minute
+			"s+" : this.getSeconds(), //second
+			"q+" : Math.floor((this.getMonth() + 3) / 3), //quarter
+			"S" : this.getMilliseconds()
+		//millisecond
+		}
+		if (/(y+)/.test(format))
+			format = format.replace(RegExp.$1, (this.getFullYear() + "")
+					.substr(4 - RegExp.$1.length));
+		for ( var k in o)
+			if (new RegExp("(" + k + ")").test(format))
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+						: ("00" + o[k]).substr(("" + o[k]).length));
+		return format;
+	}
+	
 	$().ready(function() {
 	});
 
@@ -98,34 +120,72 @@
 			}
 		});
 	}
-	
-	function search(){
-		var queryParams = $("#tgrid").datagrid("options").queryParams;
-		if($("#nameInput").val()!=""){
+
+	//处理事件的函数
+	function onKeyEnter(e) {
+		if (e == 13 || e == 32) {
+			search();
+			e.returnValue = false;
+			//返回false，在没有使用document.loginForm.submit()时可用于取消提交
+		}
+	}
+
+	//搜索
+	function search() {
+		var queryParams = {};
+
+		if ($("#nameInput").val() != "") {
 			queryParams.name = $("#nameInput").val();
 		}
-        
-        if($("#operatorInput").val()!=""){
+
+		if ($("#operatorInput").val() != "") {
 			queryParams.operator = $("#operatorInput").val();
 		}
-		
-        $("#tgrid").datagrid("reload");
+		if ($("#ipInput").val() != "") {
+			queryParams.operator = $("#operatorInput").val();
+		}
+
+		$("#tgrid").datagrid("getPager").pagination({
+			pageNumber : 1
+		});
+
+		$("#tgrid").datagrid("options").queryParams = queryParams;
+		$("#tgrid").datagrid("reload");
+	}
+
+	//清除
+	function clearSearch() {
+		$("#nameInput").val("");
+		$("#operatorInput").val("");
+		$("#ipInput").val("");
+	}
+
+	//格式化用户状态显示。
+	function formatDate(val, row) {
+		var date = new Date();
+		date.setTime(val+"");
+		var result = date.format("yyyy-MM-dd hh:mm:ss");
+
+		return result;
 	}
 </script>
 </head>
 
-<body class="easyui-layout" fit="true">
-	<div region="center" title="" style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="width: 100%;padding: 5px;border: 1px;">
-			<input type="button" value="删除" onclick="deleteRows()" />
-			<label>名称:</label><input id="nameInput">
-			<label>操作人:</label><input id="operatorInput">
-			<label>IP:</label><input id="ipInput">
-			<input type="button" value="searchBtn" onclick="search()" />
+<body class="easyui-layout" data-options="fit:true">
+	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
+	<div data-options="region:'center'" title=""
+		style="padding:0px;background:#ffffff;">
+		<div id="toolBar" style="padding: 5px;border: 0px;">
+			<input type="button" value="删除" onclick="deleteRows()" /> <label>名称:</label><input
+				id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+			<label>操作人:</label><input id="operatorInput"
+				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>IP:</label><input
+				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
+			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 		</div>
-		<div style="width: 100%;height:320px;">
-			<table id="tgrid" title="" class="easyui-datagrid"
-				data-options="
+		<table id="tgrid" title="" class="easyui-datagrid" style="height:350px;"
+			data-options="
 								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
 								nowrap : true,
@@ -140,23 +200,23 @@
 								rownumbers: false,
 								treeField: 'name',
 								showHeader: true,
-								fit:true,
+								fit:false,
 								fitColumns:true,
 								pagination : true
 							">
-				<thead>
-					<tr>
-						<th field="ck" data-options="checkbox:true"></th>
-						<th id="nameFieldTh" data-options="field:'name',align:'left'"
-							width="100%">名称</th>
-						<th id="urlFieldTh" data-options="field:'url',align:'center'"
-							width="100%">连接的URL</th>
-						<th id="createDateFieldTh"
-							data-options="field:'createDate',align:'center'" width="100%">修改日期</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+			<thead>
+				<tr>
+					<th data-options="field:'ck',checkbox:true"></th>
+					<th id="nameFieldTh" data-options="field:'name',align:'left'"
+						width="100%">名称</th>
+					<th id="operatorFieldTh"
+						data-options="field:'operator',align:'center'" width="100%">操作人</th>
+					<th id="createDateFieldTh"
+						data-options="field:'createdate',align:'center',formatter:formatDate"
+						width="100%">修改日期</th>
+				</tr>
+			</thead>
+		</table>
 
 	</div>
 </body>

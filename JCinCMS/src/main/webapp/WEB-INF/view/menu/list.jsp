@@ -172,18 +172,17 @@
 </script>
 </head>
 
-<body class="easyui-layout" fit="true">
-	<div region="center" title="" style="padding:0px;background:#ffffff;">
+<body class="easyui-layout" data-options="fit:true">
+	<div data-options="region:'center'" title=""
+		style="padding:0px;background:#ffffff;">
 		<div id="listView" style="width: 100%;height:100%;">
-			<div id="toolBar" style="width: 100%;">
+			<div id="toolBar" style="padding: 5px;border: 0px;">
 				<div>
 					<input type="button" value="新增" onclick="toEditViewView();" /> <input
 						type="button" value="删除" onclick="deleteRows()" /> <input
 						type="button" value="刷新" onclick="refresh()" />
 				</div>
 			</div>
-<!-- 			<ul id="tt" class="easyui-tree" -->
-<!-- 				data-options="url:'menu/getMenu',method:'get',animate:true,checkbox:true"></ul> -->
 			<table id="tgrid" title="" class="easyui-treegrid"
 				data-options="
 								url: 'menu/getMenu',
@@ -228,17 +227,16 @@
 					<tbody>
 						<tr class="tr1">
 							<td class="td1" colSpan="4">&nbsp;&nbsp;&nbsp;&nbsp;<input
-								type="button" value="返回" onclick="toListView();" />
-							</td>
+								type="button" value="返回" onclick="toListView();" /></td>
 						</tr>
 						<tr class="tr1">
 							<th class="th1">名称:</th>
 							<td class="td1"><input type="text" name="name" id="name"
-								value="localhost" size="35">
-							</td>
+								value="localhost" size="35"></td>
 							<th class="th1">连接URL:</th>
 							<td class="td1" colSpan="3"><input type="text" name="url"
-								id="url" value="" size="35"></td>
+								id="url" value="" size="35">
+							</td>
 						</tr>
 
 						<tr class="tr1">
@@ -252,11 +250,9 @@
 								type="button" value="保存" id="btn_login"
 								onclick="submitListener();" /> <input type="button"
 								value="清除表单" id="btn_clearForm" onclick="clearForm();" />
-								<h1 id="editResult"></h1>
-							</td>
+								<h1 id="editResult"></h1></td>
 						</tr>
 					</tbody>
-
 				</table>
 			</form>
 		</div>
