@@ -47,6 +47,7 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * .String ))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		// super.deleteByPrimaryKey(id);
 
@@ -91,7 +92,23 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		page.setTotal(total);
 		return page;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IOperationlogService#select(com.jcin.cms.domain.OperationlogCriteria)
+	 */
+	@Override
+	public Page select(OperationlogCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = operationlogMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = operationlogMapper.countByExample(criteria);
+		page.setTotal(total);
+		return page;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -10,6 +10,8 @@ package com.jcin.cms.service;
 import java.util.List;
 
 import com.jcin.cms.domain.Menu;
+import com.jcin.cms.domain.MenuCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface IMenuService extends IBaseService<Menu, String> {
 	// int deleteByPrimaryKey(String id);
@@ -31,4 +33,11 @@ public interface IMenuService extends IBaseService<Menu, String> {
 	List getMenuTree();
 
 	List<Menu> getByParentId(String id);
+	
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(MenuCriteria criteria);
 }

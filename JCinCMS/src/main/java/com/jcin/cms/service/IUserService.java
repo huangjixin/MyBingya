@@ -10,6 +10,7 @@ package com.jcin.cms.service;
 import java.util.List;
 
 import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface IUserService extends IBaseService<User, String> {
@@ -18,6 +19,12 @@ public interface IUserService extends IBaseService<User, String> {
 	int insert(User record);
 
 	Page select(Page page);
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(UserCriteria criteria);
 
 	User selectByPrimaryKey(String id);
 

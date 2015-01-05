@@ -47,6 +47,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 * com.jcin.cms.service.IUserService#deleteByPrimaryKey((java.lang.String))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 //		super.deleteByPrimaryKey(id);
 
@@ -92,6 +93,23 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.jcin.cms.service.IUserService#select(com.jcin.cms.domain.UserCriteria)
+	 */
+	@Override
+	public Page select(UserCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = userMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = userMapper.countByExample(criteria);
+		page.setTotal(total);
+		return page;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.jcin.cms.service.IUserService#selectByPrimaryKey(java.lang.String)
 	 */
 	@Override
@@ -129,5 +147,4 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		List<User> users = userMapper.selectByExample(userCriteria);
 		return users;
 	}
-
 }

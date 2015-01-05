@@ -8,6 +8,14 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Operationlog;
+import com.jcin.cms.domain.OperationlogCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface IOpeLogService extends IBaseService<Operationlog, String> {
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(OperationlogCriteria criteria);
 }

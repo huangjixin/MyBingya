@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.ArticleMapper;
 import com.jcin.cms.domain.Article;
 import com.jcin.cms.domain.ArticleCriteria;
+import com.jcin.cms.domain.CategoryCriteria;
 import com.jcin.cms.service.IArticleService;
 import com.jcin.cms.utils.Page;
 
@@ -47,6 +48,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 	 * ))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		super.deleteByPrimaryKey(id);
 
@@ -85,6 +87,23 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 		List list = articleMapper.selectByExample(articleCriteria);
 		page.setRows(list);
 		int total = articleMapper.countByExample(articleCriteria);
+		page.setTotal(total);
+		return page;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.ICommentService#select(com.jcin.cms.domain.
+	 * ArticleCriteria)
+	 */
+	@Override
+	public Page select(ArticleCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = articleMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = articleMapper.countByExample(criteria);
 		page.setTotal(total);
 		return page;
 	}

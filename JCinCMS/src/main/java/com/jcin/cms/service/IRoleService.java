@@ -8,6 +8,8 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Role;
+import com.jcin.cms.domain.RoleCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface IRoleService  extends IBaseService<Role, String>{
 //	int deleteByPrimaryKey(String id);
@@ -19,4 +21,10 @@ public interface IRoleService  extends IBaseService<Role, String>{
 //	Role selectByPrimaryKey(String id);
 //
 //	int update(Role record);
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(RoleCriteria criteria);
 }

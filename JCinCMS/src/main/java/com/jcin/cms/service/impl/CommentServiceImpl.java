@@ -46,6 +46,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 	 * ))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		super.deleteByPrimaryKey(id);
 
@@ -87,6 +88,22 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 		return page;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.ICommentService#select(com.jcin.cms.domain.CommentCriteria)
+	 */
+	@Override
+	public Page select(CommentCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = commentMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = commentMapper.countByExample(criteria);
+		page.setTotal(total);
+		return page;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

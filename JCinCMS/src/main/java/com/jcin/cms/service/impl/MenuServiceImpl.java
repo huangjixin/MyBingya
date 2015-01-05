@@ -52,6 +52,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	 * com.jcin.cms.service.IMenuService#deleteByPrimaryKey((java.lang.String))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		int result = menuMapper.deleteByPrimaryKey(id);
 //		super.deleteByPrimaryKey(id);
@@ -90,7 +91,23 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		page.setTotal(total);
 		return page;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IMenuService#select(com.jcin.cms.domain.MenuCriteria)
+	 */
+	@Override
+	public Page select(MenuCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = menuMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = menuMapper.countByExample(criteria);
+		page.setTotal(total);
+		return page;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -177,4 +194,5 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		}
 		return children;
 	}
+
 }

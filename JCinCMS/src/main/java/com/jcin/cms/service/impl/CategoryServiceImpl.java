@@ -46,6 +46,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 * ))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		super.deleteByPrimaryKey(id);
 
@@ -86,7 +87,24 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		page.setRows(list);
 		int total = categoryMapper.countByExample(categoryCriteria);
 		page.setTotal(total);
-		
+
+		return page;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.ICommentService#select(com.jcin.cms.domain.
+	 * CategoryCriteria)
+	 */
+	@Override
+	public Page select(CategoryCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = categoryMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = categoryMapper.countByExample(criteria);
+		page.setTotal(total);
 		return page;
 	}
 

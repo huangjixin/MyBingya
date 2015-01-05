@@ -8,6 +8,8 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Comment;
+import com.jcin.cms.domain.CommentCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface ICommentService extends IBaseService<Comment, String>{
 //	int deleteByPrimaryKey(String id);
@@ -19,4 +21,11 @@ public interface ICommentService extends IBaseService<Comment, String>{
 //	Comment selectByPrimaryKey(String id);
 //
 //	int update(Comment record);
+
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(CommentCriteria criteria);
 }

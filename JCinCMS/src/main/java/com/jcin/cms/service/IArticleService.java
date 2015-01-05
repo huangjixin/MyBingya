@@ -8,6 +8,8 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Article;
+import com.jcin.cms.domain.ArticleCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface IArticleService extends IBaseService<Article, String>{
 //	int deleteByPrimaryKey(String id);
@@ -19,4 +21,10 @@ public interface IArticleService extends IBaseService<Article, String>{
 //	Article selectByPrimaryKey(String id);
 //
 //	int update(Article record);
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(ArticleCriteria criteria);
 }

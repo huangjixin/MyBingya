@@ -8,6 +8,8 @@
 package com.jcin.cms.service;
 
 import com.jcin.cms.domain.Category;
+import com.jcin.cms.domain.CategoryCriteria;
+import com.jcin.cms.utils.Page;
 
 public interface ICategoryService extends IBaseService<Category, String>{
 //	int deleteByPrimaryKey(String id);
@@ -19,4 +21,10 @@ public interface ICategoryService extends IBaseService<Category, String>{
 //	Category selectByPrimaryKey(String id);
 //
 //	int update(Category record);
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(CategoryCriteria criteria);
 }

@@ -46,6 +46,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * com.jcin.cms.service.IRoleService#deleteByPrimaryKey((java.lang.String))
 	 */
 	@Override
+	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		super.deleteByPrimaryKey(id);
 
@@ -92,6 +93,22 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.jcin.cms.service.IRoleService#select(com.jcin.cms.domain.RoleCriteria)
+	 */
+	@Override
+	public Page select(RoleCriteria criteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = roleMapper.selectByExample(criteria);
+		page.setRows(list);
+		int total = roleMapper.countByExample(criteria);
+		page.setTotal(total);
+		return page;
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.jcin.cms.service.IRoleService#selectByPrimaryKey(java.lang.String)
 	 */
 	@Override
@@ -115,5 +132,4 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		int result = roleMapper.updateByPrimaryKeySelective(record);
 		return result;
 	}
-
 }
