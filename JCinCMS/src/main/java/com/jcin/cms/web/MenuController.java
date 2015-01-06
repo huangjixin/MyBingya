@@ -61,6 +61,15 @@ public class MenuController {
 		menuService.insert(menu);
 		return null;
 	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public String update(@Valid Menu menu, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		menuService.update(menu);
+		return null;
+	}
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/getMenu")

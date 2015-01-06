@@ -185,7 +185,27 @@
 		return btn;
 	}
 
+	//导出excel
+	function exportExcel(){
+// 		$.ajax({
+// 			cache : true,
+// 			type : "GET",
+// 			url : 'user/exportExcel',
+// 			data : pamameter,
+// 			async : false,
+// 			error : function(request) {
+// 				alert("连接失败");
+// 			},
+// 			success : function(data) {
+// 				$("#tgrid").datagrid('reload'); // 重新加载;
+// 			}
+// 		});
+	}
 	
+	//导入excel
+	function importExcel(){
+	
+	}
 </script>
 </head>
 
@@ -201,6 +221,8 @@
 				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
+			<input type="button" id="exportBtn" value="导出excel" onclick="exportExcel()" />
+			<input type="button" id="importBtn" value="导入excel" onclick="importExcel()" />
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

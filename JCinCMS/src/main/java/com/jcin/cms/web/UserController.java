@@ -101,9 +101,9 @@ public class UserController extends BaseController {
 		return null;
 	}
 
-	@RequestMapping(value = "/test")
+	@RequestMapping(value = "/exportExcel")
 	@ResponseBody
-	public void test(HttpServletRequest httpServletRequest,
+	public void exportExcel(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		User user = new User();
 		user.setUsername("eteste");
