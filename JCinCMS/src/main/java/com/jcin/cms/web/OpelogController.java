@@ -58,6 +58,7 @@ public class OpelogController extends BaseController {
 		OperationlogCriteria.Criteria criteria = operationlogCriteria
 				.createCriteria();
 		operationlogCriteria.setPage(page);
+		operationlogCriteria.setOrderByClause("id desc");
 		if (null != name) {
 			criteria.andNameLike("%" + name + "%");
 		}
