@@ -47,15 +47,16 @@
 			targetPackage="com.jcin.cms.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="tb_operationlog" domainObjectName="Operationlog" />
-		<table tableName="tb_article" domainObjectName="Article" />
-		<table tableName="tb_assets" domainObjectName="Assets" />
-		<table tableName="tb_category" domainObjectName="Category" />
-		<table tableName="tb_comment" domainObjectName="Comment" />
-		<table tableName="tb_menu" domainObjectName="Menu" />
-		<table tableName="tb_role" domainObjectName="Role" />
-		<table tableName="tb_role_menu" domainObjectName="RoleMenu" />
-		<table tableName="tb_user" domainObjectName="User" />
-		<table tableName="tb_user_role" domainObjectName="UserRole" />
+<!-- 		<table tableName="tb_operationlog" domainObjectName="Operationlog" /> -->
+<!-- 		<table tableName="tb_article" domainObjectName="Article" /> -->
+<!-- 		<table tableName="tb_assets" domainObjectName="Assets" /> -->
+<!-- 		<table tableName="tb_category" domainObjectName="Category" /> -->
+<!-- 		<table tableName="tb_comment" domainObjectName="Comment" /> -->
+<!-- 		<table tableName="tb_menu" domainObjectName="Menu" /> -->
+<!-- 		<table tableName="tb_role" domainObjectName="Role" /> -->
+<!-- 		<table tableName="tb_role_menu" domainObjectName="RoleMenu" /> -->
+<!-- 		<table tableName="tb_user" domainObjectName="User" /> -->
+<!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
+		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" />
 	</context>
 </generatorConfiguration>

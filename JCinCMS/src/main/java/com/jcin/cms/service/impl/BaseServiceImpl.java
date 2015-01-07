@@ -87,11 +87,11 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 				createDatemethod.invoke(record, new Date());
 			}
 
-			Method updateDatemethod = clazz.getDeclaredMethod("setUpdatedate",
-					Date.class);
-			if (updateDatemethod != null) {
-				updateDatemethod.invoke(record, new Date());
-			}
+//			Method updateDatemethod = clazz.getDeclaredMethod("setUpdatedate",
+//					Date.class);
+//			if (updateDatemethod != null) {
+//				updateDatemethod.invoke(record, new Date());
+//			}
 
 			Operationlog operationlog = new Operationlog();
 			operationlog.setId(new Date().getTime() + "");
