@@ -68,7 +68,7 @@
 					$("#hintMsg").html("连接失败");
 				},
 				success : function(data) {
-					alert(data.loginResult);
+					
 					if(data.loginResult == "success"){
 						window.location.href="index.jsp";
 					}else{

@@ -192,13 +192,38 @@
 
 	}
 
-	//导入excel
+	//备份
 	function backup() {
 		$.ajax({
 			cache : true,
 			type : "GET",
 			url : "mysql/backup",
 			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tgrid").datagrid("reload");
+			}
+		});
+	}
+
+	//还原。
+	function restore() {
+		var row = $("#tgrid").datagrid("getSelected");
+		if(row == null){
+			return;
+		}
+		var pamameter = {
+			path : row.path
+		};
+		alert(row.path);
+		$.ajax({
+			cache : true,
+			type : "GET",
+			url : "mysql/restore",
+			async : false,
+			data : pamameter,
 			error : function(request) {
 				alert("连接失败");
 			},
@@ -225,7 +250,8 @@
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" /> <input type="button"
-				id="backupBtn" value="备份" onclick="backup()" />
+				id="backupBtn" value="备份" onclick="backup()" /> <input
+				type="button" id="restoreBtn" value="还原" onclick="restore()" />
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

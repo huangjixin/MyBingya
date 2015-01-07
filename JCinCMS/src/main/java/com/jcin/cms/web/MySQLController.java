@@ -181,7 +181,7 @@ public class MySQLController extends BaseController {
 
 		String mysqlpaths = pros.getProperty("database.mysqlpath");
 		String sqlpath = pros.getProperty("database.export");
-		String filepath = sqlpath + path; // 备份的路径地址
+		String filepath = path; // 备份的路径地址
 
 		// 新建数据库finacing
 		String stmt1 = "mysqladmin -u " + root + " -p" + pass
