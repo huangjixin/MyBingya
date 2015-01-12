@@ -44,12 +44,13 @@ public class TestRoleService {
 	@Test
 	public void testInsert() {
 		Role role = new Role();
-		role.setName("123456");
+		role.setName("admin");
 		role.setId(new Date().getTime() + "");
 
 		int result = roleService.insert(role);
 		Assert.assertEquals(1, result);
 	}
+
 
 	@Test
 	public void testSelect() {

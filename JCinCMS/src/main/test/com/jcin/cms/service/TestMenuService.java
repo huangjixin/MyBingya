@@ -48,12 +48,10 @@ public class TestMenuService extends TestCase {
 		Assert.assertEquals(1, result);
 	}
 	
-//	@SuppressWarnings("rawtypes")
-//	@Test
-//	public void testGetMenuTree() {
-//		List list = menuService.getMenuTree();
-//		Assert.assertNotNull(list);
-//	}
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testGetMenuTreeByRoleId() {
+	}
 
 //	@Test
 //	public void testDeleteByPrimaryKey() {

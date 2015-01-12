@@ -61,7 +61,8 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		operationlog.setId(new Date().getTime() + "");
 		String opeName = Thread.currentThread().getStackTrace()[1]
 				.getMethodName();
-		operationlog.setName(entityClass.getName() + "." + opeName+" 刪除成功");
+		String name = entityClass.getName() + "." + opeName+" delete(删除) success";
+		operationlog.setName(name);
 		if (LoginResponse.user != null) {
 			operationlog.setOperator(LoginResponse.user.getUsername());
 		}
@@ -98,7 +99,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			String opeName = Thread.currentThread().getStackTrace()[1]
 					.getMethodName();// 具体使用数组的那个元素和JVM的实现有关，我在SUN
 										// JDK6下面测试的是第二个元素，具体说明可以查看Thread.getStackTrace方法的javadoc
-			operationlog.setName(entityClass.getName() + "." + opeName+" 添加成功");
+			operationlog.setName(entityClass.getName() + "." + opeName+" insert(添加) success");
 			if (LoginResponse.user != null) {
 				operationlog.setOperator(LoginResponse.user.getUsername());
 			}

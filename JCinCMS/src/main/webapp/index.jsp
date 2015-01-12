@@ -67,15 +67,30 @@ body {
 		}
 		$("#ifrContentArea").attr("src", url);
 	}
+	
+	function logout(){
+		$.ajax({
+				cache : false,
+				type : "get",
+				url : 'login/validatelogout',
+				async : false,
+				error : function(request) {
+				},
+				success : function(data) {
+					
+				}
+			});
+	}
 </script>
 </head>
 
 <body class="easyui-layout" fit="true">
 	<div region="north" title="" split="false" id="header"
 		style="height:100px;">
-		<!-- 		<div id="header" > -->
-		<!-- 			<h1></h1> -->
-		<!-- 		</div> -->
+		<h1
+			style="margin: 0; padding: 15px; cursor: default; font-family: 微软雅黑, 黑体, 宋体;">XX管理系统</h1>
+		<input id="logoutBtn" type="button" value="退出"
+			style="position: absolute;right:8px;bottom:2px;" onclick="logout()"></input>
 	</div>
 	<!-- 	<div region="south" title="" split="false"
 			style="height:30px;"></div>

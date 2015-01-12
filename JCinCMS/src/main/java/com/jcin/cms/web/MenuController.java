@@ -76,7 +76,7 @@ public class MenuController {
 	@ResponseBody
 	public List getMenu(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		List list = menuService.getMenuTree();
+		List list = menuService.getMenuTree(null);
 		return list;
 	}
 

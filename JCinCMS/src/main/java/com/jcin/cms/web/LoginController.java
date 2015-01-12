@@ -95,7 +95,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/validatelogout")
-	public ModelAndView validateLogout(@Valid User user,
+	public String validateLogout(@Valid User user,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -106,7 +106,7 @@ public class LoginController {
 		HttpSession session = httpServletRequest.getSession();
 
 		session.setAttribute("loginInfo", null);
-
-		return new ModelAndView(new RedirectView("view/login"));
+		String viewPath = httpServletRequest.getContextPath();
+		return "view/login";
 	}
 }

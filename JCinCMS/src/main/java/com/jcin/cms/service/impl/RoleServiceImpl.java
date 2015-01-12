@@ -20,8 +20,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.RoleMapper;
+import com.jcin.cms.dao.UserMapper;
+import com.jcin.cms.dao.UserRoleMapper;
 import com.jcin.cms.domain.Role;
 import com.jcin.cms.domain.RoleCriteria;
+import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.UserCriteria;
+import com.jcin.cms.domain.UserRole;
+import com.jcin.cms.domain.UserRoleCriteria;
 import com.jcin.cms.service.IRoleService;
 import com.jcin.cms.utils.Page;
 
@@ -35,6 +41,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		IRoleService {
 	private static Logger logger = Logger.getLogger(RoleServiceImpl.class
 			.getName());
+
+	@Resource
+	private UserMapper userMapper;
+
+	@Resource
+	private UserRoleMapper userRoleMapper;
 
 	@Resource
 	private RoleMapper roleMapper;
@@ -64,8 +76,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	public int insert(Role record) {
 		super.insert(record);
 
-//		record.setCreatedate(new Date());
-//		record.setId(new Date().getTime() + "");
+		// record.setCreatedate(new Date());
+		// record.setId(new Date().getTime() + "");
 		int result = roleMapper.insert(record);
 		return result;
 	}
@@ -93,7 +105,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IRoleService#select(com.jcin.cms.domain.RoleCriteria)
+	 * com.jcin.cms.service.IRoleService#select(com.jcin.cms.domain.RoleCriteria
+	 * )
 	 */
 	@Override
 	public Page select(RoleCriteria criteria) {
@@ -105,6 +118,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		page.setTotal(total);
 		return page;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -131,5 +145,31 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 
 		int result = roleMapper.updateByPrimaryKeySelective(record);
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.IRoleService#getUsesByRoleId(String)
+	 */
+	@Override
+	public List<User> getUsesByRoleId(String id) {
+		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
+		userRoleCriteria.createCriteria().andRoleIdEqualTo(id);
+		List<UserRole> userRoles = userRoleMapper
+				.selectByExample(userRoleCriteria);
+		List<User> users = null;
+
+		for (UserRole userRole : userRoles) {
+			UserCriteria userCriteria = new UserCriteria();
+			userCriteria.createCriteria().andIdEqualTo(userRole.getUserId());
+			if (users == null) {
+				users = userMapper.selectByExample(userCriteria);
+			} else {
+				users.addAll(userMapper.selectByExample(userCriteria));
+			}
+		}
+
+		return users;
 	}
 }

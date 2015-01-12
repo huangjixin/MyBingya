@@ -9,6 +9,7 @@ package com.jcin.cms.service;
 
 import java.util.List;
 
+import com.jcin.cms.domain.Role;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.utils.Page;
@@ -19,8 +20,10 @@ public interface IUserService extends IBaseService<User, String> {
 	int insert(User record);
 
 	Page select(Page page);
+
 	/**
 	 * 封装查询条件，返回Page对象。
+	 * 
 	 * @param criteria
 	 * @return
 	 */
@@ -29,6 +32,7 @@ public interface IUserService extends IBaseService<User, String> {
 	User selectByPrimaryKey(String id);
 
 	int update(User record);
+
 	/**
 	 * 验证登录。
 	 * 
@@ -37,4 +41,11 @@ public interface IUserService extends IBaseService<User, String> {
 	 * @return
 	 */
 	List<User> validateLogin(String username, String password);
+
+	/**
+	 * 根据用户ID获取关联角色。
+	 * @param id
+	 * @return
+	 */
+	List<Role> getRolesByUserId(String id);
 }

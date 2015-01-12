@@ -7,6 +7,8 @@
  */
 package com.jcin.cms.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import junit.framework.TestCase;
@@ -19,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.domain.Role;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.utils.Page;
 
@@ -38,9 +41,8 @@ public class TestUserService extends TestCase {
 	@Test
 	public void testInsert() {
 		User user = new User();
-		user.setPassword("123456");
-		user.setUsername("123456");
-//		user.setId(new Date().getTime() + "");
+		user.setPassword("admin");
+		user.setUsername("admin");
 
 		int result = userService.insert(user);
 		Assert.assertEquals(1, result);
@@ -48,7 +50,7 @@ public class TestUserService extends TestCase {
 
 	@Test
 	public void testDeleteByPrimaryKey() {
-		int result = userService.deleteByPrimaryKey("1419213655697");
+		int result = userService.deleteByPrimaryKey("1");
 		Assert.assertEquals(1, result);
 	}
 
@@ -67,4 +69,10 @@ public class TestUserService extends TestCase {
 		Assert.assertEquals(1, i);
 	}
 
+	@Test
+	public void testGetRolesByUserId() {
+		List<Role> list = userService.getRolesByUserId("1");
+
+		Assert.assertEquals(1, list.size());
+	}
 }

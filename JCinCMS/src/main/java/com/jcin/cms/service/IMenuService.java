@@ -30,12 +30,14 @@ public interface IMenuService extends IBaseService<Menu, String> {
 	 * @param roleId
 	 * @return
 	 */
-	List getMenuTree();
+	@SuppressWarnings("rawtypes")
+	List getMenuTree(String roleId);
 
 	List<Menu> getByParentId(String id);
-	
+
 	/**
 	 * 封装查询条件，返回Page对象。
+	 * 
 	 * @param criteria
 	 * @return
 	 */

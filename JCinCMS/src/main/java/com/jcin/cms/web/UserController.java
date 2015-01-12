@@ -18,8 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.security.MD5Encoder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,26 +82,38 @@ public class UserController extends BaseController {
 
 		return result;
 	}
+
 	@RequestMapping(value = "/new")
 	@ResponseBody
-	public String create(@Valid User user, BindingResult bindingResult,
+	public int create(@Valid User user, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		// userService.insert(user);
-		httpServletResponse.setContentType("text/html");
-		PrintWriter out = httpServletResponse.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
-		return null;
+		int result = userService.insert(user);
+		return result;
+	}
+
+	@RequestMapping(value = "/resetPassword")
+	@ResponseBody
+	public ModelMap resetPassword(
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "repassword") String repassword,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		ModelMap modelMap = new ModelMap();
+		User user = userService.selectByPrimaryKey(id);
+		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		String pas = passwordEncoder.encodePassword(password, "");
+		
+		if(pas.equals(user.getPassword())){
+			pas = passwordEncoder.encodePassword(repassword, "");
+			user.setPassword(pas);
+			userService.update(user);
+		}else{
+			
+		}
+		
+		return modelMap;
 	}
 
 	@RequestMapping(value = "/exportExcel")

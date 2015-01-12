@@ -11,7 +11,6 @@
 package com.jcin.cms.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,14 +19,15 @@ import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.MenuMapper;
+import com.jcin.cms.dao.RoleMenuMapper;
 import com.jcin.cms.domain.Menu;
 import com.jcin.cms.domain.MenuCriteria;
 import com.jcin.cms.domain.RoleMenu;
+import com.jcin.cms.domain.RoleMenuCriteria;
 import com.jcin.cms.service.IMenuService;
 import com.jcin.cms.utils.Page;
 
@@ -45,6 +45,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	@Resource
 	private MenuMapper menuMapper;
 
+	@Resource
+	private RoleMenuMapper roleMenuMapper;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -54,8 +57,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	@Override
 	@Transactional
 	public int deleteByPrimaryKey(String id) {
+		super.deleteByPrimaryKey(id);
 		int result = menuMapper.deleteByPrimaryKey(id);
-//		super.deleteByPrimaryKey(id);
+
 		return result;
 	}
 
@@ -91,12 +95,13 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.IMenuService#select(com.jcin.cms.domain.MenuCriteria)
+	 * com.jcin.cms.service.IMenuService#select(com.jcin.cms.domain.MenuCriteria
+	 * )
 	 */
 	@Override
 	public Page select(MenuCriteria criteria) {
@@ -108,6 +113,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		page.setTotal(total);
 		return page;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -138,16 +144,37 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List getMenuTree() {
+	public List getMenuTree(String roleId) {
+		List<RoleMenu> roleMenus = null;
+		if (roleId != null || "".equals(roleId)) {
+			RoleMenuCriteria roleMenuCriteria = new RoleMenuCriteria();
+			roleMenuCriteria.createCriteria().andRoleIdEqualTo(roleId);
+			roleMenus = roleMenuMapper.selectByExample(roleMenuCriteria);
+		}
+
 		MenuCriteria menuExample = new MenuCriteria();
 		menuExample.createCriteria().andParentidIsNull();
 
 		List<Menu> list = menuMapper.selectByExample(menuExample);
 		List children = new ArrayList();
 		for (Menu object : list) {
+			boolean flag = false;
+			if(roleMenus != null){
+				for (RoleMenu roleMenu : roleMenus) {
+					if (roleMenu.getMenuId().equals(object.getId())) {
+						flag = true;
+						break;
+					}
+				}
+			}
+			
+			if (!flag && roleMenus != null) {
+				continue;
+			}
+
 			JSONObject jsonObject;
 
-			jsonObject = searialMenu(object);
+			jsonObject = searialMenu(object, roleMenus);
 			children.add(jsonObject);
 		}
 		return children;
@@ -163,7 +190,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	}
 
 	@SuppressWarnings("rawtypes")
-	public JSONObject searialMenu(Menu menu) {
+	public JSONObject searialMenu(Menu menu, List<RoleMenu> roleMenus) {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("id", menu.getId());
 		jsonObject.put("parentid", menu.getParentid());
@@ -173,7 +200,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		jsonObject.put("description", menu.getDescription());
 		jsonObject.put("updatedate", menu.getUpdatedate());
 
-		List list = searialChild(menu);
+		List list = searialChild(menu, roleMenus);
 		if (null != list) {
 			jsonObject.put("children", list);
 		}
@@ -182,14 +209,27 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List searialChild(Menu menu) {
+	public List searialChild(Menu menu, List<RoleMenu> roleMenus) {
 		List children = null;
 		List<Menu> list = getByParentId(menu.getId());
 		if (list != null && list.size() > 0) {
 			children = new ArrayList();
 		}
 		for (Menu object : list) {
-			JSONObject jsonObject = searialMenu(object);
+			boolean flag = false;
+			if(roleMenus != null){
+				for (RoleMenu roleMenu : roleMenus) {
+					if (roleMenu.getMenuId().equals(object.getId())) {
+						flag = true;
+						break;
+					}
+				}
+			}
+			if (!flag && roleMenus != null) {
+				continue;
+			}
+
+			JSONObject jsonObject = searialMenu(object, roleMenus);
 			children.add(jsonObject);
 		}
 		return children;
