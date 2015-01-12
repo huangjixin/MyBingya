@@ -10,9 +10,12 @@
  */
 package com.jcin.cms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.CategoryMapper;
 import com.jcin.cms.domain.Category;
 import com.jcin.cms.domain.CategoryCriteria;
+import com.jcin.cms.domain.Menu;
+import com.jcin.cms.domain.MenuCriteria;
+import com.jcin.cms.domain.RoleMenu;
+import com.jcin.cms.domain.RoleMenuCriteria;
 import com.jcin.cms.service.ICategoryService;
 import com.jcin.cms.utils.Page;
 
@@ -78,7 +85,6 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 */
 	@Override
 	public Page select(Page page) {
-		super.select(page);
 
 		CategoryCriteria categoryCriteria = new CategoryCriteria();
 		categoryCriteria.setPage(page);
@@ -117,8 +123,6 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 */
 	@Override
 	public Category selectByPrimaryKey(String id) {
-		super.selectByPrimaryKey(id);
-
 		Category category = categoryMapper.selectByPrimaryKey(id);
 		return category;
 	}
@@ -139,4 +143,61 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		return result;
 	}
 
+	@Override
+	public List getCategoryTree() {
+		CategoryCriteria categorCriteria = new CategoryCriteria();
+		categorCriteria.createCriteria().andParentidIsNull();
+
+		List<Category> list = categoryMapper.selectByExample(categorCriteria);
+		List children = new ArrayList();
+		for (Category object : list) {
+
+			JSONObject jsonObject;
+
+			jsonObject = searialChild(object);
+			children.add(jsonObject);
+		}
+		return children;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public JSONObject searialChild(Category Category) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", Category.getId());
+		jsonObject.put("parentid", Category.getParentid());
+		jsonObject.put("name", Category.getName());
+		jsonObject.put("createdate", Category.getCreatedate());
+		jsonObject.put("description", Category.getDescription());
+		jsonObject.put("updatedate", Category.getUpdatedate());
+
+		List list = searialChildren(Category);
+		if (null != list) {
+			jsonObject.put("children", list);
+		}
+
+		return jsonObject;
+	}
+
+	public List<Category> getByParentId(String id) {
+		CategoryCriteria categorCriteria = new CategoryCriteria();
+		categorCriteria.createCriteria().andParentidEqualTo(id);
+		List<Category> list = categoryMapper.selectByExample(categorCriteria);
+
+		return list;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List searialChildren(Category category) {
+		List children = null;
+		List<Category> list = getByParentId(category.getId());
+		if (list != null && list.size() > 0) {
+			children = new ArrayList();
+		}
+		for (Category object : list) {
+
+			JSONObject jsonObject = searialChild(object);
+			children.add(jsonObject);
+		}
+		return children;
+	}
 }

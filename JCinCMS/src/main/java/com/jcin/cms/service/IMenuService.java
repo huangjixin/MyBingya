@@ -14,16 +14,6 @@ import com.jcin.cms.domain.MenuCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface IMenuService extends IBaseService<Menu, String> {
-	// int deleteByPrimaryKey(String id);
-	//
-	// int insert(Menu record);
-	//
-	// Page select(Page page);
-	//
-	// Menu selectByPrimaryKey(String id);
-	//
-	// int update(Menu record);
-
 	/**
 	 * 根据角色id查询菜单，参数为null查询全部菜单。
 	 * 
