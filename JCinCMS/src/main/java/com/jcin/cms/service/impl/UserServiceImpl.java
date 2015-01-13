@@ -195,7 +195,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 				roles.addAll(roleMapper.selectByExample(roleCriteria));
 			}
 		}
-
+		
 		return roles;
 	}
 }

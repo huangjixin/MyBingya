@@ -57,6 +57,7 @@
 <!-- 		<table tableName="tb_role_menu" domainObjectName="RoleMenu" /> -->
 <!-- 		<table tableName="tb_user" domainObjectName="User" /> -->
 <!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
-		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" />
+<!-- 		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
+			<table tableName="tb_test" domainObjectName="Test" />
 	</context>
 </generatorConfiguration>

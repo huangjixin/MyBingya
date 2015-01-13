@@ -140,4 +140,10 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		return result;
 	}
 
+	@Override
+	public int insertBatch(List<Operationlog> list) {
+		int result = operationlogMapper.insertBatch(list);
+		return result;
+	}
+
 }

@@ -78,6 +78,17 @@ public class PaginationPlugin extends PluginAdapter {
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
 
+//	@Override
+//	public boolean sqlMapInsertElementGenerated(XmlElement element,
+//			IntrospectedTable introspectedTable) {
+//		XmlElement middleForEachElement = new XmlElement("foreach"); //$NON-NLS-1$ 
+//		middleForEachElement.addAttribute(new Attribute(
+//				"collection", "list")); //$NON-NLS-1$ 
+//		middleForEachElement.addAttribute(new Attribute("item", "item")); //$NON-NLS-1$ //$NON-NLS-2$ 
+//		element.addElement(middleForEachElement);
+//		return super.sqlMapInsertElementGenerated(element, introspectedTable);
+//	}
+
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(
 			XmlElement element, IntrospectedTable introspectedTable) {

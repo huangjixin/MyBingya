@@ -7,6 +7,8 @@
  */
 package com.jcin.cms.service;
 
+import java.util.List;
+
 import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.domain.OperationlogCriteria;
 import com.jcin.cms.utils.Page;
@@ -18,4 +20,6 @@ public interface IOpeLogService extends IBaseService<Operationlog, String> {
 	 * @return
 	 */
 	Page select(OperationlogCriteria criteria);
+	
+	int insertBatch(List<Operationlog> list);
 }

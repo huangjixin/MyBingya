@@ -10,12 +10,17 @@
  */
 package com.jcin.cms.web;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -54,9 +59,10 @@ public class OpelogController extends BaseController {
 
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@Valid Page page,
-			@RequestParam(value = "name",required=false) String name,
-			@RequestParam(value = "operator",required=false) String operator,
+	public Page select(
+			@Valid Page page,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "operator", required = false) String operator,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -168,5 +174,52 @@ public class OpelogController extends BaseController {
 		// // 清除缓存
 		// outputStream.flush();
 		// outputStream.close();
+	}
+
+	@RequestMapping(value = "/readXls")
+	@ResponseBody
+	public List<Operationlog> readXls(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		
+		String path = httpServletRequest.getServletContext().getRealPath(File.separator);
+		path += "test.xls";
+		InputStream is = new FileInputStream(path);
+		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
+		Operationlog operationlog = null;
+		List<Operationlog> list = new ArrayList<Operationlog>();
+		// Read the Sheet
+		for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+			if (hssfSheet == null) {
+				continue;
+			}
+			// Read the Row
+			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				if (hssfRow != null) {
+					operationlog = new Operationlog();
+					HSSFCell name = hssfRow.getCell(0);
+					operationlog.setName(getValue(name));
+					list.add(operationlog);
+				}
+			}
+		}
+		for (Operationlog operationlog2 : list) {
+			operationlog2.setId(""+(Math.round(1000000000*Math.random())));
+			operationlog2.setCreatedate(new Date());
+		}
+		int result = opeLogService.insertBatch(list);
+		return list;
+	}
+
+	@SuppressWarnings("static-access")
+	private String getValue(HSSFCell hssfCell) {
+		if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
+			return String.valueOf(hssfCell.getBooleanCellValue());
+		} else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
+			return String.valueOf(hssfCell.getNumericCellValue());
+		} else {
+			return String.valueOf(hssfCell.getStringCellValue());
+		}
 	}
 }
