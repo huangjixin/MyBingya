@@ -56,4 +56,13 @@ public class TestOpelogService extends TestCase {
 		Assert.assertEquals(1, result);
 	}
 
+	@Test
+	public void testDeleteBatch() {
+		List<String> list = new ArrayList<String>();
+		
+		list.add("870136048");
+		int result = opeLogService.deleteBatch(list);
+		Assert.assertEquals(1, result);
+	}
+
 }

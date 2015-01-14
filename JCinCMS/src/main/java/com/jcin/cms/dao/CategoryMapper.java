@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
+    int deleteBatch(List list);
+
+    int insertBatch(List<Category> list);
+
     int countByExample(CategoryCriteria example);
 
     int deleteByExample(CategoryCriteria example);

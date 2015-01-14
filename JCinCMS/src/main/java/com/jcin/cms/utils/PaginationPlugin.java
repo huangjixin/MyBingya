@@ -93,7 +93,7 @@ public class PaginationPlugin extends PluginAdapter {
 
 		StringBuilder insertClause = new StringBuilder();
 		StringBuilder valuesClause = new StringBuilder();
-		
+
 		insertClause.append("insert into "); //$NON-NLS-1$
 		insertClause.append(introspectedTable
 				.getFullyQualifiedTableNameAtRuntime());
@@ -111,22 +111,24 @@ public class PaginationPlugin extends PluginAdapter {
 
 			insertClause.append(MyBatis3FormattingUtilities
 					.getEscapedColumnName(introspectedColumn));
-			
+
 			String parameterColumnName = MyBatis3FormattingUtilities
 					.getParameterClause(introspectedColumn);
-			String columnName = MyBatis3FormattingUtilities.getAliasedActualColumnName(introspectedColumn);
-			parameterColumnName = parameterColumnName.replace(columnName, "item."+columnName);
+			String columnName = MyBatis3FormattingUtilities
+					.getAliasedActualColumnName(introspectedColumn);
+			parameterColumnName = parameterColumnName.replace(columnName,
+					"item." + columnName);
 			valuesClause.append(parameterColumnName);
-//			valuesClause.append("#{item.");
-//			valuesClause.append(MyBatis3FormattingUtilities
-//					.getEscapedColumnName(introspectedColumn));
-//			valuesClause.append("}");
-			
+			// valuesClause.append("#{item.");
+			// valuesClause.append(MyBatis3FormattingUtilities
+			// .getEscapedColumnName(introspectedColumn));
+			// valuesClause.append("}");
+
 			if (iter.hasNext()) {
-				insertClause.append(", "); 
+				insertClause.append(", ");
 				valuesClause.append(", ");
 			}
-			
+
 		}
 
 		insertClause.append(')');
@@ -139,15 +141,44 @@ public class PaginationPlugin extends PluginAdapter {
 		foreach.addAttribute(new Attribute("item", "item"));
 		foreach.addAttribute(new Attribute("index", "index"));
 		foreach.addAttribute(new Attribute("separator", ","));
-		
+
 		foreach.addElement(new TextElement(valuesClause.toString()));
 		insertBatch.addElement(foreach);
-		
+
 		parentElement.addElement(insertBatch);
 
+		// //////////////////////////////////////////////////////////////////////////
+		// //////////////////////////////////////////////////////////////////////////
+		// //////////////////////////////////////////////////////////////////////////
+		// 添加批量删除。
+		XmlElement deleteBatch = new XmlElement("delete"); //$NON-NLS-1$
+		deleteBatch.addAttribute(new Attribute("id", "deleteBatch")); //$NON-NLS-1$
+		deleteBatch.addAttribute(new Attribute("parameterType",
+				"java.util.List"));
+		StringBuilder deleteClause = new StringBuilder();
+		deleteClause.append("delete from ");
+		deleteClause.append(introspectedTable
+				.getFullyQualifiedTableNameAtRuntime());
+		deleteClause.append(" where ");
+		System.out.println(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName());
+		deleteClause.append(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName());
+		deleteClause.append(" in ");
+		deleteBatch.addElement(new TextElement(deleteClause.toString()));
+		
+		XmlElement deleteforeach = new XmlElement("foreach");
+		deleteforeach.addAttribute(new Attribute("collection", "list"));
+		deleteforeach.addAttribute(new Attribute("item", "item"));
+		deleteforeach.addAttribute(new Attribute("index", "index"));
+		deleteforeach.addAttribute(new Attribute("open", "("));
+		deleteforeach.addAttribute(new Attribute("close", ")"));
+		deleteforeach.addAttribute(new Attribute("separator", ","));
+		
+		deleteforeach.addElement(new TextElement("#{item}"));
+		deleteBatch.addElement(deleteforeach);
+		parentElement.addElement(deleteBatch);
+		
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
-
 
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(
@@ -166,19 +197,19 @@ public class PaginationPlugin extends PluginAdapter {
 				introspectedTable);
 	}
 
-//	private void addInsertBatch(TopLevelClass topLevelClass,
-//			IntrospectedTable introspectedTable, String name) {
-//		CommentGenerator commentGenerator = context.getCommentGenerator();
-//		Method method = new Method();
-//		method.setVisibility(JavaVisibility.PUBLIC);
-//		method.setName(name);
-//		method.addParameter(new Parameter(new FullyQualifiedJavaType("List"),
-//				name));
-//		method.addBodyLine("this." + name + "=" + name + ";");
-//		commentGenerator.addGeneralMethodComment(method, introspectedTable);
-//		topLevelClass.addMethod(method);
-//	}
-	
+	// private void addInsertBatch(TopLevelClass topLevelClass,
+	// IntrospectedTable introspectedTable, String name) {
+	// CommentGenerator commentGenerator = context.getCommentGenerator();
+	// Method method = new Method();
+	// method.setVisibility(JavaVisibility.PUBLIC);
+	// method.setName(name);
+	// method.addParameter(new Parameter(new FullyQualifiedJavaType("List"),
+	// name));
+	// method.addBodyLine("this." + name + "=" + name + ";");
+	// commentGenerator.addGeneralMethodComment(method, introspectedTable);
+	// topLevelClass.addMethod(method);
+	// }
+
 	/**
 	 * @param topLevelClass
 	 * @param introspectedTable

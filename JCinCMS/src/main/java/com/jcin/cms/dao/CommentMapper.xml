@@ -244,4 +244,17 @@
       </if>
     </if>
   </sql>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_comment (id, content, tb_article_id, parentId, updateDate, createDate)
+     values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.content,jdbcType=VARCHAR}, #{tbArticleId,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_comment where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

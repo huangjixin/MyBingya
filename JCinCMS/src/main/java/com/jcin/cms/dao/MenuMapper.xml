@@ -291,4 +291,17 @@
       </if>
     </if>
   </sql>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_menu (id, name, description, path, parentId, createDate, icon, updateDate, url)
+     values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.path,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{item.icon,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}, #{item.url,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_menu where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

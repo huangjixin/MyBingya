@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface MysqlbackupMapper {
+    int deleteBatch(List list);
+
+    int insertBatch(List<Mysqlbackup> list);
+
     int countByExample(MysqlbackupCriteria example);
 
     int deleteByExample(MysqlbackupCriteria example);

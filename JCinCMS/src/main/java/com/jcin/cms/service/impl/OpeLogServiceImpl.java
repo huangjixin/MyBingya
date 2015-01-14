@@ -146,4 +146,10 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		return result;
 	}
 
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = operationlogMapper.deleteBatch(list);
+		return result;
+	}
+
 }

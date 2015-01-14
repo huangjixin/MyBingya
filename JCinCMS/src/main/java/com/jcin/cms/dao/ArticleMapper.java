@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleMapper {
+    int deleteBatch(List list);
+
+    int insertBatch(List<Article> list);
+
     int countByExample(ArticleCriteria example);
 
     int deleteByExample(ArticleCriteria example);

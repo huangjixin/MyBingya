@@ -15,6 +15,7 @@ import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
 import org.mybatis.generator.codegen.AbstractXmlGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.AbstractJavaMapperMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.CountByExampleMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteBatchMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByExampleMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByPrimaryKeyMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertBatchMethodGenerator;
@@ -74,6 +75,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
             interfaze.addSuperInterface(fqjt);
             interfaze.addImportedType(fqjt);
         }
+        addDeleteBatchMethod(interfaze);
         addInsertBatchMethod(interfaze);
         addCountByExampleMethod(interfaze);
         addDeleteByExampleMethod(interfaze);
@@ -132,6 +134,10 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         }
     }
     
+    protected void addDeleteBatchMethod(Interface interfaze) {
+    	DeleteBatchMethodGenerator methodGenerator = new DeleteBatchMethodGenerator();
+        initializeAndExecuteGenerator(methodGenerator, interfaze);
+    }
     protected void addInsertBatchMethod(Interface interfaze) {
     	InsertBatchMethodGenerator methodGenerator = new InsertBatchMethodGenerator();
         initializeAndExecuteGenerator(methodGenerator, interfaze);

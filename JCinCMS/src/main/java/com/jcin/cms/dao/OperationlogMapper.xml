@@ -251,4 +251,10 @@
       (#{item.id,jdbcType=VARCHAR}, #{item.operator,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.ip,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{item.description,jdbcType=VARCHAR})
     </foreach>
   </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_operationlog where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

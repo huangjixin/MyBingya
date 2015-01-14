@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OperationlogMapper {
+    int deleteBatch(List list);
+
     int insertBatch(List<Operationlog> list);
 
     int countByExample(OperationlogCriteria example);

@@ -291,4 +291,17 @@
       </if>
     </if>
   </sql>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_user (id, username, password, status, description, enabled, createDate, updateDate, ip)
+     values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=SMALLINT}, #{item.description,jdbcType=VARCHAR}, #{item.enabled,jdbcType=BIT}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{item.ip,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_user where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

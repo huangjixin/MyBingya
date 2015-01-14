@@ -197,4 +197,17 @@
       </if>
     </if>
   </sql>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_user_role (id, user_id, role_id)
+     values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_user_role where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

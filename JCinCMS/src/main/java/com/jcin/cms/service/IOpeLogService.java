@@ -22,4 +22,6 @@ public interface IOpeLogService extends IBaseService<Operationlog, String> {
 	Page select(OperationlogCriteria criteria);
 	
 	int insertBatch(List<Operationlog> list);
+	
+	int deleteBatch(List<String> list);
 }

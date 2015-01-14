@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMenuMapper {
+    int deleteBatch(List list);
+
+    int insertBatch(List<RoleMenu> list);
+
     int countByExample(RoleMenuCriteria example);
 
     int deleteByExample(RoleMenuCriteria example);

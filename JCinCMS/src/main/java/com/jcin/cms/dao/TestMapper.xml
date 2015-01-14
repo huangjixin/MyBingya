@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jcin.cms.dao.RoleMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.jcin.cms.domain.RoleMenu" >
+<mapper namespace="com.jcin.cms.dao.TestMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.domain.Test" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
-    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.domain.Test" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,16 +66,35 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, role_id, menu_id
+    id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.RoleMenuCriteria" >
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jcin.cms.domain.TestCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_test
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.TestCriteria" >
     <include refid="OracleDialectPrefix" />
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_role_menu
+    from tb_test
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,101 +103,94 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from tb_role_menu
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_test
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from tb_role_menu
+    delete from tb_test
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jcin.cms.domain.RoleMenuCriteria" >
-    delete from tb_role_menu
+  <delete id="deleteByExample" parameterType="com.jcin.cms.domain.TestCriteria" >
+    delete from tb_test
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jcin.cms.domain.RoleMenu" >
-    insert into tb_role_menu (id, role_id, menu_id
-      )
-    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.jcin.cms.domain.Test" >
+    insert into tb_test (id, description)
+    values (#{id,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARBINARY})
   </insert>
-  <insert id="insertSelective" parameterType="com.jcin.cms.domain.RoleMenu" >
-    insert into tb_role_menu
+  <insert id="insertSelective" parameterType="com.jcin.cms.domain.Test" >
+    insert into tb_test
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
-      <if test="menuId != null" >
-        menu_id,
+      <if test="description != null" >
+        description,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="menuId != null" >
-        #{menuId,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARBINARY},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jcin.cms.domain.RoleMenuCriteria" resultType="java.lang.Integer" >
-    select count(*) from tb_role_menu
+  <select id="countByExample" parameterType="com.jcin.cms.domain.TestCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_test
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_role_menu
+    update tb_test
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.roleId != null" >
-        role_id = #{record.roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuId != null" >
-        menu_id = #{record.menuId,jdbcType=VARCHAR},
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARBINARY},
       </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_test
+    set id = #{record.id,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_role_menu
-    set id = #{record.id,jdbcType=VARCHAR},
-      role_id = #{record.roleId,jdbcType=VARCHAR},
-      menu_id = #{record.menuId,jdbcType=VARCHAR}
+    update tb_test
+    set id = #{record.id,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.domain.RoleMenu" >
-    update tb_role_menu
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.domain.Test" >
+    update tb_test
     <set >
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="menuId != null" >
-        menu_id = #{menuId,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARBINARY},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.domain.RoleMenu" >
-    update tb_role_menu
-    set role_id = #{roleId,jdbcType=VARCHAR},
-      menu_id = #{menuId,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jcin.cms.domain.Test" >
+    update tb_test
+    set description = #{description,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix" >
@@ -198,14 +211,14 @@
     </if>
   </sql>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_role_menu (id, role_id, menu_id)
+    insert into tb_test (id, description)
      values
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.description,jdbcType=LONGVARBINARY})
     </foreach>
   </insert>
   <delete id="deleteBatch" parameterType="java.util.List" >
-    delete from tb_role_menu where id in 
+    delete from tb_test where id in 
     <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
       #{item}
     </foreach>

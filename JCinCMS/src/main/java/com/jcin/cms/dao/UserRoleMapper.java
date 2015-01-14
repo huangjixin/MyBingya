@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserRoleMapper {
+    int deleteBatch(List list);
+
+    int insertBatch(List<UserRole> list);
+
     int countByExample(UserRoleCriteria example);
 
     int deleteByExample(UserRoleCriteria example);

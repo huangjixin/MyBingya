@@ -291,4 +291,17 @@
       </if>
     </if>
   </sql>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_article (id, title, author, content, description, tb_category_id, createDate, source, updateDate)
+     values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.content,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{tbCategoryId,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{item.source,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from tb_article where id in 
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
 </mapper>
