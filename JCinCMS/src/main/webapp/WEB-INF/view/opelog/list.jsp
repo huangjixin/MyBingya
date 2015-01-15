@@ -24,6 +24,8 @@
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript"
+	src="js/jquery-easyui/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/default/easyui.css">
@@ -81,7 +83,7 @@
 						: ("00" + o[k]).substr(("" + o[k]).length));
 		return format;
 	}
-	
+
 	$().ready(function() {
 	});
 
@@ -168,28 +170,35 @@
 
 		return result;
 	}
-	
+
 	//导出excel
-	function exportExcel(){
+	function exportExcel() {
 		var pamameter = $("#tgrid").datagrid("options").queryParams;
-		$.ajax({
-			cache : true,
-			type : "GET",
-			url : "opelog/exportExcel",
-			data : pamameter,
-			async : false,
-			error : function(request) {
-				alert("连接失败");
+		var param = "?";
+		param += "name=" + $("#nameInput").val();
+		param += "&operator=" + $("#operatorInput").val();
+		param += "&ip=" + $("#ipInput").val();
+		var url = "opelog/exportExcel" + param;
+		window.open(url);
+	}
+
+	//导入excel
+	function importExcel() {
+		$("#importBtn").fileupload();
+	}
+
+	function submit() {
+		alert("hello");
+		$.ajaxFileUpload({
+			url : "opelog/importExcel",
+			fileElementId : "uFile",
+			success : function(data, status) {
+				//alert(123);
 			},
-			success : function(data) {
-				alert("导出成功");
+			error : function(data, status) {
+				//alert(456);
 			}
 		});
-	}
-	
-	//导入excel
-	function importExcel(){
-	
 	}
 </script>
 </head>
@@ -206,10 +215,13 @@
 				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
-			<input type="button" id="exportBtn" value="导出excel" onclick="exportExcel()" />
-			<input type="button" id="importBtn" value="导入excel" onclick="importExcel()" />
+			<input type="button" id="exportBtn" value="导出excel"
+				onclick="exportExcel();" /> <input type="file" id="uFile"
+				name="uFile" value="导入excel" /> <input type="button"
+				id="submittBtn" value="提交" onclick="submit();" />
 		</div>
-		<table id="tgrid" title="" class="easyui-datagrid" style="height:350px;"
+		<table id="tgrid" title="" class="easyui-datagrid"
+			style="height:350px;"
 			data-options="
 								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
