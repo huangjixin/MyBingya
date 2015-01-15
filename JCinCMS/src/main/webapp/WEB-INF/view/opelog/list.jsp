@@ -24,8 +24,7 @@
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="js/jquery-easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript"
-	src="js/jquery-easyui/ajaxfileupload.js"></script>
+<script type="text/javascript" src="js/jquery-easyui/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/default/easyui.css">
@@ -219,6 +218,12 @@
 				onclick="exportExcel();" /> <input type="file" id="uFile"
 				name="uFile" value="导入excel" /> <input type="button"
 				id="submittBtn" value="提交" onclick="submit();" />
+			<form method="POST" enctype="multipart/form-data" action="opelog/importExcel">
+				File to upload: <input type="file" name="file"> Name:
+				<input type="text" name="name"> <input
+					type="submit" value="Upload">
+				file!
+			</form>
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

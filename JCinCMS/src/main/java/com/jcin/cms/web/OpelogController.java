@@ -12,6 +12,7 @@ package com.jcin.cms.web;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -215,13 +216,17 @@ public class OpelogController extends BaseController {
 	@RequestMapping(value = "/importExcel")
 	@ResponseBody
 	public List<Operationlog> importExcel(
+			@RequestParam(value = "file", required = true) MultipartFile file,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		// MultipartFile uFile = (MultipartFile)httpServletRequest.get("uFile");
 		String path = httpServletRequest.getServletContext().getRealPath(
 				File.separator);
-		path += "test.xls";
-		InputStream is = new FileInputStream(path);
+		path += file.getName();
+//		OutputStream outputStream = new FileOutputStream(path);
+//		outputStream.w
+//		InputStream is = new FileInputStream(path);
+		InputStream is = file.getInputStream();
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
 		Operationlog operationlog = null;
 		List<Operationlog> list = new ArrayList<Operationlog>();
