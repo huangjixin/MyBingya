@@ -24,10 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.CategoryMapper;
 import com.jcin.cms.domain.Category;
 import com.jcin.cms.domain.CategoryCriteria;
-import com.jcin.cms.domain.Menu;
-import com.jcin.cms.domain.MenuCriteria;
-import com.jcin.cms.domain.RoleMenu;
-import com.jcin.cms.domain.RoleMenuCriteria;
 import com.jcin.cms.service.ICategoryService;
 import com.jcin.cms.utils.Page;
 
@@ -199,5 +195,31 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 			children.add(jsonObject);
 		}
 		return children;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.ICategoryService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Category> list) {
+		int result = categoryMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.ICategoryService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = categoryMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
 	}
 }

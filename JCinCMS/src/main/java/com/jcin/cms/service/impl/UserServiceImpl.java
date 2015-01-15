@@ -198,4 +198,30 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		
 		return roles;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IUserService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<User> list) {
+		int result = userMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IUserService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = userMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
+	}
 }

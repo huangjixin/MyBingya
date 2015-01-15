@@ -12,7 +12,11 @@ import com.jcin.cms.domain.MysqlbackupCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface IMySQLService extends IBaseService<Mysqlbackup, String> {
-
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * 
+	 * @param criteria
+	 * @return
+	 */
 	Page select(MysqlbackupCriteria criteria);
-	
 }

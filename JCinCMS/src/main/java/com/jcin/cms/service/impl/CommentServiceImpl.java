@@ -133,4 +133,29 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.ICommentService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Comment> list) {
+		int result = commentMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.ICommentService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = commentMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
+	}
 }

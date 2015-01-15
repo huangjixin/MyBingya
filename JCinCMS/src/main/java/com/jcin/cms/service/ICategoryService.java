@@ -14,15 +14,6 @@ import com.jcin.cms.domain.CategoryCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface ICategoryService extends IBaseService<Category, String> {
-	// int deleteByPrimaryKey(String id);
-	//
-	// int insert(Category record);
-	//
-	// Page select(Page page);
-	//
-	// Category selectByPrimaryKey(String id);
-	//
-	// int update(Category record);
 	/**
 	 * 封装查询条件，返回Page对象。
 	 * 

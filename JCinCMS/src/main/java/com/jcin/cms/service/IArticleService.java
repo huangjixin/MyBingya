@@ -12,15 +12,6 @@ import com.jcin.cms.domain.ArticleCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface IArticleService extends IBaseService<Article, String>{
-//	int deleteByPrimaryKey(String id);
-//
-//	int insert(Article record);
-//
-//	Page select(Page page);
-//
-//	Article selectByPrimaryKey(String id);
-//
-//	int update(Article record);
 	/**
 	 * 封装查询条件，返回Page对象。
 	 * @param criteria

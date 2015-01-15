@@ -10,7 +10,6 @@
  */
 package com.jcin.cms.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.ArticleMapper;
 import com.jcin.cms.domain.Article;
 import com.jcin.cms.domain.ArticleCriteria;
-import com.jcin.cms.domain.CategoryCriteria;
 import com.jcin.cms.service.IArticleService;
 import com.jcin.cms.utils.Page;
 
@@ -137,4 +135,29 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IArticleService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Article> list) {
+		int result = articleMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IArticleService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = articleMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
+	}
 }

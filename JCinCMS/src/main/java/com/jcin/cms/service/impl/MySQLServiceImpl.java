@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.MysqlbackupMapper;
+import com.jcin.cms.domain.Article;
 import com.jcin.cms.domain.Mysqlbackup;
 import com.jcin.cms.domain.MysqlbackupCriteria;
 import com.jcin.cms.service.IMySQLService;
@@ -137,4 +138,29 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IMysqlbackupService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Mysqlbackup> list) {
+		int result = mysqlMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IMysqlbackupService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = mysqlMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
+	}
 }

@@ -15,12 +15,7 @@ import com.jcin.cms.domain.UserCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface IUserService extends IBaseService<User, String> {
-	int deleteByPrimaryKey(String id);
-
-	int insert(User record);
-
-	Page select(Page page);
-
+	
 	/**
 	 * 封装查询条件，返回Page对象。
 	 * 
@@ -28,10 +23,6 @@ public interface IUserService extends IBaseService<User, String> {
 	 * @return
 	 */
 	Page select(UserCriteria criteria);
-
-	User selectByPrimaryKey(String id);
-
-	int update(User record);
 
 	/**
 	 * 验证登录。

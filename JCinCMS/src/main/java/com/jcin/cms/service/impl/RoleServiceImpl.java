@@ -10,7 +10,6 @@
  */
 package com.jcin.cms.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -171,5 +170,31 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		}
 
 		return users;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IRoleService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Role> list) {
+		int result = roleMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IRoleService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = roleMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
 	}
 }

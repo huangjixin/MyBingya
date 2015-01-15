@@ -140,15 +140,29 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IOperationlogService#insertBatch(List)
+	 */
 	@Override
 	public int insertBatch(List<Operationlog> list) {
 		int result = operationlogMapper.insertBatch(list);
+		super.insertBatch(list);
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IOperationlogService#deleteBatch(List)
+	 */
 	@Override
 	public int deleteBatch(List<String> list) {
 		int result = operationlogMapper.deleteBatch(list);
+		super.deleteBatch(list);
 		return result;
 	}
 

@@ -23,6 +23,11 @@ public interface IMenuService extends IBaseService<Menu, String> {
 	@SuppressWarnings("rawtypes")
 	List getMenuTree(String roleId);
 
+	/**
+	 * 根据ParentId列查询记录数。
+	 * @param id
+	 * @return
+	 */
 	List<Menu> getByParentId(String id);
 
 	/**

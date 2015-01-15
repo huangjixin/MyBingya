@@ -12,16 +12,6 @@ import com.jcin.cms.domain.CommentCriteria;
 import com.jcin.cms.utils.Page;
 
 public interface ICommentService extends IBaseService<Comment, String>{
-//	int deleteByPrimaryKey(String id);
-//
-//	int insert(Comment record);
-//
-//	Page select(Page page);
-//
-//	Comment selectByPrimaryKey(String id);
-//
-//	int update(Comment record);
-
 	/**
 	 * 封装查询条件，返回Page对象。
 	 * @param criteria

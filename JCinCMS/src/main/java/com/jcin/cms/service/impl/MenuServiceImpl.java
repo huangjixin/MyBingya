@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -235,4 +234,29 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		return children;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IMenuService#insertBatch(List)
+	 */
+	@Override
+	public int insertBatch(List<Menu> list) {
+		int result = menuMapper.insertBatch(list);
+		super.insertBatch(list);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IMenuService#deleteBatch(List)
+	 */
+	@Override
+	public int deleteBatch(List<String> list) {
+		int result = menuMapper.deleteBatch(list);
+		super.deleteBatch(list);
+		return result;
+	}
 }

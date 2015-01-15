@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -56,7 +57,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	}
 
 	@Override
-	public int deleteByPrimaryKey(String id) {
+	public int deleteByPrimaryKey(PK id) {
 		Operationlog operationlog = new Operationlog();
 		operationlog.setId(new Date().getTime() + "");
 		String opeName = Thread.currentThread().getStackTrace()[1]
@@ -111,13 +112,10 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -130,7 +128,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	}
 
 	@Override
-	public T selectByPrimaryKey(String id) {
+	public T selectByPrimaryKey(PK id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -175,6 +173,28 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			e.printStackTrace();
 		}
 
+		return 0;
+	}
+
+	@Override
+	public int insertBatch(List<T> list) {
+		Operationlog operationlog = new Operationlog();
+		operationlog.setId(new Date().getTime() + "");
+		String opeName = Thread.currentThread().getStackTrace()[1]
+				.getMethodName();
+		operationlog.setName(entityClass.getName() + "." + opeName+" insertBatch(批量添加) 成功");
+		if (LoginResponse.user != null) {
+			operationlog.setOperator(LoginResponse.user.getUsername());
+		}
+
+		operationlog.setCreatedate(new Date());
+		operationlogMapper.insert(operationlog);
+		return 0;
+	}
+
+	@Override
+	public int deleteBatch(List<PK> list) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
