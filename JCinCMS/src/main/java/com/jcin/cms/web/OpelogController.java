@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.domain.OperationlogCriteria;
+import com.jcin.cms.exception.ExcelException;
 import com.jcin.cms.service.IOpeLogService;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
@@ -218,7 +220,7 @@ public class OpelogController extends BaseController {
 	public List<Operationlog> importExcel(
 			@RequestParam(value = "file", required = true) MultipartFile file,
 			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
+			HttpServletResponse httpServletResponse) throws IOException, ExcelException {
 		// MultipartFile uFile = (MultipartFile)httpServletRequest.get("uFile");
 		String path = httpServletRequest.getServletContext().getRealPath(
 				File.separator);
@@ -228,29 +230,43 @@ public class OpelogController extends BaseController {
 //		InputStream is = new FileInputStream(path);
 		InputStream is = file.getInputStream();
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
-		Operationlog operationlog = null;
-		List<Operationlog> list = new ArrayList<Operationlog>();
+//		Operationlog operationlog = null;
+		List<Operationlog> list = null;
+		LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
+		fieldMap.put("操作名称", "name");
+		
+		list = ExcelUtil.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
+		if(list.size()>0){
+			long time = new Date().getTime();
+			int i = 0;
+			Date date = new Date();
+			for (Operationlog operationlog : list) {
+				operationlog.setId((time+i)+"");
+				operationlog.setCreatedate(date);
+				i++;
+			}
+		}
 		// Read the Sheet
-		for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-			if (hssfSheet == null) {
-				continue;
-			}
-			// Read the Row
-			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-				if (hssfRow != null) {
-					operationlog = new Operationlog();
-					HSSFCell name = hssfRow.getCell(0);
-					operationlog.setName(getValue(name));
-					list.add(operationlog);
-				}
-			}
-		}
-		for (Operationlog operationlog2 : list) {
-			operationlog2.setId("" + (Math.round(1000000000 * Math.random())));
-			operationlog2.setCreatedate(new Date());
-		}
+//		for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+//			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+//			if (hssfSheet == null) {
+//				continue;
+//			}
+//			// Read the Row
+//			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+//				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+//				if (hssfRow != null) {
+//					operationlog = new Operationlog();
+//					HSSFCell name = hssfRow.getCell(0);
+//					operationlog.setName(getValue(name));
+//					list.add(operationlog);
+//				}
+//			}
+//		}
+//		for (Operationlog operationlog2 : list) {
+//			operationlog2.setId("" + (Math.round(1000000000 * Math.random())));
+//			operationlog2.setCreatedate(new Date());
+//		}
 		int result = opeLogService.insertBatch(list);
 		return list;
 	}
