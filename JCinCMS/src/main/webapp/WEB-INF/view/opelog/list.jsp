@@ -221,9 +221,8 @@
 	}
 	
 	function onexcelToList(result){
-		alert(result.length);
-// 		var data={total:result.length,rows:[result]};
-// 		$("#tgrid").datagrid("loadData", data);
+		var data={total:result.length,rows:[result]};
+		$("#tgrid").datagrid("loadData", result);
 	}
 
 </script>
