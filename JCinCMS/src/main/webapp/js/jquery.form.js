@@ -204,11 +204,11 @@
 				}
 
 				options.success = function(data, status, xhr) { // jQuery 1.4+
-																// passes xhr as
-																// 3rd arg
+					// passes xhr as
+					// 3rd arg
 					var context = options.context || this; // jQuery 1.4+
-															// supports scope
-															// context
+					// supports scope
+					// context
 					for ( var i = 0, max = callbacks.length; i < max; i++) {
 						callbacks[i].apply(context, [ data, status,
 								xhr || $form, $form ]);
@@ -447,7 +447,7 @@
 							}
 
 							$io.attr('src', s.iframeSrc); // abort op in
-															// progress
+							// progress
 							xhr.error = e;
 							if (s.error) {
 								s.error.call(s.context, xhr, e, status);
@@ -529,7 +529,7 @@
 						}
 
 						try { // simply checking may throw in ie8 under ssl or
-								// mismatched protocol
+							// mismatched protocol
 							doc = frame.contentDocument ? frame.contentDocument
 									: frame.document;
 						} catch (err) {
@@ -671,7 +671,7 @@
 						doSubmit();
 					} else {
 						setTimeout(doSubmit, 10); // this lets dom updates
-													// render
+						// render
 					}
 
 					var data, doc, domCheckCount = 50, callbackProcessed;
@@ -865,7 +865,7 @@
 							if (!s.iframeTarget) {
 								$io.remove();
 							} else { // adding else to clean up existing
-										// iframe response.
+								// iframe response.
 								$io.attr('src', s.iframeSrc);
 							}
 							xhr.responseXML = null;
@@ -874,7 +874,7 @@
 
 					var toXml = $.parseXML
 							|| function(s, doc) { // use parseXML if available
-													// (jQuery 1.5+)
+								// (jQuery 1.5+)
 								if (window.ActiveXObject) {
 									doc = new ActiveXObject('Microsoft.XMLDOM');
 									doc.async = 'false';
@@ -892,7 +892,7 @@
 					};
 
 					var httpData = function(xhr, type, s) { // mostly lifted
-															// from jq1.4.4
+						// from jq1.4.4
 
 						var ct = xhr.getResponseHeader('content-type') || '', xml = type === 'xml'
 								|| !type && ct.indexOf('xml') >= 0, data = xml ? xhr.responseXML
@@ -985,7 +985,7 @@
 				/* jshint validthis:true */
 				var options = e.data;
 				if (!e.isDefaultPrevented()) { // if event has been canceled,
-												// don't proceed
+					// don't proceed
 					e.preventDefault();
 					$(e.target).ajaxSubmit(options); // #365
 				}
@@ -1036,9 +1036,8 @@
 			 * that can be passed to any of the following ajax functions: $.get,
 			 * $.post, or load. Each object in the array has both a 'name' and
 			 * 'value' property. An example of an array for a simple login form
-			 * might be:
-			 *  [ { name: 'username', value: 'jresig' }, { name: 'password',
-			 * value: 'secret' } ]
+			 * might be: [ { name: 'username', value: 'jresig' }, { name:
+			 * 'password', value: 'secret' } ]
 			 * 
 			 * It is this array that is passed to pre-submit callback functions
 			 * provided to the ajaxSubmit() and ajaxForm() methods.
@@ -1063,8 +1062,8 @@
 				// 'form' attribute
 				if (formId) {
 					els2 = $(':input[form="' + formId + '"]').get(); // hat
-																		// tip
-																		// @thet
+					// tip
+					// @thet
 					if (els2.length) {
 						els = (els || []).concat(els2);
 					}
@@ -1325,11 +1324,11 @@
 			 */
 			$.fn.clearFields = $.fn.clearInputs = function(includeHidden) {
 				var re = /^(?:color|date|datetime|email|month|number|password|range|search|tel|text|time|url|week)$/i; // 'hidden'
-																														// is
-																														// not
-																														// in
-																														// this
-																														// list
+				// is
+				// not
+				// in
+				// this
+				// list
 				return this.each(function() {
 					var t = this.type, tag = this.tagName.toLowerCase();
 					if (re.test(t) || tag == 'textarea') {

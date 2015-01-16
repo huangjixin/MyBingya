@@ -24,7 +24,7 @@
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/ajaxfileupload.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/default/easyui.css">
@@ -33,6 +33,7 @@
 <link rel="stylesheet" type="text/css"
 	href="js/jquery-easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="js//ajaxfileupload.css">
 <style type="text/css">
 .table {
 	border-collapse: collapse;
@@ -183,11 +184,10 @@
 
 	//导入excel
 	function importExcel() {
-		$("#importBtn").fileupload();
+		$("#file").fileupload();
 	}
 
 	function submit() {
-		alert("hello");
 		$.ajaxFileUpload({
 			url : "opelog/importExcel",
 			fileElementId : "uFile",
@@ -199,6 +199,33 @@
 			}
 		});
 	}
+
+	function onfilechange() {
+		var options = {
+			//         target:        '#output',   // target element(s) to be updated with server response 
+// 			beforeSubmit : showRequest, // pre-submit callback 
+		success : onexcelToList,
+		// post-submit callback 
+
+		// other available options: 
+		url:       "opelog/excelToList",         // override for form's 'action' attribute 
+		//type:      type        // 'get' or 'post', override for form's 'method' attribute 
+// 		dataType:  json        // 'xml', 'script', or 'json' (expected server response type) 
+		//clearForm: true        // clear all form fields after successful submit 
+		//resetForm: true        // reset the form after successful submit 
+
+		// $.ajax options can be used here too, for example: 
+		//timeout:   3000 
+		};
+		$("#fileForm").ajaxSubmit(options);
+	}
+	
+	function onexcelToList(result){
+		alert(result.length);
+// 		var data={total:result.length,rows:[result]};
+// 		$("#tgrid").datagrid("loadData", data);
+	}
+
 </script>
 </head>
 
@@ -215,15 +242,16 @@
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel();" /> <input type="file" id="uFile"
-				name="uFile" value="导入excel" /> <input type="button"
-				id="submittBtn" value="提交" onclick="submit();" />
-			<form method="POST" enctype="multipart/form-data" action="opelog/importExcel">
-				File to upload: <input type="file" name="file"> Name:
-				<input type="text" name="name"> <input
-					type="submit" value="Upload">
-				file!
+				onclick="exportExcel();" /> <input type="button" id="submittBtn"
+				value="提交" onclick="importExcel();" />
+			<form id="fileForm" method="POST" enctype="multipart/form-data"
+				action="opelog/importExcel">
+				<input type="button" value="导入excel"
+					onclick="return $('#file').click();" /> <input type="file"
+					id="file" name="file" value="" style="width: 0px;height: 0px;"
+					onchange="onfilechange();"> <input type="submit" value="提交">
 			</form>
+
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

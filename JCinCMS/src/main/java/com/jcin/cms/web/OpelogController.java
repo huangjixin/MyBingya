@@ -141,8 +141,8 @@ public class OpelogController extends BaseController {
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
-		String columnNames[] = { "ID", "操作名称" };// 列名
-		String keys[] = { "id", "name" };// map中的key
+		String columnNames[] = { "ID", "名称","操作人","修改日期" };// 列名
+		String keys[] = { "id", "name","operator","createdate" };// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 		// // 获取总列数
 		// int CountColumnNum = list.size();
@@ -215,81 +215,94 @@ public class OpelogController extends BaseController {
 		return listmap;
 	}
 
+	@RequestMapping(value = "/excelToList")
+	@ResponseBody
+	public List<Operationlog> excelToList(
+			@RequestParam(value = "file", required = true) MultipartFile file,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException,
+			ExcelException {
+		InputStream is = file.getInputStream();
+		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
+		List<Operationlog> list = null;
+		LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
+		fieldMap.put("名称", "name");
+		fieldMap.put("操作人", "operator");
+		fieldMap.put("修改日期", "createdate");
+
+		list = ExcelUtil
+				.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
+
+		return list;
+	}
+
 	@RequestMapping(value = "/importExcel")
 	@ResponseBody
 	public List<Operationlog> importExcel(
 			@RequestParam(value = "file", required = true) MultipartFile file,
 			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException, ExcelException {
+			HttpServletResponse httpServletResponse) throws IOException,
+			ExcelException {
 		// MultipartFile uFile = (MultipartFile)httpServletRequest.get("uFile");
 		String path = httpServletRequest.getServletContext().getRealPath(
 				File.separator);
 		path += file.getName();
-//		OutputStream outputStream = new FileOutputStream(path);
-//		outputStream.w
-//		InputStream is = new FileInputStream(path);
+		// OutputStream outputStream = new FileOutputStream(path);
+		// outputStream.w
+		// InputStream is = new FileInputStream(path);
 		InputStream is = file.getInputStream();
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
-//		Operationlog operationlog = null;
+		// Operationlog operationlog = null;
 		List<Operationlog> list = null;
 		LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
 		fieldMap.put("操作名称", "name");
-		
-		list = ExcelUtil.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
-		if(list.size()>0){
+
+		list = ExcelUtil
+				.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
+		if (list.size() > 0) {
 			long time = new Date().getTime();
 			int i = 0;
 			Date date = new Date();
 			for (Operationlog operationlog : list) {
-				operationlog.setId((time+i)+"");
+				operationlog.setId((time + i) + "");
 				operationlog.setCreatedate(date);
 				i++;
 			}
 		}
 		// Read the Sheet
-//		for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-//			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-//			if (hssfSheet == null) {
-//				continue;
-//			}
-//			// Read the Row
-//			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-//				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-//				if (hssfRow != null) {
-//					operationlog = new Operationlog();
-//					HSSFCell name = hssfRow.getCell(0);
-//					operationlog.setName(getValue(name));
-//					list.add(operationlog);
-//				}
-//			}
-//		}
-//		for (Operationlog operationlog2 : list) {
-//			operationlog2.setId("" + (Math.round(1000000000 * Math.random())));
-//			operationlog2.setCreatedate(new Date());
-//		}
+		// for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets();
+		// numSheet++) {
+		// HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+		// if (hssfSheet == null) {
+		// continue;
+		// }
+		// // Read the Row
+		// for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+		// HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+		// if (hssfRow != null) {
+		// operationlog = new Operationlog();
+		// HSSFCell name = hssfRow.getCell(0);
+		// operationlog.setName(getValue(name));
+		// list.add(operationlog);
+		// }
+		// }
+		// }
+		// for (Operationlog operationlog2 : list) {
+		// operationlog2.setId("" + (Math.round(1000000000 * Math.random())));
+		// operationlog2.setCreatedate(new Date());
+		// }
 		int result = opeLogService.insertBatch(list);
 		return list;
 	}
 
-	@SuppressWarnings("static-access")
-	private String getValue(HSSFCell hssfCell) {
-		if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
-			return String.valueOf(hssfCell.getBooleanCellValue());
-		} else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
-			return String.valueOf(hssfCell.getNumericCellValue());
-		} else {
-			return String.valueOf(hssfCell.getStringCellValue());
-		}
-	}
-
-	/**
-	 * 
-	 * @param xls
-	 *            XlsDto实体类的一个对象
-	 * @throws Exception
-	 *             在导入Excel的过程中抛出异常
-	 */
-	public static void xlsDto2Excel(List<Operationlog> xls) throws Exception {
-
-	}
+	// @SuppressWarnings("static-access")
+	// private String getValue(HSSFCell hssfCell) {
+	// if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
+	// return String.valueOf(hssfCell.getBooleanCellValue());
+	// } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
+	// return String.valueOf(hssfCell.getNumericCellValue());
+	// } else {
+	// return String.valueOf(hssfCell.getStringCellValue());
+	// }
+	// }
 }
