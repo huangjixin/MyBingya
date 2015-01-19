@@ -87,6 +87,10 @@
 	$().ready(function() {
 	});
 
+	function refreshRows() {
+		$("#tgrid").datagrid('reload'); // 重新加载;
+	}
+
 	// 移除条目；
 	function deleteRows() {
 		//多行删除。
@@ -203,14 +207,14 @@
 	function onfilechange() {
 		var options = {
 			//         target:        '#output',   // target element(s) to be updated with server response 
-// 			beforeSubmit : showRequest, // pre-submit callback 
-		success : onexcelToList,
-		// post-submit callback 
+			// 			beforeSubmit : showRequest, // pre-submit callback 
+			success : onexcelToList,
+			// post-submit callback 
 
-		// other available options: 
-		url:       "opelog/excelToList",         // override for form's 'action' attribute 
+			// other available options: 
+			url : "opelog/excelToList", // override for form's 'action' attribute 
 		//type:      type        // 'get' or 'post', override for form's 'method' attribute 
-// 		dataType:  json        // 'xml', 'script', or 'json' (expected server response type) 
+		// 		dataType:  json        // 'xml', 'script', or 'json' (expected server response type) 
 		//clearForm: true        // clear all form fields after successful submit 
 		//resetForm: true        // reset the form after successful submit 
 
@@ -219,12 +223,30 @@
 		};
 		$("#fileForm").ajaxSubmit(options);
 	}
-	
-	function onexcelToList(result){
-		var data={total:result.length,rows:[result]};
+
+	function onexcelToList(result) {
+		var data = {
+			total : result.length,
+			rows : [ result ]
+		};
 		$("#tgrid").datagrid("loadData", result);
 	}
 
+	function openfile() {
+		try {
+			var fd = new ActiveXObject("MSComDlg.CommonDialog");
+			fd.Filter = "图像文件 (*.jpg;*.jpeg;*.gif)|*.jpg;*.jpeg;*.gif";
+			fd.FilterIndex = 2;
+			// 必须设置MaxFileSize. 否则出错
+			fd.MaxFileSize = 128;
+			fd.ShowOpen();
+			document.getElementById("txtFileName").value = fd.Filename;
+			document.getElementById("textImage").src = fd.FileName;
+		} catch (e) {
+			alert("你的浏览器不支持ActiveX！\r\n请启用ActiveX后重试．");
+			document.getElementById("txtFileName").value = "";
+		}
+	}
 </script>
 </head>
 
@@ -233,7 +255,8 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="删除" onclick="deleteRows()" /> <label>名称:</label><input
+			<input type="button" value="删除" onclick="deleteRows()" /> <input
+				type="button" value="刷新" onclick="refreshRows()" /><label>名称:</label><input
 				id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<label>操作人:</label><input id="operatorInput"
 				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>IP:</label><input
@@ -241,15 +264,16 @@
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel();" /> <input type="button" id="submittBtn"
-				value="提交" onclick="importExcel();" />
-			<form id="fileForm" method="POST" enctype="multipart/form-data"
-				action="opelog/importExcel">
-				<input type="button" value="导入excel"
-					onclick="return $('#file').click();" /> <input type="file"
-					id="file" name="file" value="" style="width: 0px;height: 0px;"
-					onchange="onfilechange();"> <input type="submit" value="提交">
-			</form>
+				onclick="exportExcel();" />
+			<!-- 				<input type="button" id="submittBtn" -->
+			<!-- 				value="提交" onclick="importExcel();" /> -->
+			<!-- 			<form id="fileForm" method="POST" enctype="multipart/form-data" -->
+			<!-- 				action="opelog/importExcel"> -->
+			<input type="button" value="导入excel"
+				onclick="return $('#file').click();" /> <input type="file"
+				id="file" name="file" value="" style="width: 0px;height: 0px;"
+				onchange="onfilechange();" accept=".xls"> <input type="submit" value="提交">
+			<!-- 			</form> -->
 
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
