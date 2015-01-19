@@ -217,7 +217,7 @@ public class OpelogController extends BaseController {
 
 	@RequestMapping(value = "/excelToList")
 	@ResponseBody
-	public List<Operationlog> excelToList(
+	public Page excelToList(
 			@RequestParam(value = "file", required = true) MultipartFile file,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException,
@@ -228,12 +228,13 @@ public class OpelogController extends BaseController {
 		LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
 		fieldMap.put("名称", "name");
 		fieldMap.put("操作人", "operator");
-		fieldMap.put("修改日期", "createdate");
-
+//		fieldMap.put("修改日期", "createdate");
+		Page page = new Page();
 		list = ExcelUtil
 				.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
-
-		return list;
+		page.setRows(list);
+		page.setTotal(list.size());
+		return page;
 	}
 
 	@RequestMapping(value = "/importExcel")
