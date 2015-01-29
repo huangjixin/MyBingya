@@ -157,26 +157,26 @@
 			<version>5.1.27</version>
 		</dependency>
 	</dependencies>
-<!-- 	<build> -->
-<!-- 		<finalName>JCinCMS</finalName> -->
-<!-- 		<plugins> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.mybatis.generator</groupId> -->
-<!-- 				<artifactId>mybatis-generator-maven-plugin</artifactId> -->
-<!-- 				<version>1.3.2</version> -->
-<!-- 				<configuration> -->
-<!-- 					<verbose>true</verbose> -->
-<!-- 					<overwrite>true</overwrite> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-war-plugin</artifactId> -->
-<!-- 				<configuration> -->
-<!-- 					<version>3.0</version> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 		</plugins> -->
-<!-- 	</build> -->
+	<build>
+		<finalName>JCinCMS</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<version>3.0</version>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<modules>
 		<module>InstallSetUp</module>
 	</modules>
