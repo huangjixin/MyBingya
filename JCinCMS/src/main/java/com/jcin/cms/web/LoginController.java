@@ -8,7 +8,6 @@
 package com.jcin.cms.web;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,21 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.service.IOpeLogService;
 import com.jcin.cms.service.IUserService;
+import com.jcin.cms.utils.EncryptUtil;
 import com.jcin.cms.web.vo.LoginResponse;
 
 @Controller
@@ -39,9 +37,12 @@ import com.jcin.cms.web.vo.LoginResponse;
 public class LoginController {
 	@Resource
 	private IUserService userService;
-	
+
 	@Resource
 	private IOpeLogService opeLogService;
+
+	@Resource
+	private EncryptUtil encryptUtil;
 
 	@RequestMapping
 	public String login(HttpServletRequest httpServletRequest,
@@ -51,10 +52,20 @@ public class LoginController {
 
 	@RequestMapping(value = "/validatelogin")
 	@ResponseBody
-	public Map validateLogin(@Valid User user,
+	public Map validateLogin(
+			@Valid User user,
+			@RequestParam(value = "encryptStrLength", required = false) Integer encryptStrLength,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		String password = user.getPassword();
+		System.out.println("加密原文密码是：" + password);
+		password = (String) encryptUtil.decrypt(password); 
+		if (null != encryptStrLength) {
+			System.out.println("解密原文密码是："
+					+ password.substring(0, encryptStrLength));
+		} else
+			System.out.println("解密原文密码是：" + password);
 		ModelMap modelMap = new ModelMap();
 		List<User> list = userService.validateLogin(user.getUsername(),
 				user.getPassword());
@@ -63,7 +74,7 @@ public class LoginController {
 			modelMap.put("loginInfo", "用户名或者密码错误。");
 			return modelMap;
 		}
-		String ip = httpServletRequest.getRemoteHost(); 
+		String ip = httpServletRequest.getRemoteHost();
 		user.setIp(ip);
 		userService.update(user);
 		LoginResponse loginResponse = LoginResponse.getInstance();
@@ -72,20 +83,21 @@ public class LoginController {
 
 		session.setAttribute("loginInfo", loginResponse);
 		modelMap.put("loginResult", "success");
-		
-		//操作日志。
+
+		// 操作日志。
 		Operationlog operationlog = new Operationlog();
 		operationlog.setId(new Date().getTime() + "");
 		String opeName = Thread.currentThread().getStackTrace()[1]
 				.getMethodName();
-		operationlog.setName(LoginController.class.getName() + "." + opeName+" 登录成功");
+		operationlog.setName(LoginController.class.getName() + "." + opeName
+				+ " 登录成功");
 		if (LoginResponse.user != null) {
 			operationlog.setOperator(LoginResponse.user.getUsername());
 		}
 
 		operationlog.setCreatedate(new Date());
 		opeLogService.insert(operationlog);
-		
+
 		return modelMap;
 	}
 
@@ -95,14 +107,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/validatelogout")
-	public String validateLogout(@Valid User user,
-			BindingResult bindingResult, Model uiModel,
-			HttpServletRequest httpServletRequest,
+	public String validateLogout(@Valid User user, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-//		ModelMap modelMap = new ModelMap();
+		// ModelMap modelMap = new ModelMap();
 
 		LoginResponse.user = null;
-		
+
 		HttpSession session = httpServletRequest.getSession();
 
 		session.setAttribute("loginInfo", null);

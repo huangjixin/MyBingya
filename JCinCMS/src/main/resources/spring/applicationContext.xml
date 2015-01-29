@@ -59,4 +59,5 @@
 	<context:annotation-config />
 
 	<!-- <aop:config></aop:config> -->
+	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" scope="singleton"></bean>
 </beans>
