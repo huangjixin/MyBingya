@@ -13,6 +13,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
@@ -21,7 +28,7 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		
+
 		<!-- 上传 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -180,5 +187,6 @@
 	</build>
 	<modules>
 		<module>InstallSetUp</module>
+		<module>BaseApp</module>
 	</modules>
 </project>
