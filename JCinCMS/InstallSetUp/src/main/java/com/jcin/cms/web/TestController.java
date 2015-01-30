@@ -24,6 +24,7 @@ public class TestController extends BaseController {
 	public Model select(BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		uiModel.addAttribute("list","list");
 		return uiModel;
 	}
 }
