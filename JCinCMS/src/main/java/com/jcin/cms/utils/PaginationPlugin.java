@@ -1,15 +1,11 @@
 package com.jcin.cms.utils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.generator.api.CommentGenerator;
-import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.ShellRunner;
-import org.mybatis.generator.api.dom.OutputUtilities;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
@@ -20,8 +16,6 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
-import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
-import org.mybatis.generator.config.GeneratedKey;
 
 /**
  * @author 黄记新
@@ -81,102 +75,6 @@ public class PaginationPlugin extends PluginAdapter {
 
 		parentElement.addElement(paginationSuffixElement);
 
-		// //////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////
-		// 添加批量插入的节点。
-		XmlElement insertBatch = new XmlElement("insert"); //$NON-NLS-1$
-
-		insertBatch.addAttribute(new Attribute("id", "insertBatch")); //$NON-NLS-1$
-		insertBatch.addAttribute(new Attribute("parameterType",
-				"java.util.List"));
-
-		StringBuilder insertClause = new StringBuilder();
-		StringBuilder valuesClause = new StringBuilder();
-
-		insertClause.append("insert into "); //$NON-NLS-1$
-		insertClause.append(introspectedTable
-				.getFullyQualifiedTableNameAtRuntime());
-		insertClause.append(" (");
-		valuesClause.append("(");
-		Iterator<IntrospectedColumn> iter = introspectedTable.getAllColumns()
-				.iterator();
-		while (iter.hasNext()) {
-			IntrospectedColumn introspectedColumn = iter.next();
-
-			if (introspectedColumn.isIdentity()) {
-				// cannot set values on identity fields
-				continue;
-			}
-
-			insertClause.append(MyBatis3FormattingUtilities
-					.getEscapedColumnName(introspectedColumn));
-
-			String parameterColumnName = MyBatis3FormattingUtilities
-					.getParameterClause(introspectedColumn);
-			String columnName = MyBatis3FormattingUtilities
-					.getAliasedActualColumnName(introspectedColumn);
-			parameterColumnName = parameterColumnName.replace(columnName,
-					"item." + columnName);
-			valuesClause.append(parameterColumnName);
-			// valuesClause.append("#{item.");
-			// valuesClause.append(MyBatis3FormattingUtilities
-			// .getEscapedColumnName(introspectedColumn));
-			// valuesClause.append("}");
-
-			if (iter.hasNext()) {
-				insertClause.append(", ");
-				valuesClause.append(", ");
-			}
-
-		}
-
-		insertClause.append(')');
-		insertBatch.addElement(new TextElement(insertClause.toString()));
-		valuesClause.append(")");
-		insertBatch.addElement(new TextElement(" values"));
-
-		XmlElement foreach = new XmlElement("foreach");
-		foreach.addAttribute(new Attribute("collection", "list"));
-		foreach.addAttribute(new Attribute("item", "item"));
-		foreach.addAttribute(new Attribute("index", "index"));
-		foreach.addAttribute(new Attribute("separator", ","));
-
-		foreach.addElement(new TextElement(valuesClause.toString()));
-		insertBatch.addElement(foreach);
-
-		parentElement.addElement(insertBatch);
-
-		// //////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////
-		// 添加批量删除。
-		XmlElement deleteBatch = new XmlElement("delete"); //$NON-NLS-1$
-		deleteBatch.addAttribute(new Attribute("id", "deleteBatch")); //$NON-NLS-1$
-		deleteBatch.addAttribute(new Attribute("parameterType",
-				"java.util.List"));
-		StringBuilder deleteClause = new StringBuilder();
-		deleteClause.append("delete from ");
-		deleteClause.append(introspectedTable
-				.getFullyQualifiedTableNameAtRuntime());
-		deleteClause.append(" where ");
-		System.out.println(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName());
-		deleteClause.append(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName());
-		deleteClause.append(" in ");
-		deleteBatch.addElement(new TextElement(deleteClause.toString()));
-		
-		XmlElement deleteforeach = new XmlElement("foreach");
-		deleteforeach.addAttribute(new Attribute("collection", "list"));
-		deleteforeach.addAttribute(new Attribute("item", "item"));
-		deleteforeach.addAttribute(new Attribute("index", "index"));
-		deleteforeach.addAttribute(new Attribute("open", "("));
-		deleteforeach.addAttribute(new Attribute("close", ")"));
-		deleteforeach.addAttribute(new Attribute("separator", ","));
-		
-		deleteforeach.addElement(new TextElement("#{item}"));
-		deleteBatch.addElement(deleteforeach);
-		parentElement.addElement(deleteBatch);
-		
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
 
@@ -196,19 +94,6 @@ public class PaginationPlugin extends PluginAdapter {
 		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element,
 				introspectedTable);
 	}
-
-	// private void addInsertBatch(TopLevelClass topLevelClass,
-	// IntrospectedTable introspectedTable, String name) {
-	// CommentGenerator commentGenerator = context.getCommentGenerator();
-	// Method method = new Method();
-	// method.setVisibility(JavaVisibility.PUBLIC);
-	// method.setName(name);
-	// method.addParameter(new Parameter(new FullyQualifiedJavaType("List"),
-	// name));
-	// method.addBodyLine("this." + name + "=" + name + ";");
-	// commentGenerator.addGeneralMethodComment(method, introspectedTable);
-	// topLevelClass.addMethod(method);
-	// }
 
 	/**
 	 * @param topLevelClass
