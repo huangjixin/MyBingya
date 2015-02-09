@@ -245,8 +245,9 @@ public class OpelogController extends BaseController {
 			HttpServletResponse httpServletResponse) throws IOException,
 			ExcelException {
 		// MultipartFile uFile = (MultipartFile)httpServletRequest.get("uFile");
-		String path = httpServletRequest.getServletContext().getRealPath(
-				File.separator);
+//		String path = httpServletRequest.getServletContext().getRealPath(
+//				File.separator);
+		String path = httpServletRequest.getServletPath();
 		path += file.getName();
 		// OutputStream outputStream = new FileOutputStream(path);
 		// outputStream.w
