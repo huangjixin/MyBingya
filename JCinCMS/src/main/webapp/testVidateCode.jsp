@@ -12,7 +12,7 @@
 <body>
 	<form action="" method="post">
 		<label>输入验证码</label><br /> <input type="text" name="randomCode" /><img
-			title="点击更换" onclick="javascript:refresh(this);" src="imageServlet"><br />
+			title="点击更换" onclick="javascript:refresh(this);" src="validateCode/getValidateCode"><br />
 		<input type="submit" value="submit">
 	</form>
 </body>
