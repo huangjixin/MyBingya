@@ -11,9 +11,25 @@
                http://www.springframework.org/schema/aop
                http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<context:property-placeholder location="classpath*:spring/*.properties" />
-	
+
+	<!-- <bean class="org.apache.commons.dbcp.BasicDataSource" -->
+	<!-- destroy-method="close" id="dataSource"> -->
+	<!-- <property name="driverClassName" value="${database.driverClassName}" 
+		/> -->
+	<!-- <property name="url" value="${database.url}" /> -->
+	<!-- <property name="username" value="${database.username}" /> -->
+	<!-- <property name="password" value="${database.password}" /> -->
+	<!-- <property name="testOnBorrow" value="true" /> -->
+	<!-- <property name="testOnReturn" value="true" /> -->
+	<!-- <property name="testWhileIdle" value="true" /> -->
+	<!-- <property name="timeBetweenEvictionRunsMillis" value="1800000" /> -->
+	<!-- <property name="numTestsPerEvictionRun" value="3" /> -->
+	<!-- <property name="minEvictableIdleTimeMillis" value="1800000" /> -->
+	<!-- 请注意用MySQL要改成SELECT 1 oracle:select 1 from dual -->
+	<!-- <property name="validationQuery" value="SELECT 1" /> -->
+	<!-- </bean> -->
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close" id="dataSource">
+		destroy-method="close" id="basicDataSource">
 		<property name="driverClassName" value="${database.driverClassName}" />
 		<property name="url" value="${database.url}" />
 		<property name="username" value="${database.username}" />
@@ -27,15 +43,33 @@
 		<!-- 请注意用MySQL要改成SELECT 1 oracle:select 1 from dual -->
 		<property name="validationQuery" value="SELECT 1" />
 	</bean>
+	<bean id="masterDataSource" parent="basicDataSource">
+		<property name="url" value="${database.url}" />
+	</bean>
+	<bean id="slaveDataSource" parent="basicDataSource">
+		<property name="url" value="${database.url}" />
+	</bean>
+
+	<bean id="dataSource" class="com.jcin.cms.utils.CustomerRoutingDataSource">
+		<!-- 这个targetDataSource是必须要注入的 -->
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="MASTER" value-ref="masterDataSource" />
+				<entry key="SLAVE" value-ref="slaveDataSource" />
+			</map>
+		</property>
+		<!-- 默认的数据源 -->
+		<property name="defaultTargetDataSource" ref="masterDataSource" />
+	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.jcin.cms" />
+		<property name="typeAliasesPackage" value="com.jcin.cms.service" />
 	</bean>
 
 	<!-- scan formappers andlet them beautowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.jcin.cms" />
+		<property name="basePackage" value="com.jcin.cms.dao" />
 	</bean>
 
 	<!-- 事务管理器配置：只支持单数据源事务 -->
@@ -50,7 +84,7 @@
 
 	<!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) 扫描类包，将标注spring注解的类自动转化成Bean，同时完成Bean的注入 -->
-	<context:component-scan base-package="com.jcin.cms">
+	<context:component-scan base-package="com.jcin.cms.service">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -59,5 +93,11 @@
 	<context:annotation-config />
 
 	<!-- <aop:config></aop:config> -->
-	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" scope="singleton"></bean>
+	<!-- 加密明文传输 -->
+	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil"
+		scope="singleton"></bean>
+
+	<bean id="dBdialect" class="com.jcin.cms.dbdialect.DBdialect">
+		<property name="dialect" value="mysql"></property>
+	</bean>
 </beans>
