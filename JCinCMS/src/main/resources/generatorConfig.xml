@@ -5,7 +5,8 @@
 <!-- 黄记新，mybatis底层生成器配置文件 -->
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\platform\maven\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar" />
+		location="D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\ojdbc14-1.0.jar" />
+<!-- 		D:\tempRepo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18-bin.jar -->
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -22,29 +23,29 @@
 			<property name="suppressDate" value="false" />
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/jcincms" userId="root"
-			password="qwer123456">
+<!--  com.mysql.jdbc.Driver jdbc:mysql://localhost:3306/jcincms root qwer123456-->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@10.123.188.106:1521:ECS" userId="WSSMALL_DEVELOP"
+			password="WSSMALL_DEVELOP">
 		</jdbcConnection>
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.domain"
+		<javaModelGenerator targetPackage="com.ztesoft.wssmall.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.dao"
+		<sqlMapGenerator targetPackage="com.ztesoft.wssmall.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.dao" targetProject="src/main/java">
+			targetPackage="com.ztesoft.wssmall.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 <!-- 		<table tableName="tb_operationlog" domainObjectName="Operationlog" /> -->
@@ -59,5 +60,10 @@
 <!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
 <!-- 		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
 <!-- 		<table tableName="tb_test" domainObjectName="Test" /> -->
+			<!-- oracle-->
+			<table tableName="CT_CONFIG" domainObjectName="Config" />
+			<table tableName="DC_SYSTEM_PARAM" domainObjectName="SystemParam" />
+			<table tableName="EOP_APP" domainObjectName="App" />
+			<table tableName="ES_GRAPHICS2D" domainObjectName="Graphics2d" />
 	</context>
 </generatorConfiguration>
