@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import com.jcin.cms.dao.OperationlogMapper;
 import com.jcin.cms.domain.Operationlog;
 import com.jcin.cms.service.IBaseService;
+import com.jcin.cms.utils.CustomerContextHolder;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.vo.LoginResponse;
 
@@ -58,6 +59,8 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public int deleteByPrimaryKey(PK id) {
+		CustomerContextHolder.setCustomerType("SLAVE");
+		
 		Operationlog operationlog = new Operationlog();
 		operationlog.setId(new Date().getTime() + "");
 		String opeName = Thread.currentThread().getStackTrace()[1]
@@ -77,6 +80,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	@Override
 	@SuppressWarnings("unchecked")
 	public int insert(T record) {
+		CustomerContextHolder.setCustomerType("SLAVE");
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		try {
@@ -123,19 +127,21 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public Page select(Page page) {
-		// TODO Auto-generated method stub
+		CustomerContextHolder.setCustomerType("MASTER");
 		return null;
 	}
 
 	@Override
 	public T selectByPrimaryKey(PK id) {
-		// TODO Auto-generated method stub
+		CustomerContextHolder.setCustomerType("MASTER");
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public int update(T record) {
+		CustomerContextHolder.setCustomerType("SLAVE");
+		
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		Method updateDatemethod;
