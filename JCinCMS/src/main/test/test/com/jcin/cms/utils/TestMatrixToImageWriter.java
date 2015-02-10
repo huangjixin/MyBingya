@@ -27,45 +27,45 @@ public class TestMatrixToImageWriter {
 	 */
 	public static void main(String[] args) {
 		//二维码生成。
-//		try {
-//
-//			String content = "120605181003;http://www.cnblogs.com/jtmjx";
-//			String path = "C:/Users/Administrator/Desktop/";
-//
-//			MultiFormatWriter multiFormatWritder = new MultiFormatWriter();
-//
-//			Map hints = new HashMap();
-//			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-//			BitMatrix bitMatrix = multiFormatWritder.encode(content,
-//					BarcodeFormat.QR_CODE, 400, 400, hints);
-//			File file1 = new File(path, "餐巾纸.jpg");
-//			MatrixToImageWriter.writeToFile(bitMatrix, "jpg", file1);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-
-		//解析二维码
 		try {
-			MultiFormatReader formatReader = new MultiFormatReader();
-			String filePath = "C:/Users/Administrator/Desktop/餐巾纸.jpg";
-			File file = new File(filePath);
-			BufferedImage image = ImageIO.read(file);
-			;
-			LuminanceSource source = new BufferedImageLuminanceSource(image);
-			Binarizer binarizer = new HybridBinarizer(source);
-			BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
+
+			String content = "http://www.baidu.com";
+			String path = "C:/Users/Administrator/Desktop/";
+
+			MultiFormatWriter multiFormatWritder = new MultiFormatWriter();
+
 			Map hints = new HashMap();
 			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-			Result result = formatReader.decode(binaryBitmap, hints);
-
-			System.out.println("result = " + result.toString());
-			System.out.println("resultFormat = " + result.getBarcodeFormat());
-			System.out.println("resultText = " + result.getText());
+			BitMatrix bitMatrix = multiFormatWritder.encode(content,
+					BarcodeFormat.QR_CODE, 400, 400, hints);
+			File file1 = new File(path, "餐巾纸.jpg");
+			MatrixToImageWriter.writeToFile(bitMatrix, "jpg", file1);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		//解析二维码
+//		try {
+//			MultiFormatReader formatReader = new MultiFormatReader();
+//			String filePath = "C:/Users/Administrator/Desktop/餐巾纸.jpg";
+//			File file = new File(filePath);
+//			BufferedImage image = ImageIO.read(file);
+//			;
+//			LuminanceSource source = new BufferedImageLuminanceSource(image);
+//			Binarizer binarizer = new HybridBinarizer(source);
+//			BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
+//			Map hints = new HashMap();
+//			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+//			Result result = formatReader.decode(binaryBitmap, hints);
+//
+//			System.out.println("result = " + result.toString());
+//			System.out.println("resultFormat = " + result.getBarcodeFormat());
+//			System.out.println("resultText = " + result.getText());
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
