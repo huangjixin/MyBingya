@@ -25,7 +25,7 @@
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 <!-- oracle.jdbc.driver.OracleDriver jdbc:oracle:thin:@10.123.188.106:1521:ECS WSSMALL_DEVELOP WSSMALL_DEVELOP -->
-		<jdbcConnection driverClass=" com.mysql.jdbc.Driver"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/jcincms" userId="root"
 			password="qwer123456">
 		</jdbcConnection>
