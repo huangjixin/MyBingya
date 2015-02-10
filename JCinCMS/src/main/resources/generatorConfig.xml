@@ -5,8 +5,9 @@
 <!-- 黄记新，mybatis底层生成器配置文件 -->
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\ojdbc14-1.0.jar" />
-<!-- 		D:\tempRepo\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18-bin.jar -->
+		location="D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\mysql-connector-java-5.1.18-bin.jar" />
+<!-- 		D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\mysql-connector-java-5.1.18-bin.jar 
+			D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\ojdbc14-1.0.jar-->
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -23,10 +24,10 @@
 			<property name="suppressDate" value="false" />
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-<!--  com.mysql.jdbc.Driver jdbc:mysql://localhost:3306/jcincms root qwer123456-->
-		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-			connectionURL="jdbc:oracle:thin:@10.123.188.106:1521:ECS" userId="WSSMALL_DEVELOP"
-			password="WSSMALL_DEVELOP">
+<!-- oracle.jdbc.driver.OracleDriver jdbc:oracle:thin:@10.123.188.106:1521:ECS WSSMALL_DEVELOP WSSMALL_DEVELOP -->
+		<jdbcConnection driverClass=" com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/jcincms" userId="root"
+			password="qwer123456">
 		</jdbcConnection>
 
 		<javaTypeResolver>
@@ -50,7 +51,7 @@
 		</javaClientGenerator>
 <!-- 		<table tableName="tb_operationlog" domainObjectName="Operationlog" /> -->
 <!-- 		<table tableName="tb_article" domainObjectName="Article" /> -->
-		<table tableName="tb_asset" domainObjectName="Asset" />
+<!-- 		<table tableName="tb_asset" domainObjectName="Asset" /> -->
 <!-- 		<table tableName="tb_category" domainObjectName="Category" /> -->
 <!-- 		<table tableName="tb_comment" domainObjectName="Comment" /> -->
 <!-- 		<table tableName="tb_menu" domainObjectName="Menu" /> -->
@@ -59,11 +60,11 @@
 <!-- 		<table tableName="tb_user" domainObjectName="User" /> -->
 <!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
 <!-- 		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
-<!-- 		<table tableName="tb_test" domainObjectName="Test" /> -->
+		<table tableName="tb_test" domainObjectName="Test" />
 			<!-- oracle-->
-			<table tableName="CT_CONFIG" domainObjectName="Config" />
-			<table tableName="DC_SYSTEM_PARAM" domainObjectName="SystemParam" />
-			<table tableName="EOP_APP" domainObjectName="App" />
-			<table tableName="ES_GRAPHICS2D" domainObjectName="Graphics2d" />
+<!-- 			<table tableName="CT_CONFIG" domainObjectName="Config" /> -->
+<!-- 			<table tableName="DC_SYSTEM_PARAM" domainObjectName="SystemParam" /> -->
+<!-- 			<table tableName="EOP_APP" domainObjectName="App" /> -->
+<!-- 			<table tableName="ES_GRAPHICS2D" domainObjectName="Graphics2d" /> -->
 	</context>
 </generatorConfiguration>
