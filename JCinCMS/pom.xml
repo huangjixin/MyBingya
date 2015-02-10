@@ -11,6 +11,14 @@
 		<spring-version>4.0.2.RELEASE</spring-version>
 	</properties>
 	<dependencies>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.android</groupId>
+				<artifactId>spring-android-rest-template</artifactId>
+				<version>2.0.0.M1</version>
+			</dependency>
+		</dependencies>
+
 		<!-- free marker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -203,6 +211,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<modules>
 		<module>InstallSetUp</module>
 		<module>BaseApp</module>
