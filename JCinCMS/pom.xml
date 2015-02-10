@@ -11,6 +11,12 @@
 		<spring-version>4.0.2.RELEASE</spring-version>
 	</properties>
 	<dependencies>
+		<!-- 二维码 -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 		<!-- mybatis缓存 -->
 		<dependency>
 			<groupId>org.mybatis.caches</groupId>
