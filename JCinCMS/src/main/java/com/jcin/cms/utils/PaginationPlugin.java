@@ -1,5 +1,6 @@
 package com.jcin.cms.utils;
 
+import java.net.URL;
 import java.util.List;
 
 import org.mybatis.generator.api.CommentGenerator;
@@ -173,8 +174,9 @@ public class PaginationPlugin extends PluginAdapter {
 	}
 
 	public static void generate() {
-		String config = PaginationPlugin.class.getClassLoader()
-				.getResource("generatorConfig.xml").getFile();
+		URL url = PaginationPlugin.class.getClassLoader()
+		.getResource("generatorConfig.xml");
+		String config = url.getFile();
 		String[] arg = { "-configfile", config, "-overwrite" };
 		ShellRunner.main(arg);
 	}
