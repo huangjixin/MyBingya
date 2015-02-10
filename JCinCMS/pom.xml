@@ -11,6 +11,12 @@
 		<spring-version>4.0.2.RELEASE</spring-version>
 	</properties>
 	<dependencies>
+		<!-- free marker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.21</version>
+		</dependency>
 		<!-- 二维码 -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
