@@ -59,12 +59,12 @@ public class LoginController {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		String password = user.getPassword();
-		System.out.println("加密原文密码是：" + password);
+//		System.out.println("加密原文密码是：" + password);
 		password = (String) encryptUtil.decrypt(password); 
-		if (null != encryptStrLength) {
-			System.out.println("解密原文密码是："
-					+ password.substring(0, encryptStrLength));
-		} else
+//		if (null != encryptStrLength) {
+//			System.out.println("解密原文密码是："
+//					+ password.substring(0, encryptStrLength));
+//		} else
 			System.out.println("解密原文密码是：" + password);
 		ModelMap modelMap = new ModelMap();
 		List<User> list = userService.validateLogin(user.getUsername(),

@@ -78,32 +78,32 @@
 	}
 
 	$(document).ready(function() {
-		initUsernameInput();
+// 		initUsernameInput();
 	});
 
 	//初始化用户名输入文本
-	function initUsernameInput() {
-		$('#username').focusin(function() {
-			var username = $('#username').val();
-			if (username == "请输入用户名") {
-				this.value = '';
-			}
+// 	function initUsernameInput() {
+// 		$('#username').focusin(function() {
+// 			var username = $('#username').val();
+// 			if (username == "请输入用户名") {
+// 				this.value = '';
+// 			}
 
-		}).focusout(function() {
-			var username = $('#username').val();
-			if (username == "") {
-				this.value = '请输入用户名';
-			}
-		});
-	}
+// 		}).focusout(function() {
+// 			var username = $('#username').val();
+// 			if (username == "") {
+// 				this.value = '请输入用户名';
+// 			}
+// 		});
+// 	}
 
 	function submitData() {
 		var loginRequest = {};
 
 		loginRequest.username = $("#username").val();
 		loginRequest.password = $("#passwd").val();
-		loginRequest.encryptStrLength = loginRequest.password.length;
-		loginRequest.password += generateMixed(25);
+// 		loginRequest.encryptStrLength = loginRequest.password.length;
+// 		loginRequest.password += generateMixed(25);
 
 		loginRequest.password = base64encode(loginRequest.password);
 		$.ajax({
@@ -144,7 +144,7 @@
 							<td>
 								<div class="loginipt">
 									<span class="useric"></span> <input type="text"
-										name="textfield" id="username" value="请输入用户名" />
+										name="textfield" id="username" value="" />
 								</div>
 							</td>
 						</tr>
