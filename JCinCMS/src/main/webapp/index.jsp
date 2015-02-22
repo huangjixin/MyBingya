@@ -88,7 +88,7 @@ body {
 	<div region="north" title="" split="false" id="header"
 		style="height:100px;">
 		<h1
-			style="margin: 0; padding: 15px; cursor: default; font-family: 微软雅黑, 黑体, 宋体;">XX管理系统</h1>
+			style="margin: 0; padding: 15px; cursor: default; font-family: 微软雅黑, 黑体, 宋体;">客户管理系统</h1>
 		<input id="logoutBtn" type="button" value="退出"
 			style="position: absolute;right:8px;bottom:2px;" onclick="logout()"></input>
 	</div>
