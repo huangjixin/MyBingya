@@ -81,8 +81,17 @@
 	//edit：null新增；
 	//edit：1保存并返回；
 	//edit：2保存并新增；
-	function update(edit) {
-		alert("update");
+	function update() {
+		//多行删除。
+		var row = $("#tgrid").treegrid('getSelections');
+		if (row == null) {
+			return;
+		}
+
+		$('#idInput').val(row[0].id);
+		// 		alert(path);
+		// 		$('#updateForm').attr("action", path);
+		$('#updateForm').submit();
 	}
 
 	//删除；
@@ -180,7 +189,9 @@
 				<div>
 					<input type="button" value="新增" onclick="toEditViewView();" /> <input
 						type="button" value="删除" onclick="deleteRows()" /> <input
-						type="button" value="刷新" onclick="refresh()" />
+						type="button" value="修改" id="btn_Update" name="btn_Update"
+						onclick="update();" /><input type="button" value="刷新"
+						onclick="refresh()" />
 				</div>
 			</div>
 			<table id="tgrid" title="" class="easyui-treegrid"
@@ -208,9 +219,9 @@
 							width="100%">连接的URL</th>
 						<th id="descriptionTh"
 							data-options="field:'description',align:'center'" width="100%">描述</th>
-						<th id="descriptionTh"
-							data-options="field:'opt',align:'center',formatter:formatterWithBtn"
-							width="100%">操作</th>
+<!-- 						<th id="descriptionTh" -->
+<!-- 							data-options="field:'opt',align:'center',formatter:formatterWithBtn" -->
+<!-- 							width="100%">操作</th> -->
 						<!-- <th id="createdateFieldTh" data-options="field:'createdate'" 
 						width="100%">创建日期</th>
 					<th id="updatedateFieldTh" data-options="field:'updatedate'"
@@ -235,8 +246,7 @@
 								value="localhost" size="35"></td>
 							<th class="th1">连接URL:</th>
 							<td class="td1" colSpan="3"><input type="text" name="url"
-								id="url" value="" size="35">
-							</td>
+								id="url" value="" size="35"></td>
 						</tr>
 
 						<tr class="tr1">
@@ -257,5 +267,8 @@
 			</form>
 		</div>
 	</div>
+	<form id="updateForm" action="menu/menuUpdate" method="get">
+		<input type="hidden" id="idInput" name="id" />
+	</form>
 </body>
 </html>

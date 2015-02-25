@@ -12,13 +12,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>已付款管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,用户列表">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="keywords" content="已付款列表">
+<meta http-equiv="description" content="已付款管理">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
@@ -88,9 +88,8 @@
 	// 移除条目；
 	function deleteRows(selecedRow) {
 		var pamameter = null;
-		alert(selecedRow == null);
 		if (selecedRow != null) {
-			alert(selecedRow.username);
+			alert(selecedRow.material);
 			pamameter = {};
 			pamameter.idstring = selecedRow.id;
 		} else {
@@ -119,7 +118,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : 'user/deleteById',
+			url : 'payed/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -144,17 +143,21 @@
 	function search() {
 		var queryParams = {};
 
-		if ($("#usernameInput").val() != "") {
-			queryParams.username = $("#usernameInput").val();
+		if ($("#materialInput").val() != "") {
+			queryParams.material = $("#materialInput").val();
 		}
 
-		if ($("#operatorInput").val() != "") {
-			queryParams.operator = $("#operatorInput").val();
-		}
-		if ($("#ipInput").val() != "") {
-			queryParams.operator = $("#operatorInput").val();
+		if ($("#sizeInput").val() != "") {
+			queryParams.size = $("#sizeInput").val();
 		}
 
+		if ($("#customerNameInput").val() != "") {
+			queryParams.customerName = $("#customerNameInput").val();
+		}
+		if ($("#recorddateInput").val() != "") {
+			queryParams.recorddate = $("#recorddateInput").val();
+		}
+		
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
 		});
@@ -165,9 +168,10 @@
 
 	//清除
 	function clearSearch() {
-		$("#usernameInput").val("");
-		$("#operatorInput").val("");
-		$("#ipInput").val("");
+		$("#materialInput").val("");
+		$("#sizeInput").val("");
+		$("#customerNameInput").val("");
+		$("#recorddateInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -179,54 +183,58 @@
 		return result;
 	}
 
-	function formatterWithBtn(value, rec) {
-		var btn = '<a class="removecls" onclick="deleteRows(\'' + rec
-				+ '\')" href="javascript:void(0)">删除</a>';
-		return btn;
+	//更新
+	function update() {
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null) {
+			return;
+		}
+// 		var path = "payed/payedUpdate?id='" + row[0].id+"'";
+		$('#idInput').val(row[0].id);
+// 		alert(path);
+// 		$('#updateForm').attr("action", path);
+		$('#updateForm').submit();
 	}
-
+	
 	//导出excel
-	function exportExcel() {
-		// 		$.ajax({
-		// 			cache : true,
-		// 			type : "GET",
-		// 			url : 'user/exportExcel',
-		// 			data : pamameter,
-		// 			async : false,
-		// 			error : function(request) {
-		// 				alert("连接失败");
-		// 			},
-		// 			success : function(data) {
-		// 				$("#tgrid").datagrid('reload'); // 重新加载;
-		// 			}
-		// 		});
-	}
-
-	//导入excel
-	function importExcel() {
-
+	function exportExcel(){
+		var pamameter = $("#tgrid").datagrid("options").queryParams;
+		$.ajax({
+			cache : true,
+			type : "GET",
+			url : "payed/exportExcel",
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				alert("导出成功");
+			}
+		});
 	}
 </script>
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
 				onclick="$('#addForm').submit();" /> <input type="button"
-				value="删除" onclick="deleteRows()" /> <label>名称:</label><input
-				id="usernameInput"
-				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>操作人:</label><input
-				id="operatorInput"
-				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>IP:</label><input
-				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+				value="修改" id="btn_Update" name="btn_Update" onclick="update();" /> <input
+				type="button" value="删除" onclick="deleteRows()" /> <label>材质:</label><input
+				id="materialInput"
+				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>规格:</label><input
+				id="sizeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+				<label>客户名:</label><input
+				id="customerNameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+				<label>日期:</label><input
+				id="recorddateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+			<input type="button" id="exportBtn" value="导出excel" onclick="exportExcel()" />
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -236,7 +244,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: 'user/select',
+								url: 'payed/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -252,22 +260,27 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th id="idFieldTh" data-options="field:'id',align:'left'"
-						width="100%">ID</th>
-					<th id="usernameFieldTh"
-						data-options="field:'username',align:'left'" width="100%">名称</th>
-					<th id="passwordFieldTh"
-						data-options="field:'password',align:'center'" width="100%">密码</th>
+					<th data-options="field:'id',align:'left'" width="100%">ID</th>
 					<th id="createDateFieldTh"
-						data-options="field:'updatedate',align:'center',formatter:formatDate"
-						width="100%">修改日期</th>
-					<th width="100%"
-						data-options="field:'opt',title:'操作',align:'center',formatter:formatterWithBtn"></th>
+						data-options="field:'recorddate',align:'center'"
+						width="100%">日期</th>
+					<th data-options="field:'material',align:'left'" width="100%">材质</th>
+					<th data-options="field:'customerName',align:'left'" width="100%">客户名</th>
+					<th data-options="field:'size',align:'center'" width="100%">规格</th>
+					<th data-options="field:'weight',align:'center'" width="100%">重量</th>
+					<th data-options="field:'price',align:'center'" width="100%">单价</th>
+					<th data-options="field:'goodsMoney',align:'center'" width="100%">货款</th>
+					<th id="createDateFieldTh"
+						data-options="field:'createdate',align:'center',formatter:formatDate"
+						width="100%">操作日期</th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="user/userAdd"></form>
+	<form id="addForm" action="payed/payedAdd"></form>
+	<form id="updateForm" action="payed/payedUpdate" method="get">
+		<input type="hidden" id="idInput" name="id"/> 
+	</form>
 </body>
 </html>

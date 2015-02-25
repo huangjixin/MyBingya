@@ -12,13 +12,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>操作日志</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,用户列表">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="keywords" content="menu,menu list">
+<meta http-equiv="description" content="菜单列表">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
@@ -81,45 +81,35 @@
 						: ("00" + o[k]).substr(("" + o[k]).length));
 		return format;
 	}
-
+	
 	$().ready(function() {
 	});
 
 	// 移除条目；
-	function deleteRows(selecedRow) {
-		var pamameter = null;
-		alert(selecedRow == null);
-		if (selecedRow != null) {
-			alert(selecedRow.username);
-			pamameter = {};
-			pamameter.idstring = selecedRow.id;
-		} else {
-			//多行删除。
-			var row = $('#tgrid').datagrid('getSelections');
-			if (row == null) {
-				return;
-			}
-			var i = 0;
-			var string = "";
-			for (i; i < row.length; i++) {
-				string += row[i].id;
-				if (i < row.length - 1) {
-					string += ',';
-				} else {
-					break;
-				}
-			}
-			pamameter = {};
-			pamameter.idstring = string;
-		}
-
-		if (pamameter == null) {
+	function deleteRows() {
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null) {
 			return;
 		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
+		}
+
+		var pamameter = {
+			idstring : string
+		};
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : 'user/deleteById',
+			url : 'opelog/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -144,8 +134,8 @@
 	function search() {
 		var queryParams = {};
 
-		if ($("#usernameInput").val() != "") {
-			queryParams.username = $("#usernameInput").val();
+		if ($("#nameInput").val() != "") {
+			queryParams.name = $("#nameInput").val();
 		}
 
 		if ($("#operatorInput").val() != "") {
@@ -165,7 +155,7 @@
 
 	//清除
 	function clearSearch() {
-		$("#usernameInput").val("");
+		$("#nameInput").val("");
 		$("#operatorInput").val("");
 		$("#ipInput").val("");
 	}
@@ -178,33 +168,28 @@
 
 		return result;
 	}
-
-	function formatterWithBtn(value, rec) {
-		var btn = '<a class="removecls" onclick="deleteRows(\'' + rec
-				+ '\')" href="javascript:void(0)">删除</a>';
-		return btn;
-	}
-
+	
 	//导出excel
-	function exportExcel() {
-		// 		$.ajax({
-		// 			cache : true,
-		// 			type : "GET",
-		// 			url : 'user/exportExcel',
-		// 			data : pamameter,
-		// 			async : false,
-		// 			error : function(request) {
-		// 				alert("连接失败");
-		// 			},
-		// 			success : function(data) {
-		// 				$("#tgrid").datagrid('reload'); // 重新加载;
-		// 			}
-		// 		});
+	function exportExcel(){
+		var pamameter = $("#tgrid").datagrid("options").queryParams;
+		$.ajax({
+			cache : true,
+			type : "GET",
+			url : "opelog/exportExcel",
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				alert("导出成功");
+			}
+		});
 	}
-
+	
 	//导入excel
-	function importExcel() {
-
+	function importExcel(){
+	
 	}
 </script>
 </head>
@@ -214,29 +199,24 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="$('#addForm').submit();" /> <input type="button"
-				value="删除" onclick="deleteRows()" /> <label>名称:</label><input
-				id="usernameInput"
-				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>操作人:</label><input
-				id="operatorInput"
+			<input type="button" value="删除" onclick="deleteRows()" /> <label>名称:</label><input
+				id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
+			<label>操作人:</label><input id="operatorInput"
 				onkeydown="onKeyEnter(event.keyCode||event.which);"> <label>IP:</label><input
 				id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+			<input type="button" id="exportBtn" value="导出excel" onclick="exportExcel()" />
+			<input type="button" id="importBtn" value="导入excel" onclick="importExcel()" />
 		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
-			style="height:350px;"
+		<table id="tgrid" title="" class="easyui-datagrid" style="height:350px;"
 			data-options="
 								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: 'user/select',
+								url: 'opelog/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -252,22 +232,17 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th id="idFieldTh" data-options="field:'id',align:'left'"
-						width="100%">ID</th>
-					<th id="usernameFieldTh"
-						data-options="field:'username',align:'left'" width="100%">名称</th>
-					<th id="passwordFieldTh"
-						data-options="field:'password',align:'center'" width="100%">密码</th>
+					<th id="nameFieldTh" data-options="field:'name',align:'left'"
+						width="100%">名称</th>
+					<th id="operatorFieldTh"
+						data-options="field:'operator',align:'center'" width="100%">操作人</th>
 					<th id="createDateFieldTh"
-						data-options="field:'updatedate',align:'center',formatter:formatDate"
+						data-options="field:'createdate',align:'center',formatter:formatDate"
 						width="100%">修改日期</th>
-					<th width="100%"
-						data-options="field:'opt',title:'操作',align:'center',formatter:formatterWithBtn"></th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="user/userAdd"></form>
 </body>
 </html>
