@@ -46,7 +46,7 @@ public class TestRoleService {
 		role.setName("admin");
 		role.setId(new Date().getTime() + "");
 
-		int result = roleService.insert(role);
+		String result = roleService.insert(role);
 		Assert.assertEquals(1, result);
 	}
 

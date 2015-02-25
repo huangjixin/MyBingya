@@ -43,7 +43,7 @@ public class TestUserService extends TestCase {
 		user.setPassword("admin");
 		user.setUsername("admin");
 
-		int result = userService.insert(user);
+		String result = userService.insert(user);
 		Assert.assertEquals(1, result);
 	}
 
