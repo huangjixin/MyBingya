@@ -82,11 +82,12 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		CustomerContextHolder.setCustomerType("SLAVE");
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
+		Method createDatemethod;
 		try {
 			Method method = clazz.getDeclaredMethod("setId", String.class);
 			method.invoke(record, new Date().getTime() + "");
 			
-			Method createDatemethod = clazz.getDeclaredMethod("setCreatedate",
+			createDatemethod = clazz.getDeclaredMethod("setCreatedate",
 					Date.class);
 			if (createDatemethod != null) {
 				createDatemethod.invoke(record, new Date());
