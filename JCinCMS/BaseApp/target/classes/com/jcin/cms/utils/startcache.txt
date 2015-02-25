@@ -1,0 +1,6 @@
+在mapper中配置
+
+<mapper namespace="org.acme.FooMapper">
+  <cache type="org.mybatis.caches.memcached.MemcachedCache" />
+  ...
+</mapper>
