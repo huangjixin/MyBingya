@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="JCinCMS Maven Webapp"
+  name="JCinCMS"
   id="myeclipse.1418734196236"
   context-root="/JCinCMS"
   j2ee-spec="6.0"
-  archive="JCinCMS Maven Webapp.war">
+  archive="JCinCMS.war">
   <attributes>
     <attribute name="webrootdir" value="src/main/webapp" />
   </attributes>

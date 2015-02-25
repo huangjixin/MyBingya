@@ -230,8 +230,4 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	<modules>
-		<module>InstallSetUp</module>
-		<module>BaseApp</module>
-	</modules>
 </project>
