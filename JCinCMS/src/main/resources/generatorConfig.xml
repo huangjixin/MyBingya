@@ -62,9 +62,9 @@
 		<!-- <table tableName="tb_user" domainObjectName="User" /> -->
 		<!-- <table tableName="tb_user_role" domainObjectName="UserRole" /> -->
 		<!-- <table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
-		<!-- <table tableName="tb_test" domainObjectName="Test" /> -->
-		<table tableName="tb_payed" domainObjectName="Payed" />
-		<table tableName="tb_not_payed" domainObjectName="NotPayed" />
+		<table tableName="tb_test" domainObjectName="Test" />
+<!-- 		<table tableName="tb_payed" domainObjectName="Payed" /> -->
+<!-- 		<table tableName="tb_not_payed" domainObjectName="NotPayed" /> -->
 		<!-- oracle -->
 		<!-- <table tableName="CT_CONFIG" domainObjectName="Config" /> -->
 		<!-- <table tableName="DC_SYSTEM_PARAM" domainObjectName="SystemParam" 
