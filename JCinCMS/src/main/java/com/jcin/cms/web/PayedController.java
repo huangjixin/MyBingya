@@ -117,7 +117,7 @@ public class PayedController extends BaseController {
 	public String update(@Valid Payed payed, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		int result = payedService.update(payed);
+		String result = payedService.update(payed);
 
 		return "view/payed/list";
 	}

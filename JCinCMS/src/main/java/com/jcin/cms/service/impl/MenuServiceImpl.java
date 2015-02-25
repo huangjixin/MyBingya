@@ -134,11 +134,11 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	 */
 	@Override
 	@Transactional
-	public int update(Menu record) {
+	public String update(Menu record) {
 		super.update(record);
 
 		int result = menuMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

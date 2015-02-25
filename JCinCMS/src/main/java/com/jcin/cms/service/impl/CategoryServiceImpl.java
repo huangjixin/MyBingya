@@ -132,11 +132,11 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 */
 	@Override
 	@Transactional
-	public int update(Category record) {
+	public String update(Category record) {
 		super.update(record);
 
 		int result = categoryMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	@Override

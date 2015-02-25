@@ -126,11 +126,11 @@ public class PayedServiceImpl extends BaseServiceImpl<Payed, String> implements
 	 */
 	@Override
 	@Transactional
-	public int update(Payed record) {
+	public String update(Payed record) {
 		super.update(record);
 
 		int result = payedMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

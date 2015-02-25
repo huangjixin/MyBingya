@@ -126,11 +126,11 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 	 */
 	@Override
 	@Transactional
-	public int update(Comment record) {
+	public String update(Comment record) {
 		super.update(record);
 
 		int result = commentMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

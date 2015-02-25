@@ -150,13 +150,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	@Transactional
-	public int update(User record) {
+	public String update(User record) {
 		super.update(record);
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
 		record.setPassword(pas);
 		int result = userMapper.updateByPrimaryKey(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

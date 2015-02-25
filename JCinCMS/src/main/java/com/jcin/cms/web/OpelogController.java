@@ -62,7 +62,7 @@ public class OpelogController extends BaseController {
 
 	@RequestMapping("/list")
 	public String list() {
-		return "view/opelog/list";
+		return "view/opelog/opelog_list";
 	}
 
 	@RequestMapping(value = "/select")

@@ -139,7 +139,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int update(T record) {
+	public String update(T record) {
 		CustomerContextHolder.setCustomerType("SLAVE");
 		
 		@SuppressWarnings("rawtypes")
@@ -179,7 +179,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			e.printStackTrace();
 		}
 
-		return 0;
+		return "";
 	}
 
 	@Override

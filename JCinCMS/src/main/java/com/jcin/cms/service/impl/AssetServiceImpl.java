@@ -126,11 +126,11 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, String> implements
 	 */
 	@Override
 	@Transactional
-	public int update(Asset record) {
+	public String update(Asset record) {
 		super.update(record);
 
 		int result = assetMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

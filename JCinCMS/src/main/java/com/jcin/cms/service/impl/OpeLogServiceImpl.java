@@ -133,11 +133,11 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 */
 	@Override
 	@Transactional
-	public int update(Operationlog record) {
+	public String update(Operationlog record) {
 		// super.update(record);
 
 		int result = operationlogMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

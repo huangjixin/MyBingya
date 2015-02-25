@@ -139,11 +139,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 */
 	@Override
 	@Transactional
-	public int update(Role record) {
+	public String update(Role record) {
 		super.update(record);
 
 		int result = roleMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

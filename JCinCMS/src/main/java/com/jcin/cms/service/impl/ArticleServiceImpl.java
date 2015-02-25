@@ -128,11 +128,11 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 	 */
 	@Override
 	@Transactional
-	public int update(Article record) {
+	public String update(Article record) {
 		super.update(record);
 
 		int result = articleMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

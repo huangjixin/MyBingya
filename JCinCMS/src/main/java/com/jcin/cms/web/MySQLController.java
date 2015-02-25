@@ -247,11 +247,11 @@ public class MySQLController extends BaseController {
 
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public int update(@Valid Mysqlbackup mysqlbackup,
+	public String update(@Valid Mysqlbackup mysqlbackup,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		int result = mysqlService.update(mysqlbackup);
+		String result = mysqlService.update(mysqlbackup);
 		return result;
 	}
 }

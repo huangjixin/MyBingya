@@ -54,7 +54,7 @@ public interface IBaseService<T extends Serializable, PK extends Serializable> {
 	 * @param record
 	 * @return
 	 */
-	int update(T record);
+	String update(T record);
 	
 	/**
 	 * 批量插入。

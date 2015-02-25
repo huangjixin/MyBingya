@@ -131,11 +131,11 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 	 */
 	@Override
 	@Transactional
-	public int update(Mysqlbackup record) {
+	public String update(Mysqlbackup record) {
 		super.update(record);
 
 		int result = mysqlMapper.updateByPrimaryKey(record);
-		return result;
+		return record.getId();
 	}
 
 	/*

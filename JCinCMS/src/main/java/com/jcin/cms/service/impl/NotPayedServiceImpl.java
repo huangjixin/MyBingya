@@ -132,11 +132,11 @@ public class NotPayedServiceImpl extends BaseServiceImpl<NotPayed, String>
 	 */
 	@Override
 	@Transactional
-	public int update(NotPayed record) {
+	public String update(NotPayed record) {
 		super.update(record);
 
 		int result = notPayedMapper.updateByPrimaryKeySelective(record);
-		return result;
+		return record.getId();
 	}
 
 	/*
