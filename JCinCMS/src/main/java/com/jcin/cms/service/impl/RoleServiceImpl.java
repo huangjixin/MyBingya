@@ -71,13 +71,14 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 */
 	@Override
 	@Transactional
-	public int insert(Role record) {
+	public String insert(Role record) {
 		super.insert(record);
 
 		// record.setCreatedate(new Date());
 		// record.setId(new Date().getTime() + "");
 		int result = roleMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

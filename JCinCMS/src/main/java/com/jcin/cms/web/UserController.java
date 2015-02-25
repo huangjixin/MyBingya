@@ -83,18 +83,16 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/new")
-	@ResponseBody
-	public int create(@Valid User user, BindingResult bindingResult,
+	public String create(@Valid User user, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		int result = userService.insert(user);
-		return result;
+		String id = userService.insert(user);
+		return this.list();
 	}
 
 	@RequestMapping(value = "/resetPassword")
 	@ResponseBody
-	public ModelMap resetPassword(
-			@RequestParam(value = "id") String id,
+	public ModelMap resetPassword(@RequestParam(value = "id") String id,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "repassword") String repassword,
 			HttpServletRequest httpServletRequest,
@@ -103,15 +101,15 @@ public class UserController extends BaseController {
 		User user = userService.selectByPrimaryKey(id);
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pas = passwordEncoder.encodePassword(password, "");
-		
-		if(pas.equals(user.getPassword())){
+
+		if (pas.equals(user.getPassword())) {
 			pas = passwordEncoder.encodePassword(repassword, "");
 			user.setPassword(pas);
 			userService.update(user);
-		}else{
-			
+		} else {
+
 		}
-		
+
 		return modelMap;
 	}
 
@@ -126,6 +124,12 @@ public class UserController extends BaseController {
 		out.print(user);
 		out.flush();
 		out.close();
+	}
+
+	@RequestMapping(value = "/userAdd")
+	public String userAdd(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		return "view/user/userAdd";
 	}
 
 	/**

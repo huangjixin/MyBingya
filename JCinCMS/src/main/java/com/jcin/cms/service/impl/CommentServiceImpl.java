@@ -61,11 +61,12 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 	 */
 	@Override
 	@Transactional
-	public int insert(Comment record) {
+	public String insert(Comment record) {
 		super.insert(record);
 
 		int result = commentMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

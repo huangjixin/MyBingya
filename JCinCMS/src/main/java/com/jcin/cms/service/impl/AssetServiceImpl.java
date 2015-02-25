@@ -29,8 +29,8 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service(value = "assetService")
-public class AssetServiceImpl extends BaseServiceImpl<Asset, String>
-		implements IAssetService {
+public class AssetServiceImpl extends BaseServiceImpl<Asset, String> implements
+		IAssetService {
 	private static Logger logger = Logger.getLogger(AssetServiceImpl.class
 			.getName());
 
@@ -56,17 +56,17 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IAssetService#insert(com.jcin.cms.domain.Asset)
+	 * @see com.jcin.cms.service.IAssetService#insert(com.jcin.cms.domain.Asset)
 	 */
 	@Override
 	@Transactional
-	public int insert(Asset record) {
+	public String insert(Asset record) {
 		super.insert(record);
 
-//		record.setCreatedate(new Date().getTime());
+		// record.setCreatedate(new Date().getTime());
 		int result = assetMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*
@@ -122,8 +122,7 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IAssetService#update(com.jcin.cms.domain.Asset)
+	 * @see com.jcin.cms.service.IAssetService#update(com.jcin.cms.domain.Asset)
 	 */
 	@Override
 	@Transactional
@@ -137,8 +136,7 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IAssetService#insertBatch(List)
+	 * @see com.jcin.cms.service.IAssetService#insertBatch(List)
 	 */
 	@Override
 	public int insertBatch(List<Asset> list) {
@@ -150,8 +148,7 @@ public class AssetServiceImpl extends BaseServiceImpl<Asset, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IAssetService#deleteBatch(List)
+	 * @see com.jcin.cms.service.IAssetService#deleteBatch(List)
 	 */
 	@Override
 	public int deleteBatch(List<String> list) {

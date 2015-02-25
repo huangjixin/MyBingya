@@ -33,7 +33,7 @@ public interface IBaseService<T extends Serializable, PK extends Serializable> {
 	 * @param record
 	 * @return
 	 */
-	int insert(T record);
+	String insert(T record);
 
 	/**
 	 * 根据page对象进行查询。

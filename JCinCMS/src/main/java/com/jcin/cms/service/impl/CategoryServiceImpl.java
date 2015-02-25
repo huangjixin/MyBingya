@@ -65,11 +65,12 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 */
 	@Override
 	@Transactional
-	public int insert(Category record) {
+	public String insert(Category record) {
 		super.insert(record);
 
 		int result = categoryMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*
@@ -195,12 +196,11 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		}
 		return children;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.ICategoryService#insertBatch(List)
+	 * @see com.jcin.cms.service.ICategoryService#insertBatch(List)
 	 */
 	@Override
 	public int insertBatch(List<Category> list) {
@@ -212,8 +212,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.ICategoryService#deleteBatch(List)
+	 * @see com.jcin.cms.service.ICategoryService#deleteBatch(List)
 	 */
 	@Override
 	public int deleteBatch(List<String> list) {

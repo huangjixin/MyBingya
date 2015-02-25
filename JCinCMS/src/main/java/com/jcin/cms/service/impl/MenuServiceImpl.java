@@ -68,11 +68,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	 */
 	@Override
 	@Transactional
-	public int insert(Menu record) {
+	public String insert(Menu record) {
 		super.insert(record);
 
 		int result = menuMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

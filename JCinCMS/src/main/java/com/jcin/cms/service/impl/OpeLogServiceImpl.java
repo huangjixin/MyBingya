@@ -63,12 +63,13 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 */
 	@Override
 	@Transactional
-	public int insert(Operationlog record) {
+	public String insert(Operationlog record) {
 		// super.insert(record);
 
 //		record.setCreatedate(new Date()+"");
 		int result = operationlogMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

@@ -61,12 +61,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 	 */
 	@Override
 	@Transactional
-	public int insert(Article record) {
+	public String insert(Article record) {
 		super.insert(record);
 
 //		record.setCreatedate(new Date().getTime());
 		int result = articleMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

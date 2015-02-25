@@ -78,14 +78,14 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public int insert(T record) {
+	public String insert(T record) {
 		CustomerContextHolder.setCustomerType("SLAVE");
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		try {
 			Method method = clazz.getDeclaredMethod("setId", String.class);
 			method.invoke(record, new Date().getTime() + "");
-
+			
 			Method createDatemethod = clazz.getDeclaredMethod("setCreatedate",
 					Date.class);
 			if (createDatemethod != null) {
@@ -121,7 +121,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return "";
 	}
 
 	@Override

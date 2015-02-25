@@ -62,12 +62,13 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 	 */
 	@Override
 	@Transactional
-	public int insert(Mysqlbackup record) {
+	public String insert(Mysqlbackup record) {
 		super.insert(record);
 
 		// record.setCreatedate(new Date());
 		int result = mysqlMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

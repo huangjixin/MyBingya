@@ -79,7 +79,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	@Transactional
-	public int insert(User record) {
+	public String insert(User record) {
 		super.insert(record);
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
@@ -90,7 +90,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 				+ ",record:"
 				+ record.getUsername() + "成功");
 		int result = userMapper.insert(record);
-		return result;
+		String id = record.getId();
+		return id;
 	}
 
 	/*

@@ -32,8 +32,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jcin.cms.domain.Menu;
+import com.jcin.cms.domain.Payed;
 import com.jcin.cms.domain.User;
 import com.jcin.cms.service.IMenuService;
 
@@ -58,17 +60,28 @@ public class MenuController {
 	public String create(@Valid Menu menu, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
+		if("".equals(menu.getId())){
+			menu.setId(null);
+		}
+		if("".equals(menu.getParentid())){
+			menu.setParentid(null);
+		}
 		menuService.insert(menu);
-		return null;
+		return "view/menu/list";
 	}
 	
 	@RequestMapping(value = "/update")
-	@ResponseBody
 	public String update(@Valid Menu menu, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
+		if("".equals(menu.getId())){
+			menu.setId(null);
+		}
+		if("".equals(menu.getParentid())){
+			menu.setParentid(null);
+		}
 		menuService.update(menu);
-		return null;
+		return "view/menu/list";
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -96,6 +109,19 @@ public class MenuController {
 		return result;
 	}
 
+
+	@RequestMapping(value = "/menuUpdate")
+	public ModelAndView menuUpdate(@RequestParam String id,HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		Menu menu = new Menu();
+		if (null != id && !"".equals(id)) {
+			menu = menuService.selectByPrimaryKey(id);
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("menu", menu);
+		modelAndView.setViewName("view/menu/menu_update");
+		return modelAndView;
+	}
 	/**
 	 * @param args
 	 */

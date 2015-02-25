@@ -114,7 +114,7 @@ public class OpelogController extends BaseController {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		httpServletResponse.setCharacterEncoding("UTF-8");
-		String filename = new String("操作日志".getBytes("GBK"), "iso8859-1");
+		String filename = new String("opelog".getBytes("GBK"), "iso8859-1");
 
 		OperationlogCriteria operationlogCriteria = new OperationlogCriteria();
 		OperationlogCriteria.Criteria criteria = operationlogCriteria
@@ -141,8 +141,8 @@ public class OpelogController extends BaseController {
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
-		String columnNames[] = { "ID", "名称","操作人","修改日期" };// 列名
-		String keys[] = { "id", "name","operator","createdate" };// map中的key
+		String columnNames[] = { "ID", "名称", "操作人", "修改日期" };// 列名
+		String keys[] = { "id", "name", "operator", "createdate" };// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 		// // 获取总列数
 		// int CountColumnNum = list.size();
@@ -184,9 +184,10 @@ public class OpelogController extends BaseController {
 		// File.separator);
 		// path += "testwrite.xls";
 		// 创建文件输出流，准备输出电子表格
-		// OutputStream out = new FileOutputStream(path);
-		// hwb.write(out);
-		// out.close();
+		String path = "D:" + File.separator + filename;
+		OutputStream out = new FileOutputStream(path);
+		hwb.write(out);
+		out.close();
 		// System.out.println("数据库导出成功");
 
 		OutputStream os = httpServletResponse.getOutputStream();
@@ -228,7 +229,7 @@ public class OpelogController extends BaseController {
 		LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
 		fieldMap.put("名称", "name");
 		fieldMap.put("操作人", "operator");
-//		fieldMap.put("修改日期", "createdate");
+		// fieldMap.put("修改日期", "createdate");
 		Page page = new Page();
 		list = ExcelUtil
 				.excelToList(hssfWorkbook, Operationlog.class, fieldMap);
@@ -245,8 +246,8 @@ public class OpelogController extends BaseController {
 			HttpServletResponse httpServletResponse) throws IOException,
 			ExcelException {
 		// MultipartFile uFile = (MultipartFile)httpServletRequest.get("uFile");
-//		String path = httpServletRequest.getServletContext().getRealPath(
-//				File.separator);
+		// String path = httpServletRequest.getServletContext().getRealPath(
+		// File.separator);
 		String path = httpServletRequest.getServletPath();
 		path += file.getName();
 		// OutputStream outputStream = new FileOutputStream(path);
