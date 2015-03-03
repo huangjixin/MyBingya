@@ -247,6 +247,18 @@
 			document.getElementById("txtFileName").value = "";
 		}
 	}
+	
+	//更新
+	function update() {
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null) {
+			return;
+		}
+// 		var path = "payed/payedUpdate?id='" + row[0].id+"'";
+		$('#idInput').val(row[0].id);
+		$('#updateForm').submit();
+	}
 </script>
 </head>
 
@@ -255,7 +267,9 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="删除" onclick="deleteRows()" /> <input
+			<input type="button" value="新增" onclick="$('#addForm').submit();" /> <input
+				type="button" value="修改" onclick="update();" /> <input
+				type="button" value="删除" onclick="deleteRows()" /> <input
 				type="button" value="刷新" onclick="refreshRows()" /><label>名称:</label><input
 				id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">
 			<label>操作人:</label><input id="operatorInput"
@@ -272,7 +286,8 @@
 			<input type="button" value="导入excel"
 				onclick="return $('#file').click();" /> <input type="file"
 				id="file" name="file" value="" style="width: 0px;height: 0px;"
-				onchange="onfilechange();" accept=".xls"> <input type="submit" value="提交">
+				onchange="onfilechange();" accept=".xls"> <input
+				type="submit" value="提交">
 			<!-- 			</form> -->
 
 		</div>
@@ -310,7 +325,10 @@
 				</tr>
 			</thead>
 		</table>
-
 	</div>
+	<form id="addForm" action="opelog/new"></form>
+	<form id="updateForm" action="opelog/edit">
+		<input type="hidden" id="idInput" name="id"/> 
+	</form>
 </body>
 </html>

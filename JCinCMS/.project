@@ -69,14 +69,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>BaseApp_java</name>
+			<name>system-java</name>
 			<type>2</type>
-			<location>D:/workspace/JCinCMS/BaseApp/src/main/java</location>
+			<locationURI>PROJECT_LOC/SystemManage_Module/src/main/java</locationURI>
 		</link>
 		<link>
-			<name>BaseApp_resources</name>
+			<name>system-webapp</name>
 			<type>2</type>
-			<location>D:/workspace/JCinCMS/BaseApp/src/main/resources</location>
+			<locationURI>PROJECT_LOC/SystemManage_Module/src/main/webapp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
