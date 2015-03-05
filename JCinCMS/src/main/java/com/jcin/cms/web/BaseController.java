@@ -55,9 +55,9 @@ public class BaseController<T extends Serializable> {
 
 		return page;
 	}
-	
-	public ModelAndView create(T record,BindingResult bindingResult, Model uiModel,
-			HttpServletRequest httpServletRequest) {
+
+	public ModelAndView create(T record, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest) {
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		try {
@@ -77,8 +77,9 @@ public class BaseController<T extends Serializable> {
 		}
 		return null;
 	}
-//	public String create(<T extends Serializable>,BindingResult bindingResult, Model uiModel,
-//			HttpServletRequest httpServletRequest){
-//		return "";
-//	}
+	// public String create(<T extends Serializable>,BindingResult
+	// bindingResult, Model uiModel,
+	// HttpServletRequest httpServletRequest){
+	// return "";
+	// }
 }

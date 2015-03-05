@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.MenuCriteria;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.service.system.IMenuService;
+import com.jcin.cms.service.system.impl.vo.MenuExtention;
 import com.jcin.cms.utils.Page;
 
 /**
@@ -130,43 +132,43 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		return record.getId();
 	}
 
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	@Override
-//	public List getMenuTree(String roleId) throws JSONException {
-//		List<RoleMenu> roleMenus = null;
-//		if (roleId != null || "".equals(roleId)) {
-//			RoleMenuCriteria roleMenuCriteria = new RoleMenuCriteria();
-//			roleMenuCriteria.createCriteria().andRoleIdEqualTo(roleId);
-//			roleMenus = roleMenuMapper.selectByExample(roleMenuCriteria);
-//		}
-//
-//		MenuCriteria menuExample = new MenuCriteria();
-//		menuExample.createCriteria().andParentidIsNull();
-//
-//		List<Menu> list = menuMapper.selectByExample(menuExample);
-//		List children = new ArrayList();
-//		for (Menu object : list) {
-//			boolean flag = false;
-//			if(roleMenus != null){
-//				for (RoleMenu roleMenu : roleMenus) {
-//					if (roleMenu.getMenuId().equals(object.getId())) {
-//						flag = true;
-//						break;
-//					}
-//				}
-//			}
-//			
-//			if (!flag && roleMenus != null) {
-//				continue;
-//			}
-//
-//			JSONObject jsonObject;
-//
-//			jsonObject = searialMenu(object, roleMenus);
-//			children.add(jsonObject);
-//		}
-//		return children;
-//	}
+	// @SuppressWarnings({ "rawtypes", "unchecked" })
+	// @Override
+	// public List getMenuTree(String roleId) throws JSONException {
+	// List<RoleMenu> roleMenus = null;
+	// if (roleId != null || "".equals(roleId)) {
+	// RoleMenuCriteria roleMenuCriteria = new RoleMenuCriteria();
+	// roleMenuCriteria.createCriteria().andRoleIdEqualTo(roleId);
+	// roleMenus = roleMenuMapper.selectByExample(roleMenuCriteria);
+	// }
+	//
+	// MenuCriteria menuExample = new MenuCriteria();
+	// menuExample.createCriteria().andParentidIsNull();
+	//
+	// List<Menu> list = menuMapper.selectByExample(menuExample);
+	// List children = new ArrayList();
+	// for (Menu object : list) {
+	// boolean flag = false;
+	// if(roleMenus != null){
+	// for (RoleMenu roleMenu : roleMenus) {
+	// if (roleMenu.getMenuId().equals(object.getId())) {
+	// flag = true;
+	// break;
+	// }
+	// }
+	// }
+	//
+	// if (!flag && roleMenus != null) {
+	// continue;
+	// }
+	//
+	// JSONObject jsonObject;
+	//
+	// jsonObject = searialMenu(object, roleMenus);
+	// children.add(jsonObject);
+	// }
+	// return children;
+	// }
 
 	@Override
 	public List<Menu> getByParentId(String id) {
@@ -177,57 +179,58 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 		return list;
 	}
 
-//	@SuppressWarnings("rawtypes")
-//	public JSONObject searialMenu(Menu menu, List<RoleMenu> roleMenus) throws JSONException {
-//		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("id", menu.getId());
-//		jsonObject.put("parentid", menu.getParentid());
-//		jsonObject.put("name", menu.getName());
-//		jsonObject.put("url", menu.getUrl());
-//		jsonObject.put("createdate", menu.getCreatedate());
-//		jsonObject.put("description", menu.getDescription());
-//		jsonObject.put("updatedate", menu.getUpdatedate());
-//
-//		List list = searialChild(menu, roleMenus);
-//		if (null != list) {
-//			jsonObject.put("children", list);
-//		}
-//
-//		return jsonObject;
-//	}
+	// @SuppressWarnings("rawtypes")
+	// public JSONObject searialMenu(Menu menu, List<RoleMenu> roleMenus) throws
+	// JSONException {
+	// JSONObject jsonObject = new JSONObject();
+	// jsonObject.put("id", menu.getId());
+	// jsonObject.put("parentid", menu.getParentid());
+	// jsonObject.put("name", menu.getName());
+	// jsonObject.put("url", menu.getUrl());
+	// jsonObject.put("createdate", menu.getCreatedate());
+	// jsonObject.put("description", menu.getDescription());
+	// jsonObject.put("updatedate", menu.getUpdatedate());
+	//
+	// List list = searialChild(menu, roleMenus);
+	// if (null != list) {
+	// jsonObject.put("children", list);
+	// }
+	//
+	// return jsonObject;
+	// }
 
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	public List searialChild(Menu menu, List<RoleMenu> roleMenus) throws JSONException {
-//		List children = null;
-//		List<Menu> list = getByParentId(menu.getId());
-//		if (list != null && list.size() > 0) {
-//			children = new ArrayList();
-//		}
-//		for (Menu object : list) {
-//			boolean flag = false;
-//			if(roleMenus != null){
-//				for (RoleMenu roleMenu : roleMenus) {
-//					if (roleMenu.getMenuId().equals(object.getId())) {
-//						flag = true;
-//						break;
-//					}
-//				}
-//			}
-//			if (!flag && roleMenus != null) {
-//				continue;
-//			}
-//
-//			JSONObject jsonObject = searialMenu(object, roleMenus);
-//			children.add(jsonObject);
-//		}
-//		return children;
-//	}
+	// @SuppressWarnings({ "rawtypes", "unchecked" })
+	// public List searialChild(Menu menu, List<RoleMenu> roleMenus) throws
+	// JSONException {
+	// List children = null;
+	// List<Menu> list = getByParentId(menu.getId());
+	// if (list != null && list.size() > 0) {
+	// children = new ArrayList();
+	// }
+	// for (Menu object : list) {
+	// boolean flag = false;
+	// if(roleMenus != null){
+	// for (RoleMenu roleMenu : roleMenus) {
+	// if (roleMenu.getMenuId().equals(object.getId())) {
+	// flag = true;
+	// break;
+	// }
+	// }
+	// }
+	// if (!flag && roleMenus != null) {
+	// continue;
+	// }
+	//
+	// JSONObject jsonObject = searialMenu(object, roleMenus);
+	// children.add(jsonObject);
+	// }
+	// return children;
+	// }
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IMenuService#insertBatch(List)
+	 * @see com.jcin.cms.service.IMenuService#insertBatch(List)
 	 */
 	@Override
 	public int insertBatch(List<Menu> list) {
@@ -239,13 +242,96 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IMenuService#deleteBatch(List)
+	 * @see com.jcin.cms.service.IMenuService#deleteBatch(List)
 	 */
 	@Override
 	public int deleteBatch(List<String> list) {
 		int result = menuMapper.deleteBatch(list);
 		super.deleteBatch(list);
 		return result;
+	}
+
+	@Override
+	public List<MenuExtention> getMenuTree() {
+		MenuCriteria menuExample = new MenuCriteria();
+		menuExample.createCriteria().andParentidIsNull();
+
+		List<Menu> list = menuMapper.selectByExample(menuExample);
+		List<MenuExtention> extentions = new ArrayList<MenuExtention>();
+
+		for (Menu menu : list) {
+			MenuExtention extention = new MenuExtention();
+			extention.setId(menu.getId());
+			extention.setCreatedate(menu.getCreatedate());
+			extention.setDescription(menu.getDescription());
+			extention.setIcon(menu.getIcon());
+			extention.setName(menu.getName());
+			extention.setParentid(menu.getParentid());
+			extention.setPath(menu.getPath());
+			extention.setUpdatedate(menu.getUpdatedate());
+			extention.setUrl(menu.getUrl());
+			
+			extentions.add(extention);
+		}
+
+		List<MenuExtention> children = new ArrayList<MenuExtention>();
+		for (MenuExtention object : extentions) {
+
+			MenuExtention menu;
+
+			menu = searialMenu(object);
+			children.add(menu);
+		}
+		return children;
+	}
+
+	public MenuExtention searialMenu(MenuExtention menu) {
+		MenuExtention extention = new MenuExtention();
+		extention.setId(menu.getId());
+		extention.setCreatedate(menu.getCreatedate());
+		extention.setDescription(menu.getDescription());
+		extention.setIcon(menu.getIcon());
+		extention.setName(menu.getName());
+		extention.setParentid(menu.getParentid());
+		extention.setPath(menu.getPath());
+		extention.setUpdatedate(menu.getUpdatedate());
+		extention.setUrl(menu.getUrl());
+
+		List<MenuExtention> list = searialChild(menu.getId());
+		if (null != list) {
+			extention.setChildren(list);
+		}
+
+		return extention;
+	}
+
+	public List<MenuExtention> searialChild(String id) {
+		List<MenuExtention> children = null;
+		List<Menu> list = getByParentId(id);
+		List<MenuExtention> extentions = new ArrayList<MenuExtention>();
+
+		for (Menu menu : list) {
+			MenuExtention extention = new MenuExtention();
+			extention.setId(menu.getId());
+			extention.setCreatedate(menu.getCreatedate());
+			extention.setDescription(menu.getDescription());
+			extention.setIcon(menu.getIcon());
+			extention.setName(menu.getName());
+			extention.setParentid(menu.getParentid());
+			extention.setPath(menu.getPath());
+			extention.setUpdatedate(menu.getUpdatedate());
+			extention.setUrl(menu.getUrl());
+			extentions.add(extention);
+		}
+
+		if (list != null && list.size() > 0) {
+			children = new ArrayList<MenuExtention>();
+		}
+		for (MenuExtention object : extentions) {
+
+			MenuExtention jsonObject = searialMenu(object);
+			children.add(jsonObject);
+		}
+		return children;
 	}
 }

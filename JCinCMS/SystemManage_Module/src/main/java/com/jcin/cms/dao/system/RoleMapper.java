@@ -1,9 +1,12 @@
 package com.jcin.cms.dao.system;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.RoleCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
     int deleteBatch(List list);
@@ -31,4 +34,10 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    ////////////// 自定义
+    List<Role> getRolesByUserId(String userId);
+    
+    List<Authorization> getAuthorizationsByRoleId(String id);
+    
 }

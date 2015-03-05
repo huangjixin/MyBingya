@@ -180,21 +180,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 */
 	@Override
 	public List<Role> getRolesByUserId(String id) {
-		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-		userRoleCriteria.createCriteria().andUserIdEqualTo(id);
-		List<UserRole> userRoles = userRoleMapper
-				.selectByExample(userRoleCriteria);
-		List<Role> roles = null;
-
-		for (UserRole userRole : userRoles) {
-			RoleCriteria roleCriteria = new RoleCriteria();
-			roleCriteria.createCriteria().andIdEqualTo(userRole.getRoleId());
-			if (roles == null) {
-				roles = roleMapper.selectByExample(roleCriteria);
-			} else {
-				roles.addAll(roleMapper.selectByExample(roleCriteria));
-			}
-		}
+		List<Role> roles = roleMapper.getRolesByUserId(id);
 		
 		return roles;
 	}

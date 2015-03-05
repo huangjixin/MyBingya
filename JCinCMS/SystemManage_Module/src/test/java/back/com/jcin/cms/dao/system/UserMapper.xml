@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.dao.system.UserMapper" >
+    
+   <select id="getUsersByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    user.*
+    from  tb_user user left join tb_user_role user_role on user.id = user_role.user_id
+    	 			  left join tb_role role on user_role.role_id = role.id
+    where role.id = #{roleId,jdbcType=VARCHAR}
+  </select>
+</mapper>

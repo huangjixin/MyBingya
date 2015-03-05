@@ -13,6 +13,7 @@ import org.json.JSONException;
 import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.MenuCriteria;
 import com.jcin.cms.service.IBaseService;
+import com.jcin.cms.service.system.impl.vo.MenuExtention;
 import com.jcin.cms.utils.Page;
 
 public interface IMenuService extends IBaseService<Menu, String> {
@@ -23,8 +24,7 @@ public interface IMenuService extends IBaseService<Menu, String> {
 	 * @return
 	 * @throws JSONException 
 	 */
-//	@SuppressWarnings("rawtypes")
-//	List getMenuTree(String roleId) throws JSONException;
+	List<MenuExtention> getMenuTree();
 
 	/**
 	 * 根据ParentId列查询记录数。

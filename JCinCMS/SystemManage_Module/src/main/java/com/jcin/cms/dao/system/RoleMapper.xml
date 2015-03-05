@@ -233,4 +233,21 @@
       </if>
     </if>
   </sql>
+  
+  <!-- 自定义 -->
+  <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    role.*
+    from tb_role role left join tb_user_role user_role on role.id = user_role.role_id
+    	 			  left join tb_user user on user_role.user_id = user.id
+    where user.id = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getAuthorizationsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    authorization.*
+    from tb_authorization authorization left join tb_role_authorization role_authorization on authorization.id = role_authorization.authorization_id
+    	 			  left join tb_role role on role_authorization.role_id = role.id
+    where role.id = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>

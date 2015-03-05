@@ -1,9 +1,11 @@
 package com.jcin.cms.dao.system;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteBatch(List list);
@@ -31,4 +33,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    List<User> getUsersByRoleId(String roleId);
 }
