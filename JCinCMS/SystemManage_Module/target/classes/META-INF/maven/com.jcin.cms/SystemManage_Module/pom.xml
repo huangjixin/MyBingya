@@ -22,5 +22,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+<!--     <dependency> -->
+<!--     <groupId>com.fasterxml.jackson.core</groupId> -->
+<!--     <artifactId>jackson-databind</artifactId> -->
+<!--     <version>${jackson-version}</version> -->
+<!-- </dependency> -->
   </dependencies>
 </project>

@@ -7,8 +7,8 @@
  */
 package com.jcin.cms.web.vo;
 
-import com.jcin.cms.domain.Role;
-import com.jcin.cms.domain.User;
+import com.jcin.cms.domain.system.Role;
+import com.jcin.cms.domain.system.User;
 
 public class LoginResponse {
 	private static LoginResponse loginResponse;

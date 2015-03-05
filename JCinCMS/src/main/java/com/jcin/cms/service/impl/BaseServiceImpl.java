@@ -21,8 +21,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
-import com.jcin.cms.dao.OperationlogMapper;
-import com.jcin.cms.domain.Operationlog;
+import com.jcin.cms.dao.system.OperationlogMapper;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.CustomerContextHolder;
 import com.jcin.cms.utils.Page;

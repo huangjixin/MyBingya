@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jcin.cms.domain.Operationlog;
-import com.jcin.cms.domain.User;
-import com.jcin.cms.service.IOpeLogService;
-import com.jcin.cms.service.IUserService;
+import com.jcin.cms.domain.system.Operationlog;
+import com.jcin.cms.domain.system.User;
+import com.jcin.cms.service.system.IOpeLogService;
+import com.jcin.cms.service.system.IUserService;
 import com.jcin.cms.utils.EncryptUtil;
 import com.jcin.cms.web.vo.LoginResponse;
 

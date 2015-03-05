@@ -35,32 +35,34 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.domain"
+		<javaModelGenerator targetPackage="com.jcin.cms.domain.system"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.dao"
+		<sqlMapGenerator targetPackage="com.jcin.cms.dao.system"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.dao" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.dao.system" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<table tableName="tb_operationlog" domainObjectName="Operationlog" />
+		
 		<!-- <table tableName="tb_article" domainObjectName="Article" /> -->
 		<!-- <table tableName="tb_asset" domainObjectName="Asset" /> -->
 		<!-- <table tableName="tb_category" domainObjectName="Category" /> -->
 		<!-- <table tableName="tb_comment" domainObjectName="Comment" /> -->
-<!-- 		<table tableName="tb_menu" domainObjectName="Menu" /> -->
-<!-- 		<table tableName="tb_role" domainObjectName="Role" /> -->
-<!-- 		<table tableName="tb_role_menu" domainObjectName="RoleMenu" /> -->
-<!-- 		<table tableName="tb_user" domainObjectName="User" /> -->
-<!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
-<!-- 		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
+		<table tableName="tb_menu" domainObjectName="Menu" />
+		<table tableName="tb_authorization" domainObjectName="Authorization" />
+		<table tableName="tb_role" domainObjectName="Role" />
+		<table tableName="tb_role_authorization" domainObjectName="RoleAuthorization" />
+		<table tableName="tb_user" domainObjectName="User" />
+		<table tableName="tb_user_role" domainObjectName="UserRole" />
+		<table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" />
 <!-- 		<table tableName="tb_test" domainObjectName="Test" /> -->
 		
 <!-- 		<table tableName="tb_payed" domainObjectName="Payed" /> -->

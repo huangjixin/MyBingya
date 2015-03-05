@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.dao.system.AuthorizationMapper" >
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select authorization.* from tb_authorization authorization 
+  		left join tb_role_authorization role_authorization on authorization.id = role_authorization.tb_authorization_id
+		left join tb_role role on role.id = role_authorization.tb_role_id = role.id
+		left join tb_user_role user_role on role.id = user_role.role_id
+		left join tb_user user on user_role.role_id = user.id where user.id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

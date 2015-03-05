@@ -32,9 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.Operationlog;
-import com.jcin.cms.domain.OperationlogCriteria;
-import com.jcin.cms.service.IOpeLogService;
+import com.jcin.cms.domain.system.Operationlog;
+import com.jcin.cms.domain.system.OperationlogCriteria;
+import com.jcin.cms.service.system.IOpeLogService;
 import com.jcin.cms.utils.Page;
 
 /**

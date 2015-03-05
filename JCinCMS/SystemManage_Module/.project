@@ -32,5 +32,10 @@
 			<type>2</type>
 			<locationURI>WORKSPACE_LOC/JCinCMS/src/main/generator</locationURI>
 		</link>
+		<link>
+			<name>resources</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/JCinCMS/src/main/resources</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
