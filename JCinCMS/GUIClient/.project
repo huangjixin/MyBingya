@@ -26,4 +26,21 @@
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>jcincms_java</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/JCinCMS/src/main/java</locationURI>
+		</link>
+		<link>
+			<name>resources</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/JCinCMS/src/main/resources</locationURI>
+		</link>
+		<link>
+			<name>system_java</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/JCinCMS/SystemManage_Module/src/main/java</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
