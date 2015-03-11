@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,10 +33,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.system.Menu;
-import com.jcin.cms.domain.system.MenuCriteria;
-import com.jcin.cms.service.system.IMenuService;
-import com.jcin.cms.service.system.impl.vo.MenuExtention;
+import com.jcin.cms.domain.system.Role;
+import com.jcin.cms.domain.system.User;
+import com.jcin.cms.domain.system.UserCriteria;
+import com.jcin.cms.service.system.IUserService;
 import com.jcin.cms.utils.Page;
 
 /**
@@ -44,98 +45,102 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Controller
-@RequestMapping("/menu")
-public class MenuController extends BaseController<Menu> {
+@RequestMapping("/user")
+public class UserController extends BaseController<User> {
 	@Resource
-	private IMenuService menuService;
+	private IUserService userService;
 
 	@RequestMapping(value = "/create")
-	public ModelAndView create(@Valid Menu menu, BindingResult bindingResult,
-			Model uiModel, HttpServletRequest httpServletRequest) {
-		//为空字符串则为顶级菜单。
-		if("".equals(menu.getParentid())){
-			menu.setParentid(null);
-		}
+	public ModelAndView create(@Valid User user,@Valid String roleId,
+			BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("view/menu/menu_add");
+		modelAndView.setViewName("view/user/user_add");
 		if (bindingResult.hasErrors()) {
-			populateEditForm(modelAndView, menu);
+			populateEditForm(modelAndView, user);
 			return modelAndView;
 		}
-		menu.setCreatedate(new Date());
-		super.create(menu, bindingResult, uiModel, httpServletRequest);
+		user.setCreatedate(new Date());
+//		super.create(user, bindingResult, uiModel, httpServletRequest);
 
-		menuService.insert(menu);
-
-		populateEditForm(modelAndView, menu);
-		modelAndView.addObject("result", "添加成功");
+		userService.insert(user,roleId);
+		modelAndView.addObject("roleId", roleId);
+		populateEditForm(modelAndView, user);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "new", produces = "text/html")
 	public String createForm(Model uiModel) {
-		populateEditForm(uiModel, new Menu());
-		return "view/menu/menu_add";
+		populateEditForm(uiModel, new User());
+		uiModel.addAttribute("roleId", "");
+		return "view/user/user_add";
 	}
 
 	@RequestMapping(value = "/{id}")
 	public ModelAndView show(@PathVariable("id") String id, Model uiModel) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("view/menu/menu_show");
-		modelAndView.addObject("menu", menuService.selectByPrimaryKey(id));
+		modelAndView.setViewName("view/user/user_show");
+		modelAndView.addObject("user", userService.selectByPrimaryKey(id));
 		modelAndView.addObject("itemId", id);
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/list", produces = "text/html")
+	@RequestMapping(value = "list", produces = "text/html")
 	public String list(
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer rows,
 			Model uiModel) {
-		return "view/menu/menu_list";
+		return "view/user/user_list";
 	}
 
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@Valid Page page, @Valid Menu menu,
+	public Page select(@Valid Page page, @Valid User user,
 			BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		super.select(page, bindingResult, uiModel, httpServletRequest,
 				httpServletResponse);
-		MenuCriteria menuCriteria = new MenuCriteria();
-		MenuCriteria.Criteria criteria = menuCriteria.createCriteria();
-		menuCriteria.setPage(page);
-		menuCriteria.setOrderByClause("id desc");
-		if (null != menu.getName()) {
-			criteria.andNameLike("%" + menu.getName() + "%");
+		UserCriteria userCriteria = new UserCriteria();
+		UserCriteria.Criteria criteria = userCriteria.createCriteria();
+		userCriteria.setPage(page);
+		userCriteria.setOrderByClause("id desc");
+		if (null != user.getUsername()) {
+			criteria.andUsernameLike("%" + user.getUsername() + "%");
 		}
-		page = menuService.select(menuCriteria);
+		page = userService.select(userCriteria);
 		return page;
 	}
 
 	@RequestMapping(value = "update")
-	public ModelAndView update(@Valid Menu menu, BindingResult bindingResult,
+	public String update(@Valid User user, @Valid String roleId, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("view/menu/menu_list");
-
-		if (bindingResult.hasErrors()) {
-			populateEditForm(modelAndView, menu);
-			return modelAndView;
-		}
-		uiModel.asMap().clear();
-		menuService.update(menu);
-		populateEditForm(modelAndView, menu);
-		modelAndView.addObject("result", "更新成功");
-		return modelAndView;
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("view/user/user_list");
+//
+//		if (bindingResult.hasErrors()) {
+//			populateEditForm(modelAndView, user);
+//			return modelAndView;
+//		}
+//		uiModel.asMap().clear();
+		userService.update(user,roleId);
+//		populateEditForm(modelAndView, user);
+//		return modelAndView;
+		return "view/user/user_list";
 	}
 
 	@RequestMapping(value = "/edit")
 	public ModelAndView updateForm(@RequestParam String id, Model uiModel) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("view/menu/menu_update");
-		populateEditForm(modelAndView, menuService.selectByPrimaryKey(id));
+		modelAndView.setViewName("view/user/user_update");
+		User user = userService.selectByPrimaryKey(id);
+		List<Role>roles = userService.getRolesByUserId(id);
+		String roleId = "";
+		if(roles.size()>0){
+			roleId = roles.get(0).getId();
+		}
+		populateEditForm(modelAndView, user);
+		modelAndView.addObject("roleId", roleId);
 		return modelAndView;
 	}
 
@@ -144,11 +149,11 @@ public class MenuController extends BaseController<Menu> {
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			Model uiModel) {
-		menuService.deleteByPrimaryKey(id);
+		userService.deleteByPrimaryKey(id);
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-		return "redirect:/view/menu";
+		return "redirect:/view/user";
 	}
 
 	@RequestMapping(value = "/deleteById")
@@ -162,25 +167,18 @@ public class MenuController extends BaseController<Menu> {
 		for (String idstr : ids) {
 			list.add(idstr);
 		}
-		int result = menuService.deleteBatch(list);
+		int result = userService.deleteBatch(list);
 
 		return result;
 	}
 
-	@RequestMapping(value = "/getMenu")
-	@ResponseBody
-	public List<MenuExtention> getMenu(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-		List<MenuExtention> list = menuService.getMenuTree();
-		return list;
+	void populateEditForm(Model uiModel, User user) {
+		uiModel.addAttribute("user", user);
 	}
 
-	void populateEditForm(Model uiModel, Menu menu) {
-		uiModel.addAttribute("menu", menu);
-	}
-
-	void populateEditForm(ModelAndView modelAndView, Menu menu) {
-		modelAndView.addObject("menu", menu);
+	void populateEditForm(ModelAndView modelAndView, User user) {
+		modelAndView.addObject("user", user);
+		
 	}
 
 	String encodeUrlPathSegment(String pathSegment,

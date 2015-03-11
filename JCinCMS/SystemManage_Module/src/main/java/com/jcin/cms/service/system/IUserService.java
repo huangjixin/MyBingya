@@ -13,6 +13,7 @@ import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.IBaseService;
+import com.jcin.cms.service.system.impl.vo.UserExtention;
 import com.jcin.cms.utils.Page;
 
 public interface IUserService extends IBaseService<User, String> {
@@ -47,4 +48,17 @@ public interface IUserService extends IBaseService<User, String> {
 	 * @return
 	 */
 	List<Authorization> getAuthoByUserId(String id);
+	
+	/**
+	 * 插入一条记录
+	 * @param record
+	 * @return
+	 */
+	String insert(User record,String roleId);
+	/**
+	 * 更新一条记录
+	 * @param record
+	 * @return
+	 */
+	String update(User record,String roleId);
 }

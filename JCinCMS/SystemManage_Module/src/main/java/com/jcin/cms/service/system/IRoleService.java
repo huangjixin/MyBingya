@@ -8,6 +8,7 @@ package com.jcin.cms.service.system;
 
 import java.util.List;
 
+import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.RoleCriteria;
 import com.jcin.cms.domain.system.User;
@@ -30,4 +31,10 @@ public interface IRoleService  extends IBaseService<Role, String>{
 	 */
 	List<User> getUsesByRoleId(String id);
 	
+	/**
+	 * 根据角色Id查询权限。
+	 * @param id
+	 * @return
+	 */
+	List<Authorization> getAuthorizationsByRoleId(String id);
 }

@@ -14,13 +14,19 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.domain.system.Authorization;
+import com.jcin.cms.domain.system.Role;
+import com.jcin.cms.domain.system.User;
+import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.system.IUserService;
+import com.jcin.cms.service.system.impl.vo.UserExtention;
+import com.jcin.cms.utils.Page;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // 指定测试用例的运行器 这里是指定了Junit4
@@ -42,5 +48,17 @@ public class TestUserService extends TestCase {
 	public void testGetAuthoByUserId() {
 		List<Authorization> list = userService.getAuthoByUserId("1");
 		assertEquals(1, list.size());
+	}
+	
+	@Test
+	public void testUpdate() {
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.createCriteria().andUsernameEqualTo("12334");
+		Page page = userService.select(userCriteria);
+		User user = (User) page.getRows().get(0);
+		user.setPassword("222222");
+		List<Role>roles = userService.getRolesByUserId(user.getId());
+		userService.update(user,roles.get(0).getId());
+//		assertEquals(1, list.size());
 	}
 }

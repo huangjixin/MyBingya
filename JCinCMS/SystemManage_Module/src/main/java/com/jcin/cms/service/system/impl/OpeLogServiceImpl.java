@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.system.OperationlogMapper;
+import com.jcin.cms.domain.system.Mysqlbackup;
 import com.jcin.cms.domain.system.Operationlog;
 import com.jcin.cms.domain.system.OperationlogCriteria;
 import com.jcin.cms.service.impl.BaseServiceImpl;
@@ -106,6 +107,19 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 		page.setTotal(total);
 		return page;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IOperationlogService#selectAll()
+	 */
+	@Override
+	public List<Operationlog> selectAll() {
+		List<Operationlog> list = operationlogMapper.selectByExample(null);
+		return list;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -144,6 +158,7 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * com.jcin.cms.service.IOperationlogService#insertBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int insertBatch(List<Operationlog> list) {
 		int result = operationlogMapper.insertBatch(list);
 		super.insertBatch(list);
@@ -157,6 +172,7 @@ public class OpeLogServiceImpl extends BaseServiceImpl<Operationlog, String>
 	 * com.jcin.cms.service.IOperationlogService#deleteBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int deleteBatch(List<String> list) {
 		OperationlogCriteria operationlogCriteria = new OperationlogCriteria();
 		operationlogCriteria.createCriteria().andIdIn(list);

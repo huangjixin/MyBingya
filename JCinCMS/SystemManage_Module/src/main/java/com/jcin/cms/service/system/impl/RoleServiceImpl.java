@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.system.RoleMapper;
 import com.jcin.cms.dao.system.UserMapper;
 import com.jcin.cms.dao.system.UserRoleMapper;
+import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.RoleCriteria;
 import com.jcin.cms.domain.system.User;
@@ -123,6 +124,17 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.jcin.cms.service.IRoleService#selectAll()
+	 */
+	@Override
+	public List<Role> selectAll() {
+		List<Role> list = roleMapper.selectByExample(null);
+		return list;
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.jcin.cms.service.IRoleService#selectByPrimaryKey(java.lang.String)
 	 */
 	@Override
@@ -154,21 +166,22 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 */
 	@Override
 	public List<User> getUsesByRoleId(String id) {
-		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-		userRoleCriteria.createCriteria().andRoleIdEqualTo(id);
-		List<UserRole> userRoles = userRoleMapper
-				.selectByExample(userRoleCriteria);
 		List<User> users = null;
-
-		for (UserRole userRole : userRoles) {
-			UserCriteria userCriteria = new UserCriteria();
-			userCriteria.createCriteria().andIdEqualTo(userRole.getUserId());
-			if (users == null) {
-				users = userMapper.selectByExample(userCriteria);
-			} else {
-				users.addAll(userMapper.selectByExample(userCriteria));
-			}
-		}
+//		users = userMapper.getUsersByRoleId(id);
+//		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
+//		userRoleCriteria.createCriteria().andRoleIdEqualTo(id);
+//		List<UserRole> userRoles = userRoleMapper
+//				.selectByExample(userRoleCriteria);
+//
+//		for (UserRole userRole : userRoles) {
+//			UserCriteria userCriteria = new UserCriteria();
+//			userCriteria.createCriteria().andIdEqualTo(userRole.getUserId());
+//			if (users == null) {
+//				users = userMapper.selectByExample(userCriteria);
+//			} else {
+//				users.addAll(userMapper.selectByExample(userCriteria));
+//			}
+//		}
 
 		return users;
 	}
@@ -180,6 +193,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * com.jcin.cms.service.IRoleService#insertBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int insertBatch(List<Role> list) {
 		int result = roleMapper.insertBatch(list);
 		super.insertBatch(list);
@@ -193,9 +207,24 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * com.jcin.cms.service.IRoleService#deleteBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int deleteBatch(List<String> list) {
-		int result = roleMapper.deleteBatch(list);
+		RoleCriteria roleCriteria = new RoleCriteria();
+		roleCriteria.createCriteria().andIdIn(list);
+		int result = roleMapper.deleteByExample(roleCriteria);
 		super.deleteBatch(list);
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.jcin.cms.service.IRoleService#getAuthorizationsByRoleId(String)
+	 */
+	@Override
+	public List<Authorization> getAuthorizationsByRoleId(String id) {
+		List<Authorization>list = roleMapper.getAuthorizationsByRoleId(id);
+		return list;
 	}
 }

@@ -233,6 +233,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	 * @see com.jcin.cms.service.IMenuService#insertBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int insertBatch(List<Menu> list) {
 		int result = menuMapper.insertBatch(list);
 		super.insertBatch(list);
@@ -242,15 +243,19 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jcin.cms.service.IMenuService#deleteBatch(List)
+	 * @see
+	 * com.jcin.cms.service.IMenuService#deleteBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int deleteBatch(List<String> list) {
-		int result = menuMapper.deleteBatch(list);
+		MenuCriteria menuCriteria = new MenuCriteria();
+		menuCriteria.createCriteria().andIdIn(list);
+		int result = menuMapper.deleteByExample(menuCriteria);
 		super.deleteBatch(list);
 		return result;
 	}
-
+	
 	@Override
 	public List<MenuExtention> getMenuTree() {
 		MenuCriteria menuExample = new MenuCriteria();

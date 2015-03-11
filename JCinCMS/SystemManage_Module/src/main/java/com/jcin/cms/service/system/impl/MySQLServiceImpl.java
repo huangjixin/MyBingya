@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.dao.system.MysqlbackupMapper;
 import com.jcin.cms.domain.system.Mysqlbackup;
 import com.jcin.cms.domain.system.MysqlbackupCriteria;
+import com.jcin.cms.domain.system.User;
+import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.service.system.IMySQLService;
 import com.jcin.cms.utils.Page;
@@ -113,6 +115,18 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.jcin.cms.service.IMysqlbackupService#selectAll()
+	 */
+	@Override
+	public List<Mysqlbackup> selectAll() {
+		List<Mysqlbackup> list = mysqlMapper.selectByExample(null);
+		return list;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.jcin.cms.service.IMysqlbackupService#selectByPrimaryKey(java.lang
 	 * .String)
 	 */
@@ -146,6 +160,7 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 	 * com.jcin.cms.service.IMysqlbackupService#insertBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int insertBatch(List<Mysqlbackup> list) {
 		int result = mysqlMapper.insertBatch(list);
 		super.insertBatch(list);
@@ -159,8 +174,11 @@ public class MySQLServiceImpl extends BaseServiceImpl<Mysqlbackup, String>
 	 * com.jcin.cms.service.IMysqlbackupService#deleteBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int deleteBatch(List<String> list) {
-		int result = mysqlMapper.deleteBatch(list);
+		MysqlbackupCriteria mysqlbackupCriteria = new MysqlbackupCriteria();
+		mysqlbackupCriteria.createCriteria().andIdIn(list);
+		int result = mysqlMapper.deleteByExample(mysqlbackupCriteria);
 		super.deleteBatch(list);
 		return result;
 	}

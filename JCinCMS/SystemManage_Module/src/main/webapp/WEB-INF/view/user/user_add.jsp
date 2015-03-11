@@ -6,15 +6,15 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-	+ request.getServerName() + ":" + request.getServerPort()
-	+ path + "/";
-	
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>菜单添加</title>
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<title>用户添加</title>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery-easyui/dwrloader.js"></script>
@@ -60,28 +60,26 @@
 <script type="text/javascript">
 	//清除表单。
 	function clearForm() {
-		$('.easyui-combotree').combotree('clear');
-		$('#parentid').val('');
-		$('#name').val('');
-		$('#url').val('');
-		$('#description').val('');
-		$('#result').html('');
+// 		$('.easyui-combotree').combotree('clear');
+// 		$('#roleId').val('');
+// 		$('#name').val('');
+// 		$('#url').val('');
+// 		$('#description').val('');
+// 		$('#result').html('');
 	}
 
 	//父类菜单变化。
 	function onChange(rec) {
-		$('#parentid').val(rec.id);
+		$('#roleId').val(rec.id);
 	}
 
 	function onLoadSuccess() {
-		var pid = $('#parentid').val();
-		var node = $('#menuTree').combotree('tree').tree('find', pid);
-		if(node != null){
-			$("#menuTree").combotree('setValue', pid);
-// 			$('#menuTree').combotree('tree').tree('select', node.target);//node为要选中的节点
-// 			$('#menuTree').combotree('tree').tree('expandAll', node.target);
-// 			alert(node.name);
-// 			$('#menuTree').val(node.name);
+		var roleId = $('#roleId').val();
+		var data = $('#roleCombobox').combobox('getData');
+		for(var i=0;i<data.length;i++){
+			if(data[i].id ==  roleId){
+				$('#roleCombobox').combobox('select', data[i].name);
+			}
 		}
 	}
 </script>
@@ -89,35 +87,34 @@
 <body>
 	<form id="form_return" action="list"></form>
 	<form action="create" method="post">
-		<table width="100%" border="1px;" bordercolor="#C5C5C5"
-			align="center" cellpadding="0" cellspacing="0"
-			style="border-collapse: collapse;">
+		<table width="100%" border="1px;" bordercolor="#C5C5C5" align="center"
+			cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
 			<tbody>
 				<tr class="tr1">
-					<th class="th1">名称:</th>
-					<td class="td1"><input type="text" name="name" id="name"
-						value="${menu.name}" size="35"></td>
+					<th class="th1">用户名:</th>
+					<td class="td1"><input type="hidden" id="idInput" name="id"/><input type="text" name="username" id="name"
+						value="${user.username}" size="35"></td>
 				</tr>
 				<tr class="tr1">
-					<th class="th1">父菜单:</th>
-					<td class="td1"><input type="hidden" name="parentid"
-						id="parentid" value="${menu.parentid}"><input
-						class="easyui-combotree" id="menuTree"
-						data-options="url:'getMenu',method:'get',onSelect:onChange,onLoadSuccess:onLoadSuccess"
-						style="width:224px;"> <input type="button"
-						onclick="$('.easyui-combotree').combotree('clear');$('#parentid').val('');"
+					<th class="th1">密  码:</th>
+					<td class="td1"><input type="password" name="password" id="password"
+						value="" size="35"></td>
+				</tr>
+				<tr class="tr1">
+					<th class="th1">角色:</th>
+					<td class="td1"><input type="hidden" name="roleId"
+						id="roleId" value="${roleId}"><input
+						class="easyui-combobox" id="roleCombobox"
+						data-options="editable : false,url:'<%=basePath%>role/selectAll',method:'get',onSelect:onChange,onLoadSuccess:onLoadSuccess,textField:'name'"
+						style="width:224px;">  <input type="button"
+						onclick="$('.easyui-combobox').combobox('clear');$('#roleId').val('');"
 						value="清除" /></td>
-				</tr>
-				<tr class="tr1">
-					<th class="th1">连接URL:</th>
-					<td class="td1" colSpan="3"><input type="text" name="url"
-						id="url" value="${menu.url}" size="35"></td>
 				</tr>
 				<tr class="tr1">
 					<th class="th1">描述:</th>
 					<td class="td1" colSpan="3" style="padding: 4px;"><textarea
 							id="description" name="description"
-							style="width: 520px;height: 100px;">${menu.description}</textarea></td>
+							style="width: 520px;height: 100px;">${user.description}</textarea></td>
 				</tr>
 				<tr class="tr1">
 					<th></th>
@@ -130,6 +127,7 @@
 			</tbody>
 		</table>
 	</form>
+
 
 </body>
 </html>

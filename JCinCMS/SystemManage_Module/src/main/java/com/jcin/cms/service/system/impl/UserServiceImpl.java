@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import com.jcin.cms.dao.system.RoleMapper;
 import com.jcin.cms.dao.system.UserMapper;
 import com.jcin.cms.dao.system.UserRoleMapper;
 import com.jcin.cms.domain.system.Authorization;
+import com.jcin.cms.domain.system.OperationlogCriteria;
 import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.RoleCriteria;
 import com.jcin.cms.domain.system.User;
@@ -28,6 +30,8 @@ import com.jcin.cms.domain.system.UserRole;
 import com.jcin.cms.domain.system.UserRoleCriteria;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.service.system.IUserService;
+import com.jcin.cms.service.system.impl.vo.UserExtention;
+import com.jcin.cms.utils.CustomerContextHolder;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.vo.LoginResponse;
 
@@ -50,9 +54,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 
 	@Resource
 	private RoleMapper roleMapper;
-	
+
 	@Resource
 	private AuthorizationMapper authorizationMapper;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -63,11 +68,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		super.deleteByPrimaryKey(id);
-//		logger.info(LoginResponse.user == null ? "" : LoginResponse.user
-//				.getUsername()
-//				+ " UserServiceImpl.deleteByPrimaryKey"
-//				+ ",ID:"
-//				+ id + "成功");
+		// logger.info(LoginResponse.user == null ? "" : LoginResponse.user
+		// .getUsername()
+		// + " UserServiceImpl.deleteByPrimaryKey"
+		// + ",ID:"
+		// + id + "成功");
 		int result = userMapper.deleteByPrimaryKey(id);
 		return result;
 	}
@@ -84,11 +89,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
 		record.setPassword(pas);
-//		logger.info(LoginResponse.user == null ? "" : LoginResponse.user
-//				.getUsername()
-//				+ "操作 UserServiceImpl.insert"
-//				+ ",record:"
-//				+ record.getUsername() + "成功");
+		// logger.info(LoginResponse.user == null ? "" : LoginResponse.user
+		// .getUsername()
+		// + "操作 UserServiceImpl.insert"
+		// + ",record:"
+		// + record.getUsername() + "成功");
 		userMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -134,6 +139,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.jcin.cms.service.IUserService#selectAll()
+	 */
+	@Override
+	public List<User> selectAll() {
+		List<User> list = userMapper.selectByExample(null);
+		return list;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * com.jcin.cms.service.IUserService#selectByPrimaryKey(java.lang.String)
 	 */
@@ -152,9 +168,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional
 	public String update(User record) {
 		super.update(record);
-		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
-		record.setPassword(pas);
+		// Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		// String pas = passwordEncoder.encodePassword(record.getPassword(),
+		// "");
+		// record.setPassword(pas);
 		int result = userMapper.updateByPrimaryKey(record);
 		return record.getId();
 	}
@@ -181,17 +198,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	public List<Role> getRolesByUserId(String id) {
 		List<Role> roles = roleMapper.getRolesByUserId(id);
-		
+
 		return roles;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IUserService#insertBatch(List)
+	 * @see com.jcin.cms.service.IUserService#insertBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int insertBatch(List<User> list) {
 		int result = userMapper.insertBatch(list);
 		super.insertBatch(list);
@@ -201,25 +218,97 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IUserService#deleteBatch(List)
+	 * @see com.jcin.cms.service.IUserService#deleteBatch(List)
 	 */
 	@Override
+	@Transactional
 	public int deleteBatch(List<String> list) {
-		int result = userMapper.deleteBatch(list);
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.createCriteria().andIdIn(list);
+		int result = userMapper.deleteByExample(userCriteria);
 		super.deleteBatch(list);
 		return result;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.IUserService#getAuthoByUserId(String)
+	 * @see com.jcin.cms.service.IUserService#getAuthoByUserId(String)
 	 */
 	@Override
 	public List<Authorization> getAuthoByUserId(String id) {
-		List<Authorization> authorizations = authorizationMapper.selectByUserId(id);
+		List<Authorization> authorizations = authorizationMapper
+				.selectByUserId(id);
 		return authorizations;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.IUserService#insert(UserExtention)
+	 */
+	@Override
+	@Transactional
+	public String insert(User record, String roleId) {
+		// super.insert(record);
+		record.setId(new Date().getTime() + "");
+		// Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		// String pas = passwordEncoder.encodePassword(record.getPassword(),
+		// "");
+		// record.setPassword(pas);
+		// logger.info(LoginResponse.user == null ? "" : LoginResponse.user
+		// .getUsername()
+		// + "操作 UserServiceImpl.insert"
+		// + ",record:"
+		// + record.getUsername() + "成功");
+		userMapper.insert(record);
+		String id = record.getId();
+
+		if (!"".equals(roleId) && roleId != null && !"".equals(roleId)) {
+			UserRole userRole = new UserRole();
+			userRole.setId(new Date().getTime() + "");
+			userRole.setUserId(id);
+			userRole.setRoleId(roleId);
+			userRoleMapper.insert(userRole);
+		}
+		return id;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jcin.cms.service.IUserService#update(com.jcin.cms.domain.User)
+	 */
+	@Override
+	@Transactional
+	public String update(User record, String roleId) {
+		CustomerContextHolder.setCustomerType("SLAVE");
+		// super.update(record);
+		// Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		// String pas = passwordEncoder.encodePassword(record.getPassword(),
+		// "");
+		// record.setPassword(pas);
+
+		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
+		userRoleCriteria.createCriteria().andUserIdEqualTo(record.getId());
+		List<UserRole> userRoles = userRoleMapper
+				.selectByExample(userRoleCriteria);
+		UserRole userRole = null;
+		if ("".equals(roleId) || roleId == null) {
+			// 更新关联表
+			if (userRoles.size() > 0) {
+				userRole = userRoles.get(0);
+				userRoleMapper.deleteByPrimaryKey(userRole.getId());
+			}
+		} else if (!roleId.equals(userRole.getRoleId())) {
+			if (userRoles.size() > 0) {
+				userRole = userRoles.get(0);
+				userRole.setRoleId(roleId);
+				userRoleMapper.updateByPrimaryKey(userRole);
+			}
+		}
+
+		userMapper.updateByPrimaryKeySelective(record);
+		return record.getId();
 	}
 }

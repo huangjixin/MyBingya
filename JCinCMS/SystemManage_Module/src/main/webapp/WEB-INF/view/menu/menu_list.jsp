@@ -122,7 +122,7 @@ function deleteRows() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : 'opelog/deleteById',
+		url : 'menu/deleteById',
 		data : pamameter,
 		async : false,
 		error : function(request) {
