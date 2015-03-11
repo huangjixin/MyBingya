@@ -132,6 +132,12 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	}
 
 	@Override
+	public List<T> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public T selectByPrimaryKey(PK id) {
 		CustomerContextHolder.setCustomerType("MASTER");
 		return null;

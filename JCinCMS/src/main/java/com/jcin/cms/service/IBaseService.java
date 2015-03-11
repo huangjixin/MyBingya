@@ -43,6 +43,11 @@ public interface IBaseService<T extends Serializable, PK extends Serializable> {
 	Page select(Page page);
 
 	/**
+	 * 查询全部
+	 * @return
+	 */
+	List<T> selectAll();
+	/**
 	 * 根据主键查询返回记录。
 	 * @param id
 	 * @return

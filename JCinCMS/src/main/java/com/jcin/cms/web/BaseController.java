@@ -1,6 +1,5 @@
 /**
- * 中兴软创<br/>
- * 一句话描述该类：<br/>
+ * 一句话描述该类：Controller基础类<br/>
  * @author 黄记新
  * @date 2015-1-4,下午3:23:34
  *
@@ -11,6 +10,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jcin.cms.utils.Page;
 
 public class BaseController<T extends Serializable> {
-
 	public Page select(Page page, BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -75,6 +74,10 @@ public class BaseController<T extends Serializable> {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public List<T> selectAll(HttpServletRequest httpServletRequest) {
 		return null;
 	}
 	// public String create(<T extends Serializable>,BindingResult
