@@ -38,4 +38,9 @@ public interface IAuthorizationService extends
 	 * @return
 	 */
 	Page select(AuthorizationCriteria criteria);
+	
+	/**
+	 * 同步菜单。
+	 */
+	void sychMenu();
 }

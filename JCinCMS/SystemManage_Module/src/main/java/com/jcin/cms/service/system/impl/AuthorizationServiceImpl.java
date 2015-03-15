@@ -16,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.system.AuthorizationMapper;
+import com.jcin.cms.dao.system.MenuMapper;
 import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.AuthorizationCriteria;
+import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.service.system.IAuthorizationService;
 import com.jcin.cms.service.system.impl.vo.AuthorizationExtention;
@@ -36,6 +38,8 @@ public class AuthorizationServiceImpl extends BaseServiceImpl<Authorization, Str
 
 	@Resource
 	private AuthorizationMapper authorizationMapper;
+	@Resource
+	private MenuMapper menuMapper;
 
 	/*
 	 * (non-Javadoc)
@@ -332,5 +336,34 @@ public class AuthorizationServiceImpl extends BaseServiceImpl<Authorization, Str
 			children.add(jsonObject);
 		}
 		return children;
+	}
+
+	@Override
+	public void sychMenu() {
+		List<Authorization> list = authorizationMapper.selectByExample(null);
+		List<String>idList = new ArrayList<String>();
+		for (Authorization authorization : list) {
+			idList.add(authorization.getId());
+		}
+		
+		AuthorizationCriteria authorizationCriteria = new AuthorizationCriteria();
+		authorizationCriteria.createCriteria().andIdIn(idList);
+		if(idList.size()>0){
+			authorizationMapper.deleteByExample(authorizationCriteria);
+		}
+		
+		
+		List<Menu>menus = menuMapper.selectByExample(null);
+		list = new ArrayList<Authorization>();
+		for (Menu menu : menus) {
+			Authorization authorization = new Authorization();
+			authorization.setId(menu.getId());
+			authorization.setParentId(menu.getParentid());
+			authorization.setName(menu.getName());
+			authorization.setUrl(menu.getUrl());
+			list.add(authorization);
+		}
+		
+		authorizationMapper.insertBatch(list);
 	}
 }
