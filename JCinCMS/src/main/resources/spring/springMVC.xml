@@ -20,8 +20,8 @@
 	</context:component-scan>
 
 	<!-- 默认的注解映射的支持 -->
-	<mvc:annotation-driven />
-
+	<mvc:annotation-driven>
+	</mvc:annotation-driven>
 	<!-- 视图解释类 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,12 +32,12 @@
 	</bean>
 
 	<!-- 拦截器 -->
-<!-- 	<mvc:interceptors> -->
-		<!-- <mvc:interceptor> -->
-		<!-- <mvc:mapping path="/api/time/get_time/" /> -->
-		<!-- </mvc:interceptor> -->
-<!-- 		<bean class="com.jcin.cms.web.JCinInteceptor" /> -->
-<!-- 	</mvc:interceptors> -->
+	<!-- <mvc:interceptors> -->
+	<!-- <mvc:interceptor> -->
+	<!-- <mvc:mapping path="/api/time/get_time/" /> -->
+	<!-- </mvc:interceptor> -->
+	<!-- <bean class="com.jcin.cms.web.JCinInteceptor" /> -->
+	<!-- </mvc:interceptors> -->
 
 	<mvc:default-servlet-handler />
 
