@@ -9,26 +9,14 @@ import java.util.List;
  * @author linzongxue
  * 
  */
-@SuppressWarnings("rawtypes")
 public class Page {
-	protected int limit = 20; // 每页显示条数
-	protected int start = 0; // 起始行号
-	protected int pageSize = 10; // 每页显示条数
-	protected int total = -1; // 总数
-	protected List rows = new ArrayList(); // 结果集
-	protected int page = 1; // 第几页
-	// protected int pages = 0; //总页面码, jqGrid要求给出总页数，超级无聊
-	protected String desc = "false";
-	// -- 访问查询结果函数 --//
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
+	private int limit = 20; // 每页显示条数
+	private int start = 0; // 起始行号
+	private int pageSize = 10; // 每页显示条数
+	private int total = -1; // 总数
+	private List rows = new ArrayList(); // 结果集
+	private int page = 1; // 第几页
+	
 	public int getLimit() {
 		return limit;
 	}
@@ -45,12 +33,12 @@ public class Page {
 		this.start = start;
 	}
 
-	public List getRows() {
-		return rows;
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setRows(List rows) {
-		this.rows = rows;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public int getTotal() {
@@ -61,6 +49,14 @@ public class Page {
 		this.total = total;
 	}
 
+	public List getRows() {
+		return rows;
+	}
+
+	public void setRows(List rows) {
+		this.rows = rows;
+	}
+
 	public int getPage() {
 		return page;
 	}
@@ -69,8 +65,4 @@ public class Page {
 		this.page = page;
 	}
 
-	//
-	// public int getPages() {
-	// return (int)((total / limit) + (total % limit > 0 ? 1 : 0));
-	// }
 }
