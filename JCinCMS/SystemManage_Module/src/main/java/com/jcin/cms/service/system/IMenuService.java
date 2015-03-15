@@ -8,8 +8,6 @@ package com.jcin.cms.service.system;
 
 import java.util.List;
 
-import org.json.JSONException;
-
 import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.MenuCriteria;
 import com.jcin.cms.service.IBaseService;
