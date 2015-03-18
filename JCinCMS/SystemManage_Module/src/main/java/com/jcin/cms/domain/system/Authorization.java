@@ -18,6 +18,8 @@ public class Authorization implements Serializable {
 
     private String url;
 
+    private String parentIds;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -74,5 +76,13 @@ public class Authorization implements Serializable {
 
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    public String getParentIds() {
+        return parentIds;
+    }
+
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds == null ? null : parentIds.trim();
     }
 }

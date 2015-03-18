@@ -11,6 +11,9 @@
     <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="locked" property="locked" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, status, description, enabled, createDate, updateDate, ip
+    id, username, password, status, description, enabled, createDate, updateDate, ip, 
+    telephone, salt, locked
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.system.UserCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -108,11 +112,13 @@
   <insert id="insert" parameterType="com.jcin.cms.domain.system.User" >
     insert into tb_user (id, username, password, 
       status, description, enabled, 
-      createDate, updateDate, ip
+      createDate, updateDate, ip, 
+      telephone, salt, locked
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}
+      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{locked,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.system.User" >
@@ -145,6 +151,15 @@
       <if test="ip != null" >
         ip,
       </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -173,6 +188,15 @@
       </if>
       <if test="ip != null" >
         #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -212,6 +236,15 @@
       <if test="record.ip != null" >
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null" >
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -227,7 +260,10 @@
       enabled = #{record.enabled,jdbcType=BIT},
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
-      ip = #{record.ip,jdbcType=VARCHAR}
+      ip = #{record.ip,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      locked = #{record.locked,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +295,15 @@
       <if test="ip != null" >
         ip = #{ip,jdbcType=VARCHAR},
       </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -271,13 +316,16 @@
       enabled = #{enabled,jdbcType=BIT},
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP},
-      ip = #{ip,jdbcType=VARCHAR}
+      ip = #{ip,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_user (id, username, password, status, description, enabled, createDate, updateDate, ip) values 
+    insert into tb_user (id, username, password, status, description, enabled, createDate, updateDate, ip, telephone, salt, locked) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=SMALLINT}, #{item.description,jdbcType=VARCHAR}, #{item.enabled,jdbcType=BIT}, #{item.createdate,jdbcType=TIMESTAMP}, #{item.updatedate,jdbcType=TIMESTAMP}, #{item.ip,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=SMALLINT}, #{item.description,jdbcType=VARCHAR}, #{item.enabled,jdbcType=BIT}, #{item.createdate,jdbcType=TIMESTAMP}, #{item.updatedate,jdbcType=TIMESTAMP}, #{item.ip,jdbcType=VARCHAR}, #{item.telephone,jdbcType=VARCHAR}, #{item.salt,jdbcType=VARCHAR}, #{item.locked,jdbcType=BIT})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
@@ -297,8 +345,7 @@
       </if>
     </if>
   </sql>
-  
-   <select id="getUsersByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getUsersByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     user.*
     from  tb_user user left join tb_user_role user_role on user.id = user_role.user_id

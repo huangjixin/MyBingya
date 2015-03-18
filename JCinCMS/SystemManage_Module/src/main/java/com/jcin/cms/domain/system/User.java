@@ -22,6 +22,12 @@ public class User implements Serializable {
 
     private String ip;
 
+    private String telephone;
+
+    private String salt;
+
+    private Boolean locked;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -94,5 +100,29 @@ public class User implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip == null ? null : ip.trim();
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 }

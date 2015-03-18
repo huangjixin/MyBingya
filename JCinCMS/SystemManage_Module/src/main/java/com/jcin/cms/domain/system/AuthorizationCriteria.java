@@ -596,6 +596,76 @@ public class AuthorizationCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andParentIdsIsNull() {
+            addCriterion("parent_ids is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsIsNotNull() {
+            addCriterion("parent_ids is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsEqualTo(String value) {
+            addCriterion("parent_ids =", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsNotEqualTo(String value) {
+            addCriterion("parent_ids <>", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsGreaterThan(String value) {
+            addCriterion("parent_ids >", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("parent_ids >=", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsLessThan(String value) {
+            addCriterion("parent_ids <", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsLessThanOrEqualTo(String value) {
+            addCriterion("parent_ids <=", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsLike(String value) {
+            addCriterion("parent_ids like", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsNotLike(String value) {
+            addCriterion("parent_ids not like", value, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsIn(List<String> values) {
+            addCriterion("parent_ids in", values, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsNotIn(List<String> values) {
+            addCriterion("parent_ids not in", values, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsBetween(String value1, String value2) {
+            addCriterion("parent_ids between", value1, value2, "parentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsNotBetween(String value1, String value2) {
+            addCriterion("parent_ids not between", value1, value2, "parentIds");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -618,6 +688,11 @@ public class AuthorizationCriteria {
 
         public Criteria andUrlLikeInsensitive(String value) {
             addCriterion("upper(url) like", value.toUpperCase(), "url");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdsLikeInsensitive(String value) {
+            addCriterion("upper(parent_ids) like", value.toUpperCase(), "parentIds");
             return (Criteria) this;
         }
     }

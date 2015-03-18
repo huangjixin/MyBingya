@@ -31,7 +31,6 @@ public interface AuthorizationMapper {
     int updateByPrimaryKeySelective(Authorization record);
 
     int updateByPrimaryKey(Authorization record);
-    
     /**
      * 根据菜单查询访问列表。
      * @param userId

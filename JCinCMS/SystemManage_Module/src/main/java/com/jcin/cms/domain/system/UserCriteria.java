@@ -716,6 +716,206 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andTelephoneIsNull() {
+            addCriterion("telephone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneIsNotNull() {
+            addCriterion("telephone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneEqualTo(String value) {
+            addCriterion("telephone =", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneNotEqualTo(String value) {
+            addCriterion("telephone <>", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneGreaterThan(String value) {
+            addCriterion("telephone >", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneGreaterThanOrEqualTo(String value) {
+            addCriterion("telephone >=", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneLessThan(String value) {
+            addCriterion("telephone <", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneLessThanOrEqualTo(String value) {
+            addCriterion("telephone <=", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneLike(String value) {
+            addCriterion("telephone like", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneNotLike(String value) {
+            addCriterion("telephone not like", value, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneIn(List<String> values) {
+            addCriterion("telephone in", values, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneNotIn(List<String> values) {
+            addCriterion("telephone not in", values, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneBetween(String value1, String value2) {
+            addCriterion("telephone between", value1, value2, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneNotBetween(String value1, String value2) {
+            addCriterion("telephone not between", value1, value2, "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIsNull() {
+            addCriterion("salt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIsNotNull() {
+            addCriterion("salt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltEqualTo(String value) {
+            addCriterion("salt =", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotEqualTo(String value) {
+            addCriterion("salt <>", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltGreaterThan(String value) {
+            addCriterion("salt >", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltGreaterThanOrEqualTo(String value) {
+            addCriterion("salt >=", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLessThan(String value) {
+            addCriterion("salt <", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLessThanOrEqualTo(String value) {
+            addCriterion("salt <=", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLike(String value) {
+            addCriterion("salt like", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotLike(String value) {
+            addCriterion("salt not like", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIn(List<String> values) {
+            addCriterion("salt in", values, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotIn(List<String> values) {
+            addCriterion("salt not in", values, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltBetween(String value1, String value2) {
+            addCriterion("salt between", value1, value2, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotBetween(String value1, String value2) {
+            addCriterion("salt not between", value1, value2, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedIsNull() {
+            addCriterion("locked is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedIsNotNull() {
+            addCriterion("locked is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedEqualTo(Boolean value) {
+            addCriterion("locked =", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedNotEqualTo(Boolean value) {
+            addCriterion("locked <>", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedGreaterThan(Boolean value) {
+            addCriterion("locked >", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("locked >=", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedLessThan(Boolean value) {
+            addCriterion("locked <", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedLessThanOrEqualTo(Boolean value) {
+            addCriterion("locked <=", value, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedIn(List<Boolean> values) {
+            addCriterion("locked in", values, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedNotIn(List<Boolean> values) {
+            addCriterion("locked not in", values, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedBetween(Boolean value1, Boolean value2) {
+            addCriterion("locked between", value1, value2, "locked");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("locked not between", value1, value2, "locked");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -738,6 +938,16 @@ public class UserCriteria {
 
         public Criteria andIpLikeInsensitive(String value) {
             addCriterion("upper(ip) like", value.toUpperCase(), "ip");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelephoneLikeInsensitive(String value) {
+            addCriterion("upper(telephone) like", value.toUpperCase(), "telephone");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLikeInsensitive(String value) {
+            addCriterion("upper(salt) like", value.toUpperCase(), "salt");
             return (Criteria) this;
         }
     }

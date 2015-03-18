@@ -9,6 +9,7 @@
     <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, description, createDate, updateDate, parent_id, url
+    id, name, description, createDate, updateDate, parent_id, url, parent_ids
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.system.AuthorizationCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -106,10 +107,10 @@
   <insert id="insert" parameterType="com.jcin.cms.domain.system.Authorization" >
     insert into tb_authorization (id, name, description, 
       createDate, updateDate, parent_id, 
-      url)
+      url, parent_ids)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, #{parentId,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR})
+      #{url,jdbcType=VARCHAR}, #{parentIds,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.domain.system.Authorization" >
     insert into tb_authorization
@@ -135,6 +136,9 @@
       <if test="url != null" >
         url,
       </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -157,6 +161,9 @@
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -190,6 +197,9 @@
       <if test="record.url != null" >
         url = #{record.url,jdbcType=VARCHAR},
       </if>
+      <if test="record.parentIds != null" >
+        parent_ids = #{record.parentIds,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -203,7 +213,8 @@
       createDate = #{record.createdate,jdbcType=TIMESTAMP},
       updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
       parent_id = #{record.parentId,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR}
+      url = #{record.url,jdbcType=VARCHAR},
+      parent_ids = #{record.parentIds,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -229,6 +240,9 @@
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="parentIds != null" >
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -239,13 +253,14 @@
       createDate = #{createdate,jdbcType=TIMESTAMP},
       updateDate = #{updatedate,jdbcType=TIMESTAMP},
       parent_id = #{parentId,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
+      url = #{url,jdbcType=VARCHAR},
+      parent_ids = #{parentIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_authorization (id, name, description, createDate, updateDate, parent_id, url) values 
+    insert into tb_authorization (id, name, description, createDate, updateDate, parent_id, url, parent_ids) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.createdate,jdbcType=TIMESTAMP}, #{item.updatedate,jdbcType=TIMESTAMP}, #{item.parentId,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.createdate,jdbcType=TIMESTAMP}, #{item.updatedate,jdbcType=TIMESTAMP}, #{item.parentId,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.parentIds,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
@@ -267,8 +282,8 @@
   </sql>
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
   	select authorization.* from tb_authorization authorization 
-  		left join tb_role_authorization role_authorization on authorization.id = role_authorization.authorization_id
-		left join tb_role role on role.id = role_authorization.role_id = role.id
+  		left join tb_role_authorization role_authorization on authorization.id = role_authorization.tb_authorization_id
+		left join tb_role role on role.id = role_authorization.tb_role_id = role.id
 		left join tb_user_role user_role on role.id = user_role.role_id
 		left join tb_user user on user_role.role_id = user.id where user.id = #{id,jdbcType=VARCHAR}
   </select>
