@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>websocket.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript"
+	src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script>
+	var websocket;
+	if ('WebSocket' in window) {
+		websocket = new WebSocket("ws://localhost:8080/JCinCMS/myHandler");
+	} else if ('MozWebSocket' in window) {
+		websocket = new MozWebSocket(
+				"ws://localhost:8080/JCinCMS/myHandler");
+	} else {
+		websocket = new SockJS(
+				"http://localhost:8080/JCinCMS/sockjs/myHandler");
+	}
+	websocket.onopen = function(evnt) {
+	};
+	websocket.onmessage = function(evnt) {
+		$("#msgcount").html("(<font color='red'>" + evnt.data + "</font>)")
+	};
+	websocket.onerror = function(evnt) {
+	};
+	websocket.onclose = function(evnt) {
+	}
+</script>
+</head>
+
+<body>
+	This is my HTML page.
+	<br>
+</body>
+</html>

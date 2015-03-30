@@ -61,4 +61,14 @@ public class TestUserService extends TestCase {
 		userService.update(user,roles.get(0).getId());
 //		assertEquals(1, list.size());
 	}
+	
+	@Test
+	public void testInsert() {
+		User user = new User();
+		user.setUsername("admin");
+		user.setPassword("123");
+		user.setLocked(false);
+		String userId = userService.insert(user);
+		assertNotNull(userId);
+	}
 }
