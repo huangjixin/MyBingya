@@ -49,6 +49,20 @@ public class LoginController {
 			HttpServletResponse httpServletResponse) {
 		return "view/login";
 	}
+	
+	@RequestMapping(value="/validate")
+	@ResponseBody
+	public Boolean login(@Valid User user,BindingResult bindingResult,HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		String password = user.getPassword();
+		List<User> list = userService.validateLogin(user.getUsername(),
+				user.getPassword());
+		if (list.size() == 0) {
+			
+			return false;
+		}
+		return true;
+	}
 
 	@RequestMapping(value = "/validatelogin")
 	@ResponseBody
@@ -100,6 +114,8 @@ public class LoginController {
 
 		return modelMap;
 	}
+	
+	
 
 	@RequestMapping(value = "/logout")
 	public String logout() {

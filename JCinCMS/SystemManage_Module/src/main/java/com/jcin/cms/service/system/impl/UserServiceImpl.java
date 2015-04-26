@@ -86,9 +86,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional
 	public String insert(User record) {
 		super.insert(record);
-		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
-		record.setPassword(pas);
+//		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+//		String pas = passwordEncoder.encodePassword(record.getPassword(), "");
+//		record.setPassword(pas);
+		
 		// logger.info(LoginResponse.user == null ? "" : LoginResponse.user
 		// .getUsername()
 		// + "操作 UserServiceImpl.insert"
