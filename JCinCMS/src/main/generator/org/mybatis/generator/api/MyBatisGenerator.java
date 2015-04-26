@@ -366,6 +366,42 @@ public class MyBatisGenerator {
 				}
 			}
         }
+        
+        for (Context context : contextsToRun) {
+        	List<TableConfiguration> list= context.getTableConfigurations();
+        	for (TableConfiguration tableConfiguration : list) {
+        		String path = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+"freemarkerTemplate";
+        		freemarker.template.Configuration configuration = new freemarker.template.Configuration();
+        		configuration.setDirectoryForTemplateLoading(new File(path));
+        		Template template = configuration.getTemplate(File.separator+"IService.ftl");
+        		StringWriter out = new StringWriter();
+        		
+        		String doname = tableConfiguration.getDomainObjectName();
+        		String fir = doname.substring(0, 1);
+        		String last = doname.substring(1);
+        		String daoMapper = fir.toLowerCase()+last;
+        		Map<String,Object> root = new HashMap<String, Object>();
+        		String packageName = "com.jcin.cms.service.system";
+        		root.put("packageName", packageName);
+        		root.put("domainObjectName", doname);
+        		try {
+        			packageName=packageName.replace(".", File.separator);
+        			File directory = shellCallback.getDirectory("src/main/java", packageName);
+//                	String filepath = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+packageName+File.separator;
+        			File  file = new File(directory, "I"+doname+"Service.java");
+        			template.process(root, out);
+        			writeFile(file, out.toString(),null);
+        			System.out.println(out.toString());
+        			out.close();
+        		} catch (TemplateException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (ShellException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        	}
+        }
     }
 
     /**

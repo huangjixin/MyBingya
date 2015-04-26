@@ -14,12 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.dao.system.${domainObjectName}Mapper;
-import com.jcin.cms.domain.system.Mysqlbackup;
-import com.jcin.cms.domain.system.${domainObjectName};
-import com.jcin.cms.domain.system.${domainObjectName}Criteria;
 import com.jcin.cms.service.impl.BaseServiceImpl;
-import com.jcin.cms.service.system.I${domainObjectName}Service;
 import com.jcin.cms.utils.Page;
 
 /**
