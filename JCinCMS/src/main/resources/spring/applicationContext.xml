@@ -10,6 +10,16 @@
                http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                http://www.springframework.org/schema/aop
                http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="config" ref="environmentVariablesConfiguration" />
+	</bean>
+
+	<bean id="environmentVariablesConfiguration"
+		class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<property name="algorithm" value="PBEWithMD5AndDES" />
+		<property name="password" value="jcincms" />
+	</bean>
+
 	<context:property-placeholder location="classpath*:spring/*.properties" />
 
 	<!-- <bean class="org.apache.commons.dbcp.BasicDataSource" -->
@@ -85,8 +95,8 @@
 	<!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) 扫描类包，将标注spring注解的类自动转化成Bean，同时完成Bean的注入 -->
 	<context:component-scan base-package="com.jcin.cms.service">
-<!-- 		<context:exclude-filter type="annotation" -->
-<!-- 			expression="org.springframework.stereotype.Controller.*" /> -->
+		<!-- <context:exclude-filter type="annotation" -->
+		<!-- expression="org.springframework.stereotype.Controller.*" /> -->
 	</context:component-scan>
 
 	<!-- enable autowire -->
@@ -97,7 +107,7 @@
 	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil"
 		scope="singleton"></bean>
 
-<!-- 	<bean id="dBdialect" class="com.jcin.cms.dbdialect.DBdialect"> -->
-<!-- 		<property name="dialect" value="mysql"></property> -->
-<!-- 	</bean> -->
+	<!-- <bean id="dBdialect" class="com.jcin.cms.dbdialect.DBdialect"> -->
+	<!-- <property name="dialect" value="mysql"></property> -->
+	<!-- </bean> -->
 </beans>
