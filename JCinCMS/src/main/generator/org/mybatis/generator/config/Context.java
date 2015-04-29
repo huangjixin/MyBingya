@@ -544,4 +544,8 @@ public class Context extends PropertyHolder {
         return autoDelimitKeywords != null
                 && autoDelimitKeywords.booleanValue();
     }
+    
+    public List<IntrospectedTable> getIntrospectedTables() {
+		return introspectedTables;
+	}
 }

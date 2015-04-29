@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.mybatis.generator.config.ColumnOverride;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.Context;
 import org.mybatis.generator.config.MergeConstants;
@@ -330,7 +331,9 @@ public class MyBatisGenerator {
 
         callback.done();
         
+        //--------------- 生成实现类接口
         for (Context context : contextsToRun) {
+        	List<IntrospectedTable> introspectedTables = context.getIntrospectedTables();
             List<TableConfiguration> list= context.getTableConfigurations();
             for (TableConfiguration tableConfiguration : list) {
             	String path = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+"freemarkerTemplate";
@@ -351,7 +354,6 @@ public class MyBatisGenerator {
                 try {
                 	packageName=packageName.replace(".", File.separator);
                 	File directory = shellCallback.getDirectory("src/main/java", packageName);
-//                	String filepath = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+packageName+File.separator;
     				File  file = new File(directory, doname+"ServiceImpl.java");
                 	template.process(root, out);
     				writeFile(file, out.toString(),null);
@@ -367,19 +369,18 @@ public class MyBatisGenerator {
 			}
         }
         
+        //--------------- 生成接口
         for (Context context : contextsToRun) {
         	List<TableConfiguration> list= context.getTableConfigurations();
         	for (TableConfiguration tableConfiguration : list) {
         		String path = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+"freemarkerTemplate";
-        		freemarker.template.Configuration configuration = new freemarker.template.Configuration();
+        		@SuppressWarnings("deprecation")
+				freemarker.template.Configuration configuration = new freemarker.template.Configuration();
         		configuration.setDirectoryForTemplateLoading(new File(path));
         		Template template = configuration.getTemplate(File.separator+"IService.ftl");
         		StringWriter out = new StringWriter();
         		
         		String doname = tableConfiguration.getDomainObjectName();
-        		String fir = doname.substring(0, 1);
-        		String last = doname.substring(1);
-        		String daoMapper = fir.toLowerCase()+last;
         		Map<String,Object> root = new HashMap<String, Object>();
         		String packageName = "com.jcin.cms.service.system";
         		root.put("packageName", packageName);
@@ -387,7 +388,6 @@ public class MyBatisGenerator {
         		try {
         			packageName=packageName.replace(".", File.separator);
         			File directory = shellCallback.getDirectory("src/main/java", packageName);
-//                	String filepath = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+packageName+File.separator;
         			File  file = new File(directory, "I"+doname+"Service.java");
         			template.process(root, out);
         			writeFile(file, out.toString(),null);
@@ -401,6 +401,56 @@ public class MyBatisGenerator {
         			e.printStackTrace();
         		}
         	}
+        }
+        
+        //--------------- 生成web控制器
+        for (Context context : contextsToRun) {
+        	List<IntrospectedTable> introspectedTables = context.getIntrospectedTables();
+        	for (IntrospectedTable introspectedTable : introspectedTables) {
+        		TableConfiguration tableConfiguration = introspectedTable.getTableConfiguration();
+        		
+        		String path = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+"freemarkerTemplate";
+        		@SuppressWarnings("deprecation")
+				freemarker.template.Configuration configuration = new freemarker.template.Configuration();
+        		configuration.setDirectoryForTemplateLoading(new File(path));
+        		Template template = configuration.getTemplate(File.separator+"Controller.ftl");
+        		StringWriter out = new StringWriter();
+        		
+        		String doname = tableConfiguration.getDomainObjectName();
+        		String fir = doname.substring(0, 1);
+        		String last = doname.substring(1);
+        		String objInst = fir.toLowerCase()+last;
+        		Map<String,Object> root = new HashMap<String, Object>();
+        		String packageName = "com.jcin.cms.web.system";
+        		root.put("packageName", packageName);
+        		root.put("domainObjectName", doname);
+        		root.put("objInst", objInst);
+        		List<IntrospectedColumn> introspectedColumns = introspectedTable.getAllColumns();
+        		List<String> colNames = new ArrayList<String>();
+        		for (IntrospectedColumn introspectedColumn : introspectedColumns) {
+        			String colName = introspectedColumn.getActualColumnName();
+        			fir = colName.substring(0, 1);
+        			fir = fir.toUpperCase();
+        			last = colName.substring(1);
+        			colNames.add(fir+last);
+				}
+        		root.put("introspectedColumns", colNames);
+        		try {
+        			packageName=packageName.replace(".", File.separator);
+        			File directory = shellCallback.getDirectory("src/main/java", packageName);
+        			File  file = new File(directory, doname+"Controller.java");
+        			template.process(root, out);
+        			writeFile(file, out.toString(),null);
+        			System.out.println(out.toString());
+        			out.close();
+        		} catch (TemplateException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (ShellException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+			}
         }
     }
 
