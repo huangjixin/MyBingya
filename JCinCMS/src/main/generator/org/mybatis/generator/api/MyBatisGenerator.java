@@ -347,10 +347,12 @@ public class MyBatisGenerator {
                 String last = doname.substring(1);
                 String daoMapper = fir.toLowerCase()+last;
                 Map<String,Object> root = new HashMap<String, Object>();
-                String packageName = "com.jcin.cms.service.system.impl";
+                String moduleName = context.getProperty("moduleName"); 
+                String packageName = "com.jcin.cms.service."+moduleName+".impl";
                 root.put("packageName", packageName);
                 root.put("domainObjectName", doname);
                 root.put("daoMapper", daoMapper);
+                root.put("moduleName", moduleName);
                 try {
                 	packageName=packageName.replace(".", File.separator);
                 	File directory = shellCallback.getDirectory("src/main/java", packageName);
@@ -382,9 +384,11 @@ public class MyBatisGenerator {
         		
         		String doname = tableConfiguration.getDomainObjectName();
         		Map<String,Object> root = new HashMap<String, Object>();
-        		String packageName = "com.jcin.cms.service.system";
+        		String moduleName = context.getProperty("moduleName"); 
+                String packageName = "com.jcin.cms.service."+moduleName;
         		root.put("packageName", packageName);
         		root.put("domainObjectName", doname);
+        		root.put("moduleName", moduleName);
         		try {
         			packageName=packageName.replace(".", File.separator);
         			File directory = shellCallback.getDirectory("src/main/java", packageName);
@@ -421,10 +425,12 @@ public class MyBatisGenerator {
         		String last = doname.substring(1);
         		String objInst = fir.toLowerCase()+last;
         		Map<String,Object> root = new HashMap<String, Object>();
-        		String packageName = "com.jcin.cms.web.system";
+        		String moduleName = context.getProperty("moduleName"); 
+                String packageName = "com.jcin.cms.web."+moduleName;
         		root.put("packageName", packageName);
         		root.put("domainObjectName", doname);
         		root.put("objInst", objInst);
+        		root.put("moduleName", moduleName);
         		List<IntrospectedColumn> introspectedColumns = introspectedTable.getAllColumns();
         		List<String> colNames = new ArrayList<String>();
         		for (IntrospectedColumn introspectedColumn : introspectedColumns) {

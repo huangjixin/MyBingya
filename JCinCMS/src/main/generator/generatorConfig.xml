@@ -10,6 +10,10 @@
 		D:\workspace\JCinCMS\src\main\webapp\WEB-INF\lib\ojdbc14-1.0.jar -->
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 自定义 -->
+		<property name="moduleName" value="system"></property>
+		<property name="mergeable" value="false"></property>
+		
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<!-- 想要mybaits代码生成器生成Example类换个名字，是通过插件实现的，即下面的这个插件配置参数很关键。 -->

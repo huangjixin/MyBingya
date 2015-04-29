@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.system.${domainObjectName};
-import com.jcin.cms.domain.system.${domainObjectName}Criteria;
-import com.jcin.cms.service.system.I${domainObjectName}Service;
+import com.jcin.cms.domain.${moduleName}.${domainObjectName};
+import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
+import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 

@@ -1,8 +1,8 @@
 package  ${packageName};
 
-import com.jcin.cms.domain.system.${domainObjectName};
-import com.jcin.cms.domain.system.${domainObjectName}Criteria;
-import com.jcin.cms.service.system.I${domainObjectName}Service;
+import com.jcin.cms.domain.${moduleName}.${domainObjectName};
+import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
+import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.Page;
 
