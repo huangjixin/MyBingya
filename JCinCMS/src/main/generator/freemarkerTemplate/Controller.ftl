@@ -39,13 +39,6 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@Resource
 	private I${domainObjectName}Service ${objInst}Service;
 
-	/**
-	 * 该方法将往数据库插进去一个对象
-	 * 
-	 * @param ${objInst}
-	 * @param httpServletRequest
-	 * @return
-	 */
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@ModelAttribute ${domainObjectName} ${objInst},
 			HttpServletRequest httpServletRequest) {
@@ -57,7 +50,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@RequestMapping(params = "form", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new ${domainObjectName}());
-		return "${objInst}/create";
+		return "${objInst}/${objInst}_create";
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
@@ -65,12 +58,12 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		uiModel.addAttribute("${objInst}", ${objInst});
 		uiModel.addAttribute("itemId", id);
-		return "${objInst}/show";
+		return "${objInst}/${objInst}_show";
 	}
 
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
-		return "${objInst}/list";
+		return "${objInst}/${objInst}_list";
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -87,7 +80,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		populateEditForm(uiModel, ${objInst});
-		return "${objInst}/update";
+		return "${objInst}/${objInst}_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
