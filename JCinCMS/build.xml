@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="JCinCMS" default="copy" basedir=".">
+	<target name="copy">
+		<copy todir="src/main/webapp/WEB-INF">  
+		    <fileset dir="SystemManage_Module/src/main/webapp/WEB-INF"/>  
+		</copy>
+	</target>
+</project>

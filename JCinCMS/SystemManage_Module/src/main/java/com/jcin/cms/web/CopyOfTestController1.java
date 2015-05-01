@@ -18,7 +18,7 @@ import com.jcin.cms.utils.Page;
 
 @Controller
 @RequestMapping(value = "/testController")
-public class TestController {
+public class CopyOfTestController1 {
 
 	@Resource
 	private IUserService userService;
