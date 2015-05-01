@@ -6,14 +6,15 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>菜单更新</title>
+<title>菜单添加</title>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery-easyui/dwrloader.js"></script>
@@ -27,8 +28,6 @@
 	href="<%=basePath%>js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>js/jquery-easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/common.css">
 <style type="text/css">
 .table {
 	border-collapse: collapse;
@@ -66,6 +65,7 @@
 		$('#name').val('');
 		$('#url').val('');
 		$('#description').val('');
+		$('#result').html('');
 	}
 
 	//父类菜单变化。
@@ -76,27 +76,27 @@
 	function onLoadSuccess() {
 		var pid = $('#parentid').val();
 		var node = $('#menuTree').combotree('tree').tree('find', pid);
-		if (node != null) {
+		if(node != null){
 			$("#menuTree").combotree('setValue', pid);
-			// 			$('#menuTree').combotree('tree').tree('select', node.target);//node为要选中的节点
-			// 			$('#menuTree').combotree('tree').tree('expandAll', node.target);
-			// 			alert(node.name);
-			// 			$('#menuTree').val(node.name);
+// 			$('#menuTree').combotree('tree').tree('select', node.target);//node为要选中的节点
+// 			$('#menuTree').combotree('tree').tree('expandAll', node.target);
+// 			alert(node.name);
+// 			$('#menuTree').val(node.name);
 		}
 	}
 </script>
 </head>
 <body>
 	<form id="form_return" action="list"></form>
-	<form action="update" method="post">
-		<table width="100%" id="ListArea" border="1px;" bordercolor="#C5C5C5"
+	<form action="create" method="post">
+		<table width="100%" border="1px;" bordercolor="#C5C5C5"
 			align="center" cellpadding="0" cellspacing="0"
 			style="border-collapse: collapse;">
 			<tbody>
 				<tr class="tr1">
 					<th class="th1">名称:</th>
-					<td class="td1"><input type="hidden" id="idInput" name="id" value="${menu.id}"/><input
-						type="text" name="name" id="name" value="${menu.name}" size="35"></td>
+					<td class="td1"><input type="text" name="name" id="name"
+						value="${menu.name}" size="35"></td>
 				</tr>
 				<tr class="tr1">
 					<th class="th1">父菜单:</th>
@@ -123,7 +123,8 @@
 					<th></th>
 					<td class="td1"><input type="submit" value="保存" /><input
 						type="button" value="清除表单" onclick="clearForm();" /><input
-						type="button" value="返回" onclick="$('#form_return').submit();" /></td>
+						type="button" value="返回" onclick="$('#form_return').submit();" />
+						<label id="result">${result}</label></td>
 
 				</tr>
 			</tbody>

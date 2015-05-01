@@ -26,20 +26,28 @@ public class BaseController<T extends Serializable> {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		// 当前页
+		String startStr = httpServletRequest.getParameter("start");
+		// 当前页
 		String pageStr = httpServletRequest.getParameter("page");
 		Integer intPage = null;
 		if (null != pageStr) {
 			intPage = Integer.parseInt(pageStr);
-		} else {
+		} else if (null != startStr){
+			intPage = Integer.parseInt(startStr);
+		}else {
 			intPage = 0;
 		}
 
+		// 每页显示条数
+		String limit = httpServletRequest.getParameter("limit");
 		// 每页显示条数
 		String rows = httpServletRequest.getParameter("rows");
 		Integer number = null;
 		if (null != rows) {
 			number = Integer.parseInt(rows);
-		} else {
+		} else if(null != limit){
+			number = Integer.parseInt(limit);
+		}else{
 			number = 10;
 		}
 
@@ -47,6 +55,8 @@ public class BaseController<T extends Serializable> {
 		// 每页的开始记录 第一页为1 第二页为number +1
 		if (page != null && rows != null) {
 			start = (intPage - 1) * number;
+		}else if(startStr != null){
+			start = Integer.parseInt(startStr);
 		}
 
 		page.setStart(start);

@@ -34,9 +34,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#grid').omGrid({
-                dataSource : 'gridcrud.do',
+                dataSource : 'test/select',
                 width : 686,
-                height : 332,
+                height : 376,
                 limit : 10,
                 colModel : [ {header : 'ID', name : 'id', width : 50, align : 'center'}, 
                              {header : '地区', name : 'city', width : 120, align : 'left'}, 
@@ -133,19 +133,16 @@
             // 对表单进行校验
             var validator = $('#ipForm').validate({
                 rules : {
-                   // city : {required: true}, 
-                   // address : {required : true},
-                   // start : {required : true}, 
-                   // end : {required : true}
+                    city : {required: true}, 
+                    address : {required : true},
+                    start : {required : true}, 
+                    end : {required : true}
                 }, 
                 messages : {
-                	//<#list introspectedColumns as introspectedColumn>
-	        			//${introspectedColumn} : {required : "${introspectedColumn}城市不能为空"},
-					//</#list>
-                    //city : {required : "城市不能为空"},
-                    //address : {required : "地址不能为空"},
-                    //start : {required : "开始地址不能为空"},
-                    //end : {required : "结束地址不能为空"}
+                    city : {required : "城市不能为空"},
+                    address : {required : "地址不能为空"},
+                    start : {required : "开始地址不能为空"},
+                    end : {required : "结束地址不能为空"}
                 }
             });
         });
@@ -165,12 +162,22 @@
         <form id="ipForm">
 	        <input name="id" style="display: none"/>
 	        <table>
-	        	<#list introspectedColumns as introspectedColumn>
-	        	<tr>
-	                <td>${introspectedColumn}：</td>
-	                <td><input name="${introspectedColumn}" id="${introspectedColumn}" /></td>
+	            <tr>
+	                <td>地区：</td>
+	                <td><input name="city" /></td>
 	            </tr>
-				</#list>
+	            <tr>
+	                <td>地址：</td>
+	                <td><input name="address" /></td>
+	            </tr>
+	            <tr>
+	                <td>起始：</td>
+	                <td><input name="start" /></td>
+	            </tr>
+	            <tr>
+	                <td>结束：</td>
+	                <td><input name="end" /></td>
+	            </tr>
 	        </table>
         </form>
     </div>

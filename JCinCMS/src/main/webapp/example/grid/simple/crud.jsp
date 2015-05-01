@@ -1,40 +1,31 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>增删改查</title>
-    <script type="text/javascript" src="<%=basePath %>jquery.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-core.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-validate.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-mouse.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-draggable.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-position.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-resizable.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-grid.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-button.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-dialog.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-ajaxsubmit.js"></script>
-    <script type="text/javascript" src="<%=basePath %>ui/om-messagetip.js"></script>
-<!--     <script type="text/javascript" src="demos/common/js/themeloader.js"></script> -->
- 
-    <link rel="stylesheet" type="text/css" href="<%=basePath %>themes/apusic/om-all.css" />
-<!--     <link rel="stylesheet" type="text/css" href="<%=basePath %>demos/common/css/demo.css" /> -->
+    <script type="text/javascript" src="../../../jquery.js"></script>
+    <script src="../../../ui/om-core.js"></script>
+    <script src="../../../ui/om-validate.js"></script>
+    <script src="../../../ui/om-mouse.js"></script>
+    <script src="../../../ui/om-draggable.js"></script>
+    <script src="../../../ui/om-position.js"></script>
+    <script src="../../../ui/om-resizable.js"></script>
+    <script type="text/javascript" src="../../../ui/om-grid.js"></script>
+    <script src="../../../ui/om-button.js"></script>
+    <script src="../../../ui/om-dialog.js"></script>
+    <script src="../../../ui/om-ajaxsubmit.js"></script>
+    <script src="../../../ui/om-messagetip.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../themes/default/om-all.css" />
+    <link rel="stylesheet" href="../../../demos/common/css/demo.css">
     <style>
         #delete{margin-right:20px;}
         #ipForm label {color:red;}
     </style>
+    <!-- view_source_begin -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#grid').omGrid({
-                dataSource : 'gridcrud.do',
+                dataSource : '../../../gridcrud.do',
                 width : 686,
                 height : 332,
                 limit : 10,
@@ -82,7 +73,7 @@
 	                    start:$("input[name='start']",dialog).val(),
 	                    end:$("input[name='end']",dialog).val()
 	                };
-	                $.post('gridcrud.do',submitData,function(){
+	                $.post('../../../gridcrud.do',submitData,function(){
 	                    if(isAdd){
 	                        $('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
 	                        $.omMessageTip.show({title: "操作成功", content: "添加数据成功", timeout: 1500});
@@ -116,7 +107,7 @@
                 }
                 //将选择的记录的id传递到后台去并执行delete操作
                 var toDeleteRecordID=selections[0].id;
-                $.post('gridcrud.do',{operation:'delete',id:toDeleteRecordID},function(){
+                $.post('../../../gridcrud.do',{operation:'delete',id:toDeleteRecordID},function(){
                     $('#grid').omGrid('reload');//刷新当前页数据
                     $.omMessageTip.show({title: "操作成功", content: "删除数据成功", timeout: 1500});
                 });
@@ -124,34 +115,33 @@
             $('#query').bind('click', function(e) {
                 var qCity=$('#qCity').val();
                 if(qCity===""){ //没要有查询条件，要显示全部数据
-                    $('#grid').omGrid("setData", 'gridcrud.do');
+                    $('#grid').omGrid("setData", '../../../gridcrud.do');
                 }else{ //有查询条件，显示查询数据
-                    $('#grid').omGrid("setData", 'gridcrud.do?qCity='+encodeURI(qCity));
+                    $('#grid').omGrid("setData", '../../../gridcrud.do?qCity='+encodeURI(qCity));
                 }
             });
             
             // 对表单进行校验
             var validator = $('#ipForm').validate({
                 rules : {
-                   // city : {required: true}, 
-                   // address : {required : true},
-                   // start : {required : true}, 
-                   // end : {required : true}
+                    city : {required: true}, 
+                    address : {required : true},
+                    start : {required : true}, 
+                    end : {required : true}
                 }, 
                 messages : {
-                	//<#list introspectedColumns as introspectedColumn>
-	        			//${introspectedColumn} : {required : "${introspectedColumn}城市不能为空"},
-					//</#list>
-                    //city : {required : "城市不能为空"},
-                    //address : {required : "地址不能为空"},
-                    //start : {required : "开始地址不能为空"},
-                    //end : {required : "结束地址不能为空"}
+                    city : {required : "城市不能为空"},
+                    address : {required : "地址不能为空"},
+                    start : {required : "开始地址不能为空"},
+                    end : {required : "结束地址不能为空"}
                 }
             });
         });
     </script>
+    <!-- view_source_end -->
 </head>
 <body>
+    <!-- view_source_begin -->
     <div id="tbdiv">
         <input id="create" type="button" value="新增"/>
         <input id="modify" type="button" value="修改"/>
@@ -165,15 +155,29 @@
         <form id="ipForm">
 	        <input name="id" style="display: none"/>
 	        <table>
-	        	<#list introspectedColumns as introspectedColumn>
-	        	<tr>
-	                <td>${introspectedColumn}：</td>
-	                <td><input name="${introspectedColumn}" id="${introspectedColumn}" /></td>
+	            <tr>
+	                <td>地区：</td>
+	                <td><input name="city" /></td>
 	            </tr>
-				</#list>
+	            <tr>
+	                <td>地址：</td>
+	                <td><input name="address" /></td>
+	            </tr>
+	            <tr>
+	                <td>起始：</td>
+	                <td><input name="start" /></td>
+	            </tr>
+	            <tr>
+	                <td>结束：</td>
+	                <td><input name="end" /></td>
+	            </tr>
 	        </table>
         </form>
     </div>
+    <!-- view_source_end -->
+    <div id="view-desc">
+        <p>本示例演示了表格的增删改查功能。增加、修改、删除都是直接修改后台数据模型，然后刷新表格即可。查询功能是修改表格的数据源，加上查询相关参数，修改数据源后表格会自动使用新的数据源刷新表格。 并在提交数据的时候进行校验。</p>
+    </div>
 </body>
-
+<script type="text/javascript" src="../../../demos/common/js/themeloader.js"></script>
 </html>
