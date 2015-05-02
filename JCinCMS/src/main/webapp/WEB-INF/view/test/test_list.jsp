@@ -17,7 +17,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,${domainObjectName}列表">
+<meta http-equiv="keywords" content="user,user list,Test列表">
 <meta http-equiv="description" content="管理">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
@@ -89,7 +89,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : '${objInst}/deleteById',
+			url : 'test/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -113,11 +113,12 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		<#list introspectedColumns as introspectedColumn>
-		if ($("${introspectedColumn}Input").val() != "") {
-			queryParams.${introspectedColumn} = $("#${introspectedColumn}Input").val();
+		if ($("idInput").val() != "") {
+			queryParams.id = $("#idInput").val();
 		}
-		</#list>
+		if ($("descriptionInput").val() != "") {
+			queryParams.description = $("#descriptionInput").val();
+		}
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -129,9 +130,8 @@
 
 	//清除
 	function clearSearch() {
-		<#list introspectedColumns as introspectedColumn>
-			$("#${introspectedColumn}Input").val("");
-		</#list>
+			$("#idInput").val("");
+			$("#descriptionInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -141,6 +141,12 @@
 		var result = date.format("yyyy-MM-dd hh:mm:ss");
 
 		return result;
+	}
+
+	function formatterWithBtn(value, rec) {
+		var btn = '<a class="removecls" onclick="deleteRows(\'' + rec
+				+ '\')" href="javascript:void(0)">删除</a>';
+		return btn;
 	}
 
 	//导出excel
@@ -164,10 +170,10 @@
 				onclick="$('#addForm').submit();" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
-			<#list introspectedColumns as introspectedColumn>
-				<label>${introspectedColumn}:</label>
-				<input  id="${introspectedColumn}Input" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-			</#list>
+				<label>id:</label>
+				<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
+				<label>description:</label>
+				<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
@@ -182,7 +188,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: '${objInst}/select',
+								url: 'test/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -198,16 +204,18 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<#list introspectedColumns as introspectedColumn>
-					<th id="${introspectedColumn}FieldTh"
-						data-options="field:'${introspectedColumn}',align:'center'" width="100%">${introspectedColumn}</th>
-					</#list>
+					<th id="idFieldTh"
+						data-options="field:'id',align:'center'" width="100%">id</th>
+					<th id="descriptionFieldTh"
+						data-options="field:'description',align:'center'" width="100%">description</th>
+					<th width="100%"
+						data-options="field:'opt',title:'操作',align:'center',formatter:formatterWithBtn"></th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="${objInst}/create"></form>
-	<form id="updateForm" action="${objInst}/update"></form>
+	<form id="addForm" action="test/create"></form>
+	<form id="updateForm" action="test/update"></form>
 </body>
 </html>

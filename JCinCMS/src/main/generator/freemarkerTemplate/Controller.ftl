@@ -50,7 +50,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@RequestMapping(params = "form", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new ${domainObjectName}());
-		return "${objInst}/${objInst}_create";
+		return "view/${objInst}/${objInst}_create";
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
@@ -58,12 +58,12 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		uiModel.addAttribute("${objInst}", ${objInst});
 		uiModel.addAttribute("itemId", id);
-		return "${objInst}/${objInst}_show";
+		return "view/${objInst}/${objInst}_show";
 	}
 
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
-		return "${objInst}/${objInst}_list";
+		return "view/${objInst}/${objInst}_list";
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -122,7 +122,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		${objInst}Criteria.setPage(page);
 		${objInst}Criteria.setOrderByClause("id desc");
 		<#list introspectedColumns as introspectedColumn>
-		if (null != ${objInst}.get${introspectedColumn}()) {
+		if (null != ${objInst}.get${introspectedColumn}()  && !"".equals(${objInst}.get${introspectedColumn}())) {
 		  	criteria.and${introspectedColumn}Like("%" + ${objInst}.get${introspectedColumn}() + "%");
 		}
 		</#list>

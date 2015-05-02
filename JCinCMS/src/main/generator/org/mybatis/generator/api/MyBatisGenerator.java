@@ -458,6 +458,54 @@ public class MyBatisGenerator {
         		}
 			}
         }
+        //--------------- 生成list页面
+        for (Context context : contextsToRun) {
+        	List<IntrospectedTable> introspectedTables = context.getIntrospectedTables();
+        	for (IntrospectedTable introspectedTable : introspectedTables) {
+        		TableConfiguration tableConfiguration = introspectedTable.getTableConfiguration();
+        		
+        		String path = MyBatisGenerator.class.getClassLoader().getResource("").getPath()+"freemarkerTemplate";
+        		@SuppressWarnings("deprecation")
+        		freemarker.template.Configuration configuration = new freemarker.template.Configuration();
+        		configuration.setDirectoryForTemplateLoading(new File(path));
+        		Template template = configuration.getTemplate(File.separator+"list.ftl");
+        		StringWriter out = new StringWriter();
+        		
+        		String doname = tableConfiguration.getDomainObjectName();
+        		String fir = doname.substring(0, 1);
+        		String last = doname.substring(1);
+        		String objInst = fir.toLowerCase()+last;
+        		Map<String,Object> root = new HashMap<String, Object>();
+        		String moduleName = context.getProperty("moduleName"); 
+        		root.put("domainObjectName", doname);
+        		root.put("objInst", objInst);
+        		List<IntrospectedColumn> introspectedColumns = introspectedTable.getAllColumns();
+        		List<String> colNames = new ArrayList<String>();
+        		for (IntrospectedColumn introspectedColumn : introspectedColumns) {
+        			String colName = introspectedColumn.getActualColumnName();
+        			fir = colName.substring(0, 1);
+        			fir = fir.toLowerCase();
+        			last = colName.substring(1);
+        			colNames.add(fir+last);
+        		}
+        		root.put("introspectedColumns", colNames);
+        		try {
+        			String packageName = "WEB-INF.view."+objInst;
+        			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
+        			File  file = new File(directory, objInst+"_list.jsp");
+        			template.process(root, out);
+        			writeFile(file, out.toString(),null);
+        			System.out.println(out.toString());
+        			out.close();
+        		} catch (TemplateException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (ShellException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        	}
+        }
     }
 
     /**
