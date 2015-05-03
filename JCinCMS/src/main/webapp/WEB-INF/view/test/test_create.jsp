@@ -14,23 +14,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>日志添加</title>
+<title>test添加</title>
 </head>
 <body>
-	<input type="button" value="返回"/>
-	<form action="create" method="post">
+	<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>test'"/>
+	<form action="createForm" method="post">
 		<table>
 			<tr>
-				<th></th>
-				<td></td>
-			</tr>
-						<tr>
-				<th>名称：</th>
-				<td><input id="id" type="text" name="id"/></td>
+				<th>id：</th>
+				<td><input id="id" type="text" name="id" value="${test.id}"/></td>
 			</tr>
 			<tr>
-				<th>名称：</th>
-				<td><input id="description" type="text" name="description"/></td>
+				<th>description：</th>
+				<td><input id="description" type="text" name="description" value="${test.description}"/></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="保存" /></td>
 			</tr>
 		</table>
 	</form>

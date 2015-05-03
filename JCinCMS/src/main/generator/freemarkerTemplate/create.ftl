@@ -14,18 +14,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>日志添加</title>
+<title>${objInst}添加</title>
 </head>
 <body>
-	<input type="button" value="返回"/>
-	<form action="create" method="post">
+	<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>${objInst}'"/>
+	<form action="createForm" method="post">
 		<table>
 			<#list introspectedColumns as introspectedColumn>
 			<tr>
-				<th>名称：</th>
+				<th>${introspectedColumn}：</th>
 				<td><input id="${introspectedColumn}" type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/></td>
 			</tr>
 			</#list>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="保存" /></td>
+			</tr>
 		</table>
 	</form>
 

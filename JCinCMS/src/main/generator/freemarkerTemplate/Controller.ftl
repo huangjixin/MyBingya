@@ -42,7 +42,8 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@ModelAttribute ${domainObjectName} ${objInst},
 			HttpServletRequest httpServletRequest) {
-		return "redirect:/${objInst}/${objInst}_create";
+			${objInst}Service.insert(${objInst});
+		return "redirect:/${objInst}/new";
 		//return "redirect:/${objInst}/"
 		//		+ encodeUrlPathSegment(${objInst}.getId().toString(),
 		//				httpServletRequest);
