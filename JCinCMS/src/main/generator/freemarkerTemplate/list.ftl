@@ -161,7 +161,7 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="$('#addForm').submit();" /> 
+				onclick="javascript:window.location.href='${objInst}/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
 			<#list introspectedColumns as introspectedColumn>
@@ -207,7 +207,7 @@
 		</table>
 
 	</div>
-	<form id="addForm" action="${objInst}/create"></form>
-	<form id="updateForm" action="${objInst}/update"></form>
+	<form id="addForm" action="${objInst}/new"></form>
+	<form id="updateForm" action="${objInst}/edit"></form>
 </body>
 </html>

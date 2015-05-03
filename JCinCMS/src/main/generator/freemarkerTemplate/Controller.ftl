@@ -39,15 +39,16 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@Resource
 	private I${domainObjectName}Service ${objInst}Service;
 
-	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@ModelAttribute ${domainObjectName} ${objInst},
 			HttpServletRequest httpServletRequest) {
-		return "redirect:/${objInst}/"
-				+ encodeUrlPathSegment(${objInst}.getId().toString(),
-						httpServletRequest);
+		return "redirect:/${objInst}/${objInst}_create";
+		//return "redirect:/${objInst}/"
+		//		+ encodeUrlPathSegment(${objInst}.getId().toString(),
+		//				httpServletRequest);
 	}
 
-	@RequestMapping(params = "form", produces = "text/html")
+	@RequestMapping(value="new", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new ${domainObjectName}());
 		return "view/${objInst}/${objInst}_create";
@@ -66,7 +67,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		return "view/${objInst}/${objInst}_list";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+	@RequestMapping(value="updateForm")
 	public String update(@ModelAttribute ${domainObjectName} ${objInst}, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
@@ -76,7 +77,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+	@RequestMapping(value = "/edit")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		populateEditForm(uiModel, ${objInst});

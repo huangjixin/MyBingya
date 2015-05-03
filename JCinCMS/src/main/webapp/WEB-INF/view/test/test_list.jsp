@@ -143,12 +143,6 @@
 		return result;
 	}
 
-	function formatterWithBtn(value, rec) {
-		var btn = '<a class="removecls" onclick="deleteRows(\'' + rec
-				+ '\')" href="javascript:void(0)">删除</a>';
-		return btn;
-	}
-
 	//导出excel
 	function exportExcel() {
 		
@@ -167,7 +161,7 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="$('#addForm').submit();" /> 
+				onclick="javascript:window.location.href='test/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
 				<label>id:</label>
@@ -208,14 +202,12 @@
 						data-options="field:'id',align:'center'" width="100%">id</th>
 					<th id="descriptionFieldTh"
 						data-options="field:'description',align:'center'" width="100%">description</th>
-					<th width="100%"
-						data-options="field:'opt',title:'操作',align:'center',formatter:formatterWithBtn"></th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="test/create"></form>
-	<form id="updateForm" action="test/update"></form>
+	<form id="addForm" action="test/new"></form>
+	<form id="updateForm" action="test/edit"></form>
 </body>
 </html>

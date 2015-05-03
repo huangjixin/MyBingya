@@ -24,12 +24,14 @@
 				<th></th>
 				<td></td>
 			</tr>
-			<#list introspectedColumns as introspectedColumn>
+						<tr>
+				<th>名称：</th>
+				<td><input id="id" type="text" name="id"/></td>
+			</tr>
 			<tr>
 				<th>名称：</th>
-				<td><input id="${introspectedColumn}" type="text" name="${introspectedColumn}"/></td>
+				<td><input id="description" type="text" name="description"/></td>
 			</tr>
-			</#list>
 		</table>
 	</form>
 
