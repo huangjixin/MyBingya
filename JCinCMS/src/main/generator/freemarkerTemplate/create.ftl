@@ -20,14 +20,10 @@
 	<input type="button" value="返回"/>
 	<form action="create" method="post">
 		<table>
-			<tr>
-				<th></th>
-				<td></td>
-			</tr>
 			<#list introspectedColumns as introspectedColumn>
 			<tr>
 				<th>名称：</th>
-				<td><input id="${introspectedColumn}" type="text" name="${introspectedColumn}"/></td>
+				<td><input id="${introspectedColumn}" type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/></td>
 			</tr>
 			</#list>
 		</table>
