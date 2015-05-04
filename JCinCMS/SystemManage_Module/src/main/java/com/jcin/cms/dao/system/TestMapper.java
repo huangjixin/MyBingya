@@ -7,107 +7,93 @@ import org.apache.ibatis.annotations.Param;
 
 public interface TestMapper {
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int deleteBatch(List list);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int insertBatch(List<Test> list);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int countByExample(TestCriteria example);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int deleteByExample(TestCriteria example);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int deleteByPrimaryKey(String id);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int insert(Test record);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int insertSelective(Test record);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
-     */
-    List<Test> selectByExampleWithBLOBs(TestCriteria example);
-
-    /**
-     * This method corresponds to the database table tb_test
-     *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     List<Test> selectByExample(TestCriteria example);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     Test selectByPrimaryKey(String id);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int updateByExampleSelective(@Param("record") Test record, @Param("example") TestCriteria example);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
-     */
-    int updateByExampleWithBLOBs(@Param("record") Test record, @Param("example") TestCriteria example);
-
-    /**
-     * This method corresponds to the database table tb_test
-     *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int updateByExample(@Param("record") Test record, @Param("example") TestCriteria example);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     int updateByPrimaryKeySelective(Test record);
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
-    int updateByPrimaryKeyWithBLOBs(Test record);
+    int updateByPrimaryKey(Test record);
 }

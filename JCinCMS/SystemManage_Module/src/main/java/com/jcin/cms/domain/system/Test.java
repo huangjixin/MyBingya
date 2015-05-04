@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class Test implements Serializable {
     /**
-     *  所属表字段为tb_test.id
+     *  主键ID 所属表字段为tb_test.id
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     private String id;
 
     /**
-     *  所属表字段为tb_test.description
+     *  描述信息 所属表字段为tb_test.description
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
-    private byte[] description;
+    private String description;
 
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class Test implements Serializable {
      *
      * @return 返回 tb_test.id
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public String getId() {
         return id;
@@ -40,7 +40,7 @@ public class Test implements Serializable {
      *
      * @param id 赋值 tb_test.id
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -51,9 +51,9 @@ public class Test implements Serializable {
      *
      * @return 返回 tb_test.description
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
-    public byte[] getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -62,9 +62,9 @@ public class Test implements Serializable {
      *
      * @param description 赋值 tb_test.description
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
-    public void setDescription(byte[] description) {
-        this.description = description;
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

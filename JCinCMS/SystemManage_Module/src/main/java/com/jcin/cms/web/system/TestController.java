@@ -39,15 +39,17 @@ public class TestController extends BaseController<Test>{
 	@Resource
 	private ITestService testService;
 
-	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@ModelAttribute Test test,
 			HttpServletRequest httpServletRequest) {
-		return "redirect:/test/"
-				+ encodeUrlPathSegment(test.getId().toString(),
-						httpServletRequest);
+			testService.insert(test);
+		return "redirect:/test/new";
+		//return "redirect:/test/"
+		//		+ encodeUrlPathSegment(test.getId().toString(),
+		//				httpServletRequest);
 	}
 
-	@RequestMapping(params = "form", produces = "text/html")
+	@RequestMapping(value="new", produces = "text/html")
 	public String createForm(Model uiModel) {
 		populateEditForm(uiModel, new Test());
 		return "view/test/test_create";
@@ -63,11 +65,10 @@ public class TestController extends BaseController<Test>{
 
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
-//		return "crud";
 		return "view/test/test_list";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+	@RequestMapping(value="updateForm")
 	public String update(@ModelAttribute Test test, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
@@ -77,11 +78,11 @@ public class TestController extends BaseController<Test>{
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+	@RequestMapping(value = "/edit")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		Test test = testService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, test);
-		return "view/test/test_update";
+		return "test/test_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -122,10 +123,12 @@ public class TestController extends BaseController<Test>{
 		TestCriteria.Criteria criteria = testCriteria.createCriteria();
 		testCriteria.setPage(page);
 		testCriteria.setOrderByClause("id desc");
-		if (null != test.getId()) {
+		if (null != test.getId()  && !"".equals(test.getId())) {
 		  	criteria.andIdLike("%" + test.getId() + "%");
 		}
-		
+		if (null != test.getDescription()  && !"".equals(test.getDescription())) {
+		  	criteria.andDescriptionLike("%" + test.getDescription() + "%");
+		}
 		page = testService.select(testCriteria);
 		return page;
 	}

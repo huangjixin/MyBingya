@@ -8,105 +8,105 @@ public class TestCriteria {
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     private String dialect = "mysql";
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public TestCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public String getOrderByClause() {
         return orderByClause;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public boolean isDistinct() {
         return distinct;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -115,9 +115,9 @@ public class TestCriteria {
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -128,9 +128,9 @@ public class TestCriteria {
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -138,9 +138,9 @@ public class TestCriteria {
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void clear() {
         oredCriteria.clear();
@@ -149,36 +149,36 @@ public class TestCriteria {
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void setPage(Page page) {
         this.page=page;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public Page getPage() {
         return page;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
     }
 
     /**
-     * This method corresponds to the database table tb_test
+     * 该方法由系统生成 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -300,8 +300,83 @@ public class TestCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andDescriptionIsNull() {
+            addCriterion("description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("description =", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLikeInsensitive(String value) {
+            addCriterion("upper(description) like", value.toUpperCase(), "description");
             return (Criteria) this;
         }
     }
@@ -309,7 +384,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 tb_test
      *
-     * @mbggenerated do_not_delete_during_merge 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated do_not_delete_during_merge 2015年05月03日 18时22分51秒 星期日
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -321,7 +396,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 tb_test
      *
-     * @mbggenerated 2015年04月30日 14时27分52秒 星期四
+     * @mbggenerated 2015年05月03日 18时22分51秒 星期日
      */
     public static class Criterion {
         private String condition;
