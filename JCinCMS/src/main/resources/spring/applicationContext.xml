@@ -104,8 +104,8 @@
 
 	<!-- <aop:config></aop:config> -->
 	<!-- 加密明文传输 -->
-	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil"
-		scope="singleton"></bean>
+<!-- 	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" -->
+<!-- 		scope="singleton"></bean> -->
 
 	<!-- <bean id="dBdialect" class="com.jcin.cms.dbdialect.DBdialect"> -->
 	<!-- <property name="dialect" value="mysql"></property> -->
