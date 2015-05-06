@@ -58,30 +58,25 @@
 	});
 
 	// 移除条目；
-	function deleteRows(selecedRow) {
+	function deleteRows() {
 		var pamameter = null;
-		if (selecedRow != null) {
-			pamameter = {};
-			pamameter.idstring = selecedRow.id;
-		} else {
-			//多行删除。
-			var row = $('#tgrid').datagrid('getSelections');
-			if (row == null) {
-				return;
-			}
-			var i = 0;
-			var string = "";
-			for (i; i < row.length; i++) {
-				string += row[i].id;
-				if (i < row.length - 1) {
-					string += ',';
-				} else {
-					break;
-				}
-			}
-			pamameter = {};
-			pamameter.idstring = string;
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
 		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
+		}
+		pamameter = {};
+		pamameter.idstring = string;
 
 		if (pamameter == null) {
 			return;

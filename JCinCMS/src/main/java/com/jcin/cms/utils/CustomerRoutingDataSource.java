@@ -12,9 +12,9 @@ public class CustomerRoutingDataSource extends AbstractRoutingDataSource {
 		return CustomerContextHolder.getCustomerType();
 	}
 
-	@Override
-	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
