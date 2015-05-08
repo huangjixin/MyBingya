@@ -351,5 +351,6 @@
 	<modules>
 		<module>BaseApp</module>
 		<module>SystemManage_Module</module>
+		<module>System_Module</module>
 	</modules>
 </project>
