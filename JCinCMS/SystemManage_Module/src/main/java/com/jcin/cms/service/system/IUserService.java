@@ -7,6 +7,7 @@
 package com.jcin.cms.service.system;
 
 import java.util.List;
+import java.util.Set;
 
 import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.Role;
@@ -53,12 +54,33 @@ public interface IUserService extends IBaseService<User, String> {
 	 * 插入一条记录
 	 * @param record
 	 * @return
+	 * @throws Exception 
 	 */
-	String insert(User record,String roleId);
+	String insert(User record,String roleId) throws Exception;
 	/**
 	 * 更新一条记录
 	 * @param record
 	 * @return
 	 */
 	String update(User record,String roleId);
+
+	/**
+	 * 根据用户名查询对象。
+	 * @param username
+	 * @return
+	 */
+	User findByUsername(String username);
+
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
+	Set<String> findRoles(String username);
+
+	/**
+	 * @param username
+	 * @return
+	 */
+	Set<String> findPermissions(String username);
 }

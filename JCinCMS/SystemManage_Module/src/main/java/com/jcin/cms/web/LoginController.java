@@ -29,7 +29,6 @@ import com.jcin.cms.domain.system.Operationlog;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.service.system.IOpeLogService;
 import com.jcin.cms.service.system.IUserService;
-import com.jcin.cms.utils.EncryptUtil;
 import com.jcin.cms.web.vo.LoginResponse;
 
 @Controller
@@ -41,8 +40,8 @@ public class LoginController {
 	@Resource
 	private IOpeLogService opeLogService;
 
-	@Resource
-	private EncryptUtil encryptUtil;
+//	@Resource
+//	private EncryptUtil encryptUtil;
 
 	@RequestMapping
 	public String login(HttpServletRequest httpServletRequest,
@@ -58,7 +57,6 @@ public class LoginController {
 		List<User> list = userService.validateLogin(user.getUsername(),
 				user.getPassword());
 		if (list.size() == 0) {
-			
 			return false;
 		}
 		return true;
@@ -74,12 +72,34 @@ public class LoginController {
 			HttpServletResponse httpServletResponse) {
 		String password = user.getPassword();
 		// System.out.println("加密原文密码是：" + password);
-		password = (String) encryptUtil.decrypt(password);
+//		password = (String) encryptUtil.decrypt(password);
 		// if (null != encryptStrLength) {
 		// System.out.println("解密原文密码是："
 		// + password.substring(0, encryptStrLength));
 		// } else
-		System.out.println("解密原文密码是：" + password);
+//		System.out.println("解密原文密码是：" + password);
+		
+//		String error = null;
+//		Subject subject = SecurityUtils.getSubject();  
+//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);  
+//        try {  
+//            subject.login(token);  
+//        } catch (UnknownAccountException e) {  
+//            error = "用户名/密码错误";  
+//        } catch (IncorrectCredentialsException e) {  
+//            error = "用户名/密码错误";  
+//        } catch (AuthenticationException e) {  
+//            //其他错误，比如锁定，如果想单独处理请单独catch处理  
+//            error = "其他错误：" + e.getMessage();  
+//        }
+//        if(error != null) {//出错了，返回登录页面  
+//            req.setAttribute("error", error);  
+//            req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);  
+//        } else {//登录成功  
+//            req.getRequestDispatcher("/WEB-INF/jsp/loginSuccess.jsp").forward(req, resp);  
+//        } 
+        
+        
 		ModelMap modelMap = new ModelMap();
 		List<User> list = userService.validateLogin(user.getUsername(),
 				user.getPassword());

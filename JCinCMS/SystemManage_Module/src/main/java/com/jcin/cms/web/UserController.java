@@ -53,7 +53,7 @@ public class UserController extends BaseController<User> {
 	@RequestMapping(value = "/create")
 	public ModelAndView create(@Valid User user,@Valid String roleId,
 			BindingResult bindingResult, Model uiModel,
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest httpServletRequest) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("view/user/user_add");
 		if (bindingResult.hasErrors()) {
