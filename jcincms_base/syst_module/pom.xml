@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.jcin.cms</groupId>
+		<artifactId>jcincms_base</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.jcin.cms</groupId>
+	<artifactId>syst_module</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>syst_module</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>com.jcin.cms</groupId>
+			<artifactId>test_module</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.jcin.cms</groupId>
+			<artifactId>test_module</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>warpath</type>
+		</dependency>
+		<dependency>
+			<groupId>com.jcin.cms</groupId>
+			<artifactId>jcincms_base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.jcin.cms</groupId>
+			<artifactId>jcincms_base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>warpath</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>syst_module</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <encoding>utf-8</encoding>
+                </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- 排除要合并的War包中的全部Jar包因为已经用插件把War包中依赖的Jar包全部引入了当前工程中 -->
+					<!-- <configuration>
+						<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
+					</configuration> -->
+
+					<!-- 配置要合并的War包 -->
+					<overlays>
+						<overlay>
+							<id>jcincms_base</id>
+							<groupId>com.jcin.cms</groupId>
+							<artifactId>jcincms_base</artifactId>
+						</overlay>
+						<overlay>
+							<id>test_module</id>
+							<groupId>com.jcin.cms</groupId>
+							<artifactId>test_module</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+
+			<!-- War依赖关系传递插件 -->
+			<plugin>
+				<groupId>org.appfuse</groupId>
+				<artifactId>maven-warpath-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
