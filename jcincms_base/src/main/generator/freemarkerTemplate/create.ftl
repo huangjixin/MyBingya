@@ -13,26 +13,45 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
+	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <title>${objInst}添加</title>
 </head>
 <body>
-	<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>${objInst}'"/>
-	<form action="createForm" method="post">
-		<table>
-			<#list introspectedColumns as introspectedColumn>
-			<tr>
-				<th>${introspectedColumn}：</th>
-				<td><input id="${introspectedColumn}" type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/></td>
-			</tr>
-			</#list>
-			<tr>
-				<th></th>
-				<td><input type="submit" value="保存" /></td>
-			</tr>
-		</table>
-	</form>
-
-
+	<form id="validForm" action="createForm" method="post">
+				<input type="hidden" name="step" value="1">
+				<div class="desc">
+					<b>${objInst}信息添加</b>
+				</div>
+				<table width="100%" border="0" cellpadding="2" cellspacing="0">
+					<tr>
+						<td width="100%">
+							<table border="0" cellpadding="3" cellspacing="1" width="100%"
+								align="center" style="background-color: #b9d8f3;">
+								<#assign iSum=0>
+								<#list introspectedColumns as introspectedColumn>
+								<#if (iSum%3==0)>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								</#if>
+									<th style="width: 150px;">&nbsp;${introspectedColumn}：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}" size="35" style="padding: 3px;"/></td>
+								<#if (iSum%3!=0 && iSum%3==2)>
+								</tr>
+								</#if>
+								<#assign iSum=iSum+1>
+								</#list>
+								<#if (iSum%3!=0)>
+								</tr>
+								</#if>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th style="width: 150px;">&nbsp;</th>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>${objInst}'"/></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>	
+		</form>		
 </body>
 </html>

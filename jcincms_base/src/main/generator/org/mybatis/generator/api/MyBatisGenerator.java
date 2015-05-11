@@ -438,7 +438,15 @@ public class MyBatisGenerator {
         			fir = colName.substring(0, 1);
         			fir = fir.toUpperCase();
         			last = colName.substring(1);
-        			colNames.add(fir+last);
+        			String col = fir+last;
+        			if(col.indexOf("_") != -1){
+        				int index = col.indexOf("_");
+        				String torep = col.substring(index, index+2);
+        				String replaced = col.substring(index+1, index+2);
+        				replaced = replaced.toUpperCase();
+        				col = col.replaceFirst(torep, replaced);
+        			}
+        			colNames.add(col);
 				}
         		root.put("introspectedColumns", colNames);
         		try {
@@ -486,7 +494,15 @@ public class MyBatisGenerator {
         			fir = colName.substring(0, 1);
         			fir = fir.toLowerCase();
         			last = colName.substring(1);
-        			colNames.add(fir+last);
+        			String col = fir+last;
+        			if(col.indexOf("_") != -1){
+        				int index = col.indexOf("_");
+        				String torep = col.substring(index, index+2);
+        				String replaced = col.substring(index+1, index+2);
+        				replaced = replaced.toUpperCase();
+        				col = col.replaceFirst(torep, replaced);
+        			}
+        			colNames.add(col);
         		}
         		root.put("introspectedColumns", colNames);
         		try {
@@ -511,6 +527,24 @@ public class MyBatisGenerator {
         			String packageName = "WEB-INF.view."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
         			File  file = new File(directory, objInst+"_create.jsp");
+        			template.process(root, out);
+        			writeFile(file, out.toString(),null);
+        			System.out.println(out.toString());
+        			out.close();
+        		} catch (TemplateException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (ShellException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        		
+        		template = configuration.getTemplate(File.separator+"update.ftl");
+        		out = new StringWriter();
+        		try {
+        			String packageName = "WEB-INF.view."+objInst;
+        			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
+        			File  file = new File(directory, objInst+"_update.jsp");
         			template.process(root, out);
         			writeFile(file, out.toString(),null);
         			System.out.println(out.toString());
