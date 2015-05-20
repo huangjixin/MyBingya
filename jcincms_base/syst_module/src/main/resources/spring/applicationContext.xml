@@ -13,13 +13,11 @@
 	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
 		<property name="config" ref="environmentVariablesConfiguration" />
 	</bean>
-
 	<bean id="environmentVariablesConfiguration"
 		class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
 		<property name="algorithm" value="PBEWithMD5AndDES" />
 		<property name="password" value="jcincms" />
 	</bean>
-
 	<context:property-placeholder location="classpath*:spring/*.properties" />
 
 	<!-- <bean class="org.apache.commons.dbcp.BasicDataSource" -->
@@ -75,15 +73,15 @@
 	<!-- dataSource -->
 	<bean id="dataSource4developmaster" class="com.p6spy.engine.spy.P6DataSource">
 		<constructor-arg>
-			<ref bean="masterDataSource"/>
+			<ref bean="masterDataSource" />
 		</constructor-arg>
 	</bean>
 	<bean id="dataSource4developslave" class="com.p6spy.engine.spy.P6DataSource">
 		<constructor-arg>
-			<ref bean="slaveDataSource"/>
+			<ref bean="slaveDataSource" />
 		</constructor-arg>
 	</bean>
-	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.jcin.cms.service.*" />
@@ -107,13 +105,14 @@
 	<!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) 扫描类包，将标注spring注解的类自动转化成Bean，同时完成Bean的注入 -->
 	<context:component-scan base-package="com.jcin.cms.service">
-		<!-- <context:exclude-filter type="annotation" -->
-		<!-- expression="org.springframework.stereotype.Controller.*" /> -->
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller.*" 
+			/> -->
 	</context:component-scan>
 
 	<!-- enable autowire -->
 	<context:annotation-config />
 
+	<!-- <aop:aspectj-autoproxy> </aop:aspectj-autoproxy> -->
 	<!-- <aop:config></aop:config> -->
 	<!-- 加密明文传输 -->
 	<!-- <bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" -->
