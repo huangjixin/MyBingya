@@ -268,7 +268,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>test_module</finalName>
+		<finalName>jcincms_base</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -312,5 +312,6 @@
 	<modules>
 		<module>syst_module</module>
 		<module>test_module</module>
+		<module>base_module</module>
 	</modules>
 </project>
