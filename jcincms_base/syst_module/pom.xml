@@ -21,12 +21,12 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>test_module</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>warpath</type>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency>
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>jcincms_base</artifactId>
