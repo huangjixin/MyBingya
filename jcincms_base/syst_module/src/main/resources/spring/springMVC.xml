@@ -20,7 +20,7 @@
 	</context:component-scan>
 
 	<!-- 默认的注解映射的支持 -->
-	<mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="applicationConversionService">
 	</mvc:annotation-driven>
 	<!-- 视图解释类 -->
 	<bean
@@ -74,6 +74,7 @@
 			</list>
 		</property>
 	</bean>
+	<bean class="com.jcin.cms.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 	<!-- <bean id="conversionService" -->
 	<!-- class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> -->
 	<!-- <property name="registerDefaultFormatters" value="false" /> -->

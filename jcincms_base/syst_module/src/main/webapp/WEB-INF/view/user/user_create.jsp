@@ -46,6 +46,14 @@
 									<td nowrap="nowrap" align="left"><input type="text" name="enabled" value="${user.enabled}" size="35" style="padding: 3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th style="width: 150px;">&nbsp;createDate：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${user.createDate}" size="35" style="padding: 3px;"/></td>
+									<th style="width: 150px;">&nbsp;updateDate：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${user.updateDate}" size="35" style="padding: 3px;"/></td>
+									<th style="width: 150px;">&nbsp;ip：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="ip" value="${user.ip}" size="35" style="padding: 3px;"/></td>
+								</tr>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;telephone：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="telephone" value="${user.telephone}" size="35" style="padding: 3px;"/></td>
 									<th style="width: 150px;">&nbsp;salt：</th>
