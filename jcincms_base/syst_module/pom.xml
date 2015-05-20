@@ -31,14 +31,14 @@
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>jcincms_base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<type>war</type>
+			<type>jar</type>
 		</dependency>
-		<dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>jcincms_base</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>warpath</type>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.jcin.cms</groupId> -->
+<!-- 			<artifactId>jcincms_base</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 			<type>warpath</type> -->
+<!-- 		</dependency> -->
 	</dependencies>
 	<build>
 		<finalName>syst_module</finalName>
@@ -71,11 +71,11 @@
 
 					<!-- 配置要合并的War包 -->
 					<overlays>
-						<overlay>
+						<!-- <overlay>
 							<id>jcincms_base</id>
 							<groupId>com.jcin.cms</groupId>
 							<artifactId>jcincms_base</artifactId>
-						</overlay>
+						</overlay> -->
 						<overlay>
 							<id>test_module</id>
 							<groupId>com.jcin.cms</groupId>
