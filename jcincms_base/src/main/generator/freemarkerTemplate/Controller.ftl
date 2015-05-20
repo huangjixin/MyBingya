@@ -7,14 +7,20 @@
 package ${packageName};
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +37,7 @@ import com.jcin.cms.domain.${moduleName}.${domainObjectName};
 import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
 import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -167,6 +174,79 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		String id = ${objInst}.getId();
 		return id;
 	}
+	
+	/**
+	 * 全部导出Excel.
+	 * @param user
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/exportExcel")
+	public void exportExcel(@ModelAttribute User user,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.setCharacterEncoding("UTF-8");
+		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
+
+		List<User>list = userService.selectAll();
+
+		List<Map<String, Object>> maps = createExcelRecord(list);
+
+		String columnNames[] = { 
+		<#assign iSum=0>
+		<#list introspectedColumns as introspectedColumn>
+			<#if (iSum+1< (introspectedColumns?size))>
+			"${introspectedColumn}",
+			</#if>
+			<#if (iSum+1== (introspectedColumns?size))>
+			"${introspectedColumn}"
+			</#if>
+			<#assign iSum=iSum+1>
+		</#list>
+		};// 列名
+		String keys[] = { 
+		<#assign iSum=0>
+		<#list introspectedColumns as introspectedColumn>
+			<#if (iSum+1< (introspectedColumns?size))>
+			"${introspectedColumn}",
+			</#if>
+			<#if (iSum+1== (introspectedColumns?size))>
+			"${introspectedColumn}"
+			</#if>
+			<#assign iSum=iSum+1>
+		</#list>
+		};// map中的key
+		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
+		filename += "_" + sdf.format(new Date()) + ".xls";
+		httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+		httpServletResponse.setHeader("Content-Disposition",
+				"attachment; filename=\"" + filename + "\"");
+		OutputStream os = httpServletResponse.getOutputStream();
+		hwb.write(os);
+		os.flush();
+		os.close();
+	}
+
+	private List<Map<String, Object>> createExcelRecord(List<User> list) {
+		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sheetName", "sheet1");
+		listmap.add(map);
+		User user = null;
+		for (int j = 0; j < list.size(); j++) {
+			user = list.get(j);
+			Map<String, Object> mapValue = new HashMap<String, Object>();
+			<#list introspectedColumns as introspectedColumn>
+				mapValue.put("${introspectedColumn}",${objInst}.get${introspectedColumn}());
+			</#list>
+			listmap.add(mapValue);
+		}
+		return listmap;
+	}
+	
 	/**
 	 * @param args
 	 */

@@ -140,7 +140,7 @@
 
 	//导出excel
 	function exportExcel() {
-		
+		window.open('<%=basePath%>${objInst}/exportExcel');
 	}
 
 	//导入excel

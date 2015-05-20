@@ -489,8 +489,10 @@ public class MyBatisGenerator {
         		root.put("objInst", objInst);
         		List<IntrospectedColumn> introspectedColumns = introspectedTable.getAllColumns();
         		List<String> colNames = new ArrayList<String>();
+        		List<String> colNamesLowcase = new ArrayList<String>();
         		for (IntrospectedColumn introspectedColumn : introspectedColumns) {
         			String colName = introspectedColumn.getActualColumnName();
+        			colNamesLowcase.add(colName);
         			fir = colName.substring(0, 1);
         			fir = fir.toLowerCase();
         			last = colName.substring(1);
@@ -505,6 +507,7 @@ public class MyBatisGenerator {
         			colNames.add(col);
         		}
         		root.put("introspectedColumns", colNames);
+        		root.put("introspectedColumnsLowcase", colNamesLowcase);
         		try {
         			String packageName = "WEB-INF.view."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
