@@ -20,6 +20,7 @@ import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import org.mybatis.generator.api.CommentGenerator;
@@ -27,6 +28,7 @@ import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.InnerEnum;
 import org.mybatis.generator.api.dom.java.JavaElement;
@@ -64,10 +66,13 @@ public class DefaultCommentGenerator implements CommentGenerator {
      * when it was generated.
      */
     public void addComment(XmlElement xmlElement) {
-        if (suppressAllComments) {
-            return;
-        }
-
+    	 if (suppressAllComments) {
+             return;
+         }
+    	 if ("1".equals("1")) {
+             return;
+         }
+        
         xmlElement.addElement(new TextElement("<!--")); //$NON-NLS-1$
 
         StringBuilder sb = new StringBuilder();
@@ -215,8 +220,16 @@ public class DefaultCommentGenerator implements CommentGenerator {
         sb.append(introspectedColumn.getActualColumnName());
         field.addJavaDocLine(sb.toString());
         addJavadocTag(field, false);
-
+       
         field.addJavaDocLine(" */"); //$NON-NLS-1$
+        FullyQualifiedJavaType fullyQualifiedJavaType = field.getType();
+        String fullyQualifiedName = fullyQualifiedJavaType.getFullyQualifiedName();
+        if("java.util.Date".equals(fullyQualifiedName)){
+        	field.addJavaDocLine("@DateTimeFormat(pattern=\"yyyy-MM-dd\")");
+        	
+//        	FullyQualifiedJavaType type = new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat");
+//        	fullyQualifiedJavaType.addTypeArgument(type);
+        }
     }
 
     public void addFieldComment(Field field, IntrospectedTable introspectedTable) {
@@ -232,7 +245,6 @@ public class DefaultCommentGenerator implements CommentGenerator {
         sb.append(" * 该字段对应数据库表 "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTable());
         field.addJavaDocLine(sb.toString());
-
         addJavadocTag(field, false);
 
         field.addJavaDocLine(" */"); //$NON-NLS-1$
