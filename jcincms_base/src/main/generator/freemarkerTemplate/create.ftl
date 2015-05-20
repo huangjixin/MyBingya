@@ -34,8 +34,8 @@
 								<#if (iSum%3==0)>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 								</#if>
-									<th style="width: 150px;">&nbsp;${introspectedColumn}：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}" size="35" style="padding: 3px;"/></td>
+									<th>&nbsp;${introspectedColumn}：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								<#if (iSum%3!=0 && iSum%3==2)>
 								</tr>
 								</#if>
