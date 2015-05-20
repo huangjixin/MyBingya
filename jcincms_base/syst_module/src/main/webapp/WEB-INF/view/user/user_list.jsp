@@ -180,7 +180,7 @@
 
 	//导出excel
 	function exportExcel() {
-		
+		window.open('<%=basePath%>user/exportExcel');
 	}
 
 	//导入excel

@@ -9,91 +9,91 @@ public interface UserMapper {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int deleteBatch(List list);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int insertBatch(List<User> list);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int countByExample(UserCriteria example);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int deleteByExample(UserCriteria example);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int deleteByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int insert(User record);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int insertSelective(User record);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     List<User> selectByExample(UserCriteria example);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     User selectByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserCriteria example);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int updateByExample(@Param("record") User record, @Param("example") UserCriteria example);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int updateByPrimaryKeySelective(User record);
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年05月20日 16时51分05秒 星期三
+     * @mbggenerated 2015年05月20日 18时26分02秒 星期三
      */
     int updateByPrimaryKey(User record);
 }
