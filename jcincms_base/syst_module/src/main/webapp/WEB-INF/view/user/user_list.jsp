@@ -199,35 +199,37 @@
 				onclick="javascript:window.location.href='user/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
-				<label>id:</label>
-				<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>username:</label>
-				<input  id="usernameInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>password:</label>
-				<input  id="passwordInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>status:</label>
-				<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>description:</label>
-				<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>enabled:</label>
-				<input  id="enabledInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>createDate:</label>
-				<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>updateDate:</label>
-				<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>ip:</label>
-				<input  id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>telephone:</label>
-				<input  id="telephoneInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>salt:</label>
-				<input  id="saltInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>locked:</label>
-				<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" />
+		</div>
+		<div style="padding: 5px;border: 0px;">
+			<label>id:</label>
+			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>username:</label>
+			<input  id="usernameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>password:</label>
+			<input  id="passwordInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>status:</label>
+			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>description:</label>
+			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>enabled:</label>
+			<input  id="enabledInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>createDate:</label>
+			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>updateDate:</label>
+			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>ip:</label>
+			<input  id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>telephone:</label>
+			<input  id="telephoneInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>salt:</label>
+			<input  id="saltInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>locked:</label>
+			<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

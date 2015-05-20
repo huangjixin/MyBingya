@@ -64,14 +64,26 @@
 		<!-- 这个targetDataSource是必须要注入的 -->
 		<property name="targetDataSources">
 			<map key-type="java.lang.String">
-				<entry key="MASTER" value-ref="masterDataSource" />
-				<entry key="SLAVE" value-ref="slaveDataSource" />
+				<entry key="MASTER" value-ref="dataSource4developmaster" />
+				<entry key="SLAVE" value-ref="dataSource4developslave" />
 			</map>
 		</property>
 		<!-- 默认的数据源 -->
 		<property name="defaultTargetDataSource" ref="masterDataSource" />
 	</bean>
 
+	<!-- dataSource -->
+	<bean id="dataSource4developmaster" class="com.p6spy.engine.spy.P6DataSource">
+		<constructor-arg>
+			<ref bean="masterDataSource"/>
+		</constructor-arg>
+	</bean>
+	<bean id="dataSource4developslave" class="com.p6spy.engine.spy.P6DataSource">
+		<constructor-arg>
+			<ref bean="slaveDataSource"/>
+		</constructor-arg>
+	</bean>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.jcin.cms.service.*" />
@@ -104,8 +116,8 @@
 
 	<!-- <aop:config></aop:config> -->
 	<!-- 加密明文传输 -->
-<!-- 	<bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" -->
-<!-- 		scope="singleton"></bean> -->
+	<!-- <bean id="encryptUtil" class="com.jcin.cms.utils.EncryptUtil" -->
+	<!-- scope="singleton"></bean> -->
 
 	<!-- <bean id="dBdialect" class="com.jcin.cms.dbdialect.DBdialect"> -->
 	<!-- <property name="dialect" value="mysql"></property> -->

@@ -30,36 +30,36 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th style="width: 150px;">&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${user.id}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;username：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="username" value="${user.username}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;password：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="password" value="${user.password}" size="35" style="padding: 3px;"/></td>
+									<th>&nbsp;id：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${user.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;username：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="username" value="${user.username}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;password：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="password" value="${user.password}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th style="width: 150px;">&nbsp;status：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="status" value="${user.status}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;description：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${user.description}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;enabled：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="enabled" value="${user.enabled}" size="35" style="padding: 3px;"/></td>
+									<th>&nbsp;status：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="status" value="${user.status}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;description：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${user.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;enabled：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="enabled" value="${user.enabled}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th style="width: 150px;">&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${user.createDate}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${user.updateDate}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;ip：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="ip" value="${user.ip}" size="35" style="padding: 3px;"/></td>
+									<th>&nbsp;createDate：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${user.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;updateDate：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${user.updateDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;ip：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="ip" value="${user.ip}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th style="width: 150px;">&nbsp;telephone：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="telephone" value="${user.telephone}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;salt：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="salt" value="${user.salt}" size="35" style="padding: 3px;"/></td>
-									<th style="width: 150px;">&nbsp;locked：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="locked" value="${user.locked}" size="35" style="padding: 3px;"/></td>
+									<th>&nbsp;telephone：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="telephone" value="${user.telephone}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;salt：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="salt" value="${user.salt}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;locked：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="locked" value="${user.locked}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;</th>

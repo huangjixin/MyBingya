@@ -132,9 +132,6 @@ public class UserController extends BaseController<User>{
 		if (null != user.getPassword()  && !"".equals(user.getPassword())) {
 		  	criteria.andPasswordLike("%" + user.getPassword() + "%");
 		}
-		if (null != user.getDescription()  && !"".equals(user.getDescription())) {
-		  	criteria.andDescriptionLike("%" + user.getDescription() + "%");
-		}
 		if (null != user.getIp()  && !"".equals(user.getIp())) {
 		  	criteria.andIpLike("%" + user.getIp() + "%");
 		}
