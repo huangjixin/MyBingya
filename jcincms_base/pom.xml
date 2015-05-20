@@ -128,21 +128,21 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-core</artifactId>  
-            <version>2.1.0</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-databind</artifactId>  
-            <version>2.1.0</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>com.fasterxml.jackson.core</groupId>  
-            <artifactId>jackson-annotations</artifactId>  
-            <version>2.1.0</version>  
-        </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.1.0</version>
+		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>net.sf.json-lib</groupId> -->
 		<!-- <artifactId>json-lib</artifactId> -->
@@ -166,11 +166,11 @@
 			<version>4.11</version>
 			<!-- <scope>test</scope> -->
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.hibernate</groupId> -->
-		<!-- <artifactId>hibernate-validator</artifactId> -->
-		<!-- <version>4.2.0.Final</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
