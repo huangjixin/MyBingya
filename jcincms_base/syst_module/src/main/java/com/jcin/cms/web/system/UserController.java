@@ -85,8 +85,8 @@ public class UserController extends BaseController<User>{
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/edit")
-	public String updateForm(@RequestParam("id") String id, Model uiModel) {
+	@RequestMapping(value = "/edit/{id}")
+	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		User user = userService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, user);
 		return "view/user/user_update";

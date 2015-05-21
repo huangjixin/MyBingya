@@ -102,7 +102,7 @@
 			return;
 		}
 		
-		window.location.href='<%=basePath%>user/edit?id='+row[0].id; 
+		window.location.href='<%=basePath%>user/edit/'+row[0].id; 
 	}
 
 	function show(){
@@ -111,7 +111,7 @@
 			return;
 		}
 		
-		window.location.href="<%=basePath%>user/deleteById"; 
+		window.location.href='<%=basePath%>user/'+row[0].id; 
 	}
 	//处理事件的函数
 	function onKeyEnter(e) {
