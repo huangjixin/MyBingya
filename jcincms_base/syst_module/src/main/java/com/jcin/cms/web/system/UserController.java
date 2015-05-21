@@ -80,16 +80,16 @@ public class UserController extends BaseController<User>{
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		userService.update(user);
-		return "redirect:/user/"
+		return "redirect:user/"
 				+ encodeUrlPathSegment(user.getId().toString(),
 						httpServletRequest);
 	}
 
 	@RequestMapping(value = "/edit")
-	public String updateForm(@PathVariable("id") String id, Model uiModel) {
+	public String updateForm(@RequestParam("id") String id, Model uiModel) {
 		User user = userService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, user);
-		return "user/user_update";
+		return "view/user/user_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -138,15 +138,6 @@ public class UserController extends BaseController<User>{
 		}
 		if (null != user.getPassword()  && !"".equals(user.getPassword())) {
 		  	criteria.andPasswordLike("%" + user.getPassword() + "%");
-		}
-		if (null != user.getIp()  && !"".equals(user.getIp())) {
-		  	criteria.andIpLike("%" + user.getIp() + "%");
-		}
-		if (null != user.getTelephone()  && !"".equals(user.getTelephone())) {
-		  	criteria.andTelephoneLike("%" + user.getTelephone() + "%");
-		}
-		if (null != user.getSalt()  && !"".equals(user.getSalt())) {
-		  	criteria.andSaltLike("%" + user.getSalt() + "%");
 		}
 		page = userService.select(userCriteria);
 		return page;

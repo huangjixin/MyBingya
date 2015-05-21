@@ -96,6 +96,23 @@
 		});
 	}
 
+	function update(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		
+		window.location.href='<%=basePath%>user/edit?id='+row[0].id; 
+	}
+
+	function show(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		
+		window.location.href="<%=basePath%>user/deleteById"; 
+	}
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -199,6 +216,10 @@
 				onclick="javascript:window.location.href='user/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
+			<input type="button"
+				value="更新" onclick="update()" /> 
+			<input type="button"
+				value="详情" onclick="show()" /> 
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
