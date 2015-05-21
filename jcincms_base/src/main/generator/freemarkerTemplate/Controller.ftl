@@ -80,16 +80,16 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		${objInst}Service.update(${objInst});
-		return "redirect:/${objInst}/"
+		return "redirect:${objInst}/"
 				+ encodeUrlPathSegment(${objInst}.getId().toString(),
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		populateEditForm(uiModel, ${objInst});
-		return "${objInst}/${objInst}_update";
+		return "view/${objInst}/${objInst}_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

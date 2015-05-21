@@ -559,6 +559,23 @@ public class MyBatisGenerator {
         			// TODO Auto-generated catch block
         			e.printStackTrace();
         		}
+        		template = configuration.getTemplate(File.separator+"show.ftl");
+        		out = new StringWriter();
+        		try {
+        			String packageName = "WEB-INF.view."+objInst;
+        			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
+        			File  file = new File(directory, objInst+"_show.jsp");
+        			template.process(root, out);
+        			writeFile(file, out.toString(),null);
+        			System.out.println(out.toString());
+        			out.close();
+        		} catch (TemplateException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (ShellException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
         	}
         }
     }

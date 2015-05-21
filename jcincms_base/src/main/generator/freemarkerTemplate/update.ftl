@@ -13,35 +13,45 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />
+<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
+	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>${objInst}更新</title>
+<title>${objInst}添加</title>
 </head>
 <body>
-	<div class="container">
-		<div class="main" style="margin-top:0px;">
-			<form id="validForm" action="updateForm" method="post">
+	<form id="validForm" action="updateForm" method="post">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>${objInst}信息添加</b>
 				</div>
-				<table class="tb2">
-					<#list introspectedColumns as introspectedColumn>
+				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
-						<th class="tbopt">&nbsp;${introspectedColumn}:</th>
-						<td><input type="text" name="${introspectedColumn}"  value="${r'${'}${objInst}.${introspectedColumn}}"
-							size="35" class="txt"/></td>
-						<td>&nbsp;</td>
+						<td width="100%">
+							<table border="0" cellpadding="3" cellspacing="1" width="100%"
+								align="center" style="background-color: #b9d8f3;">
+								<#assign iSum=0>
+								<#list introspectedColumns as introspectedColumn>
+								<#if (iSum%3==0)>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								</#if>
+									<th>&nbsp;${introspectedColumn}：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+								<#if (iSum%3!=0 && iSum%3==2)>
+								</tr>
+								</#if>
+								<#assign iSum=iSum+1>
+								</#list>
+								<#if (iSum%3!=0)>
+								</tr>
+								</#if>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th style="width: 150px;">&nbsp;</th>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>${objInst}'"/></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
-					</#list>
-					<tr>
-						<th class="tbopt">&nbsp;</th>
-						<td><input type="submit" value="保存" /><input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>user'" /></td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-		</div>
-	</div>
+				</table>	
+		</form>		
 </body>
 </html>
