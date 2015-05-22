@@ -7,14 +7,20 @@
 package com.jcin.cms.web.system;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +37,7 @@ import com.jcin.cms.domain.system.UserRole;
 import com.jcin.cms.domain.system.UserRoleCriteria;
 import com.jcin.cms.service.system.IUserRoleService;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -40,9 +47,10 @@ public class UserRoleController extends BaseController<UserRole>{
 	private IUserRoleService userRoleService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute UserRole userRole,
+	public String create(@ModelAttribute UserRole userRole,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 			userRoleService.insert(userRole);
+		populateEditForm(uiModel, userRole);
 		return "redirect:/userRole/new";
 		//return "redirect:/userRole/"
 		//		+ encodeUrlPathSegment(userRole.getId().toString(),
@@ -73,16 +81,17 @@ public class UserRoleController extends BaseController<UserRole>{
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		userRoleService.update(userRole);
-		return "redirect:/userRole/"
+		populateEditForm(uiModel, userRole);
+		return "redirect:edit/"
 				+ encodeUrlPathSegment(userRole.getId().toString(),
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		UserRole userRole = userRoleService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, userRole);
-		return "userRole/userRole_update";
+		return "view/userRole/userRole_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -171,6 +180,65 @@ public class UserRoleController extends BaseController<UserRole>{
 		String id = userRole.getId();
 		return id;
 	}
+	
+	/**
+	 * 全部导出Excel.
+	 * @param userRole
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/exportExcel")
+	public void exportExcel(@ModelAttribute UserRole userRole,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.setCharacterEncoding("UTF-8");
+		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
+
+		List<UserRole>list = userRoleService.selectAll();
+
+		List<Map<String, Object>> maps = createExcelRecord(list);
+
+		String columnNames[] = { 
+			"Id",
+			"UserId",
+			"RoleId"
+		};// 列名
+		String keys[] = { 
+			"Id",
+			"UserId",
+			"RoleId"
+		};// map中的key
+		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
+		filename += "_" + sdf.format(new Date()) + ".xls";
+		httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+		httpServletResponse.setHeader("Content-Disposition",
+				"attachment; filename=\"" + filename + "\"");
+		OutputStream os = httpServletResponse.getOutputStream();
+		hwb.write(os);
+		os.flush();
+		os.close();
+	}
+
+	private List<Map<String, Object>> createExcelRecord(List<UserRole> list) {
+		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sheetName", "sheet1");
+		listmap.add(map);
+		UserRole userRole = null;
+		for (int j = 0; j < list.size(); j++) {
+			userRole = list.get(j);
+			Map<String, Object> mapValue = new HashMap<String, Object>();
+				mapValue.put("Id",userRole.getId());
+				mapValue.put("UserId",userRole.getUserId());
+				mapValue.put("RoleId",userRole.getRoleId());
+			listmap.add(mapValue);
+		}
+		return listmap;
+	}
+	
 	/**
 	 * @param args
 	 */

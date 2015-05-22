@@ -1,76 +1,82 @@
 package com.jcin.cms.domain.system;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Menu implements Serializable {
     /**
      *   所属表字段为tb_menu.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String id;
 
     /**
      *   所属表字段为tb_menu.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String name;
 
     /**
      *   所属表字段为tb_menu.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String description;
 
     /**
      *   所属表字段为tb_menu.path
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String path;
 
     /**
      *   所属表字段为tb_menu.parent_id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String parentId;
 
     /**
      *   所属表字段为tb_menu.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
 
     /**
      *   所属表字段为tb_menu.icon
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String icon;
 
     /**
      *   所属表字段为tb_menu.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
 
     /**
      *   所属表字段为tb_menu.url
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String url;
 
     /**
      * 该字段对应数据库表 tb_menu
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private static final long serialVersionUID = 1L;
 
@@ -79,7 +85,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getId() {
         return id;
@@ -90,7 +96,7 @@ public class Menu implements Serializable {
      *
      * @param id 赋值 tb_menu.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -101,7 +107,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getName() {
         return name;
@@ -112,7 +118,7 @@ public class Menu implements Serializable {
      *
      * @param name 赋值 tb_menu.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -123,7 +129,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getDescription() {
         return description;
@@ -134,7 +140,7 @@ public class Menu implements Serializable {
      *
      * @param description 赋值 tb_menu.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
@@ -145,7 +151,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.path
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getPath() {
         return path;
@@ -156,7 +162,7 @@ public class Menu implements Serializable {
      *
      * @param path 赋值 tb_menu.path
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setPath(String path) {
         this.path = path == null ? null : path.trim();
@@ -167,7 +173,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.parent_id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getParentId() {
         return parentId;
@@ -178,7 +184,7 @@ public class Menu implements Serializable {
      *
      * @param parentId 赋值 tb_menu.parent_id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setParentId(String parentId) {
         this.parentId = parentId == null ? null : parentId.trim();
@@ -189,7 +195,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Date getCreateDate() {
         return createDate;
@@ -200,7 +206,7 @@ public class Menu implements Serializable {
      *
      * @param createDate 赋值 tb_menu.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -211,7 +217,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.icon
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getIcon() {
         return icon;
@@ -222,7 +228,7 @@ public class Menu implements Serializable {
      *
      * @param icon 赋值 tb_menu.icon
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
@@ -233,7 +239,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -244,7 +250,7 @@ public class Menu implements Serializable {
      *
      * @param updateDate 赋值 tb_menu.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
@@ -255,7 +261,7 @@ public class Menu implements Serializable {
      *
      * @return 返回 tb_menu.url
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getUrl() {
         return url;
@@ -266,7 +272,7 @@ public class Menu implements Serializable {
      *
      * @param url 赋值 tb_menu.url
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();

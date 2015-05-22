@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,6 @@ public class RoleAuthorizationServiceImpl extends BaseServiceImpl<RoleAuthorizat
 	public String insert(RoleAuthorization record) {
 		 super.insert(record);
 
-//		record.setCreatedate(new Date()+"");
 		int result = roleAuthorizationMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -145,7 +145,6 @@ public class RoleAuthorizationServiceImpl extends BaseServiceImpl<RoleAuthorizat
 	@Transactional
 	public String update(RoleAuthorization record) {
 		// super.update(record);
-
 		int result = roleAuthorizationMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

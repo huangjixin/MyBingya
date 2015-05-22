@@ -47,9 +47,10 @@ public class UserController extends BaseController<User>{
 	private IUserService userService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute User user,
+	public String create(@ModelAttribute User user,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 			userService.insert(user);
+		populateEditForm(uiModel, user);
 		return "redirect:/user/new";
 		//return "redirect:/user/"
 		//		+ encodeUrlPathSegment(user.getId().toString(),
@@ -80,7 +81,8 @@ public class UserController extends BaseController<User>{
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		userService.update(user);
-		return "redirect:user/"
+		populateEditForm(uiModel, user);
+		return "redirect:edit/"
 				+ encodeUrlPathSegment(user.getId().toString(),
 						httpServletRequest);
 	}
@@ -138,6 +140,15 @@ public class UserController extends BaseController<User>{
 		}
 		if (null != user.getPassword()  && !"".equals(user.getPassword())) {
 		  	criteria.andPasswordLike("%" + user.getPassword() + "%");
+		}
+		if (null != user.getIp()  && !"".equals(user.getIp())) {
+		  	criteria.andIpLike("%" + user.getIp() + "%");
+		}
+		if (null != user.getTelephone()  && !"".equals(user.getTelephone())) {
+		  	criteria.andTelephoneLike("%" + user.getTelephone() + "%");
+		}
+		if (null != user.getSalt()  && !"".equals(user.getSalt())) {
+		  	criteria.andSaltLike("%" + user.getSalt() + "%");
 		}
 		page = userService.select(userCriteria);
 		return page;

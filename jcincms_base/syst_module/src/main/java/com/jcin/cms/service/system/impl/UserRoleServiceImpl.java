@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,6 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, String>
 	public String insert(UserRole record) {
 		 super.insert(record);
 
-//		record.setCreatedate(new Date()+"");
 		int result = userRoleMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -145,7 +145,6 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, String>
 	@Transactional
 	public String update(UserRole record) {
 		// super.update(record);
-
 		int result = userRoleMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

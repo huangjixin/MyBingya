@@ -7,14 +7,20 @@
 package com.jcin.cms.web.system;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +37,7 @@ import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.AuthorizationCriteria;
 import com.jcin.cms.service.system.IAuthorizationService;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -40,9 +47,10 @@ public class AuthorizationController extends BaseController<Authorization>{
 	private IAuthorizationService authorizationService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute Authorization authorization,
+	public String create(@ModelAttribute Authorization authorization,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 			authorizationService.insert(authorization);
+		populateEditForm(uiModel, authorization);
 		return "redirect:/authorization/new";
 		//return "redirect:/authorization/"
 		//		+ encodeUrlPathSegment(authorization.getId().toString(),
@@ -73,16 +81,17 @@ public class AuthorizationController extends BaseController<Authorization>{
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		authorizationService.update(authorization);
-		return "redirect:/authorization/"
+		populateEditForm(uiModel, authorization);
+		return "redirect:edit/"
 				+ encodeUrlPathSegment(authorization.getId().toString(),
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		Authorization authorization = authorizationService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, authorization);
-		return "authorization/authorization_update";
+		return "view/authorization/authorization_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -180,6 +189,80 @@ public class AuthorizationController extends BaseController<Authorization>{
 		String id = authorization.getId();
 		return id;
 	}
+	
+	/**
+	 * 全部导出Excel.
+	 * @param authorization
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/exportExcel")
+	public void exportExcel(@ModelAttribute Authorization authorization,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.setCharacterEncoding("UTF-8");
+		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
+
+		List<Authorization>list = authorizationService.selectAll();
+
+		List<Map<String, Object>> maps = createExcelRecord(list);
+
+		String columnNames[] = { 
+			"Id",
+			"Name",
+			"Description",
+			"CreateDate",
+			"UpdateDate",
+			"ParentId",
+			"Url",
+			"ParentIds"
+		};// 列名
+		String keys[] = { 
+			"Id",
+			"Name",
+			"Description",
+			"CreateDate",
+			"UpdateDate",
+			"ParentId",
+			"Url",
+			"ParentIds"
+		};// map中的key
+		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
+		filename += "_" + sdf.format(new Date()) + ".xls";
+		httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+		httpServletResponse.setHeader("Content-Disposition",
+				"attachment; filename=\"" + filename + "\"");
+		OutputStream os = httpServletResponse.getOutputStream();
+		hwb.write(os);
+		os.flush();
+		os.close();
+	}
+
+	private List<Map<String, Object>> createExcelRecord(List<Authorization> list) {
+		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sheetName", "sheet1");
+		listmap.add(map);
+		Authorization authorization = null;
+		for (int j = 0; j < list.size(); j++) {
+			authorization = list.get(j);
+			Map<String, Object> mapValue = new HashMap<String, Object>();
+				mapValue.put("Id",authorization.getId());
+				mapValue.put("Name",authorization.getName());
+				mapValue.put("Description",authorization.getDescription());
+				mapValue.put("CreateDate",authorization.getCreateDate());
+				mapValue.put("UpdateDate",authorization.getUpdateDate());
+				mapValue.put("ParentId",authorization.getParentId());
+				mapValue.put("Url",authorization.getUrl());
+				mapValue.put("ParentIds",authorization.getParentIds());
+			listmap.add(mapValue);
+		}
+		return listmap;
+	}
+	
 	/**
 	 * @param args
 	 */

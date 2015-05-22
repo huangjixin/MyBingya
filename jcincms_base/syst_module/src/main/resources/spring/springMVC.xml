@@ -64,7 +64,17 @@
 
 	<!-- 输出对象转JSON支持 -->
 	<bean id="jsonConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<!-- <property name="objectMapper">
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
+					</bean>
+				</property>
+			</bean>
+		</property> -->
+	</bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -74,7 +84,8 @@
 			</list>
 		</property>
 	</bean>
-	<bean class="com.jcin.cms.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+	<bean class="com.jcin.cms.web.ApplicationConversionServiceFactoryBean"
+		id="applicationConversionService" />
 	<!-- <bean id="conversionService" -->
 	<!-- class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> -->
 	<!-- <property name="registerDefaultFormatters" value="false" /> -->

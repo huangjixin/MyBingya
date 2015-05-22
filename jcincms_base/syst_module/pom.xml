@@ -15,6 +15,7 @@
 	<name>syst_module</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+
 		<dependency>
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>test_module</artifactId>

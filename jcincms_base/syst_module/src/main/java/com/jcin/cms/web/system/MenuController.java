@@ -7,14 +7,20 @@
 package com.jcin.cms.web.system;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +37,7 @@ import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.MenuCriteria;
 import com.jcin.cms.service.system.IMenuService;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -40,9 +47,10 @@ public class MenuController extends BaseController<Menu>{
 	private IMenuService menuService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute Menu menu,
+	public String create(@ModelAttribute Menu menu,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 			menuService.insert(menu);
+		populateEditForm(uiModel, menu);
 		return "redirect:/menu/new";
 		//return "redirect:/menu/"
 		//		+ encodeUrlPathSegment(menu.getId().toString(),
@@ -73,16 +81,17 @@ public class MenuController extends BaseController<Menu>{
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		menuService.update(menu);
-		return "redirect:/menu/"
+		populateEditForm(uiModel, menu);
+		return "redirect:edit/"
 				+ encodeUrlPathSegment(menu.getId().toString(),
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
 		Menu menu = menuService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, menu);
-		return "menu/menu_update";
+		return "view/menu/menu_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -138,12 +147,6 @@ public class MenuController extends BaseController<Menu>{
 		if (null != menu.getParentId()  && !"".equals(menu.getParentId())) {
 		  	criteria.andParentIdLike("%" + menu.getParentId() + "%");
 		}
-		if (null != menu.getIcon()  && !"".equals(menu.getIcon())) {
-		  	criteria.andIconLike("%" + menu.getIcon() + "%");
-		}
-		if (null != menu.getUrl()  && !"".equals(menu.getUrl())) {
-		  	criteria.andUrlLike("%" + menu.getUrl() + "%");
-		}
 		page = menuService.select(menuCriteria);
 		return page;
 	}
@@ -183,6 +186,83 @@ public class MenuController extends BaseController<Menu>{
 		String id = menu.getId();
 		return id;
 	}
+	
+	/**
+	 * 全部导出Excel.
+	 * @param menu
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/exportExcel")
+	public void exportExcel(@ModelAttribute Menu menu,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.setCharacterEncoding("UTF-8");
+		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
+
+		List<Menu>list = menuService.selectAll();
+
+		List<Map<String, Object>> maps = createExcelRecord(list);
+
+		String columnNames[] = { 
+			"Id",
+			"Name",
+			"Description",
+			"Path",
+			"ParentId",
+			"CreateDate",
+			"Icon",
+			"UpdateDate",
+			"Url"
+		};// 列名
+		String keys[] = { 
+			"Id",
+			"Name",
+			"Description",
+			"Path",
+			"ParentId",
+			"CreateDate",
+			"Icon",
+			"UpdateDate",
+			"Url"
+		};// map中的key
+		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
+		filename += "_" + sdf.format(new Date()) + ".xls";
+		httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+		httpServletResponse.setHeader("Content-Disposition",
+				"attachment; filename=\"" + filename + "\"");
+		OutputStream os = httpServletResponse.getOutputStream();
+		hwb.write(os);
+		os.flush();
+		os.close();
+	}
+
+	private List<Map<String, Object>> createExcelRecord(List<Menu> list) {
+		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sheetName", "sheet1");
+		listmap.add(map);
+		Menu menu = null;
+		for (int j = 0; j < list.size(); j++) {
+			menu = list.get(j);
+			Map<String, Object> mapValue = new HashMap<String, Object>();
+				mapValue.put("Id",menu.getId());
+				mapValue.put("Name",menu.getName());
+				mapValue.put("Description",menu.getDescription());
+				mapValue.put("Path",menu.getPath());
+				mapValue.put("ParentId",menu.getParentId());
+				mapValue.put("CreateDate",menu.getCreateDate());
+				mapValue.put("Icon",menu.getIcon());
+				mapValue.put("UpdateDate",menu.getUpdateDate());
+				mapValue.put("Url",menu.getUrl());
+			listmap.add(mapValue);
+		}
+		return listmap;
+	}
+	
 	/**
 	 * @param args
 	 */

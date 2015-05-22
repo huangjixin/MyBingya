@@ -9,42 +9,42 @@ public class AuthorizationCriteria {
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public AuthorizationCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class AuthorizationCriteria {
     /**
      * 该方法由系统生成 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class AuthorizationCriteria {
     /**
      * 该类对应于数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -805,7 +805,7 @@ public class AuthorizationCriteria {
     /**
      * 该类对应于数据库表 tb_authorization
      *
-     * @mbggenerated do_not_delete_during_merge 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2015年05月22日 18时15分56秒 星期五
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -817,7 +817,7 @@ public class AuthorizationCriteria {
     /**
      * 该类对应于数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public static class Criterion {
         private String condition;

@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	public String insert(Menu record) {
 		 super.insert(record);
 
-//		record.setCreatedate(new Date()+"");
+		record.setCreateDate(new Date());
 		int result = menuMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -145,7 +146,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	@Transactional
 	public String update(Menu record) {
 		// super.update(record);
-
+		record.setUpdateDate(new Date());
 		int result = menuMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

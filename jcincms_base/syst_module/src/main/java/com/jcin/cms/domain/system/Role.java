@@ -1,48 +1,54 @@
 package com.jcin.cms.domain.system;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Role implements Serializable {
     /**
      *   所属表字段为tb_role.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String id;
 
     /**
      *   所属表字段为tb_role.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String name;
 
     /**
      *   所属表字段为tb_role.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private String description;
 
     /**
      *   所属表字段为tb_role.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
 
     /**
      *   所属表字段为tb_role.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
 
     /**
      * 该字段对应数据库表 tb_role
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     private static final long serialVersionUID = 1L;
 
@@ -51,7 +57,7 @@ public class Role implements Serializable {
      *
      * @return 返回 tb_role.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getId() {
         return id;
@@ -62,7 +68,7 @@ public class Role implements Serializable {
      *
      * @param id 赋值 tb_role.id
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -73,7 +79,7 @@ public class Role implements Serializable {
      *
      * @return 返回 tb_role.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getName() {
         return name;
@@ -84,7 +90,7 @@ public class Role implements Serializable {
      *
      * @param name 赋值 tb_role.name
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -95,7 +101,7 @@ public class Role implements Serializable {
      *
      * @return 返回 tb_role.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public String getDescription() {
         return description;
@@ -106,7 +112,7 @@ public class Role implements Serializable {
      *
      * @param description 赋值 tb_role.description
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
@@ -117,7 +123,7 @@ public class Role implements Serializable {
      *
      * @return 返回 tb_role.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Date getCreateDate() {
         return createDate;
@@ -128,7 +134,7 @@ public class Role implements Serializable {
      *
      * @param createDate 赋值 tb_role.create_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -139,7 +145,7 @@ public class Role implements Serializable {
      *
      * @return 返回 tb_role.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -150,7 +156,7 @@ public class Role implements Serializable {
      *
      * @param updateDate 赋值 tb_role.update_date
      *
-     * @mbggenerated 2015年05月11日 11时56分31秒 星期一
+     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
