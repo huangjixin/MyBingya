@@ -39,8 +39,6 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.jcin.cms.utils.JsonDateSerializer;
 
 /**
  * @author Jeff Butler
@@ -229,10 +227,10 @@ public class DefaultCommentGenerator implements CommentGenerator {
         String fullyQualifiedName = fullyQualifiedJavaType.getFullyQualifiedName();
         if("java.util.Date".equals(fullyQualifiedName)){
         	field.addJavaDocLine("@DateTimeFormat(pattern=\"yyyy-MM-dd\")");
-        	field.addJavaDocLine("@JsonSerialize(using=JsonDateSerializer.class)");
+        	field.addJavaDocLine("@JsonFormat(pattern=\"yyyy-MM-dd HH:mm:ss\")");
         	
 //        	FullyQualifiedJavaType type = new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat");
-//        	fullyQualifiedJavaType.addTypeArgument(type);  hh:mm:ss
+//        	fullyQualifiedJavaType.addTypeArgument(type);  ,timezone = \"GMT+8\"
         }
     }
 
