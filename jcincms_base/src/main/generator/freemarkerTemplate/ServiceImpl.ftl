@@ -6,6 +6,7 @@
  */
 package ${packageName};
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,7 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	public String insert(${domainObjectName} record) {
 		 super.insert(record);
 
-//		record.setCreatedate(new Date()+"");
+		record.setCreateDate(new Date());
 		int result = ${daoMapper}Mapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -145,7 +146,7 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	@Transactional
 	public String update(${domainObjectName} record) {
 		// super.update(record);
-
+		record.setUpdateDate(new Date());
 		int result = ${daoMapper}Mapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

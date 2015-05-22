@@ -226,8 +226,8 @@ public class DefaultCommentGenerator implements CommentGenerator {
         FullyQualifiedJavaType fullyQualifiedJavaType = field.getType();
         String fullyQualifiedName = fullyQualifiedJavaType.getFullyQualifiedName();
         if("java.util.Date".equals(fullyQualifiedName)){
-        	field.addJavaDocLine("@DateTimeFormat(pattern=\"yyyy-MM-dd\")");
-        	field.addJavaDocLine("@JsonFormat(pattern=\"yyyy-MM-dd HH:mm:ss\")");
+        	field.addJavaDocLine("@DateTimeFormat(pattern=\"yyyy-MM-dd HH:mm:ss\")");
+        	field.addJavaDocLine("@JsonFormat(pattern=\"yyyy-MM-dd HH:mm:ss\",timezone = \"GMT+8\")");
         	
 //        	FullyQualifiedJavaType type = new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat");
 //        	fullyQualifiedJavaType.addTypeArgument(type);  ,timezone = \"GMT+8\"
