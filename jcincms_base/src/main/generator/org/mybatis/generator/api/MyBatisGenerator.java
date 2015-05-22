@@ -458,10 +458,8 @@ public class MyBatisGenerator {
         			System.out.println(out.toString());
         			out.close();
         		} catch (TemplateException e) {
-        			// TODO Auto-generated catch block
         			e.printStackTrace();
         		} catch (ShellException e) {
-        			// TODO Auto-generated catch block
         			e.printStackTrace();
         		}
 			}

@@ -62,12 +62,13 @@
 		<!-- <table tableName="tb_category" domainObjectName="Category" /> -->
 		<!-- <table tableName="tb_comment" domainObjectName="Comment" /> -->
 		
-<!-- 		<table tableName="tb_menu" domainObjectName="Menu" /> -->
-<!-- 		<table tableName="tb_Authorization" domainObjectName="Authorization" /> -->
-<!-- 		<table tableName="tb_role" domainObjectName="Role" /> -->
-<!-- 		<table tableName="tb_role_authorization" domainObjectName="RoleAuthorization" /> -->
+		<table tableName="tb_menu" domainObjectName="Menu" />
+		<table tableName="tb_Authorization" domainObjectName="Authorization" />
+		<table tableName="tb_role" domainObjectName="Role" />
+		<table tableName="tb_role_authorization" domainObjectName="RoleAuthorization" />
 		<table tableName="tb_user" domainObjectName="User" />
-<!-- 		<table tableName="tb_user_role" domainObjectName="UserRole" /> -->
+		<table tableName="tb_user_role" domainObjectName="UserRole" />
+		
 		<!-- <table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
 		<!-- <table tableName="tb_test" domainObjectName="Test" /> -->
 

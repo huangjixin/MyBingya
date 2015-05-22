@@ -67,7 +67,10 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
 
         FullyQualifiedJavaType type1 = new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat");
         topLevelClass.addImportedType(type1);
-        
+        type1 = new FullyQualifiedJavaType("com.fasterxml.jackson.databind.annotation.JsonSerialize");
+        topLevelClass.addImportedType(type1);
+        type1 = new FullyQualifiedJavaType("com.jcin.cms.utils.JsonDateSerializer");
+        topLevelClass.addImportedType(type1);
         List<IntrospectedColumn> introspectedColumns = getColumnsInThisClass();
 
         if (introspectedTable.isConstructorBased()) {

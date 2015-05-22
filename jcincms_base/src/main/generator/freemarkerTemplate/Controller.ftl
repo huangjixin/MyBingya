@@ -47,9 +47,10 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	private I${domainObjectName}Service ${objInst}Service;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute ${domainObjectName} ${objInst},
+	public String create(@ModelAttribute ${domainObjectName} ${objInst},Model uiModel,
 			HttpServletRequest httpServletRequest) {
 			${objInst}Service.insert(${objInst});
+		populateEditForm(uiModel, ${objInst});
 		return "redirect:/${objInst}/new";
 		//return "redirect:/${objInst}/"
 		//		+ encodeUrlPathSegment(${objInst}.getId().toString(),
@@ -80,7 +81,8 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		${objInst}Service.update(${objInst});
-		return "redirect:${objInst}/"
+		populateEditForm(uiModel, ${objInst});
+		return "redirect:edit/"
 				+ encodeUrlPathSegment(${objInst}.getId().toString(),
 						httpServletRequest);
 	}
@@ -177,19 +179,19 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	
 	/**
 	 * 全部导出Excel.
-	 * @param user
+	 * @param ${objInst}
 	 * @param httpServletRequest
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/exportExcel")
-	public void exportExcel(@ModelAttribute User user,
+	public void exportExcel(@ModelAttribute ${domainObjectName} ${objInst},
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		httpServletResponse.setCharacterEncoding("UTF-8");
 		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
-		List<User>list = userService.selectAll();
+		List<${domainObjectName}>list = ${objInst}Service.selectAll();
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
@@ -230,14 +232,14 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		os.close();
 	}
 
-	private List<Map<String, Object>> createExcelRecord(List<User> list) {
+	private List<Map<String, Object>> createExcelRecord(List<${domainObjectName}> list) {
 		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sheetName", "sheet1");
 		listmap.add(map);
-		User user = null;
+		${domainObjectName} ${objInst} = null;
 		for (int j = 0; j < list.size(); j++) {
-			user = list.get(j);
+			${objInst} = list.get(j);
 			Map<String, Object> mapValue = new HashMap<String, Object>();
 			<#list introspectedColumns as introspectedColumn>
 				mapValue.put("${introspectedColumn}",${objInst}.get${introspectedColumn}());
