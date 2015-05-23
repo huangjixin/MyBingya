@@ -85,7 +85,15 @@
 		</property>
 	</bean>
 	<bean class="com.jcin.cms.web.ApplicationConversionServiceFactoryBean"
-		id="applicationConversionService" />
+		id="applicationConversionService" >
+		<!-- <property name="formatters">
+			<set>
+				<bean class="org.springframework.format.datetime.DateFormatter">
+					<property name="pattern" value="yyyy-MM-dd HH:mm:ss"></property>
+				</bean>
+			</set>
+		</property> -->		
+	</bean>
 	<!-- <bean id="conversionService" -->
 	<!-- class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> -->
 	<!-- <property name="registerDefaultFormatters" value="false" /> -->

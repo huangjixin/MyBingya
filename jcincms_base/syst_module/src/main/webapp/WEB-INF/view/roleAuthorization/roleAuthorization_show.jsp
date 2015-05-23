@@ -16,13 +16,13 @@
 <!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
 	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>role添加</title>
+<title>roleAuthorization添加</title>
 </head>
 <body>
 	<form id="validForm" action="createForm" method="post">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>role信息添加</b>
+					<b>roleAuthorization信息添加</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -31,21 +31,15 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${role.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
-									<th>&nbsp;name：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="name" value="${role.name}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
-									<th>&nbsp;description：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${role.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${role.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
-									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${role.updateDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${roleAuthorization.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;roleId：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="roleId" value="${roleAuthorization.roleId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;authorizationId：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="authorizationId" value="${roleAuthorization.authorizationId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>role'"/></td>
+									<td  style="text-align: left;" colspan="6">&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>roleAuthorization'"/></td>
 								</tr>
 							</table>
 						</td>

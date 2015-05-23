@@ -13,45 +13,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />
+<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
+	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <title>userRole添加</title>
 </head>
 <body>
-	<div class="container">
-		<div class="main" style="margin-top:0px;">
-			<form id="validForm" action="createForm" method="post">
+	<form id="validForm" action="createForm" method="post">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>userRole信息添加</b>
 				</div>
-				<table class="tb2">
+				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
-						<th class="tbopt">&nbsp;id:</th>
-						<td><input type="text" name="id"  value="${userRole.id}"
-							size="35" class="txt"/></td>
-						<td>&nbsp;</td>
+						<td width="100%">
+							<table border="0" cellpadding="3" cellspacing="1" width="100%"
+								align="center" style="background-color: #b9d8f3;">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th>&nbsp;id：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${userRole.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;userId：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="userId" value="${userRole.userId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<th>&nbsp;roleId：</th>
+									<td nowrap="nowrap" align="left"><input type="text" name="roleId" value="${userRole.roleId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+								</tr>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th style="width: 150px;">&nbsp;</th>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>userRole'"/></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
-					<tr>
-						<th class="tbopt">&nbsp;userId:</th>
-						<td><input type="text" name="userId"  value="${userRole.userId}"
-							size="35" class="txt"/></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<th class="tbopt">&nbsp;roleId:</th>
-						<td><input type="text" name="roleId"  value="${userRole.roleId}"
-							size="35" class="txt"/></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<th class="tbopt">&nbsp;</th>
-						<td><input type="submit" value="保存" /><input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>user'" /></td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-		</div>
-	</div>
+				</table>	
+		</form>		
 </body>
 </html>

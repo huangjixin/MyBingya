@@ -16,20 +16,20 @@
 <!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
 	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>menu添加</title>
+<title>menu更新</title>
 </head>
 <body>
-	<form id="validForm" action="createForm" method="post">
+	<form id="validForm" action="<%=basePath%>menu/updateForm" method="post">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>menu信息添加</b>
+					<b>menu信息更新</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
 						<td width="100%">
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;id：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${menu.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;name：</th>
@@ -37,7 +37,7 @@
 									<th>&nbsp;description：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${menu.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;path：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="path" value="${menu.path}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;parentId：</th>
@@ -45,7 +45,7 @@
 									<th>&nbsp;createDate：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${menu.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;icon：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="icon" value="${menu.icon}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;updateDate：</th>
@@ -53,7 +53,7 @@
 									<th>&nbsp;url：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="url" value="${menu.url}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
 									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>menu'"/></td>
 								</tr>

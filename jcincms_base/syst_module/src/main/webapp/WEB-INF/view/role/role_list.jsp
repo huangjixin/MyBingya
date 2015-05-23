@@ -96,6 +96,23 @@
 		});
 	}
 
+	function update(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		
+		window.location.href='<%=basePath%>role/edit/'+row[0].id; 
+	}
+
+	function show(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		
+		window.location.href='<%=basePath%>role/'+row[0].id; 
+	}
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -152,7 +169,7 @@
 
 	//导出excel
 	function exportExcel() {
-		
+		window.open('<%=basePath%>role/exportExcel');
 	}
 
 	//导入excel
@@ -171,21 +188,27 @@
 				onclick="javascript:window.location.href='role/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
-				<label>id:</label>
-				<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>name:</label>
-				<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>description:</label>
-				<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>createDate:</label>
-				<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
-				<label>updateDate:</label>
-				<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);"> 
+			<input type="button"
+				value="更新" onclick="update()" /> 
+			<input type="button"
+				value="详情" onclick="show()" /> 
 			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" />
+		</div>
+		<div style="padding: 5px;border: 0px;">
+			<label>id:</label>
+			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>name:</label>
+			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>description:</label>
+			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>createDate:</label>
+			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>updateDate:</label>
+			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

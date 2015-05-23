@@ -16,20 +16,20 @@
 <!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
 	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>user添加</title>
+<title>user更新</title>
 </head>
 <body>
-	<form id="validForm" action="updateForm" method="post">
+	<form id="validForm" action="<%=basePath%>user/updateForm" method="post">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>user信息添加</b>
+					<b>user信息更新</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
 						<td width="100%">
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;id：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${user.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;username：</th>
@@ -37,7 +37,7 @@
 									<th>&nbsp;password：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="password" value="${user.password}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;status：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="status" value="${user.status}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;description：</th>
@@ -45,7 +45,7 @@
 									<th>&nbsp;enabled：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="enabled" value="${user.enabled}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;createDate：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${user.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;updateDate：</th>
@@ -53,7 +53,7 @@
 									<th>&nbsp;ip：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="ip" value="${user.ip}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;telephone：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="telephone" value="${user.telephone}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 									<th>&nbsp;salt：</th>
@@ -61,7 +61,7 @@
 									<th>&nbsp;locked：</th>
 									<td nowrap="nowrap" align="left"><input type="text" name="locked" value="${user.locked}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
 									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>user'"/></td>
 								</tr>
