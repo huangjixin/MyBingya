@@ -332,6 +332,10 @@ public class User implements Serializable {
         return salt;
     }
 
+
+    public String getCredentialsSalt() {
+        return username + salt;
+    }
     /**
      * setter方法 tb_user.salt
      *

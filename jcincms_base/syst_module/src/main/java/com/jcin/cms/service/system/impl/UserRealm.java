@@ -33,8 +33,8 @@ public class UserRealm extends AuthorizingRealm {
         String username = (String)principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(userService.findRoles(username));
-        authorizationInfo.setStringPermissions(userService.findPermissions(username));
+        authorizationInfo.setRoles(getUserService().findRoles(username));
+        authorizationInfo.setStringPermissions(getUserService().findPermissions(username));
 
         return authorizationInfo;
     }
@@ -44,7 +44,7 @@ public class UserRealm extends AuthorizingRealm {
 
         String username = (String)token.getPrincipal();
 
-        User user = userService.findByUsername(username);
+        User user = getUserService().findByUsername(username);
 
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
@@ -53,14 +53,16 @@ public class UserRealm extends AuthorizingRealm {
         if(Boolean.TRUE.equals(user.getLocked())) {
             throw new LockedAccountException(); //帐号锁定
         }
-
-        //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+        
+        SimpleAuthenticationInfo authenticationInfo;
+      //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
+        authenticationInfo = new SimpleAuthenticationInfo(
                 user.getUsername(), //用户名
                 user.getPassword(), //密码
-               // ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
+//                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
+        
         return authenticationInfo;
     }
 
@@ -91,5 +93,13 @@ public class UserRealm extends AuthorizingRealm {
         clearAllCachedAuthenticationInfo();
         clearAllCachedAuthorizationInfo();
     }
+
+	public IUserServiceShiro getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserServiceShiro userService) {
+		this.userService = userService;
+	}
 
 }
