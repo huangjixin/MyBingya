@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,8 +37,8 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.system.IUserService;
-import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
+import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -71,6 +72,7 @@ public class UserController extends BaseController<User>{
 		return "view/user/user_show";
 	}
 
+	@RequiresPermissions("user:list")
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
 		return "view/user/user_list";
