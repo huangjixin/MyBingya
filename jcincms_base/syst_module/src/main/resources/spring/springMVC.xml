@@ -21,6 +21,9 @@
 
 	<!-- 默认的注解映射的支持 -->
 	<mvc:annotation-driven conversion-service="applicationConversionService">
+		<mvc:argument-resolvers>
+            <bean class="com.jcin.cms.web.system.bind.method.CurrentUserMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<!-- 视图解释类 -->
 	<bean
@@ -94,6 +97,16 @@
 			</set>
 		</property> -->		
 	</bean>
+	
+	<!-- 开启AOP监听 只对当前配置文件有效 -->
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+    
+	<!-- 控制器异常处理 -->
+    <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+    </bean>
+
+    <bean class="com.jcin.cms.web.DefaultExceptionHandler"/>
+    
 	<!-- <bean id="conversionService" -->
 	<!-- class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> -->
 	<!-- <property name="registerDefaultFormatters" value="false" /> -->
