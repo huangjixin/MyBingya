@@ -1,3 +1,4 @@
+
 /**
  * 一句话描述该类：<br/>
  * @author 黄记新
@@ -18,8 +19,8 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		
 	}
 
 }

@@ -39,6 +39,13 @@ public class TestController extends BaseController<Test>{
 	@Resource
 	private ITestService testService;
 
+
+	@RequestMapping(value="login", produces = "text/html")
+	public String login(Model uiModel) {
+		populateEditForm(uiModel, new Test());
+		return "view/test/test_create";
+	}
+	
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@ModelAttribute Test test,
 			HttpServletRequest httpServletRequest) {
