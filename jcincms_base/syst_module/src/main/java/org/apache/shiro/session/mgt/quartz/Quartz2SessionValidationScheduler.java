@@ -1,22 +1,10 @@
 package org.apache.shiro.session.mgt.quartz;
 
 import org.apache.shiro.session.mgt.SessionValidationScheduler;
-import org.apache.shiro.session.mgt.ValidatingSessionManager;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SimpleScheduleBuilder;
-import org.quartz.SimpleTrigger;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
-import org.quartz.impl.StdSchedulerFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class Quartz2SessionValidationScheduler implements
-		SessionValidationScheduler {
-	public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = 3600000L;
+public class Quartz2SessionValidationScheduler /*implements
+		SessionValidationScheduler*/ {
+	/*public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = 3600000L;
 	private static final String JOB_NAME = "SessionValidationJob";
 	private static final Logger log = LoggerFactory
 			.getLogger(Quartz2SessionValidationScheduler.class);
@@ -150,5 +138,5 @@ public class Quartz2SessionValidationScheduler implements
 				setScheduler(null);
 				this.schedulerImplicitlyCreated = false;
 			}
-	}
+	}*/
 }
