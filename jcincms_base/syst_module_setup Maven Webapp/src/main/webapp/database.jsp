@@ -148,12 +148,15 @@
 					 *实现回调 
 					 */
 					text = window.decodeURI(text);
+					var p = document.getElementById('info');
+					var hostSetting_btn = document.getElementById('hostSetting_btn');
 					if(text == "success"){
-						var hostSetting_btn = document.getElementById('hostSetting_btn');
 						hostSetting_btn.disabled=false; //可编辑状态
-						var p = document.getElementById('info');
 						p.innerText = "连接正常";
 						
+					}else{
+						hostSetting_btn.disabled=true; //可编辑状态
+						p.innerText = text;
 					}
 				}
 			}

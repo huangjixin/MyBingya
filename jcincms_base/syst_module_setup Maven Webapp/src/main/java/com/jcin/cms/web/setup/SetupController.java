@@ -8,6 +8,7 @@ package com.jcin.cms.web.setup;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -67,14 +68,17 @@ public class SetupController {
 	 * 測試。
 	 * 
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/testSetting")
 	public void testSetting(@Valid Hostsetting hostsetting,
 			BindingResult result, Model uiModel,
-			HttpServletRequest httpServletRequest, HttpServletResponse response) {
-
+			HttpServletRequest httpServletRequest, HttpServletResponse response) throws UnsupportedEncodingException {
+		// 处理中文问题
+		httpServletRequest.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
-		String object = "success";
+		String object = "";
 
 		String dbdriver = "com.mysql.jdbc.Driver";
 		String dburl = "jdbc:mysql://" + hostsetting.getHost() + ":"
@@ -85,7 +89,7 @@ public class SetupController {
 			Class.forName(dbdriver).newInstance();
 			con = DriverManager.getConnection(dburl, hostsetting.getUsername(),
 					hostsetting.getPassword()); // 2、连接数据库
-			if(con!=null)
+			if (con != null)
 				object = "success";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -100,9 +104,10 @@ public class SetupController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			object = "连接数据库失败，请检查url,端口，数据库是否存在，用户名和密码正确与否";
 			e.printStackTrace();
 		} finally {
+			if (!object.equals("success"))
+				object = "连接数据库失败，请检查url,端口，数据库是否存在，用户名和密码正确与否";
 			out.write(object);
 			out.flush();
 			out.close();
