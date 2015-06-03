@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	private I${domainObjectName}Service ${objInst}Service;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute ${domainObjectName} ${objInst},Model uiModel,
+	public String create(@Valid ${domainObjectName} ${objInst},BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, ${objInst});
+            return "view/${objInst}/${objInst}_create";
+        }
 			${objInst}Service.insert(${objInst});
 		populateEditForm(uiModel, ${objInst});
 		return "redirect:/${objInst}/new";
@@ -77,7 +82,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute ${domainObjectName} ${objInst}, Model uiModel,
+	public String update(@Valid ${domainObjectName} ${objInst},BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		${objInst}Service.update(${objInst});
@@ -123,10 +128,10 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute ${domainObjectName} ${objInst},BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute ${domainObjectName} ${objInst},Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		${domainObjectName}Criteria ${objInst}Criteria = new ${domainObjectName}Criteria();
 		${domainObjectName}Criteria.Criteria criteria = ${objInst}Criteria.createCriteria();

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,7 +20,7 @@
 <title>${objInst}添加</title>
 </head>
 <body>
-	<form id="validForm" action="createForm" method="post">
+	<form:form id="validForm" action="createForm" method="post" commandName="${objInst}">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>${objInst}信息添加</b>
@@ -35,7 +36,7 @@
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 								</#if>
 									<th>&nbsp;${introspectedColumn}：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<form:errors path="${introspectedColumn}" cssStyle="color:red;"></form:errors></td>
 								<#if (iSum%3!=0 && iSum%3==2)>
 								</tr>
 								</#if>
@@ -52,6 +53,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form>		
+		</form:form>		
 </body>
 </html>
