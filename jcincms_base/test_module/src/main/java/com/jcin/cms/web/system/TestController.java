@@ -40,7 +40,7 @@ public class TestController extends BaseController<Test>{
 	private ITestService testService;
 
 
-	@RequestMapping(value="login", produces = "text/html")
+	@RequestMapping(value="/login", produces = "text/html")
 	public String login(Model uiModel) {
 		populateEditForm(uiModel, new Test());
 		return "view/test/test_create";
@@ -124,7 +124,7 @@ public class TestController extends BaseController<Test>{
 	public Page select(@ModelAttribute Page page, @ModelAttribute Test test,BindingResult bindingResult,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		TestCriteria testCriteria = new TestCriteria();
 		TestCriteria.Criteria criteria = testCriteria.createCriteria();
