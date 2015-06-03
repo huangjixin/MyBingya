@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,7 +20,7 @@
 <title>user添加</title>
 </head>
 <body>
-	<form id="validForm" action="createForm" method="post">
+	<form:form id="validForm" action="createForm" method="post" commandName="user">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>user信息添加</b>
@@ -31,35 +32,43 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${user.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="id" value="${user.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;username：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="username" value="${user.username}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="username" value="${user.username}"/>&nbsp;<form:errors path="username" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;password：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="password" value="${user.password}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="password" value="${user.password}"/>&nbsp;<form:errors path="password" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;status：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="status" value="${user.status}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="status" value="${user.status}"/>&nbsp;<form:errors path="status" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;description：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${user.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="description" value="${user.description}"/>&nbsp;<form:errors path="description" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;enabled：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="enabled" value="${user.enabled}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="enabled" value="${user.enabled}"/>&nbsp;<form:errors path="enabled" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${user.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${user.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${user.updateDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${user.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;ip：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="ip" value="${user.ip}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="ip" value="${user.ip}"/>&nbsp;<form:errors path="ip" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;telephone：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="telephone" value="${user.telephone}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="telephone" value="${user.telephone}"/>&nbsp;<form:errors path="telephone" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;salt：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="salt" value="${user.salt}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="salt" value="${user.salt}"/>&nbsp;<form:errors path="salt" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;locked：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="locked" value="${user.locked}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="locked" value="${user.locked}"/>&nbsp;<form:errors path="locked" cssStyle="color:red;"></form:errors></td>
+								</tr>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+									<th>&nbsp;email：</th>
+									<td nowrap="nowrap" align="left"><form:input path="email" value="${user.email}"/>&nbsp;<form:errors path="email" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;sex：</th>
+									<td nowrap="nowrap" align="left"><form:input path="sex" value="${user.sex}"/>&nbsp;<form:errors path="sex" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;address：</th>
+									<td nowrap="nowrap" align="left"><form:input path="address" value="${user.address}"/>&nbsp;<form:errors path="address" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;</th>
@@ -69,6 +78,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form>		
+		</form:form>		
 </body>
 </html>

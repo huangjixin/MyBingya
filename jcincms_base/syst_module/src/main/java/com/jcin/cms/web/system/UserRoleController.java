@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class UserRoleController extends BaseController<UserRole>{
 	private IUserRoleService userRoleService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute UserRole userRole,Model uiModel,
+	public String create(@Valid UserRole userRole,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, userRole);
+            return "view/userRole/userRole_create";
+        }
 			userRoleService.insert(userRole);
 		populateEditForm(uiModel, userRole);
 		return "redirect:/userRole/new";
@@ -77,7 +82,7 @@ public class UserRoleController extends BaseController<UserRole>{
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute UserRole userRole, Model uiModel,
+	public String update(@Valid UserRole userRole,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		userRoleService.update(userRole);
@@ -123,10 +128,10 @@ public class UserRoleController extends BaseController<UserRole>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute UserRole userRole,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute UserRole userRole,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
 		UserRoleCriteria.Criteria criteria = userRoleCriteria.createCriteria();

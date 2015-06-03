@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,7 +20,7 @@
 <title>role添加</title>
 </head>
 <body>
-	<form id="validForm" action="createForm" method="post">
+	<form:form id="validForm" action="createForm" method="post" commandName="role">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>role信息添加</b>
@@ -31,17 +32,17 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${role.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="id" value="${role.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;name：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="name" value="${role.name}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="name" value="${role.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;description：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${role.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="description" value="${role.description}"/>&nbsp;<form:errors path="description" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${role.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${role.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${role.updateDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${role.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;</th>
@@ -51,6 +52,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form>		
+		</form:form>		
 </body>
 </html>

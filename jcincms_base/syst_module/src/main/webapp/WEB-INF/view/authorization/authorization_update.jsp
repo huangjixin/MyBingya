@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,7 +20,7 @@
 <title>authorization更新</title>
 </head>
 <body>
-	<form id="validForm" action="<%=basePath%>authorization/updateForm" method="post">
+	<form:form id="validForm" action="<%=basePath%>authorization/updateForm" method="post" commandName="authorization">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>authorization信息更新</b>
@@ -31,25 +32,25 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${authorization.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="id" value="${authorization.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;name：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="name" value="${authorization.name}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="name" value="${authorization.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;description：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="description" value="${authorization.description}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="description" value="${authorization.description}"/>&nbsp;<form:errors path="description" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="createDate" value="${authorization.createDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${authorization.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="updateDate" value="${authorization.updateDate}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${authorization.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;parentId：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="parentId" value="${authorization.parentId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${authorization.parentId}"/>&nbsp;<form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;url：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="url" value="${authorization.url}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="url" value="${authorization.url}"/>&nbsp;<form:errors path="url" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;parentIds：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="parentIds" value="${authorization.parentIds}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="parentIds" value="${authorization.parentIds}"/>&nbsp;<form:errors path="parentIds" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
@@ -59,6 +60,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form>		
+		</form:form>		
 </body>
 </html>

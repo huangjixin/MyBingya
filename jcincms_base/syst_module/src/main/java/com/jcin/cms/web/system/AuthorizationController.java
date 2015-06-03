@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class AuthorizationController extends BaseController<Authorization>{
 	private IAuthorizationService authorizationService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute Authorization authorization,Model uiModel,
+	public String create(@Valid Authorization authorization,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, authorization);
+            return "view/authorization/authorization_create";
+        }
 			authorizationService.insert(authorization);
 		populateEditForm(uiModel, authorization);
 		return "redirect:/authorization/new";
@@ -77,7 +82,7 @@ public class AuthorizationController extends BaseController<Authorization>{
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute Authorization authorization, Model uiModel,
+	public String update(@Valid Authorization authorization,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		authorizationService.update(authorization);
@@ -123,10 +128,10 @@ public class AuthorizationController extends BaseController<Authorization>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Authorization authorization,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute Authorization authorization,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		AuthorizationCriteria authorizationCriteria = new AuthorizationCriteria();
 		AuthorizationCriteria.Criteria criteria = authorizationCriteria.createCriteria();

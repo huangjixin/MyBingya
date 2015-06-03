@@ -9,28 +9,28 @@ public class Authorization implements Serializable {
     /**
      *   所属表字段为tb_authorization.id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String id;
 
     /**
      *   所属表字段为tb_authorization.name
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String name;
 
     /**
      *   所属表字段为tb_authorization.description
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String description;
 
     /**
      *   所属表字段为tb_authorization.create_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -39,7 +39,7 @@ public class Authorization implements Serializable {
     /**
      *   所属表字段为tb_authorization.update_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -48,28 +48,28 @@ public class Authorization implements Serializable {
     /**
      *   所属表字段为tb_authorization.parent_id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String parentId;
 
     /**
      *   所属表字段为tb_authorization.url
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String url;
 
     /**
      *   所属表字段为tb_authorization.parent_ids
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String parentIds;
 
     /**
      * 该字段对应数据库表 tb_authorization
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private static final long serialVersionUID = 1L;
 
@@ -78,7 +78,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getId() {
         return id;
@@ -89,7 +89,7 @@ public class Authorization implements Serializable {
      *
      * @param id 赋值 tb_authorization.id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -100,7 +100,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.name
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getName() {
         return name;
@@ -111,7 +111,7 @@ public class Authorization implements Serializable {
      *
      * @param name 赋值 tb_authorization.name
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -122,7 +122,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.description
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getDescription() {
         return description;
@@ -133,7 +133,7 @@ public class Authorization implements Serializable {
      *
      * @param description 赋值 tb_authorization.description
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
@@ -144,7 +144,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.create_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public Date getCreateDate() {
         return createDate;
@@ -155,7 +155,7 @@ public class Authorization implements Serializable {
      *
      * @param createDate 赋值 tb_authorization.create_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -166,7 +166,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.update_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -177,7 +177,7 @@ public class Authorization implements Serializable {
      *
      * @param updateDate 赋值 tb_authorization.update_date
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
@@ -188,7 +188,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.parent_id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getParentId() {
         return parentId;
@@ -199,7 +199,7 @@ public class Authorization implements Serializable {
      *
      * @param parentId 赋值 tb_authorization.parent_id
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setParentId(String parentId) {
         this.parentId = parentId == null ? null : parentId.trim();
@@ -210,7 +210,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.url
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getUrl() {
         return url;
@@ -221,7 +221,7 @@ public class Authorization implements Serializable {
      *
      * @param url 赋值 tb_authorization.url
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
@@ -232,7 +232,7 @@ public class Authorization implements Serializable {
      *
      * @return 返回 tb_authorization.parent_ids
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public String getParentIds() {
         return parentIds;
@@ -243,7 +243,7 @@ public class Authorization implements Serializable {
      *
      * @param parentIds 赋值 tb_authorization.parent_ids
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     public void setParentIds(String parentIds) {
         this.parentIds = parentIds == null ? null : parentIds.trim();

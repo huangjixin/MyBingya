@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>test管理</title>
+<title>authorization管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,7 +20,7 @@
 <title>roleAuthorization添加</title>
 </head>
 <body>
-	<form id="validForm" action="createForm" method="post">
+	<form:form id="validForm" action="createForm" method="post" commandName="roleAuthorization">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>roleAuthorization信息添加</b>
@@ -31,11 +32,11 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="id" value="${roleAuthorization.id}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="id" value="${roleAuthorization.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;roleId：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="roleId" value="${roleAuthorization.roleId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="roleId" value="${roleAuthorization.roleId}"/>&nbsp;<form:errors path="roleId" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;authorizationId：</th>
-									<td nowrap="nowrap" align="left"><input type="text" name="authorizationId" value="${roleAuthorization.authorizationId}" size="35" style="paddingLeft:3px;paddingTop:3px;paddingBottom:3px;"/></td>
+									<td nowrap="nowrap" align="left"><form:input path="authorizationId" value="${roleAuthorization.authorizationId}"/>&nbsp;<form:errors path="authorizationId" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th style="width: 150px;">&nbsp;</th>
@@ -45,6 +46,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form>		
+		</form:form>		
 </body>
 </html>

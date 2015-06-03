@@ -9,91 +9,91 @@ public interface UserRoleMapper {
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int deleteBatch(List list);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int insertBatch(List<UserRole> list);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int countByExample(UserRoleCriteria example);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int deleteByExample(UserRoleCriteria example);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int deleteByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int insert(UserRole record);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int insertSelective(UserRole record);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     List<UserRole> selectByExample(UserRoleCriteria example);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     UserRole selectByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int updateByExampleSelective(@Param("record") UserRole record, @Param("example") UserRoleCriteria example);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int updateByExample(@Param("record") UserRole record, @Param("example") UserRoleCriteria example);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int updateByPrimaryKeySelective(UserRole record);
 
     /**
      * 该方法由系统生成 tb_user_role
      *
-     * @mbggenerated 2015年05月22日 18时15分56秒 星期五
+     * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int updateByPrimaryKey(UserRole record);
 }

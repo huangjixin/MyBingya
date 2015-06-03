@@ -19,9 +19,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +37,8 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.system.IUserService;
-import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -48,8 +48,12 @@ public class UserController extends BaseController<User>{
 	private IUserService userService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute User user,Model uiModel,
+	public String create(@Valid User user,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, user);
+            return "view/user/user_create";
+        }
 			userService.insert(user);
 		populateEditForm(uiModel, user);
 		return "redirect:/user/new";
@@ -72,14 +76,13 @@ public class UserController extends BaseController<User>{
 		return "view/user/user_show";
 	}
 
-	@RequiresPermissions("user:list")
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
 		return "view/user/user_list";
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute User user, Model uiModel,
+	public String update(@Valid User user,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		userService.update(user);
@@ -125,10 +128,10 @@ public class UserController extends BaseController<User>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute User user,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute User user,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		UserCriteria userCriteria = new UserCriteria();
 		UserCriteria.Criteria criteria = userCriteria.createCriteria();
@@ -143,6 +146,9 @@ public class UserController extends BaseController<User>{
 		if (null != user.getPassword()  && !"".equals(user.getPassword())) {
 		  	criteria.andPasswordLike("%" + user.getPassword() + "%");
 		}
+		if (null != user.getDescription()  && !"".equals(user.getDescription())) {
+		  	criteria.andDescriptionLike("%" + user.getDescription() + "%");
+		}
 		if (null != user.getIp()  && !"".equals(user.getIp())) {
 		  	criteria.andIpLike("%" + user.getIp() + "%");
 		}
@@ -151,6 +157,12 @@ public class UserController extends BaseController<User>{
 		}
 		if (null != user.getSalt()  && !"".equals(user.getSalt())) {
 		  	criteria.andSaltLike("%" + user.getSalt() + "%");
+		}
+		if (null != user.getEmail()  && !"".equals(user.getEmail())) {
+		  	criteria.andEmailLike("%" + user.getEmail() + "%");
+		}
+		if (null != user.getAddress()  && !"".equals(user.getAddress())) {
+		  	criteria.andAddressLike("%" + user.getAddress() + "%");
 		}
 		page = userService.select(userCriteria);
 		return page;
@@ -222,7 +234,10 @@ public class UserController extends BaseController<User>{
 			"Ip",
 			"Telephone",
 			"Salt",
-			"Locked"
+			"Locked",
+			"Email",
+			"Sex",
+			"Address"
 		};// 列名
 		String keys[] = { 
 			"Id",
@@ -236,7 +251,10 @@ public class UserController extends BaseController<User>{
 			"Ip",
 			"Telephone",
 			"Salt",
-			"Locked"
+			"Locked",
+			"Email",
+			"Sex",
+			"Address"
 		};// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 
@@ -272,6 +290,9 @@ public class UserController extends BaseController<User>{
 				mapValue.put("Telephone",user.getTelephone());
 				mapValue.put("Salt",user.getSalt());
 				mapValue.put("Locked",user.getLocked());
+				mapValue.put("Email",user.getEmail());
+				mapValue.put("Sex",user.getSex());
+				mapValue.put("Address",user.getAddress());
 			listmap.add(mapValue);
 		}
 		return listmap;

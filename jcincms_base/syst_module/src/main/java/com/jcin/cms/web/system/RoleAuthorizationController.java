@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class RoleAuthorizationController extends BaseController<RoleAuthorizatio
 	private IRoleAuthorizationService roleAuthorizationService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute RoleAuthorization roleAuthorization,Model uiModel,
+	public String create(@Valid RoleAuthorization roleAuthorization,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, roleAuthorization);
+            return "view/roleAuthorization/roleAuthorization_create";
+        }
 			roleAuthorizationService.insert(roleAuthorization);
 		populateEditForm(uiModel, roleAuthorization);
 		return "redirect:/roleAuthorization/new";
@@ -77,7 +82,7 @@ public class RoleAuthorizationController extends BaseController<RoleAuthorizatio
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute RoleAuthorization roleAuthorization, Model uiModel,
+	public String update(@Valid RoleAuthorization roleAuthorization,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		roleAuthorizationService.update(roleAuthorization);
@@ -123,10 +128,10 @@ public class RoleAuthorizationController extends BaseController<RoleAuthorizatio
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute RoleAuthorization roleAuthorization,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute RoleAuthorization roleAuthorization,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		RoleAuthorizationCriteria roleAuthorizationCriteria = new RoleAuthorizationCriteria();
 		RoleAuthorizationCriteria.Criteria criteria = roleAuthorizationCriteria.createCriteria();

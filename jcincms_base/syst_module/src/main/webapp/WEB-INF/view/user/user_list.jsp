@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>test管理</title>
+<title>user管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -161,6 +161,15 @@
 		if ($("lockedInput").val() != "") {
 			queryParams.locked = $("#lockedInput").val();
 		}
+		if ($("emailInput").val() != "") {
+			queryParams.email = $("#emailInput").val();
+		}
+		if ($("sexInput").val() != "") {
+			queryParams.sex = $("#sexInput").val();
+		}
+		if ($("addressInput").val() != "") {
+			queryParams.address = $("#addressInput").val();
+		}
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -184,6 +193,9 @@
 			$("#telephoneInput").val("");
 			$("#saltInput").val("");
 			$("#lockedInput").val("");
+			$("#emailInput").val("");
+			$("#sexInput").val("");
+			$("#addressInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -251,6 +263,12 @@
 			<input  id="saltInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>locked:</label>
 			<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>email:</label>
+			<input  id="emailInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>sex:</label>
+			<input  id="sexInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>address:</label>
+			<input  id="addressInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -300,6 +318,12 @@
 						data-options="field:'salt',align:'center'" width="100%">salt</th>
 					<th id="lockedFieldTh"
 						data-options="field:'locked',align:'center'" width="100%">locked</th>
+					<th id="emailFieldTh"
+						data-options="field:'email',align:'center'" width="100%">email</th>
+					<th id="sexFieldTh"
+						data-options="field:'sex',align:'center'" width="100%">sex</th>
+					<th id="addressFieldTh"
+						data-options="field:'address',align:'center'" width="100%">address</th>
 				</tr>
 			</thead>
 		</table>

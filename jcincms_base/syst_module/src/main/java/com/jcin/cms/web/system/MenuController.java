@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class MenuController extends BaseController<Menu>{
 	private IMenuService menuService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute Menu menu,Model uiModel,
+	public String create(@Valid Menu menu,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, menu);
+            return "view/menu/menu_create";
+        }
 			menuService.insert(menu);
 		populateEditForm(uiModel, menu);
 		return "redirect:/menu/new";
@@ -77,7 +82,7 @@ public class MenuController extends BaseController<Menu>{
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute Menu menu, Model uiModel,
+	public String update(@Valid Menu menu,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		menuService.update(menu);
@@ -123,10 +128,10 @@ public class MenuController extends BaseController<Menu>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Menu menu,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute Menu menu,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		MenuCriteria menuCriteria = new MenuCriteria();
 		MenuCriteria.Criteria criteria = menuCriteria.createCriteria();
@@ -146,6 +151,12 @@ public class MenuController extends BaseController<Menu>{
 		}
 		if (null != menu.getParentId()  && !"".equals(menu.getParentId())) {
 		  	criteria.andParentIdLike("%" + menu.getParentId() + "%");
+		}
+		if (null != menu.getIcon()  && !"".equals(menu.getIcon())) {
+		  	criteria.andIconLike("%" + menu.getIcon() + "%");
+		}
+		if (null != menu.getUrl()  && !"".equals(menu.getUrl())) {
+		  	criteria.andUrlLike("%" + menu.getUrl() + "%");
 		}
 		page = menuService.select(menuCriteria);
 		return page;

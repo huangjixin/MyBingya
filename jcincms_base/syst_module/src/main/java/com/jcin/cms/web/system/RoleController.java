@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,12 @@ public class RoleController extends BaseController<Role>{
 	private IRoleService roleService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@ModelAttribute Role role,Model uiModel,
+	public String create(@Valid Role role,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if (result.hasErrors()) {
+            populateEditForm(uiModel, role);
+            return "view/role/role_create";
+        }
 			roleService.insert(role);
 		populateEditForm(uiModel, role);
 		return "redirect:/role/new";
@@ -77,7 +82,7 @@ public class RoleController extends BaseController<Role>{
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@ModelAttribute Role role, Model uiModel,
+	public String update(@Valid Role role,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 		roleService.update(role);
@@ -123,10 +128,10 @@ public class RoleController extends BaseController<Role>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Role role,BindingResult bindingResult,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute Role role,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, bindingResult, uiModel, httpServletRequest,
+		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		RoleCriteria roleCriteria = new RoleCriteria();
 		RoleCriteria.Criteria criteria = roleCriteria.createCriteria();
