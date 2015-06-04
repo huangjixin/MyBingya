@@ -14,6 +14,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-version>4.1.5.RELEASE</spring-version>
 		<build.war.name>jcincms</build.war.name>
+		<!-- Logging -->
+		<slf4j.version>1.7.12</slf4j.version>
+		<slf4j-log4j12.version>1.7.12</slf4j-log4j12.version>
+		<log4j.version>1.2.15</log4j.version>
 	</properties>
 
 	<dependencies>
@@ -40,17 +44,17 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.12</version>
+			<version>${slf4j-log4j12.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -339,16 +343,32 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>1.2.3.RELEASE</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-autoconfigure</artifactId> 
+			<version>1.2.3.RELEASE</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>1.2.3.RELEASE</version>
-		</dependency> -->
+		</dependency>
+
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<!-- zkclient -->
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<!-- zookeeper -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.3.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>jcincms_base</finalName>
@@ -418,5 +438,6 @@
 		<module>base_module</module>
 		<module>shiro_module</module>
 		<module>syst_module_setup</module>
+		<module>syst_module_api</module>
 	</modules>
 </project>
