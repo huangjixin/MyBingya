@@ -1,5 +1,5 @@
 /**
- * 一句话描述该类：<br/>
+ * 一句话描述该类：数据库连接域模型<br/>
  * @author 黄记新
  * @date 2015-6-3,下午6:28:09
  *
@@ -15,23 +15,23 @@ public class Hostsetting {
 
 	@NotBlank
 	@NotNull
-	@NotEmpty(message="数据库必填")
+	@NotEmpty(message = "数据库必填")
 	private String dbname;
 	@NotBlank
 	@NotNull
-	@NotEmpty(message="主机地址必填")
+	@NotEmpty(message = "主机地址必填")
 	private String host;
 	@NotBlank
 	@NotNull
-	@NotEmpty(message="端口必填")
+	@NotEmpty(message = "端口必填")
 	private int port;
 	@NotBlank
 	@NotNull
-	@NotEmpty(message="用户必填")
+	@NotEmpty(message = "用户必填")
 	private String username;
 	@NotBlank
 	@NotNull
-	@NotEmpty(message="密码必填")
+	@NotEmpty(message = "密码必填")
 	private String password;
 
 	public String getDbname() {

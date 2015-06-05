@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.web.setup;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -61,6 +62,11 @@ public class SetupController {
 			populateEditForm(uiModel, hostsetting);
 			return "database";
 		}
+		
+		String filePath = httpServletRequest.getContextPath();
+		filePath += "database" + File.separator + "createDatabase.sql";
+		File file = new File(filePath);
+		
 		return "finish";
 	}
 
