@@ -78,10 +78,10 @@ public class SetupController {
 		String dburl = "jdbc:mysql://" + hostsetting.getHost() + ":"
 				+ hostsetting.getPort() + "/" + hostsetting.getDbname();
 		Connection con = null; // 表示数据库的连接对象
-		PrintWriter out = null;
+//		PrintWriter out = null;
 		String object = "";
 		try {
-			out = response.getWriter();
+//			out = response.getWriter();
 			Class.forName(dbdriver).newInstance();
 			con = DriverManager.getConnection(dburl, hostsetting.getUsername(),
 					hostsetting.getPassword()); // 2、连接数据库
@@ -109,13 +109,18 @@ public class SetupController {
 		} finally {
 			if (!object.equals("success"))
 				object = "连接数据库失败，请检查url,端口，数据库是否存在，用户名和密码正确与否";
-			out.write(object);
-			out.flush();
-			out.close();
+//			out.write(object);
+//			out.flush();
+//			out.close();
 		}
-		return "finish";
+		return "redirect:/setup/success";
 	}
 
+	@RequestMapping(value = "/success")
+	public String success(HttpServletRequest httpServletRequest,
+			HttpServletResponse response) {
+		return "success";
+	}
 	/**
 	 * 測試。
 	 * 
