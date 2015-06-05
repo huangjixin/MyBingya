@@ -5,9 +5,9 @@
                http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
                http://code.alibabatech.com/schema/dubbo 
                http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	<dubbo:application name="dubbo_consumer"></dubbo:application>
+	<!-- <dubbo:application name="dubbo_consumer"></dubbo:application>
 	<dubbo:registry address="zookeeper://127.0.0.1:2181"
 		check="false"></dubbo:registry>
 	<dubbo:reference interface="com.jcin.cms.service.system.IRoleService"
-		id="roleService"></dubbo:reference>
+		id="roleService"></dubbo:reference> -->
 </beans>

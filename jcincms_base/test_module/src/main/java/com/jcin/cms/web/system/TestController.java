@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.web.system;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,13 +23,15 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "/test")
 public class TestController extends BaseController<Test> {
-	@Resource
-	private ITestService testService;
+	//使用分布式框架dubbo获取到的接口。
+//	@Resource
+//	private ITestService testService;
 
 	@RequestMapping(value = "/getRoles")
 	@ResponseBody
 	public List<Role> getRoles() {
-		List<Role> roles = testService.selectAll();
+		List<Role> roles = new ArrayList<Role>();
+//		roles= testService.selectAll();
 		return roles;
 	}
 
