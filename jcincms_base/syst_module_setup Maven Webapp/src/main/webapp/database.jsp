@@ -56,7 +56,7 @@
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>数据库名：</th>
 							<td nowrap="nowrap" align="left"><input id="dbname"
-								name="dbname" value="jcincms"/>&nbsp;</td>
+								name="dbname" value="jcms_test"/>&nbsp;</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>地址：</th>
