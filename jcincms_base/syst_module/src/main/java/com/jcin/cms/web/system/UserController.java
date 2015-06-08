@@ -36,7 +36,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
-import com.jcin.cms.service.activemq.ProducerService;
 import com.jcin.cms.service.system.IUserService;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
@@ -47,9 +46,6 @@ import com.jcin.cms.web.BaseController;
 public class UserController extends BaseController<User>{
 	@Resource
 	private IUserService userService;
-	
-	@Resource
-	private ProducerService producerService;
 	
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@Valid User user,BindingResult result,Model uiModel,
