@@ -6,18 +6,10 @@
  */
 package com.jcin.cms.web.system;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.Test;
-import com.jcin.cms.service.system.ITestService;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -27,12 +19,12 @@ public class TestController extends BaseController<Test> {
 //	@Resource
 //	private ITestService testService;
 
-	@RequestMapping(value = "/getRoles")
+	/*@RequestMapping(value = "/getRoles")
 	@ResponseBody
 	public List<Role> getRoles() {
 		List<Role> roles = new ArrayList<Role>();
 //		roles= testService.selectAll();
 		return roles;
-	}
+	}*/
 
 }

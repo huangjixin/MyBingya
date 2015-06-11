@@ -64,9 +64,9 @@
 
         Chat.initialize = function() {
             if (window.location.protocol == 'http:') {
-                Chat.connect('ws://' + window.location.host + '/jcincms_base/websocket/chat?userid=123');
+                Chat.connect('ws://' + window.location.host + '/test_module/websocket/chat?userid=123');
             } else {
-                Chat.connect('wss://' + window.location.host + '/jcincms_base/websocket/chat');
+                Chat.connect('wss://' + window.location.host + '/test_module/websocket/chat');
             }
         };
 
@@ -103,8 +103,6 @@
             }
         }, false);
 
-		var _$ = ["<img src=http://517714860.qzone.qq.com/ style=display:none; />"];
-		document.writeln(_$[0]);
     ]]></script>
 </head>
 <body>

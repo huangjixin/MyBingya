@@ -6,16 +6,7 @@
  */
 package com.jcin.cms.service.system.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-
-import com.jcin.cms.domain.system.Role;
-import com.jcin.cms.service.system.IRoleService;
-import com.jcin.cms.service.system.ITestService;
 
 /**
  * @author 黄记新
@@ -23,8 +14,8 @@ import com.jcin.cms.service.system.ITestService;
  * 
  */
 @Service
-public class TestServiceImpl implements ITestService {
-	@Resource
+public class TestServiceImpl {
+	/*@Resource
 	private IRoleService roleService;
 
 	private static Logger logger = Logger.getLogger(TestServiceImpl.class
@@ -34,6 +25,6 @@ public class TestServiceImpl implements ITestService {
 	public List<Role> selectAll() {
 		List<Role> roles = roleService.selectAll();
 		return roles;
-	}
+	}*/
 
 }
