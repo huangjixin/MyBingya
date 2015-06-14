@@ -15,40 +15,31 @@
 	<name>syst_module</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-
 		<!-- <dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>test_module</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>war</type>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>2.2.1</version>
 		</dependency> -->
-		<!-- <dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>test_module</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>warpath</type>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>jcincms_base</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-		</dependency> -->
+		<dependency>
+			<groupId>com.github.livesense</groupId>
+			<artifactId>jodconverter-core</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.jcin.cms</groupId> <artifactId>test_module</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <type>war</type> </dependency> -->
+		<!-- <dependency> <groupId>com.jcin.cms</groupId> <artifactId>test_module</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <type>warpath</type> </dependency> -->
+		<!-- <dependency> <groupId>com.jcin.cms</groupId> <artifactId>jcincms_base</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <type>jar</type> </dependency> -->
 		<dependency>
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>base_module</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>syst_module_activemq</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
-		<!-- <dependency>
-			<groupId>com.jcin.cms</groupId>
-			<artifactId>syst_module_api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.jcin.cms</groupId> <artifactId>syst_module_activemq</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+		<!-- <dependency> <groupId>com.jcin.cms</groupId> <artifactId>syst_module_api</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 	</dependencies>
 	<build>
 		<finalName>syst_module</finalName>
@@ -57,10 +48,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                        <encoding>utf-8</encoding>
-                </configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>utf-8</encoding>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -75,22 +66,15 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<!-- 排除要合并的War包中的全部Jar包因为已经用插件把War包中依赖的Jar包全部引入了当前工程中 -->
-					<!-- <configuration>
-						<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
-					</configuration> -->
+					<!-- <configuration> <dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes> 
+						</configuration> -->
 
 					<!-- 配置要合并的War包 -->
 					<overlays>
-						<!-- <overlay>
-							<id>jcincms_base</id>
-							<groupId>com.jcin.cms</groupId>
-							<artifactId>jcincms_base</artifactId>
-						</overlay> -->
-						<!-- <overlay>
-							<id>test_module</id>
-							<groupId>com.jcin.cms</groupId>
-							<artifactId>test_module</artifactId>
-						</overlay> -->
+						<!-- <overlay> <id>jcincms_base</id> <groupId>com.jcin.cms</groupId> 
+							<artifactId>jcincms_base</artifactId> </overlay> -->
+						<!-- <overlay> <id>test_module</id> <groupId>com.jcin.cms</groupId> 
+							<artifactId>test_module</artifactId> </overlay> -->
 					</overlays>
 				</configuration>
 			</plugin>
