@@ -14,15 +14,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.jcin.cms.utils.Page;
 
 public class BaseController<T extends Serializable> {
-	public Page select(Page page, BindingResult bindingResult, Model uiModel,
+	public Page select(Page page, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		// 当前页
@@ -65,7 +65,7 @@ public class BaseController<T extends Serializable> {
 		return page;
 	}
 
-	public ModelAndView create(T record, BindingResult bindingResult,
+	public String create(@Valid T record, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
