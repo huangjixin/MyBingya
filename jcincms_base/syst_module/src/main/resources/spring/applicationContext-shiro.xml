@@ -147,6 +147,7 @@
                 /logout = logout
                 /authenticated = authc
                 /** = user,sysUser
+                /menu = anon
 			</value>
 		</property>
 	</bean>
