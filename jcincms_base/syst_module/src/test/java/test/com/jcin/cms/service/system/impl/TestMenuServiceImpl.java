@@ -1,20 +1,16 @@
 package test.com.jcin.cms.service.system.impl;
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
-import junit.framework.Assert;
-
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.json.JSONObject;
 import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.service.system.IMenuService;
+import com.sun.star.mozilla.MenuSingleChange;
 
 /**
  * 一句话描述该类：<br/>
@@ -32,20 +28,22 @@ public class TestMenuServiceImpl {
 	@Test
 	public void testInsertMenu() {
 		Menu menu = new Menu();
-		menu.setName("test");
+		menu.setName("操作日志");
+		menu.setId("12");
+		menu.setParentId("11");
 		String id = menuService.insert(menu);
 		org.junit.Assert.assertNotNull(id);
 	}
 
 	@Test
 	public void testGetMenuTree() {
-		List<JSONObject> list = menuService.getMenuTree();
+		List<Menu> list = menuService.getMenuTree();
 		org.junit.Assert.assertNotNull(list);
 	}
 	
 	@Test
 	public void testDeleteByPrimaryKey() {
-		int id  = menuService.deleteByPrimaryKey("1434850270559");
+		int id  = menuService.deleteByPrimaryKey("1434849123735");
 		org.junit.Assert.assertNotNull(id);
 	}
 
