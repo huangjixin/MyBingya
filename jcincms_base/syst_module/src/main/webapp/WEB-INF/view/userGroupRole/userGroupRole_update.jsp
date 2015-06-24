@@ -17,30 +17,30 @@
 <!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
 	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>userRole添加</title>
+<title>userGroupRole更新</title>
 </head>
 <body>
-	<form:form id="validForm" action="createForm" method="post" commandName="userRole">
+	<form:form id="validForm" action="<%=basePath%>userGroupRole/updateForm" method="post" commandName="userGroupRole">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>userRole信息添加</b>
+					<b>userGroupRole信息更新</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
 						<td width="100%">
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${userRole.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;userId：</th>
-									<td nowrap="nowrap" align="left"><form:input path="userId" value="${userRole.userId}"/>&nbsp;<form:errors path="userId" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input path="id" value="${userGroupRole.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;roleId：</th>
-									<td nowrap="nowrap" align="left"><form:input path="roleId" value="${userRole.roleId}"/>&nbsp;<form:errors path="roleId" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input path="roleId" value="${userGroupRole.roleId}"/>&nbsp;<form:errors path="roleId" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;userGroup_id：</th>
+									<td nowrap="nowrap" align="left"><form:input path="userGroup_id" value="${userGroupRole.userGroup_id}"/>&nbsp;<form:errors path="userGroup_id" cssStyle="color:red;"></form:errors></td>
 								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>userRole'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>userGroupRole'"/></td>
 								</tr>
 							</table>
 						</td>

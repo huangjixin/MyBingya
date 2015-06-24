@@ -71,6 +71,10 @@
 									<td nowrap="nowrap" align="left"><form:input path="address" value="${user.address}"/>&nbsp;<form:errors path="address" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+									<th>&nbsp;userGroup_id：</th>
+									<td nowrap="nowrap" align="left"><form:input path="userGroup_id" value="${user.userGroup_id}"/>&nbsp;<form:errors path="userGroup_id" cssStyle="color:red;"></form:errors></td>
+								</tr>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
 									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='<%=basePath%>user'"/></td>
 								</tr>

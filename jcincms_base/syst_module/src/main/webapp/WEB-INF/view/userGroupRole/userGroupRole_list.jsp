@@ -12,12 +12,12 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>userRole管理</title>
+<title>userGroupRole管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,UserRole列表">
+<meta http-equiv="keywords" content="user,user list,UserGroupRole列表">
 <meta http-equiv="description" content="管理">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
@@ -84,7 +84,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : 'userRole/deleteById',
+			url : 'userGroupRole/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -102,7 +102,7 @@
 			return;
 		}
 		
-		window.location.href='<%=basePath%>userRole/edit/'+row[0].id; 
+		window.location.href='<%=basePath%>userGroupRole/edit/'+row[0].id; 
 	}
 
 	function show(){
@@ -111,7 +111,7 @@
 			return;
 		}
 		
-		window.location.href='<%=basePath%>userRole/'+row[0].id; 
+		window.location.href='<%=basePath%>userGroupRole/'+row[0].id; 
 	}
 	//处理事件的函数
 	function onKeyEnter(e) {
@@ -128,11 +128,11 @@
 		if ($("idInput").val() != "") {
 			queryParams.id = $("#idInput").val();
 		}
-		if ($("userIdInput").val() != "") {
-			queryParams.userId = $("#userIdInput").val();
-		}
 		if ($("roleIdInput").val() != "") {
 			queryParams.roleId = $("#roleIdInput").val();
+		}
+		if ($("userGroup_idInput").val() != "") {
+			queryParams.userGroup_id = $("#userGroup_idInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -146,8 +146,8 @@
 	//清除
 	function clearSearch() {
 			$("#idInput").val("");
-			$("#userIdInput").val("");
 			$("#roleIdInput").val("");
+			$("#userGroup_idInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -161,7 +161,7 @@
 
 	//导出excel
 	function exportExcel() {
-		window.open('<%=basePath%>userRole/exportExcel');
+		window.open('<%=basePath%>userGroupRole/exportExcel');
 	}
 
 	//导入excel
@@ -177,7 +177,7 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='userRole/new'" /> 
+				onclick="javascript:window.location.href='userGroupRole/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
 			<input type="button"
@@ -193,10 +193,10 @@
 		<div style="padding: 5px;border: 0px;">
 			<label>id:</label>
 			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>userId:</label>
-			<input  id="userIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>roleId:</label>
 			<input  id="roleIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>userGroup_id:</label>
+			<input  id="userGroup_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -206,7 +206,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: 'userRole/select',
+								url: 'userGroupRole/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -224,16 +224,16 @@
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center'" width="100%">id</th>
-					<th id="userIdFieldTh"
-						data-options="field:'userId',align:'center'" width="100%">userId</th>
 					<th id="roleIdFieldTh"
 						data-options="field:'roleId',align:'center'" width="100%">roleId</th>
+					<th id="userGroup_idFieldTh"
+						data-options="field:'userGroup_id',align:'center'" width="100%">userGroup_id</th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="userRole/new"></form>
-	<form id="updateForm" action="userRole/edit"></form>
+	<form id="addForm" action="userGroupRole/new"></form>
+	<form id="updateForm" action="userGroupRole/edit"></form>
 </body>
 </html>

@@ -12,12 +12,12 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>user管理</title>
+<title>userGroup管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,User列表">
+<meta http-equiv="keywords" content="user,user list,UserGroup列表">
 <meta http-equiv="description" content="管理">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
@@ -84,7 +84,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : 'user/deleteById',
+			url : 'userGroup/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -102,7 +102,7 @@
 			return;
 		}
 		
-		window.location.href='<%=basePath%>user/edit/'+row[0].id; 
+		window.location.href='<%=basePath%>userGroup/edit/'+row[0].id; 
 	}
 
 	function show(){
@@ -111,7 +111,7 @@
 			return;
 		}
 		
-		window.location.href='<%=basePath%>user/'+row[0].id; 
+		window.location.href='<%=basePath%>userGroup/'+row[0].id; 
 	}
 	//处理事件的函数
 	function onKeyEnter(e) {
@@ -128,11 +128,8 @@
 		if ($("idInput").val() != "") {
 			queryParams.id = $("#idInput").val();
 		}
-		if ($("usernameInput").val() != "") {
-			queryParams.username = $("#usernameInput").val();
-		}
-		if ($("passwordInput").val() != "") {
-			queryParams.password = $("#passwordInput").val();
+		if ($("groupnameInput").val() != "") {
+			queryParams.groupname = $("#groupnameInput").val();
 		}
 		if ($("statusInput").val() != "") {
 			queryParams.status = $("#statusInput").val();
@@ -149,29 +146,8 @@
 		if ($("updateDateInput").val() != "") {
 			queryParams.updateDate = $("#updateDateInput").val();
 		}
-		if ($("ipInput").val() != "") {
-			queryParams.ip = $("#ipInput").val();
-		}
-		if ($("telephoneInput").val() != "") {
-			queryParams.telephone = $("#telephoneInput").val();
-		}
-		if ($("saltInput").val() != "") {
-			queryParams.salt = $("#saltInput").val();
-		}
 		if ($("lockedInput").val() != "") {
 			queryParams.locked = $("#lockedInput").val();
-		}
-		if ($("emailInput").val() != "") {
-			queryParams.email = $("#emailInput").val();
-		}
-		if ($("sexInput").val() != "") {
-			queryParams.sex = $("#sexInput").val();
-		}
-		if ($("addressInput").val() != "") {
-			queryParams.address = $("#addressInput").val();
-		}
-		if ($("userGroup_idInput").val() != "") {
-			queryParams.userGroup_id = $("#userGroup_idInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -185,21 +161,13 @@
 	//清除
 	function clearSearch() {
 			$("#idInput").val("");
-			$("#usernameInput").val("");
-			$("#passwordInput").val("");
+			$("#groupnameInput").val("");
 			$("#statusInput").val("");
 			$("#descriptionInput").val("");
 			$("#enabledInput").val("");
 			$("#createDateInput").val("");
 			$("#updateDateInput").val("");
-			$("#ipInput").val("");
-			$("#telephoneInput").val("");
-			$("#saltInput").val("");
 			$("#lockedInput").val("");
-			$("#emailInput").val("");
-			$("#sexInput").val("");
-			$("#addressInput").val("");
-			$("#userGroup_idInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -213,7 +181,7 @@
 
 	//导出excel
 	function exportExcel() {
-		window.open('<%=basePath%>user/exportExcel');
+		window.open('<%=basePath%>userGroup/exportExcel');
 	}
 
 	//导入excel
@@ -229,7 +197,7 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='user/new'" /> 
+				onclick="javascript:window.location.href='userGroup/new'" /> 
 			<input type="button"
 				value="删除" onclick="deleteRows()" /> 
 			<input type="button"
@@ -245,10 +213,8 @@
 		<div style="padding: 5px;border: 0px;">
 			<label>id:</label>
 			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>username:</label>
-			<input  id="usernameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>password:</label>
-			<input  id="passwordInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>groupname:</label>
+			<input  id="groupnameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>status:</label>
 			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>description:</label>
@@ -259,22 +225,8 @@
 			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>updateDate:</label>
 			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>ip:</label>
-			<input  id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>telephone:</label>
-			<input  id="telephoneInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>salt:</label>
-			<input  id="saltInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>locked:</label>
 			<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>email:</label>
-			<input  id="emailInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>sex:</label>
-			<input  id="sexInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>address:</label>
-			<input  id="addressInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>userGroup_id:</label>
-			<input  id="userGroup_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -284,7 +236,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: 'user/select',
+								url: 'userGroup/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -302,10 +254,8 @@
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center'" width="100%">id</th>
-					<th id="usernameFieldTh"
-						data-options="field:'username',align:'center'" width="100%">username</th>
-					<th id="passwordFieldTh"
-						data-options="field:'password',align:'center'" width="100%">password</th>
+					<th id="groupnameFieldTh"
+						data-options="field:'groupname',align:'center'" width="100%">groupname</th>
 					<th id="statusFieldTh"
 						data-options="field:'status',align:'center'" width="100%">status</th>
 					<th id="descriptionFieldTh"
@@ -316,28 +266,14 @@
 						data-options="field:'createDate',align:'center'" width="100%">createDate</th>
 					<th id="updateDateFieldTh"
 						data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
-					<th id="ipFieldTh"
-						data-options="field:'ip',align:'center'" width="100%">ip</th>
-					<th id="telephoneFieldTh"
-						data-options="field:'telephone',align:'center'" width="100%">telephone</th>
-					<th id="saltFieldTh"
-						data-options="field:'salt',align:'center'" width="100%">salt</th>
 					<th id="lockedFieldTh"
 						data-options="field:'locked',align:'center'" width="100%">locked</th>
-					<th id="emailFieldTh"
-						data-options="field:'email',align:'center'" width="100%">email</th>
-					<th id="sexFieldTh"
-						data-options="field:'sex',align:'center'" width="100%">sex</th>
-					<th id="addressFieldTh"
-						data-options="field:'address',align:'center'" width="100%">address</th>
-					<th id="userGroup_idFieldTh"
-						data-options="field:'userGroup_id',align:'center'" width="100%">userGroup_id</th>
 				</tr>
 			</thead>
 		</table>
 
 	</div>
-	<form id="addForm" action="user/new"></form>
-	<form id="updateForm" action="user/edit"></form>
+	<form id="addForm" action="userGroup/new"></form>
+	<form id="updateForm" action="userGroup/edit"></form>
 </body>
 </html>
