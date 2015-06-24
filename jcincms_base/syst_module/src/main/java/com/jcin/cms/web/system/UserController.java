@@ -37,8 +37,8 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
 import com.jcin.cms.service.system.IUserService;
-import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -46,7 +46,7 @@ import com.jcin.cms.web.BaseController;
 public class UserController extends BaseController<User>{
 	@Resource
 	private IUserService userService;
-	
+
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
 	public String create(@Valid User user,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -146,24 +146,6 @@ public class UserController extends BaseController<User>{
 		if (null != user.getPassword()  && !"".equals(user.getPassword())) {
 		  	criteria.andPasswordLike("%" + user.getPassword() + "%");
 		}
-		if (null != user.getDescription()  && !"".equals(user.getDescription())) {
-		  	criteria.andDescriptionLike("%" + user.getDescription() + "%");
-		}
-		if (null != user.getIp()  && !"".equals(user.getIp())) {
-		  	criteria.andIpLike("%" + user.getIp() + "%");
-		}
-		if (null != user.getTelephone()  && !"".equals(user.getTelephone())) {
-		  	criteria.andTelephoneLike("%" + user.getTelephone() + "%");
-		}
-		if (null != user.getSalt()  && !"".equals(user.getSalt())) {
-		  	criteria.andSaltLike("%" + user.getSalt() + "%");
-		}
-		if (null != user.getEmail()  && !"".equals(user.getEmail())) {
-		  	criteria.andEmailLike("%" + user.getEmail() + "%");
-		}
-		if (null != user.getAddress()  && !"".equals(user.getAddress())) {
-		  	criteria.andAddressLike("%" + user.getAddress() + "%");
-		}
 		page = userService.select(userCriteria);
 		return page;
 	}
@@ -237,7 +219,8 @@ public class UserController extends BaseController<User>{
 			"Locked",
 			"Email",
 			"Sex",
-			"Address"
+			"Address",
+			"UserGroup_id"
 		};// 列名
 		String keys[] = { 
 			"Id",
@@ -254,7 +237,8 @@ public class UserController extends BaseController<User>{
 			"Locked",
 			"Email",
 			"Sex",
-			"Address"
+			"Address",
+			"UserGroup_id"
 		};// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 

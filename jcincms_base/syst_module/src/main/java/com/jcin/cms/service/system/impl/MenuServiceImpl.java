@@ -6,20 +6,23 @@
  */
 package com.jcin.cms.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.dao.system.MenuMapper;
 import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.MenuCriteria;
-import com.jcin.cms.service.system.IMenuService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
+import com.jcin.cms.service.system.IMenuService;
 import com.jcin.cms.utils.Page;
 
 /**
@@ -28,8 +31,8 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service
-public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
-		implements IMenuService {
+public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
+		IMenuService {
 	private static Logger logger = Logger.getLogger(MenuServiceImpl.class
 			.getName());
 
@@ -56,14 +59,17 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.IMenuService#insert(com.jcin.cms.service.system.
-	 * Menu)
+	 * com.jcin.cms.service.system.IMenuService#insert(com.jcin.cms.service.
+	 * system. Menu)
 	 */
 	@Override
 	@Transactional
 	public String insert(Menu record) {
-		 super.insert(record);
-
+		String recordid = record.getId();
+		super.insert(record);
+		if(null != recordid){
+			record.setId(recordid);
+		}
 		record.setCreateDate(new Date());
 		int result = menuMapper.insert(record);
 		String id = record.getId();
@@ -79,7 +85,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	@Override
 	public Page select(Page page) {
 		super.select(page);
-		//setOrderByClause("SER_NO  asc , ORG_ID desc");  
+		// setOrderByClause("SER_NO  asc , ORG_ID desc");
 		MenuCriteria menuCriteria = new MenuCriteria();
 		menuCriteria.setOrderByClause("id desc");
 		menuCriteria.setPage(page);
@@ -90,14 +96,15 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.IMenuService#select(com.jcin.cms.service.system.MenuCriteria)
+	 * com.jcin.cms.service.system.IMenuService#select(com.jcin.cms.service.
+	 * system.MenuCriteria)
 	 */
-	//@Override
+	// @Override
 	public Page select(MenuCriteria criteria) {
 		Page page = new Page();
 		@SuppressWarnings("rawtypes")
@@ -107,19 +114,18 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.system.IMenuService#selectAll()
+	 * @see com.jcin.cms.service.system.IMenuService#selectAll()
 	 */
 	@Override
 	public List<Menu> selectAll() {
 		List<Menu> list = menuMapper.selectByExample(null);
 		return list;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -139,8 +145,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.IMenuService#update(com.jcin.cms.service.system.
-	 * Menu)
+	 * com.jcin.cms.service.system.IMenuService#update(com.jcin.cms.service.
+	 * system. Menu)
 	 */
 	@Override
 	@Transactional
@@ -154,8 +160,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.system.IMenuService#insertBatch(List)
+	 * @see com.jcin.cms.service.system.IMenuService#insertBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -168,8 +173,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.system.IMenuService#deleteBatch(List)
+	 * @see com.jcin.cms.service.system.IMenuService#deleteBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -179,6 +183,69 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String>
 		int result = menuMapper.deleteByExample(menuCriteria);
 		super.deleteBatch(list);
 		return result;
+	}
+
+	@Override
+	public List<Menu> getMenuTree() {
+		MenuCriteria menuExample = new MenuCriteria();
+		menuExample.createCriteria().andParentIdIsNull();
+
+		List<Menu> list = menuMapper.selectByExample(menuExample);
+		List<Menu> children = new ArrayList<Menu>();
+		for (Menu object : list) {
+			Menu jsonObject;
+
+			try {
+				jsonObject = searialMenu(object);
+				children.add(jsonObject);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return children;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Menu searialMenu(Menu menu) throws JSONException {
+		Menu jsonObject = new Menu();
+		jsonObject.setId( menu.getId());
+		jsonObject.setParentId(menu.getParentId());
+		jsonObject.setName(menu.getName());
+		jsonObject.setUrl(menu.getUrl());
+		jsonObject.setCreateDate(menu.getCreateDate());
+		jsonObject.setDescription(menu.getDescription());
+		jsonObject.setUpdateDate(menu.getUpdateDate());
+
+		List<Menu> list = searialChild(menu);
+		if (null != list) {
+			jsonObject.setChildren(list);
+		}
+
+		return jsonObject;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Menu> searialChild(Menu menu) throws JSONException {
+		List children = null;
+		List<Menu> list = getByParentId(menu.getId());
+		if (list != null && list.size() > 0) {
+			children = new ArrayList();
+		}
+		for (Menu object : list) {
+			Menu jsonObject = searialMenu(object);
+			children.add(jsonObject);
+		}
+		return children;
+	}
+
+	@Override
+	public List<Menu> getByParentId(String id) {
+		MenuCriteria menuExample = new MenuCriteria();
+		menuExample.createCriteria().andParentIdEqualTo(id);
+		List<Menu> list = menuMapper.selectByExample(menuExample);
+
+		return list;
 	}
 
 }

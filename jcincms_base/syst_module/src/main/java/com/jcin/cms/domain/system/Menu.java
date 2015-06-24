@@ -2,7 +2,10 @@ package com.jcin.cms.domain.system;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Menu implements Serializable {
@@ -72,6 +75,8 @@ public class Menu implements Serializable {
      * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     private String url;
+    
+    private List<Menu> children = new ArrayList<Menu>();
 
     /**
      * 该字段对应数据库表 tb_menu
@@ -277,4 +282,12 @@ public class Menu implements Serializable {
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
     }
+
+	public List<Menu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Menu> children) {
+		this.children = children;
+	}
 }

@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jcin.cms.dao.system.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.jcin.cms.domain.system.User" >
+<mapper namespace="com.jcin.cms.dao.system.UserGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.domain.system.UserGroup" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="groupname" property="groupname" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="ip" property="ip" jdbcType="VARCHAR" />
-    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
-    <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="locked" property="locked" jdbcType="BIT" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="BIT" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="user_group_id" property="userGroupId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,17 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, status, description, enabled, create_date, update_date, ip, 
-    telephone, salt, locked, email, sex, address, user_group_id
+    id, groupname, status, description, enabled, create_date, update_date, locked
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.system.UserCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.domain.system.UserGroupCriteria" >
     <include refid="OracleDialectPrefix" />
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_user
+    from tb_user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,44 +91,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from tb_user
+    from tb_user_group
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from tb_user
+    delete from tb_user_group
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jcin.cms.domain.system.UserCriteria" >
-    delete from tb_user
+  <delete id="deleteByExample" parameterType="com.jcin.cms.domain.system.UserGroupCriteria" >
+    delete from tb_user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jcin.cms.domain.system.User" >
-    insert into tb_user (id, username, password, 
-      status, description, enabled, 
-      create_date, update_date, ip, 
-      telephone, salt, locked, 
-      email, sex, address, user_group_id
-      )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{status,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{locked,jdbcType=BIT}, 
-      #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{address,jdbcType=VARCHAR}, #{userGroupId,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.jcin.cms.domain.system.UserGroup" >
+    insert into tb_user_group (id, groupname, status, 
+      description, enabled, create_date, 
+      update_date, locked)
+    values (#{id,jdbcType=VARCHAR}, #{groupname,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{locked,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.jcin.cms.domain.system.User" >
-    insert into tb_user
+  <insert id="insertSelective" parameterType="com.jcin.cms.domain.system.UserGroup" >
+    insert into tb_user_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="password != null" >
-        password,
+      <if test="groupname != null" >
+        groupname,
       </if>
       <if test="status != null" >
         status,
@@ -154,40 +136,16 @@
       <if test="updateDate != null" >
         update_date,
       </if>
-      <if test="ip != null" >
-        ip,
-      </if>
-      <if test="telephone != null" >
-        telephone,
-      </if>
-      <if test="salt != null" >
-        salt,
-      </if>
       <if test="locked != null" >
         locked,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="userGroupId != null" >
-        user_group_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=SMALLINT},
@@ -204,49 +162,25 @@
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="ip != null" >
-        #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null" >
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
-      </if>
       <if test="locked != null" >
         #{locked,jdbcType=BIT},
       </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=BIT},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="userGroupId != null" >
-        #{userGroupId,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jcin.cms.domain.system.UserCriteria" resultType="java.lang.Integer" >
-    select count(*) from tb_user
+  <select id="countByExample" parameterType="com.jcin.cms.domain.system.UserGroupCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_user
+    update tb_user_group
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.groupname != null" >
+        groupname = #{record.groupname,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=SMALLINT},
@@ -263,29 +197,8 @@
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.ip != null" >
-        ip = #{record.ip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.telephone != null" >
-        telephone = #{record.telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.salt != null" >
-        salt = #{record.salt,jdbcType=VARCHAR},
-      </if>
       <if test="record.locked != null" >
         locked = #{record.locked,jdbcType=BIT},
-      </if>
-      <if test="record.email != null" >
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=BIT},
-      </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userGroupId != null" >
-        user_group_id = #{record.userGroupId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -293,35 +206,24 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_user
+    update tb_user_group
     set id = #{record.id,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=SMALLINT},
       description = #{record.description,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=BIT},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      ip = #{record.ip,jdbcType=VARCHAR},
-      telephone = #{record.telephone,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      locked = #{record.locked,jdbcType=BIT},
-      email = #{record.email,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=BIT},
-      address = #{record.address,jdbcType=VARCHAR},
-      user_group_id = #{record.userGroupId,jdbcType=VARCHAR}
+      locked = #{record.locked,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.domain.system.User" >
-    update tb_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.domain.system.UserGroup" >
+    update tb_user_group
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+      <if test="groupname != null" >
+        groupname = #{groupname,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=SMALLINT},
@@ -338,56 +240,27 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="ip != null" >
-        ip = #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null" >
-        telephone = #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
       <if test="locked != null" >
         locked = #{locked,jdbcType=BIT},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=BIT},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="userGroupId != null" >
-        user_group_id = #{userGroupId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.domain.system.User" >
-    update tb_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.domain.system.UserGroup" >
+    update tb_user_group
+    set groupname = #{groupname,jdbcType=VARCHAR},
       status = #{status,jdbcType=SMALLINT},
       description = #{description,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=BIT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
-      ip = #{ip,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      locked = #{locked,jdbcType=BIT},
-      email = #{email,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=BIT},
-      address = #{address,jdbcType=VARCHAR},
-      user_group_id = #{userGroupId,jdbcType=VARCHAR}
+      locked = #{locked,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_user (id, username, password, status, description, enabled, create_date, update_date, ip, telephone, salt, locked, email, sex, address, user_group_id) values 
+    insert into tb_user_group (id, groupname, status, description, enabled, create_date, update_date, locked) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=SMALLINT}, #{item.description,jdbcType=VARCHAR}, #{item.enabled,jdbcType=BIT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.ip,jdbcType=VARCHAR}, #{item.telephone,jdbcType=VARCHAR}, #{item.salt,jdbcType=VARCHAR}, #{item.locked,jdbcType=BIT}, #{item.email,jdbcType=VARCHAR}, #{item.sex,jdbcType=BIT}, #{item.address,jdbcType=VARCHAR}, #{item.userGroupId,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.groupname,jdbcType=VARCHAR}, #{item.status,jdbcType=SMALLINT}, #{item.description,jdbcType=VARCHAR}, #{item.enabled,jdbcType=BIT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.locked,jdbcType=BIT})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

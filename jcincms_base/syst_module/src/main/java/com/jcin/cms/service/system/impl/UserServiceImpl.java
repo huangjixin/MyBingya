@@ -12,6 +12,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service
+@RequiresAuthentication
 public class UserServiceImpl extends BaseServiceImpl<User, String>
 		implements IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class

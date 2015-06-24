@@ -25,7 +25,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,80 +34,80 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.system.Menu;
-import com.jcin.cms.domain.system.MenuCriteria;
-import com.jcin.cms.service.system.IMenuService;
-import com.jcin.cms.utils.ExcelUtil;
+import com.jcin.cms.domain.system.UserGroup;
+import com.jcin.cms.domain.system.UserGroupCriteria;
+import com.jcin.cms.service.system.IUserGroupService;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "/menu")
-public class MenuController extends BaseController<Menu> {
+@RequestMapping(value = "/userGroup")
+public class UserGroupController extends BaseController<UserGroup>{
 	@Resource
-	private IMenuService menuService;
+	private IUserGroupService userGroupService;
 
-	@RequestMapping(value = "createForm", method = RequestMethod.POST)
-	public String create(@Valid Menu menu, BindingResult result, Model uiModel,
+	@RequestMapping(value="createForm",method = RequestMethod.POST)
+	public String create(@Valid UserGroup userGroup,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (result.hasErrors()) {
-			populateEditForm(uiModel, menu);
-			return "view/menu/menu_create";
-		}
-		menuService.insert(menu);
-		populateEditForm(uiModel, menu);
-		return "redirect:/menu/new";
-		// return "redirect:/menu/"
-		// + encodeUrlPathSegment(menu.getId().toString(),
-		// httpServletRequest);
+            populateEditForm(uiModel, userGroup);
+            return "view/userGroup/userGroup_create";
+        }
+			userGroupService.insert(userGroup);
+		populateEditForm(uiModel, userGroup);
+		return "redirect:/userGroup/new";
+		//return "redirect:/userGroup/"
+		//		+ encodeUrlPathSegment(userGroup.getId().toString(),
+		//				httpServletRequest);
 	}
 
-	@RequestMapping(value = "new", produces = "text/html")
+	@RequestMapping(value="new", produces = "text/html")
 	public String createForm(Model uiModel) {
-		populateEditForm(uiModel, new Menu());
-		return "view/menu/menu_create";
+		populateEditForm(uiModel, new UserGroup());
+		return "view/userGroup/userGroup_create";
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") String id, Model uiModel) {
-		Menu menu = menuService.selectByPrimaryKey(id);
-		uiModel.addAttribute("menu", menu);
+		UserGroup userGroup = userGroupService.selectByPrimaryKey(id);
+		uiModel.addAttribute("userGroup", userGroup);
 		uiModel.addAttribute("itemId", id);
-		return "view/menu/menu_show";
+		return "view/userGroup/userGroup_show";
 	}
 
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
-		return "view/menu/menu_list";
+		return "view/userGroup/userGroup_list";
 	}
 
-	@RequestMapping(value = "updateForm")
-	public String update(@Valid Menu menu, BindingResult result, Model uiModel,
+	@RequestMapping(value="updateForm")
+	public String update(@Valid UserGroup userGroup,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
-		menuService.update(menu);
-		populateEditForm(uiModel, menu);
+		userGroupService.update(userGroup);
+		populateEditForm(uiModel, userGroup);
 		return "redirect:edit/"
-				+ encodeUrlPathSegment(menu.getId().toString(),
+				+ encodeUrlPathSegment(userGroup.getId().toString(),
 						httpServletRequest);
 	}
 
 	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
-		Menu menu = menuService.selectByPrimaryKey(id);
-		populateEditForm(uiModel, menu);
-		return "view/menu/menu_update";
+		UserGroup userGroup = userGroupService.selectByPrimaryKey(id);
+		populateEditForm(uiModel, userGroup);
+		return "view/userGroup/userGroup_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
-		menuService.deleteByPrimaryKey(id);
+		userGroupService.deleteByPrimaryKey(id);
 		uiModel.asMap().clear();
-		return "redirect:/menu";
+		return "redirect:/userGroup";
 	}
 
-	void populateEditForm(Model uiModel, Menu menu) {
-		uiModel.addAttribute("menu", menu);
+	void populateEditForm(Model uiModel, UserGroup userGroup) {
+		uiModel.addAttribute("userGroup", userGroup);
 	}
 
 	String encodeUrlPathSegment(String pathSegment,
@@ -129,39 +128,25 @@ public class MenuController extends BaseController<Menu> {
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Menu menu,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public Page select(@ModelAttribute Page page, @ModelAttribute UserGroup userGroup,Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, uiModel, httpServletRequest, httpServletResponse);
-		MenuCriteria menuCriteria = new MenuCriteria();
-		MenuCriteria.Criteria criteria = menuCriteria.createCriteria();
-		menuCriteria.setPage(page);
-		menuCriteria.setOrderByClause("id desc");
-		if (null != menu.getId() && !"".equals(menu.getId())) {
-			criteria.andIdLike("%" + menu.getId() + "%");
+		super.select(page, uiModel, httpServletRequest,
+				httpServletResponse);
+		UserGroupCriteria userGroupCriteria = new UserGroupCriteria();
+		UserGroupCriteria.Criteria criteria = userGroupCriteria.createCriteria();
+		userGroupCriteria.setPage(page);
+		userGroupCriteria.setOrderByClause("id desc");
+		if (null != userGroup.getId()  && !"".equals(userGroup.getId())) {
+		  	criteria.andIdLike("%" + userGroup.getId() + "%");
 		}
-		if (null != menu.getName() && !"".equals(menu.getName())) {
-			criteria.andNameLike("%" + menu.getName() + "%");
+		if (null != userGroup.getGroupname()  && !"".equals(userGroup.getGroupname())) {
+		  	criteria.andGroupnameLike("%" + userGroup.getGroupname() + "%");
 		}
-		if (null != menu.getDescription() && !"".equals(menu.getDescription())) {
-			criteria.andDescriptionLike("%" + menu.getDescription() + "%");
-		}
-		if (null != menu.getPath() && !"".equals(menu.getPath())) {
-			criteria.andPathLike("%" + menu.getPath() + "%");
-		}
-		if (null != menu.getParentId() && !"".equals(menu.getParentId())) {
-			criteria.andParentIdLike("%" + menu.getParentId() + "%");
-		}
-		if (null != menu.getIcon() && !"".equals(menu.getIcon())) {
-			criteria.andIconLike("%" + menu.getIcon() + "%");
-		}
-		if (null != menu.getUrl() && !"".equals(menu.getUrl())) {
-			criteria.andUrlLike("%" + menu.getUrl() + "%");
-		}
-		page = menuService.select(menuCriteria);
+		page = userGroupService.select(userGroupCriteria);
 		return page;
 	}
-
+	
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -173,62 +158,69 @@ public class MenuController extends BaseController<Menu> {
 		for (String idstr : ids) {
 			list.add(idstr);
 		}
-		int result = menuService.deleteBatch(list);
+		int result = userGroupService.deleteBatch(list);
 
 		return result;
 	}
-
+	
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public String create(@ModelAttribute Menu menu,
+	public String create(@ModelAttribute UserGroup userGroup,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		menuService.insert(menu);
-		String id = menu.getId();
+		userGroupService.insert(userGroup);
+		String id = userGroup.getId();
 		return id;
 	}
-
+	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public String update(@ModelAttribute Menu menu,
+	public String update(@ModelAttribute UserGroup userGroup,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		menuService.update(menu);
-		String id = menu.getId();
+		userGroupService.update(userGroup);
+		String id = userGroup.getId();
 		return id;
 	}
-
-	@RequestMapping(value = "/getMenu")
-	@ResponseBody
-	public List getMenu(@ModelAttribute Menu menu,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
-		return menuService.getMenuTree();
-	}
-
+	
 	/**
 	 * 全部导出Excel.
-	 * 
-	 * @param menu
+	 * @param userGroup
 	 * @param httpServletRequest
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/exportExcel")
-	public void exportExcel(@ModelAttribute Menu menu,
+	public void exportExcel(@ModelAttribute UserGroup userGroup,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		httpServletResponse.setCharacterEncoding("UTF-8");
 		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
-		List<Menu> list = menuService.selectAll();
+		List<UserGroup>list = userGroupService.selectAll();
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
-		String columnNames[] = { "Id", "Name", "Description", "Path",
-				"ParentId", "CreateDate", "Icon", "UpdateDate", "Url" };// 列名
-		String keys[] = { "Id", "Name", "Description", "Path", "ParentId",
-				"CreateDate", "Icon", "UpdateDate", "Url" };// map中的key
+		String columnNames[] = { 
+			"Id",
+			"Groupname",
+			"Status",
+			"Description",
+			"Enabled",
+			"CreateDate",
+			"UpdateDate",
+			"Locked"
+		};// 列名
+		String keys[] = { 
+			"Id",
+			"Groupname",
+			"Status",
+			"Description",
+			"Enabled",
+			"CreateDate",
+			"UpdateDate",
+			"Locked"
+		};// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
@@ -242,39 +234,28 @@ public class MenuController extends BaseController<Menu> {
 		os.close();
 	}
 
-	private List<Map<String, Object>> createExcelRecord(List<Menu> list) {
+	private List<Map<String, Object>> createExcelRecord(List<UserGroup> list) {
 		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sheetName", "sheet1");
 		listmap.add(map);
-		Menu menu = null;
+		UserGroup userGroup = null;
 		for (int j = 0; j < list.size(); j++) {
-			menu = list.get(j);
+			userGroup = list.get(j);
 			Map<String, Object> mapValue = new HashMap<String, Object>();
-			mapValue.put("Id", menu.getId());
-			mapValue.put("Name", menu.getName());
-			mapValue.put("Description", menu.getDescription());
-			mapValue.put("Path", menu.getPath());
-			mapValue.put("ParentId", menu.getParentId());
-			mapValue.put("CreateDate", menu.getCreateDate());
-			mapValue.put("Icon", menu.getIcon());
-			mapValue.put("UpdateDate", menu.getUpdateDate());
-			mapValue.put("Url", menu.getUrl());
+				mapValue.put("Id",userGroup.getId());
+				mapValue.put("Groupname",userGroup.getGroupname());
+				mapValue.put("Status",userGroup.getStatus());
+				mapValue.put("Description",userGroup.getDescription());
+				mapValue.put("Enabled",userGroup.getEnabled());
+				mapValue.put("CreateDate",userGroup.getCreateDate());
+				mapValue.put("UpdateDate",userGroup.getUpdateDate());
+				mapValue.put("Locked",userGroup.getLocked());
 			listmap.add(mapValue);
 		}
 		return listmap;
 	}
-
-	/*@ExceptionHandler(RuntimeException.class)
-	@ResponseBody
-	public Map<String, Object> runtimeExceptionHandler(
-			RuntimeException runtimeException) {
-		// logger.error(runtimeException.getLocalizedMessage());
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", false);
-		return map;
-	}*/
-
+	
 	/**
 	 * @param args
 	 */

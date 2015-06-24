@@ -34,80 +34,80 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.system.UserRole;
-import com.jcin.cms.domain.system.UserRoleCriteria;
-import com.jcin.cms.service.system.IUserRoleService;
+import com.jcin.cms.domain.system.UserGroupRole;
+import com.jcin.cms.domain.system.UserGroupRoleCriteria;
+import com.jcin.cms.service.system.IUserGroupRoleService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "/userRole")
-public class UserRoleController extends BaseController<UserRole>{
+@RequestMapping(value = "/userGroupRole")
+public class UserGroupRoleController extends BaseController<UserGroupRole>{
 	@Resource
-	private IUserRoleService userRoleService;
+	private IUserGroupRoleService userGroupRoleService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@Valid UserRole userRole,BindingResult result,Model uiModel,
+	public String create(@Valid UserGroupRole userGroupRole,BindingResult result,Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (result.hasErrors()) {
-            populateEditForm(uiModel, userRole);
-            return "view/userRole/userRole_create";
+            populateEditForm(uiModel, userGroupRole);
+            return "view/userGroupRole/userGroupRole_create";
         }
-			userRoleService.insert(userRole);
-		populateEditForm(uiModel, userRole);
-		return "redirect:/userRole/new";
-		//return "redirect:/userRole/"
-		//		+ encodeUrlPathSegment(userRole.getId().toString(),
+			userGroupRoleService.insert(userGroupRole);
+		populateEditForm(uiModel, userGroupRole);
+		return "redirect:/userGroupRole/new";
+		//return "redirect:/userGroupRole/"
+		//		+ encodeUrlPathSegment(userGroupRole.getId().toString(),
 		//				httpServletRequest);
 	}
 
 	@RequestMapping(value="new", produces = "text/html")
 	public String createForm(Model uiModel) {
-		populateEditForm(uiModel, new UserRole());
-		return "view/userRole/userRole_create";
+		populateEditForm(uiModel, new UserGroupRole());
+		return "view/userGroupRole/userGroupRole_create";
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") String id, Model uiModel) {
-		UserRole userRole = userRoleService.selectByPrimaryKey(id);
-		uiModel.addAttribute("userRole", userRole);
+		UserGroupRole userGroupRole = userGroupRoleService.selectByPrimaryKey(id);
+		uiModel.addAttribute("userGroupRole", userGroupRole);
 		uiModel.addAttribute("itemId", id);
-		return "view/userRole/userRole_show";
+		return "view/userGroupRole/userGroupRole_show";
 	}
 
 	@RequestMapping(produces = "text/html")
 	public String list(HttpServletRequest httpServletRequest) {
-		return "view/userRole/userRole_list";
+		return "view/userGroupRole/userGroupRole_list";
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@Valid UserRole userRole,BindingResult result, Model uiModel,
+	public String update(@Valid UserGroupRole userGroupRole,BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
-		userRoleService.update(userRole);
-		populateEditForm(uiModel, userRole);
+		userGroupRoleService.update(userGroupRole);
+		populateEditForm(uiModel, userGroupRole);
 		return "redirect:edit/"
-				+ encodeUrlPathSegment(userRole.getId().toString(),
+				+ encodeUrlPathSegment(userGroupRole.getId().toString(),
 						httpServletRequest);
 	}
 
 	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
-		UserRole userRole = userRoleService.selectByPrimaryKey(id);
-		populateEditForm(uiModel, userRole);
-		return "view/userRole/userRole_update";
+		UserGroupRole userGroupRole = userGroupRoleService.selectByPrimaryKey(id);
+		populateEditForm(uiModel, userGroupRole);
+		return "view/userGroupRole/userGroupRole_update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
-		userRoleService.deleteByPrimaryKey(id);
+		userGroupRoleService.deleteByPrimaryKey(id);
 		uiModel.asMap().clear();
-		return "redirect:/userRole";
+		return "redirect:/userGroupRole";
 	}
 
-	void populateEditForm(Model uiModel, UserRole userRole) {
-		uiModel.addAttribute("userRole", userRole);
+	void populateEditForm(Model uiModel, UserGroupRole userGroupRole) {
+		uiModel.addAttribute("userGroupRole", userGroupRole);
 	}
 
 	String encodeUrlPathSegment(String pathSegment,
@@ -128,25 +128,22 @@ public class UserRoleController extends BaseController<UserRole>{
 	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute UserRole userRole,Model uiModel,
+	public Page select(@ModelAttribute Page page, @ModelAttribute UserGroupRole userGroupRole,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
-		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-		UserRoleCriteria.Criteria criteria = userRoleCriteria.createCriteria();
-		userRoleCriteria.setPage(page);
-		userRoleCriteria.setOrderByClause("id desc");
-		if (null != userRole.getId()  && !"".equals(userRole.getId())) {
-		  	criteria.andIdLike("%" + userRole.getId() + "%");
+		UserGroupRoleCriteria userGroupRoleCriteria = new UserGroupRoleCriteria();
+		UserGroupRoleCriteria.Criteria criteria = userGroupRoleCriteria.createCriteria();
+		userGroupRoleCriteria.setPage(page);
+		userGroupRoleCriteria.setOrderByClause("id desc");
+		if (null != userGroupRole.getId()  && !"".equals(userGroupRole.getId())) {
+		  	criteria.andIdLike("%" + userGroupRole.getId() + "%");
 		}
-		if (null != userRole.getUserId()  && !"".equals(userRole.getUserId())) {
-		  	criteria.andUserIdLike("%" + userRole.getUserId() + "%");
+		if (null != userGroupRole.getRoleId()  && !"".equals(userGroupRole.getRoleId())) {
+		  	criteria.andRoleIdLike("%" + userGroupRole.getRoleId() + "%");
 		}
-		if (null != userRole.getRoleId()  && !"".equals(userRole.getRoleId())) {
-		  	criteria.andRoleIdLike("%" + userRole.getRoleId() + "%");
-		}
-		page = userRoleService.select(userRoleCriteria);
+		page = userGroupRoleService.select(userGroupRoleCriteria);
 		return page;
 	}
 	
@@ -161,58 +158,58 @@ public class UserRoleController extends BaseController<UserRole>{
 		for (String idstr : ids) {
 			list.add(idstr);
 		}
-		int result = userRoleService.deleteBatch(list);
+		int result = userGroupRoleService.deleteBatch(list);
 
 		return result;
 	}
 	
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public String create(@ModelAttribute UserRole userRole,
+	public String create(@ModelAttribute UserGroupRole userGroupRole,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		userRoleService.insert(userRole);
-		String id = userRole.getId();
+		userGroupRoleService.insert(userGroupRole);
+		String id = userGroupRole.getId();
 		return id;
 	}
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public String update(@ModelAttribute UserRole userRole,
+	public String update(@ModelAttribute UserGroupRole userGroupRole,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		userRoleService.update(userRole);
-		String id = userRole.getId();
+		userGroupRoleService.update(userGroupRole);
+		String id = userGroupRole.getId();
 		return id;
 	}
 	
 	/**
 	 * 全部导出Excel.
-	 * @param userRole
+	 * @param userGroupRole
 	 * @param httpServletRequest
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/exportExcel")
-	public void exportExcel(@ModelAttribute UserRole userRole,
+	public void exportExcel(@ModelAttribute UserGroupRole userGroupRole,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		httpServletResponse.setCharacterEncoding("UTF-8");
 		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
-		List<UserRole>list = userRoleService.selectAll();
+		List<UserGroupRole>list = userGroupRoleService.selectAll();
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
 		String columnNames[] = { 
 			"Id",
-			"UserId",
-			"RoleId"
+			"RoleId",
+			"UserGroup_id"
 		};// 列名
 		String keys[] = { 
 			"Id",
-			"UserId",
-			"RoleId"
+			"RoleId",
+			"UserGroup_id"
 		};// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 
@@ -227,18 +224,17 @@ public class UserRoleController extends BaseController<UserRole>{
 		os.close();
 	}
 
-	private List<Map<String, Object>> createExcelRecord(List<UserRole> list) {
+	private List<Map<String, Object>> createExcelRecord(List<UserGroupRole> list) {
 		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sheetName", "sheet1");
 		listmap.add(map);
-		UserRole userRole = null;
+		UserGroupRole userGroupRole = null;
 		for (int j = 0; j < list.size(); j++) {
-			userRole = list.get(j);
+			userGroupRole = list.get(j);
 			Map<String, Object> mapValue = new HashMap<String, Object>();
-				mapValue.put("Id",userRole.getId());
-				mapValue.put("UserId",userRole.getUserId());
-				mapValue.put("RoleId",userRole.getRoleId());
+				mapValue.put("Id",userGroupRole.getId());
+				mapValue.put("RoleId",userGroupRole.getRoleId());
 			listmap.add(mapValue);
 		}
 		return listmap;

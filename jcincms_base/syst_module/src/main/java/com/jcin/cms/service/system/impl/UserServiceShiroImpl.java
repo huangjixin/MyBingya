@@ -21,8 +21,9 @@ import org.springframework.stereotype.Service;
 import com.jcin.cms.dao.system.AuthorizationMapper;
 import com.jcin.cms.dao.system.RoleAuthorizationMapper;
 import com.jcin.cms.dao.system.RoleMapper;
+import com.jcin.cms.dao.system.UserGroupMapper;
+import com.jcin.cms.dao.system.UserGroupRoleMapper;
 import com.jcin.cms.dao.system.UserMapper;
-import com.jcin.cms.dao.system.UserRoleMapper;
 import com.jcin.cms.domain.system.Authorization;
 import com.jcin.cms.domain.system.AuthorizationCriteria;
 import com.jcin.cms.domain.system.Role;
@@ -31,8 +32,10 @@ import com.jcin.cms.domain.system.RoleAuthorizationCriteria;
 import com.jcin.cms.domain.system.RoleCriteria;
 import com.jcin.cms.domain.system.User;
 import com.jcin.cms.domain.system.UserCriteria;
-import com.jcin.cms.domain.system.UserRole;
-import com.jcin.cms.domain.system.UserRoleCriteria;
+import com.jcin.cms.domain.system.UserGroup;
+import com.jcin.cms.domain.system.UserGroupCriteria;
+import com.jcin.cms.domain.system.UserGroupRole;
+import com.jcin.cms.domain.system.UserGroupRoleCriteria;
 import com.jcin.cms.service.system.IUserServiceShiro;
 
 /**
@@ -46,7 +49,10 @@ public class UserServiceShiroImpl implements IUserServiceShiro {
 	private UserMapper userMapper;
 
 	@Resource
-	private UserRoleMapper userRoleMapper;
+	private UserGroupMapper userGroupMapper;
+	
+	@Resource
+	private UserGroupRoleMapper userGroupRoleMapper;
 
 	@Resource
 	private RoleMapper roleMapper;
@@ -70,19 +76,27 @@ public class UserServiceShiroImpl implements IUserServiceShiro {
 		UserCriteria.Criteria criteria = userCriteria.createCriteria();
 		criteria.andUsernameEqualTo(username);
 		List<User> users = userMapper.selectByExample(userCriteria);
-		List<UserRole> userRoles = new ArrayList<UserRole>();	//查询中间表
+		List<UserGroup> userGroups = new ArrayList<UserGroup>();	//查询用户组
 		for (User user : users) {
-			UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-			UserRoleCriteria.Criteria cri = userRoleCriteria.createCriteria();
-			cri.andUserIdEqualTo(user.getId());
-			userRoles.addAll(userRoleMapper.selectByExample(userRoleCriteria));
+			UserGroupCriteria userGroupCriteria = new UserGroupCriteria();
+			UserGroupCriteria.Criteria cri = userGroupCriteria.createCriteria();
+			cri.andIdEqualTo(user.getUserGroupId());
+			userGroups.addAll(userGroupMapper.selectByExample(userGroupCriteria));
+		}
+		
+		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();	//查询中间表
+		for (UserGroup userGroup : userGroups) {
+			UserGroupRoleCriteria userGroupRoleCriteria = new UserGroupRoleCriteria();
+			UserGroupRoleCriteria.Criteria cri = userGroupRoleCriteria.createCriteria();
+			cri.andUserGroupIdEqualTo(userGroup.getId());
+			userGroupRoles.addAll(userGroupRoleMapper.selectByExample(userGroupRoleCriteria));
 		}
 
 		List<Role> roles = new ArrayList<Role>();				//查询角色表
-		for (UserRole userRole : userRoles) {
+		for (UserGroupRole userGroupRole : userGroupRoles) {
 			RoleCriteria roleCriteria = new RoleCriteria();
 			RoleCriteria.Criteria rolecri = roleCriteria.createCriteria();
-			rolecri.andIdEqualTo(userRole.getRoleId());
+			rolecri.andIdEqualTo(userGroupRole.getRoleId());
 			roles.addAll(roleMapper.selectByExample(roleCriteria));
 		}
 		Set<String> set = new HashSet<String>();
@@ -106,19 +120,27 @@ public class UserServiceShiroImpl implements IUserServiceShiro {
 		UserCriteria.Criteria criteria = userCriteria.createCriteria();
 		criteria.andUsernameEqualTo(username);
 		List<User> users = userMapper.selectByExample(userCriteria);
-		List<UserRole> userRoles = new ArrayList<UserRole>();
+		List<UserGroup> userGroups = new ArrayList<UserGroup>();	//查询用户组
 		for (User user : users) {
-			UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-			UserRoleCriteria.Criteria cri = userRoleCriteria.createCriteria();
-			cri.andUserIdEqualTo(user.getId());
-			userRoles.addAll(userRoleMapper.selectByExample(userRoleCriteria));
+			UserGroupCriteria userGroupCriteria = new UserGroupCriteria();
+			UserGroupCriteria.Criteria cri = userGroupCriteria.createCriteria();
+			cri.andIdEqualTo(user.getUserGroupId());
+			userGroups.addAll(userGroupMapper.selectByExample(userGroupCriteria));
+		}
+		
+		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();	//查询中间表
+		for (UserGroup userGroup : userGroups) {
+			UserGroupRoleCriteria userGroupRoleCriteria = new UserGroupRoleCriteria();
+			UserGroupRoleCriteria.Criteria cri = userGroupRoleCriteria.createCriteria();
+			cri.andUserGroupIdEqualTo(userGroup.getId());
+			userGroupRoles.addAll(userGroupRoleMapper.selectByExample(userGroupRoleCriteria));
 		}
 
-		List<Role> roles = new ArrayList<Role>();
-		for (UserRole userRole : userRoles) {
+		List<Role> roles = new ArrayList<Role>();				//查询角色表
+		for (UserGroupRole userGroupRole : userGroupRoles) {
 			RoleCriteria roleCriteria = new RoleCriteria();
 			RoleCriteria.Criteria rolecri = roleCriteria.createCriteria();
-			rolecri.andIdEqualTo(userRole.getRoleId());
+			rolecri.andIdEqualTo(userGroupRole.getRoleId());
 			roles.addAll(roleMapper.selectByExample(roleCriteria));
 		}
 		
