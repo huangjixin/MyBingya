@@ -14,16 +14,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />-->
+<style type="text/css">
+	th {
+		font-weight: normal;
+		font-size: 12px;
+	}
+</style>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>menu添加</title>
+<title>菜单添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="createForm" method="post" commandName="menu">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>menu信息添加</b>
+					<b>菜单信息添加</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>

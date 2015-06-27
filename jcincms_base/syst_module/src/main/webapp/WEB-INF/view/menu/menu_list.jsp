@@ -122,58 +122,6 @@
 		}
 	}
 
-	//搜索
-	function search() {
-		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
-		if ($("nameInput").val() != "") {
-			queryParams.name = $("#nameInput").val();
-		}
-		if ($("descriptionInput").val() != "") {
-			queryParams.description = $("#descriptionInput").val();
-		}
-		if ($("pathInput").val() != "") {
-			queryParams.path = $("#pathInput").val();
-		}
-		if ($("parentIdInput").val() != "") {
-			queryParams.parentId = $("#parentIdInput").val();
-		}
-		if ($("createDateInput").val() != "") {
-			queryParams.createDate = $("#createDateInput").val();
-		}
-		if ($("iconInput").val() != "") {
-			queryParams.icon = $("#iconInput").val();
-		}
-		if ($("updateDateInput").val() != "") {
-			queryParams.updateDate = $("#updateDateInput").val();
-		}
-		if ($("urlInput").val() != "") {
-			queryParams.url = $("#urlInput").val();
-		}
-
-		$("#tgrid").datagrid("getPager").pagination({
-			pageNumber : 1
-		});
-
-		$("#tgrid").datagrid("options").queryParams = queryParams;
-		$("#tgrid").datagrid("reload");
-	}
-
-	//清除
-	function clearSearch() {
-			$("#idInput").val("");
-			$("#nameInput").val("");
-			$("#descriptionInput").val("");
-			$("#pathInput").val("");
-			$("#parentIdInput").val("");
-			$("#createDateInput").val("");
-			$("#iconInput").val("");
-			$("#updateDateInput").val("");
-			$("#urlInput").val("");
-	}
-
 	//格式化用户状态显示。
 	function formatDate(val, row) {
 		var date = new Date();
@@ -214,52 +162,23 @@
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" />
 		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>name:</label>
-			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>description:</label>
-			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>path:</label>
-			<input  id="pathInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>parentId:</label>
-			<input  id="parentIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>icon:</label>
-			<input  id="iconInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>url:</label>
-			<input  id="urlInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
-			style="height:350px;"
+		<table id="tgrid" title="" class="easyui-treegrid"
 			data-options="
-								pageSize : 10,
-								pageList : [ 5, 10, 15, 20 ],
-								nowrap : true,
-								striped : true,
-								collapsible : true,
-								url: 'menu/select',
-								loadMsg : '数据装载中......',
+								url: 'menu/getMenu',
 								method: 'get',
+								rownumbers: false,
+								idField: 'id',
+								treeField: 'name',
+								showHeader: true,
+								lines: true,
 								singleSelect : false,
 								selectOnCheck: true,
 								checkOnSelect: true,
-								rownumbers: false,
-								treeField: 'name',
-								showHeader: true,
-								fit:false,
-								fitColumns:true,
-								pagination : true
+								fitColumns:true
 							">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th id="idFieldTh"
-						data-options="field:'id',align:'center'" width="100%">id</th>
 					<th id="nameFieldTh"
 						data-options="field:'name',align:'center'" width="100%">name</th>
 					<th id="descriptionFieldTh"

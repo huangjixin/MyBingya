@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>user管理</title>
+<title>用户管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -184,14 +184,10 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
 			$("#usernameInput").val("");
-			$("#passwordInput").val("");
 			$("#statusInput").val("");
 			$("#descriptionInput").val("");
 			$("#enabledInput").val("");
-			$("#createDateInput").val("");
-			$("#updateDateInput").val("");
 			$("#ipInput").val("");
 			$("#telephoneInput").val("");
 			$("#saltInput").val("");
@@ -199,7 +195,6 @@
 			$("#emailInput").val("");
 			$("#sexInput").val("");
 			$("#addressInput").val("");
-			$("#userGroup_idInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -243,38 +238,26 @@
 				value="导入excel" onclick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>username:</label>
+			<label>用户名:</label>
 			<input  id="usernameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>password:</label>
-			<input  id="passwordInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>status:</label>
+			<label>状态:</label>
 			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>description:</label>
+			<label>描述:</label>
 			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>enabled:</label>
+			<label>是否可用:</label>
 			<input  id="enabledInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>ip:</label>
+			<label>ip地址:</label>
 			<input  id="ipInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>telephone:</label>
+			<label>电话:</label>
 			<input  id="telephoneInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>salt:</label>
-			<input  id="saltInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>locked:</label>
+			<label>锁定:</label>
 			<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>email:</label>
+			<label>邮箱:</label>
 			<input  id="emailInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>sex:</label>
+			<label>性别:</label>
 			<input  id="sexInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>address:</label>
+			<label>地址:</label>
 			<input  id="addressInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>userGroup_id:</label>
-			<input  id="userGroup_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -303,35 +286,29 @@
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center'" width="100%">id</th>
 					<th id="usernameFieldTh"
-						data-options="field:'username',align:'center'" width="100%">username</th>
-					<th id="passwordFieldTh"
-						data-options="field:'password',align:'center'" width="100%">password</th>
+						data-options="field:'username',align:'center'" width="100%">用户名</th>
 					<th id="statusFieldTh"
-						data-options="field:'status',align:'center'" width="100%">status</th>
+						data-options="field:'status',align:'center'" width="100%">状态</th>
 					<th id="descriptionFieldTh"
-						data-options="field:'description',align:'center'" width="100%">description</th>
+						data-options="field:'description',align:'center'" width="100%">描述</th>
 					<th id="enabledFieldTh"
-						data-options="field:'enabled',align:'center'" width="100%">enabled</th>
+						data-options="field:'enabled',align:'center'" width="100%">是否可用</th>
 					<th id="createDateFieldTh"
-						data-options="field:'createDate',align:'center'" width="100%">createDate</th>
+						data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 					<th id="updateDateFieldTh"
-						data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
+						data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
 					<th id="ipFieldTh"
-						data-options="field:'ip',align:'center'" width="100%">ip</th>
+						data-options="field:'ip',align:'center'" width="100%">ip地址</th>
 					<th id="telephoneFieldTh"
-						data-options="field:'telephone',align:'center'" width="100%">telephone</th>
-					<th id="saltFieldTh"
-						data-options="field:'salt',align:'center'" width="100%">salt</th>
+						data-options="field:'telephone',align:'center'" width="100%">电话</th>
 					<th id="lockedFieldTh"
-						data-options="field:'locked',align:'center'" width="100%">locked</th>
+						data-options="field:'locked',align:'center'" width="100%">锁定</th>
 					<th id="emailFieldTh"
 						data-options="field:'email',align:'center'" width="100%">email</th>
 					<th id="sexFieldTh"
-						data-options="field:'sex',align:'center'" width="100%">sex</th>
+						data-options="field:'sex',align:'center'" width="100%">性别</th>
 					<th id="addressFieldTh"
-						data-options="field:'address',align:'center'" width="100%">address</th>
-					<th id="userGroup_idFieldTh"
-						data-options="field:'userGroup_id',align:'center'" width="100%">userGroup_id</th>
+						data-options="field:'address',align:'center'" width="100%">地址</th>
 				</tr>
 			</thead>
 		</table>

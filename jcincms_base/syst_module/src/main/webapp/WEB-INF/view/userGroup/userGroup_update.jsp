@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -20,10 +21,10 @@
 <title>userGroup更新</title>
 </head>
 <body>
-	<form:form id="validForm" action="<%=basePath%>userGroup/updateForm" method="post" commandName="userGroup">
+	<form:form id="validForm" action="${ctx}/userGroup/updateForm" method="post" commandName="userGroup">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>userGroup信息更新</b>
+					<b>用户组信息更新</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>

@@ -143,6 +143,9 @@ public class UserGroupRoleController extends BaseController<UserGroupRole>{
 		if (null != userGroupRole.getRoleId()  && !"".equals(userGroupRole.getRoleId())) {
 		  	criteria.andRoleIdLike("%" + userGroupRole.getRoleId() + "%");
 		}
+		if (null != userGroupRole.getUserGroupId()  && !"".equals(userGroupRole.getUserGroupId())) {
+		  	criteria.andUserGroupIdLike("%" + userGroupRole.getUserGroupId() + "%");
+		}
 		page = userGroupRoleService.select(userGroupRoleCriteria);
 		return page;
 	}
@@ -235,6 +238,7 @@ public class UserGroupRoleController extends BaseController<UserGroupRole>{
 			Map<String, Object> mapValue = new HashMap<String, Object>();
 				mapValue.put("Id",userGroupRole.getId());
 				mapValue.put("RoleId",userGroupRole.getRoleId());
+				mapValue.put("UserGroupId",userGroupRole.getUserGroupId());
 			listmap.add(mapValue);
 		}
 		return listmap;

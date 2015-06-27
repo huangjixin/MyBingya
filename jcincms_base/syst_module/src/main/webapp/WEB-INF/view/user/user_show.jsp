@@ -14,8 +14,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />-->
+<style type="text/css">
+	th {
+		font-weight: normal;
+		font-size: 12px;
+	}
+</style>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <title>user添加</title>
 </head>

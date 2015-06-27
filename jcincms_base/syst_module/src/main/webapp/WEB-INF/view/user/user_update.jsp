@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -14,16 +15,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />-->
+<style type="text/css">
+	th {
+		font-weight: normal;
+		font-size: 12px;
+	}
+</style>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<title>user更新</title>
+<title>用户更新</title>
 </head>
 <body>
-	<form:form id="validForm" action="<%=basePath%>user/updateForm" method="post" commandName="user">
+	<form:form id="validForm" action="${ctx}/user/updateForm" method="post" commandName="user">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
-					<b>user信息更新</b>
+					<b>用户信息更新</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -71,8 +76,8 @@
 									<td nowrap="nowrap" align="left"><form:input path="address" value="${user.address}"/>&nbsp;<form:errors path="address" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;userGroup_id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="userGroup_id" value="${user.userGroup_id}"/>&nbsp;<form:errors path="userGroup_id" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;userGroupId：</th>
+									<td nowrap="nowrap" align="left"><form:input path="userGroupId" value="${user.userGroupId}"/>&nbsp;<form:errors path="userGroupId" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>

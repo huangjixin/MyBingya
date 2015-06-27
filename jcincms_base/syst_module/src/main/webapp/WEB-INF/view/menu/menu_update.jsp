@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -20,7 +21,7 @@
 <title>menu更新</title>
 </head>
 <body>
-	<form:form id="validForm" action="<%=basePath%>menu/updateForm" method="post" commandName="menu">
+	<form:form id="validForm" action="${ctx}/menu/updateForm" method="post" commandName="menu">
 				<input type="hidden" name="step" value="1">
 				<div class="desc">
 					<b>menu信息更新</b>

@@ -143,6 +143,24 @@ public class UserGroupController extends BaseController<UserGroup>{
 		if (null != userGroup.getGroupname()  && !"".equals(userGroup.getGroupname())) {
 		  	criteria.andGroupnameLike("%" + userGroup.getGroupname() + "%");
 		}
+		/*if (null != userGroup.getStatus()  && !"".equals(userGroup.getStatus())) {
+		  	criteria.andStatusLike("%" + userGroup.getStatus() + "%");
+		}
+		if (null != userGroup.getDescription()  && !"".equals(userGroup.getDescription())) {
+		  	criteria.andDescriptionLike("%" + userGroup.getDescription() + "%");
+		}
+		if (null != userGroup.getEnabled()  && !"".equals(userGroup.getEnabled())) {
+		  	criteria.andEnabledLike("%" + userGroup.getEnabled() + "%");
+		}
+		if (null != userGroup.getCreateDate()  && !"".equals(userGroup.getCreateDate())) {
+		  	criteria.andCreateDateLike("%" + userGroup.getCreateDate() + "%");
+		}
+		if (null != userGroup.getUpdateDate()  && !"".equals(userGroup.getUpdateDate())) {
+		  	criteria.andUpdateDateLike("%" + userGroup.getUpdateDate() + "%");
+		}
+		if (null != userGroup.getLocked()  && !"".equals(userGroup.getLocked())) {
+		  	criteria.andLockedLike("%" + userGroup.getLocked() + "%");
+		}*/
 		page = userGroupService.select(userGroupCriteria);
 		return page;
 	}
