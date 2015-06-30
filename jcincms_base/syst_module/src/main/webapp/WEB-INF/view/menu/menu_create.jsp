@@ -43,17 +43,17 @@
 									<td nowrap="nowrap" align="left"><form:input path="description" value="${menu.description}"/>&nbsp;<form:errors path="description" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-									<th>&nbsp;path：</th>
+									<th>&nbsp;路径：</th>
 									<td nowrap="nowrap" align="left"><form:input path="path" value="${menu.path}"/>&nbsp;<form:errors path="path" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;parentId：</th>
+									<th>&nbsp;父亲节点：</th>
 									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${menu.parentId}"/>&nbsp;<form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;createDate：</th>
+									<th>&nbsp;创建日期：</th>
 									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${menu.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 									<th>&nbsp;icon：</th>
 									<td nowrap="nowrap" align="left"><form:input path="icon" value="${menu.icon}"/>&nbsp;<form:errors path="icon" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;updateDate：</th>
+									<th>&nbsp;更新日期：</th>
 									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${menu.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;url：</th>
 									<td nowrap="nowrap" align="left"><form:input path="url" value="${menu.url}"/>&nbsp;<form:errors path="url" cssStyle="color:red;"></form:errors></td>

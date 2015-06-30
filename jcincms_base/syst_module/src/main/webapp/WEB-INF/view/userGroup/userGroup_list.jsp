@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>userGroup管理</title>
+<title>用户组管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -160,14 +160,9 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
 			$("#groupnameInput").val("");
-			$("#statusInput").val("");
-			$("#descriptionInput").val("");
-			$("#enabledInput").val("");
 			$("#createDateInput").val("");
 			$("#updateDateInput").val("");
-			$("#lockedInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -211,22 +206,10 @@
 				value="导入excel" onclick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>groupname:</label>
+			<label>用户组:</label>
 			<input  id="groupnameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>status:</label>
-			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>description:</label>
+			<label>描述:</label>
 			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>enabled:</label>
-			<input  id="enabledInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>locked:</label>
-			<input  id="lockedInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -255,19 +238,9 @@
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center'" width="100%">id</th>
 					<th id="groupnameFieldTh"
-						data-options="field:'groupname',align:'center'" width="100%">groupname</th>
-					<th id="statusFieldTh"
-						data-options="field:'status',align:'center'" width="100%">status</th>
+						data-options="field:'groupname',align:'center'" width="100%">用户组</th>
 					<th id="descriptionFieldTh"
-						data-options="field:'description',align:'center'" width="100%">description</th>
-					<th id="enabledFieldTh"
-						data-options="field:'enabled',align:'center'" width="100%">enabled</th>
-					<th id="createDateFieldTh"
-						data-options="field:'createDate',align:'center'" width="100%">createDate</th>
-					<th id="updateDateFieldTh"
-						data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
-					<th id="lockedFieldTh"
-						data-options="field:'locked',align:'center'" width="100%">locked</th>
+						data-options="field:'description',align:'center'" width="100%">描述</th>
 				</tr>
 			</thead>
 		</table>

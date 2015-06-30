@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>role管理</title>
+<title>角色管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -199,16 +199,10 @@
 				value="导入excel" onclick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>name:</label>
+			<label>名称:</label>
 			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>description:</label>
+			<label>描述:</label>
 			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -237,13 +231,13 @@
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center'" width="100%">id</th>
 					<th id="nameFieldTh"
-						data-options="field:'name',align:'center'" width="100%">name</th>
+						data-options="field:'name',align:'center'" width="100%">名称</th>
 					<th id="descriptionFieldTh"
-						data-options="field:'description',align:'center'" width="100%">description</th>
+						data-options="field:'description',align:'center'" width="100%">描述</th>
 					<th id="createDateFieldTh"
-						data-options="field:'createDate',align:'center'" width="100%">createDate</th>
+						data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 					<th id="updateDateFieldTh"
-						data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
+						data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
 				</tr>
 			</thead>
 		</table>

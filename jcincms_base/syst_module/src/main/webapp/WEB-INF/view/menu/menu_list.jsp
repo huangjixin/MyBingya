@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>menu管理</title>
+<title>菜单管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -179,20 +179,22 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
+					<th id="idFieldTh"
+						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th id="nameFieldTh"
-						data-options="field:'name',align:'center'" width="100%">name</th>
+						data-options="field:'name',align:'center'" width="100%">名称</th>
 					<th id="descriptionFieldTh"
-						data-options="field:'description',align:'center'" width="100%">description</th>
+						data-options="field:'description',align:'center'" width="100%">描述</th>
 					<th id="pathFieldTh"
-						data-options="field:'path',align:'center'" width="100%">path</th>
+						data-options="field:'path',align:'center'" width="100%">路径</th>
 					<th id="parentIdFieldTh"
-						data-options="field:'parentId',align:'center'" width="100%">parentId</th>
+						data-options="field:'parentId',align:'center',hidden:true" width="100%">父亲Id</th>
 					<th id="createDateFieldTh"
-						data-options="field:'createDate',align:'center'" width="100%">createDate</th>
+						data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 					<th id="iconFieldTh"
 						data-options="field:'icon',align:'center'" width="100%">icon</th>
 					<th id="updateDateFieldTh"
-						data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
+						data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
 					<th id="urlFieldTh"
 						data-options="field:'url',align:'center'" width="100%">url</th>
 				</tr>
