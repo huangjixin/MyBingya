@@ -91,7 +91,7 @@
 				alert("连接失败");
 			},
 			success : function(data) {
-				$("#tgrid").datagrid('reload'); // 重新加载;
+				$("#tgrid").treegrid('reload'); // 重新加载;
 			}
 		});
 	}

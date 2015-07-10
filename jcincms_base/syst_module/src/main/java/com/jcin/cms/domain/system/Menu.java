@@ -23,6 +23,7 @@ public class Menu implements Serializable {
      */
     private String name;
 
+    private String text;
     /**
      *   所属表字段为tb_menu.description
      *
@@ -289,5 +290,13 @@ public class Menu implements Serializable {
 
 	public void setChildren(List<Menu> children) {
 		this.children = children;
+	}
+
+	public String getText() {
+		return this.name;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }

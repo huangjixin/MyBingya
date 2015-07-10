@@ -51,6 +51,9 @@ public class MenuController extends BaseController<Menu> {
 	@RequestMapping(value = "createForm", method = RequestMethod.POST)
 	public String create(@Valid Menu menu, BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		if("".equals(menu.getParentId())){
+			menu.setParentId(null);
+		}
 		if (result.hasErrors()) {
 			populateEditForm(uiModel, menu);
 			return "view/menu/menu_create";
@@ -200,10 +203,11 @@ public class MenuController extends BaseController<Menu> {
 
 	@RequestMapping(value = "/getMenu")
 	@ResponseBody
-	public List getMenu(@ModelAttribute Menu menu,
+	public List<Menu> getMenu(@ModelAttribute Menu menu,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		return menuService.getMenuTree();
+		List<Menu> list = menuService.getMenuTree();
+		return list;
 	}
 
 	/**
