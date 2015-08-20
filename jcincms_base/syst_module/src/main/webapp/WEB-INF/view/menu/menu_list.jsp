@@ -11,7 +11,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <title>菜单管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
@@ -19,19 +19,19 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="user,user list,Menu列表">
 <meta http-equiv="description" content="管理">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui/dwrloader.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
-	src="js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery.form.js"></script>
+	src="<%=basePath%>js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/themes/default/easyui.css">
+	href="<%=basePath%>js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/demo/demo.css">
+	href="<%=basePath%>js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+	href="<%=basePath%>js/jquery-easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/common.css">
 <script type="text/javascript">
 	Date.prototype.format = function(format) {
 		var o = {
@@ -55,6 +55,7 @@
 	}
 
 	$().ready(function() {
+		alert('${pageContext.request.contextPath}');
 	});
 
 	// 移除条目；
