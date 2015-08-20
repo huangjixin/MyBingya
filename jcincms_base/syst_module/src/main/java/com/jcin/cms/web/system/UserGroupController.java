@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.jcin.cms.domain.system.Menu;
 import com.jcin.cms.domain.system.UserGroup;
 import com.jcin.cms.domain.system.UserGroupCriteria;
 import com.jcin.cms.service.system.IUserGroupService;
@@ -200,6 +201,15 @@ public class UserGroupController extends BaseController<UserGroup>{
 		String id = userGroup.getId();
 		return id;
 	}
+
+	@RequestMapping(value = "/getUserGroup")
+	@ResponseBody
+	public List<UserGroup> getUserGroup(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		List<UserGroup> list = userGroupService.selectAll();
+		return list;
+	}
 	
 	/**
 	 * 全部导出Excel.
@@ -213,7 +223,7 @@ public class UserGroupController extends BaseController<UserGroup>{
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		httpServletResponse.setCharacterEncoding("UTF-8");
-		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
+		String filename = new String("用户组信息".getBytes("GBK"), "iso8859-1");
 
 		List<UserGroup>list = userGroupService.selectAll();
 
