@@ -20,7 +20,6 @@
 <meta http-equiv="keywords" content="user,user list,Menu列表">
 <meta http-equiv="description" content="管理">
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-easyui/dwrloader.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery-easyui/jquery.easyui.min.js"></script>
@@ -31,7 +30,6 @@
 	href="<%=basePath%>js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>js/jquery-easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>css/common.css">
 <script type="text/javascript">
 	Date.prototype.format = function(format) {
 		var o = {
@@ -55,7 +53,7 @@
 	}
 
 	$().ready(function() {
-		alert('${pageContext.request.contextPath}');
+		
 	});
 
 	// 移除条目；

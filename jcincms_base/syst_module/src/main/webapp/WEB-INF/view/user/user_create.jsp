@@ -32,29 +32,21 @@ th {
 <script type="text/javascript">
 $().ready(function() {
 	$('#userGroupIdInput').combobox({
-		url:'<%=basePath%>menu/getMenu',
+		url:'<%=basePath%>userGroup/getUserGroup',
 		valueField:'id',
-		textField:'name',
+		textField:'groupname',
+		editable: false, //不允许手动输入
 		onSelect:function(node){
 			var id = $('#userGroupIdInput').combobox('getValue');
 			$('#userGroupId').val(id);
-		}
+		},
+		onLoadSuccess: function () { //数据加载完毕事件
+             var data = $('#userGroupIdInput').combobox('getData');
+             if (data.length > 0) {
+                 $("#userGroupIdInput").combobox('select', data[0].groupname);
+             }
+        }
 		});
-	<%-- $('#userGroupIdInput').combotree
-    ({ 	url: '<%=basePath%>menu/getMenu',
-			valuefield : 'id',
-			textfield : 'name',
-			required : false,
-			editable : false,
-			onClick : function(node) {
-				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); */
-				$('#userGroupId').val(node.id);
-			}, //全部折叠
-			onLoadSuccess : function(node, data) {
-				$('#userGroupIdInput').combotree('tree').tree("collapseAll");
-			}
-		}); --%>
-
 	});
 	
 	function clearUserGroupIdInput(){
@@ -62,12 +54,11 @@ $().ready(function() {
 		$('#userGroupIdInput').combobox('clear');
 	}
 </script>
-<title>user添加</title>
+<title>用户添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="createForm" method="post"
 		commandName="user">
-		<input type="hidden" name="step" value="1">
 		<div class="desc">
 			<b>用户信息添加</b>
 		</div>
@@ -86,7 +77,7 @@ $().ready(function() {
 							<td nowrap="nowrap" align="left"><form:password
 									path="password" value="${user.password}" />&nbsp;<form:errors
 									path="password" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;用户组ID：</th>
+							<th>&nbsp;用户组：</th>
 							<td nowrap="nowrap" align="left">
 									<input id="userGroupIdInput"/>
 									<form:hidden id="userGroupId"
@@ -108,8 +99,8 @@ $().ready(function() {
 									path="description" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否可用：</th>
 							<td nowrap="nowrap" align="left">
-								<select name="enabled" id="enabled">       
-										<option value="true">可用</option>
+								<select name="enabled" id="enabled"  style="width: 100px;">       
+										<option value="true" selected="selected">可用</option>
 										<option value="false">不可用</option>       
 									</select> &nbsp;
 									<form:errors path="enabled" cssStyle="color:red;"></form:errors>
@@ -126,8 +117,11 @@ $().ready(function() {
 									value="${user.ip}" />&nbsp;<form:errors path="ip"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否锁定：</th>
-							<td nowrap="nowrap" align="left"><form:input path="locked"
-									value="${user.locked}" />&nbsp;<form:errors path="locked"
+							<td nowrap="nowrap" align="left"><select name="locked"
+								id="locked"  style="width: 100px;">      
+									<option value="true">是</option>
+									<option value="false" selected="selected">否</option>       
+							</select>&nbsp;<form:errors path="locked"
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr
@@ -137,8 +131,11 @@ $().ready(function() {
 									value="${user.email}" />&nbsp;<form:errors path="email"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;性别：</th>
-							<td nowrap="nowrap" align="left"><form:input path="sex"
-									value="${user.sex}" />&nbsp;<form:errors path="sex"
+							<td nowrap="nowrap" align="left"><select name="sex"
+								id="sex" style="width: 100px;">      
+									<option value="true" selected="selected">男</option>
+									<option value="false">女</option>       
+							</select>&nbsp;<form:errors path="sex"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;地址：</th>
 							<td nowrap="nowrap" align="left"><form:input path="address"
