@@ -15,9 +15,57 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />-->
+<style type="text/css">
+th {
+	font-weight: normal;
+	font-size: 12px;
+}
+</style>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/jquery-easyui/jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/demo/demo.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/themes/icon.css">
+<script type="text/javascript">
+$().ready(function() {
+	$("#enabled").val('${enabled}');
+	$("#locked").val('${locked}');
+	$("#sex").val('${sex}');
+	$('#userGroupIdInput').combobox({
+		url:'<%=basePath%>userGroup/getUserGroup',
+		valueField:'id',
+		textField:'groupname',
+		editable: false, //不允许手动输入
+		required : true,
+		onSelect:function(node){
+			$('#userGroupId').val(node.id);
+		},
+		onLoadSuccess: function () { //数据加载完毕事件
+             var data = $('#userGroupIdInput').combobox('getData');
+             if (data.length > 0) {
+            	 $("#userGroupIdInput").combobox('select', data[0].groupname);
+            	 var groupId = ${groupId};
+            	 for(var i=0;i<data.length;i++){
+            		 if(groupId == data[i].id){
+            			 $("#userGroupIdInput").combobox('select', data[i].groupname);
+            			 break;
+            		 }
+            	 }
+            	 
+             }
+        }
+		});
+	});
+	
+	function clearUserGroupIdInput(){
+		$('#userGroupId').val('');
+		$('#userGroupIdInput').combobox('clear');
+	}
+</script>
 <title>userGroup更新</title>
 </head>
 <body>
@@ -32,26 +80,11 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${userGroup.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;groupname：</th>
+									<input type="hidden" id="id" name="id" value="${userGroup.id}"/>
+									<th>&nbsp;组名：</th>
 									<td nowrap="nowrap" align="left"><form:input path="groupname" value="${userGroup.groupname}"/>&nbsp;<form:errors path="groupname" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;status：</th>
-									<td nowrap="nowrap" align="left"><form:input path="status" value="${userGroup.status}"/>&nbsp;<form:errors path="status" cssStyle="color:red;"></form:errors></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;description：</th>
+									<th>&nbsp;描述：</th>
 									<td nowrap="nowrap" align="left"><form:input path="description" value="${userGroup.description}"/>&nbsp;<form:errors path="description" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;enabled：</th>
-									<td nowrap="nowrap" align="left"><form:input path="enabled" value="${userGroup.enabled}"/>&nbsp;<form:errors path="enabled" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${userGroup.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${userGroup.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;locked：</th>
-									<td nowrap="nowrap" align="left"><form:input path="locked" value="${userGroup.locked}"/>&nbsp;<form:errors path="locked" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
