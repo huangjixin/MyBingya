@@ -20,9 +20,48 @@ th {
 	font-size: 12px;
 }
 </style>
-<!--<link rel="stylesheet" href="<%=basePath%>images/style.css"
-	type="text/css" />-->
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/jquery-easyui/jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/demo/demo.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/jquery-easyui/themes/icon.css">
+<script type="text/javascript">
+$().ready(function() {
+	$('#userGroupIdInput').combobox({
+		url:'<%=basePath%>menu/getMenu',
+		valueField:'id',
+		textField:'name',
+		onSelect:function(node){
+			var id = $('#userGroupIdInput').combobox('getValue');
+			$('#userGroupId').val(id);
+		}
+		});
+	<%-- $('#userGroupIdInput').combotree
+    ({ 	url: '<%=basePath%>menu/getMenu',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); */
+				$('#userGroupId').val(node.id);
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#userGroupIdInput').combotree('tree').tree("collapseAll");
+			}
+		}); --%>
+
+	});
+	
+	function clearUserGroupIdInput(){
+		$('#userGroupId').val('');
+		$('#userGroupIdInput').combobox('clear');
+	}
+</script>
 <title>user添加</title>
 </head>
 <body>
@@ -49,10 +88,13 @@ th {
 									path="password" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;用户组ID：</th>
 							<td nowrap="nowrap" align="left">
-									<%-- <form:hidden path="userGroupId"/> --%>
-									<form:input
-									path="userGroupId" value="${user.userGroupId}" />&nbsp;<form:errors
-									path="userGroupId" cssStyle="color:red;"></form:errors></td>
+									<input id="userGroupIdInput"/>
+									<form:hidden id="userGroupId"
+									path="userGroupId" value="${user.userGroupId}" />&nbsp;
+									<input type="button"
+								value="清除"
+								onclick="javascript:clearUserGroupIdInput();" />
+							</td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
