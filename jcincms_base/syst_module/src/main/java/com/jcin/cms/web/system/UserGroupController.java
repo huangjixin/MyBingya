@@ -34,12 +34,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.system.Menu;
+import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.UserGroup;
 import com.jcin.cms.domain.system.UserGroupCriteria;
+import com.jcin.cms.domain.system.UserGroupRole;
+import com.jcin.cms.service.system.IUserGroupRoleService;
 import com.jcin.cms.service.system.IUserGroupService;
-import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
+import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -47,15 +49,23 @@ import com.jcin.cms.web.BaseController;
 public class UserGroupController extends BaseController<UserGroup>{
 	@Resource
 	private IUserGroupService userGroupService;
+	@Resource
+	private IUserGroupRoleService userGroupRoleService;
 
 	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@Valid UserGroup userGroup,BindingResult result,Model uiModel,
+	public String create(@Valid UserGroup userGroup,BindingResult result,Model uiModel,@Valid String roleId,
 			HttpServletRequest httpServletRequest) {
 		if (result.hasErrors()) {
             populateEditForm(uiModel, userGroup);
             return "view/userGroup/userGroup_create";
         }
-			userGroupService.insert(userGroup);
+			String id = userGroupService.insert(userGroup);
+			if(null!=roleId && !"".equals(roleId)){
+				UserGroupRole userGroupRole = new UserGroupRole();
+				userGroupRole.setRoleId(id);
+				userGroupRole.setRoleId(roleId);
+				userGroupRoleService.insert(userGroupRole);
+			}
 		populateEditForm(uiModel, userGroup);
 		return "redirect:/userGroup/new";
 		//return "redirect:/userGroup/"
@@ -83,11 +93,26 @@ public class UserGroupController extends BaseController<UserGroup>{
 	}
 
 	@RequestMapping(value="updateForm")
-	public String update(@Valid UserGroup userGroup,BindingResult result, Model uiModel,
+	public String update(@Valid UserGroup userGroup,BindingResult result, Model uiModel,@Valid String roleId,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
+		
 		userGroupService.update(userGroup);
+		if(null != roleId && !"".equals(roleId)){ //更改关联关系
+			UserGroupRole userGroupRole = userGroupRoleService.getByGroupId(userGroup.getId());
+			if(null!=userGroupRole){
+				userGroupRole.setRoleId(roleId);
+				userGroupRoleService.update(userGroupRole);
+			}else{
+				userGroupRole = new UserGroupRole();
+				userGroupRole.setRoleId(roleId);
+				userGroupRole.setUserGroupId(userGroup.getId());
+				userGroupRoleService.insert(userGroupRole);
+			}
+		}
+		
 		populateEditForm(uiModel, userGroup);
+		uiModel.addAttribute("roleId", roleId);
 		return "redirect:edit/"
 				+ encodeUrlPathSegment(userGroup.getId().toString(),
 						httpServletRequest);
@@ -95,6 +120,11 @@ public class UserGroupController extends BaseController<UserGroup>{
 
 	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
+		List<Role> roles = userGroupService.getRoleByUserGroupID(id);
+		if(null!=roles&& roles.size()>0){
+			Role role = roles.get(0);
+			uiModel.addAttribute("roleId", role.getId());
+		}
 		UserGroup userGroup = userGroupService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, userGroup);
 		return "view/userGroup/userGroup_update";

@@ -36,6 +36,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.RoleCriteria;
+import com.jcin.cms.domain.system.UserGroup;
 import com.jcin.cms.service.system.IRoleService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
@@ -184,6 +185,16 @@ public class RoleController extends BaseController<Role>{
 		roleService.update(role);
 		String id = role.getId();
 		return id;
+	}
+	
+
+	@RequestMapping(value = "/getRole")
+	@ResponseBody
+	public List<Role> getUserGroup(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		List<Role> list = roleService.selectAll();
+		return list;
 	}
 	
 	/**
