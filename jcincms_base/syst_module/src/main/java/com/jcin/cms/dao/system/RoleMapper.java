@@ -96,4 +96,11 @@ public interface RoleMapper {
      * @mbggenerated 2015年06月03日 12时08分12秒 星期三
      */
     int updateByPrimaryKey(Role record);
+    
+    /**
+     * 根据用户组ID查询角色。
+     * @param userGroupID
+     * @return
+     */
+    List<Role> getRoleByUserGroupID(String userGroupID);
 }

@@ -91,6 +91,10 @@
     from tb_role
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="getRoleByUserGroupID" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select tr.* from tb_role tr left join tb_user_group_role tugr  on tugr.role_id = tr.id left join tb_user_group tug on tug.id=tugr.user_group_id 
+  	where tug.id=#{userGroupID,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from tb_role
     where id = #{id,jdbcType=VARCHAR}

@@ -1,5 +1,6 @@
 package com.jcin.cms.dao.system;
 
+import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.UserGroup;
 import com.jcin.cms.domain.system.UserGroupCriteria;
 import java.util.List;
