@@ -37,8 +37,8 @@ $().ready(function() {
 		textField:'name',
 		editable: false, //不允许手动输入
 		onSelect:function(node){
-			var id = $('#roleIdInput').combobox('getValue');
-			$('#roleId').val(id);
+			$('#roleId').val(node.id);
+			alert($('#roleId').val());
 		},
 		onLoadSuccess: function () { //数据加载完毕事件
              var data = $('#userGroupIdInput').combobox('getData');
