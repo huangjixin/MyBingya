@@ -15,7 +15,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.dao.system.RoleMapper;
 import com.jcin.cms.dao.system.UserGroupMapper;
+import com.jcin.cms.domain.system.Role;
 import com.jcin.cms.domain.system.UserGroup;
 import com.jcin.cms.domain.system.UserGroupCriteria;
 import com.jcin.cms.service.system.IUserGroupService;
@@ -35,6 +37,9 @@ public class UserGroupServiceImpl extends BaseServiceImpl<UserGroup, String>
 
 	@Resource
 	private UserGroupMapper userGroupMapper;
+	
+	@Resource
+	private RoleMapper roleMapper;
 
 	/*
 	 * (non-Javadoc)
@@ -179,6 +184,12 @@ public class UserGroupServiceImpl extends BaseServiceImpl<UserGroup, String>
 		int result = userGroupMapper.deleteByExample(userGroupCriteria);
 		super.deleteBatch(list);
 		return result;
+	}
+
+	@Override
+	public List<Role> getRoleByUserGroupID(String userGroupID) {
+		List<Role> list = roleMapper.getRoleByUserGroupID(userGroupID);
+		return list;
 	}
 
 }

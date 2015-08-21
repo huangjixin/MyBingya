@@ -179,4 +179,15 @@ public class UserGroupRoleServiceImpl extends BaseServiceImpl<UserGroupRole, Str
 		return result;
 	}
 
+	@Override
+	public UserGroupRole getByGroupId(String groupId) {
+		UserGroupRoleCriteria userGroupRoleCriteria = new UserGroupRoleCriteria();
+		userGroupRoleCriteria.createCriteria().andUserGroupIdEqualTo(groupId);
+		List<UserGroupRole> list = userGroupRoleMapper.selectByExample(userGroupRoleCriteria);
+		if(list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+
 }

@@ -13,4 +13,6 @@ public interface IUserGroupRoleService extends IBaseService<UserGroupRole, Strin
 	 * @return
 	 */
 	Page select(UserGroupRoleCriteria criteria);
+	
+	UserGroupRole getByGroupId(String groupId);
 }
