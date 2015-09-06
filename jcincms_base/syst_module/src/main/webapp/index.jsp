@@ -19,7 +19,7 @@
 <meta http-equiv="keywords" content="首页">
 <meta http-equiv="description" content="index">
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script> -->
 <script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript"
 	src="js/jquery-easyui/jquery.easyui.min.js"></script>

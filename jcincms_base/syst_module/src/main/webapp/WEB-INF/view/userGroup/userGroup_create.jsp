@@ -38,7 +38,6 @@ $().ready(function() {
 		editable: false, //不允许手动输入
 		onSelect:function(node){
 			$('#roleId').val(node.id);
-			alert($('#roleId').val());
 		},
 		onLoadSuccess: function () { //数据加载完毕事件
              var data = $('#userGroupIdInput').combobox('getData');
@@ -79,7 +78,7 @@ $().ready(function() {
 									path="description" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;角色：</th>
 							<td nowrap="nowrap" align="left"><input
-								id="roleIdInput" /> <input type="hidden" id="roleId"/>&nbsp; <input
+								id="roleIdInput" /> <input type="hidden" id="roleId" name="roleId"/>&nbsp; <input
 								type="button" value="清除"
 								onclick="javascript:clearUserGroupIdInput();" /></td>
 						</tr>
