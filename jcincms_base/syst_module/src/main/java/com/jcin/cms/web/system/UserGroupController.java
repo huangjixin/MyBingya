@@ -62,7 +62,7 @@ public class UserGroupController extends BaseController<UserGroup>{
 			String id = userGroupService.insert(userGroup);
 			if(null!=roleId && !"".equals(roleId)){
 				UserGroupRole userGroupRole = new UserGroupRole();
-				userGroupRole.setRoleId(id);
+				userGroupRole.setUserGroupId(id);
 				userGroupRole.setRoleId(roleId);
 				userGroupRoleService.insert(userGroupRole);
 			}
@@ -112,6 +112,8 @@ public class UserGroupController extends BaseController<UserGroup>{
 		}
 		
 		populateEditForm(uiModel, userGroup);
+		if(roleId==null)
+		  roleId="";
 		uiModel.addAttribute("roleId", roleId);
 		return "redirect:edit/"
 				+ encodeUrlPathSegment(userGroup.getId().toString(),
@@ -120,10 +122,13 @@ public class UserGroupController extends BaseController<UserGroup>{
 
 	@RequestMapping(value = "/edit/{id}")
 	public String updateForm(@PathVariable("id") String id, Model uiModel) {
+		
 		List<Role> roles = userGroupService.getRoleByUserGroupID(id);
 		if(null!=roles&& roles.size()>0){
 			Role role = roles.get(0);
 			uiModel.addAttribute("roleId", role.getId());
+		}else{
+			uiModel.addAttribute("roleId", 0);
 		}
 		UserGroup userGroup = userGroupService.selectByPrimaryKey(id);
 		populateEditForm(uiModel, userGroup);
