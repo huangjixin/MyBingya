@@ -153,6 +153,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, String> implements
 	public String update(Menu record) {
 		// super.update(record);
 		record.setUpdateDate(new Date());
+		if("".equals(record.getParentId())){
+			record.setParentId(null);
+		}
 		int result = menuMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
