@@ -89,6 +89,9 @@ public class MenuController extends BaseController<Menu> {
 	public String update(@Valid Menu menu, BindingResult result, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
+		if("".equals(menu.getParentId())){
+			menu.setParentId(null);
+		}
 		menuService.update(menu);
 		populateEditForm(uiModel, menu);
 		return "redirect:edit/"
