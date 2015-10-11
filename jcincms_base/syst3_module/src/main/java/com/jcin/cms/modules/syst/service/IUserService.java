@@ -1,0 +1,53 @@
+package  com.jcin.cms.modules.syst.service;
+
+
+import java.util.Set;
+
+import com.jcin.cms.modules.syst.domain.User;
+import com.jcin.cms.modules.syst.domain.UserCriteria;
+import com.jcin.cms.service.IBaseService;
+import com.jcin.cms.utils.Page;
+
+public interface IUserService extends IBaseService<User, String> {
+	/**
+	 * 封装查询条件，返回Page对象。
+	 * @param criteria
+	 * @return
+	 */
+	Page select(UserCriteria criteria);
+
+	/**
+	 * 通过用户名查询用户。
+	 * @param username
+	 * @return
+	 */
+	User findByUsername(String username);
+
+	/**
+	 * 通过用户名查询角色。
+	 * @param username
+	 * @return
+	 */
+	Set<String> findRoles(String username);
+
+	/**
+	 * 通过用户名查询权限集合。
+	 * @param username
+	 * @return
+	 */
+	Set<String> findPermissions(String username);
+	
+	/**
+	 * 通过用户名查询权限集合。
+	 * @param username
+	 * @return
+	 */
+	void connectUserRole(String userId,String roleId);
+	
+	/**
+	 * 通过用户名查询权限集合。
+	 * @param username
+	 * @return
+	 */
+	void updateUserRole(String userId, String oldRoleId, String newRoleId);
+}
