@@ -96,4 +96,11 @@ public interface OrganizationMapper {
      * @mbggenerated 2015年10月11日 09时03分48秒 星期日
      */
     int updateByPrimaryKey(Organization record);
+
+	/**
+	 * 根据用户名查询组织。
+	 * @param username
+	 * @return
+	 */
+	List<Organization> selectByUsername(String username);
 }

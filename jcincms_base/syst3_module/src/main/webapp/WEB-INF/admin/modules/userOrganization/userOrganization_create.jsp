@@ -16,12 +16,12 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>userOrganization更新</title>
+<title>userOrganization添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/userOrganization/create" method="post" commandName="userOrganization">
 				<div class="desc">
-					<b>userOrganization信息更新</b>&nbsp;&nbsp;<b>${msg}</b>
+					<b>userOrganization信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -38,7 +38,7 @@
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/userOrganization'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/userOrganization'"/></td>
 								</tr>
 							</table>
 						</td>

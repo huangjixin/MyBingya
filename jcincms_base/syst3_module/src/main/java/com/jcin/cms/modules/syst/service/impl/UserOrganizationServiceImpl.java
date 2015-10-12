@@ -180,5 +180,12 @@ public class UserOrganizationServiceImpl extends BaseServiceImpl<UserOrganizatio
 		super.deleteBatch(list);
 		return result;
 	}
+	
+	
+	@Override
+	public List<UserOrganization> selectByExample(
+			UserOrganizationCriteria criteria) {
+		return  userOrganizationMapper.selectByExample(criteria);
+	}
 
 }

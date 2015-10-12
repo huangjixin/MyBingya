@@ -35,4 +35,11 @@ public interface IOrganizationService extends
 	 * @return
 	 */
 	List<Organization> getByParentId(String id);
+
+	/**
+	 * 根据用户名查询组织。
+	 * @param username
+	 * @return
+	 */
+	List<Organization> selectByUsername(String username);
 }

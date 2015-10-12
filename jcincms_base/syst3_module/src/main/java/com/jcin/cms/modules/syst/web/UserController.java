@@ -33,9 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
 import com.jcin.cms.common.UserUtils;
+import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.domain.UserCriteria;
+import com.jcin.cms.modules.syst.service.IOrganizationService;
 import com.jcin.cms.modules.syst.service.IRoleService;
 import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.utils.ExcelUtil;
@@ -49,29 +51,39 @@ public class UserController extends BaseController<User> {
 	private IUserService userService;
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private IOrganizationService organizationService;
 
 	@RequiresPermissions("user:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(User user, Model uiModel) {
 		uiModel.addAttribute("user", user);
-		List<Role>roles = roleService.selectAll();
+		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
 		return "admin/modules/user/user_create";
 	}
 
 	@RequiresPermissions("user:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(User user,@RequestParam(required=false) String roleId, RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String create(User user,
+			@RequestParam(required = false) String roleId,
+			@RequestParam(required = false) String organizationId,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		userService.insert(user);
-		if(null != roleId && !"".equals(roleId)){ //关联用户角色
+		if (null != roleId && !"".equals(roleId)) { // 关联用户角色
 			userService.connectUserRole(user.getId(), roleId);
 			redirectAttributes.addFlashAttribute("roleId", roleId);
 		}
+		if (null != organizationId && !"".equals(organizationId)) { // 关联组织
+			userService.connectUserRole(user.getId(), organizationId);
+			redirectAttributes.addFlashAttribute("organizationId",
+					organizationId);
+		}
 		redirectAttributes.addFlashAttribute("user", user);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
-		return "redirect:/"+Global.getAdminPath()+"/user/create";
+		return "redirect:/" + Global.getAdminPath() + "/user/create";
 	}
 
 	@RequiresPermissions("user:update")
@@ -79,68 +91,96 @@ public class UserController extends BaseController<User> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		User user = userService.selectByPrimaryKey(id);
 		uiModel.addAttribute("user", user);
-		
-		List<Role>roles = roleService.selectAll();
+
+		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		
-		List<Role>list = roleService.selectByUsername(user.getUsername());
-		if(null != list && list.size()>0){
+
+		List<Role> list = roleService.selectByUsername(user.getUsername());
+		if (null != list && list.size() > 0) {
 			uiModel.addAttribute("roleId", list.get(0).getId());
 		}
+
+		List<Organization> organizations = organizationService.selectAll();
+		uiModel.addAttribute("organizationList", organizations);
+
+		List<Organization> list2 = organizationService.selectByUsername(user
+				.getUsername());
+		if (null != list2 && list2.size() > 0) {
+			uiModel.addAttribute("organizationId", list2.get(0).getId());
+		}
+
 		return "admin/modules/user/user_update";
 	}
 
 	@RequiresPermissions("user:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(User user ,@RequestParam(required=false) String roleId,RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String update(User user,
+			@RequestParam(required = false) String roleId,
+			@RequestParam(required = false) String organizationId,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		userService.update(user);
-		
-		List<Role>list = roleService.selectByUsername(user.getUsername());
-		if(null != list && list.size()>0){
-			if(!list.get(0).getId().equals(roleId)){
-				userService.updateUserRole(user.getId(), list.get(0).getId(), roleId);
+
+		List<Role> list = roleService.selectByUsername(user.getUsername());
+		if (null != list && list.size() > 0) {
+			if (!list.get(0).getId().equals(roleId)) {
+				userService.updateUserRole(user.getId(), list.get(0).getId(),
+						roleId);
 			}
 			uiModel.addAttribute("roleId", roleId);
 		}
-		
+
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("user", user);
-		return "redirect:/"+Global.getAdminPath()+"/user/update/"+user.getId();
+		return "redirect:/" + Global.getAdminPath() + "/user/update/"
+				+ user.getId();
 	}
 
 	@RequiresPermissions("user:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		User user = userService.selectByPrimaryKey(id);
-		List<Role>roles = roleService.selectAll();
+		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		
-		List<Role>list = roleService.selectByUsername(user.getUsername());
-		if(null != list && list.size()>0){
+
+		List<Role> list = roleService.selectByUsername(user.getUsername());
+		if (null != list && list.size() > 0) {
 			uiModel.addAttribute("roleId", list.get(0).getId());
 		}
-		
+
 		uiModel.addAttribute("user", user);
 		return "admin/modules/user/user_show";
 	}
-	
+
 	@RequiresPermissions("user:update")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
-	public String changePassword( Model uiModel,HttpServletRequest httpServletRequest,
+	public String changePassword(Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		User user = UserUtils.getUser();
 		uiModel.addAttribute("user", user);
 		return "admin/modules/user/changePassword";
 	}
-	
+
+	/**
+	 * 密码更改。
+	 * @param user
+	 * @param newPassword
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @return
+	 */
 	@RequiresPermissions("user:update")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String changePassword(User user,@RequestParam(value="newPassword",required=true)String newPassword, Model uiModel,HttpServletRequest httpServletRequest,
+	public String changePassword(
+			User user,
+			@RequestParam(value = "newPassword", required = true) String newPassword,
+			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		User user2 = UserUtils.getUser();
-		if(!user2.getPassword().equals(user.getPassword())){
+		if (!user2.getPassword().equals(user.getPassword())) {
 			uiModel.addAttribute("msg", "旧密码输入有误");
 			return "admin/modules/user/changePassword";
 		}
@@ -148,7 +188,7 @@ public class UserController extends BaseController<User> {
 		user3.setPassword(newPassword);
 		user3.setId(user2.getId());
 		userService.updatePassword(user3);
-		return "redirect:/"+Global.getAdminPath()+"/logout";
+		return "redirect:/" + Global.getAdminPath() + "/logout";
 	}
 
 	@RequiresPermissions("user:view")
@@ -156,12 +196,17 @@ public class UserController extends BaseController<User> {
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/user/user_list";
 	}
-	
-	@RequestMapping(value = { "productInfo"})
+
+	/**
+	 * 跳转到产品信息页面。
+	 * @param httpServletRequest
+	 * @return
+	 */
+	@RequestMapping(value = { "productInfo" })
 	public String productInfo(HttpServletRequest httpServletRequest) {
 		return "admin/modules/user/product_info";
 	}
-	
+
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> test(Model uiModel,

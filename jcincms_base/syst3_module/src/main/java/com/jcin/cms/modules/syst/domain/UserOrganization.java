@@ -8,28 +8,28 @@ public class UserOrganization implements Serializable {
     /**
      *   所属表字段为tb_user_organization.id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     private String id;
 
     /**
      *   所属表字段为tb_user_organization.user_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     private String userId;
 
     /**
      *   所属表字段为tb_user_organization.organization_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     private String organizationId;
 
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class UserOrganization implements Serializable {
      *
      * @return 返回 tb_user_organization.id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public String getId() {
         return id;
@@ -49,7 +49,7 @@ public class UserOrganization implements Serializable {
      *
      * @param id 赋值 tb_user_organization.id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -60,7 +60,7 @@ public class UserOrganization implements Serializable {
      *
      * @return 返回 tb_user_organization.user_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public String getUserId() {
         return userId;
@@ -71,7 +71,7 @@ public class UserOrganization implements Serializable {
      *
      * @param userId 赋值 tb_user_organization.user_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
@@ -82,7 +82,7 @@ public class UserOrganization implements Serializable {
      *
      * @return 返回 tb_user_organization.organization_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public String getOrganizationId() {
         return organizationId;
@@ -93,7 +93,7 @@ public class UserOrganization implements Serializable {
      *
      * @param organizationId 赋值 tb_user_organization.organization_id
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setOrganizationId(String organizationId) {
         this.organizationId = organizationId == null ? null : organizationId.trim();

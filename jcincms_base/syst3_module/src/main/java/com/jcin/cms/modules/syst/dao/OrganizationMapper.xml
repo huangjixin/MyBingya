@@ -265,4 +265,16 @@
       </if>
     </if>
   </sql>
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT 
+    	organization . *
+	FROM
+   		tb_organization organization
+        	left join
+    	tb_user_organization user_organization ON organization.id = user_organization.organization_id
+        	left join
+    	tb_user user ON user_organization.user_id = user.id
+	where
+    	user.username = #{username,jdbcType=VARCHAR}
+  </select>
 </mapper>

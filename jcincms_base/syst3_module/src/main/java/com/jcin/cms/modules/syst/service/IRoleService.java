@@ -16,6 +16,11 @@ public interface IRoleService extends IBaseService<Role, String> {
 	 */
 	Page select(RoleCriteria criteria);
 	
+	/**
+	 * 根据用户查询角色
+	 * @param username
+	 * @return
+	 */
 	List<Role> selectByUsername(String username);
 	
 	/**

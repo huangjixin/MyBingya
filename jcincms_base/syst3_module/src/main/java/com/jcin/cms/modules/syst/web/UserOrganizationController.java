@@ -50,14 +50,14 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 	@Resource
 	private IUserOrganizationService userOrganizationService;
 
-	@RequiresPermissions("userOrganization:create")
+//	@RequiresPermissions("userOrganization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(UserOrganization userOrganization, Model uiModel) {
 		uiModel.addAttribute("userOrganization", userOrganization);
 		return "admin/modules/userOrganization/userOrganization_create";
 	}
 
-	@RequiresPermissions("userOrganization:create")
+//	@RequiresPermissions("userOrganization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(UserOrganization userOrganization, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -69,7 +69,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return "redirect:/"+Global.getAdminPath()+"/userOrganization/create";
 	}
 	
-	@RequiresPermissions("userOrganization:update")
+//	@RequiresPermissions("userOrganization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		UserOrganization userOrganization = userOrganizationService.selectByPrimaryKey(id);
@@ -77,7 +77,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return "admin/modules/userOrganization/userOrganization_update";
 	}
 
-	@RequiresPermissions("userOrganization:update")
+//	@RequiresPermissions("userOrganization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(UserOrganization userOrganization,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -89,7 +89,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return "redirect:/"+Global.getAdminPath()+"/userOrganization/update/"+userOrganization.getId();
 	}
 
-	@RequiresPermissions("userOrganization:show")
+//	@RequiresPermissions("userOrganization:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		UserOrganization userOrganization = userOrganizationService.selectByPrimaryKey(id);
@@ -98,12 +98,13 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return "admin/modules/userOrganization/userOrganization_show";
 	}
 
-	@RequiresPermissions("userOrganization:view")
+//	@RequiresPermissions("userOrganization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/userOrganization/userOrganization_list";
 	}
 
+//	@RequiresPermissions("userOrganization:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		userOrganizationService.deleteByPrimaryKey(id);
@@ -128,6 +129,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return pathSegment;
 	}
 
+//	@RequiresPermissions("userOrganization:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute UserOrganization userOrganization,Model uiModel,
@@ -152,6 +154,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		return page;
 	}
 	
+//	@RequiresPermissions("userOrganization:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -175,6 +178,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
+//	@RequiresPermissions("userOrganization:view")
 	@RequestMapping(value = "/exportExcel")
 	public void exportExcel(@ModelAttribute UserOrganization userOrganization,
 			HttpServletRequest httpServletRequest,

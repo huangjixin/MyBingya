@@ -8,42 +8,42 @@ public class UserOrganizationCriteria {
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public UserOrganizationCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -52,7 +52,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -61,7 +61,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -70,7 +70,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -79,7 +79,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public boolean isDistinct() {
         return distinct;
@@ -88,7 +88,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -97,7 +97,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -106,7 +106,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -117,7 +117,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -130,7 +130,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -140,7 +140,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void clear() {
         oredCriteria.clear();
@@ -151,7 +151,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setPage(Page page) {
         this.page=page;
@@ -160,7 +160,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public Page getPage() {
         return page;
@@ -169,7 +169,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -178,7 +178,7 @@ public class UserOrganizationCriteria {
     /**
      * 该方法由系统生成 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class UserOrganizationCriteria {
     /**
      * 该类对应于数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -459,7 +459,7 @@ public class UserOrganizationCriteria {
     /**
      * 该类对应于数据库表 tb_user_organization
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated do_not_delete_during_merge 2015年10月12日 19时55分54秒 星期一
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -471,7 +471,7 @@ public class UserOrganizationCriteria {
     /**
      * 该类对应于数据库表 tb_user_organization
      *
-     * @mbggenerated 2015年10月11日 09时03分48秒 星期日
+     * @mbggenerated 2015年10月12日 19时55分54秒 星期一
      */
     public static class Criterion {
         private String condition;

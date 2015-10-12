@@ -299,4 +299,10 @@ public class OrganizationServiceImpl extends
 
 		return list;
 	}
+
+	@Override
+	public List<Organization> selectByUsername(String username) {
+		List<Organization> list = organizationMapper.selectByUsername(username);
+		return list;
+	}
 }
