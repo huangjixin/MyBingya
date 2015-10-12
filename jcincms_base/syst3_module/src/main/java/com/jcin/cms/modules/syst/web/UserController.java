@@ -77,7 +77,7 @@ public class UserController extends BaseController<User> {
 			redirectAttributes.addFlashAttribute("roleId", roleId);
 		}
 		if (null != organizationId && !"".equals(organizationId)) { // 关联组织
-			userService.connectUserRole(user.getId(), organizationId);
+			userService.connectUserOrganization(user.getId(), organizationId);
 			redirectAttributes.addFlashAttribute("organizationId",
 					organizationId);
 		}
@@ -129,6 +129,15 @@ public class UserController extends BaseController<User> {
 						roleId);
 			}
 			uiModel.addAttribute("roleId", roleId);
+		}
+		
+		List<Organization> organizations = organizationService.selectByUsername(user.getUsername());
+		if (null != organizations && organizations.size() > 0) {
+			if (!organizations.get(0).getId().equals(organizationId)) {
+				userService.updateUserOrganization(user.getId(), organizations.get(0).getId(),
+						organizationId);
+			}
+			uiModel.addAttribute("organizationId", organizationId);
 		}
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");

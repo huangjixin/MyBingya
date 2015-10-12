@@ -18,11 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jcin.cms.modules.syst.dao.ResourceMapper;
 import com.jcin.cms.modules.syst.dao.RoleMapper;
 import com.jcin.cms.modules.syst.dao.UserMapper;
+import com.jcin.cms.modules.syst.dao.UserOrganizationMapper;
 import com.jcin.cms.modules.syst.dao.UserRoleMapper;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.domain.UserCriteria;
+import com.jcin.cms.modules.syst.domain.UserOrganization;
+import com.jcin.cms.modules.syst.domain.UserOrganizationCriteria;
 import com.jcin.cms.modules.syst.domain.UserRole;
 import com.jcin.cms.modules.syst.domain.UserRoleCriteria;
 import com.jcin.cms.modules.syst.service.IUserService;
@@ -46,6 +49,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	private RoleMapper roleMapper;
 	@javax.annotation.Resource
 	private UserRoleMapper userRoleMapper;
+	@javax.annotation.Resource
+	private UserOrganizationMapper userOrganizationMapper;
 	@javax.annotation.Resource
 	private ResourceMapper resourceMapper;
 //	@javax.annotation.Resource
@@ -243,23 +248,40 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		List<UserRole>userRoles = userRoleMapper.selectByExample(userRoleCriteria);
 		if(null != userRoles && userRoles.size()>0){
 			UserRole userRole  = userRoles.get(0);
-			userRole.setTbRoleId(newRoleId);
-			userRoleMapper.updateByPrimaryKey(userRole);
+			if(null != newRoleId){
+				userRole.setTbRoleId(newRoleId);
+				userRoleMapper.updateByPrimaryKey(userRole);
+			}else{
+				userRoleMapper.deleteByPrimaryKey(userRole.getId());
+			}
 		}
 	}
 
 
 	@Override
 	public void connectUserOrganization(String userId, String roleId) {
-		// TODO Auto-generated method stub
-		
+		UserOrganization record = new UserOrganization();
+		record.setId(new Date().getTime()+"");
+		record.setUserId(userId);
+		record.setOrganizationId(roleId);
+		userOrganizationMapper.insert(record);
 	}
 
 	@Override
 	public void updateUserOrganization(String userId, String oldOrgId,
 			String newOrgId) {
-		// TODO Auto-generated method stub
-		
+		UserOrganizationCriteria userOrganizationCriteria = new UserOrganizationCriteria();
+		userOrganizationCriteria.createCriteria().andUserIdEqualTo(userId).andOrganizationIdEqualTo(oldOrgId);
+		List<UserOrganization>userOrganizations = userOrganizationMapper.selectByExample(userOrganizationCriteria);
+		if(null != userOrganizations && userOrganizations.size()>0){
+			UserOrganization userOrganization  = userOrganizations.get(0);
+			if(null != newOrgId){
+				userOrganization.setOrganizationId(newOrgId);
+				userOrganizationMapper.updateByPrimaryKey(userOrganization);
+			}else{
+				userOrganizationMapper.deleteByPrimaryKey(userOrganization.getId());
+			}
+		}
 	}
 	
 	@Override
