@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,74 +32,79 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.jcin.cms.domain.${moduleName}.${domainObjectName};
-import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
-import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
+import com.jcin.cms.common.Global;
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName};
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName}Criteria;
+import com.jcin.cms.modules.${moduleName}.service.I${domainObjectName}Service;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "/${objInst}")
+@RequestMapping(value = "${r'${adminPath}'}/${objInst}")
 public class ${domainObjectName}Controller extends BaseController<${domainObjectName}>{
 	@Resource
 	private I${domainObjectName}Service ${objInst}Service;
 
-	@RequestMapping(value="createForm",method = RequestMethod.POST)
-	public String create(@Valid ${domainObjectName} ${objInst},BindingResult result,Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		if (result.hasErrors()) {
-            populateEditForm(uiModel, ${objInst});
-            return "view/${objInst}/${objInst}_create";
-        }
-			${objInst}Service.insert(${objInst});
-		populateEditForm(uiModel, ${objInst});
-		return "redirect:/${objInst}/new";
-		//return "redirect:/${objInst}/"
-		//		+ encodeUrlPathSegment(${objInst}.getId().toString(),
-		//				httpServletRequest);
+//	@RequiresPermissions("${objInst}:create")
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String create(${domainObjectName} ${objInst}, Model uiModel) {
+		uiModel.addAttribute("${objInst}", ${objInst});
+		return "admin/modules/${objInst}/${objInst}_create";
 	}
 
-	@RequestMapping(value="new", produces = "text/html")
-	public String createForm(Model uiModel) {
-		populateEditForm(uiModel, new ${domainObjectName}());
-		return "view/${objInst}/${objInst}_create";
+//	@RequiresPermissions("${objInst}:create")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String create(${domainObjectName} ${objInst}, RedirectAttributes redirectAttributes,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		${objInst}Service.insert(${objInst});
+		
+		redirectAttributes.addFlashAttribute("${objInst}", ${objInst});
+		redirectAttributes.addFlashAttribute("msg", "新增成功");
+		return "redirect:/"+Global.getAdminPath()+"/${objInst}/create";
 	}
-
-	@RequestMapping(value = "/{id}", produces = "text/html")
-	public String show(@PathVariable("id") String id, Model uiModel) {
+	
+//	@RequiresPermissions("${objInst}:update")
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String update(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		uiModel.addAttribute("${objInst}", ${objInst});
-		uiModel.addAttribute("itemId", id);
-		return "view/${objInst}/${objInst}_show";
+		return "admin/modules/${objInst}/${objInst}_update";
 	}
 
-	@RequestMapping(produces = "text/html")
-	public String list(HttpServletRequest httpServletRequest) {
-		return "view/${objInst}/${objInst}_list";
-	}
-
-	@RequestMapping(value="updateForm")
-	public String update(@Valid ${domainObjectName} ${objInst},BindingResult result, Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		uiModel.asMap().clear();
+//	@RequiresPermissions("${objInst}:update")
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	public String update(${domainObjectName} ${objInst},RedirectAttributes redirectAttributes,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
 		${objInst}Service.update(${objInst});
-		populateEditForm(uiModel, ${objInst});
-		return "redirect:edit/"
-				+ encodeUrlPathSegment(${objInst}.getId().toString(),
-						httpServletRequest);
+		
+		redirectAttributes.addFlashAttribute("msg", "修改成功");
+		redirectAttributes.addFlashAttribute("${objInst}", ${objInst});
+		return "redirect:/"+Global.getAdminPath()+"/${objInst}/update/"+${objInst}.getId();
 	}
 
-	@RequestMapping(value = "/edit/{id}")
-	public String updateForm(@PathVariable("id") String id, Model uiModel) {
+//	@RequiresPermissions("${objInst}:show")
+	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
-		populateEditForm(uiModel, ${objInst});
-		return "view/${objInst}/${objInst}_update";
+		
+		uiModel.addAttribute("${objInst}", ${objInst});
+		return "admin/modules/${objInst}/${objInst}_show";
 	}
 
+//	@RequiresPermissions("${objInst}:view")
+	@RequestMapping(value = { "", "list" })
+	public String list(HttpServletRequest httpServletRequest) {
+		return "admin/modules/${objInst}/${objInst}_list";
+	}
+
+//	@RequiresPermissions("${objInst}:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		${objInst}Service.deleteByPrimaryKey(id);
@@ -123,9 +129,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		return pathSegment;
 	}
 
-	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-	// _/_/_/_/_/_/ 下面将产生JSON格式的返回值
-	// _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+//	@RequiresPermissions("${objInst}:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute ${domainObjectName} ${objInst},Model uiModel,
@@ -146,6 +150,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		return page;
 	}
 	
+//	@RequiresPermissions("${objInst}:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -162,26 +167,6 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		return result;
 	}
 	
-	@RequestMapping(value = "/create")
-	@ResponseBody
-	public String create(@ModelAttribute ${domainObjectName} ${objInst},
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
-		${objInst}Service.insert(${objInst});
-		String id = ${objInst}.getId();
-		return id;
-	}
-	
-	@RequestMapping(value = "/update")
-	@ResponseBody
-	public String update(@ModelAttribute ${domainObjectName} ${objInst},
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
-		${objInst}Service.update(${objInst});
-		String id = ${objInst}.getId();
-		return id;
-	}
-	
 	/**
 	 * 全部导出Excel.
 	 * @param ${objInst}
@@ -189,6 +174,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
+//	@RequiresPermissions("${objInst}:view")
 	@RequestMapping(value = "/exportExcel")
 	public void exportExcel(@ModelAttribute ${domainObjectName} ${objInst},
 			HttpServletRequest httpServletRequest,

@@ -348,7 +348,7 @@ public class MyBatisGenerator {
                 String daoMapper = fir.toLowerCase()+last;
                 Map<String,Object> root = new HashMap<String, Object>();
                 String moduleName = context.getProperty("moduleName"); 
-                String packageName = "com.jcin.cms.service."+moduleName+".impl";
+                String packageName = "com.jcin.cms.modules."+moduleName+".service.impl";
                 root.put("packageName", packageName);
                 root.put("domainObjectName", doname);
                 root.put("daoMapper", daoMapper);
@@ -385,7 +385,7 @@ public class MyBatisGenerator {
         		String doname = tableConfiguration.getDomainObjectName();
         		Map<String,Object> root = new HashMap<String, Object>();
         		String moduleName = context.getProperty("moduleName"); 
-                String packageName = "com.jcin.cms.service."+moduleName;
+                String packageName = "com.jcin.cms.modules."+moduleName+".service";
         		root.put("packageName", packageName);
         		root.put("domainObjectName", doname);
         		root.put("moduleName", moduleName);
@@ -426,7 +426,7 @@ public class MyBatisGenerator {
         		String objInst = fir.toLowerCase()+last;
         		Map<String,Object> root = new HashMap<String, Object>();
         		String moduleName = context.getProperty("moduleName"); 
-                String packageName = "com.jcin.cms.web."+moduleName;
+                String packageName = "com.jcin.cms.modules."+moduleName+".web";
         		root.put("packageName", packageName);
         		root.put("domainObjectName", doname);
         		root.put("objInst", objInst);
@@ -507,7 +507,7 @@ public class MyBatisGenerator {
         		root.put("introspectedColumns", colNames);
         		root.put("introspectedColumnsLowcase", colNamesLowcase);
         		try {
-        			String packageName = "WEB-INF.view."+objInst;
+        			String packageName = "WEB-INF.admin.modules."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
         			File  file = new File(directory, objInst+"_list.jsp");
         			template.process(root, out);
@@ -525,7 +525,7 @@ public class MyBatisGenerator {
         		template = configuration.getTemplate(File.separator+"create.ftl");
         		out = new StringWriter();
         		try {
-        			String packageName = "WEB-INF.view."+objInst;
+        			String packageName = "WEB-INF.admin.modules."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
         			File  file = new File(directory, objInst+"_create.jsp");
         			template.process(root, out);
@@ -543,7 +543,7 @@ public class MyBatisGenerator {
         		template = configuration.getTemplate(File.separator+"update.ftl");
         		out = new StringWriter();
         		try {
-        			String packageName = "WEB-INF.view."+objInst;
+        			String packageName = "WEB-INF.admin.modules."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
         			File  file = new File(directory, objInst+"_update.jsp");
         			template.process(root, out);
@@ -560,7 +560,7 @@ public class MyBatisGenerator {
         		template = configuration.getTemplate(File.separator+"show.ftl");
         		out = new StringWriter();
         		try {
-        			String packageName = "WEB-INF.view."+objInst;
+        			String packageName = "WEB-INF.admin.modules."+objInst;
         			File directory = shellCallback.getDirectory("src/main/webapp", packageName);
         			File  file = new File(directory, objInst+"_show.jsp");
         			template.process(root, out);

@@ -1,37 +1,21 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
+<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
-
 <title>${objInst}管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="user,user list,${domainObjectName}列表">
+<meta http-equiv="keywords" content="${domainObjectName}列表">
 <meta http-equiv="description" content="管理">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/dwrloader.js"></script>
-<script type="text/javascript" src="js/jquery-easyui/easyloader.js"></script>
-<script type="text/javascript"
-	src="js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery.form.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css"
-	href="js/jquery-easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/default/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/demo/demo.css"/>
+<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/icon.css"/>
+<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	Date.prototype.format = function(format) {
 		var o = {
@@ -84,7 +68,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : '${objInst}/deleteById',
+			url : '${r'${ctxAdmin}'}/${objInst}/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -96,23 +80,28 @@
 		});
 	}
 
+	function create(){
+		window.location.href='${r'${ctxAdmin}'}/${objInst}/create'; 
+	}
+	
 	function update(){
 		var row = $('#tgrid').datagrid('getSelections');
 		if (row == null || row.length==0) {
 			return;
 		}
 		
-		window.location.href='<%=basePath%>${objInst}/edit/'+row[0].id; 
+		window.location.href='${r'${ctxAdmin}'}/${objInst}/update/'+row[0].id+''; 
 	}
-
+		
 	function show(){
 		var row = $('#tgrid').datagrid('getSelections');
 		if (row == null || row.length==0) {
 			return;
 		}
 		
-		window.location.href='<%=basePath%>${objInst}/'+row[0].id; 
+		window.location.href='${r'${ctxAdmin}'}/${objInst}/show/'+row[0].id; 
 	}
+	
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -157,7 +146,7 @@
 
 	//导出excel
 	function exportExcel() {
-		window.open('<%=basePath%>${objInst}/exportExcel');
+		window.open('${r'${ctxAdmin}'}/${objInst}/exportExcel');
 	}
 
 	//导入excel
@@ -173,15 +162,15 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='${objInst}/new'" /> 
+				onclick="javascript:window.location.href='${r'${ctxAdmin}'}/${objInst}/create'" /> 
 			<input type="button"
-				value="删除" onclick="deleteRows()" /> 
+				value="删除" onclick="deleteRows();" /> 
 			<input type="button"
-				value="更新" onclick="update()" /> 
+				value="更新" onclick="update();" /> 
 			<input type="button"
-				value="详情" onclick="show()" /> 
-			<input type="button" id="searchBtn" value="搜索" onclick="search()" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch()" />
+				value="详情" onclick="show();" /> 
+			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
+			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" />
@@ -200,7 +189,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: '${objInst}/select',
+								url: '${r'${ctxAdmin}'}/${objInst}/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -217,8 +206,7 @@
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
 					<#list introspectedColumns as introspectedColumn>
-					<th id="${introspectedColumn}FieldTh"
-						data-options="field:'${introspectedColumn}',align:'center'" width="100%">${introspectedColumn}</th>
+					<th data-options="field:'${introspectedColumn}',align:'center'" width="100%">${introspectedColumn}</th>
 					</#list>
 				</tr>
 			</thead>

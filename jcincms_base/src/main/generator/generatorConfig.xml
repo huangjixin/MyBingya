@@ -11,7 +11,7 @@
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<!-- 自定义 -->
-		<property name="moduleName" value="system"></property>
+		<property name="moduleName" value="syst"></property>
 		<property name="mergeable" value="false"></property>
 		
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -31,7 +31,7 @@
 		<!-- oracle.jdbc.driver.OracleDriver jdbc:oracle:thin:@10.123.188.106:1521:ECS 
 			WSSMALL_DEVELOP WSSMALL_DEVELOP -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/jcincms" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/jcincms3" userId="root"
 			password="qwer123456">
 		</jdbcConnection>
 
@@ -39,21 +39,32 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.domain.system"
+		<javaModelGenerator targetPackage="com.jcin.cms.modules.syst.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.dao.system"
+		<sqlMapGenerator targetPackage="com.jcin.cms.modules.syst.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.dao.system" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.modules.syst.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
+		<table tableName="tb_user_organization" domainObjectName="UserOrganization" />
+		<!-- <table tableName="tb_role_resource" domainObjectName="RoleResource" /> -->
+		<!-- <table tableName="tb_user_organization" domainObjectName="UserOrganization" />
+		<table tableName="tb_organization" domainObjectName="Organization" /> -->
+		<!-- <table tableName="tb_organization_resource" domainObjectName="OrganizationResource" /> -->
+		<!-- <table tableName="tb_dictionary" domainObjectName="Dictionary" /> -->
+		<!-- <table tableName="tb_user" domainObjectName="User" /> -->
+		<!-- <table tableName="tb_role" domainObjectName="Role" />
+		<table tableName="tb_user_role" domainObjectName="UserRole" /> 
+		
+		<table tableName="tb_resource" domainObjectName="Resource" />-->
 		<!-- <table tableName="tb_operationlog" domainObjectName="Operationlog" 
 			/> -->
 
@@ -62,12 +73,13 @@
 		<!-- <table tableName="tb_category" domainObjectName="Category" /> -->
 		<!-- <table tableName="tb_comment" domainObjectName="Comment" /> -->
 		
-		<table tableName="tb_menu" domainObjectName="Menu" />
-		<table tableName="tb_Authorization" domainObjectName="Authorization" />
-		<table tableName="tb_role" domainObjectName="Role" />
-		<table tableName="tb_role_authorization" domainObjectName="RoleAuthorization" />
-		<table tableName="tb_user" domainObjectName="User" />
-		<table tableName="tb_user_role" domainObjectName="UserRole" />
+		<!-- <table tableName="tb_menu" domainObjectName="Menu" /> 菜单表，稳定-->
+		<!-- <table tableName="tb_Authorization" domainObjectName="Authorization" />
+		
+		<table tableName="tb_role_authorization" domainObjectName="RoleAuthorization" /> -->
+		
+		<!-- <table tableName="tb_user_group" domainObjectName="UserGroup" />
+		<table tableName="tb_user_group_role" domainObjectName="UserGroupRole" /> -->
 		
 		<!-- <table tableName="tb_mysqlbackup" domainObjectName="Mysqlbackup" /> -->
 		<!-- <table tableName="tb_test" domainObjectName="Test" /> -->

@@ -1,8 +1,10 @@
 package  ${packageName};
 
-import com.jcin.cms.domain.${moduleName}.${domainObjectName};
-import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
-import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
+import java.util.List;
+
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName};
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName}Criteria;
+import com.jcin.cms.modules.${moduleName}.service.I${domainObjectName}Service;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.Page;
 
@@ -13,4 +15,11 @@ public interface I${domainObjectName}Service extends IBaseService<${domainObject
 	 * @return
 	 */
 	Page select(${domainObjectName}Criteria criteria);
+	
+	/**
+	 * 根据查询条件进行查询
+	 * @param dictionaryCriteria
+	 * @return
+	 */
+	List<${domainObjectName}> selectByExample(${domainObjectName}Criteria criteria);
 }

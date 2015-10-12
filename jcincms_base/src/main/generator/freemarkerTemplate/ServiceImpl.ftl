@@ -15,10 +15,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.dao.${moduleName}.${domainObjectName}Mapper;
-import com.jcin.cms.domain.${moduleName}.${domainObjectName};
-import com.jcin.cms.domain.${moduleName}.${domainObjectName}Criteria;
-import com.jcin.cms.service.${moduleName}.I${domainObjectName}Service;
+import com.jcin.cms.modules.${moduleName}.dao.${domainObjectName}Mapper;
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName};
+import com.jcin.cms.modules.${moduleName}.domain.${domainObjectName}Criteria;
+import com.jcin.cms.modules.${moduleName}.service.I${domainObjectName}Service;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
 
@@ -179,6 +179,13 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 		int result = ${daoMapper}Mapper.deleteByExample(${daoMapper}Criteria);
 		super.deleteBatch(list);
 		return result;
+	}
+	
+	
+	@Override
+	public List<${domainObjectName}> selectByExample(
+			${domainObjectName}Criteria criteria) {
+		return  ${daoMapper}Mapper.selectByExample(criteria);
 	}
 
 }
