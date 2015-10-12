@@ -121,7 +121,12 @@ public class UserController extends BaseController<User> {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		userService.update(user);
-
+		if("".equals(roleId)){
+			roleId = null;
+		}
+		if("".equals(organizationId)){
+			organizationId = null;
+		}
 		List<Role> list = roleService.selectByUsername(user.getUsername());
 		if (null != list && list.size() > 0) {
 			if (!list.get(0).getId().equals(roleId)) {
