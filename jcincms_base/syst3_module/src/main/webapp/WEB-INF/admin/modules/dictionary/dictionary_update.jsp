@@ -16,13 +16,13 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>dictionary更新</title>
+<title>字典更新</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/dictionary/update/${dictionary.id}" method="post" commandName="dictionary">
 				<input name="id" value="${dictionary.id}" type="hidden" />
 				<div class="desc">
-					<b>dictionary信息更新</b>
+					<b>字典信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>

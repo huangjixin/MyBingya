@@ -1,5 +1,7 @@
 package  com.jcin.cms.modules.syst.service;
 
+import java.util.List;
+
 import com.jcin.cms.modules.syst.domain.Dictionary;
 import com.jcin.cms.modules.syst.domain.DictionaryCriteria;
 import com.jcin.cms.modules.syst.service.IDictionaryService;
@@ -13,4 +15,11 @@ public interface IDictionaryService extends IBaseService<Dictionary, String> {
 	 * @return
 	 */
 	Page select(DictionaryCriteria criteria);
+
+	/**
+	 * 根据查询条件进行查询
+	 * @param dictionaryCriteria
+	 * @return
+	 */
+	List<Dictionary> selectByExample(DictionaryCriteria dictionaryCriteria);
 }

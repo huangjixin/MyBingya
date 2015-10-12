@@ -11,9 +11,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="Organization列表">
 <meta http-equiv="description" content="管理">
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css" />
 <script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
@@ -46,7 +46,7 @@
 		var pamameter = null;
 		//多行删除。
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
 		var i = 0;
@@ -80,79 +80,27 @@
 		});
 	}
 
-	function create(){
-		window.location.href='${ctxAdmin}/organization/create'; 
+	function create() {
+		window.location.href = '${ctxAdmin}/organization/create';
 	}
-	
-	function update(){
+
+	function update() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/organization/update/'+row[0].id+''; 
+
+		window.location.href = '${ctxAdmin}/organization/update/' + row[0].id
+				+ '';
 	}
-		
-	function show(){
+
+	function show() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/organization/show/'+row[0].id; 
-	}
-	
-	//处理事件的函数
-	function onKeyEnter(e) {
-		if (e == 13 || e == 32) {
-			search();
-			e.returnValue = false;
-			//返回false，在没有使用document.loginForm.submit()时可用于取消提交
-		}
-	}
 
-	//搜索
-	function search() {
-		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
-		if ($("nameInput").val() != "") {
-			queryParams.name = $("#nameInput").val();
-		}
-		if ($("parentIdInput").val() != "") {
-			queryParams.parentId = $("#parentIdInput").val();
-		}
-		if ($("parentIdsInput").val() != "") {
-			queryParams.parentIds = $("#parentIdsInput").val();
-		}
-		if ($("availableInput").val() != "") {
-			queryParams.available = $("#availableInput").val();
-		}
-		if ($("createDateInput").val() != "") {
-			queryParams.createDate = $("#createDateInput").val();
-		}
-		if ($("updateDateInput").val() != "") {
-			queryParams.updateDate = $("#updateDateInput").val();
-		}
-
-		$("#tgrid").datagrid("getPager").pagination({
-			pageNumber : 1
-		});
-
-		$("#tgrid").datagrid("options").queryParams = queryParams;
-		$("#tgrid").datagrid("reload");
-	}
-
-	//清除
-	function clearSearch() {
-			$("#idInput").val("");
-			$("#nameInput").val("");
-			$("#parentIdInput").val("");
-			$("#parentIdsInput").val("");
-			$("#availableInput").val("");
-			$("#createDateInput").val("");
-			$("#updateDateInput").val("");
+		window.location.href = '${ctxAdmin}/organization/show/' + row[0].id;
 	}
 
 	//格式化用户状态显示。
@@ -173,47 +121,35 @@
 	function importExcel() {
 
 	}
+	
+	function onLoadSuccess(row, data){
+		alert('dfs');
+	}
 </script>
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
+	<div data-options="region:'north'" style="padding:5px;">
+						<input type="button" value="添加" id="btn_Add" name="btn_Add"
+						onclick="javascript:window.location.href='${ctxAdmin}/organization/create'" />
+					<input type="button" value="删除" onclick="deleteRows();" /> <input
+						type="button" value="更新" onclick="update();" /> <input
+						type="button" value="详情" onclick="show();" /> <input
+						type="button" id="searchBtn" value="搜索" onclick="search();" /> <input
+						type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
+					<input type="button" id="exportBtn" value="导出excel"
+						onclick="exportExcel()" /> <input type="button" id="importBtn"
+						value="导入excel" onclick="importExcel()" />
+	</div>
 	<div data-options="region:'center'" title=""
-		style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='${ctxAdmin}/organization/create'" /> 
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
-			<input type="button"
-				value="更新" onclick="update();" /> 
-			<input type="button"
-				value="详情" onclick="show();" /> 
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
-		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>name:</label>
-			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>parentId:</label>
-			<input  id="parentIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>parentIds:</label>
-			<input  id="parentIdsInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>available:</label>
-			<input  id="availableInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
-			style="height:350px;"
-			data-options="
+		style="padding:1px;background:#ffffff;">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" title=""
+				style="padding:1px;background:#ffffff;">
+				
+				<table id="tgrid" title="" class="easyui-datagrid"
+					style="height:350px;"
+					data-options="
 								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
 								nowrap : true,
@@ -229,25 +165,28 @@
 								treeField: 'name',
 								showHeader: true,
 								fit:false,
-								fitColumns:true,
-								pagination : true
+								fitColumns:true
 							">
-			<thead>
-				<tr>
-					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th data-options="field:'name',align:'center'" width="100%">name</th>
-					<th data-options="field:'parentId',align:'center'" width="100%">parentId</th>
-					<th data-options="field:'parentIds',align:'center'" width="100%">parentIds</th>
-					<th data-options="field:'available',align:'center'" width="100%">available</th>
-					<th data-options="field:'createDate',align:'center'" width="100%">createDate</th>
-					<th data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
-				</tr>
-			</thead>
-		</table>
-
+					<thead>
+						<tr>
+							<th data-options="field:'ck',checkbox:true"></th>
+							<th data-options="field:'id',align:'center',hidden:true"
+								width="100%">id</th>
+							<th data-options="field:'name',align:'center'" width="100%">name</th>
+							<th data-options="field:'parentId',align:'center'" width="100%">parentId</th>
+							<th data-options="field:'parentIds',align:'center'" width="100%">parentIds</th>
+							<th data-options="field:'available',align:'center'" width="100%">available</th>
+							<th data-options="field:'createDate',align:'center'" width="100%">createDate</th>
+							<th data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div data-options="region:'west',split:true" title="组织列表"
+				style="width:200px;padding:1px;">
+				<ul id="tt" class="easyui-tree" data-options="url:'${ctxAdmin}/organization/getOrganizationTree',method:'get',animate:true,checkbox:true"></ul>	
+			</div>
+		</div>
 	</div>
-	<form id="addForm" action="organization/new"></form>
-	<form id="updateForm" action="organization/edit"></form>
 </body>
 </html>

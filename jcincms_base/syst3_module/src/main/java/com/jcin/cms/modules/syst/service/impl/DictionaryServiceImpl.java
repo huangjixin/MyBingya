@@ -181,4 +181,10 @@ public class DictionaryServiceImpl extends BaseServiceImpl<Dictionary, String>
 		return result;
 	}
 
+	@Override
+	public List<Dictionary> selectByExample(
+			DictionaryCriteria dictionaryCriteria) {
+		return  dictionaryMapper.selectByExample(dictionaryCriteria);
+	}
+
 }

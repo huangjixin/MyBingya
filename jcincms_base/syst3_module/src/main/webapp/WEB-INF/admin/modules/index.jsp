@@ -27,10 +27,18 @@
 	
 	//打开连接。
 	function doLink(url) {
-		if (url == null) {
+		if (url == null||url=="") {
 			return;
 		}
 		$("#ifrContentArea").attr("src",'${ctxAdmin}/'+url);
+	}
+	
+	function showUser(){
+		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/show/'+$('#userId').val());
+	}
+	
+	function changePassword(){
+		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/changePassword');
 	}
 </script>
 <style type="text/css">
@@ -84,11 +92,12 @@ html,body {
 </style>
 </head>
 <body>
+	<input type="hidden" id="userId" value="${fns:getUserId()}"/>
 	<div class="easyui-layout" fit="true">
-		<div data-options="region:'north'" style="height:80px;background:-moz-linear-gradient(top,#DBEAF9,#ffffff);/*火狐*/background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f6f6f8));">
+		<div data-options="region:'north',split:true" style="height:80px;background:-moz-linear-gradient(top,#DBEAF9,#ffffff);/*火狐*/background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f6f6f8));">
 			<div class="logo">J2EE应用开发平台</div>
 			<div class="topNav">
-				欢迎<b style="color: red;">${fns:getUsername()}</b>，上次登录是：<b style="color: red;">2015/10/11</b> &nbsp;&nbsp;<a href="${ctxAdmin}/user/changePassword">密码修改</a>&nbsp;&nbsp;<a href="../index.html">首页</a> | <a href="../demo/index.html">在线示例</a>
+				欢迎<a onclick="showUser();"><b style="color: red;">${fns:getUsername()}</b></a>，上次登录是：<b style="color: red;">2015/10/11</b> &nbsp;&nbsp;<a  onclick="changePassword();">密码修改</a>&nbsp;&nbsp;<a href="../index.html">首页</a> | <a href="../demo/index.html">在线示例</a>
 				| <a href="../docs/api/index.html">Api手册</a> | <a
 					href="../index.html#tutorial">开发教程</a> | <a
 					href="${ctxAdmin}/logout">退出</a>
@@ -96,12 +105,13 @@ html,body {
 		</div>
 
 		<div data-options="region:'west',split:true" title="菜单"
-			style="width:230px;">
+			style="width:230px;padding: 1px;">
 			<table id="tgrid" title="" class="easyui-treegrid"
-				style="padding: 1px;"
+				style=""
 				data-options="
 								url: '${ctxAdmin}/resource/getMenu',
 								method: 'get',
+								lines: true,
 								rownumbers: false,
 								idField: 'id',
 								treeField: 'name',

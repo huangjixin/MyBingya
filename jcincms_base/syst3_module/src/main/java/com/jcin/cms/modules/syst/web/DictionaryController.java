@@ -36,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.jcin.cms.common.DictionaryUtils;
 import com.jcin.cms.common.Global;
 import com.jcin.cms.modules.syst.domain.Dictionary;
 import com.jcin.cms.modules.syst.domain.DictionaryCriteria;
@@ -169,6 +170,16 @@ public class DictionaryController extends BaseController<Dictionary>{
 		int result = dictionaryService.deleteBatch(list);
 
 		return result;
+	}
+	
+	@RequestMapping(value = "/getByType")
+	@ResponseBody
+	public List<Dictionary> getByType(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		
+		List<Dictionary> dictionaries = DictionaryUtils.getAvailable();
+		
+		return dictionaries;
 	}
 	
 	/**

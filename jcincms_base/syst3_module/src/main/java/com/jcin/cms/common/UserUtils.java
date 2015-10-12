@@ -1,6 +1,5 @@
 package com.jcin.cms.common;
 
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +61,10 @@ public class UserUtils {
 	
 	public static String getUsername(){
 		return getUser().getUsername();
+	}
+	
+	public static String getUserId(){
+		return getUser().getId();
 	}
 
 	

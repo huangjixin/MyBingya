@@ -21,8 +21,30 @@ th {
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
-	$().ready(function() {
-	});
+$().ready(function() {
+	createResourceTree();
+});
+
+function createResourceTree(){
+	$('#organizationId').combotree({ 	
+			url: '${ctxAdmin}/organization/getOrganizationTree',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#organizationId').combotree('tree').tree("collapseAll");
+			}
+		});
+}
+
+function clearParentInput(){
+	$('#organizationId').combotree('clear');
+}
 </script>
 <title>用户添加</title>
 </head>
@@ -30,7 +52,7 @@ th {
 	<form:form id="validForm" action="${ctxAdmin}/user/create"
 		method="post" commandName="user">
 		<div class="desc">
-			<b>用户信息添加</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>${msg}</b>
+			<b>用户信息添加</b>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
 		<table width="100%" border="0" cellpadding="2" cellspacing="0">
 			<tr>
@@ -57,6 +79,18 @@ th {
 									</c:if>
 							</select></td>
 						</tr>
+						<tr
+							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
+							<th>&nbsp;父亲节点：</th>
+							<td nowrap="nowrap" align="left"><input id="organizationId"
+								name="organizationId">&nbsp; <input type="button" value="清除"
+								onclick="clearParentInput();" /></td>
+							<th>&nbsp;</th>
+							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;</th>
+							<td nowrap="nowrap" align="left"></td>
+						</tr>
+						
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 							<th style="width: 150px;">&nbsp;</th>

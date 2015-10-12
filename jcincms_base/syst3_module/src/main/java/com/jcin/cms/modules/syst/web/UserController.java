@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.domain.UserCriteria;
@@ -124,13 +125,43 @@ public class UserController extends BaseController<User> {
 		uiModel.addAttribute("user", user);
 		return "admin/modules/user/user_show";
 	}
+	
+	@RequiresPermissions("user:update")
+	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+	public String changePassword( Model uiModel,HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		User user = UserUtils.getUser();
+		uiModel.addAttribute("user", user);
+		return "admin/modules/user/changePassword";
+	}
+	
+	@RequiresPermissions("user:update")
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	public String changePassword(User user,@RequestParam(value="newPassword",required=true)String newPassword, Model uiModel,HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		User user2 = UserUtils.getUser();
+		if(!user2.getPassword().equals(user.getPassword())){
+			uiModel.addAttribute("msg", "旧密码输入有误");
+			return "admin/modules/user/changePassword";
+		}
+		User user3 = new User();
+		user3.setPassword(newPassword);
+		user3.setId(user2.getId());
+		userService.updatePassword(user3);
+		return "redirect:/"+Global.getAdminPath()+"/logout";
+	}
 
 	@RequiresPermissions("user:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/user/user_list";
 	}
-
+	
+	@RequestMapping(value = { "productInfo"})
+	public String productInfo(HttpServletRequest httpServletRequest) {
+		return "admin/modules/user/product_info";
+	}
+	
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> test(Model uiModel,

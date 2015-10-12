@@ -6,18 +6,22 @@
  */
 package com.jcin.cms.modules.syst.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.syst.dao.OrganizationMapper;
 import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
+import com.jcin.cms.modules.syst.domain.ResourceCriteria;
 import com.jcin.cms.modules.syst.service.IOrganizationService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
@@ -28,10 +32,10 @@ import com.jcin.cms.utils.Page;
  * 
  */
 @Service
-public class OrganizationServiceImpl extends BaseServiceImpl<Organization, String>
-		implements IOrganizationService {
-	private static Logger logger = Logger.getLogger(OrganizationServiceImpl.class
-			.getName());
+public class OrganizationServiceImpl extends
+		BaseServiceImpl<Organization, String> implements IOrganizationService {
+	private static Logger logger = Logger
+			.getLogger(OrganizationServiceImpl.class.getName());
 
 	@Resource
 	private OrganizationMapper organizationMapper;
@@ -40,8 +44,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#deleteByPrimaryKey((java.lang
-	 * .String ))
+	 * com.jcin.cms.service.syst.IOrganizationService#deleteByPrimaryKey((java
+	 * .lang .String ))
 	 */
 	@Override
 	@Transactional
@@ -56,8 +60,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#insert(com.jcin.cms.service.syst.
-	 * Organization)
+	 * com.jcin.cms.service.syst.IOrganizationService#insert(com.jcin.cms.service
+	 * .syst. Organization)
 	 */
 	@Override
 	@Transactional
@@ -76,7 +80,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 				organization.setParentIds(parentids);
 			}
 		}
-		 super.insert(organization);
+		super.insert(organization);
 
 		organization.setCreateDate(new Date());
 		int result = organizationMapper.insert(organization);
@@ -88,12 +92,13 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#select(com.jcin.cms.utils.Page)
+	 * com.jcin.cms.service.syst.IOrganizationService#select(com.jcin.cms.utils
+	 * .Page)
 	 */
 	@Override
 	public Page select(Page page) {
 		super.select(page);
-		//setOrderByClause("SER_NO  asc , ORG_ID desc");  
+		// setOrderByClause("SER_NO  asc , ORG_ID desc");
 		OrganizationCriteria organizationCriteria = new OrganizationCriteria();
 		organizationCriteria.setOrderByClause("id desc");
 		organizationCriteria.setPage(page);
@@ -104,14 +109,15 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#select(com.jcin.cms.service.syst.OrganizationCriteria)
+	 * com.jcin.cms.service.syst.IOrganizationService#select(com.jcin.cms.service
+	 * .syst.OrganizationCriteria)
 	 */
-	//@Override
+	// @Override
 	public Page select(OrganizationCriteria criteria) {
 		Page page = new Page();
 		@SuppressWarnings("rawtypes")
@@ -121,25 +127,24 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#selectAll()
+	 * @see com.jcin.cms.service.syst.IOrganizationService#selectAll()
 	 */
 	@Override
 	public List<Organization> selectAll() {
 		List<Organization> list = organizationMapper.selectByExample(null);
 		return list;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#selectByPrimaryKey(java.lang
-	 * .String)
+	 * com.jcin.cms.service.syst.IOrganizationService#selectByPrimaryKey(java
+	 * .lang .String)
 	 */
 	@Override
 	public Organization selectByPrimaryKey(String id) {
@@ -153,8 +158,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#update(com.jcin.cms.service.syst.
-	 * Organization)
+	 * com.jcin.cms.service.syst.IOrganizationService#update(com.jcin.cms.service
+	 * .syst. Organization)
 	 */
 	@Override
 	@Transactional
@@ -163,7 +168,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 			organization.setParentId(null);
 			organization.setParentIds(null);
 		} else {
-			Organization organization2 = selectByPrimaryKey(organization.getParentId());
+			Organization organization2 = selectByPrimaryKey(organization
+					.getParentId());
 			if (null != organization2) {
 				String parentids = organization2.getParentIds();
 				if (parentids == null || "".equals(parentids)) {
@@ -174,7 +180,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 				organization.setParentIds(parentids);
 			}
 		}
-		
+
 		// super.update(record);
 		organization.setUpdateDate(new Date());
 		int result = organizationMapper.updateByPrimaryKey(organization);
@@ -184,8 +190,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#insertBatch(List)
+	 * @see com.jcin.cms.service.syst.IOrganizationService#insertBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -194,7 +199,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 			if ("".equals(organization.getParentId())) {
 				organization.setParentId(null);
 			} else {
-				Organization organization2 = selectByPrimaryKey(organization.getParentId());
+				Organization organization2 = selectByPrimaryKey(organization
+						.getParentId());
 				if (null != organization2) {
 					String parentids = organization2.getParentIds();
 					if (parentids == null || "".equals(parentids)) {
@@ -214,8 +220,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.syst.IOrganizationService#deleteBatch(List)
+	 * @see com.jcin.cms.service.syst.IOrganizationService#deleteBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -227,4 +232,71 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 		return result;
 	}
 
+	@Override
+	public List<Organization> getOrganizationTree() {
+		OrganizationCriteria resourceExample = new OrganizationCriteria();
+		resourceExample.createCriteria().andParentIdIsNull();
+
+		List<Organization> list = organizationMapper
+				.selectByExample(resourceExample);
+		List<Organization> children = new ArrayList<Organization>();
+		for (Organization object : list) {
+			Organization jsonObject;
+
+			try {
+				jsonObject = searialOrganization(object);
+				if (jsonObject != null) {
+					children.add(jsonObject);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return children;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Organization searialOrganization(Organization resource) throws JSONException {
+
+		Organization jsonObject = new Organization();
+		jsonObject.setId(resource.getId());
+		jsonObject.setParentId(resource.getParentId());
+		jsonObject.setName(resource.getName());
+
+		jsonObject.setParentIds(resource.getParentIds());
+
+		List<Organization> list = searialChild(resource);
+		if (null != list) {
+			jsonObject.setChildren(list);
+		}
+
+		return jsonObject;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Organization> searialChild(Organization organization) throws JSONException {
+		List children = null;
+		List<Organization> list = getByParentId(organization.getId());
+		if (list != null && list.size() > 0) {
+			children = new ArrayList();
+		}
+		for (Organization object : list) {
+			Organization jsonObject = searialOrganization(object);
+			if (jsonObject != null) {
+				children.add(jsonObject);
+			}
+		}
+		return children;
+	}
+
+	@Override
+	public List<Organization> getByParentId(String id) {
+		OrganizationCriteria organizationCriteria = new OrganizationCriteria();
+		organizationCriteria.createCriteria().andParentIdEqualTo(id);
+		List<Organization> list = organizationMapper
+				.selectByExample(organizationCriteria);
+
+		return list;
+	}
 }

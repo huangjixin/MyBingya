@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -129,6 +132,7 @@ public class OrganizationController extends BaseController<Organization>{
 		return pathSegment;
 	}
 
+//	@RequiresPermissions("organization:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute Organization organization,Model uiModel,
@@ -157,6 +161,7 @@ public class OrganizationController extends BaseController<Organization>{
 		return page;
 	}
 	
+//	@RequiresPermissions("organization:update")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -173,82 +178,13 @@ public class OrganizationController extends BaseController<Organization>{
 		return result;
 	}
 	
-	/**
-	 * 全部导出Excel.
-	 * @param organization
-	 * @param httpServletRequest
-	 * @param httpServletResponse
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/exportExcel")
-	public void exportExcel(@ModelAttribute Organization organization,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-		httpServletResponse.setCharacterEncoding("UTF-8");
-		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
-		List<Organization>list = organizationService.selectAll();
 
-		List<Map<String, Object>> maps = createExcelRecord(list);
-
-		String columnNames[] = { 
-			"Id",
-			"Name",
-			"ParentId",
-			"ParentIds",
-			"Available",
-			"CreateDate",
-			"UpdateDate"
-		};// 列名
-		String keys[] = { 
-			"Id",
-			"Name",
-			"ParentId",
-			"ParentIds",
-			"Available",
-			"CreateDate",
-			"UpdateDate"
-		};// map中的key
-		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
-		filename += "_" + sdf.format(new Date()) + ".xls";
-		httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-		httpServletResponse.setHeader("Content-Disposition",
-				"attachment; filename=\"" + filename + "\"");
-		OutputStream os = httpServletResponse.getOutputStream();
-		hwb.write(os);
-		os.flush();
-		os.close();
-	}
-
-	private List<Map<String, Object>> createExcelRecord(List<Organization> list) {
-		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("sheetName", "sheet1");
-		listmap.add(map);
-		Organization organization = null;
-		for (int j = 0; j < list.size(); j++) {
-			organization = list.get(j);
-			Map<String, Object> mapValue = new HashMap<String, Object>();
-				mapValue.put("Id",organization.getId());
-				mapValue.put("Name",organization.getName());
-				mapValue.put("ParentId",organization.getParentId());
-				mapValue.put("ParentIds",organization.getParentIds());
-				mapValue.put("Available",organization.getAvailable());
-				mapValue.put("CreateDate",organization.getCreateDate());
-				mapValue.put("UpdateDate",organization.getUpdateDate());
-			listmap.add(mapValue);
-		}
-		return listmap;
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	@RequestMapping(value = "/getOrganizationTree")
+	@ResponseBody
+	public List<Organization> getOrganizationTree(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+		List<Organization> list = organizationService.getOrganizationTree();
+		return list;
 	}
 
 }

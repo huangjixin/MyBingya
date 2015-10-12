@@ -48,7 +48,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	private UserRoleMapper userRoleMapper;
 	@javax.annotation.Resource
 	private ResourceMapper resourceMapper;
-
+//	@javax.annotation.Resource
+//	private Userre;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -246,5 +247,36 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 			userRoleMapper.updateByPrimaryKey(userRole);
 		}
 	}
+
+
+	@Override
+	public void connectUserOrganization(String userId, String roleId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUserOrganization(String userId, String oldOrgId,
+			String newOrgId) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean checkUsernamePassword(String username, String password) {
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(password);
+		List<User> list = userMapper.selectByExample(userCriteria);
+		return (null != list && list.size() > 0) ? true : false;
+	}
+
+	@Override
+	public boolean updatePassword(User user) {
+//		User user2 = userMapper.selectByPrimaryKey(user.getId());
+//		user2.setPassword(user.getPassword());
+		userMapper.updateByPrimaryKeySelective(user);
+		return true;
+	}
+
 
 }

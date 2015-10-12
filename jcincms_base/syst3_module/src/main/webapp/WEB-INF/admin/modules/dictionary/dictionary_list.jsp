@@ -137,7 +137,6 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
 			$("#typeInput").val("");
 			$("#labelInput").val("");
 			$("#valueInput").val("");
@@ -184,13 +183,11 @@
 				value="导入excel" onclick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>type:</label>
+			<label>类型:</label>
 			<input  id="typeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>label:</label>
+			<label>键:</label>
 			<input  id="labelInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>value:</label>
+			<label>值:</label>
 			<input  id="valueInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
@@ -217,16 +214,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center'" width="100%">id</th>
-					<th data-options="field:'type',align:'center'" width="100%">type</th>
-					<th data-options="field:'label',align:'center'" width="100%">label</th>
-					<th data-options="field:'value',align:'center'" width="100%">value</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'type',align:'center'" width="100%">类型</th>
+					<th data-options="field:'label',align:'center'" width="100%">键</th>
+					<th data-options="field:'value',align:'center'" width="100%">值</th>
 				</tr>
 			</thead>
 		</table>
-
 	</div>
-	<form id="addForm" action="dictionary/new"></form>
-	<form id="updateForm" action="dictionary/edit"></form>
 </body>
 </html>

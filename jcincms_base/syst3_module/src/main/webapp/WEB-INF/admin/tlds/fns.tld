@@ -22,4 +22,32 @@
 		</function-signature>
 		<example>${fns:getUsername()}</example>
 	</function>
+
+	<function>
+		<description>获取登录用户ID</description>
+		<name>getUserId</name>
+		<function-class>com.jcin.cms.common.UserUtils</function-class>
+		<function-signature>java.lang.String getUserId()
+		</function-signature>
+		<example>${fns:getUserId()}</example>
+	</function>
+	
+	<!-- 字典 -->
+	<function>
+		<description>根据类型获取字典</description>
+		<name>getByType</name>
+		<function-class>com.jcin.cms.common.DictionaryUtils</function-class>
+		<function-signature>java.util.List getByType(java.lang.String)
+		</function-signature>
+		<example>${fns:getByType(type)}</example>
+	</function>
+	
+	<function>
+		<description>获取是否可用</description>
+		<name>getAvailable</name>
+		<function-class>com.jcin.cms.common.DictionaryUtils</function-class>
+		<function-signature>java.util.List getAvailable()
+		</function-signature>
+		<example>${fns:getAvailable()}</example>
+	</function>
 </taglib>

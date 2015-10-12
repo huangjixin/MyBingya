@@ -38,16 +38,47 @@ public interface IUserService extends IBaseService<User, String> {
 	Set<String> findPermissions(String username);
 	
 	/**
-	 * 通过用户名查询权限集合。
-	 * @param username
-	 * @return
+	 * 关联用户角色。
+	 * @param userId
+	 * @param roleId
 	 */
 	void connectUserRole(String userId,String roleId);
 	
 	/**
-	 * 通过用户名查询权限集合。
-	 * @param username
-	 * @return
+	 * 关联用户角色。
+	 * @param userId
+	 * @param oldRoleId
+	 * @param newRoleId
 	 */
 	void updateUserRole(String userId, String oldRoleId, String newRoleId);
+	
+	/**
+	 * 关联用户组织。
+	 * @param userId
+	 * @param roleId
+	 */
+	void connectUserOrganization(String userId,String roleId);
+	
+	/**
+	 * 更新关联用户组织。
+	 * @param userId
+	 * @param oldOrgId
+	 * @param newOrgId
+	 */
+	void updateUserOrganization(String userId, String oldOrgId, String newOrgId);
+	
+	/**
+	 * 检查用户名密码
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	boolean checkUsernamePassword(String username, String password);
+	
+	/**
+	 * 更新密码。
+	 * @param user
+	 * @return
+	 */
+	boolean updatePassword(User user);
 }

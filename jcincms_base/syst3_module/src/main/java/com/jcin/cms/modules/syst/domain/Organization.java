@@ -1,9 +1,13 @@
 package com.jcin.cms.modules.syst.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Organization implements Serializable {
     /**
@@ -59,6 +63,9 @@ public class Organization implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
 
+    private List<Organization> Children = new ArrayList<Organization>();
+    
+    private boolean checked;
     /**
      * 该字段对应数据库表 tb_organization
      *
@@ -219,4 +226,24 @@ public class Organization implements Serializable {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+	public String getText() {
+		return name;
+	}
+	
+	public List<Organization> getChildren() {
+		return Children;
+	}
+
+	public void setChildren(List<Organization> children) {
+		Children = children;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 }

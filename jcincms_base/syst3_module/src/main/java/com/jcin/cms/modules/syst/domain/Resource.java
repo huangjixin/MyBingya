@@ -63,6 +63,8 @@ public class Resource implements Serializable {
 
 	
 	private List<Resource> children = new ArrayList<Resource>();
+	
+	private boolean checked;
 	/**
 	 * 所属表字段为 tb_resource.id
 	 * 
@@ -233,5 +235,13 @@ public class Resource implements Serializable {
 
 	public void setChildren(List<Resource> children) {
 		this.children = children;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }
