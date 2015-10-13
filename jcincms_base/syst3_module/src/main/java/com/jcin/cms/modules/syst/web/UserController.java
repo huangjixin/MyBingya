@@ -128,12 +128,15 @@ public class UserController extends BaseController<User> {
 			organizationId = null;
 		}
 		List<Role> list = roleService.selectByUsername(user.getUsername());
-		if (null != list && list.size() > 0) {
+		if (null != list && list.size() > 0) {//更新
 			if (!list.get(0).getId().equals(roleId)) {
 				userService.updateUserRole(user.getId(), list.get(0).getId(),
 						roleId);
 			}
 			uiModel.addAttribute("roleId", roleId);
+		}else{
+			userService.updateUserRole(user.getId(), null,
+					roleId);
 		}
 		
 		List<Organization> organizations = organizationService.selectByUsername(user.getUsername());
@@ -143,6 +146,9 @@ public class UserController extends BaseController<User> {
 						organizationId);
 			}
 			uiModel.addAttribute("organizationId", organizationId);
+		}else{
+			userService.updateUserOrganization(user.getId(), null,
+					organizationId);
 		}
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");

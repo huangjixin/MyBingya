@@ -33,17 +33,18 @@ function createResourceTree(){
 				$('#parentId').val(node.id);*/
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
-				$('#organizationId').combotree('tree').tree("collapseAll");
+				/* var tree = $('#organizationId').combotree('tree');
+// 				$('#organizationId').combotree('tree').tree("collapseAll");
 				var orgid = $('#organizationIdInput').val();
 				if(orgid == ''){
 					return ;
 				}
 				
-				var node = $('#organizationId').combotree('tree').tree('find', orgid);
-				alert(node==null);
+				var node = tree.tree('find', orgid);
 				if(node !=null){
-					$('#organizationId').combotree('tree').tree('select', node.target);
-				}
+					tree.tree('select', node.target);
+					$('#organizationId').val(node.text);
+				} */
 				
 			}
 		});
@@ -92,7 +93,7 @@ function clearOrgInput(){
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
 							<th>&nbsp;父亲节点：</th>
 							<td nowrap="nowrap" align="left"><input id="organizationId"
-								name="organizationId">&nbsp; <input type="button" value="清除"
+								name="organizationId" value="${organizationId}">&nbsp; <input type="button" value="清除"
 								onclick="clearOrgInput();" /></td>
 							<th>&nbsp;</th>
 							<td nowrap="nowrap" align="left"></td>

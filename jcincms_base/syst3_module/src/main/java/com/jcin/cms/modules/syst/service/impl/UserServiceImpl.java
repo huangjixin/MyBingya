@@ -246,7 +246,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
 		userRoleCriteria.createCriteria().andUserIdEqualTo(userId).andTbRoleIdEqualTo(oldRoleId);
 		List<UserRole>userRoles = userRoleMapper.selectByExample(userRoleCriteria);
-		if(null != userRoles && userRoles.size()>0){
+		if(null != userRoles && userRoles.size()>0){//更新
 			UserRole userRole  = userRoles.get(0);
 			if(null != newRoleId){
 				userRole.setTbRoleId(newRoleId);
@@ -254,6 +254,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 			}else{
 				userRoleMapper.deleteByPrimaryKey(userRole.getId());
 			}
+		}else{//新增
+			if((null == oldRoleId || "".equals(oldRoleId)) && null != newRoleId){
+				UserRole userRole  = new UserRole();
+				userRole.setId(new Date().getTime()+"");
+				userRole.setUserId(userId);
+				userRole.setTbRoleId(newRoleId);
+				userRoleMapper.insert(userRole);
+			}
+			
 		}
 	}
 
@@ -270,6 +279,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	public void updateUserOrganization(String userId, String oldOrgId,
 			String newOrgId) {
+		if(oldOrgId == null){
+			oldOrgId="";
+		}
 		UserOrganizationCriteria userOrganizationCriteria = new UserOrganizationCriteria();
 		userOrganizationCriteria.createCriteria().andUserIdEqualTo(userId).andOrganizationIdEqualTo(oldOrgId);
 		List<UserOrganization>userOrganizations = userOrganizationMapper.selectByExample(userOrganizationCriteria);
@@ -281,6 +293,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 			}else{
 				userOrganizationMapper.deleteByPrimaryKey(userOrganization.getId());
 			}
+		}else{//新增
+			if((null == oldOrgId || "".equals(oldOrgId)) && null != newOrgId){
+				UserOrganization userOrganization  = new UserOrganization();
+				userOrganization.setId(new Date().getTime()+"");
+				userOrganization.setUserId(userId);
+				userOrganization.setOrganizationId(newOrgId);
+				userOrganizationMapper.insert(userOrganization);
+			}
+			
 		}
 	}
 	
