@@ -351,4 +351,87 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 
 		return list;
 	}
+
+	@Override
+	public List<Resource> getResourceCheckboxTree(List<Resource> resources) {
+		ResourceCriteria resourceExample = new ResourceCriteria();
+		resourceExample.createCriteria().andParentIdIsNull();
+
+		List<Resource> list = resourceMapper.selectByExample(resourceExample);
+		List<Resource> children = new ArrayList<Resource>();
+		for (Resource object : list) {
+			Resource jsonObject;
+			
+			jsonObject = searialResource(object, resources);
+			if(jsonObject!=null){
+				if(null != resources){
+					for (int i = 0; i < resources.size(); i++) {
+						Resource resource = resources.get(i); 
+						if(object.getId().equals(resource.getId())){
+							jsonObject.setChecked(true);
+							break;
+						}
+					}
+				}
+				
+				children.add(jsonObject);
+			}
+
+		}
+		return children;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public Resource searialResource(Resource resource, List<Resource> resources) {
+		Resource jsonObject = new Resource();
+		jsonObject.setId(resource.getId());
+		jsonObject.setParentId(resource.getParentId());
+		jsonObject.setName(resource.getName());
+		jsonObject.setType(resource.getType());
+		jsonObject.setPath(resource.getPath());
+		jsonObject.setAuthName(resource.getAuthName());
+		jsonObject.setParentids(resource.getParentids());
+
+		List<Resource> list = searialChild(resource, resources);
+		if (null != list) {
+			jsonObject.setChildren(list);
+		}
+
+		return jsonObject;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Resource> searialChild(Resource resource,List<Resource> resources){
+		List children = null;
+		List<Resource> list = getByParentId(resource.getId());
+		if (list != null && list.size() > 0) {
+			children = new ArrayList();
+		}
+		for (Resource object : list) {
+			Resource jsonObject = searialResource(object, resources);
+			if(jsonObject!=null){
+				if(null != resources){
+					for (Resource resource1 : resources) {
+						if(object.getId().equals(resource1.getId())){
+							jsonObject.setChecked(true);
+							break;
+						}
+					}
+				}
+				
+				children.add(jsonObject);
+			}
+		}
+		return children;
+	}
+
+	@Override
+	public List<Resource> selectByRoleId(String roleId) {
+		return resourceMapper.selectByRoleId(roleId);
+	}
+
+	@Override
+	public List<Resource> selectByOrgId(String orgId) {
+		return resourceMapper.selectByOrgId(orgId);
+	}
 }

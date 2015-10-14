@@ -43,36 +43,40 @@ import com.jcin.cms.common.Global;
 import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
 import com.jcin.cms.modules.syst.service.IOrganizationService;
+import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
 @RequestMapping(value = "${adminPath}/organization")
-public class OrganizationController extends BaseController<Organization>{
+public class OrganizationController extends BaseController<Organization> {
 	@Resource
 	private IOrganizationService organizationService;
+	@Resource
+	private IResourceService resourceService;
 
-//	@RequiresPermissions("organization:create")
+	// @RequiresPermissions("organization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Organization organization, Model uiModel) {
 		uiModel.addAttribute("organization", organization);
 		return "admin/modules/organization/organization_create";
 	}
 
-//	@RequiresPermissions("organization:create")
+	// @RequiresPermissions("organization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(Organization organization, RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String create(Organization organization,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		organizationService.insert(organization);
-		
+
 		redirectAttributes.addFlashAttribute("organization", organization);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
-		return "redirect:/"+Global.getAdminPath()+"/organization/create";
+		return "redirect:/" + Global.getAdminPath() + "/organization/create";
 	}
-	
-//	@RequiresPermissions("organization:update")
+
+	// @RequiresPermissions("organization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
@@ -80,29 +84,31 @@ public class OrganizationController extends BaseController<Organization>{
 		return "admin/modules/organization/organization_update";
 	}
 
-//	@RequiresPermissions("organization:update")
+	// @RequiresPermissions("organization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(Organization organization,RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String update(Organization organization,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		
+
 		organizationService.update(organization);
-		
+
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("organization", organization);
-		return "redirect:/"+Global.getAdminPath()+"/organization/update/"+organization.getId();
+		return "redirect:/" + Global.getAdminPath() + "/organization/update/"
+				+ organization.getId();
 	}
 
-//	@RequiresPermissions("organization:show")
+	// @RequiresPermissions("organization:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
-		
+
 		uiModel.addAttribute("organization", organization);
 		return "admin/modules/organization/organization_show";
 	}
 
-//	@RequiresPermissions("organization:view")
+	// @RequiresPermissions("organization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/organization/organization_list";
@@ -132,36 +138,40 @@ public class OrganizationController extends BaseController<Organization>{
 		return pathSegment;
 	}
 
-//	@RequiresPermissions("organization:view")
+	// @RequiresPermissions("organization:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Organization organization,Model uiModel,
+	public Page select(@ModelAttribute Page page,
+			@ModelAttribute Organization organization, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, uiModel, httpServletRequest,
-				httpServletResponse);
+		super.select(page, uiModel, httpServletRequest, httpServletResponse);
 		OrganizationCriteria organizationCriteria = new OrganizationCriteria();
-		OrganizationCriteria.Criteria criteria = organizationCriteria.createCriteria();
+		OrganizationCriteria.Criteria criteria = organizationCriteria
+				.createCriteria();
 		organizationCriteria.setPage(page);
 		organizationCriteria.setOrderByClause("id desc");
-		if (null != organization.getId()  && !"".equals(organization.getId())) {
-		  	criteria.andIdLike("%" + organization.getId() + "%");
+		if (null != organization.getId() && !"".equals(organization.getId())) {
+			criteria.andIdLike("%" + organization.getId() + "%");
 		}
-		if (null != organization.getName()  && !"".equals(organization.getName())) {
-		  	criteria.andNameLike("%" + organization.getName() + "%");
+		if (null != organization.getName()
+				&& !"".equals(organization.getName())) {
+			criteria.andNameLike("%" + organization.getName() + "%");
 		}
-		if (null != organization.getParentId()  && !"".equals(organization.getParentId())) {
-		  	criteria.andParentIdLike("%" + organization.getParentId() + "%");
+		if (null != organization.getParentId()
+				&& !"".equals(organization.getParentId())) {
+			criteria.andParentIdLike("%" + organization.getParentId() + "%");
 		}
-		if (null != organization.getParentIds()  && !"".equals(organization.getParentIds())) {
-		  	criteria.andParentIdsLike("%" + organization.getParentIds() + "%");
+		if (null != organization.getParentIds()
+				&& !"".equals(organization.getParentIds())) {
+			criteria.andParentIdsLike("%" + organization.getParentIds() + "%");
 		}
-		
+
 		page = organizationService.select(organizationCriteria);
 		return page;
 	}
-	
-//	@RequiresPermissions("organization:update")
+
+	// @RequiresPermissions("organization:update")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -177,14 +187,52 @@ public class OrganizationController extends BaseController<Organization>{
 
 		return result;
 	}
-	
-
 
 	@RequestMapping(value = "/getOrganizationTree")
 	@ResponseBody
-	public List<Organization> getOrganizationTree(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
-		List<Organization> list = organizationService.getOrganizationTree();
+	public List<Organization> getOrganizationTree(
+			@RequestParam(value = "organizationId", required = false) String organizationId,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		/*List<com.jcin.cms.modules.syst.domain.Resource> resources = null;
+		if (organizationId != null) {
+			resources = resourceService.selectByOrgId(organizationId);
+		}*/
+		List<Organization> list = organizationService.getOrganizationTree(null);
 		return list;
 	}
+	
+	@RequestMapping(value = "/getResourceCheckboxTree")
+	@ResponseBody
+	public List<com.jcin.cms.modules.syst.domain.Resource> getResourceCheckboxTree(
+			@RequestParam(value = "organizationId", required = false) String organizationId,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		List<com.jcin.cms.modules.syst.domain.Resource> resources = null;
+		if (organizationId != null) {
+			resources = resourceService.selectByOrgId(organizationId);
+		}
+		List<com.jcin.cms.modules.syst.domain.Resource> list = resourceService
+				.getResourceCheckboxTree(resources);
+		return list;
+	}
+	
 
+	@RequestMapping(value = "/connectOrganizationResource")
+	@ResponseBody
+	public void connectOrganizationResource(@RequestParam(value = "organizationId") String organizationId,@RequestParam(value = "resourceIds") String resourceIds,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		if(resourceIds==null){
+			resourceIds = "";
+		}
+		
+		String[] ids = resourceIds.split(",");
+		List<String> list = new ArrayList<String>();
+		for (String idstr : ids) {
+			list.add(idstr);
+		}
+		
+		organizationService.connectOrgResource(organizationId, list);
+	}
 }

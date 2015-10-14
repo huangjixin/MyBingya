@@ -54,7 +54,7 @@ th {
 							<td style="text-align: left;" colspan="6"><input
 								type="submit" value="保存" />&nbsp;&nbsp;<input type="button"
 								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/'" /></td>
+								onclick="javascript:window.location.href='${ctxAdmin}/role'" /></td>
 						</tr>
 					</table>
 				</td>

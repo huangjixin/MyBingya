@@ -39,13 +39,54 @@
 	}
 
 	$().ready(function() {
+	    $('#orgTree').tree({
+	    	url:'${ctxAdmin}/organization/getOrganizationTree',method:'get',animate:true,checkbox:true,onSelect: function(node){
+	    		$('#resourceTree').tree("options").url = '${ctxAdmin}/organization/getResourceCheckboxTree?organizationId='+node.id;
+		    	$('#resourceTree').tree('reload');
+	    	}
+	    });
+	    $('#resourceTree').tree({
+	    	url:'${ctxAdmin}/organization/getResourceCheckboxTree',method:'get',animate:true,checkbox:true
+	    });
 	});
 
+	function connectOrganizationResource(){
+		var row = $('#orgTree').tree('getSelected');
+		if (row == null) {
+			return;
+		}
+		
+        var nodes = $('#resourceTree').tree('getChecked');
+        var s = '';
+        for(var i=0; i<nodes.length; i++){
+            if (s != '') s += ',';
+            s += nodes[i].id;
+        }
+
+		var pamameter = {};
+		pamameter.organizationId = row.id;
+		pamameter.resourceIds = s;
+		
+        $.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/organization/connectOrganizationResource',
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				alert("授权成功"); // 重新加载;
+			}
+		});
+	}
+	
 	// 移除条目；
 	function deleteRows(selecedRow) {
 		var pamameter = null;
 		//多行删除。
-		var row = $('#tgrid').datagrid('getSelections');
+		var row = $('#orgTree').tree('getChecked');
 		if (row == null || row.length == 0) {
 			return;
 		}
@@ -85,13 +126,12 @@
 	}
 
 	function update() {
-		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length == 0) {
+		var row = $('#orgTree').tree('getSelected');
+		if (row == null) {
 			return;
 		}
 
-		window.location.href = '${ctxAdmin}/organization/update/' + row[0].id
-				+ '';
+		window.location.href = '${ctxAdmin}/organization/update/' + row.id;
 	}
 
 	function show() {
@@ -121,10 +161,6 @@
 	function importExcel() {
 
 	}
-	
-	function onLoadSuccess(row, data){
-		alert('dfs');
-	}
 </script>
 </head>
 
@@ -134,57 +170,20 @@
 						onclick="javascript:window.location.href='${ctxAdmin}/organization/create'" />
 					<input type="button" value="删除" onclick="deleteRows();" /> <input
 						type="button" value="更新" onclick="update();" /> <input
-						type="button" value="详情" onclick="show();" /> <input
-						type="button" id="searchBtn" value="搜索" onclick="search();" /> <input
-						type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-					<input type="button" id="exportBtn" value="导出excel"
-						onclick="exportExcel()" /> <input type="button" id="importBtn"
-						value="导入excel" onclick="importExcel()" />
+						type="button" value="详情" onclick="show();" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="授权" onclick="connectOrganizationResource();"/>
 	</div>
 	<div data-options="region:'center'" title=""
 		style="padding:1px;background:#ffffff;">
 		<div class="easyui-layout" data-options="fit:true">
-			<div data-options="region:'center'" title=""
+			<div data-options="region:'center'" title="资源树"
 				style="padding:1px;background:#ffffff;">
-				
-				<table id="tgrid" title="" class="easyui-datagrid"
-					style="height:350px;"
-					data-options="
-								pageSize : 10,
-								pageList : [ 5, 10, 15, 20 ],
-								nowrap : true,
-								striped : true,
-								collapsible : true,
-								url: '${ctxAdmin}/organization/select',
-								loadMsg : '数据装载中......',
-								method: 'get',
-								singleSelect : false,
-								selectOnCheck: true,
-								checkOnSelect: true,
-								rownumbers: false,
-								treeField: 'name',
-								showHeader: true,
-								fit:false,
-								fitColumns:true
-							">
-					<thead>
-						<tr>
-							<th data-options="field:'ck',checkbox:true"></th>
-							<th data-options="field:'id',align:'center',hidden:true"
-								width="100%">id</th>
-							<th data-options="field:'name',align:'center'" width="100%">name</th>
-							<th data-options="field:'parentId',align:'center'" width="100%">parentId</th>
-							<th data-options="field:'parentIds',align:'center'" width="100%">parentIds</th>
-							<th data-options="field:'available',align:'center'" width="100%">available</th>
-							<th data-options="field:'createDate',align:'center'" width="100%">createDate</th>
-							<th data-options="field:'updateDate',align:'center'" width="100%">updateDate</th>
-						</tr>
-					</thead>
-				</table>
+				<ul id="resourceTree"></ul>
 			</div>
 			<div data-options="region:'west',split:true" title="组织列表"
-				style="width:200px;padding:1px;">
-				<ul id="tt" class="easyui-tree" data-options="url:'${ctxAdmin}/organization/getOrganizationTree',method:'get',animate:true,checkbox:true"></ul>	
+				style="width:400px;padding:1px;">
+				<ul id="orgTree"></ul>	
 			</div>
 		</div>
 	</div>

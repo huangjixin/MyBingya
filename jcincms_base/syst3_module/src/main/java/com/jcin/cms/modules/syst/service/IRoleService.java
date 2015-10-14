@@ -29,4 +29,11 @@ public interface IRoleService extends IBaseService<Role, String> {
 	 * @return
 	 */
 	void updateUserRole(String roleId, String oldUserId, String newUserId);
+	
+	/**
+	 * 关联角色资源
+	 * @param roleId
+	 * @param resourceIds
+	 */
+	void connectRoleResource(String roleId, List<String> resourceIds);
 }

@@ -1,10 +1,11 @@
 package com.jcin.cms.modules.syst.dao;
 
-import com.jcin.cms.modules.syst.domain.Menu;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.ResourceCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ResourceMapper {
     /**
@@ -99,9 +100,30 @@ public interface ResourceMapper {
     int updateByPrimaryKey(Resource record);
     
     /**
-     * 根据用户名查询角色。
+     * 根据用户名查询资源。
      * @param username
      * @return
      */
     List<Resource> selectByUsername(String username);
+    
+    /**
+     * 根据用户名通过组织查询资源。
+     * @param username
+     * @return
+     */
+    List<Resource> selectOnOrgByUsername(String username);
+    
+    /**
+	 * 根据角色id查询权限
+	 * @param username
+	 * @return
+	 */
+	List<Resource> selectByRoleId(String roleId);
+
+	/**
+	 * 根据组织id查询权限
+	 * @param orgId
+	 * @return
+	 */
+	List<Resource> selectByOrgId(String orgId);
 }

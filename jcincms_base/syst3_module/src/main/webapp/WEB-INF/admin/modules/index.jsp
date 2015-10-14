@@ -130,9 +130,9 @@ html,body {
 			<iframe id="ifrContentArea" frameborder="0" name="main"
 					style="width:100%;height:99%;" border="0"  scrolling="auto"></iframe>
 		</div>
-		<div data-options="region:'south'"
+		<!-- <div data-options="region:'south'"
 			style="text-align:center;height:25px;padding-top: 2px;">
-			Copyright © 黄记新软件有限公司版权所有</div>
+			Copyright © 黄记新软件有限公司版权所有</div> -->
 	</div>
 </body>
 </html>

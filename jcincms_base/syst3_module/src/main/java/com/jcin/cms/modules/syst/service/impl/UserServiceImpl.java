@@ -226,6 +226,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 				set.add(resource.getAuthName());
 			}
 		}
+		
+		list = resourceMapper.selectOnOrgByUsername(username);
+		for (Resource resource : list) {
+			if (null != resource.getAuthName() && !"".equals(resource.getAuthName())) {
+				set.add(resource.getAuthName());
+			}
+		}
 		logger.debug("权限集合是：{：" + set.toString() + "}");
 		return set;
 	}

@@ -9,19 +9,20 @@ package com.jcin.cms.modules.syst.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.syst.dao.OrganizationMapper;
+import com.jcin.cms.modules.syst.dao.OrganizationResourceMapper;
 import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
-import com.jcin.cms.modules.syst.domain.ResourceCriteria;
+import com.jcin.cms.modules.syst.domain.OrganizationResource;
+import com.jcin.cms.modules.syst.domain.OrganizationResourceCriteria;
 import com.jcin.cms.modules.syst.service.IOrganizationService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
@@ -39,6 +40,8 @@ public class OrganizationServiceImpl extends
 
 	@Resource
 	private OrganizationMapper organizationMapper;
+	@Resource
+	private OrganizationResourceMapper organizationResourceMapper;
 
 	/*
 	 * (non-Javadoc)
@@ -51,8 +54,9 @@ public class OrganizationServiceImpl extends
 	@Transactional
 	public int deleteByPrimaryKey(String id) {
 		// super.deleteByPrimaryKey(id);
-
+		logger.info("organization开始删除，id:"+id);
 		int result = organizationMapper.deleteByPrimaryKey(id);
+		logger.info("删除结束");
 		return result;
 	}
 
@@ -81,10 +85,11 @@ public class OrganizationServiceImpl extends
 			}
 		}
 		super.insert(organization);
-
+		logger.info("organization开始添加，id:"+organization.getId());
 		organization.setCreateDate(new Date());
 		int result = organizationMapper.insert(organization);
 		String id = organization.getId();
+		logger.info("organization添加结束，id:"+organization.getId());
 		return id;
 	}
 
@@ -233,40 +238,42 @@ public class OrganizationServiceImpl extends
 	}
 
 	@Override
-	public List<Organization> getOrganizationTree() {
-		OrganizationCriteria resourceExample = new OrganizationCriteria();
-		resourceExample.createCriteria().andParentIdIsNull();
+	public List<Organization> getOrganizationTree(List<Organization> organizations) {
+		OrganizationCriteria organizationExample = new OrganizationCriteria();
+		organizationExample.createCriteria().andParentIdIsNull();
 
-		List<Organization> list = organizationMapper
-				.selectByExample(resourceExample);
+		List<Organization> list = organizationMapper.selectByExample(organizationExample);
 		List<Organization> children = new ArrayList<Organization>();
 		for (Organization object : list) {
-			Organization jsonObject;
-
-			try {
-				jsonObject = searialOrganization(object);
-				if (jsonObject != null) {
-					children.add(jsonObject);
+			Organization jsonObject = null;
+			if(null != organizations){
+				for (Organization organization : organizations) {
+					if(object.getId().equals(organization.getId())){
+						jsonObject.setChecked(true);
+						break;
+					}
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
 			}
-
+			
+			jsonObject = searialOrganization(object,organizations);
+			if (jsonObject != null) {
+				children.add(jsonObject);
+			}
 		}
 		return children;
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Organization searialOrganization(Organization resource) throws JSONException {
+	public Organization searialOrganization(Organization organization,List<Organization> orgs){
 
 		Organization jsonObject = new Organization();
-		jsonObject.setId(resource.getId());
-		jsonObject.setParentId(resource.getParentId());
-		jsonObject.setName(resource.getName());
+		jsonObject.setId(organization.getId());
+		jsonObject.setParentId(organization.getParentId());
+		jsonObject.setName(organization.getName());
 
-		jsonObject.setParentIds(resource.getParentIds());
+		jsonObject.setParentIds(organization.getParentIds());
 
-		List<Organization> list = searialChild(resource);
+		List<Organization> list = searialChild(organization,orgs);
 		if (null != list) {
 			jsonObject.setChildren(list);
 		}
@@ -275,14 +282,23 @@ public class OrganizationServiceImpl extends
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<Organization> searialChild(Organization organization) throws JSONException {
+	public List<Organization> searialChild(Organization organization,List<Organization> organizations){
 		List children = null;
 		List<Organization> list = getByParentId(organization.getId());
 		if (list != null && list.size() > 0) {
 			children = new ArrayList();
 		}
 		for (Organization object : list) {
-			Organization jsonObject = searialOrganization(object);
+			if(null != organizations){
+				for (Organization organization1 : organizations) {
+					if(object.getId().equals(organization1.getId())){
+						object.setChecked(true);
+						break;
+					}
+				}
+			}
+			
+			Organization jsonObject = searialOrganization(object,organizations);
 			if (jsonObject != null) {
 				children.add(jsonObject);
 			}
@@ -304,5 +320,22 @@ public class OrganizationServiceImpl extends
 	public List<Organization> selectByUsername(String username) {
 		List<Organization> list = organizationMapper.selectByUsername(username);
 		return list;
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void connectOrgResource(String orgId, List<String> resourceIds) {
+		OrganizationResourceCriteria organizationResourceCriteria = new OrganizationResourceCriteria();
+		organizationResourceCriteria.createCriteria().andOrganizationIdEqualTo(orgId);
+		organizationResourceMapper.deleteByExample(organizationResourceCriteria);
+		
+		for (int i = 0; i < resourceIds.size(); i++) {
+			String resourceId = resourceIds.get(i);
+			OrganizationResource organizationResource = new OrganizationResource();
+			organizationResource.setId(UUID.randomUUID().toString());
+			organizationResource.setResourceId(resourceId);
+			organizationResource.setOrganizationId(orgId);
+			organizationResourceMapper.insert(organizationResource);
+		}
 	}
 }

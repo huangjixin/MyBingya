@@ -27,7 +27,7 @@ public interface IOrganizationService extends
 	 * 
 	 * @return
 	 */
-	List<Organization> getOrganizationTree();
+	List<Organization> getOrganizationTree(List<Organization> orgs);
 
 	/**
 	 * 根据parentId进行查询
@@ -42,4 +42,12 @@ public interface IOrganizationService extends
 	 * @return
 	 */
 	List<Organization> selectByUsername(String username);
+
+	/**
+	 * 关联组织资源。
+	 * @param orgId
+	 * @param resourceIds
+	 */
+	void connectOrgResource(String orgId, List<String> resourceIds);
+	
 }

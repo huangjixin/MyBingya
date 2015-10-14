@@ -282,4 +282,45 @@
 	where
     	user.username = #{username,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectOnOrgByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT 
+		r.*
+	FROM
+		tb_resource r
+			left join
+		tb_organization_resource organization_resource on organization_resource.resource_id = r.id
+			left join 
+   		tb_organization organization on organization_resource.organization_id = organization.id
+        	left join
+    	tb_user_organization user_organization ON organization.id = user_organization.organization_id
+        	left join
+    	tb_user user ON user_organization.user_id = user.id
+	where
+    	user.username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT 
+		r.*
+	FROM
+		tb_resource r
+			left join
+		tb_role_resource role_resource on role_resource.resource_id = r.id
+			left join 
+   		tb_role role on role_resource.role_id = role.id
+	where
+    	role.id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT 
+		r.*
+	FROM
+		tb_resource r
+			left join
+		tb_organization_resource organization_resource on organization_resource.resource_id = r.id
+			left join 
+   		tb_organization organization on organization_resource.organization_id = organization.id
+	where
+    	organization.id = #{orgId,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.jcin.cms.modules.syst.service;
 import java.util.List;
 import java.util.Set;
 
+import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.ResourceCriteria;
 import com.jcin.cms.service.IBaseService;
@@ -37,6 +38,12 @@ public interface IResourceService extends IBaseService<Resource, String> {
 	 * 创建资源树。
 	 * @return
 	 */
+	List<Resource> getResourceCheckboxTree(List<Resource> resources);
+	
+	/**
+	 * 创建资源树。
+	 * @return
+	 */
 	List<Resource> getResourceTree(Set<String>permission,boolean menuOnly);
 	
 	/**
@@ -45,4 +52,18 @@ public interface IResourceService extends IBaseService<Resource, String> {
 	 * @return
 	 */
 	List<Resource> getByParentId(String id);
+	
+	/**
+	 * 根据角色查找。
+	 * @param id
+	 * @return
+	 */
+	List<Resource> selectByRoleId(String roleId);
+	
+	/**
+	 * 根据组织查找。
+	 * @param id
+	 * @return
+	 */
+	List<Resource> selectByOrgId(String orgId);
 }

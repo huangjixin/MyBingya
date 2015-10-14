@@ -161,24 +161,8 @@
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='${ctxAdmin}/roleResource/create'" /> 
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
-			<input type="button"
-				value="更新" onclick="update();" /> 
-			<input type="button"
-				value="详情" onclick="show();" /> 
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
-		</div>
 		<div style="padding: 5px;border: 0px;">
 			<label>id:</label>
 			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;

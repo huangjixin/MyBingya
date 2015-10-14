@@ -7,16 +7,19 @@
 package com.jcin.cms.modules.syst.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.modules.syst.dao.ResourceMapper;
 import com.jcin.cms.modules.syst.dao.RoleMapper;
+import com.jcin.cms.modules.syst.dao.RoleResourceMapper;
 import com.jcin.cms.modules.syst.dao.UserRoleMapper;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.RoleCriteria;
+import com.jcin.cms.modules.syst.domain.RoleResource;
+import com.jcin.cms.modules.syst.domain.RoleResourceCriteria;
 import com.jcin.cms.modules.syst.domain.UserRole;
 import com.jcin.cms.modules.syst.domain.UserRoleCriteria;
 import com.jcin.cms.modules.syst.service.IRoleService;
@@ -38,6 +41,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	private RoleMapper roleMapper;
 	@javax.annotation.Resource
 	private UserRoleMapper userRoleMapper;
+	@javax.annotation.Resource
+	private RoleResourceMapper roleResourceMapper;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -197,6 +202,23 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 			UserRole userRole  = userRoles.get(0);
 			userRole.setUserId(newUserId);
 			userRoleMapper.updateByPrimaryKey(userRole);
+		}
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void connectRoleResource(String roleId, List<String> resourceIds) {
+		RoleResourceCriteria roleResourceCriteria = new RoleResourceCriteria();
+		roleResourceCriteria.createCriteria().andRoleIdEqualTo(roleId);
+		roleResourceMapper.deleteByExample(roleResourceCriteria);
+		
+		for (int i = 0; i < resourceIds.size(); i++) {
+			String resourceId = resourceIds.get(i);
+			RoleResource roleResource2 = new RoleResource();
+			roleResource2.setId(UUID.randomUUID().toString());
+			roleResource2.setResourceId(resourceId);
+			roleResource2.setRoleId(roleId);
+			roleResourceMapper.insert(roleResource2);
 		}
 	}
 }

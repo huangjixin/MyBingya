@@ -32,10 +32,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.RoleCriteria;
-import com.jcin.cms.modules.syst.domain.Role;
-import com.jcin.cms.modules.syst.service.IRoleService;
+import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.modules.syst.service.IRoleService;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
@@ -46,6 +46,8 @@ import com.jcin.cms.web.BaseController;
 public class RoleController extends BaseController<Role> {
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private IResourceService resourceService;
 
 	@RequiresPermissions("role:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -180,7 +182,39 @@ public class RoleController extends BaseController<Role> {
 
 		return result;
 	}
-
+	
+	@RequestMapping(value = "/getResourceCheckboxTree")
+	@ResponseBody
+	public List<Resource> getResourceCheckboxTree(@RequestParam(value = "roleId",required=false) String roleId,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		List<Resource>resources= null;
+		if(roleId!=null){
+			resources = resourceService.selectByRoleId(roleId);
+		}
+		List<Resource> list = resourceService.getResourceCheckboxTree(resources);
+		
+		return list;
+	}
+	
+	@RequestMapping(value = "/connectRoleResource")
+	@ResponseBody
+	public void connectRoleResource(@RequestParam(value = "roleId") String roleId,@RequestParam(value = "resourceIds") String resourceIds,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		if(resourceIds==null){
+			resourceIds = "";
+		}
+		
+		String[] ids = resourceIds.split(",");
+		List<String> list = new ArrayList<String>();
+		for (String idstr : ids) {
+			list.add(idstr);
+		}
+		
+		roleService.connectRoleResource(roleId, list);
+	}
+	
 	/**
 	 * 全部导出Excel.
 	 * 
