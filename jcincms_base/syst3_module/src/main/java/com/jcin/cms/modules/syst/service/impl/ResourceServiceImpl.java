@@ -360,10 +360,9 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		List<Resource> list = resourceMapper.selectByExample(resourceExample);
 		List<Resource> children = new ArrayList<Resource>();
 		for (Resource object : list) {
-			Resource jsonObject;
-			
-			jsonObject = searialResource(object, resources);
+			Resource jsonObject = searialResource(object, resources);
 			if(jsonObject!=null){
+				boolean inResources = false;
 				if(null != resources){
 					for (int i = 0; i < resources.size(); i++) {
 						Resource resource = resources.get(i); 
@@ -372,11 +371,15 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 							break;
 						}
 					}
+				}else{
+					jsonObject.setChecked(false);
 				}
-				
+				if(!inResources){
+					jsonObject.setChecked(false);
+				}
 				children.add(jsonObject);
 			}
-
+			
 		}
 		return children;
 	}
@@ -410,6 +413,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		for (Resource object : list) {
 			Resource jsonObject = searialResource(object, resources);
 			if(jsonObject!=null){
+				boolean inResources = false;
 				if(null != resources){
 					for (Resource resource1 : resources) {
 						if(object.getId().equals(resource1.getId())){
@@ -417,8 +421,13 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 							break;
 						}
 					}
+				}else{
+					jsonObject.setChecked(false);
 				}
 				
+				if(!inResources){
+					jsonObject.setChecked(false);
+				}
 				children.add(jsonObject);
 			}
 		}
@@ -434,4 +443,5 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	public List<Resource> selectByOrgId(String orgId) {
 		return resourceMapper.selectByOrgId(orgId);
 	}
+
 }

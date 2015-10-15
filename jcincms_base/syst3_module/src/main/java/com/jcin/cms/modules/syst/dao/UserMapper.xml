@@ -250,4 +250,56 @@
       </if>
     </if>
   </sql>
+  <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	<include refid="OracleDialectPrefix" />
+  	SELECT 
+    	*
+	FROM
+   		tb_user
+        	left join
+    	tb_user_organization ON tb_user.id = tb_user_organization.user_id
+        	left join
+    	tb_organization ON tb_organization.id = tb_user_organization.organization_id
+	where
+    	tb_organization.id = #{orgId,jdbcType=VARCHAR}
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="countByOrgId" resultType="java.lang.Integer" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	SELECT 
+    	count(*)
+	FROM
+   		tb_user
+        	left join
+    	tb_user_organization ON tb_user.id = tb_user_organization.user_id
+        	left join
+    	tb_organization ON tb_organization.id = tb_user_organization.organization_id
+	where
+    	tb_organization.id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	<include refid="OracleDialectPrefix" />
+  	SELECT 
+    	*
+	FROM
+   		tb_user
+        	left join
+    	tb_user_role ON tb_user.id = tb_user_role.user_id
+        	left join
+    	tb_role ON tb_user_role.tb_role_id = tb_role.id
+	where
+    	tb_role.id = #{roleId,jdbcType=VARCHAR}
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="countByRoleId" resultType="java.lang.Integer" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	SELECT 
+    	count(*)
+	FROM
+   		tb_user
+        	left join
+    	tb_user_role ON tb_user.id = tb_user_role.user_id
+        	left join
+    	tb_role ON tb_user_role.tb_role_id = tb_role.id
+	where
+    	tb_role.id = #{roleId,jdbcType=VARCHAR}
+  </select>
 </mapper>

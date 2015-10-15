@@ -96,4 +96,20 @@ public interface UserMapper {
      * @mbggenerated 2015年09月27日 15时41分15秒 星期日
      */
     int updateByPrimaryKey(User record);
+
+    /**
+     * @param userCriteria
+     * @return
+     */
+    List<User> selectByOrgId(UserCriteria userCriteria);
+    
+    /**
+     * @param userCriteria
+     * @return
+     */
+    int countByOrgId(UserCriteria userCriteria);
+
+	List<User> selectByRoleId(UserCriteria userCriteria);
+
+	int countByRoleId(UserCriteria userCriteria);
 }

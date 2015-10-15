@@ -159,7 +159,7 @@
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th id="idFieldTh"
-						data-options="field:'id',align:'center'" width="100%">id</th>
+						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th id="usernameFieldTh"
 						data-options="field:'username',align:'center'" width="100%">用户名</th>
 				</tr>

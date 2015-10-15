@@ -53,8 +53,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	private UserOrganizationMapper userOrganizationMapper;
 	@javax.annotation.Resource
 	private ResourceMapper resourceMapper;
-//	@javax.annotation.Resource
-//	private Userre;
+
+	// @javax.annotation.Resource
+	// private Userre;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -222,14 +223,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		List<Resource> list = resourceMapper.selectByUsername(username);
 		Set<String> set = new HashSet<String>();
 		for (Resource resource : list) {
-			if (null != resource.getAuthName() && !"".equals(resource.getAuthName())) {
+			if (null != resource.getAuthName()
+					&& !"".equals(resource.getAuthName())) {
 				set.add(resource.getAuthName());
 			}
 		}
-		
+
 		list = resourceMapper.selectOnOrgByUsername(username);
 		for (Resource resource : list) {
-			if (null != resource.getAuthName() && !"".equals(resource.getAuthName())) {
+			if (null != resource.getAuthName()
+					&& !"".equals(resource.getAuthName())) {
 				set.add(resource.getAuthName());
 			}
 		}
@@ -241,7 +244,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional(readOnly = false)
 	public void connectUserRole(String userId, String roleId) {
 		UserRole record = new UserRole();
-		record.setId(new Date().getTime()+"");
+		record.setId(new Date().getTime() + "");
 		record.setUserId(userId);
 		record.setTbRoleId(roleId);
 		userRoleMapper.insert(record);
@@ -251,33 +254,35 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional(readOnly = false)
 	public void updateUserRole(String userId, String oldRoleId, String newRoleId) {
 		UserRoleCriteria userRoleCriteria = new UserRoleCriteria();
-		userRoleCriteria.createCriteria().andUserIdEqualTo(userId).andTbRoleIdEqualTo(oldRoleId);
-		List<UserRole>userRoles = userRoleMapper.selectByExample(userRoleCriteria);
-		if(null != userRoles && userRoles.size()>0){//更新
-			UserRole userRole  = userRoles.get(0);
-			if(null != newRoleId){
+		userRoleCriteria.createCriteria().andUserIdEqualTo(userId)
+				.andTbRoleIdEqualTo(oldRoleId);
+		List<UserRole> userRoles = userRoleMapper
+				.selectByExample(userRoleCriteria);
+		if (null != userRoles && userRoles.size() > 0) {// 更新
+			UserRole userRole = userRoles.get(0);
+			if (null != newRoleId) {
 				userRole.setTbRoleId(newRoleId);
 				userRoleMapper.updateByPrimaryKey(userRole);
-			}else{
+			} else {
 				userRoleMapper.deleteByPrimaryKey(userRole.getId());
 			}
-		}else{//新增
-			if((null == oldRoleId || "".equals(oldRoleId)) && null != newRoleId){
-				UserRole userRole  = new UserRole();
-				userRole.setId(new Date().getTime()+"");
+		} else {// 新增
+			if ((null == oldRoleId || "".equals(oldRoleId))
+					&& null != newRoleId) {
+				UserRole userRole = new UserRole();
+				userRole.setId(new Date().getTime() + "");
 				userRole.setUserId(userId);
 				userRole.setTbRoleId(newRoleId);
 				userRoleMapper.insert(userRole);
 			}
-			
+
 		}
 	}
-
 
 	@Override
 	public void connectUserOrganization(String userId, String roleId) {
 		UserOrganization record = new UserOrganization();
-		record.setId(new Date().getTime()+"");
+		record.setId(new Date().getTime() + "");
 		record.setUserId(userId);
 		record.setOrganizationId(roleId);
 		userOrganizationMapper.insert(record);
@@ -286,47 +291,72 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	public void updateUserOrganization(String userId, String oldOrgId,
 			String newOrgId) {
-		if(oldOrgId == null){
-			oldOrgId="";
+		if (oldOrgId == null) {
+			oldOrgId = "";
 		}
 		UserOrganizationCriteria userOrganizationCriteria = new UserOrganizationCriteria();
-		userOrganizationCriteria.createCriteria().andUserIdEqualTo(userId).andOrganizationIdEqualTo(oldOrgId);
-		List<UserOrganization>userOrganizations = userOrganizationMapper.selectByExample(userOrganizationCriteria);
-		if(null != userOrganizations && userOrganizations.size()>0){
-			UserOrganization userOrganization  = userOrganizations.get(0);
-			if(null != newOrgId){
+		userOrganizationCriteria.createCriteria().andUserIdEqualTo(userId)
+				.andOrganizationIdEqualTo(oldOrgId);
+		List<UserOrganization> userOrganizations = userOrganizationMapper
+				.selectByExample(userOrganizationCriteria);
+		if (null != userOrganizations && userOrganizations.size() > 0) {
+			UserOrganization userOrganization = userOrganizations.get(0);
+			if (null != newOrgId) {
 				userOrganization.setOrganizationId(newOrgId);
 				userOrganizationMapper.updateByPrimaryKey(userOrganization);
-			}else{
-				userOrganizationMapper.deleteByPrimaryKey(userOrganization.getId());
+			} else {
+				userOrganizationMapper.deleteByPrimaryKey(userOrganization
+						.getId());
 			}
-		}else{//新增
-			if((null == oldOrgId || "".equals(oldOrgId)) && null != newOrgId){
-				UserOrganization userOrganization  = new UserOrganization();
-				userOrganization.setId(new Date().getTime()+"");
+		} else {// 新增
+			if ((null == oldOrgId || "".equals(oldOrgId)) && null != newOrgId) {
+				UserOrganization userOrganization = new UserOrganization();
+				userOrganization.setId(new Date().getTime() + "");
 				userOrganization.setUserId(userId);
 				userOrganization.setOrganizationId(newOrgId);
 				userOrganizationMapper.insert(userOrganization);
 			}
-			
+
 		}
 	}
-	
+
 	@Override
 	public boolean checkUsernamePassword(String username, String password) {
 		UserCriteria userCriteria = new UserCriteria();
-		userCriteria.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(password);
+		userCriteria.createCriteria().andUsernameEqualTo(username)
+				.andPasswordEqualTo(password);
 		List<User> list = userMapper.selectByExample(userCriteria);
 		return (null != list && list.size() > 0) ? true : false;
 	}
 
 	@Override
 	public boolean updatePassword(User user) {
-//		User user2 = userMapper.selectByPrimaryKey(user.getId());
-//		user2.setPassword(user.getPassword());
+		// User user2 = userMapper.selectByPrimaryKey(user.getId());
+		// user2.setPassword(user.getPassword());
 		userMapper.updateByPrimaryKeySelective(user);
 		return true;
 	}
 
+	@Override
+	public Page getByOrgId(UserCriteria userCriteria) {
+		Page page = new Page();
+		@SuppressWarnings("rawtypes")
+		List list = userMapper.selectByOrgId(userCriteria);
+		page.setRows(list);
+		int total = userMapper.countByOrgId(userCriteria);
+		page.setTotal(total);
+		return page;
+	}
+
+	@Override
+	public Page getByRoleId(UserCriteria userCriteria) {
+		Page page = new Page();
+		
+		List<User> list = userMapper.selectByRoleId(userCriteria);
+		page.setRows(list);
+		int total = userMapper.countByRoleId(userCriteria);
+		page.setTotal(total);
+		return page;
+	}
 
 }

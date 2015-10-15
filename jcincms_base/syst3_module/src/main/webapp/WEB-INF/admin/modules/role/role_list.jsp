@@ -17,66 +17,82 @@
 <script type="text/javascript"
 	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-	$().ready(function() {
-		$('#tgrid').datagrid({     
-			pageSize : 10,
-			pageList : [ 5, 10, 15, 20 ],
-			nowrap : true,
-			striped : true,
-			collapsible : true,
-			url: '${ctxAdmin}/role/select',
-			loadMsg : '数据装载中......',
-			method: 'get',
-			singleSelect : true,
-			selectOnCheck: true,
-			checkOnSelect: true,
-			rownumbers: false,
-			treeField: 'name',
-			showHeader: true,
-			fit:false,
-			fitColumns:true,
-			pagination : true,    
-		    columns:[[     
-		        {field:'ck',checkbox:true},     
-		        {field:'id',align:'center',hidden:true},     
-		        {field:'name',title:'角色名',align:'center',width:100}     
-		    ]],
-		    onClickRow:function (index,row){
-		    	var queryParams = {};
-		    	queryParams.roleId=row.id;
-		    	$('#resourceTree').tree("options").url = '${ctxAdmin}/role/getResourceCheckboxTree?roleId='+row.id;
-// 		    	$('#resourceTree').tree("options").queryParams = queryParams;
-		    	$('#resourceTree').tree('reload');
-		    }
-		}); 
-		
-		
-	    $('#resourceTree').tree({
-	    	url:'${ctxAdmin}/role/getResourceCheckboxTree',
-	    	method:'get',
-	    	animate:true,
-	    	checkbox:true
-	    });
-	});
+	$()
+			.ready(
+					function() {
+						$('#tgrid')
+								.datagrid(
+										{
+											pageSize : 10,
+											pageList : [ 5, 10, 15, 20 ],
+											nowrap : true,
+											striped : true,
+											collapsible : true,
+											url : '${ctxAdmin}/role/select',
+											loadMsg : '数据装载中......',
+											method : 'get',
+											singleSelect : true,
+											selectOnCheck : true,
+											checkOnSelect : true,
+											rownumbers : false,
+											treeField : 'name',
+											showHeader : true,
+											fit : false,
+											fitColumns : true,
+											pagination : true,
+											columns : [ [ {
+												field : 'ck',
+												checkbox : true
+											}, {
+												field : 'id',
+												align : 'center',
+												hidden : true
+											}, {
+												field : 'name',
+												title : '角色名',
+												align : 'center',
+												width : 100
+											} ] ],
+											onClickRow : function(index, row) {
+												var queryParams = {};
+												queryParams.roleId = row.id;
+												$('#resourceTree').tree("options").url = '${ctxAdmin}/role/getResourceCheckboxTree?roleId='+ row.id;
+												// 	$('#resourceTree').tree("options").queryParams = queryParams;
+												$('#resourceTree').tree('reload');
+												
+												$("#usergrid").datagrid("options").url = '${ctxAdmin}/role/getByRoleId?roleId='+ row.id;;
+												$("#usergrid").datagrid("reload");
+												
+											}
+										});
 
-	function connectRoleResource(){
+						$('#resourceTree').tree({
+							url : '${ctxAdmin}/role/getResourceCheckboxTree',
+							method : 'get',
+							animate : true,
+							checkbox : true
+						});
+					});
+
+	function connectRoleResource() {
 		var row = $('#tgrid').datagrid('getSelections');
 		if (row == null || row.length == 0) {
 			return;
 		}
-		
-        var nodes = $('#resourceTree').tree('getChecked');
-        var s = '';
-        for(var i=0; i<nodes.length; i++){
-            if (s != '') s += ',';
-            s += nodes[i].id;
-        }
+
+		var nodes = $('#resourceTree').tree('getChecked');
+		var s = '';
+		for ( var i = 0; i < nodes.length; i++) {
+			if (s != '')
+				s += ',';
+			s += nodes[i].id;
+		}
 
 		var pamameter = {};
 		pamameter.roleId = row[0].id;
 		pamameter.resourceIds = s;
-		
-        $.ajax({
+
+		$.ajax({
 			cache : true,
 			type : "POST",
 			url : '${ctxAdmin}/role/connectRoleResource',
@@ -202,22 +218,44 @@
 			onclick="show();" /><input type="button" id="exportBtn"
 			value="导出excel" onclick="exportExcel()" /> <input type="button"
 			id="importBtn" value="导入excel" onclick="importExcel()" />
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<label>角色名:</label> <input id="nameInput"
-			onkeydown="onKeyEnter(event.keyCode||event.which);">
-		 <input type="button" id="searchBtn" value="搜索"
-			onclick="search();" /> <input type="button" id="clearBtn" value="清除"
-			onclick="clearSearch();" /> 
+		&nbsp;&nbsp;&nbsp;&nbsp; <label>角色名:</label> <input id="nameInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);"> <input
+			type="button" id="searchBtn" value="搜索" onclick="search();" /> <input
+			type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" value="授权" onclick="connectRoleResource();"/>
-		
+		<input type="button" value="授权" onclick="connectRoleResource();" />
+
 	</div>
 	<div data-options="region:'center'" title=""
 		style="padding:1px;background:#ffffff;">
 		<table id="tgrid">
 		</table>
+		<div style="height: 10px;"></div>
+		
+		<table id="usergrid" title="" class="easyui-datagrid"
+			style="height:350px;"
+			data-options="
+								pageSize : 10,
+								pageList : [ 5, 10, 15, 20 ],
+								nowrap : true,
+								striped : true,
+								loadMsg : '数据装载中......',
+								method: 'get',
+								rownumbers: false,
+								showHeader: true,
+								fit:false,
+								fitColumns:true,
+								pagination : true
+							">
+			<thead>
+				<tr>
+					<th id="idFieldTh"
+						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th id="usernameFieldTh"
+						data-options="field:'username',align:'center'" width="100%">用户名</th>
+				</tr>
+			</thead>
+		</table>
 	</div>
-
-
 </body>
 </html>

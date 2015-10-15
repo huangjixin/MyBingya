@@ -43,6 +43,9 @@
 	    	url:'${ctxAdmin}/organization/getOrganizationTree',method:'get',animate:true,checkbox:true,onSelect: function(node){
 	    		$('#resourceTree').tree("options").url = '${ctxAdmin}/organization/getResourceCheckboxTree?organizationId='+node.id;
 		    	$('#resourceTree').tree('reload');
+		    	
+		    	$("#tgrid").datagrid("options").url = '${ctxAdmin}/organization/getByOrgId?organizationId='+node.id;
+				$("#tgrid").datagrid("reload");
 	    	}
 	    });
 	    $('#resourceTree').tree({
@@ -184,6 +187,33 @@
 			<div data-options="region:'west',split:true" title="组织列表"
 				style="width:400px;padding:1px;">
 				<ul id="orgTree"></ul>	
+			</div>
+			<div data-options="region:'east',split:true" title="用户列表"
+				style="width:400px;padding:1px;">
+				<table id="tgrid" title="" class="easyui-datagrid"
+			style="height:350px;"
+			data-options="
+								pageSize : 10,
+								pageList : [ 5, 10, 15, 20 ],
+								nowrap : true,
+								striped : true,
+								loadMsg : '数据装载中......',
+								method: 'get',
+								rownumbers: false,
+								showHeader: true,
+								fit:false,
+								fitColumns:true,
+								pagination : true
+							">
+			<thead>
+				<tr>
+					<th id="idFieldTh"
+						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th id="usernameFieldTh"
+						data-options="field:'username',align:'center'" width="100%">用户名</th>
+				</tr>
+			</thead>
+		</table>	
 			</div>
 		</div>
 	</div>

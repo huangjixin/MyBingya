@@ -7,28 +7,16 @@
 package com.jcin.cms.modules.syst.web;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,21 +28,26 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
+import com.jcin.cms.modules.syst.domain.Resource;
+import com.jcin.cms.modules.syst.domain.UserCriteria;
 import com.jcin.cms.modules.syst.service.IOrganizationService;
 import com.jcin.cms.modules.syst.service.IResourceService;
+import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.utils.Page;
-import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
 @RequestMapping(value = "${adminPath}/organization")
 public class OrganizationController extends BaseController<Organization> {
-	@Resource
+	@Autowired
 	private IOrganizationService organizationService;
-	@Resource
+	@Autowired
 	private IResourceService resourceService;
+	@Autowired
+	private IUserService userService;
 
 	// @RequiresPermissions("organization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -194,17 +187,18 @@ public class OrganizationController extends BaseController<Organization> {
 			@RequestParam(value = "organizationId", required = false) String organizationId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		/*List<com.jcin.cms.modules.syst.domain.Resource> resources = null;
-		if (organizationId != null) {
-			resources = resourceService.selectByOrgId(organizationId);
-		}*/
+		/*
+		 * List<com.jcin.cms.modules.syst.domain.Resource> resources = null; if
+		 * (organizationId != null) { resources =
+		 * resourceService.selectByOrgId(organizationId); }
+		 */
 		List<Organization> list = organizationService.getOrganizationTree(null);
 		return list;
 	}
-	
+
 	@RequestMapping(value = "/getResourceCheckboxTree")
 	@ResponseBody
-	public List<com.jcin.cms.modules.syst.domain.Resource> getResourceCheckboxTree(
+	public List<Resource> getResourceCheckboxTree(
 			@RequestParam(value = "organizationId", required = false) String organizationId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
@@ -212,27 +206,117 @@ public class OrganizationController extends BaseController<Organization> {
 		if (organizationId != null) {
 			resources = resourceService.selectByOrgId(organizationId);
 		}
-		List<com.jcin.cms.modules.syst.domain.Resource> list = resourceService
-				.getResourceCheckboxTree(resources);
+		/*
+		 * List<Resource> list = resourceService
+		 * .getResourceCheckboxTree(resources);
+		 */
+		List<Resource> list = UserUtils.getResource(false);
+		getResourceCheckboxTree(list, resources);
 		return list;
 	}
-	
 
+	private List<Resource> getResourceCheckboxTree(List<Resource> list,
+			List<Resource> resources) {
+		boolean inResources = false;
+		for (Resource object : list) {
+			if (null != resources) {
+				for (int i = 0; i < resources.size(); i++) {
+					Resource resource = resources.get(i);
+					if (object.getId().equals(resource.getId())) {
+						object.setChecked(true);
+						inResources = true;
+						break;
+					}
+				}
+			}
+			if (!inResources) {
+				object.setChecked(false);
+			}
+			searialResource(object, resources);
+		}
+
+		return list;
+	}
+
+	@SuppressWarnings("rawtypes")
+	private void searialResource(Resource resource, List<Resource> resources) {
+		if (resource != null) {
+			if (null != resources) {
+				boolean inResources = false;
+				for (int i = 0; i < resources.size(); i++) {
+					Resource resource1 = resources.get(i);
+					if (resource.getId().equals(resource1.getId())) {
+						resource.setChecked(true);
+						inResources = true;
+						break;
+					}
+				}
+
+				if (!inResources) {
+					resource.setChecked(false);
+				}
+			}
+			List<Resource> list = resource.getChildren();
+			if (null != list && list.size() > 0) {
+				for (Resource resource2 : list) {
+					searialResource(resource2, resources);
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * 根据组织ID查询用户。
+	 * @param page
+	 * @param organizationId
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @return
+	 */
+	@RequestMapping(value = "/getByOrgId")
+	@ResponseBody
+	public Page getByOrgId(@ModelAttribute Page page, @RequestParam(value = "organizationId",required=true) String organizationId,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		super.select(page, uiModel, httpServletRequest, httpServletResponse);
+		UserCriteria userCriteria = new UserCriteria();
+		UserCriteria.Criteria criteria = userCriteria.createCriteria();
+		userCriteria.setPage(page);
+		userCriteria.setOrgId(organizationId);
+		page = userService.getByOrgId(userCriteria);
+		return page;
+	}
+	
+	/**
+	 * 关联组织资源。
+	 * 
+	 * @param organizationId
+	 * @param resourceIds
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/connectOrganizationResource")
 	@ResponseBody
-	public void connectOrganizationResource(@RequestParam(value = "organizationId") String organizationId,@RequestParam(value = "resourceIds") String resourceIds,
+	public void connectOrganizationResource(
+			@RequestParam(value = "organizationId") String organizationId,
+			@RequestParam(value = "resourceIds") String resourceIds,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		if(resourceIds==null){
+		if (resourceIds == null) {
 			resourceIds = "";
 		}
-		
-		String[] ids = resourceIds.split(",");
+
 		List<String> list = new ArrayList<String>();
-		for (String idstr : ids) {
-			list.add(idstr);
+		if(!"".equals(resourceIds)){
+			String[] ids = resourceIds.split(",");
+			for (String idstr : ids) {
+				list.add(idstr);
+			}
 		}
-		
+
 		organizationService.connectOrgResource(organizationId, list);
 	}
 }

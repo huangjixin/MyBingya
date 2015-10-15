@@ -16,13 +16,43 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>organization更新</title>
+<script type="text/javascript">
+	$().ready(function() {
+		createOrganizationTree();
+	});
+
+	function createOrganizationTree(){
+		$('#parentId').combotree({ 	
+				url: '${ctxAdmin}/organization/getOrganizationTree',
+				valuefield : 'id',
+				textfield : 'name',
+				required : false,
+				editable : false,
+				onClick : function(node) {
+					/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+					$('#parentId').val(node.id);*/
+				}, //全部折叠
+				onLoadSuccess : function(node, data) {
+					$('#parentId').combotree('tree').tree("collapseAll");
+					var parId = "${organization.parentId}";
+					if(parId !=""){
+						$('#parentId').combotree("setValue",parId);
+					}
+				}
+			});
+	}
+
+	function clearParentInput(){
+		$('#parentId').combotree('clear');
+	}
+</script>
+<title>组织修改</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/organization/update/${organization.id}" method="post" commandName="organization">
-				<input name="id" value="${organization.id}" type="hidden" />
+		<input name="id" value="${organization.id}" type="hidden" />
 				<div class="desc">
-					<b>organization信息更新</b>&nbsp;&nbsp;<b>${msg}</b>
+					<b>组织信息修改</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -30,26 +60,21 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;name：</th>
+									<th>&nbsp;名称：</th>
 									<td nowrap="nowrap" align="left"><form:input path="name" value="${organization.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;parentId：</th>
-									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${organization.parentId}"/>&nbsp;<form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;parentIds：</th>
-									<td nowrap="nowrap" align="left"><form:input path="parentIds" value="${organization.parentIds}"/>&nbsp;<form:errors path="parentIds" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;available：</th>
-									<td nowrap="nowrap" align="left"><form:input path="available" value="${organization.available}"/>&nbsp;<form:errors path="available" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${organization.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${organization.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;父亲节点：</th>
+									<td nowrap="nowrap" align="left"><input id="parentId" name="parentId"/>&nbsp;<form:errors path="parentId" cssStyle="color:red;"></form:errors>&nbsp; <input type="button" value="清除"
+								onclick="clearParentInput();" /></td>
+									<th>&nbsp;是否可用：</th>
+									<td nowrap="nowrap" align="left"><select  id="available" name="available" style="width:100px;">
+										<c:forEach var="org" items="${fns:getByType('available')}">
+											<option value="${org.value}" <c:if test="${org.value == organization.available}">selected="selected"</c:if>>${org.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="available" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/organization'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/organization'"/></td>
 								</tr>
 							</table>
 						</td>

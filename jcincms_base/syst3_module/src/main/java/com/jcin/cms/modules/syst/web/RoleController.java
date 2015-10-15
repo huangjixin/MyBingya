@@ -32,11 +32,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.domain.RoleCriteria;
+import com.jcin.cms.modules.syst.domain.UserCriteria;
 import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.modules.syst.service.IRoleService;
+import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
@@ -48,6 +51,8 @@ public class RoleController extends BaseController<Role> {
 	private IRoleService roleService;
 	@Autowired
 	private IResourceService resourceService;
+	@Autowired
+	private IUserService userService;
 
 	@RequiresPermissions("role:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -167,6 +172,29 @@ public class RoleController extends BaseController<Role> {
 		return page;
 	}
 
+	/**
+	 * 根据组织ID查询用户。
+	 * @param page
+	 * @param organizationId
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @return
+	 */
+	@RequestMapping(value = "/getByRoleId")
+	@ResponseBody
+	public Page getByOrgId(@ModelAttribute Page page, @RequestParam(value = "roleId",required=true) String roleId,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		super.select(page, uiModel, httpServletRequest, httpServletResponse);
+		UserCriteria userCriteria = new UserCriteria();
+		UserCriteria.Criteria criteria = userCriteria.createCriteria();
+		userCriteria.setPage(page);
+		userCriteria.setRoleId(roleId);
+		page = userService.getByRoleId(userCriteria);
+		return page;
+	}
+	
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -192,9 +220,59 @@ public class RoleController extends BaseController<Role> {
 		if(roleId!=null){
 			resources = resourceService.selectByRoleId(roleId);
 		}
-		List<Resource> list = resourceService.getResourceCheckboxTree(resources);
-		
+//		List<Resource> list = resourceService.getResourceCheckboxTree(resources);
+		List<Resource> list = UserUtils.getResource(false);
+		getResourceCheckboxTree(list, resources);
 		return list;
+	}
+	
+	private List<Resource> getResourceCheckboxTree(List<Resource> list,List<Resource> resources) {
+		boolean inResources = false;
+		for (Resource object : list) {
+			if (null != resources) {
+				for (int i = 0; i < resources.size(); i++) {
+					Resource resource = resources.get(i);
+					if (object.getId().equals(resource.getId())) {
+						object.setChecked(true);
+						inResources = true;
+						break;
+					}
+				}
+			}
+			if (!inResources) {
+				object.setChecked(false);
+			}
+			searialResource(object, resources);
+		}
+
+		return list;
+	}
+
+	@SuppressWarnings("rawtypes")
+	private void searialResource(Resource resource, List<Resource> resources) {
+		if (resource != null) {
+			if (null != resources) {
+				boolean inResources = false;
+				for (int i = 0; i < resources.size(); i++) {
+					Resource resource1 = resources.get(i);
+					if (resource.getId().equals(resource1.getId())) {
+						resource.setChecked(true);
+						inResources = true;
+						break;
+					}
+				}
+
+				if (!inResources) {
+					resource.setChecked(false);
+				}
+			}
+			List<Resource> list = resource.getChildren();
+			if (null != list && list.size() > 0) {
+				for (Resource resource2 : list) {
+					searialResource(resource2, resources);
+				}
+			}
+		}
 	}
 	
 	@RequestMapping(value = "/connectRoleResource")
@@ -206,10 +284,12 @@ public class RoleController extends BaseController<Role> {
 			resourceIds = "";
 		}
 		
-		String[] ids = resourceIds.split(",");
 		List<String> list = new ArrayList<String>();
-		for (String idstr : ids) {
-			list.add(idstr);
+		if(!"".equals(resourceIds)){
+			String[] ids = resourceIds.split(",");
+			for (String idstr : ids) {
+				list.add(idstr);
+			}
 		}
 		
 		roleService.connectRoleResource(roleId, list);

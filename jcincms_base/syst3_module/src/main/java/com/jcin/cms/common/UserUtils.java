@@ -1,6 +1,7 @@
 package com.jcin.cms.common;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -8,8 +9,11 @@ import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
 
 import com.jcin.cms.modules.syst.dao.UserMapper;
+import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.User;
+import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.modules.syst.service.IUserService;
+import com.jcin.cms.modules.syst.service.impl.ResourceServiceImpl;
 import com.jcin.cms.modules.syst.service.impl.UserServiceImpl;
 
 /**
@@ -21,8 +25,11 @@ public class UserUtils {
 	
 	private static UserMapper userDao = SpringUtils.getBean(UserMapper.class);
 	private static IUserService userService = SpringUtils.getBean(UserServiceImpl.class);
+	private static IResourceService resourceService = SpringUtils.getBean(ResourceServiceImpl.class);
 
 	public static final String CACHE_USER = "user";
+	public static final String CACHE_RESOURCE = "resource";
+	
 	public static User getUser(){
 		User user = (User)getCache(CACHE_USER);
 
@@ -57,6 +64,27 @@ public class UserUtils {
 			removeCache(CACHE_USER);
 		}
 		return getUser();
+	}
+	
+	public static List<Resource> getResource(boolean isRefresh){
+		if (isRefresh){
+			removeCache(CACHE_RESOURCE);
+		}
+		return getResource();
+	}
+	
+	/**
+	 * 获取资源列表，实现缓存。
+	 * @return
+	 */
+	public static List<Resource> getResource(){
+		List<Resource> list = (List)getCache(CACHE_RESOURCE);
+
+        if (list == null){
+            list = resourceService.getResourceCheckboxTree(null);
+            putCache(CACHE_RESOURCE, list);
+		}
+		return list;
 	}
 	
 	public static String getUsername(){

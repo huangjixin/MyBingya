@@ -45,6 +45,10 @@ function createResourceTree(){
 function clearParentInput(){
 	$('#organizationId').combotree('clear');
 }
+
+function clearRoleInput(){
+	$('#roleIdSelect').val("");
+}
 </script>
 <title>用户添加</title>
 </head>
@@ -72,16 +76,18 @@ function clearParentInput(){
 							<th>&nbsp;角色组：</th>
 							<td nowrap="nowrap" align="left"><select id="roleIdSelect"
 								name="roleId" style="width: 100px;">
+									<option value="">请选择</option> 
 									<c:if test="${roleList !=null }">
 										<c:forEach var="role" items="${roleList}">
 											<option value="${role.id}" <c:if test="${roleId!=null && roleId==role.id}">selected="selected"</c:if>>${role.name}</option>
 										</c:forEach>
 									</c:if>
-							</select></td>
+							</select>&nbsp; <input type="button" value="清除"
+								onclick="clearRoleInput();" /></td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
-							<th>&nbsp;父亲节点：</th>
+							<th>&nbsp;组织：</th>
 							<td nowrap="nowrap" align="left"><input id="organizationId"
 								name="organizationId">&nbsp; <input type="button" value="清除"
 								onclick="clearParentInput();" /></td>

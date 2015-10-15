@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.ResourceCriteria;
 import com.jcin.cms.modules.syst.domain.Role;
@@ -66,6 +67,7 @@ public class ResourceController extends BaseController<Resource> {
 		resourceService.insert(resource);
 		redirectAttributes.addFlashAttribute("resource", resource);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
+		UserUtils.getResource(true);
 		return "redirect:/" + Global.getAdminPath() + "/resource/create";
 	}
 
@@ -96,6 +98,7 @@ public class ResourceController extends BaseController<Resource> {
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("resource", resource);
+		UserUtils.getResource(true);
 		return "redirect:/" + Global.getAdminPath() + "/resource/update/"
 				+ resource.getId();
 	}
@@ -167,7 +170,7 @@ public class ResourceController extends BaseController<Resource> {
 			list.add(idstr);
 		}
 		int result = resourceService.deleteBatch(list);
-
+		UserUtils.getResource(true);
 		return result;
 	}
 

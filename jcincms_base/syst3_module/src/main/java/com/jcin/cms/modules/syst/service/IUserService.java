@@ -81,4 +81,19 @@ public interface IUserService extends IBaseService<User, String> {
 	 * @return
 	 */
 	boolean updatePassword(User user);
+
+	/** 
+	 * 根据组织ID进行查询并分页。
+	 * @param organizationId
+	 * @param userCriteria
+	 * @return
+	 */
+	Page getByOrgId(UserCriteria userCriteria);
+
+	/** 
+	 * 根据角色Id进行查询并分页。
+	 * @param userCriteria
+	 * @return
+	 */
+	Page getByRoleId(UserCriteria userCriteria);
 }
