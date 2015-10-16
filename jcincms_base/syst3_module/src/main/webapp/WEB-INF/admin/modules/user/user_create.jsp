@@ -73,7 +73,7 @@ function clearRoleInput(){
 							<td nowrap="nowrap" align="left"><form:password
 									path="password" value="${user.password}" />&nbsp;<form:errors
 									path="password" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;角色组：</th>
+							<th>&nbsp;角色：</th>
 							<td nowrap="nowrap" align="left"><select id="roleIdSelect"
 								name="roleId" style="width: 100px;">
 									<option value="">请选择</option> 

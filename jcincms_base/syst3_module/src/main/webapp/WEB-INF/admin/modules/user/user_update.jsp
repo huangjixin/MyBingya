@@ -53,6 +53,10 @@ function createResourceTree(){
 function clearOrgInput(){
 	$('#organizationId').combotree('clear');
 }
+
+function clearRoleInput(){
+	$('#organizationId').combotree('clear');
+}
 </script>
 <title>用户修改</title>
 </head>
@@ -82,12 +86,14 @@ function clearOrgInput(){
 							<th>&nbsp;角色组：</th>
 							<td nowrap="nowrap" align="left"><select id="roleIdSelect"
 								name="roleId" style="width: 100px;">
+									<option value="">请选择</option>
 									<c:if test="${roleList !=null }">
 										<c:forEach var="role" items="${roleList}">
 											<option value="${role.id}" <c:if test="${roleId!=null && roleId==role.id}">selected="selected"</c:if>>${role.name}</option>
 										</c:forEach>
 									</c:if>
-							</select></td>
+							</select>&nbsp; <input type="button" value="清除"
+								onclick="clearRoleInput();" /></td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">

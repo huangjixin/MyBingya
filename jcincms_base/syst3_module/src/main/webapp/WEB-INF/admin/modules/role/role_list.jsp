@@ -154,7 +154,7 @@
 			return;
 		}
 
-		window.location.href = '${ctxAdmin}/role/update/' + row[0].id + '';
+		window.location.href = '${ctxAdmin}/role/update/' + row[0].id;
 	}
 
 	function show() {
