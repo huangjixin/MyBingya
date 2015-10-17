@@ -4,12 +4,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>roleResource管理</title>
+<title>dbBackup管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="RoleResource列表">
+<meta http-equiv="keywords" content="DbBackup列表">
 <meta http-equiv="description" content="管理">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css"/>
@@ -68,7 +68,7 @@
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : '${ctxAdmin}/roleResource/deleteById',
+			url : '${ctxAdmin}/dbBackup/deleteById',
 			data : pamameter,
 			async : false,
 			error : function(request) {
@@ -80,28 +80,6 @@
 		});
 	}
 
-	function create(){
-		window.location.href='${ctxAdmin}/roleResource/create'; 
-	}
-	
-	function update(){
-		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			return;
-		}
-		
-		window.location.href='${ctxAdmin}/roleResource/update/'+row[0].id+''; 
-	}
-		
-	function show(){
-		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			return;
-		}
-		
-		window.location.href='${ctxAdmin}/roleResource/show/'+row[0].id; 
-	}
-	
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -114,14 +92,11 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
+		if ($("nameInput").val() != "") {
+			queryParams.name = $("#nameInput").val();
 		}
-		if ($("roleIdInput").val() != "") {
-			queryParams.roleId = $("#roleIdInput").val();
-		}
-		if ($("resourceIdInput").val() != "") {
-			queryParams.resourceId = $("#resourceIdInput").val();
+		if ($("pathInput").val() != "") {
+			queryParams.path = $("#pathInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -134,9 +109,8 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
-			$("#roleIdInput").val("");
-			$("#resourceIdInput").val("");
+			$("#nameInput").val("");
+			$("#pathInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -148,28 +122,70 @@
 		return result;
 	}
 
-	//导出excel
-	function exportExcel() {
-		window.open('${ctxAdmin}/roleResource/exportExcel');
+	function backup() {
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/dbBackup/backup',
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tgrid").datagrid('reload'); // 重新加载;
+			}
+		});
 	}
 
-	//导入excel
-	function importExcel() {
+	//还原
+	function load() {
+		var pamameter = null;
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		
+		pamameter = {};
+		pamameter.name = row[0].name;
 
+		if (pamameter == null) {
+			return;
+		}
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/dbBackup/load',
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				alert("还原成功");
+			}
+		});
 	}
 </script>
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
+	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
+		<div id="toolBar" style="padding: 5px;border: 0px;">
+			<input type="button"
+				value="删除" onclick="deleteRows();" /> 
+			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
+			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
+			<input type="button" value="备份" onclick="backup()" /> 
+			<input type="button" value="还原" onclick="load()" />
+		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>roleId:</label>
-			<input  id="roleIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>resourceId:</label>
-			<input  id="resourceIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>名称:</label>
+			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>路径:</label>
+			<input  id="pathInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -179,7 +195,7 @@
 								nowrap : true,
 								striped : true,
 								collapsible : true,
-								url: '${ctxAdmin}/roleResource/select',
+								url: '${ctxAdmin}/dbBackup/select',
 								loadMsg : '数据装载中......',
 								method: 'get',
 								singleSelect : false,
@@ -195,15 +211,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center'" width="100%">id</th>
-					<th data-options="field:'roleId',align:'center'" width="100%">roleId</th>
-					<th data-options="field:'resourceId',align:'center'" width="100%">resourceId</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'name',align:'center'" width="100%">名称</th>
+					<th data-options="field:'path',align:'center'" width="100%">路径</th>
+					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 				</tr>
 			</thead>
 		</table>
-
 	</div>
-	<form id="addForm" action="roleResource/new"></form>
-	<form id="updateForm" action="roleResource/edit"></form>
 </body>
 </html>
