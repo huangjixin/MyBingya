@@ -211,9 +211,6 @@
 				</tr>
 			</thead>
 		</table>
-
 	</div>
-	<form id="addForm" action="${objInst}/new"></form>
-	<form id="updateForm" action="${objInst}/edit"></form>
 </body>
 </html>

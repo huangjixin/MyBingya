@@ -54,7 +54,8 @@
 			targetPackage="com.jcin.cms.modules.syst.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="tb_user_organization" domainObjectName="UserOrganization" />
+		<table tableName="tb_db_backup" domainObjectName="DbBackup" />
+<!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->
 		<!-- <table tableName="tb_role_resource" domainObjectName="RoleResource" /> -->
 		<!-- <table tableName="tb_user_organization" domainObjectName="UserOrganization" />
 		<table tableName="tb_organization" domainObjectName="Organization" /> -->
