@@ -213,12 +213,12 @@ public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 		MysqlUtil.load(name);
 	}
 	
-	@Scheduled(fixedRate = 5000)  
+	/*@Scheduled(fixedRate = 5000)  
 	public void doSomething() {   
 		System.out.println("hello,world");
-	}  
+	}*/  
 	
-	@Scheduled(cron = "0 0 2 * * ?")//每天凌晨两点执行  
+	@Scheduled(cron = "0 0 12 * * ?")//每天凌晨两点执行  
     void doSomethingWith(){  
         logger.info("定时任务开始......");  
         long begin = System.currentTimeMillis();  
