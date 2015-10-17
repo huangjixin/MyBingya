@@ -16,11 +16,13 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.UUIDGenerator;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.CustomerContextHolder;
 import com.jcin.cms.utils.Page;
@@ -35,8 +37,6 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	// 实体类类型(由构造方法自动赋值)
 	private Class<T> entityClass;
 
-	public static Logger logger = null;
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public BaseServiceImpl() {
 		this.entityClass = null;
@@ -46,13 +46,11 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 			Type[] p = ((ParameterizedType) t).getActualTypeArguments();
 			this.entityClass = (Class<T>) p[0];
 		}
-
-		logger = Logger.getLogger(entityClass.getName());
 	}
 
 	@Override
 	public int deleteByPrimaryKey(PK id) {
-		CustomerContextHolder.setCustomerType("SLAVE");
+//		CustomerContextHolder.setCustomerType("SLAVE");
 
 		// Operationlog operationlog = new Operationlog();
 		// operationlog.setId(new Date().getTime() + "");
@@ -74,7 +72,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 	@Override
 	@SuppressWarnings("unchecked")
 	public String insert(T record) {
-		CustomerContextHolder.setCustomerType("SLAVE");
+//		CustomerContextHolder.setCustomerType("SLAVE");
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();
 		// Method createDatemethod;
@@ -123,7 +121,7 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public Page select(Page page) {
-		CustomerContextHolder.setCustomerType("MASTER");
+//		CustomerContextHolder.setCustomerType("MASTER");
 		return null;
 	}
 
@@ -135,14 +133,14 @@ public class BaseServiceImpl<T extends Serializable, PK extends Serializable>
 
 	@Override
 	public T selectByPrimaryKey(PK id) {
-		CustomerContextHolder.setCustomerType("MASTER");
+//		CustomerContextHolder.setCustomerType("MASTER");
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public String update(T record) {
-		CustomerContextHolder.setCustomerType("SLAVE");
+//		CustomerContextHolder.setCustomerType("SLAVE");
 
 		@SuppressWarnings("rawtypes")
 		Class clazz = record.getClass();

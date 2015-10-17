@@ -6,12 +6,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class PDF2SwfHelper {
-
+	public static String getOutputFilePath(String inputFilePath) {
+		int dot = inputFilePath.indexOf(".");
+		String str = inputFilePath.substring(dot, inputFilePath.length());
+		String outputFilePath = inputFilePath.replaceAll(str, ".swf");
+		return outputFilePath;
+	}
+	
 	public static void execPdfToSwf(String pdfPath) {
+		String swfPath = getOutputFilePath(pdfPath);
 		String SWFPath = "C:\\Program Files (x86)\\SWFTools";
 		Process process = null;
 		String cmd = "\"" + SWFPath + "\\pdf2swf.exe\" \"" + pdfPath
-				+ "\" -s flashversion=9 \"" + pdfPath + ".swf\"";
+				+ "\" -s flashversion=9 \"" + swfPath + "\"";
 		System.out.println("cmd--->" + cmd);
 
 		try {

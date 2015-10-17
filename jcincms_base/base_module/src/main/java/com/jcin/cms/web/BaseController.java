@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jcin.cms.utils.Page;
 
@@ -90,9 +93,5 @@ public class BaseController<T extends Serializable> {
 	public List<T> selectAll(HttpServletRequest httpServletRequest) {
 		return null;
 	}
-	// public String create(<T extends Serializable>,BindingResult
-	// bindingResult, Model uiModel,
-	// HttpServletRequest httpServletRequest){
-	// return "";
-	// }
+	
 }
