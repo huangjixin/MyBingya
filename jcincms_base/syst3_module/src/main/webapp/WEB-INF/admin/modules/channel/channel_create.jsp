@@ -46,7 +46,7 @@
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/channel/create" method="post" commandName="channel">
-				<div class="desc">
+				<div class="descrition">
 					<b>栏目信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
@@ -77,7 +77,7 @@
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;描述：</th>
-									<td nowrap="nowrap" align="left" colspan="6"><form:textarea path="desc" value="${channel.desc}" style="width:400px;height:100px;"/>&nbsp;<form:errors path="desc" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left" colspan="6"><form:textarea path="descrition" value="${channel.descrition}" style="width:400px;height:100px;"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>

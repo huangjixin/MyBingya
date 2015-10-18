@@ -83,6 +83,12 @@ public class ChannelController extends BaseController<Channel>{
 	public String update(Channel channel,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		if (channel.getId().equals(channel.getParentId())) {
+			redirectAttributes.addFlashAttribute("channel", channel);
+			redirectAttributes.addFlashAttribute("msg", "父亲节点不应该为本身");
+			return "redirect:/" + Global.getAdminPath() + "/channel/update/"
+					+ channel.getId();
+		}
 		channelService.update(channel);
 		
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
@@ -187,8 +193,8 @@ public class ChannelController extends BaseController<Channel>{
 
 	@RequestMapping(value = "/getChannelTree")
 	@ResponseBody
-	public List<Channel> getOrganizationTree(
-			@RequestParam(value = "organizationId", required = false) String organizationId,
+	public List<Channel> getChannelTree(
+			@RequestParam(value = "channelId", required = false) String channelId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		List<Channel> list = channelService.getChannelTree(null);

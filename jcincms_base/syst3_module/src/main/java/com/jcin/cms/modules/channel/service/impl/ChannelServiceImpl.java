@@ -147,6 +147,9 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	@Override
 	@Transactional
 	public String update(Channel record) {
+		if ("".equals(record.getParentId())) {
+			record.setParentId(null);
+		}
 		// super.update(record);
 //		record.setUpdateDate(new Date());
 		int result = channelMapper.updateByPrimaryKeySelective(record);
@@ -162,6 +165,12 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	@Override
 	@Transactional
 	public int insertBatch(List<Channel> list) {
+		for (Channel channel : list) {
+			if ("".equals(channel.getParentId())) {
+				channel.setParentId(null);
+			} 
+		}
+		
 		int result = channelMapper.insertBatch(list);
 		super.insertBatch(list);
 		return result;

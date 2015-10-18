@@ -104,20 +104,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th id="idFieldTh"
-						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th id="nameFieldTh"
-						data-options="field:'name',align:'center'" width="100%">名称</th>
-					<th id="descriptionFieldTh"
-						data-options="field:'description',align:'center'" width="100%">描述</th>
-					<th id="pathFieldTh"
-						data-options="field:'path',align:'center'" width="100%">路径</th>
-					<th id="parentIdFieldTh"
-						data-options="field:'parentId',align:'center'" width="100%">父亲Id</th>
-					<th id="typeFieldTh"
-						data-options="field:'type',align:'center'" width="100%">类型</th>
-					<th id="authNameFieldTh"
-						data-options="field:'authName',align:'center'" width="100%">权限名</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'name',align:'center'" width="100%">名称</th>
+					<th data-options="field:'description',align:'center'" width="100%">描述</th>
+					<th data-options="field:'path',align:'center'" width="100%">路径</th>
+					<th data-options="field:'parentId',align:'center'" width="100%">父亲Id</th>
+					<th data-options="field:'type',align:'center'" width="100%">类型</th>
+					<th data-options="field:'authName',align:'center'" width="100%">权限名</th>
 				</tr>
 			</thead>
 		</table>

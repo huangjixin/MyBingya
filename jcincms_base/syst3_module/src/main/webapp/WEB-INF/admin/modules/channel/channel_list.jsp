@@ -45,7 +45,7 @@
 	function deleteRows(selecedRow) {
 		var pamameter = null;
 		//多行删除。
-		var row = $('#tgrid').datagrid('getSelections');
+		var row = $('#tgrid').treegrid('getSelections');
 		if (row == null || row.length==0) {
 			return;
 		}
@@ -75,7 +75,7 @@
 				alert("连接失败");
 			},
 			success : function(data) {
-				$("#tgrid").datagrid('reload'); // 重新加载;
+				$("#tgrid").treegrid('reload'); // 重新加载;
 			}
 		});
 	}
@@ -101,60 +101,6 @@
 		
 		window.location.href='${ctxAdmin}/channel/show/'+row[0].id; 
 	}
-	
-	//处理事件的函数
-	function onKeyEnter(e) {
-		if (e == 13 || e == 32) {
-			search();
-			e.returnValue = false;
-			//返回false，在没有使用document.loginForm.submit()时可用于取消提交
-		}
-	}
-
-	//搜索
-	function search() {
-		var queryParams = {};
-		
-		if ($("nameInput").val() != "") {
-			queryParams.name = $("#nameInput").val();
-		}
-		if ($("codeInput").val() != "") {
-			queryParams.code = $("#codeInput").val();
-		}
-		if ($("keywordInput").val() != "") {
-			queryParams.keyword = $("#keywordInput").val();
-		}
-		if ($("linkAddrInput").val() != "") {
-			queryParams.linkAddr = $("#linkAddrInput").val();
-		}
-		if ($("openModeInput").val() != "") {
-			queryParams.openMode = $("#openModeInput").val();
-		}
-		if ($("descInput").val() != "") {
-			queryParams.desc = $("#descInput").val();
-		}
-		if ($("parentIdInput").val() != "") {
-			queryParams.parentId = $("#parentIdInput").val();
-		}
-
-		$("#tgrid").datagrid("getPager").pagination({
-			pageNumber : 1
-		});
-
-		$("#tgrid").datagrid("options").queryParams = queryParams;
-		$("#tgrid").datagrid("reload");
-	}
-
-	//清除
-	function clearSearch() {
-			$("#nameInput").val("");
-			$("#codeInput").val("");
-			$("#keywordInput").val("");
-			$("#linkAddrInput").val("");
-			$("#openModeInput").val("");
-			$("#descInput").val("");
-			$("#parentIdInput").val("");
-	}
 
 	//格式化用户状态显示。
 	function formatDate(val, row) {
@@ -165,15 +111,6 @@
 		return result;
 	}
 
-	//导出excel
-	function exportExcel() {
-		window.open('${ctxAdmin}/channel/exportExcel');
-	}
-
-	//导入excel
-	function importExcel() {
-
-	}
 </script>
 </head>
 
@@ -190,62 +127,33 @@
 				value="更新" onclick="update();" /> 
 			<input type="button"
 				value="详情" onclick="show();" /> 
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
 		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>名称:</label>
-			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>编码:</label>
-			<input  id="codeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>关键字:</label>
-			<input  id="keywordInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>链接地址:</label>
-			<input  id="linkAddrInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>打开模式:</label>
-			<input  id="openModeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>描述:</label>
-			<input  id="descInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>弗雷ID:</label>
-			<input  id="parentIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
+		
+		<table id="tgrid" title="" class="easyui-treegrid"
 			style="height:350px;"
 			data-options="
-								pageSize : 10,
-								pageList : [ 5, 10, 15, 20 ],
-								nowrap : true,
-								striped : true,
-								collapsible : true,
-								url: '${ctxAdmin}/channel/select',
-								loadMsg : '数据装载中......',
+								url: '${ctxAdmin}/channel/getChannelTree',
 								method: 'get',
+								rownumbers: false,
+								idField: 'id',
+								treeField: 'name',
+								showHeader: true,
+								lines: true,
 								singleSelect : false,
 								selectOnCheck: true,
 								checkOnSelect: true,
-								rownumbers: false,
-								treeField: 'name',
-								showHeader: true,
-								fit:false,
-								fitColumns:true,
-								pagination : true
+								fitColumns:true
 							">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center'" width="100%">id</th>
-					<th data-options="field:'name',align:'center'" width="100%">name</th>
-					<th data-options="field:'code',align:'center'" width="100%">code</th>
-					<th data-options="field:'keyword',align:'center'" width="100%">keyword</th>
-					<th data-options="field:'linkAddr',align:'center'" width="100%">linkAddr</th>
-					<th data-options="field:'openMode',align:'center'" width="100%">openMode</th>
-					<th data-options="field:'desc',align:'center'" width="100%">desc</th>
-					<th data-options="field:'parentId',align:'center'" width="100%">parentId</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'name',align:'center'" width="100%">名称</th>
+					<th data-options="field:'code',align:'center'" width="100%">编码</th>
+					<th data-options="field:'keyword',align:'center'" width="100%">关键字</th>
+					<th data-options="field:'linkAddr',align:'center'" width="100%">链接地址</th>
+					<th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th>
+					<th data-options="field:'descrition',align:'center'" width="100%">描述</th>
 				</tr>
 			</thead>
 		</table>

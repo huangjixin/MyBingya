@@ -16,13 +16,43 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>channel更新</title>
+<script type="text/javascript">
+	$().ready(function() {
+		createOrganizationTree();
+	});
+
+	function createOrganizationTree(){
+		$('#parentId').combotree({ 	
+				url: '${ctxAdmin}/channel/getChannelTree',
+				valuefield : 'id',
+				textfield : 'name',
+				required : false,
+				editable : false,
+				onClick : function(node) {
+					/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+					$('#parentId').val(node.id);*/
+				}, //全部折叠
+				onLoadSuccess : function(node, data) {
+					$('#parentId').combotree('tree').tree("collapseAll");
+					var parId = "${channel.parentId}";
+					if(parId !=""){
+						$('#parentId').combotree("setValue",parId);
+					}
+				}
+			});
+	}
+
+	function clearParentInput(){
+		$('#parentId').combotree('clear');
+	}
+</script>
+<title>栏目更新</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/channel/update/${channel.id}" method="post" commandName="channel">
 				<input name="id" value="${channel.id}" type="hidden" />
-				<div class="desc">
-					<b>channel信息更新</b>&nbsp;&nbsp;<b>${msg}</b>
+				<div class="descrition">
+					<b>栏目信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -30,26 +60,29 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${channel.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;name：</th>
+									<th>&nbsp;栏目：</th>
+									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${channel.parentId}"/>&nbsp;<input type="button" value="清除"
+								onclick="clearParentInput();" /><form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;名称：</th>
 									<td nowrap="nowrap" align="left"><form:input path="name" value="${channel.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;code：</th>
+									<th>&nbsp;编码：</th>
 									<td nowrap="nowrap" align="left"><form:input path="code" value="${channel.code}"/>&nbsp;<form:errors path="code" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;keyword：</th>
+									<th>&nbsp;关键字：</th>
 									<td nowrap="nowrap" align="left"><form:input path="keyword" value="${channel.keyword}"/>&nbsp;<form:errors path="keyword" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;linkAddr：</th>
+									<th>&nbsp;链接地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="linkAddr" value="${channel.linkAddr}"/>&nbsp;<form:errors path="linkAddr" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;openMode：</th>
-									<td nowrap="nowrap" align="left"><form:input path="openMode" value="${channel.openMode}"/>&nbsp;<form:errors path="openMode" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;新窗口打开：</th>
+									<td nowrap="nowrap" align="left"><select  id="openMode" name="openMode" style="width:100px;">
+										<c:forEach var="mode" items="${fns:getByType('openMode')}">
+											<option value="${mode.value}" <c:if test="${mode.value == channel.openMode}">selected="selected"</c:if>>${mode.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="openMode" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;desc：</th>
-									<td nowrap="nowrap" align="left"><form:input path="desc" value="${channel.desc}"/>&nbsp;<form:errors path="desc" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;parentId：</th>
-									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${channel.parentId}"/>&nbsp;<form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;描述：</th>
+									<td nowrap="nowrap" align="left" colspan="6"><form:textarea path="descrition" value="${channel.descrition}" style="width:400px;height:100px;"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
