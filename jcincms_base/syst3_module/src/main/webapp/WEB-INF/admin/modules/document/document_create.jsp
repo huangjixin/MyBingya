@@ -29,7 +29,7 @@
 	$().ready(function() {
 		createDocumentTree();
 		
-		UE.getEditor('editor').setContent('${document.content}', false);
+		UE.getEditor('editor').setContent('${document.content}');
 	});
 
 	function createDocumentTree(){
@@ -45,7 +45,10 @@
 				}, //全部折叠
 				onLoadSuccess : function(node, data) {
 					$('#channelId').combotree('tree').tree("collapseAll");
-// 					value="${document.channelId}"
+					var cId = "${document.channelId}";
+					if(cId !=""){
+						$('#channelId').combotree("setValue",cId);
+					}
 				}
 			});
 	}
