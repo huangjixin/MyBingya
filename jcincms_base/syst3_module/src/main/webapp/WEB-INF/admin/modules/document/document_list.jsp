@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>document管理</title>
+<title>文档管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -114,50 +114,11 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
-		if ($("channelIdInput").val() != "") {
-			queryParams.channelId = $("#channelIdInput").val();
-		}
 		if ($("titleInput").val() != "") {
 			queryParams.title = $("#titleInput").val();
 		}
-		if ($("colorInput").val() != "") {
-			queryParams.color = $("#colorInput").val();
-		}
-		if ($("keywordInput").val() != "") {
-			queryParams.keyword = $("#keywordInput").val();
-		}
-		if ($("descInput").val() != "") {
-			queryParams.desc = $("#descInput").val();
-		}
-		if ($("priorityInput").val() != "") {
-			queryParams.priority = $("#priorityInput").val();
-		}
-		if ($("sourceInput").val() != "") {
-			queryParams.source = $("#sourceInput").val();
-		}
-		if ($("sourceAddrInput").val() != "") {
-			queryParams.sourceAddr = $("#sourceAddrInput").val();
-		}
 		if ($("authorInput").val() != "") {
 			queryParams.author = $("#authorInput").val();
-		}
-		if ($("titleImageInput").val() != "") {
-			queryParams.titleImage = $("#titleImageInput").val();
-		}
-		if ($("fileNameInput").val() != "") {
-			queryParams.fileName = $("#fileNameInput").val();
-		}
-		if ($("fileAddrInput").val() != "") {
-			queryParams.fileAddr = $("#fileAddrInput").val();
-		}
-		if ($("sizeInput").val() != "") {
-			queryParams.size = $("#sizeInput").val();
-		}
-		if ($("contentInput").val() != "") {
-			queryParams.content = $("#contentInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -170,21 +131,8 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
-			$("#channelIdInput").val("");
 			$("#titleInput").val("");
-			$("#colorInput").val("");
-			$("#keywordInput").val("");
-			$("#descInput").val("");
-			$("#priorityInput").val("");
-			$("#sourceInput").val("");
-			$("#sourceAddrInput").val("");
 			$("#authorInput").val("");
-			$("#titleImageInput").val("");
-			$("#fileNameInput").val("");
-			$("#fileAddrInput").val("");
-			$("#sizeInput").val("");
-			$("#contentInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -228,36 +176,10 @@
 				value="导入excel" onclick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>channelId:</label>
-			<input  id="channelIdInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>title:</label>
+			<label>标题:</label>
 			<input  id="titleInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>color:</label>
-			<input  id="colorInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>keyword:</label>
-			<input  id="keywordInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>desc:</label>
-			<input  id="descInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>priority:</label>
-			<input  id="priorityInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>source:</label>
-			<input  id="sourceInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>sourceAddr:</label>
-			<input  id="sourceAddrInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>author:</label>
+			<label>作者:</label>
 			<input  id="authorInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>titleImage:</label>
-			<input  id="titleImageInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>fileName:</label>
-			<input  id="fileNameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>fileAddr:</label>
-			<input  id="fileAddrInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>size:</label>
-			<input  id="sizeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>content:</label>
-			<input  id="contentInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -283,21 +205,11 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center'" width="100%">id</th>
-					<th data-options="field:'channelId',align:'center'" width="100%">channelId</th>
-					<th data-options="field:'title',align:'center'" width="100%">title</th>
-					<th data-options="field:'color',align:'center'" width="100%">color</th>
-					<th data-options="field:'keyword',align:'center'" width="100%">keyword</th>
-					<th data-options="field:'desc',align:'center'" width="100%">desc</th>
-					<th data-options="field:'priority',align:'center'" width="100%">priority</th>
-					<th data-options="field:'source',align:'center'" width="100%">source</th>
-					<th data-options="field:'sourceAddr',align:'center'" width="100%">sourceAddr</th>
-					<th data-options="field:'author',align:'center'" width="100%">author</th>
-					<th data-options="field:'titleImage',align:'center'" width="100%">titleImage</th>
-					<th data-options="field:'fileName',align:'center'" width="100%">fileName</th>
-					<th data-options="field:'fileAddr',align:'center'" width="100%">fileAddr</th>
-					<th data-options="field:'size',align:'center'" width="100%">size</th>
-					<th data-options="field:'content',align:'center'" width="100%">content</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'channelId',align:'center',hidden:true" width="100%">channelId</th>
+					<th data-options="field:'title',align:'center'" width="100%">标题</th>
+					<th data-options="field:'priority',align:'center'" width="100%">优先级</th>
+					<th data-options="field:'author',align:'center'" width="100%">作者</th>
 				</tr>
 			</thead>
 		</table>

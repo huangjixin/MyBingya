@@ -63,7 +63,7 @@ public class ResourceController extends BaseController<Resource> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-
+		
 		resourceService.insert(resource);
 		redirectAttributes.addFlashAttribute("resource", resource);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");

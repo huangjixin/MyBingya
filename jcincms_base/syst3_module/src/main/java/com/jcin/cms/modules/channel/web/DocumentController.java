@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,11 +36,13 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
+import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
-import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
+import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -49,6 +50,8 @@ import com.jcin.cms.web.BaseController;
 public class DocumentController extends BaseController<Document>{
 	@Resource
 	private IDocumentService documentService;
+	@Resource
+	private IChannelService channelService;
 
 //	@RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -59,9 +62,18 @@ public class DocumentController extends BaseController<Document>{
 
 //	@RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(Document document, RedirectAttributes redirectAttributes,
+	public String create(@Valid Document document, BindingResult bindingResult, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		if(bindingResult.hasErrors()){
+			 populateEditForm(uiModel, document);
+	         return "admin/modules/document/document_create";
+		}
+		if("".equals(document.getChannelId())){
+			populateEditForm(uiModel, document);
+			uiModel.addAttribute("msg", "请选中栏目");
+			return "admin/modules/document/document_create";
+		}
 		documentService.insert(document);
 		
 		redirectAttributes.addFlashAttribute("document", document);
@@ -129,6 +141,14 @@ public class DocumentController extends BaseController<Document>{
 		return pathSegment;
 	}
 
+	@RequestMapping(value = "/getChannelTree")
+	@ResponseBody
+	public List<Channel> getChannelTree(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		List<Channel> list = channelService.getChannelTree(null);
+		return list;
+	}
+	
 //	@RequiresPermissions("document:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
@@ -156,8 +176,8 @@ public class DocumentController extends BaseController<Document>{
 		if (null != document.getKeyword()  && !"".equals(document.getKeyword())) {
 		  	criteria.andKeywordLike("%" + document.getKeyword() + "%");
 		}
-		if (null != document.getDesc()  && !"".equals(document.getDesc())) {
-		  	criteria.andDescLike("%" + document.getDesc() + "%");
+		if (null != document.getDescrition()  && !"".equals(document.getDescrition())) {
+		  	criteria.andDescritionLike("%" + document.getDescrition() + "%");
 		}
 		if (null != document.getPriority()  && !"".equals(document.getPriority())) {
 		  	criteria.andPriorityEqualTo(document.getPriority());
@@ -243,7 +263,7 @@ public class DocumentController extends BaseController<Document>{
 			"Title",
 			"Color",
 			"Keyword",
-			"Desc",
+			"getDescrition",
 			"Priority",
 			"Source",
 			"SourceAddr",
@@ -281,7 +301,7 @@ public class DocumentController extends BaseController<Document>{
 				mapValue.put("Title",document.getTitle());
 				mapValue.put("Color",document.getColor());
 				mapValue.put("Keyword",document.getKeyword());
-				mapValue.put("Desc",document.getDesc());
+				mapValue.put("getDescrition",document.getDescrition());
 				mapValue.put("Priority",document.getPriority());
 				mapValue.put("Source",document.getSource());
 				mapValue.put("SourceAddr",document.getSourceAddr());

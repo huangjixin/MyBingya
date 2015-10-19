@@ -13,15 +13,51 @@
 </style>
 <script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${ctx}/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${ctx}/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="${ctx}/ueditor/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>document添加</title>
+<script type="text/javascript">
+	//实例化编辑器
+	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	var ue = UE.getEditor('editor');
+
+	$().ready(function() {
+		createDocumentTree();
+	});
+
+	function createDocumentTree(){
+		$('#channelId').combotree({ 	
+				url: '${ctxAdmin}/document/getChannelTree',
+				valuefield : 'id',
+				textfield : 'name',
+				required : false,
+				editable : false,
+				onClick : function(node) {
+					/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+					$('#parentId').val(node.id);*/
+				}, //全部折叠
+				onLoadSuccess : function(node, data) {
+					$('#channelId').combotree('tree').tree("collapseAll");
+// 					value="${document.channelId}"
+				}
+			});
+	}
+
+	function clearParentInput(){
+		$('#channelId').combotree('clear');
+	}
+</script>
+<title>文档添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/document/create" method="post" commandName="document">
 				<div class="desc">
-					<b>document信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+					<b>文档信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -29,43 +65,41 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${document.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;channelId：</th>
-									<td nowrap="nowrap" align="left"><form:input path="channelId" value="${document.channelId}"/>&nbsp;<form:errors path="channelId" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;title：</th>
+									<th>&nbsp;栏目：</th>
+									<td nowrap="nowrap" align="left"><input id="channelId" />&nbsp;<form:errors path="channelId" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;标题：</th>
 									<td nowrap="nowrap" align="left"><form:input path="title" value="${document.title}"/>&nbsp;<form:errors path="title" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;color：</th>
+									<th>&nbsp;颜色：</th>
 									<td nowrap="nowrap" align="left"><form:input path="color" value="${document.color}"/>&nbsp;<form:errors path="color" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;keyword：</th>
+									<th>&nbsp;关键字：</th>
 									<td nowrap="nowrap" align="left"><form:input path="keyword" value="${document.keyword}"/>&nbsp;<form:errors path="keyword" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;desc：</th>
-									<td nowrap="nowrap" align="left"><form:input path="desc" value="${document.desc}"/>&nbsp;<form:errors path="desc" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;描述：</th>
+									<td nowrap="nowrap" align="left"><form:input path="descrition" value="${document.descrition}"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;priority：</th>
+									<th>&nbsp;优先级：</th>
 									<td nowrap="nowrap" align="left"><form:input path="priority" value="${document.priority}"/>&nbsp;<form:errors path="priority" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;source：</th>
+									<th>&nbsp;来源：</th>
 									<td nowrap="nowrap" align="left"><form:input path="source" value="${document.source}"/>&nbsp;<form:errors path="source" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;sourceAddr：</th>
+									<th>&nbsp;来源地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="sourceAddr" value="${document.sourceAddr}"/>&nbsp;<form:errors path="sourceAddr" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;author：</th>
+									<th>&nbsp;作者：</th>
 									<td nowrap="nowrap" align="left"><form:input path="author" value="${document.author}"/>&nbsp;<form:errors path="author" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;titleImage：</th>
+									<th>&nbsp;标题图片：</th>
 									<td nowrap="nowrap" align="left"><form:input path="titleImage" value="${document.titleImage}"/>&nbsp;<form:errors path="titleImage" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;fileName：</th>
+									<th>&nbsp;文件名：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;fileAddr：</th>
+									<th>&nbsp;文件地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileAddr" value="${document.fileAddr}"/>&nbsp;<form:errors path="fileAddr" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;size：</th>
+									<th>&nbsp;大小：</th>
 									<td nowrap="nowrap" align="left"><form:input path="size" value="${document.size}"/>&nbsp;<form:errors path="size" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;content：</th>
+									<th>&nbsp;内容：</th>
 									<td nowrap="nowrap" align="left"><form:input path="content" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
@@ -76,6 +110,10 @@
 						</td>
 					</tr>
 				</table>	
+				<div>
+					<b>正文</b>
+				    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+				</div>
 		</form:form>		
 </body>
 </html>

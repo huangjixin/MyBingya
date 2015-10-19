@@ -7,7 +7,7 @@
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="color" property="color" jdbcType="VARCHAR" />
     <result column="keyword" property="keyword" jdbcType="VARCHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
     <result column="priority" property="priority" jdbcType="INTEGER" />
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="source_addr" property="sourceAddr" jdbcType="VARCHAR" />
@@ -79,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, channel_id, title, color, keyword, desc, priority, source, source_addr, author, 
-    title_image, file_name, file_addr, size
+    id, channel_id, title, color, keyword, descrition, priority, source, source_addr, 
+    author, title_image, file_name, file_addr, size
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -137,13 +137,13 @@
   </delete>
   <insert id="insert" parameterType="com.jcin.cms.modules.channel.domain.Document" >
     insert into busi_document (id, channel_id, title, 
-      color, keyword, desc, 
+      color, keyword, descrition, 
       priority, source, source_addr, 
       author, title_image, file_name, 
       file_addr, size, content
       )
     values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
       #{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{sourceAddr,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
       #{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}
@@ -167,8 +167,8 @@
       <if test="keyword != null" >
         keyword,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="descrition != null" >
+        descrition,
       </if>
       <if test="priority != null" >
         priority,
@@ -214,8 +214,8 @@
       <if test="keyword != null" >
         #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
       </if>
       <if test="priority != null" >
         #{priority,jdbcType=INTEGER},
@@ -270,8 +270,8 @@
       <if test="record.keyword != null" >
         keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
-      <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=VARCHAR},
+      <if test="record.descrition != null" >
+        descrition = #{record.descrition,jdbcType=VARCHAR},
       </if>
       <if test="record.priority != null" >
         priority = #{record.priority,jdbcType=INTEGER},
@@ -312,7 +312,7 @@
       title = #{record.title,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=VARCHAR},
       keyword = #{record.keyword,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
       priority = #{record.priority,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
@@ -333,7 +333,7 @@
       title = #{record.title,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=VARCHAR},
       keyword = #{record.keyword,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
       priority = #{record.priority,jdbcType=INTEGER},
       source = #{record.source,jdbcType=VARCHAR},
       source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
@@ -361,8 +361,8 @@
       <if test="keyword != null" >
         keyword = #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
       </if>
       <if test="priority != null" >
         priority = #{priority,jdbcType=INTEGER},
@@ -400,7 +400,7 @@
       title = #{title,jdbcType=VARCHAR},
       color = #{color,jdbcType=VARCHAR},
       keyword = #{keyword,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
       priority = #{priority,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       source_addr = #{sourceAddr,jdbcType=VARCHAR},
@@ -418,7 +418,7 @@
       title = #{title,jdbcType=VARCHAR},
       color = #{color,jdbcType=VARCHAR},
       keyword = #{keyword,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
       priority = #{priority,jdbcType=INTEGER},
       source = #{source,jdbcType=VARCHAR},
       source_addr = #{sourceAddr,jdbcType=VARCHAR},
@@ -430,9 +430,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_document (id, channel_id, title, color, keyword, desc, priority, source, source_addr, author, title_image, file_name, file_addr, size, content) values 
+    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, content) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.desc,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=LONGVARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
