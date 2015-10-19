@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +71,7 @@ public class DocumentController extends BaseController<Document>{
 			 populateEditForm(uiModel, document);
 	         return "admin/modules/document/document_create";
 		}
-		if("".equals(document.getChannelId())){
+		if("".equals(document.getChannelId()) && null ==document.getChannelId()){
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
 			return "admin/modules/document/document_create";

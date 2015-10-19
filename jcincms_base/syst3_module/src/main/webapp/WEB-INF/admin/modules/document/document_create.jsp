@@ -28,6 +28,8 @@
 
 	$().ready(function() {
 		createDocumentTree();
+		
+		UE.getEditor('editor').setContent('${document.content}', false);
 	});
 
 	function createDocumentTree(){
@@ -51,6 +53,12 @@
 	function clearParentInput(){
 		$('#channelId').combotree('clear');
 	}
+	
+	function submitForm(){
+		var cont = ue.getContent();
+		$('#content').val(cont);
+		$('#validForm').submit();
+	}
 </script>
 <title>文档添加</title>
 </head>
@@ -66,18 +74,24 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;栏目：</th>
-									<td nowrap="nowrap" align="left"><input id="channelId" />&nbsp;<form:errors path="channelId" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><input id="channelId" name="channelId"/>&nbsp;<form:errors path="channelId" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;标题：</th>
 									<td nowrap="nowrap" align="left"><form:input path="title" value="${document.title}"/>&nbsp;<form:errors path="title" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;</th>
+									<td nowrap="nowrap" align="left"></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;颜色：</th>
 									<td nowrap="nowrap" align="left"><form:input path="color" value="${document.color}"/>&nbsp;<form:errors path="color" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;关键字：</th>
 									<td nowrap="nowrap" align="left"><form:input path="keyword" value="${document.keyword}"/>&nbsp;<form:errors path="keyword" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;描述：</th>
-									<td nowrap="nowrap" align="left"><form:input path="descrition" value="${document.descrition}"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;</th>
+									<td nowrap="nowrap" align="left"></td>
 								</tr>
+								<%-- <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+									<th style="width: 150px;">&nbsp;描述：</th>
+									<td  style="text-align: left;" colspan="6"><textarea name="descrition" value="${document.descrition}"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
+								</tr> --%>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;优先级：</th>
 									<td nowrap="nowrap" align="left"><form:input path="priority" value="${document.priority}"/>&nbsp;<form:errors path="priority" cssStyle="color:red;"></form:errors></td>
@@ -100,11 +114,11 @@
 									<th>&nbsp;大小：</th>
 									<td nowrap="nowrap" align="left"><form:input path="size" value="${document.size}"/>&nbsp;<form:errors path="size" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;内容：</th>
-									<td nowrap="nowrap" align="left"><form:input path="content" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/document'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="button" value="保存" onclick="submitForm();"/>&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/document'"/></td>
 								</tr>
 							</table>
 						</td>
