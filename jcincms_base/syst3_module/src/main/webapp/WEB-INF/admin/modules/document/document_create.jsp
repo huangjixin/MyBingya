@@ -28,10 +28,13 @@
 
 	$().ready(function() {
 		createDocumentTree();
-		
-		UE.getEditor('editor').setContent('${document.content}');
+		ue.addListener("ready", function () {
+	        // editor准备好之后才可以使用
+	        ue.setContent('${document.content}');
+	 });
 	});
 
+	//创建文档树。
 	function createDocumentTree(){
 		$('#channelId').combotree({ 	
 				url: '${ctxAdmin}/document/getChannelTree',
@@ -80,8 +83,8 @@
 									<td nowrap="nowrap" align="left"><input id="channelId" name="channelId"/>&nbsp;<form:errors path="channelId" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;标题：</th>
 									<td nowrap="nowrap" align="left"><form:input path="title" value="${document.title}"/>&nbsp;<form:errors path="title" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;</th>
-									<td nowrap="nowrap" align="left"></td>
+									<th>&nbsp;作者：</th>
+									<td nowrap="nowrap" align="left"><form:input path="author" value="${document.author}"/>&nbsp;<form:errors path="author" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;颜色：</th>
@@ -104,19 +107,19 @@
 									<td nowrap="nowrap" align="left"><form:input path="sourceAddr" value="${document.sourceAddr}"/>&nbsp;<form:errors path="sourceAddr" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;作者：</th>
-									<td nowrap="nowrap" align="left"><form:input path="author" value="${document.author}"/>&nbsp;<form:errors path="author" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;标题图片：</th>
 									<td nowrap="nowrap" align="left"><form:input path="titleImage" value="${document.titleImage}"/>&nbsp;<form:errors path="titleImage" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;文件名：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;</th>
+									<td nowrap="nowrap" align="left"></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;文件地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileAddr" value="${document.fileAddr}"/>&nbsp;<form:errors path="fileAddr" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;大小：</th>
 									<td nowrap="nowrap" align="left"><form:input path="size" value="${document.size}"/>&nbsp;<form:errors path="size" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;内容：</th>
+									<th>&nbsp;：</th>
 									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">

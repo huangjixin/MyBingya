@@ -41,6 +41,15 @@
 	function clearParentInput(){
 		$('#parentId').combotree('clear');
 	}
+	
+	function clearForm(){
+		$('#parentId').combotree('clear');
+		$('#name').val("");
+		$('#code').val("");
+		$('#keyword').val("");
+		$('#linkAddr').val("");
+		$('#descrition').val("");
+	}
 </script>
 <title>栏目添加</title>
 </head>
@@ -59,15 +68,15 @@
 									<td nowrap="nowrap" align="left"><form:input path="parentId" value="${channel.parentId}"/>&nbsp;<input type="button" value="清除"
 								onclick="clearParentInput();" /><form:errors path="parentId" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;名称：</th>
-									<td nowrap="nowrap" align="left"><form:input path="name" value="${channel.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="name" path="name" value="${channel.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;编码：</th>
-									<td nowrap="nowrap" align="left"><form:input path="code" value="${channel.code}"/>&nbsp;<form:errors path="code" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input  id="code" path="code" value="${channel.code}"/>&nbsp;<form:errors path="code" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;关键字：</th>
-									<td nowrap="nowrap" align="left"><form:input path="keyword" value="${channel.keyword}"/>&nbsp;<form:errors path="keyword" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="keyword" path="keyword" value="${channel.keyword}"/>&nbsp;<form:errors path="keyword" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;链接地址：</th>
-									<td nowrap="nowrap" align="left"><form:input path="linkAddr" value="${channel.linkAddr}"/>&nbsp;<form:errors path="linkAddr" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="linkAddr" path="linkAddr" value="${channel.linkAddr}"/>&nbsp;<form:errors path="linkAddr" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;新窗口打开：</th>
 									<td nowrap="nowrap" align="left"><select  id="openMode" name="openMode" style="width:100px;">
 										<c:forEach var="mode" items="${fns:getByType('openMode')}">
@@ -77,11 +86,11 @@
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;描述：</th>
-									<td nowrap="nowrap" align="left" colspan="6"><form:textarea path="descrition" value="${channel.descrition}" style="width:400px;height:100px;"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left" colspan="6"><form:textarea id="descrition" path="descrition" value="${channel.descrition}" style="width:400px;height:100px;"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/channel'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="清空" onclick="clearForm();" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/channel'"/></td>
 								</tr>
 							</table>
 						</td>

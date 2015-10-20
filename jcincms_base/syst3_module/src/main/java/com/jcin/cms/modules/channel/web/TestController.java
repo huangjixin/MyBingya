@@ -4,7 +4,7 @@
  * @date 2015-4-29,10:52 <br/>
  *
  */
-package com.jcin.cms.modules.syst.web;
+package com.jcin.cms.modules.channel.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -37,9 +37,9 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
-import com.jcin.cms.modules.syst.domain.Test;
-import com.jcin.cms.modules.syst.domain.TestCriteria;
-import com.jcin.cms.modules.syst.service.ITestService;
+import com.jcin.cms.modules.channel.domain.Test;
+import com.jcin.cms.modules.channel.domain.TestCriteria;
+import com.jcin.cms.modules.channel.service.ITestService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
@@ -50,12 +50,14 @@ public class TestController extends BaseController<Test>{
 	@Resource
 	private ITestService testService;
 
+//	@RequiresPermissions("test:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Test test, Model uiModel) {
 		uiModel.addAttribute("test", test);
 		return "admin/modules/test/test_create";
 	}
 
+//	@RequiresPermissions("test:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Test test, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -67,6 +69,7 @@ public class TestController extends BaseController<Test>{
 		return "redirect:/"+Global.getAdminPath()+"/test/create";
 	}
 	
+//	@RequiresPermissions("test:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Test test = testService.selectByPrimaryKey(id);
@@ -74,8 +77,9 @@ public class TestController extends BaseController<Test>{
 		return "admin/modules/test/test_update";
 	}
 
+//	@RequiresPermissions("test:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(Test test ,RedirectAttributes redirectAttributes,
+	public String update(Test test,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		testService.update(test);
@@ -85,6 +89,7 @@ public class TestController extends BaseController<Test>{
 		return "redirect:/"+Global.getAdminPath()+"/test/update/"+test.getId();
 	}
 
+//	@RequiresPermissions("test:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Test test = testService.selectByPrimaryKey(id);
@@ -93,11 +98,13 @@ public class TestController extends BaseController<Test>{
 		return "admin/modules/test/test_show";
 	}
 
+//	@RequiresPermissions("test:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/test/test_list";
 	}
 
+//	@RequiresPermissions("test:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		testService.deleteByPrimaryKey(id);
@@ -122,6 +129,7 @@ public class TestController extends BaseController<Test>{
 		return pathSegment;
 	}
 
+//	@RequiresPermissions("test:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute Test test,Model uiModel,
@@ -139,11 +147,11 @@ public class TestController extends BaseController<Test>{
 		if (null != test.getName()  && !"".equals(test.getName())) {
 		  	criteria.andNameLike("%" + test.getName() + "%");
 		}
-		
 		page = testService.select(testCriteria);
 		return page;
 	}
 	
+//	@RequiresPermissions("test:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -167,6 +175,7 @@ public class TestController extends BaseController<Test>{
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
+//	@RequiresPermissions("test:view")
 	@RequestMapping(value = "/exportExcel")
 	public void exportExcel(@ModelAttribute Test test,
 			HttpServletRequest httpServletRequest,

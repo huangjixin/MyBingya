@@ -224,9 +224,6 @@
 				</tr>
 			</thead>
 		</table>
-
 	</div>
-	<form id="addForm" action="test/new"></form>
-	<form id="updateForm" action="test/edit"></form>
 </body>
 </html>

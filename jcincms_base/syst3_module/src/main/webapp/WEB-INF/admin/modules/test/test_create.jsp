@@ -16,12 +16,24 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
-<title>test更新</title>
+<script type="text/javascript">
+	$().ready(function() {
+		
+	});
+
+	function clearForm(){
+		$('#id').val("");
+		$('#name').val("");
+		$('#createDate').val("");
+		$('#updateDate').val("");
+	}
+</script>
+<title>test添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/test/create" method="post" commandName="test">
 				<div class="desc">
-					<b>test信息更新</b>
+					<b>test信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
@@ -30,19 +42,19 @@
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${test.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="id" path="id" value="${test.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;name：</th>
-									<td nowrap="nowrap" align="left"><form:input path="name" value="${test.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="name" path="name" value="${test.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;createDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="createDate" value="${test.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="createDate" path="createDate" value="${test.createDate}"/>&nbsp;<form:errors path="createDate" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;updateDate：</th>
-									<td nowrap="nowrap" align="left"><form:input path="updateDate" value="${test.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="updateDate" path="updateDate" value="${test.updateDate}"/>&nbsp;<form:errors path="updateDate" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/test'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="清空" onclick="clearForm();" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/test'"/></td>
 								</tr>
 							</table>
 						</td>

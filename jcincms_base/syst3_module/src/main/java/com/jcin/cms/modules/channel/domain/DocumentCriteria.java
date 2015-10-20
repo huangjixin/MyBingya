@@ -8,42 +8,42 @@ public class DocumentCriteria {
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public DocumentCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -52,7 +52,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -61,7 +61,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -70,7 +70,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -79,7 +79,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public boolean isDistinct() {
         return distinct;
@@ -88,7 +88,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -97,7 +97,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -106,7 +106,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -117,7 +117,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -130,7 +130,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -140,7 +140,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void clear() {
         oredCriteria.clear();
@@ -151,7 +151,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setPage(Page page) {
         this.page=page;
@@ -160,7 +160,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public Page getPage() {
         return page;
@@ -169,7 +169,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -178,7 +178,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1254,7 +1254,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2015年10月20日 11时49分45秒 星期二
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1266,7 +1266,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public static class Criterion {
         private String condition;

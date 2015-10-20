@@ -8,112 +8,112 @@ public class Document implements Serializable {
     /**
      *   所属表字段为busi_document.id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String id;
 
     /**
      *   所属表字段为busi_document.channel_id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String channelId;
 
     /**
      *  标题 所属表字段为busi_document.title
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String title;
 
     /**
      *  颜色 所属表字段为busi_document.color
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String color;
 
     /**
      *  关键词 所属表字段为busi_document.keyword
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String keyword;
 
     /**
      *  描述 所属表字段为busi_document.descrition
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String descrition;
 
     /**
      *  优先级 所属表字段为busi_document.priority
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private Integer priority;
 
     /**
      *  来源 所属表字段为busi_document.source
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String source;
 
     /**
      *  来源地址 所属表字段为busi_document.source_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String sourceAddr;
 
     /**
      *  作者 所属表字段为busi_document.author
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String author;
 
     /**
      *  标题图片 所属表字段为busi_document.title_image
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String titleImage;
 
     /**
      *   所属表字段为busi_document.file_name
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String fileName;
 
     /**
      *   所属表字段为busi_document.file_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String fileAddr;
 
     /**
      *  文件大小 所属表字段为busi_document.size
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private Long size;
 
     /**
      *  内容 所属表字段为busi_document.content
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private String content;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     private static final long serialVersionUID = 1L;
 
@@ -122,7 +122,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getId() {
         return id;
@@ -133,7 +133,7 @@ public class Document implements Serializable {
      *
      * @param id 赋值 busi_document.id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -144,7 +144,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.channel_id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getChannelId() {
         return channelId;
@@ -155,7 +155,7 @@ public class Document implements Serializable {
      *
      * @param channelId 赋值 busi_document.channel_id
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setChannelId(String channelId) {
         this.channelId = channelId == null ? null : channelId.trim();
@@ -166,7 +166,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.title
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getTitle() {
         return title;
@@ -177,7 +177,7 @@ public class Document implements Serializable {
      *
      * @param title 赋值 busi_document.title
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
@@ -188,7 +188,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.color
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getColor() {
         return color;
@@ -199,7 +199,7 @@ public class Document implements Serializable {
      *
      * @param color 赋值 busi_document.color
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setColor(String color) {
         this.color = color == null ? null : color.trim();
@@ -210,7 +210,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.keyword
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getKeyword() {
         return keyword;
@@ -221,7 +221,7 @@ public class Document implements Serializable {
      *
      * @param keyword 赋值 busi_document.keyword
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setKeyword(String keyword) {
         this.keyword = keyword == null ? null : keyword.trim();
@@ -232,7 +232,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.descrition
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getDescrition() {
         return descrition;
@@ -243,7 +243,7 @@ public class Document implements Serializable {
      *
      * @param descrition 赋值 busi_document.descrition
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setDescrition(String descrition) {
         this.descrition = descrition == null ? null : descrition.trim();
@@ -254,7 +254,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.priority
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public Integer getPriority() {
         return priority;
@@ -265,7 +265,7 @@ public class Document implements Serializable {
      *
      * @param priority 赋值 busi_document.priority
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setPriority(Integer priority) {
         this.priority = priority;
@@ -276,7 +276,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.source
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getSource() {
         return source;
@@ -287,7 +287,7 @@ public class Document implements Serializable {
      *
      * @param source 赋值 busi_document.source
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setSource(String source) {
         this.source = source == null ? null : source.trim();
@@ -298,7 +298,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.source_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getSourceAddr() {
         return sourceAddr;
@@ -309,7 +309,7 @@ public class Document implements Serializable {
      *
      * @param sourceAddr 赋值 busi_document.source_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setSourceAddr(String sourceAddr) {
         this.sourceAddr = sourceAddr == null ? null : sourceAddr.trim();
@@ -320,7 +320,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.author
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getAuthor() {
         return author;
@@ -331,7 +331,7 @@ public class Document implements Serializable {
      *
      * @param author 赋值 busi_document.author
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setAuthor(String author) {
         this.author = author == null ? null : author.trim();
@@ -342,7 +342,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.title_image
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getTitleImage() {
         return titleImage;
@@ -353,7 +353,7 @@ public class Document implements Serializable {
      *
      * @param titleImage 赋值 busi_document.title_image
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setTitleImage(String titleImage) {
         this.titleImage = titleImage == null ? null : titleImage.trim();
@@ -364,7 +364,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.file_name
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getFileName() {
         return fileName;
@@ -375,7 +375,7 @@ public class Document implements Serializable {
      *
      * @param fileName 赋值 busi_document.file_name
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setFileName(String fileName) {
         this.fileName = fileName == null ? null : fileName.trim();
@@ -386,7 +386,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.file_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getFileAddr() {
         return fileAddr;
@@ -397,7 +397,7 @@ public class Document implements Serializable {
      *
      * @param fileAddr 赋值 busi_document.file_addr
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setFileAddr(String fileAddr) {
         this.fileAddr = fileAddr == null ? null : fileAddr.trim();
@@ -408,7 +408,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.size
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public Long getSize() {
         return size;
@@ -419,7 +419,7 @@ public class Document implements Serializable {
      *
      * @param size 赋值 busi_document.size
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setSize(Long size) {
         this.size = size;
@@ -430,7 +430,7 @@ public class Document implements Serializable {
      *
      * @return 返回 busi_document.content
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public String getContent() {
         return content;
@@ -441,7 +441,7 @@ public class Document implements Serializable {
      *
      * @param content 赋值 busi_document.content
      *
-     * @mbggenerated 2015年10月19日 10时51分55秒 星期一
+     * @mbggenerated 2015年10月20日 11时49分45秒 星期二
      */
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();

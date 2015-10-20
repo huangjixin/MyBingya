@@ -45,6 +45,15 @@
 	function clearParentInput(){
 		$('#parentId').combotree('clear');
 	}
+	
+	function clearForm(){
+		$('#parentId').combotree('clear');
+		$('#name').val("");
+		$('#code').val("");
+		$('#keyword').val("");
+		$('#linkAddr').val("");
+		$('#descrition').val("");
+	}
 </script>
 <title>栏目更新</title>
 </head>
@@ -86,7 +95,7 @@
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
-									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/channel'"/></td>
+									<td  style="text-align: left;" colspan="6"><input type="submit" value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input type="button" value="清空" onclick="clearForm();" />&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:window.location.href='${ctxAdmin}/channel'"/></td>
 								</tr>
 							</table>
 						</td>

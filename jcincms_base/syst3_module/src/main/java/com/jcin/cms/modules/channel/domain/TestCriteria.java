@@ -1,4 +1,4 @@
-package com.jcin.cms.modules.syst.domain;
+package com.jcin.cms.modules.channel.domain;
 
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
@@ -9,42 +9,42 @@ public class TestCriteria {
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public TestCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class TestCriteria {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -505,7 +505,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 test
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated do_not_delete_during_merge 2015年10月20日 12时07分54秒 星期二
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -517,7 +517,7 @@ public class TestCriteria {
     /**
      * 该类对应于数据库表 test
      *
-     * @mbggenerated 2015年10月11日 08时11分18秒 星期日
+     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
      */
     public static class Criterion {
         private String condition;

@@ -4,7 +4,7 @@
  * @date 2015-4-26,下午6:56:55
  *
  */
-package com.jcin.cms.modules.syst.service.impl;
+package com.jcin.cms.modules.channel.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -15,10 +15,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.modules.syst.dao.TestMapper;
-import com.jcin.cms.modules.syst.domain.Test;
-import com.jcin.cms.modules.syst.domain.TestCriteria;
-import com.jcin.cms.modules.syst.service.ITestService;
+import com.jcin.cms.modules.channel.dao.TestMapper;
+import com.jcin.cms.modules.channel.domain.Test;
+import com.jcin.cms.modules.channel.domain.TestCriteria;
+import com.jcin.cms.modules.channel.service.ITestService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
 
@@ -40,7 +40,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#deleteByPrimaryKey((java.lang
+	 * com.jcin.cms.service.channel.ITestService#deleteByPrimaryKey((java.lang
 	 * .String ))
 	 */
 	@Override
@@ -56,7 +56,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#insert(com.jcin.cms.service.syst.
+	 * com.jcin.cms.service.channel.ITestService#insert(com.jcin.cms.service.channel.
 	 * Test)
 	 */
 	@Override
@@ -74,7 +74,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#select(com.jcin.cms.utils.Page)
+	 * com.jcin.cms.service.channel.ITestService#select(com.jcin.cms.utils.Page)
 	 */
 	@Override
 	public Page select(Page page) {
@@ -95,7 +95,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#select(com.jcin.cms.service.syst.TestCriteria)
+	 * com.jcin.cms.service.channel.ITestService#select(com.jcin.cms.service.channel.TestCriteria)
 	 */
 	//@Override
 	public Page select(TestCriteria criteria) {
@@ -112,7 +112,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#selectAll()
+	 * com.jcin.cms.service.channel.ITestService#selectAll()
 	 */
 	@Override
 	public List<Test> selectAll() {
@@ -124,7 +124,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#selectByPrimaryKey(java.lang
+	 * com.jcin.cms.service.channel.ITestService#selectByPrimaryKey(java.lang
 	 * .String)
 	 */
 	@Override
@@ -139,7 +139,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#update(com.jcin.cms.service.syst.
+	 * com.jcin.cms.service.channel.ITestService#update(com.jcin.cms.service.channel.
 	 * Test)
 	 */
 	@Override
@@ -155,7 +155,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#insertBatch(List)
+	 * com.jcin.cms.service.channel.ITestService#insertBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -169,7 +169,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.syst.ITestService#deleteBatch(List)
+	 * com.jcin.cms.service.channel.ITestService#deleteBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -179,6 +179,13 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 		int result = testMapper.deleteByExample(testCriteria);
 		super.deleteBatch(list);
 		return result;
+	}
+	
+	
+	@Override
+	public List<Test> selectByExample(
+			TestCriteria criteria) {
+		return  testMapper.selectByExample(criteria);
 	}
 
 }

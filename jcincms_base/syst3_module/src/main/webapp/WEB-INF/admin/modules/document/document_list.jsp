@@ -172,8 +172,8 @@
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+				onclick="exportExcel()" /> <!-- <input type="button" id="importBtn"
+				value="导入excel" onclick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
 			<label>标题:</label>
