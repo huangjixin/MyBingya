@@ -11,7 +11,7 @@
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<!-- 自定义 -->
-		<property name="moduleName" value="syst"></property>
+		<property name="moduleName" value="channel"></property>
 		<property name="mergeable" value="false"></property>
 		
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -39,22 +39,25 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.modules.syst.domain"
+		<javaModelGenerator targetPackage="com.jcin.cms.modules.channel.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.modules.syst.dao"
+		<sqlMapGenerator targetPackage="com.jcin.cms.modules.channel.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.modules.syst.dao" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.modules.channel.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="tb_db_backup" domainObjectName="DbBackup" />
+		<table tableName="test" domainObjectName="Test" />
+		<!-- <table tableName="busi_channel" domainObjectName="Channel" /> -->
+<!-- 		<table tableName="busi_document" domainObjectName="Document" /> -->
+		<!-- <table tableName="tb_db_backup" domainObjectName="DbBackup" /> -->
 <!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->
 		<!-- <table tableName="tb_role_resource" domainObjectName="RoleResource" /> -->
 		<!-- <table tableName="tb_user_organization" domainObjectName="UserOrganization" />

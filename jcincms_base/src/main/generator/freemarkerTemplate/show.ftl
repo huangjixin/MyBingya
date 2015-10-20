@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/icon.css">
-<title>${objInst}更新</title>
+<title>${objInst}查看</title>
 </head>
 <body>
 	<form:form id="validForm" commandName="${objInst}">
