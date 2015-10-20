@@ -60,16 +60,21 @@
 		$('#channelId').combotree('clear');
 	}
 	
+	//jquery 提交表单。
 	function submitForm(){
 		var cont = ue.getContent();
 		$('#content').val(cont);
 		$('#validForm').submit();
 	}
+	
+	function onselectFile(){
+		alert('hello')
+	}
 </script>
 <title>文档添加</title>
 </head>
 <body>
-	<form:form id="validForm" action="${ctxAdmin}/document/create" method="post" commandName="document">
+	<form:form id="validForm" action="${ctxAdmin}/document/create" method="post" commandName="document" enctype="multipart/form-data">
 				<div class="desc">
 					<b>文档信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
@@ -109,18 +114,18 @@
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;标题图片：</th>
 									<td nowrap="nowrap" align="left"><form:input path="titleImage" value="${document.titleImage}"/>&nbsp;<form:errors path="titleImage" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;文件名：</th>
-									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;：</th>
+									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;</th>
 									<td nowrap="nowrap" align="left"></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+									<th>&nbsp;文件名：</th>
+									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<input type="file" name="file" onselect="onselectFile()"/>&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;文件地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileAddr" value="${document.fileAddr}"/>&nbsp;<form:errors path="fileAddr" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;大小：</th>
 									<td nowrap="nowrap" align="left"><form:input path="size" value="${document.size}"/>&nbsp;<form:errors path="size" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;：</th>
-									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
