@@ -238,9 +238,9 @@ public class DocumentController extends BaseController<Document> {
 		return result;
 	}
 
-	@RequestMapping(value = "/uploadImage")
+	@RequestMapping(value = "/uploadFile")
 	@ResponseBody
-	public Map<String, Object> uploadImage(
+	public Map<String, Object> uploadFile(
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {

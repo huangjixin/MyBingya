@@ -93,7 +93,7 @@ th {
 		} */
 		// 利用ajaxFileUpload js 插件上传图片
 		$.ajaxFileUpload({
-			url : '${ctxAdmin}/document/uploadImage',
+			url : '${ctxAdmin}/document/uploadFile',
 			secureuri : false,
 			fileElementId : "file",
 			dataType : "text",
