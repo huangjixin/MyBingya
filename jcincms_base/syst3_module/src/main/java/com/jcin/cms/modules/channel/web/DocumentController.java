@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,41 +53,43 @@ import com.jcin.cms.web.BaseController;
 
 @Controller
 @RequestMapping(value = "${adminPath}/document")
-public class DocumentController extends BaseController<Document>{
+public class DocumentController extends BaseController<Document> {
 	@Resource
 	private IDocumentService documentService;
 	@Resource
 	private IChannelService channelService;
 
-//	@RequiresPermissions("document:create")
+	// @RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Document document, Model uiModel) {
 		uiModel.addAttribute("document", document);
 		return "admin/modules/document/document_create";
 	}
 
-//	@RequiresPermissions("document:create")
+	// @RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@Valid Document document, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String create(@Valid Document document, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		if(bindingResult.hasErrors()){
-			 populateEditForm(uiModel, document);
-	         return "admin/modules/document/document_create";
+		if (bindingResult.hasErrors()) {
+			populateEditForm(uiModel, document);
+			return "admin/modules/document/document_create";
 		}
-		if("".equals(document.getChannelId()) && null ==document.getChannelId()){
+		if ("".equals(document.getChannelId())
+				&& null == document.getChannelId()) {
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
 			return "admin/modules/document/document_create";
 		}
 		documentService.insert(document);
-		
+
 		redirectAttributes.addFlashAttribute("document", document);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
-		return "redirect:/"+Global.getAdminPath()+"/document/create";
+		return "redirect:/" + Global.getAdminPath() + "/document/create";
 	}
-	
-//	@RequiresPermissions("document:update")
+
+	// @RequiresPermissions("document:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
@@ -93,34 +97,36 @@ public class DocumentController extends BaseController<Document>{
 		return "admin/modules/document/document_update";
 	}
 
-//	@RequiresPermissions("document:update")
+	// @RequiresPermissions("document:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(Document document,RedirectAttributes redirectAttributes,
-			Model uiModel, HttpServletRequest httpServletRequest,
+	public String update(Document document,
+			RedirectAttributes redirectAttributes, Model uiModel,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		documentService.update(document);
-		
+
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("document", document);
-		return "redirect:/"+Global.getAdminPath()+"/document/update/"+document.getId();
+		return "redirect:/" + Global.getAdminPath() + "/document/update/"
+				+ document.getId();
 	}
 
-//	@RequiresPermissions("document:show")
+	// @RequiresPermissions("document:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
-		
+
 		uiModel.addAttribute("document", document);
 		return "admin/modules/document/document_show";
 	}
 
-//	@RequiresPermissions("document:view")
+	// @RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return "admin/modules/document/document_list";
 	}
 
-//	@RequiresPermissions("document:delete")
+	// @RequiresPermissions("document:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		documentService.deleteByPrimaryKey(id);
@@ -152,63 +158,70 @@ public class DocumentController extends BaseController<Document>{
 		List<Channel> list = channelService.getChannelTree(null);
 		return list;
 	}
-	
-//	@RequiresPermissions("document:view")
+
+	// @RequiresPermissions("document:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
-	public Page select(@ModelAttribute Page page, @ModelAttribute Document document,Model uiModel,
+	public Page select(@ModelAttribute Page page,
+			@ModelAttribute Document document, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		super.select(page, uiModel, httpServletRequest,
-				httpServletResponse);
+		super.select(page, uiModel, httpServletRequest, httpServletResponse);
 		DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		documentCriteria.setPage(page);
 		documentCriteria.setOrderByClause("id desc");
-		if (null != document.getId()  && !"".equals(document.getId())) {
-		  	criteria.andIdLike("%" + document.getId() + "%");
+		if (null != document.getId() && !"".equals(document.getId())) {
+			criteria.andIdLike("%" + document.getId() + "%");
 		}
-		if (null != document.getChannelId()  && !"".equals(document.getChannelId())) {
-		  	criteria.andChannelIdLike("%" + document.getChannelId() + "%");
+		if (null != document.getChannelId()
+				&& !"".equals(document.getChannelId())) {
+			criteria.andChannelIdLike("%" + document.getChannelId() + "%");
 		}
-		if (null != document.getTitle()  && !"".equals(document.getTitle())) {
-		  	criteria.andTitleLike("%" + document.getTitle() + "%");
+		if (null != document.getTitle() && !"".equals(document.getTitle())) {
+			criteria.andTitleLike("%" + document.getTitle() + "%");
 		}
-		if (null != document.getColor()  && !"".equals(document.getColor())) {
-		  	criteria.andColorLike("%" + document.getColor() + "%");
+		if (null != document.getColor() && !"".equals(document.getColor())) {
+			criteria.andColorLike("%" + document.getColor() + "%");
 		}
-		if (null != document.getKeyword()  && !"".equals(document.getKeyword())) {
-		  	criteria.andKeywordLike("%" + document.getKeyword() + "%");
+		if (null != document.getKeyword() && !"".equals(document.getKeyword())) {
+			criteria.andKeywordLike("%" + document.getKeyword() + "%");
 		}
-		if (null != document.getDescrition()  && !"".equals(document.getDescrition())) {
-		  	criteria.andDescritionLike("%" + document.getDescrition() + "%");
+		if (null != document.getDescrition()
+				&& !"".equals(document.getDescrition())) {
+			criteria.andDescritionLike("%" + document.getDescrition() + "%");
 		}
-		if (null != document.getPriority()  && !"".equals(document.getPriority())) {
-		  	criteria.andPriorityEqualTo(document.getPriority());
+		if (null != document.getPriority()
+				&& !"".equals(document.getPriority())) {
+			criteria.andPriorityEqualTo(document.getPriority());
 		}
-		if (null != document.getSource()  && !"".equals(document.getSource())) {
-		  	criteria.andSourceLike("%" + document.getSource() + "%");
+		if (null != document.getSource() && !"".equals(document.getSource())) {
+			criteria.andSourceLike("%" + document.getSource() + "%");
 		}
-		if (null != document.getSourceAddr()  && !"".equals(document.getSourceAddr())) {
-		  	criteria.andSourceAddrLike("%" + document.getSourceAddr() + "%");
+		if (null != document.getSourceAddr()
+				&& !"".equals(document.getSourceAddr())) {
+			criteria.andSourceAddrLike("%" + document.getSourceAddr() + "%");
 		}
-		if (null != document.getAuthor()  && !"".equals(document.getAuthor())) {
-		  	criteria.andAuthorLike("%" + document.getAuthor() + "%");
+		if (null != document.getAuthor() && !"".equals(document.getAuthor())) {
+			criteria.andAuthorLike("%" + document.getAuthor() + "%");
 		}
-		if (null != document.getTitleImage()  && !"".equals(document.getTitleImage())) {
-		  	criteria.andTitleImageLike("%" + document.getTitleImage() + "%");
+		if (null != document.getTitleImage()
+				&& !"".equals(document.getTitleImage())) {
+			criteria.andTitleImageLike("%" + document.getTitleImage() + "%");
 		}
-		if (null != document.getFileName()  && !"".equals(document.getFileName())) {
-		  	criteria.andFileNameLike("%" + document.getFileName() + "%");
+		if (null != document.getFileName()
+				&& !"".equals(document.getFileName())) {
+			criteria.andFileNameLike("%" + document.getFileName() + "%");
 		}
-		if (null != document.getFileAddr()  && !"".equals(document.getFileAddr())) {
-		  	criteria.andFileAddrLike("%" + document.getFileAddr() + "%");
+		if (null != document.getFileAddr()
+				&& !"".equals(document.getFileAddr())) {
+			criteria.andFileAddrLike("%" + document.getFileAddr() + "%");
 		}
 		page = documentService.select(documentCriteria);
 		return page;
 	}
-	
-//	@RequiresPermissions("document:delete")
+
+	// @RequiresPermissions("document:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -224,54 +237,63 @@ public class DocumentController extends BaseController<Document>{
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/uploadImage")
 	@ResponseBody
-	public Model uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,Model uiModel,
-			HttpServletRequest httpServletRequest,
+	public Map<String, Object> uploadImage(
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		// 组合零时图片名
-        String imageName = file.getOriginalFilename();
-        String file_ext = imageName.substring(imageName.lastIndexOf(".") + 1);
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
-        String tempImageName = UserUtils.getUserId()+File.separator + df.format(new Date()) + "." + file_ext;
-        
-        String uploadPath = Global.getUploadpath()+tempImageName;
-		uploadPath+= File.separator+file.getOriginalFilename();
-		
-		String uploadWeb = "/upload/"+UserUtils.getUserId()+"/" + df.format(new Date()) + "." + file_ext;
-		File targetFile = new File(uploadPath);  
-        if(!targetFile.exists()){  
-            targetFile.mkdirs();  
-        }
-        
-        if(file.getSize()>0){
-        	 try {
-     			file.transferTo(targetFile);
-     		} catch (IllegalStateException e1) {
-     			
-     			e1.printStackTrace();
-     		} catch (IOException e1) {
-     			
-     			e1.printStackTrace();
-     		}
-        }
-        FileUtils.createFile(uploadPath);
-        uiModel.addAttribute("msg", "上传成功");
-        uiModel.addAttribute("fileName", file.getOriginalFilename());
-        uiModel.addAttribute("fileAddr", uploadWeb);
-        uiModel.addAttribute("size", file.getSize());
-		return uiModel;
+		String uploadWeb = "";
+		if (file != null) {
+			// 组合零时图片名
+			String imageName = file.getOriginalFilename();
+			String file_ext = imageName
+					.substring(imageName.lastIndexOf(".") + 1);
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
+			String tempImageName = File.separator + UserUtils.getUserId()
+					+ File.separator + df.format(new Date()) + "." + file_ext;
+
+			String uploadPath = Global.getUploadpath() + tempImageName;
+
+			uploadWeb = "/upload/" + UserUtils.getUserId() + "/"
+					+ df.format(new Date()) + "." + file_ext;
+			File targetFile = new File(uploadPath);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+
+			if (file.getSize() > 0) {
+				try {
+					file.transferTo(targetFile);
+				} catch (IllegalStateException e1) {
+
+					e1.printStackTrace();
+				} catch (IOException e1) {
+
+					e1.printStackTrace();
+				}
+			}
+			FileUtils.createFile(uploadPath);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "上传成功");
+		map.put("fileName", file.getOriginalFilename());
+		map.put("fileAddr", uploadWeb);
+		map.put("size", file.getSize());
+		return map;
 	}
-	
+
 	/**
 	 * 全部导出Excel.
+	 * 
 	 * @param document
 	 * @param httpServletRequest
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
-//	@RequiresPermissions("document:view")
+	// @RequiresPermissions("document:view")
 	@RequestMapping(value = "/exportExcel")
 	public void exportExcel(@ModelAttribute Document document,
 			HttpServletRequest httpServletRequest,
@@ -279,44 +301,17 @@ public class DocumentController extends BaseController<Document>{
 		httpServletResponse.setCharacterEncoding("UTF-8");
 		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
-		List<Document>list = documentService.selectAll();
+		List<Document> list = documentService.selectAll();
 
 		List<Map<String, Object>> maps = createExcelRecord(list);
 
-		String columnNames[] = { 
-			"Id",
-			"ChannelId",
-			"Title",
-			"Color",
-			"Keyword",
-			"Desc",
-			"Priority",
-			"Source",
-			"SourceAddr",
-			"Author",
-			"TitleImage",
-			"FileName",
-			"FileAddr",
-			"Size",
-			"Content"
-		};// 列名
-		String keys[] = { 
-			"Id",
-			"ChannelId",
-			"Title",
-			"Color",
-			"Keyword",
-			"getDescrition",
-			"Priority",
-			"Source",
-			"SourceAddr",
-			"Author",
-			"TitleImage",
-			"FileName",
-			"FileAddr",
-			"Size",
-			"Content"
-		};// map中的key
+		String columnNames[] = { "Id", "ChannelId", "Title", "Color",
+				"Keyword", "Desc", "Priority", "Source", "SourceAddr",
+				"Author", "TitleImage", "FileName", "FileAddr", "Size",
+				"Content" };// 列名
+		String keys[] = { "Id", "ChannelId", "Title", "Color", "Keyword",
+				"getDescrition", "Priority", "Source", "SourceAddr", "Author",
+				"TitleImage", "FileName", "FileAddr", "Size", "Content" };// map中的key
 		Workbook hwb = ExcelUtil.createWorkBook(maps, keys, columnNames);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 等价于now.toLocaleString()
@@ -339,26 +334,26 @@ public class DocumentController extends BaseController<Document>{
 		for (int j = 0; j < list.size(); j++) {
 			document = list.get(j);
 			Map<String, Object> mapValue = new HashMap<String, Object>();
-				mapValue.put("Id",document.getId());
-				mapValue.put("ChannelId",document.getChannelId());
-				mapValue.put("Title",document.getTitle());
-				mapValue.put("Color",document.getColor());
-				mapValue.put("Keyword",document.getKeyword());
-				mapValue.put("getDescrition",document.getDescrition());
-				mapValue.put("Priority",document.getPriority());
-				mapValue.put("Source",document.getSource());
-				mapValue.put("SourceAddr",document.getSourceAddr());
-				mapValue.put("Author",document.getAuthor());
-				mapValue.put("TitleImage",document.getTitleImage());
-				mapValue.put("FileName",document.getFileName());
-				mapValue.put("FileAddr",document.getFileAddr());
-				mapValue.put("Size",document.getSize());
-				mapValue.put("Content",document.getContent());
+			mapValue.put("Id", document.getId());
+			mapValue.put("ChannelId", document.getChannelId());
+			mapValue.put("Title", document.getTitle());
+			mapValue.put("Color", document.getColor());
+			mapValue.put("Keyword", document.getKeyword());
+			mapValue.put("getDescrition", document.getDescrition());
+			mapValue.put("Priority", document.getPriority());
+			mapValue.put("Source", document.getSource());
+			mapValue.put("SourceAddr", document.getSourceAddr());
+			mapValue.put("Author", document.getAuthor());
+			mapValue.put("TitleImage", document.getTitleImage());
+			mapValue.put("FileName", document.getFileName());
+			mapValue.put("FileAddr", document.getFileAddr());
+			mapValue.put("Size", document.getSize());
+			mapValue.put("Content", document.getContent());
 			listmap.add(mapValue);
 		}
 		return listmap;
 	}
-	
+
 	/**
 	 * @param args
 	 */
