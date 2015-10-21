@@ -67,9 +67,40 @@
 		$('#validForm').submit();
 	}
 	
-	function onselectFile(){
-		alert('hello')
-	}
+	function uploadImage(){
+		// 检查图片格式
+		    var f=document.getElementById("advImage").value;
+		    if(!/.(gif|jpg|jpeg|png|JPG|PNG)$/.test(f))
+		    {
+		        alert("图片类型必须是.jpeg,jpg,png中的一种")
+		        return false;
+		    }
+		    // 利用ajaxFileUpload js 插件上传图片
+		    $.ajaxFileUpload({url:"uploadPreviewImage.html",
+		        secureuri:false,
+		        fileElementId:"advImage",
+		        dataType:"json",
+		        /* success:function (data , status) {
+		             //上传成功后，直接跳出截图框，使用imgAreaSelect插件
+		            piso = $('#photo').imgAreaSelect({ 
+		                  x1: 0, y1: 0, x2:480 , y2: 520 ,onSelectEnd: preview,
+		            resizable: false,
+		            instance: true,
+		            persistent:true
+		            });
+		            // 这个方法是现实一个div，托住截图框
+		            showCutImage();
+		            // 一些变量在页面的隐藏input的设置
+		            document.getElementById("photo").src = data.tempPath;
+		            document.getElementById("currentPath").value = data.tempPath;
+		            
+		        }, */
+		        error:function (data, status, e) {
+		            alert("图片上传失败,请重新选择图片");
+		        }
+		    });
+		    return false;
+		}
 </script>
 <title>文档添加</title>
 </head>
@@ -121,7 +152,7 @@
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;文件名：</th>
-									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<input type="file" name="file" onselect="onselectFile()"/>&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input path="fileName" value="${document.fileName}"/>&nbsp;<input type="file" name="file" onchange="uploadImage()" />&nbsp;<form:errors path="fileName" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;文件地址：</th>
 									<td nowrap="nowrap" align="left"><form:input path="fileAddr" value="${document.fileAddr}"/>&nbsp;<form:errors path="fileAddr" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;大小：</th>

@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.modules.channel.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -21,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +32,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
@@ -221,6 +223,45 @@ public class DocumentController extends BaseController<Document>{
 		int result = documentService.deleteBatch(list);
 
 		return result;
+	}
+	
+	@RequestMapping(value = "/uploadImage")
+	@ResponseBody
+	public Model uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,Model uiModel,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		// 组合零时图片名
+        String imageName = file.getOriginalFilename();
+        String file_ext = imageName.substring(imageName.lastIndexOf(".") + 1);
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
+        String tempImageName = UserUtils.getUserId()+File.separator + df.format(new Date()) + "." + file_ext;
+        
+        String uploadPath = Global.getUploadpath()+tempImageName;
+		uploadPath+= File.separator+file.getOriginalFilename();
+		
+		String uploadWeb = "/upload/"+UserUtils.getUserId()+"/" + df.format(new Date()) + "." + file_ext;
+		File targetFile = new File(uploadPath);  
+        if(!targetFile.exists()){  
+            targetFile.mkdirs();  
+        }
+        
+        if(file.getSize()>0){
+        	 try {
+     			file.transferTo(targetFile);
+     		} catch (IllegalStateException e1) {
+     			
+     			e1.printStackTrace();
+     		} catch (IOException e1) {
+     			
+     			e1.printStackTrace();
+     		}
+        }
+        FileUtils.createFile(uploadPath);
+        uiModel.addAttribute("msg", "上传成功");
+        uiModel.addAttribute("fileName", file.getOriginalFilename());
+        uiModel.addAttribute("fileAddr", uploadWeb);
+        uiModel.addAttribute("size", file.getSize());
+		return uiModel;
 	}
 	
 	/**
