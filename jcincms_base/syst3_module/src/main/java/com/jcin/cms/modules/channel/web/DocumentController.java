@@ -72,10 +72,10 @@ public class DocumentController extends BaseController<Document> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		if (bindingResult.hasErrors()) {
+		/*if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, document);
 			return "admin/modules/document/document_create";
-		}
+		}*/
 		if ("".equals(document.getChannelId())
 				&& null == document.getChannelId()) {
 			populateEditForm(uiModel, document);

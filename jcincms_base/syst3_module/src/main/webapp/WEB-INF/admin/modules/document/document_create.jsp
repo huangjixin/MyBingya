@@ -204,18 +204,18 @@ th {
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;文件名：</th>
 							<td nowrap="nowrap" align="left"><form:input path="fileName"
-									value="${document.fileName}" />&nbsp;<input id="fileUploadBtn"
+									value="${document.fileName}" disabled="true"/>&nbsp;<input id="fileUploadBtn"
 								type="button" value="上传" onclick="selectFile()" /><input
 								style="display: none" type="file" id="file" name="file"
 								onchange="uploadImage()" />&nbsp;<form:errors path="fileName"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文件地址：</th>
 							<td nowrap="nowrap" align="left"><form:input path="fileAddr"
-									value="${document.fileAddr}" />&nbsp;<form:errors
+									value="${document.fileAddr}"  disabled="true"/>&nbsp;<form:errors
 									path="fileAddr" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;大小：</th>
 							<td nowrap="nowrap" align="left"><form:input path="size"
-									value="${document.size}" />&nbsp;<form:errors path="size"
+									value="${document.size}"  disabled="true"/>&nbsp;<form:errors path="size"
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
