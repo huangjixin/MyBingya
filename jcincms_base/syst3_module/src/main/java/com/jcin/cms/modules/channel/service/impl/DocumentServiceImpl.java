@@ -188,4 +188,16 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		return  documentMapper.selectByExample(criteria);
 	}
 
+	@Override
+	public List<Document> getDocByChannelId(String channelId) {
+		Page page = new Page();
+		DocumentCriteria documentCriteria = new DocumentCriteria();
+		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+		criteria.andChannelIdEqualTo(channelId);
+		documentCriteria.setPage(page);
+		documentCriteria.setOrderByClause("id desc");
+		List<Document> list  = documentMapper.selectByExample(documentCriteria);
+		return list;
+	}
+
 }

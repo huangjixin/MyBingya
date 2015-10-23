@@ -22,4 +22,11 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	 * @return
 	 */
 	List<Document> selectByExample(DocumentCriteria criteria);
+
+	/**
+	 * 根据栏目ID查询文档
+	 * @param id
+	 * @return
+	 */
+	List<Document> getDocByChannelId(String channelId);
 }

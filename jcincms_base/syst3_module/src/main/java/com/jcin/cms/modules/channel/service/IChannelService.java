@@ -29,5 +29,17 @@ public interface IChannelService extends IBaseService<Channel, String> {
 	 */
 	List<Channel> getChannelTree(List<Channel> channels);
 
+	/**
+	 * 根据父类Id进行查询。
+	 * @param id
+	 * @return
+	 */
 	List<Channel> getByParentId(String id);
+	
+	/**
+	 * 根据父类Id进行查询。
+	 * @param id
+	 * @return
+	 */
+	Channel getByCode(String name);
 }

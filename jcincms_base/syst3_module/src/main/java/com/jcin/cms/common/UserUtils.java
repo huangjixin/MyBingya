@@ -8,6 +8,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
 
+import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.channel.service.impl.DocumentServiceImpl;
 import com.jcin.cms.modules.syst.dao.UserMapper;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.User;
@@ -26,6 +28,7 @@ public class UserUtils {
 	private static UserMapper userDao = SpringUtils.getBean(UserMapper.class);
 	private static IUserService userService = SpringUtils.getBean(UserServiceImpl.class);
 	private static IResourceService resourceService = SpringUtils.getBean(ResourceServiceImpl.class);
+	private static IDocumentService documentService = SpringUtils.getBean(DocumentServiceImpl.class);
 
 	public static final String CACHE_USER = "user";
 	public static final String CACHE_RESOURCE = "resource";
@@ -94,7 +97,10 @@ public class UserUtils {
 	public static String getUserId(){
 		return getUser().getId();
 	}
-
+	
+	public static List getDocByChannelId(String id){
+		return documentService.getDocByChannelId(id);
+	}
 	
 	// ============== User Cache ==============
 	

@@ -50,4 +50,14 @@
 		</function-signature>
 		<example>${fns:getAvailable()}</example>
 	</function>
+	
+	<!-- 文档分页 -->
+	<function>
+		<description>根据栏目ID查询文档分页</description>
+		<name>getDocByChannelId</name>
+		<function-class>com.jcin.cms.common.UserUtils</function-class>
+		<function-signature>java.util.List getDocByChannelId(java.lang.String)
+		</function-signature>
+		<example>${fns:getDocByChannelId(id)}</example>
+	</function>
 </taglib>

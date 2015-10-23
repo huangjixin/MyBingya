@@ -61,7 +61,7 @@ public class Channel implements Serializable {
      */
     private String parentId;
 
- private List<Channel> Children = new ArrayList<Channel>();
+    private List<Channel> children = new ArrayList<Channel>();
     
     private boolean checked;
     
@@ -253,11 +253,15 @@ public class Channel implements Serializable {
 	}
 	
 	public List<Channel> getChildren() {
-		return Children;
+		return children;
 	}
 
+	public boolean hasChildren() {
+		return getChildren().size()>0;
+	}
+	
 	public void setChildren(List<Channel> children) {
-		Children = children;
+		this.children = children;
 	}
 
 	public boolean isChecked() {

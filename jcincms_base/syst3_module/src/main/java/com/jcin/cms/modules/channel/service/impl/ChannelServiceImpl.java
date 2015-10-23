@@ -231,6 +231,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		Channel jsonObject = new Channel();
 		jsonObject.setId(channel.getId());
 		jsonObject.setParentId(channel.getParentId());
+		jsonObject.setCode(channel.getCode());
+		jsonObject.setDescrition(channel.getDescrition());
+		jsonObject.setKeyword(channel.getKeyword());
+		jsonObject.setLinkAddr(channel.getLinkAddr());
+		jsonObject.setOpenMode(channel.getOpenMode());
 		jsonObject.setName(channel.getName());
 
 		List<Channel> list = searialChild(channel,orgs);
@@ -273,5 +278,26 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		List<Channel> list = channelMapper.selectByExample(channelCriteria);
 
 		return list;
+	}
+
+	@Override
+	public Channel getByCode(String code) {
+		ChannelCriteria channelCriteria = new ChannelCriteria();
+		channelCriteria.createCriteria().andCodeEqualTo(code);
+		List<Channel> list = channelMapper.selectByExample(channelCriteria);
+		if(list!=null&&list.size()!=0){
+			List<Channel> children = new ArrayList<Channel>();
+			for (Channel object : list) {
+				Channel jsonObject = null;
+				
+				jsonObject = searialChannel(object,null);
+				if (jsonObject != null) {
+					children.add(jsonObject);
+				}
+			}
+			list = children;
+		}
+		
+		return list==null||list.size()==0 ? null :list.get(0);
 	}
 }

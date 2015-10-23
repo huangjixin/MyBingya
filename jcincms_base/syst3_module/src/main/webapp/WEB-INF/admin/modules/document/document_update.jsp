@@ -121,7 +121,7 @@
 									<th>&nbsp;大小：</th>
 									<td nowrap="nowrap" align="left"><form:input path="size" value="${document.size}"/>&nbsp;<form:errors path="size" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;：</th>
-									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value="${document.content}"/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><input id="content" name="content" type="hidden" value=""/>&nbsp;<form:errors path="content" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;</th>
