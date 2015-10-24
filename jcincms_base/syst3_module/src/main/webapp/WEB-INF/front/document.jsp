@@ -19,7 +19,7 @@
   </head>
   
   <body>
-    ${document.title}<br>
+    标题：${document.title}<br>
     ${document.content}<br>
   </body>
 </html>

@@ -20,7 +20,7 @@
     <c:forEach var="chan" items="${list}">
     	<a>${chan.name}</a><br>
     	<c:forEach var="doc" items="${fns:getDocByChannelId(chan.id)}">
-    	<a href="${chan.linkAddr}/${doc.id}">${doc.title}</a><br>
+    	<a href="${chan.linkAddr}/${doc.id}" target="_blank">${doc.title}</a><br>
     	</c:forEach>
     	<br>
     </c:forEach>

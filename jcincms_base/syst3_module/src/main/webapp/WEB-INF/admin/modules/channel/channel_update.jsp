@@ -31,6 +31,7 @@
 				onClick : function(node) {
 					/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
 					$('#parentId').val(node.id);*/
+					$('#linkAddr').val(node.code);
 				}, //全部折叠
 				onLoadSuccess : function(node, data) {
 					$('#parentId').combotree('tree').tree("collapseAll");
@@ -42,6 +43,21 @@
 			});
 	}
 
+	function oncodeComplete(){
+		$('#linkAddr').val("");
+		var node = $('#parentId').combotree('tree').tree("getSelected");
+		var co = $('#code').val();
+		if(node){
+			if(""!=co){
+				$('#linkAddr').val(node.code+"/"+co);
+			}
+		}else{
+			if(""!=co){
+				$('#linkAddr').val(co);
+			}
+		}
+	}
+	
 	function clearParentInput(){
 		$('#parentId').combotree('clear');
 	}
@@ -75,7 +91,7 @@
 									<th>&nbsp;名称：</th>
 									<td nowrap="nowrap" align="left"><form:input path="name" value="${channel.name}"/>&nbsp;<form:errors path="name" cssStyle="color:red;"></form:errors></td>
 									<th>&nbsp;编码：</th>
-									<td nowrap="nowrap" align="left"><form:input path="code" value="${channel.code}"/>&nbsp;<form:errors path="code" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input path="code" value="${channel.code}" onchange="oncodeComplete()"/>&nbsp;<form:errors path="code" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;关键字：</th>

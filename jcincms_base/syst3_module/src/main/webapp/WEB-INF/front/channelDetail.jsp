@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     首页/${name} <br>
     <c:forEach var="docu" items="${page.rows}">
-    	<a href="${channel.linkAddr}/${docu.id}">${docu.title}</a><br>
+    	<a href="${channel.linkAddr}/${docu.id}" target="_blank">${docu.title}</a><br>
     </c:forEach>
     总数：${page.total}<br>
   </body>
