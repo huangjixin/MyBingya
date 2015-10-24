@@ -48,7 +48,7 @@ public class IndexController {
 		return "front/index";
 	}
 
-	@RequestMapping(value = "{channels:^(?!admin).*$}")
+	@RequestMapping(value = "{channels:^(?!js|!admin).*$}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -76,7 +76,7 @@ public class IndexController {
 		return chan;
 	}
 
-	@RequestMapping(value = "{channels:^(?!admin).*$}/{code}")
+	@RequestMapping(value = "{channels:^(?!js|!admin).*$}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -105,7 +105,7 @@ public class IndexController {
 		return "front/channelDetail";
 	}
 
-	@RequestMapping(value = "{channels:^(?!js).*$}/{code}/{id}")
+	@RequestMapping(value = "{channels:^(?!js|!admin).*$}/{code}/{id}")
 	public String doc(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
