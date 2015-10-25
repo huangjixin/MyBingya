@@ -67,7 +67,9 @@ public class IndexController {
 			}
 			uiModel.addAttribute("name", channel.getName());
 			uiModel.addAttribute("channel", channel);
-
+			if(null!=channel.getChannelTemplete() && !"".equals(channel.getChannelTemplete())){
+				return channel.getChannelTemplete();
+			}
 			return "front/channel";
 		}
 
@@ -102,6 +104,9 @@ public class IndexController {
 		page = documentService.select(documentCriteria);
 
 		uiModel.addAttribute("page", page);
+		if(null!=channel.getChannelTemplete() && !"".equals(channel.getChannelTemplete())){
+			return channel.getChannelTemplete();
+		}
 		return "front/channelDetail";
 	}
 
@@ -116,6 +121,10 @@ public class IndexController {
 		}
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
+		if(null!=document.getDocumentTemplete() && !"".equals(document.getDocumentTemplete())){
+			return document.getDocumentTemplete();
+		}
+		
 		return "front/document";
 	}
 
