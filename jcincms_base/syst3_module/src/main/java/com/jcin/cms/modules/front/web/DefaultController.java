@@ -33,7 +33,7 @@ import com.jcin.cms.utils.Page;
  */
 @Controller
 @RequestMapping(value = "/")
-public class IndexController {
+public class DefaultController {
 
 	@Autowired
 	private IChannelService channelService;
