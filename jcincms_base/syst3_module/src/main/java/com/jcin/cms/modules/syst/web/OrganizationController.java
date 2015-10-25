@@ -214,6 +214,13 @@ public class OrganizationController extends BaseController<Organization> {
 		getResourceCheckboxTree(list, resources);
 		return list;
 	}
+	
+	@RequestMapping(value = "/refreshResourceCheckboxTree")
+	@ResponseBody
+	public void refreshResourceCheckboxTree(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		UserUtils.getResource(true);
+	}
 
 	private List<Resource> getResourceCheckboxTree(List<Resource> list,
 			List<Resource> resources) {

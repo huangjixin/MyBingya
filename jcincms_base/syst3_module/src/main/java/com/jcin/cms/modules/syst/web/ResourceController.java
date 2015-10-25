@@ -67,7 +67,6 @@ public class ResourceController extends BaseController<Resource> {
 		resourceService.insert(resource);
 		redirectAttributes.addFlashAttribute("resource", resource);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
-		UserUtils.getResource(true);
 		return "redirect:/" + Global.getAdminPath() + "/resource/create";
 	}
 
@@ -170,7 +169,6 @@ public class ResourceController extends BaseController<Resource> {
 			list.add(idstr);
 		}
 		int result = resourceService.deleteBatch(list);
-		UserUtils.getResource(true);
 		return result;
 	}
 
