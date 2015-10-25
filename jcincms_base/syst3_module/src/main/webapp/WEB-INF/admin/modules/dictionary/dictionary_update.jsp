@@ -30,15 +30,11 @@
 							<table border="0" cellpadding="3" cellspacing="1" width="100%"
 								align="center" style="background-color: #b9d8f3;">
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;id：</th>
-									<td nowrap="nowrap" align="left"><form:input path="id" value="${dictionary.id}"/>&nbsp;<form:errors path="id" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;type：</th>
+									<th>&nbsp;类型：</th>
 									<td nowrap="nowrap" align="left"><form:input path="type" value="${dictionary.type}"/>&nbsp;<form:errors path="type" cssStyle="color:red;"></form:errors></td>
-									<th>&nbsp;label：</th>
+									<th>&nbsp;键：</th>
 									<td nowrap="nowrap" align="left"><form:input path="label" value="${dictionary.label}"/>&nbsp;<form:errors path="label" cssStyle="color:red;"></form:errors></td>
-								</tr>
-								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th>&nbsp;value：</th>
+									<th>&nbsp;值：</th>
 									<td nowrap="nowrap" align="left"><form:input path="value" value="${dictionary.value}"/>&nbsp;<form:errors path="value" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">

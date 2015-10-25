@@ -160,9 +160,20 @@
 		window.open('${ctxAdmin}/organization/exportExcel');
 	}
 
-	//导入excel
-	function importExcel() {
-
+	//刷新组织
+	function refreshResourceCheckboxTree() {
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/organization/refreshResourceCheckboxTree',
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$('#resourceTree').tree('reload');
+			}
+		});
 	}
 </script>
 </head>
@@ -173,7 +184,8 @@
 						onclick="javascript:window.location.href='${ctxAdmin}/organization/create'" />
 					<input type="button" value="删除" onclick="deleteRows();" /> <input
 						type="button" value="更新" onclick="update();" /> <input
-						type="button" value="详情" onclick="show();" />
+						type="button" value="详情" onclick="show();" /> <input
+						type="button" value="刷新组织" onclick="refreshResourceCheckboxTree();" />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" value="授权" onclick="connectOrganizationResource();"/>
 	</div>

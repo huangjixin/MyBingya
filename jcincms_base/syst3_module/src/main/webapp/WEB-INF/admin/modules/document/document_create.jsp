@@ -168,8 +168,12 @@ th {
 							<td nowrap="nowrap" align="left"><form:input path="keyword"
 									value="${document.keyword}" />&nbsp;<form:errors path="keyword"
 									cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;是否显示：</th>
+							<td nowrap="nowrap" align="left"><select  id="hidden" name="hidden" style="width:100px;">
+										<c:forEach var="sh" items="${fns:getByType('hidden')}">
+											<option value="${sh.value}" <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<%-- <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;描述：</th>
@@ -198,8 +202,10 @@ th {
 							<td nowrap="nowrap" align="left"><input id="content"
 								name="content" type="hidden" value="${document.content}" />&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;文档模板：</th>
+							<td nowrap="nowrap" align="left">
+								<form:input id="documentTemplete" path="documentTemplete" value="${document.documentTemplete}"/>&nbsp;<form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
+							</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;文件名：</th>

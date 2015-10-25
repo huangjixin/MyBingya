@@ -96,9 +96,25 @@
 									<th>&nbsp;新窗口打开：</th>
 									<td nowrap="nowrap" align="left"><select  id="openMode" name="openMode" style="width:100px;">
 										<c:forEach var="mode" items="${fns:getByType('openMode')}">
-											<option value="${mode.value}" >${mode.label}</option>
+											<option value="${mode.value}" <c:if test="${mode.value == false}">selected="selected"</c:if>>${mode.label}</option>
 										</c:forEach>
 									</select>&nbsp;<form:errors path="openMode" cssStyle="color:red;"></form:errors></td>
+								</tr>
+								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+									<th>&nbsp;栏目模板：</th>
+									<td nowrap="nowrap" align="left"><form:input id="channelTemplete" path="channelTemplete" value="${channel.channelTemplete}"/>&nbsp;<form:errors path="channelTemplete" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;是否显示：</th>
+									<td nowrap="nowrap" align="left"><select  id="hidden" name="hidden" style="width:100px;">
+										<c:forEach var="sh" items="${fns:getByType('hidden')}">
+											<option value="${sh.value}" <c:if test="${sh.value == false}">selected="selected"</c:if>>${sh.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
+									<th>&nbsp;当成文档：</th>
+									<td nowrap="nowrap" align="left"><select  id="asdocument" name="asdocument" style="width:100px;">
+										<c:forEach var="asdoc" items="${fns:getByType('asdocument')}">
+											<option value="${asdoc.value}" <c:if test="${asdoc.value == false}">selected="selected"</c:if>>${asdoc.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="asdocument" cssStyle="color:red;"></form:errors></td>
 								</tr>
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th>&nbsp;描述：</th>
