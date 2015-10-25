@@ -8,42 +8,42 @@ public class ChannelCriteria {
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public ChannelCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -52,7 +52,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -61,7 +61,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -70,7 +70,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -79,7 +79,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public boolean isDistinct() {
         return distinct;
@@ -88,7 +88,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -97,7 +97,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -106,7 +106,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -117,7 +117,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -130,7 +130,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -140,7 +140,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void clear() {
         oredCriteria.clear();
@@ -151,7 +151,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setPage(Page page) {
         this.page=page;
@@ -160,7 +160,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public Page getPage() {
         return page;
@@ -169,7 +169,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -178,7 +178,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -790,6 +790,266 @@ public class ChannelCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andChannelTempleteIsNull() {
+            addCriterion("channel_templete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteIsNotNull() {
+            addCriterion("channel_templete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteEqualTo(String value) {
+            addCriterion("channel_templete =", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteNotEqualTo(String value) {
+            addCriterion("channel_templete <>", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteGreaterThan(String value) {
+            addCriterion("channel_templete >", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteGreaterThanOrEqualTo(String value) {
+            addCriterion("channel_templete >=", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteLessThan(String value) {
+            addCriterion("channel_templete <", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteLessThanOrEqualTo(String value) {
+            addCriterion("channel_templete <=", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteLike(String value) {
+            addCriterion("channel_templete like", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteNotLike(String value) {
+            addCriterion("channel_templete not like", value, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteIn(List<String> values) {
+            addCriterion("channel_templete in", values, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteNotIn(List<String> values) {
+            addCriterion("channel_templete not in", values, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteBetween(String value1, String value2) {
+            addCriterion("channel_templete between", value1, value2, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTempleteNotBetween(String value1, String value2) {
+            addCriterion("channel_templete not between", value1, value2, "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteIsNull() {
+            addCriterion("document_templete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteIsNotNull() {
+            addCriterion("document_templete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteEqualTo(String value) {
+            addCriterion("document_templete =", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteNotEqualTo(String value) {
+            addCriterion("document_templete <>", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteGreaterThan(String value) {
+            addCriterion("document_templete >", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteGreaterThanOrEqualTo(String value) {
+            addCriterion("document_templete >=", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteLessThan(String value) {
+            addCriterion("document_templete <", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteLessThanOrEqualTo(String value) {
+            addCriterion("document_templete <=", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteLike(String value) {
+            addCriterion("document_templete like", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteNotLike(String value) {
+            addCriterion("document_templete not like", value, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteIn(List<String> values) {
+            addCriterion("document_templete in", values, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteNotIn(List<String> values) {
+            addCriterion("document_templete not in", values, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteBetween(String value1, String value2) {
+            addCriterion("document_templete between", value1, value2, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteNotBetween(String value1, String value2) {
+            addCriterion("document_templete not between", value1, value2, "documentTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenIsNull() {
+            addCriterion("hidden is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenIsNotNull() {
+            addCriterion("hidden is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenEqualTo(Boolean value) {
+            addCriterion("hidden =", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenNotEqualTo(Boolean value) {
+            addCriterion("hidden <>", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenGreaterThan(Boolean value) {
+            addCriterion("hidden >", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("hidden >=", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenLessThan(Boolean value) {
+            addCriterion("hidden <", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenLessThanOrEqualTo(Boolean value) {
+            addCriterion("hidden <=", value, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenIn(List<Boolean> values) {
+            addCriterion("hidden in", values, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenNotIn(List<Boolean> values) {
+            addCriterion("hidden not in", values, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenBetween(Boolean value1, Boolean value2) {
+            addCriterion("hidden between", value1, value2, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andHiddenNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("hidden not between", value1, value2, "hidden");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentIsNull() {
+            addCriterion("asdocument is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentIsNotNull() {
+            addCriterion("asdocument is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentEqualTo(Boolean value) {
+            addCriterion("asdocument =", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentNotEqualTo(Boolean value) {
+            addCriterion("asdocument <>", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentGreaterThan(Boolean value) {
+            addCriterion("asdocument >", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("asdocument >=", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentLessThan(Boolean value) {
+            addCriterion("asdocument <", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentLessThanOrEqualTo(Boolean value) {
+            addCriterion("asdocument <=", value, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentIn(List<Boolean> values) {
+            addCriterion("asdocument in", values, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentNotIn(List<Boolean> values) {
+            addCriterion("asdocument not in", values, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentBetween(Boolean value1, Boolean value2) {
+            addCriterion("asdocument between", value1, value2, "asdocument");
+            return (Criteria) this;
+        }
+
+        public Criteria andAsdocumentNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("asdocument not between", value1, value2, "asdocument");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -829,12 +1089,22 @@ public class ChannelCriteria {
             addCriterion("upper(parent_id) like", value.toUpperCase(), "parentId");
             return (Criteria) this;
         }
+
+        public Criteria andChannelTempleteLikeInsensitive(String value) {
+            addCriterion("upper(channel_templete) like", value.toUpperCase(), "channelTemplete");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocumentTempleteLikeInsensitive(String value) {
+            addCriterion("upper(document_templete) like", value.toUpperCase(), "documentTemplete");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated do_not_delete_during_merge 2015年10月25日 10时28分23秒 星期日
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -846,7 +1116,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月17日 21时07分36秒 星期六
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public static class Criterion {
         private String condition;

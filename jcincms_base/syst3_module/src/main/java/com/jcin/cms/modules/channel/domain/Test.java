@@ -9,21 +9,21 @@ public class Test implements Serializable {
     /**
      *   所属表字段为test.id
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     private String id;
 
     /**
      *   所属表字段为test.name
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     private String name;
 
     /**
      *   所属表字段为test.create_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -32,7 +32,7 @@ public class Test implements Serializable {
     /**
      *   所属表字段为test.update_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -41,7 +41,7 @@ public class Test implements Serializable {
     /**
      * 该字段对应数据库表 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     private static final long serialVersionUID = 1L;
 
@@ -50,7 +50,7 @@ public class Test implements Serializable {
      *
      * @return 返回 test.id
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public String getId() {
         return id;
@@ -61,7 +61,7 @@ public class Test implements Serializable {
      *
      * @param id 赋值 test.id
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -72,7 +72,7 @@ public class Test implements Serializable {
      *
      * @return 返回 test.name
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public String getName() {
         return name;
@@ -83,7 +83,7 @@ public class Test implements Serializable {
      *
      * @param name 赋值 test.name
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -94,7 +94,7 @@ public class Test implements Serializable {
      *
      * @return 返回 test.create_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public Date getCreateDate() {
         return createDate;
@@ -105,7 +105,7 @@ public class Test implements Serializable {
      *
      * @param createDate 赋值 test.create_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -116,7 +116,7 @@ public class Test implements Serializable {
      *
      * @return 返回 test.update_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -127,7 +127,7 @@ public class Test implements Serializable {
      *
      * @param updateDate 赋值 test.update_date
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;

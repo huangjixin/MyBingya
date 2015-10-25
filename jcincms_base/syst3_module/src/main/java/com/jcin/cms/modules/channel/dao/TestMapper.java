@@ -9,91 +9,91 @@ public interface TestMapper {
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int deleteBatch(List list);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int insertBatch(List<Test> list);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int countByExample(TestCriteria example);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int deleteByExample(TestCriteria example);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int deleteByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int insert(Test record);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int insertSelective(Test record);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     List<Test> selectByExample(TestCriteria example);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     Test selectByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int updateByExampleSelective(@Param("record") Test record, @Param("example") TestCriteria example);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int updateByExample(@Param("record") Test record, @Param("example") TestCriteria example);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int updateByPrimaryKeySelective(Test record);
 
     /**
      * 该方法由系统生成 test
      *
-     * @mbggenerated 2015年10月20日 12时07分54秒 星期二
+     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
      */
     int updateByPrimaryKey(Test record);
 }
