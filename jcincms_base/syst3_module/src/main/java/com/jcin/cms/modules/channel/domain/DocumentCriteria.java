@@ -8,42 +8,42 @@ public class DocumentCriteria {
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public DocumentCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -52,7 +52,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -61,7 +61,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -70,7 +70,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -79,7 +79,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public boolean isDistinct() {
         return distinct;
@@ -88,7 +88,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -97,7 +97,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -106,7 +106,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -117,7 +117,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -130,7 +130,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -140,7 +140,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void clear() {
         oredCriteria.clear();
@@ -151,7 +151,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void setPage(Page page) {
         this.page=page;
@@ -160,7 +160,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public Page getPage() {
         return page;
@@ -169,7 +169,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -178,7 +178,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1190,6 +1190,76 @@ public class DocumentCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
         public Criteria andDocumentTempleteIsNull() {
             addCriterion("document_templete is null");
             return (Criteria) this;
@@ -1380,6 +1450,11 @@ public class DocumentCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andContentLikeInsensitive(String value) {
+            addCriterion("upper(content) like", value.toUpperCase(), "content");
+            return (Criteria) this;
+        }
+
         public Criteria andDocumentTempleteLikeInsensitive(String value) {
             addCriterion("upper(document_templete) like", value.toUpperCase(), "documentTemplete");
             return (Criteria) this;
@@ -1389,7 +1464,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated do_not_delete_during_merge 2015年10月26日 11时45分06秒 星期一
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1401,7 +1476,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 11时45分06秒 星期一
      */
     public static class Criterion {
         private String condition;

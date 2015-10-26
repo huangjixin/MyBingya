@@ -28,5 +28,12 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	 * @param id
 	 * @return
 	 */
+	List<Document> getDocByChannelId(String channelId,Page page);
+	
+	/**
+	 * 根据栏目ID查询文档
+	 * @param id
+	 * @return
+	 */
 	List<Document> getDocByChannelId(String channelId);
 }

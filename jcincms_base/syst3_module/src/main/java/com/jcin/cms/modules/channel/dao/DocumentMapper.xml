@@ -16,11 +16,9 @@
     <result column="file_name" property="fileName" jdbcType="VARCHAR" />
     <result column="file_addr" property="fileAddr" jdbcType="VARCHAR" />
     <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="document_templete" property="documentTemplete" jdbcType="VARCHAR" />
     <result column="hidden" property="hidden" jdbcType="BIT" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.channel.domain.Document" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,27 +80,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, channel_id, title, color, keyword, descrition, priority, source, source_addr, 
-    author, title_image, file_name, file_addr, size, document_templete, hidden
+    author, title_image, file_name, file_addr, size, content, document_templete, hidden
   </sql>
-  <sql id="Blob_Column_List" >
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from busi_document
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" >
     <include refid="OracleDialectPrefix" />
     select
@@ -119,11 +98,9 @@
     </if>
     <include refid="OracleDialectSuffix" />
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from busi_document
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -142,14 +119,14 @@
       color, keyword, descrition, 
       priority, source, source_addr, 
       author, title_image, file_name, 
-      file_addr, size, document_templete, 
-      hidden, content)
+      file_addr, size, content, 
+      document_templete, hidden)
     values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
       #{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{sourceAddr,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{documentTemplete,jdbcType=VARCHAR}, 
-      #{hidden,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR})
+      #{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Document" >
     insert into busi_document
@@ -196,14 +173,14 @@
       <if test="size != null" >
         size,
       </if>
+      <if test="content != null" >
+        content,
+      </if>
       <if test="documentTemplete != null" >
         document_templete,
       </if>
       <if test="hidden != null" >
         hidden,
-      </if>
-      <if test="content != null" >
-        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -249,14 +226,14 @@
       <if test="size != null" >
         #{size,jdbcType=BIGINT},
       </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
       <if test="documentTemplete != null" >
         #{documentTemplete,jdbcType=VARCHAR},
       </if>
       <if test="hidden != null" >
         #{hidden,jdbcType=BIT},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -311,39 +288,16 @@
       <if test="record.size != null" >
         size = #{record.size,jdbcType=BIGINT},
       </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
       <if test="record.documentTemplete != null" >
         document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
       </if>
       <if test="record.hidden != null" >
         hidden = #{record.hidden,jdbcType=BIT},
       </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update busi_document
-    set id = #{record.id,jdbcType=VARCHAR},
-      channel_id = #{record.channelId,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      color = #{record.color,jdbcType=VARCHAR},
-      keyword = #{record.keyword,jdbcType=VARCHAR},
-      descrition = #{record.descrition,jdbcType=VARCHAR},
-      priority = #{record.priority,jdbcType=INTEGER},
-      source = #{record.source,jdbcType=VARCHAR},
-      source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
-      author = #{record.author,jdbcType=VARCHAR},
-      title_image = #{record.titleImage,jdbcType=VARCHAR},
-      file_name = #{record.fileName,jdbcType=VARCHAR},
-      file_addr = #{record.fileAddr,jdbcType=VARCHAR},
-      size = #{record.size,jdbcType=BIGINT},
-      document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
-      hidden = #{record.hidden,jdbcType=BIT},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -364,6 +318,7 @@
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_addr = #{record.fileAddr,jdbcType=VARCHAR},
       size = #{record.size,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=VARCHAR},
       document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
       hidden = #{record.hidden,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -412,36 +367,16 @@
       <if test="size != null" >
         size = #{size,jdbcType=BIGINT},
       </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
       <if test="documentTemplete != null" >
         document_templete = #{documentTemplete,jdbcType=VARCHAR},
       </if>
       <if test="hidden != null" >
         hidden = #{hidden,jdbcType=BIT},
       </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jcin.cms.modules.channel.domain.Document" >
-    update busi_document
-    set channel_id = #{channelId,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      color = #{color,jdbcType=VARCHAR},
-      keyword = #{keyword,jdbcType=VARCHAR},
-      descrition = #{descrition,jdbcType=VARCHAR},
-      priority = #{priority,jdbcType=INTEGER},
-      source = #{source,jdbcType=VARCHAR},
-      source_addr = #{sourceAddr,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      title_image = #{titleImage,jdbcType=VARCHAR},
-      file_name = #{fileName,jdbcType=VARCHAR},
-      file_addr = #{fileAddr,jdbcType=VARCHAR},
-      size = #{size,jdbcType=BIGINT},
-      document_templete = #{documentTemplete,jdbcType=VARCHAR},
-      hidden = #{hidden,jdbcType=BIT},
-      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.channel.domain.Document" >
@@ -459,14 +394,15 @@
       file_name = #{fileName,jdbcType=VARCHAR},
       file_addr = #{fileAddr,jdbcType=VARCHAR},
       size = #{size,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
       document_templete = #{documentTemplete,jdbcType=VARCHAR},
       hidden = #{hidden,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, document_templete, hidden, content) values 
+    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, content, document_templete, hidden) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.content,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

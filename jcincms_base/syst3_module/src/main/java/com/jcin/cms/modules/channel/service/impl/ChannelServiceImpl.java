@@ -152,7 +152,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		}
 		// super.update(record);
 //		record.setUpdateDate(new Date());
-		int result = channelMapper.updateByPrimaryKeySelective(record);
+		int result = channelMapper.updateByPrimaryKey(record);
 		return record.getId();
 	}
 
@@ -237,6 +237,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		jsonObject.setLinkAddr(channel.getLinkAddr());
 		jsonObject.setOpenMode(channel.getOpenMode());
 		jsonObject.setName(channel.getName());
+		jsonObject.setAsdocument(channel.getAsdocument());
+		jsonObject.setChannelTemplete(channel.getChannelTemplete());
+		jsonObject.setAsdocument(channel.getAsdocument());
+		jsonObject.setHidden(channel.getHidden());
+		jsonObject.setDocumentId(channel.getDocumentId());
 
 		List<Channel> list = searialChild(channel,orgs);
 		if (null != list) {

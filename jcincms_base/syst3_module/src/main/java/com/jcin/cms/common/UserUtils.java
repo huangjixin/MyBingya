@@ -17,6 +17,7 @@ import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.modules.syst.service.impl.ResourceServiceImpl;
 import com.jcin.cms.modules.syst.service.impl.UserServiceImpl;
+import com.jcin.cms.utils.Page;
 
 /**
  * 用户工具类
@@ -99,7 +100,8 @@ public class UserUtils {
 	}
 	
 	public static List getDocByChannelId(String id){
-		return documentService.getDocByChannelId(id);
+		Page page = new Page();
+		return documentService.getDocByChannelId(id,page);
 	}
 	
 	// ============== User Cache ==============

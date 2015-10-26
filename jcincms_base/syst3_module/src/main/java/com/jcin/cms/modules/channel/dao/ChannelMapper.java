@@ -9,91 +9,91 @@ public interface ChannelMapper {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int deleteBatch(List list);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int insertBatch(List<Channel> list);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int countByExample(ChannelCriteria example);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int deleteByExample(ChannelCriteria example);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int deleteByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int insert(Channel record);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int insertSelective(Channel record);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     List<Channel> selectByExample(ChannelCriteria example);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     Channel selectByPrimaryKey(String id);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int updateByExampleSelective(@Param("record") Channel record, @Param("example") ChannelCriteria example);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int updateByExample(@Param("record") Channel record, @Param("example") ChannelCriteria example);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int updateByPrimaryKeySelective(Channel record);
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月25日 10时28分23秒 星期日
+     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
      */
     int updateByPrimaryKey(Channel record);
 }
