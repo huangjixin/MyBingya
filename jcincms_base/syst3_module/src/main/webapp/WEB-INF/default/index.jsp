@@ -151,12 +151,13 @@
 				</div>
 
 				<c:forEach var="chan" items="${list}">
+					<c:if test="${chan.asdocument==false}">
 					<div class="index-news" style="float: left;">
 						<h2>
 							<span>${chan.name}</span><a href="${chan.linkAddr}"><img
 								src="${ctx}/images/more.gif" width="32" height="5" alt="新闻中心" /></a>
 						</h2>
-						<c:forEach var="doc" items="${fns:getDocByChannelId(chan.id)}">
+							<c:forEach var="doc" items="${fns:getDocByChannelId(chan.id)}">
 							<ul>
 								<li class="clearfix"><a href="news.html"
 									title="未来几年北美聚酯纤维需求快速增长"><img
@@ -175,6 +176,7 @@
 							<%-- <a href="${chan.linkAddr}/${doc.id}" target="_blank">${doc.title}</a> --%>
 							<br>
 						</c:forEach>
+						</c:if>
 					</div>
 				</c:forEach>
 
