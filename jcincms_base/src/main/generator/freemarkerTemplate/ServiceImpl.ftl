@@ -147,7 +147,7 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	public String update(${domainObjectName} record) {
 		// super.update(record);
 		record.setUpdateDate(new Date());
-		int result = ${daoMapper}Mapper.updateByPrimaryKeySelective(record);
+		int result = ${daoMapper}Mapper.updateByPrimaryKey(record);
 		return record.getId();
 	}
 

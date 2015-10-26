@@ -54,9 +54,9 @@
 			targetPackage="com.jcin.cms.modules.channel.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="test" domainObjectName="Test" />
-		<!-- <table tableName="busi_channel" domainObjectName="Channel" /> -->
-<!-- 		<table tableName="busi_document" domainObjectName="Document" /> -->
+		<!-- <table tableName="test" domainObjectName="Test" />-->
+		<table tableName="busi_channel" domainObjectName="Channel" /> 
+		<!-- <table tableName="busi_document" domainObjectName="Document" /> -->
 		<!-- <table tableName="tb_db_backup" domainObjectName="DbBackup" /> -->
 <!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->
 		<!-- <table tableName="tb_role_resource" domainObjectName="RoleResource" /> -->

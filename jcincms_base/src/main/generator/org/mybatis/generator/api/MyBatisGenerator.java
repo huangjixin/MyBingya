@@ -332,7 +332,7 @@ public class MyBatisGenerator {
         callback.done();
         
         //--------------- 生成实现类接口
-        for (Context context : contextsToRun) {
+        /*for (Context context : contextsToRun) {
         	List<IntrospectedTable> introspectedTables = context.getIntrospectedTables();
             List<TableConfiguration> list= context.getTableConfigurations();
             for (TableConfiguration tableConfiguration : list) {
@@ -575,7 +575,7 @@ public class MyBatisGenerator {
         			e.printStackTrace();
         		}
         	}
-        }
+        }*/
     }
 
     /**
