@@ -305,4 +305,25 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		
 		return list==null||list.size()==0 ? null :list.get(0);
 	}
+
+	@Override
+	public List<Channel> getChannelTree() {
+		ChannelCriteria channelCriteria = new ChannelCriteria();
+		channelCriteria.createCriteria().andParentIdIsNull();
+		List<Channel> list = channelMapper.selectByExample(channelCriteria);
+		if(list!=null&&list.size()!=0){
+			List<Channel> children = new ArrayList<Channel>();
+			for (Channel object : list) {
+				Channel jsonObject = null;
+				
+				jsonObject = searialChannel(object,null);
+				if (jsonObject != null) {
+					children.add(jsonObject);
+				}
+			}
+			list = children;
+		}
+		
+		return list;
+	}
 }

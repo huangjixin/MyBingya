@@ -8,7 +8,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
 
+import com.jcin.cms.modules.channel.domain.Channel;
+import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
 import com.jcin.cms.modules.channel.service.impl.DocumentServiceImpl;
 import com.jcin.cms.modules.syst.dao.UserMapper;
 import com.jcin.cms.modules.syst.domain.Resource;
@@ -30,6 +33,7 @@ public class UserUtils {
 	private static IUserService userService = SpringUtils.getBean(UserServiceImpl.class);
 	private static IResourceService resourceService = SpringUtils.getBean(ResourceServiceImpl.class);
 	private static IDocumentService documentService = SpringUtils.getBean(DocumentServiceImpl.class);
+	private static IChannelService channelService = SpringUtils.getBean(ChannelServiceImpl.class);
 
 	public static final String CACHE_USER = "user";
 	public static final String CACHE_RESOURCE = "resource";
@@ -77,6 +81,23 @@ public class UserUtils {
 		return getResource();
 	}
 	
+	public static List<Channel> getChannels(boolean isRefresh){
+		if (isRefresh){
+			removeCache("chennels");
+		}
+		return getChannels();
+	}
+	
+	public static List<Channel> getChannels(){
+		List<Channel> list = (List<Channel>)getCache("chennels");
+
+        if (list == null){
+            list = channelService.getChannelTree();
+            putCache("chennels", list);
+		}
+		return list;
+	}
+	
 	/**
 	 * 获取资源列表，实现缓存。
 	 * @return
@@ -104,6 +125,9 @@ public class UserUtils {
 		return documentService.getDocByChannelId(id,page);
 	}
 	
+	public static Channel getByCode(String code){
+		return channelService.getByCode(code);
+	}
 	// ============== User Cache ==============
 	
 	public static Object getCache(String key) {

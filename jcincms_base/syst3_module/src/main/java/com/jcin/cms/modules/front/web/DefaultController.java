@@ -20,20 +20,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.utils.Page;
+import com.jcin.cms.web.BaseController;
 
 /**
  * @author 黄记新
  * 
  */
 @Controller
-@RequestMapping(value = "/")
-public class DefaultController {
+@RequestMapping(value = "/channel")
+public class DefaultController extends BaseController {
 
 	@Autowired
 	private IChannelService channelService;
@@ -43,7 +45,8 @@ public class DefaultController {
 
 	@RequestMapping
 	public String index(Model uiModel, HttpServletRequest httpServletRequest) {
-		List<Channel> list = channelService.selectAll();
+		// List<Channel> list = channelService.getChannelTree();
+		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
 		return "default/index";
 	}
@@ -56,49 +59,64 @@ public class DefaultController {
 		// 检查栏目是否存在；
 		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
-			return "default/channelNotExsit";
+			return root + "default/channelNotExsit";
 		}
 
 		// channel.setLinkAddr(requestRri);
 		uiModel.addAttribute("name", channel.getName());
 		uiModel.addAttribute("channel", channel);
 
+		// 菜单
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
+
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
-				uiModel.addAttribute("msg","栏目所对应的");
-				return "default/channelNotExsit";
+				uiModel.addAttribute("msg", "栏目所对应的");
+				return root + "default/channelNotExsit";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
 			if (null != document)
 				uiModel.addAttribute("document", document);
-			
-			if (null != document.getDocumentTemplete()&& !"".equals(document.getDocumentTemplete())) {
+
+			if (null != document.getDocumentTemplete()
+					&& !"".equals(document.getDocumentTemplete())) {
 				return document.getDocumentTemplete();
 			}
-			
-			return "default/document";
+
+			return root + "default/document";
 		}
 
 		// 栏目模板不为空返回模板。
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
+			DocumentCriteria documentCriteria = new DocumentCriteria();
+			DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+			criteria.andChannelIdEqualTo(channel.getId());
+			documentCriteria.setPage(page);
+			// documentCriteria.setOrderByClause("id desc");
+
+			page = documentService.select(documentCriteria);
+
+			uiModel.addAttribute("page", page);
+			
 			return channel.getChannelTemplete();
 		}
 		/*
 		 * if (channel.hasChildren()) { // 此处应该返回栏目一级级模板目录。 if (null !=
 		 * channel.getChannelTemplete() &&
 		 * !"".equals(channel.getChannelTemplete())) { return
-		 * channel.getChannelTemplete(); } return "default/channels"; }
+		 * channel.getChannelTemplete(); } return root+"default/channels"; }
 		 */
 
 		// 返回默认。
-		return "default/channels";
+		return root + "default/channels";
 	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code}")
+	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code:^(?!${excludePath}).*$}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -109,28 +127,33 @@ public class DefaultController {
 			channel = channelService.getByCode(code);
 		}
 		if (null == channel || null == channel.getId()) {
-			return "default/channelNotExsit";
+			return root + "default/channelNotExsit";
 		}
 
 		uiModel.addAttribute("name", channel.getName());
 		uiModel.addAttribute("channel", channel);
 
+		// 菜单
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
+
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
-				return "default/channelNotExsit";
+				return root + "default/channelNotExsit";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
 			if (null != document)
 				uiModel.addAttribute("document", document);
-			
-			if (null != document.getDocumentTemplete()&& !"".equals(document.getDocumentTemplete())) {
+
+			if (null != document.getDocumentTemplete()
+					&& !"".equals(document.getDocumentTemplete())) {
 				return document.getDocumentTemplete();
 			}
-			
-			return "default/document";
+
+			return root + "default/document";
 		}
 
 		channel.setLinkAddr(requestRri);
@@ -148,17 +171,19 @@ public class DefaultController {
 				&& !"".equals(channel.getChannelTemplete())) {
 			return channel.getChannelTemplete();
 		}
-		return "default/channelDetail";
+		return root + "default/channelDetail";
 	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code}/{id}")
+	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code:^(?!${excludePath}).*$}/{id:^(?!${excludePath}).*$}")
 	public String doc(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
-			return "default/channelNotExsit";
+			return root + "default/channelNotExsit";
 		}
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
@@ -167,7 +192,7 @@ public class DefaultController {
 			return document.getDocumentTemplete();
 		}
 
-		return "default/document";
+		return root + "default/document";
 	}
 
 	/**

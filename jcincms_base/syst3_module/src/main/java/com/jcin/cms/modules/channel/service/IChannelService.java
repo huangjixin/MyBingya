@@ -1,9 +1,11 @@
 package  com.jcin.cms.modules.channel.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.ChannelCriteria;
+import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.Page;
 
@@ -42,4 +44,10 @@ public interface IChannelService extends IBaseService<Channel, String> {
 	 * @return
 	 */
 	Channel getByCode(String name);
+	
+	/**
+	 * 创建栏目树。
+	 * @return
+	 */
+	List<Channel> getChannelTree();
 }

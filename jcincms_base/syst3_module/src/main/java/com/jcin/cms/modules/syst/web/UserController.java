@@ -60,7 +60,7 @@ public class UserController extends BaseController<User> {
 		uiModel.addAttribute("user", user);
 		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		return "admin/modules/user/user_create";
+		return root+"admin/modules/user/user_create";
 	}
 
 	@RequiresPermissions("user:create")
@@ -109,7 +109,7 @@ public class UserController extends BaseController<User> {
 			uiModel.addAttribute("organizationId", list2.get(0).getId());
 		}
 
-		return "admin/modules/user/user_update";
+		return root+"admin/modules/user/user_update";
 	}
 
 	@RequiresPermissions("user:update")
@@ -170,7 +170,7 @@ public class UserController extends BaseController<User> {
 		}
 
 		uiModel.addAttribute("user", user);
-		return "admin/modules/user/user_show";
+		return root+"admin/modules/user/user_show";
 	}
 
 	@RequiresPermissions("user:update")
@@ -180,7 +180,7 @@ public class UserController extends BaseController<User> {
 			HttpServletResponse httpServletResponse) {
 		User user = UserUtils.getUser();
 		uiModel.addAttribute("user", user);
-		return "admin/modules/user/changePassword";
+		return root+"admin/modules/user/changePassword";
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class UserController extends BaseController<User> {
 		User user2 = UserUtils.getUser();
 		if (!user2.getPassword().equals(user.getPassword())) {
 			uiModel.addAttribute("msg", "旧密码输入有误");
-			return "admin/modules/user/changePassword";
+			return root+"admin/modules/user/changePassword";
 		}
 		User user3 = new User();
 		user3.setPassword(newPassword);
@@ -214,7 +214,7 @@ public class UserController extends BaseController<User> {
 	@RequiresPermissions("user:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/user/user_list";
+		return root+"admin/modules/user/user_list";
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class UserController extends BaseController<User> {
 	 */
 	@RequestMapping(value = { "productInfo" })
 	public String productInfo(HttpServletRequest httpServletRequest) {
-		return "admin/modules/user/product_info";
+		return root+"admin/modules/user/product_info";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)

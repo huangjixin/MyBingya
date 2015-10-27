@@ -62,7 +62,9 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	@Override
 	@Transactional
 	public String insert(Document record) {
-		 super.insert(record);
+		if(null == record.getId()||"".equals(record.getId())){
+			super.insert(record);
+		}
 
 //		record.setCreateDate(new Date());
 		int result = documentMapper.insert(record);

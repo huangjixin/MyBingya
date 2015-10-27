@@ -54,7 +54,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(UserOrganization userOrganization, Model uiModel) {
 		uiModel.addAttribute("userOrganization", userOrganization);
-		return "admin/modules/userOrganization/userOrganization_create";
+		return root+"admin/modules/userOrganization/userOrganization_create";
 	}
 
 //	@RequiresPermissions("userOrganization:create")
@@ -74,7 +74,7 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		UserOrganization userOrganization = userOrganizationService.selectByPrimaryKey(id);
 		uiModel.addAttribute("userOrganization", userOrganization);
-		return "admin/modules/userOrganization/userOrganization_update";
+		return root+"admin/modules/userOrganization/userOrganization_update";
 	}
 
 //	@RequiresPermissions("userOrganization:update")
@@ -95,13 +95,13 @@ public class UserOrganizationController extends BaseController<UserOrganization>
 		UserOrganization userOrganization = userOrganizationService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("userOrganization", userOrganization);
-		return "admin/modules/userOrganization/userOrganization_show";
+		return root+"admin/modules/userOrganization/userOrganization_show";
 	}
 
 //	@RequiresPermissions("userOrganization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/userOrganization/userOrganization_list";
+		return root+"admin/modules/userOrganization/userOrganization_list";
 	}
 
 //	@RequiresPermissions("userOrganization:delete")

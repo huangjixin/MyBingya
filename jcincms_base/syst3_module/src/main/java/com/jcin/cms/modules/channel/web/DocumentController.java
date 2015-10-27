@@ -63,7 +63,7 @@ public class DocumentController extends BaseController<Document> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Document document, Model uiModel) {
 		uiModel.addAttribute("document", document);
-		return "admin/modules/document/document_create";
+		return root+"admin/modules/document/document_create";
 	}
 
 	// @RequiresPermissions("document:create")
@@ -74,13 +74,13 @@ public class DocumentController extends BaseController<Document> {
 			HttpServletResponse httpServletResponse) {
 		/*if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, document);
-			return "admin/modules/document/document_create";
+			return root+"admin/modules/document/document_create";
 		}*/
 		if ("".equals(document.getChannelId())
 				&& null == document.getChannelId()) {
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
-			return "admin/modules/document/document_create";
+			return root+"admin/modules/document/document_create";
 		}
 		documentService.insert(document);
 
@@ -94,7 +94,7 @@ public class DocumentController extends BaseController<Document> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
 		uiModel.addAttribute("document", document);
-		return "admin/modules/document/document_update";
+		return root+"admin/modules/document/document_update";
 	}
 
 	// @RequiresPermissions("document:update")
@@ -117,13 +117,13 @@ public class DocumentController extends BaseController<Document> {
 		Document document = documentService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("document", document);
-		return "admin/modules/document/document_show";
+		return root+"admin/modules/document/document_show";
 	}
 
 	// @RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/document/document_list";
+		return root+"admin/modules/document/document_list";
 	}
 
 	// @RequiresPermissions("document:delete")

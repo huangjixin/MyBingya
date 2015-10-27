@@ -389,7 +389,7 @@ public class Channel implements Serializable {
         this.documentId = documentId == null ? null : documentId.trim();
     }
     
-    private List<Channel> children = new ArrayList<Channel>();
+    private List<Channel> children ;
 
 	private boolean checked;
 	

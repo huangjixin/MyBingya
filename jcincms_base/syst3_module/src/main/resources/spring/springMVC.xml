@@ -30,7 +30,8 @@
 	<!-- 视图解释类 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
+		<!-- <property name="prefix" value="/WEB-INF/" /> -->
+		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" /><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
@@ -55,7 +56,7 @@
 	<mvc:resources mapping="/js/**" location="/js/"/>
 	<mvc:resources mapping="/ueditor/**" location="/ueditor/"/>
 	<mvc:resources mapping="/upload/**" location="/upload/"/>
-	<mvc:resources mapping="/WEB-INF/view/**" location="/WEB-INF/" />
+	<mvc:resources mapping="/default/**" location="/default/" />
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />

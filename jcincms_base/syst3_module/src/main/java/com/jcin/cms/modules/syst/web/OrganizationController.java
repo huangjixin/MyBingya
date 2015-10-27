@@ -53,7 +53,7 @@ public class OrganizationController extends BaseController<Organization> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Organization organization, Model uiModel) {
 		uiModel.addAttribute("organization", organization);
-		return "admin/modules/organization/organization_create";
+		return root+"admin/modules/organization/organization_create";
 	}
 
 	// @RequiresPermissions("organization:create")
@@ -74,7 +74,7 @@ public class OrganizationController extends BaseController<Organization> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
 		uiModel.addAttribute("organization", organization);
-		return "admin/modules/organization/organization_update";
+		return root+"admin/modules/organization/organization_update";
 	}
 
 	// @RequiresPermissions("organization:update")
@@ -98,13 +98,13 @@ public class OrganizationController extends BaseController<Organization> {
 		Organization organization = organizationService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("organization", organization);
-		return "admin/modules/organization/organization_show";
+		return root+"admin/modules/organization/organization_show";
 	}
 
 	// @RequiresPermissions("organization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/organization/organization_list";
+		return root+"admin/modules/organization/organization_list";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

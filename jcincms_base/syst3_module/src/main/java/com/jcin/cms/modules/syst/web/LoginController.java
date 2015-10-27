@@ -28,7 +28,7 @@ public class LoginController extends BaseController<User> {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model uiModel, HttpServletRequest request) {
 
-		return "admin/modules/login";
+		return root+"admin/modules/login";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -46,12 +46,12 @@ public class LoginController extends BaseController<User> {
 			error = "其他错误：" + exceptionClassName;
 		}
 		uiModel.addAttribute("error", error);
-		return "admin/modules/login";
+		return root+"admin/modules/login";
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String index(Model uiModel) {
-		return "admin/modules/index";
+		return root+"admin/modules/index";
 	}
 
 }

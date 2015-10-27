@@ -53,7 +53,7 @@ public class ResourceController extends BaseController<Resource> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Resource resource, Model uiModel) {
 		uiModel.addAttribute("resource", resource);
-		return "admin/modules/resource/resource_create";
+		return root+"admin/modules/resource/resource_create";
 	}
 
 	@RequiresPermissions("resource:create")
@@ -76,7 +76,7 @@ public class ResourceController extends BaseController<Resource> {
 		Resource resource = resourceService.selectByPrimaryKey(id);
 		uiModel.addAttribute("resource", resource);
 
-		return "admin/modules/resource/resource_update";
+		return root+"admin/modules/resource/resource_update";
 	}
 
 	@RequiresPermissions("resource:update")
@@ -117,13 +117,13 @@ public class ResourceController extends BaseController<Resource> {
 		 */
 
 		uiModel.addAttribute("resource", resource);
-		return "admin/modules/resource/resource_show";
+		return root+"admin/modules/resource/resource_show";
 	}
 
 	@RequiresPermissions("resource:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/resource/resource_list";
+		return root+"admin/modules/resource/resource_list";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)
