@@ -60,4 +60,12 @@
 		</function-signature>
 		<example>${fns:getDocByChannelId(id)}</example>
 	</function>
+	<function>
+		<description>根据栏目名称查询栏目</description>
+		<name>getByCode</name>
+		<function-class>com.jcin.cms.common.UserUtils</function-class>
+		<function-signature>java.util.List getByCode(java.lang.String)
+		</function-signature>
+		<example>${fns:getByCode(code)}</example>
+	</function>
 </taglib>
