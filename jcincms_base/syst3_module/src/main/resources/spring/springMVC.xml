@@ -49,7 +49,7 @@
 	<!-- <bean class="com.jcin.cms.web.JCinInteceptor" /> -->
 	<!-- </mvc:interceptors> -->
 
-	<mvc:default-servlet-handler />
+<!-- 	<mvc:default-servlet-handler /> -->
 
 	<!-- 对静态资源文件的访问 方案二 （二选一） -->
 	<mvc:resources mapping="/images/**" location="/images/"/>

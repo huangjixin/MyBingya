@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jcin.cms.common.SpringUtils;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
@@ -31,8 +33,11 @@ import com.jcin.cms.web.BaseController;
  * 
  */
 @Controller
-@RequestMapping(value = { "/", "" })
+@RequestMapping(value = {"","/"})
 public class DefaultIndexController extends BaseController {
+
+	private static IChannelService channelServ = SpringUtils
+			.getBean(ChannelServiceImpl.class);
 
 	@Autowired
 	private IChannelService channelService;
@@ -40,21 +45,23 @@ public class DefaultIndexController extends BaseController {
 	@Autowired
 	private IDocumentService documentService;
 
-	@RequestMapping(value = { "", "/" })
+	@RequestMapping
 	public String index(Model uiModel, HttpServletRequest httpServletRequest) {
 		// List<Channel> list = channelService.getChannelTree();
-		List<Channel> list = UserUtils.getChannels();
+		List<Channel> list = getChannels(true); //利用缓存。
 		uiModel.addAttribute("list", list);
 		return "default/index";
 	}
 
-	@RequestMapping(value = "{channels}")
+	@RequestMapping(value = "{channels:(?!${includePath}).*$}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		// String requestRri = httpServletRequest.getRequestURI(); :(?!${includePath}).*$}
+		// String requestRri = httpServletRequest.getRequestURI();
+		// :(?!${includePath}).*$}
 		// 检查栏目是否存在；
-		Channel channel = channelService.getByCode(channels);
+		Channel channel = getChannelByCode(true,channels);
+//		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
 			return root + "default/channelNotExsit";
 		}
@@ -64,7 +71,7 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("channel", channel);
 
 		// 菜单
-		List<Channel> list = UserUtils.getChannels();
+		List<Channel> list = getChannels(true); //利用缓存。
 		uiModel.addAttribute("list", list);
 
 		// 检查栏目是否为文档。；
@@ -113,8 +120,8 @@ public class DefaultIndexController extends BaseController {
 		// 返回默认。
 		return root + "default/channels";
 	}
-	
-	@RequestMapping(value = "{channels}/{code}")
+
+//	@RequestMapping(value = "{channels:(?!${includePath}).*$}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -122,7 +129,7 @@ public class DefaultIndexController extends BaseController {
 		String requestRri = httpServletRequest.getRequestURI();
 		setPage(page, httpServletRequest);
 		if (null == channel || null == channel.getId()) {
-			channel = channelService.getByCode(code);
+			channel = getChannelByCode(true, code);
 		}
 		if (null == channel || null == channel.getId()) {
 			return root + "default/channelNotExsit";
@@ -132,7 +139,7 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("channel", channel);
 
 		// 菜单
-		List<Channel> list = UserUtils.getChannels();
+		List<Channel> list = getChannels(true);
 		uiModel.addAttribute("list", list);
 
 		// 检查栏目是否为文档。；
@@ -172,7 +179,6 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/channelDetail";
 	}
 
-	
 	/**
 	 * 设置page。
 	 * 
@@ -219,4 +225,43 @@ public class DefaultIndexController extends BaseController {
 		page.setStart(start);
 		page.setPageSize(number);
 	}
+
+	// ////////////////////////////////////////////////////////////
+	// ////// 缓存
+	// ////////////////////////////////////////////////////////////
+	public static List<Channel> getChannels(boolean isRefresh) {
+		if (isRefresh) {
+			removeCache("chennels");
+		}
+		return getChannels();
+	}
+
+	public static List<Channel> getChannels() {
+		List<Channel> list = (List<Channel>) getCache("chennels");
+
+		if (list == null) {
+			list = channelServ.getChannelTree();
+			putCache("chennels", list);
+		}
+		return list;
+	}
+	
+	public static Channel getChannelByCode(boolean isRefresh,String code) {
+		if (isRefresh) {
+			removeCache(code);
+		}
+		return getChannelByCode(code);
+	}
+	
+	public static Channel getChannelByCode(String code) {
+		Channel channel = channelServ.getByCode(code);
+		if (channel == null) {
+			channel = channelServ.getByCode(code);
+			if (channel != null) {
+				putCache(code, channel);
+			}
+		}
+		return channel;
+	}
+
 }
