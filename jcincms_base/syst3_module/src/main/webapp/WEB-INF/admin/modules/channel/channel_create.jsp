@@ -11,16 +11,11 @@ th {
 	font-size: 12px;
 }
 </style>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/icon.css">
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
 	$().ready(function() {
 		createOrganizationTree();
@@ -50,11 +45,11 @@ th {
 		var co = $('#code').val();
 		if (node) {
 			if ("" != co) {
-				$('#linkAddr').val("channel/"+node.code + "/" + co);
+				$('#linkAddr').val(node.code + "/" + co);
 			}
 		} else {
 			if ("" != co) {
-				$('#linkAddr').val("channel/"+co);
+				$('#linkAddr').val(co);
 			}
 		}
 	}
