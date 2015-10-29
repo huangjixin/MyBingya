@@ -53,7 +53,7 @@ public class DefaultIndexController extends BaseController {
 		return "default/index";
 	}
 
-	@RequestMapping(value = "{channels:(?!${includePath}).*$}")
+	@RequestMapping(value = "{channels}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -121,7 +121,7 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/channels";
 	}
 
-//	@RequestMapping(value = "{channels:(?!${includePath}).*$}/{code}")
+	@RequestMapping(value = "{channels}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,

@@ -59,6 +59,13 @@ public class ChannelController extends BaseController<Channel>{
 	public String create(Channel channel, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		/*if(channel.getCode()!=null && !"".equals(channel.getCode())){
+			String endChactor = channel.getCode().substring(channel.getCode().length()-1, channel.getCode().length());
+			if(!"s".equals(endChactor)){
+				uiModel.addAttribute("channel", channel);
+				return root+"admin/modules/channel/channel_create";
+			}
+		}*/
 		channelService.insert(channel);
 		
 		redirectAttributes.addFlashAttribute("channel", channel);
@@ -85,6 +92,13 @@ public class ChannelController extends BaseController<Channel>{
 			return "redirect:/" + Global.getAdminPath() + "/channel/update/"
 					+ channel.getId();
 		}
+		/*if(channel.getCode()!=null && !"".equals(channel.getCode())){
+			String endChactor = channel.getCode().substring(channel.getCode().length()-1, channel.getCode().length());
+			if(!"s".equals(endChactor)){
+				uiModel.addAttribute("channel", channel);
+				return root+"admin/modules/channel/channel_create";
+			}
+		}*/
 		channelService.update(channel);
 		
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
