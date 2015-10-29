@@ -136,7 +136,7 @@
 						<c:forEach var="doc" items="${page.rows}">
 							<tr>
 								<td class="time-list"><span>2015.10.27</span></td>
-								<td style="text-align: center;"><a href="${ctx}/${channel.code}/doc/${doc.id}" title="${doc.title}">${doc.title}</a></td>
+								<td style="text-align: center;"><a href="${ctx}/${channel.code}/doc/${doc.id}" target="blank" title="${doc.title}">${doc.title}</a></td>
 							</tr>
 						</c:forEach>
 					</table>

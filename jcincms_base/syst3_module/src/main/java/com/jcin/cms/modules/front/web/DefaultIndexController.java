@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jcin.cms.common.SpringUtils;
 import com.jcin.cms.common.UserUtils;
@@ -179,6 +180,47 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/channelDetail";
 	}
 
+	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/**/doc/{id}")
+	public String doc(@PathVariable("id") String id,
+			@ModelAttribute Page page, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
+		Document document = documentService.selectByPrimaryKey(id);
+		if (null == document) {
+			return root + "default/channelNotExsit";
+		}
+		uiModel.addAttribute("document", document);
+		uiModel.addAttribute("page", page);
+		if (null != document.getDocumentTemplete()
+				&& !"".equals(document.getDocumentTemplete())) {
+			return document.getDocumentTemplete();
+		}
+
+		return root + "default/document";
+	}
+	
+//	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code}/**/{id}")
+	public String doc(@PathVariable("channels") String channels,
+			@PathVariable("code") String code, @PathVariable("id") String id,
+			@ModelAttribute Page page, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
+		Document document = documentService.selectByPrimaryKey(id);
+		if (null == document) {
+			return root + "default/channelNotExsit";
+		}
+		uiModel.addAttribute("document", document);
+		uiModel.addAttribute("page", page);
+		if (null != document.getDocumentTemplete()
+				&& !"".equals(document.getDocumentTemplete())) {
+			return document.getDocumentTemplete();
+		}
+
+		return root + "default/document";
+	}
+	
 	/**
 	 * 设置page。
 	 * 
