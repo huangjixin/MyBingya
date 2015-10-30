@@ -35,7 +35,8 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             throw new ExcessiveAttemptsException();
         }
 
-        boolean matches = super.doCredentialsMatch(token, info);
+//        boolean matches = super.doCredentialsMatch(token, info);
+        boolean matches = false;
         String password = new String ((char[])token.getCredentials());
         String dbPassword = (String) info.getCredentials();
         if(password.equals(dbPassword)){

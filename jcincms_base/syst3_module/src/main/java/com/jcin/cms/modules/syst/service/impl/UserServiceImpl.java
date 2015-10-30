@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,17 +44,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class
 			.getName());
 
-	@javax.annotation.Resource
+	@Autowired
 	private UserMapper userMapper;
-	@javax.annotation.Resource
+	@Autowired
 	private RoleMapper roleMapper;
-	@javax.annotation.Resource
+	@Autowired
 	private UserRoleMapper userRoleMapper;
-	@javax.annotation.Resource
+	@Autowired
 	private UserOrganizationMapper userOrganizationMapper;
-	@javax.annotation.Resource
+	@Autowired
 	private ResourceMapper resourceMapper;
 
+	@Autowired
+    private UserRealm systemRealm;
 	// @javax.annotation.Resource
 	// private Userre;
 	/*
@@ -334,6 +337,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		// User user2 = userMapper.selectByPrimaryKey(user.getId());
 		// user2.setPassword(user.getPassword());
 		userMapper.updateByPrimaryKeySelective(user);
+		systemRealm.clearCachedAuthorizationInfo(user.getUsername());
 		return true;
 	}
 
