@@ -55,7 +55,8 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- <table tableName="test" domainObjectName="Test" />-->
-		<table tableName="busi_channel" domainObjectName="Channel" /> 
+		<table tableName="busi_comment" domainObjectName="Comment" /> 
+<!-- 		<table tableName="busi_channel" domainObjectName="Channel" />  -->
 		<!-- <table tableName="busi_document" domainObjectName="Document" /> -->
 		<!-- <table tableName="tb_db_backup" domainObjectName="DbBackup" /> -->
 <!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->

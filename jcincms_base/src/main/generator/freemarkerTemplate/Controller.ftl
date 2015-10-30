@@ -16,13 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,14 +47,14 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "${r'${adminPath}'}/${objInst}")
 public class ${domainObjectName}Controller extends BaseController<${domainObjectName}>{
-	@Resource
+	@Autowired
 	private I${domainObjectName}Service ${objInst}Service;
 
 //	@RequiresPermissions("${objInst}:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(${domainObjectName} ${objInst}, Model uiModel) {
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return "admin/modules/${objInst}/${objInst}_create";
+		return root+"admin/modules/${objInst}/${objInst}_create";
 	}
 
 //	@RequiresPermissions("${objInst}:create")
@@ -74,7 +74,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return "admin/modules/${objInst}/${objInst}_update";
+		return root+"admin/modules/${objInst}/${objInst}_update";
 	}
 
 //	@RequiresPermissions("${objInst}:update")
@@ -95,13 +95,13 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return "admin/modules/${objInst}/${objInst}_show";
+		return root+"admin/modules/${objInst}/${objInst}_show";
 	}
 
 //	@RequiresPermissions("${objInst}:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/${objInst}/${objInst}_list";
+		return root+"admin/modules/${objInst}/${objInst}_list";
 	}
 
 //	@RequiresPermissions("${objInst}:delete")

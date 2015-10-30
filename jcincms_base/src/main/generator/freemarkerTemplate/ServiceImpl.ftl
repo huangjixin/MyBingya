@@ -9,10 +9,9 @@ package ${packageName};
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.${moduleName}.dao.${domainObjectName}Mapper;
@@ -33,7 +32,7 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	private static Logger logger = Logger.getLogger(${domainObjectName}ServiceImpl.class
 			.getName());
 
-	@Resource
+	@Autowired
 	private ${domainObjectName}Mapper ${daoMapper}Mapper;
 
 	/*
