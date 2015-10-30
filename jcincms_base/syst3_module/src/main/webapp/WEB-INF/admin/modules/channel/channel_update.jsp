@@ -54,11 +54,11 @@ th {
 		var co = $('#code').val();
 		if (node) {
 			if ("" != co) {
-				$('#linkAddr').val(node.code + "/" + co);
+				$('#linkAddr').val(node.linkAddr + "/" + co);
 			}
 		} else {
 			if ("" != co) {
-				$('#linkAddr').val(co);
+				$('#linkAddr').val("channel/"+co);
 			}
 		}
 	}
