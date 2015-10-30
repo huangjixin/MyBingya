@@ -14,7 +14,18 @@
 	<packaging>war</packaging>
 	<name>syst3_module</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<basedir>D://workspace//jcincms_base//syst3_module</basedir>
+	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.baidu.ueditor</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.1.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/ueditor/jsp/lib/ueditor-1.1.2.jar</systemPath>
+		</dependency>
+
 		<dependency>
 			<groupId>com.github.livesense</groupId>
 			<artifactId>jodconverter-core</artifactId>
