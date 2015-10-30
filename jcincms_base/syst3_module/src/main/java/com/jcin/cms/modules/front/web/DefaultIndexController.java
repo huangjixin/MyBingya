@@ -54,7 +54,7 @@ public class DefaultIndexController extends BaseController {
 		return "default/index";
 	}
 
-	@RequestMapping(value = "{channels}")
+//	@RequestMapping(value = "{channels}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -122,7 +122,7 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/channels";
 	}
 
-	@RequestMapping(value = "{channels}/{code}")
+//	@RequestMapping(value = "{channels}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -180,11 +180,11 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/channelDetail";
 	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/**/doc/{id}")
-	public String doc(@PathVariable("id") String id,
+//	@RequestMapping(value = "{channels}/doc/{id}")
+	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		List<Channel> list = UserUtils.getChannels();
+		List<Channel> list = UserUtils.getChannels();//:^(?!${excludePath}).*$
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
@@ -200,12 +200,12 @@ public class DefaultIndexController extends BaseController {
 		return root + "default/document";
 	}
 	
-//	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code}/**/{id}")
-	public String doc(@PathVariable("channels") String channels,
-			@PathVariable("code") String code, @PathVariable("id") String id,
+//	@RequestMapping(value = "{channels}/{channel}/{code}",method=RequestMethod.GET)
+	public String doc(@PathVariable("channels") String channels,@PathVariable("channel") String channel,
+			@PathVariable("code") String code,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		List<Channel> list = UserUtils.getChannels();
+		/*List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
@@ -216,7 +216,7 @@ public class DefaultIndexController extends BaseController {
 		if (null != document.getDocumentTemplete()
 				&& !"".equals(document.getDocumentTemplete())) {
 			return document.getDocumentTemplete();
-		}
+		}*/
 
 		return root + "default/document";
 	}

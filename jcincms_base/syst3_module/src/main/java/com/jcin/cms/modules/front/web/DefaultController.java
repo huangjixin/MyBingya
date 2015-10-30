@@ -51,11 +51,11 @@ public class DefaultController extends BaseController {
 		return "default/index";
 	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}")
+	@RequestMapping(value = "{channels}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		// String requestRri = httpServletRequest.getRequestURI();
+		// String requestRri = httpServletRequest.getRequestURI(); :^(?!${excludePath}).*$
 		// 检查栏目是否存在；
 		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
@@ -116,7 +116,7 @@ public class DefaultController extends BaseController {
 		return root + "default/channels";
 	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code:^(?!${excludePath}).*$}")
+	@RequestMapping(value = "{channels}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -173,13 +173,70 @@ public class DefaultController extends BaseController {
 		}
 		return root + "default/channelDetail";
 	}
+	
+	@RequestMapping(value = "{channels}/{channel}/**/{code}")
+	public String channels(@PathVariable("channels") String channels,
+			@PathVariable("code") String code, @ModelAttribute Page page,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			Channel channel) {
+		String requestRri = httpServletRequest.getRequestURI();
+		setPage(page, httpServletRequest);
+		if (null == channel || null == channel.getId()) {
+			channel = channelService.getByCode(code);
+		}
+		if (null == channel || null == channel.getId()) {
+			return root + "default/channelNotExsit";
+		}
+		
+		uiModel.addAttribute("name", channel.getName());
+		uiModel.addAttribute("channel", channel);
+		
+		// 菜单
+		List<Channel> list = UserUtils.getChannels();
+		uiModel.addAttribute("list", list);
+		
+		// 检查栏目是否为文档。；
+		if (channel.getAsdocument()) {
+			if (channel.getDocumentId() == null
+					|| "".equals(channel.getDocumentId())) {
+				return root + "default/channelNotExsit";
+			}
+			Document document = documentService.selectByPrimaryKey(channel
+					.getDocumentId());
+			if (null != document)
+				uiModel.addAttribute("document", document);
+			
+			if (null != document.getDocumentTemplete()
+					&& !"".equals(document.getDocumentTemplete())) {
+				return document.getDocumentTemplete();
+			}
+			
+			return root + "default/document";
+		}
+		
+		channel.setLinkAddr(requestRri);
+		
+		DocumentCriteria documentCriteria = new DocumentCriteria();
+		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+		criteria.andChannelIdEqualTo(channel.getId());
+		documentCriteria.setPage(page);
+		// documentCriteria.setOrderByClause("id desc");
+		
+		page = documentService.select(documentCriteria);
+		
+		uiModel.addAttribute("page", page);
+		if (null != channel.getChannelTemplete()
+				&& !"".equals(channel.getChannelTemplete())) {
+			return channel.getChannelTemplete();
+		}
+		return root + "default/channelDetail";
+	}
 
-	@RequestMapping(value = "{channels:^(?!${excludePath}).*$}/{code:^(?!${excludePath}).*$}/{id:^(?!${excludePath}).*$}")
-	public String doc(@PathVariable("channels") String channels,
-			@PathVariable("code") String code, @PathVariable("id") String id,
+	@RequestMapping(value = "{channels}/**/doc/{id}")
+	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		List<Channel> list = UserUtils.getChannels();
+		List<Channel> list = UserUtils.getChannels();//:^(?!${excludePath}).*$
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
