@@ -17,8 +17,10 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.service.IUserService;
@@ -64,8 +66,16 @@ public class UserRealm extends AuthorizingRealm {
 //                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
+        clearCache(authenticationInfo.getPrincipals());
         return authenticationInfo;
     }
+    /**
+	 * 清空用户关联权限认证，待下次使用时重新加载
+	 */
+	public void clearCachedAuthorizationInfo(String principal) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
+		clearCachedAuthorizationInfo(principals);
+	}
 
     @Override
     public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
