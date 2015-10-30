@@ -80,9 +80,9 @@
 		</dependency>
 		<!-- <dependency> <groupId>org.quartz-scheduler</groupId> <artifactId>quartz</artifactId> 
 			<version>2.2.1</version> </dependency> -->
-		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-all</artifactId> 
-			<version>1.2.3</version> </dependency> -->
-		<dependency>
+		<dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-all</artifactId> 
+			<version>1.2.3</version> </dependency>
+		<!-- <dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>1.2.2</version>
@@ -106,7 +106,7 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>1.2.2</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
