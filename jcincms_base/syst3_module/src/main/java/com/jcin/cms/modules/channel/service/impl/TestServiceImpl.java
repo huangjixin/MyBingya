@@ -27,7 +27,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="testService")
 public class TestServiceImpl extends BaseServiceImpl<Test, String>
 		implements ITestService {
 	private static Logger logger = Logger.getLogger(TestServiceImpl.class

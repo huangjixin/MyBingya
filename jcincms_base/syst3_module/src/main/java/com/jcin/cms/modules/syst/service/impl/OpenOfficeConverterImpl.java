@@ -7,16 +7,17 @@
 package com.jcin.cms.modules.syst.service.impl;
 
 import java.io.File;
-import java.net.URL;
 import java.util.regex.Pattern;
 
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
+import org.springframework.stereotype.Service;
 
 import com.jcin.cms.modules.syst.service.IOpenOfficeConverter;
 import com.jcin.cms.utils.PDF2SwfHelper;
 
+@Service(value = "openOfficeConverterService")
 public class OpenOfficeConverterImpl implements IOpenOfficeConverter {
 
 	/**
@@ -82,12 +83,14 @@ public class OpenOfficeConverterImpl implements IOpenOfficeConverter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/*URL url = OpenOfficeConverterImpl.class.getClassLoader().getResource("test.pdf");
-		String inputPath = url.getFile();
-		OpenOfficeConverterImpl.word2pdf(inputPath);
-		System.out.println();
-		inputPath = inputPath.substring(1);
-		PDF2SwfHelper.execPdfToSwf(inputPath);*/
+		/*
+		 * URL url =
+		 * OpenOfficeConverterImpl.class.getClassLoader().getResource("test.pdf"
+		 * ); String inputPath = url.getFile();
+		 * OpenOfficeConverterImpl.word2pdf(inputPath); System.out.println();
+		 * inputPath = inputPath.substring(1);
+		 * PDF2SwfHelper.execPdfToSwf(inputPath);
+		 */
 
 		OpenOfficeConverterImpl.word2pdf("D://MySQl//test11.doc");
 		PDF2SwfHelper.execPdfToSwf("D://MySQl//test.pdf");

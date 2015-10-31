@@ -32,7 +32,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="resourceService")
 public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		implements IResourceService {
 	private static Logger logger = Logger.getLogger(ResourceServiceImpl.class

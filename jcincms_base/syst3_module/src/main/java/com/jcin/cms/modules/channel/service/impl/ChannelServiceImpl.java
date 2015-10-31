@@ -27,7 +27,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="channelService")
 public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		implements IChannelService {
 	private static Logger logger = Logger.getLogger(ChannelServiceImpl.class

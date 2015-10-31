@@ -17,7 +17,6 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -35,8 +34,8 @@ public class UserRealm extends AuthorizingRealm {
         String username = (String)principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(getUserService().findRoles(username));
-        Set<String>set = getUserService().findPermissions(username);
+        authorizationInfo.setRoles(userService.findRoles(username));
+        Set<String>set = userService.findPermissions(username);
         authorizationInfo.setStringPermissions(set);
 
         return authorizationInfo;
@@ -47,7 +46,7 @@ public class UserRealm extends AuthorizingRealm {
 
         String username = (String)token.getPrincipal();
 
-        User user = getUserService().findByUsername(username);
+        User user = userService.findByUsername(username);
 
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
@@ -105,12 +104,12 @@ public class UserRealm extends AuthorizingRealm {
         clearAllCachedAuthorizationInfo();
     }
 
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
+//	public IUserService getUserService() {
+//		return userServiceImpl;
+//	}
+//
+//	public void setUserService(IUserService userService) {
+//		this.userServiceImpl = userService;
+//	}
 
 }

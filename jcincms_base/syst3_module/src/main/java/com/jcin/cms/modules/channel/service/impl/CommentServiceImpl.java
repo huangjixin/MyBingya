@@ -26,7 +26,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="commentService")
 public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 		implements ICommentService {
 	private static Logger logger = Logger.getLogger(CommentServiceImpl.class

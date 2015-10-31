@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.syst.dao.LogMapper;
-import com.jcin.cms.modules.syst.dao.RoleMapper;
 import com.jcin.cms.modules.syst.domain.Log;
 import com.jcin.cms.modules.syst.domain.LogCriteria;
 import com.jcin.cms.modules.syst.service.ILogService;
@@ -26,7 +25,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="logService")
 public class LogServiceImpl extends BaseServiceImpl<Log, String> implements
 		ILogService {
 	private static Logger logger = Logger.getLogger(LogServiceImpl.class

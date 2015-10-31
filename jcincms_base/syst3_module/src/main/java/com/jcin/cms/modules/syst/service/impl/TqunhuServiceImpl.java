@@ -27,7 +27,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="tqunhuInfoService")
 public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> implements
 		ITqunhuInfoService {
 	private static Logger logger = Logger.getLogger(TqunhuServiceImpl.class

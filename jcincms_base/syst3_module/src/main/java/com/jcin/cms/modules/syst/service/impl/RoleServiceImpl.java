@@ -31,7 +31,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="roleService")
 public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		IRoleService {
 	private static Logger logger = Logger.getLogger(RoleServiceImpl.class

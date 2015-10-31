@@ -6,7 +6,6 @@
  */
 package com.jcin.cms.modules.syst.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,7 +26,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value = "organizationResourceService")
 public class OrganizationResourceServiceImpl extends BaseServiceImpl<OrganizationResource, String>
 		implements IOrganizationResourceService {
 	private static Logger logger = Logger.getLogger(OrganizationResourceServiceImpl.class
