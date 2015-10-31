@@ -116,8 +116,9 @@
 </head>
 <body>
 	<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
+			<shiro:hasPermission name="log:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
 			<input type="button"
 				value="详情" onclick="show();" /> 
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />

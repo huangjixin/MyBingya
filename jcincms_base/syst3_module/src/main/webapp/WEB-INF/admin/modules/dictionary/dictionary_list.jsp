@@ -168,14 +168,18 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="javascript:window.location.href='dictionary/create'" /> 
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
-			<input type="button"
-				value="更新" onclick="update();" /> 
-			<input type="button"
-				value="详情" onclick="show();" /> 
+			<shiro:hasPermission name="dictionary:create">
+				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="dictionary:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
+			<shiro:hasPermission name="dictionary:update">
+				<input type="button" value="更新" onclick="update();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="dictionary:view">
+				<input type="button" value="详情" onclick="show();" /> 
+			</shiro:hasPermission>  
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"

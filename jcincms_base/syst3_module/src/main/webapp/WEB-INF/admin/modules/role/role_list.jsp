@@ -211,11 +211,19 @@
 		<ul id="resourceTree"></ul>
 	</div>
 	<div data-options="region:'north'" style="padding:5px;">
-		<input type="button" value="添加" id="btn_Add" name="btn_Add"
-			onclick="create();" /> <input type="button" value="删除"
-			onclick="deleteRows();" /> <input type="button" value="更新"
-			onclick="update();" /> <input type="button" value="详情"
-			onclick="show();" /><input type="button" id="exportBtn"
+		<shiro:hasPermission name="role:create">
+				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="role:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
+			<shiro:hasPermission name="role:update">
+				<input type="button" value="更新" onclick="update();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="role:view">
+				<input type="button" value="详情" onclick="show();" /> 
+			</shiro:hasPermission>
+			<input type="button" id="exportBtn"
 			value="导出excel" onclick="exportExcel()" /> <input type="button"
 			id="importBtn" value="导入excel" onclick="importExcel()" />
 		&nbsp;&nbsp;&nbsp;&nbsp; <label>角色名:</label> <input id="nameInput"

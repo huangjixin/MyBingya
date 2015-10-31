@@ -1,3 +1,4 @@
+<%@page import="com.jcin.cms.common.Global"%>
 <%@page import="org.apache.shiro.SecurityUtils"%>
 <%@page import="org.apache.shiro.subject.Subject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 <% 
 	Subject subject = SecurityUtils.getSubject();
 	if (subject.isAuthenticated()) {
-		response.sendRedirect("/syst/admin");	
+		response.sendRedirect(request.getContextPath()+"/"+Global.getAdminPath());	
 	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

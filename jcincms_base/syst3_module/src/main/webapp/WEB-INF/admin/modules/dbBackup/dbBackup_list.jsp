@@ -174,8 +174,9 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
+			<shiro:hasPermission name="channel:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 			<input type="button" value="备份" onclick="backup()" /> 

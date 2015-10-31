@@ -78,14 +78,18 @@
 </head>
 <body>
 	<div id="toolBar" style="padding: 5px;border: 0px;">
-			<input type="button" value="添加" id="btn_Add" name="btn_Add"
-				onclick="create();" /> 
-			<input type="button"
-				value="删除" onclick="deleteRows();" /> 
-			<input type="button"
-				value="更新" onclick="update();" /> 
-			<input type="button"
-				value="详情" onclick="show();" />
+			<shiro:hasPermission name="resource:create">
+				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="resource:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
+			<shiro:hasPermission name="resource:update">
+				<input type="button" value="更新" onclick="update();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="resource:view">
+				<input type="button" value="详情" onclick="show();" /> 
+			</shiro:hasPermission>
 		</div>
 		<table id="tgrid" title="" class="easyui-treegrid"
 			data-options="

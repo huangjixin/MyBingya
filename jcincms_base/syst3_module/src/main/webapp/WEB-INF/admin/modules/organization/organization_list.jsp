@@ -180,12 +180,19 @@
 
 <body class="easyui-layout" data-options="fit:true">
 	<div data-options="region:'north'" style="padding:5px;">
-						<input type="button" value="添加" id="btn_Add" name="btn_Add"
-						onclick="javascript:window.location.href='${ctxAdmin}/organization/create'" />
-					<input type="button" value="删除" onclick="deleteRows();" /> <input
-						type="button" value="更新" onclick="update();" /> <input
-						type="button" value="详情" onclick="show();" /> <input
-						type="button" value="刷新组织" onclick="refreshResourceCheckboxTree();" />
+		<shiro:hasPermission name="organization:create">
+				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="organization:delete">
+				<input type="button" value="删除" onclick="deleteRows();" />
+			</shiro:hasPermission>
+			<shiro:hasPermission name="organization:update">
+				<input type="button" value="更新" onclick="update();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="organization:view">
+				<input type="button" value="详情" onclick="show();" /> 
+			</shiro:hasPermission>
+			<input type="button" value="刷新组织" onclick="refreshResourceCheckboxTree();" />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" value="授权" onclick="connectOrganizationResource();"/>
 	</div>
