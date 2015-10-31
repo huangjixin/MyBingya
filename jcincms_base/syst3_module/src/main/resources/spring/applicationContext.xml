@@ -14,10 +14,10 @@
 	<bean id="springUtils" class="com.jcin.cms.common.SpringUtils"></bean>
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" id="dataSource">
-		<property name="driverClassName" value="${database.driverClassName}" />
-		<property name="url" value="${database.url}" />
-		<property name="username" value="${database.username}" />
-		<property name="password" value="${database.password}" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/jcincms3" />
+		<property name="username" value="root" />
+		<property name="password" value="qwer123456" />
 		<property name="testOnBorrow" value="true" />
 		<property name="testOnReturn" value="true" />
 		<property name="testWhileIdle" value="true" />
@@ -35,6 +35,7 @@
 
 	<!-- scan formappers andlet them beautowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 		<property name="basePackage" value="com.jcin.cms.modules..*" />
 	</bean>
 
@@ -46,12 +47,13 @@
 
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
 	<!-- 声明式事务配置，transaction-manager属性值默认为 transactionManager -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 	<!-- enable component scanning (beware that this does not enable mapper 
 		scanning!) 扫描类包，将标注spring注解的类自动转化成Bean，同时完成Bean的注入 -->
 	<context:component-scan base-package="com.jcin.cms.modules..*">
-		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller.*"/> -->
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
 	<!-- enable autowire -->
