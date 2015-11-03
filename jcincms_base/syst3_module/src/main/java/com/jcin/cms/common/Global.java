@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.common;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -32,7 +33,8 @@ public class Global {
 	}
 	
 	public static String getUploadpath(){
-		return getConfig("uploadPath");
+		return System.getProperty("user.dir")+File.separator+"webapp"+File.separator+"upload"+File.separator;
+//		return getConfig("uploadPath");
 	}
 	
 	private static Properties loadProperties(String resources) {

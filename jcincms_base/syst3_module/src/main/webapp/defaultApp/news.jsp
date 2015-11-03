@@ -14,20 +14,20 @@
 <meta name="Identifier-URL" content="http://www.netgather.com" />
 <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="Bookmark" href="/favicon.ico" type="image/x-icon" />
-<link href="${ctx}/default/css/reset.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/reset.css" rel="stylesheet"
 	type="text/css" />
-<link href="${ctx}/default/css/webmain.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/webmain.css" rel="stylesheet"
 	type="text/css" />
-<link href="${ctx}/default/css/ddsmoothmenu.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/ddsmoothmenu.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript"
-	src="${ctx}/default/scripts/jquery-1.4.2.min.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
 	src="scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
-	src="${ctx}/default/scripts/webtry_roll.js"></script>
+	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"
-	src="${ctx}/default/scripts/ddsmoothmenu.js"></script>
+	src="${ctx}/defaultApp/scripts/ddsmoothmenu.js"></script>
 <script type="text/javascript">
 	ddsmoothmenu.init({
 		mainmenuid : "MainMenu", //menu DIV id
@@ -41,12 +41,12 @@
 <body>
 	<div id="wrapper">
 		<div class="top">
-			<img src="${ctx}/default/images/logo.gif" width="650" height="90"
+			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
 			<div id="lang">
 				<a
 					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="${ctx}/default/images/gb.gif" width="16" height="11"
+					src="${ctx}/defaultApp/images/gb.gif" width="16" height="11"
 					alt="English" />English</a>
 			</div>
 		</div>
@@ -114,11 +114,11 @@
 			})
 		</script>
 		<div id="banner">
-			<a href="#"><img src="${ctx}/default/images/banner01.jpg"
+			<a href="#"><img src="${ctx}/defaultApp/images/banner01.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a> <a
-				href="#"><img src="${ctx}/default/images/banner02.jpg"
+				href="#"><img src="${ctx}/defaultApp/images/banner02.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a> <a
-				href="#"><img src="${ctx}/default/images/banner03.jpg"
+				href="#"><img src="${ctx}/defaultApp/images/banner03.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a>
 		</div>
 		<div id="page_main" class="clearfix">
@@ -136,7 +136,7 @@
 						<c:forEach var="doc" items="${page.rows}">
 							<tr>
 								<td class="time-list"><span>2015.10.27</span></td>
-								<td style="text-align: center;"><a href="${ctx}/${channel.code}/doc/${doc.id}" target="blank" title="${doc.title}">${doc.title}</a></td>
+								<td style="text-align: center;"><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank" title="${doc.title}">${doc.title}</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -180,7 +180,7 @@
 						</span>netgather@netgather.com
 					</p>
 				</div>
-				<img src="${ctx}/default/images/tel.gif" width="240" height="59" alt="联系我们" />
+				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59" alt="联系我们" />
 			</div>
 		</div>
 		<div id="copyright">

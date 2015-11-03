@@ -9,6 +9,7 @@ package com.jcin.cms.modules.front.web;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,6 +17,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.jcin.cms.common.HttpUtil;
 
 public class TestPatterns {
 	
@@ -38,7 +41,7 @@ public class TestPatterns {
 				String lineTxt = null;
 				while ((lineTxt = bufferedReader.readLine()) != null) {
 					// System.out.println(lineTxt);
-					getStrings(lineTxt);
+					set.add(lineTxt);
 				}
 				read.close();
 			} else {
@@ -51,6 +54,7 @@ public class TestPatterns {
 
 	}
 
+	private static Set<String>imgSet = new HashSet<String>();
 	private static void getStrings(String str) {
 		// str =
 		// ".nav li a.hover{color:#005ca1;background-image:url(../images/cornel_bg.png);background-repeat:no-repeat;background-position";
@@ -58,21 +62,35 @@ public class TestPatterns {
 		Matcher m = p.matcher(str);
 		ArrayList<String> strs = new ArrayList<String>();
 		while (m.find()) {
-			strs.add(m.group(1));
+			imgSet.add(m.group(1));
 		}
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// getStrings(); // 用正则表达式获取指定字符串内容中的指定内容
+		// D:\workspace\jcincms_base\syst3_module\src\main\webapp\default\css
+		// System.out.println(TestPatterns.class.getResource("/"));
+		readTxtFile("D:/newcapec.css");
+		for (String string : set) {
+			getStrings(string);
+		}
+		
 		String findStr = "";
 		String path = "";
-		for (String s : strs) {
+		for (String s : imgSet) {
 			findStr = "http://www.newcapec.com.cn/images/" + s + ".png";
-			path = "D:/workspace/jcincms_base/syst3_module/src/main/webapp/default/images"+s+".png";
+			path = "D:/images/"+s+".png";
 			if(!set.contains(findStr)){
 				set.add(findStr);
 			}
-//			try {
-//				HttpUtil.downloadFile(path, findStr);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				HttpUtil.downloadFile(path, findStr);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			// System.out.println();
 		}
 		Iterator<String> iterator = set.iterator();
@@ -86,16 +104,6 @@ public class TestPatterns {
 			String type = (String) iterator.next();
 			System.out.println(type);
 		}
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// getStrings(); // 用正则表达式获取指定字符串内容中的指定内容
-		// D:\workspace\jcincms_base\syst3_module\src\main\webapp\default\css
-		// System.out.println(TestPatterns.class.getResource("/"));
-		readTxtFile("D:/workspace/jcincms_base/syst3_module/src/main/webapp/default/css/newcapec.css");
 	}
 
 }

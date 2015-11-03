@@ -14,20 +14,20 @@
 <meta name="Identifier-URL" content="http://www.netgather.com" />
 <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="Bookmark" href="/favicon.ico" type="image/x-icon" />
-<link href="default/css/reset.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/reset.css" rel="stylesheet"
 	type="text/css" />
-<link href="default/css/webmain.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/webmain.css" rel="stylesheet"
 	type="text/css" />
-<link href="default/css/ddsmoothmenu.css" rel="stylesheet"
+<link href="${ctx}/defaultApp/css/ddsmoothmenu.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript"
-	src="default/scripts/jquery-1.4.2.min.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
-	src="default/scripts/jquery.KinSlideshow-1.2.1.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
-	src="default/scripts/webtry_roll.js"></script>
+	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"
-	src="default/scripts/ddsmoothmenu.js"></script>
+	src="${ctx}/defaultApp/scripts/ddsmoothmenu.js"></script>
 <script type="text/javascript">
 	ddsmoothmenu.init({
 		mainmenuid : "MainMenu", //menu DIV id
@@ -41,12 +41,12 @@
 <body>
 	<div id="wrapper">
 		<div class="top">
-			<img src="${ctx}/default/images/logo.gif" width="650" height="90"
+			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
 			<div id="lang">
 				<a
 					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="${ctx}/default/images/gb.gif" width="16" height="11"
+					src="${ctx}/defaultApp/images/gb.gif" width="16" height="11"
 					alt="English" />English</a>
 			</div>
 		</div>
@@ -64,24 +64,24 @@
 						</c:if></li>
 				</c:forEach>
 				<%-- <li><a href="${ctx}/" title="公司主页" id="menu_selected"><span>公司主页</span></a></li>
-				<li><a href="${ctx}/default/single.html" title="关于我们"><span>关于我们</span></a>
+				<li><a href="${ctx}/defaultApp/single.html" title="关于我们"><span>关于我们</span></a>
 				<ul class="menulevel">
-						<li><a href="${ctx}/default/single.html" title="组织构架">组织构架</a></li>
-						<li><a href="${ctx}/default/single.html" title="公司历史">公司历史</a></li>
-						<li><a href="${ctx}/default/single.html" title="联系我们">联系我们</a></li>
+						<li><a href="${ctx}/defaultApp/single.html" title="组织构架">组织构架</a></li>
+						<li><a href="${ctx}/defaultApp/single.html" title="公司历史">公司历史</a></li>
+						<li><a href="${ctx}/defaultApp/single.html" title="联系我们">联系我们</a></li>
 					</ul></li>
-				<li><a href="${ctx}/default/products.html" title="产品展示"><span>产品展示</span></a>
+				<li><a href="${ctx}/defaultApp/products.html" title="产品展示"><span>产品展示</span></a>
 				<ul class="menulevel">
-						<li><a href="${ctx}/default/products.html" title="医药原料及中间体">医药原料及中间体</a></li>
-						<li><a href="${ctx}/default/products.html" title="无机化工产品">无机化工产品</a></li>
+						<li><a href="${ctx}/defaultApp/products.html" title="医药原料及中间体">医药原料及中间体</a></li>
+						<li><a href="${ctx}/defaultApp/products.html" title="无机化工产品">无机化工产品</a></li>
 						<li><a href="products.html" title="香精香料及植物提取物">香精香料及植物提取物</a></li>
-						<li><a href="${ctx}/default/products.html" title="食品化工产品">食品化工产品</a></li>
-						<li><a href="${ctx}/default/products.html" title="有机化工产品">有机化工产品</a></li>
-						<li><a href="${ctx}/default/products.html" title="农资化工产品">农资化工产品</a></li>
+						<li><a href="${ctx}/defaultApp/products.html" title="食品化工产品">食品化工产品</a></li>
+						<li><a href="${ctx}/defaultApp/products.html" title="有机化工产品">有机化工产品</a></li>
+						<li><a href="${ctx}/defaultApp/products.html" title="农资化工产品">农资化工产品</a></li>
 					</ul></li>
-				<li><a href="${ctx}/default/news.html" title="新闻中心"><span>新闻中心</span></a></li>
-				<li><a href="${ctx}/default/jobs.html" title="招聘信息"><span>招聘信息</span></a></li>
-				<li><a href="${ctx}/default/guestbook.html" title="留言反馈"><span>留言反馈</span></a></li> --%>
+				<li><a href="${ctx}/defaultApp/news.html" title="新闻中心"><span>新闻中心</span></a></li>
+				<li><a href="${ctx}/defaultApp/jobs.html" title="招聘信息"><span>招聘信息</span></a></li>
+				<li><a href="${ctx}/defaultApp/guestbook.html" title="留言反馈"><span>留言反馈</span></a></li> --%>
 			</ul>
 		</div>
 		<script type="text/javascript">
@@ -111,11 +111,11 @@
 			})
 		</script>
 		<div id="banner">
-			<a href="#"><img src="${ctx}/default/images/banner01.jpg"
+			<a href="#"><img src="${ctx}/defaultApp/images/banner01.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a> <a
-				href="#"><img src="${ctx}/default/images/banner02.jpg"
+				href="#"><img src="${ctx}/defaultApp/images/banner02.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a> <a
-				href="#"><img src="${ctx}/default/images/banner03.jpg"
+				href="#"><img src="${ctx}/defaultApp/images/banner03.jpg"
 				alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950" height="152" /></a>
 		</div>
 		<div id="index_main" class="clearfix">
@@ -123,7 +123,7 @@
 				<div class="index-newproducts">
 					<h2>
 						<span>暂无信息</span><a href="products.html"><img
-							src="${ctx}/default/images/more.gif" width="32" height="5"
+							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="产品展示" /></a>
 					</h2>
 					<div class="productsroll">
@@ -131,19 +131,19 @@
 						<div id="RightArr1"></div>
 						<ul id="ScrollBox" class="clearfix">
 							<li><a href="products.html" title="覆盆子酮"><img
-									src="default/uploadfile/20110611023489748974.jpg" alt="覆盆子酮"
+									src="${ctx}/defaultApp/uploadfile/20110611023489748974.jpg" alt="覆盆子酮"
 									width="140" height="100" /><span>覆盆子酮</span></a></li>
 							<li><a href="products.html" title="氯霉素"><img
-									src="default/uploadfile/20110611023092419241.jpg" alt="氯霉素"
+									src="${ctx}/defaultApp/uploadfile/20110611023092419241.jpg" alt="氯霉素"
 									width="140" height="100" /><span>氯霉素</span></a></li>
 							<li><a href="products.html" title="利巴韦林(病毒唑）"><img
-									src="default/uploadfile/20110611022328652865.jpg"
+									src="${ctx}/defaultApp/uploadfile/20110611022328652865.jpg"
 									alt="利巴韦林(病毒唑）" width="140" height="100" /><span>利巴韦林(病毒唑）</span></a></li>
 							<li><a href="products.html" title="土霉素"><img
-									src="default/uploadfile/20110611021745864586.jpg" alt="土霉素"
+									src="${ctx}/defaultApp/uploadfile/20110611021745864586.jpg" alt="土霉素"
 									width="140" height="100" /><span>土霉素</span></a></li>
 							<li><a href="products.html" title="盐酸特比奈芬"><img
-									src="default/uploadfile/20110611014993929392.jpg" alt="盐酸特比奈芬"
+									src="${ctx}/defaultApp/uploadfile/20110611014993929392.jpg" alt="盐酸特比奈芬"
 									width="140" height="100" /><span>盐酸特比奈芬</span></a></li>
 						</ul>
 						<script language="javascript" type="text/javascript">
@@ -166,13 +166,13 @@
 				<div class="index-news">
 					<h2>
 						<span>新闻中心</span><a href="news.html"><img
-							src="${ctx}/default/images/more.gif" width="32" height="5"
+							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="新闻中心" /></a>
 					</h2>
 					<ul>
 						<li class="clearfix"><a href="news.html"
 							title="未来几年北美聚酯纤维需求快速增长"><img
-								src="${ctx}/default/images/index_NewsPic.jpg"
+								src="${ctx}/defaultApp/images/index_NewsPic.jpg"
 								alt="未来几年北美聚酯纤维需求快速增长" width="110" height="80" /></a>
 							<h3>
 								<a href="news.html" title="未来几年北美聚酯纤维需求快速增长">未来几年北美聚酯纤维需求快速...</a>
@@ -194,11 +194,11 @@
 				<div class="index-about">
 					<h2>
 						<span>关于我们</span><a href="single.html"><img
-							src="${ctx}/default/images/more.gif" width="32" height="5"
+							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="关于我们" /></a>
 					</h2>
 					<p>
-						<img src="${ctx}/default/images/index_AboutPic.jpg" alt="关于我们"
+						<img src="${ctx}/defaultApp/images/index_AboutPic.jpg" alt="关于我们"
 							width="145" height="181" /><a href="single.html" title="关于我们">
 							上海网聚化工有限公司和进出口有限公司是以无机化工、有机化工、精细化工、香精香料、食品添加剂、医药原料及中间体等经营、销售为一体的高科技化工企业。公司位于上海市商业中心,交通十分便捷。<br />
 							我公司华东地区总经销双氧水，品质保证...
@@ -208,33 +208,33 @@
 				<div class="index-products">
 					<h2>
 						<span>产品展示</span><a href="products.html"><img
-							src="${ctx}/default/images/more.gif" width="32" height="5"
+							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="产品展示" /></a>
 					</h2>
 					<ul class="clearfix">
 						<li><a href="products.html" title="氯化钾"><img
-								src="default/uploadfile/20110611032733583358.jpg" alt="氯化钾"
+								src="${ctx}/defaultApp/uploadfile/20110611032733583358.jpg" alt="氯化钾"
 								width="154" height="110" /><span>氯化钾</span></a></li>
 						<li><a href="products.html" title="磷酸二氢钾"><img
-								src="default/uploadfile/20110611032516391639.jpg" alt="磷酸二氢钾"
+								src="${ctx}/defaultApp/uploadfile/20110611032516391639.jpg" alt="磷酸二氢钾"
 								width="154" height="110" /><span>磷酸二氢钾</span></a></li>
 						<li><a href="products.html" title="微晶纤维素"><img
-								src="default/uploadfile/20110611032067186718.jpg" alt="微晶纤维素"
+								src="${ctx}/defaultApp/uploadfile/20110611032067186718.jpg" alt="微晶纤维素"
 								width="154" height="110" /><span>微晶纤维素</span></a></li>
 						<li><a href="products.html" title="氢化铝锂"><img
-								src="default/uploadfile/2011061103180984984.jpg" alt="氢化铝锂"
+								src="${ctx}/defaultApp/uploadfile/2011061103180984984.jpg" alt="氢化铝锂"
 								width="154" height="110" /><span>氢化铝锂</span></a></li>
 						<li><a href="products.html" title="淀粉酶"><img
-								src="default/uploadfile/2011061103170236236.jpg" alt="淀粉酶"
+								src="${ctx}/defaultApp/uploadfile/2011061103170236236.jpg" alt="淀粉酶"
 								width="154" height="110" /><span>淀粉酶</span></a></li>
 						<li><a href="products.html" title="抗氧剂BHT"><img
-								src="default/uploadfile/20110611031576567656.jpg" alt="抗氧剂BHT"
+								src="${ctx}/defaultApp/uploadfile/20110611031576567656.jpg" alt="抗氧剂BHT"
 								width="154" height="110" /><span>抗氧剂BHT</span></a></li>
 						<li><a href="products.html" title="香兰素"><img
-								src="default/uploadfile/20110611031134093409.jpg" alt="香兰素"
+								src="${ctx}/defaultApp/uploadfile/20110611031134093409.jpg" alt="香兰素"
 								width="154" height="110" /><span>香兰素</span></a></li>
 						<li><a href="products.html" title="丁香罗勒油"><img
-								src="default/uploadfile/20110611031086798679.jpg" alt="丁香罗勒油"
+								src="${ctx}/defaultApp/uploadfile/20110611031086798679.jpg" alt="丁香罗勒油"
 								width="154" height="110" /><span>丁香罗勒油</span></a></li>
 					</ul>
 				</div>
@@ -262,7 +262,7 @@
 				<div class="index-jobs">
 					<h2>
 						<span>招聘信息</span><a href="jobs.html"><img
-							src="${ctx}/default/images/more.gif" width="32" height="5"
+							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="招聘信息" /></a>
 					</h2>
 					<ul>
@@ -285,7 +285,7 @@
 						</span>netgather@netgather.com
 					</p>
 				</div>
-				<img src="${ctx}/default/images/tel.gif" width="240" height="59"
+				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59"
 					alt="联系我们" />
 			</div>
 		</div>
