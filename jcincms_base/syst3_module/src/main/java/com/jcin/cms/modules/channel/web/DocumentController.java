@@ -254,7 +254,7 @@ public class DocumentController extends BaseController<Document> {
 					+ File.separator + imgeName + "." + file_ext;
 //			String uploadPath = Global.getUploadpath() + tempImageName;
 			@SuppressWarnings("deprecation")
-			String uploadPath = httpServletRequest.getRealPath("/")+File.separator+"upload"+"" + tempImageName;
+			String uploadPath = httpServletRequest.getRealPath("/")+File.separator+"upload"+File.separator + tempImageName;
 //			application.getRealPath("/");
 			uploadWeb = "/upload/" + UserUtils.getUserId() + "/"
 					+ imgeName + "." + file_ext;
