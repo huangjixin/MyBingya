@@ -26,7 +26,7 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service
+@Service(value="${daoMapper}Service");
 public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObjectName}, String>
 		implements I${domainObjectName}Service {
 	private static Logger logger = Logger.getLogger(${domainObjectName}ServiceImpl.class
