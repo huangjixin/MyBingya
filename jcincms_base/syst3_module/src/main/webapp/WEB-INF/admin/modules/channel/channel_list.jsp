@@ -102,6 +102,20 @@
 		window.location.href='${ctxAdmin}/channel/show/'+row[0].id; 
 	}
 
+	function refreshMenu(){
+		$.ajax({
+			cache : true,
+			url : '${ctxAdmin}/channel/getChannels',
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				alert('刷新成功'); // 重新加载;
+			}
+		});
+	}
+	
 	//格式化用户状态显示。
 	function formatDate(val, row) {
 		var date = new Date();
@@ -131,6 +145,7 @@
 			<shiro:hasPermission name="channel:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>   
+			<input type="button" value="刷新栏目缓存" onclick="refreshMenu();" />
 		</div>
 		
 		<table id="tgrid" title="" class="easyui-treegrid"
@@ -154,6 +169,7 @@
 					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th data-options="field:'name',align:'center'" width="100%">名称</th>
 					<th data-options="field:'code',align:'center'" width="100%">编码</th>
+					<th data-options="field:'channelTemplete',align:'center'" width="100%">栏目模板</th>
 					<th data-options="field:'keyword',align:'center'" width="100%">关键字</th>
 					<th data-options="field:'linkAddr',align:'center'" width="100%">链接地址</th>
 					<th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th>

@@ -104,7 +104,7 @@
 			<div class="page-right">
 				<div class="site-nav">
 					<span>当前位置 : </span><a href="${ctx}">公司主页</a> &gt;&gt; <a
-						href="${ctx}/channel/news" title="新闻中心">新闻中心</a> &gt;&gt; 正文
+						href="${ctx}/channel/jobs" title="新闻中心">招聘信息</a> &gt;&gt; 正文
 				</div>
 				<div class="page-single">
 					<p style="LINE-HEIGHT: 25px">
@@ -121,8 +121,8 @@
 					<form action="" method="post" id="sitesearch" name="sitesearch">
 						<p>
 							<select name="searchid" id="searchid"><option value="2">产品展示</option>
-								<option value="3" selected="selected">新闻中心</option>
-								<option value="4">招聘信息</option></select>
+								<option value="3" selected="selected">招聘信息</option>
+								<option value="4">新闻中心</option></select>
 						</p>
 						<p>
 							<input name="searchtext" type="text" id="searchtext" />

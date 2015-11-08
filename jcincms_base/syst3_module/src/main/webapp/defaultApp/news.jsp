@@ -124,8 +124,8 @@
 		<div id="page_main" class="clearfix">
 			<div class="page-right">
 				<div class="site-nav">
-					<span>当前位置 : </span><a href="index.html">公司主页</a> &gt;&gt; <a
-						href="news.html" title="新闻中心">新闻中心</a>
+					<span>当前位置 : </span><a href="${ctx}">公司主页</a> &gt;&gt; <a
+						href="${ctx}/channel/news" title="新闻中心">新闻中心</a>
 				</div>
 				<div class="page-news">
 					<table border="0" align="center">
@@ -142,7 +142,7 @@
 					</table>
 					<div class="page_list">
 						<div class="list_info">
-							共${page.total}个/${page.totalPage}页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
+							共${page.total}个/${page.totalPage+1}页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
 								class="disabled">&nbsp;&lt;&nbsp;</span><span class="current">${page.page}</span><span
 								class="disabled">&nbsp;&gt;&nbsp;</span><span class="disabled">&nbsp;&gt;&gt;&nbsp;</span>
 						</div>
