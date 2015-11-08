@@ -13,7 +13,7 @@ public class Page {
 	private int limit = 20; // 每页显示条数
 	private int start = 0; // 起始行号
 	private int pageSize = 10; // 每页显示条数
-	private int total = -1; // 总数
+	private int total = 0; // 总数
 	private List rows = new ArrayList(); // 结果集
 	private int page = 1; // 第几页
 	
@@ -65,4 +65,7 @@ public class Page {
 		this.page = page;
 	}
 
+	public int getTotalPage(){
+		return total/pageSize;
+	}
 }

@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jcin.cms.utils.Page;
 
 public class BaseController<T extends Serializable> {
+	public String root = "WEB-INF/";
+
 	public Page select(Page page, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -35,9 +39,9 @@ public class BaseController<T extends Serializable> {
 		Integer intPage = null;
 		if (null != pageStr) {
 			intPage = Integer.parseInt(pageStr);
-		} else if (null != startStr){
+		} else if (null != startStr) {
 			intPage = Integer.parseInt(startStr);
-		}else {
+		} else {
 			intPage = 0;
 		}
 
@@ -48,9 +52,9 @@ public class BaseController<T extends Serializable> {
 		Integer number = null;
 		if (null != rows) {
 			number = Integer.parseInt(rows);
-		} else if(null != limit){
+		} else if (null != limit) {
 			number = Integer.parseInt(limit);
-		}else{
+		} else {
 			number = 10;
 		}
 
@@ -58,7 +62,7 @@ public class BaseController<T extends Serializable> {
 		// 每页的开始记录 第一页为1 第二页为number +1
 		if (page != null && rows != null) {
 			start = (intPage - 1) * number;
-		}else if(startStr != null){
+		} else if (startStr != null) {
 			start = Integer.parseInt(startStr);
 		}
 
@@ -89,9 +93,34 @@ public class BaseController<T extends Serializable> {
 		}
 		return null;
 	}
-	
+
 	public List<T> selectAll(HttpServletRequest httpServletRequest) {
 		return null;
 	}
-	
+
+	public static Object getCache(String key) {
+		return getCache(key, null);
+	}
+
+	public static Object getCache(String key, Object defaultValue) {
+		Object obj = getCacheMap().get(key);
+		return obj == null ? defaultValue : obj;
+	}
+
+	public static void putCache(String key, Object value) {
+		getCacheMap().put(key, value);
+	}
+
+	public static void removeCache(String key) {
+		getCacheMap().remove(key);
+	}
+
+	private static Map<String, Object> map;
+
+	public static Map<String, Object> getCacheMap() {
+		if (map == null) {
+			map = new HashMap<String, Object>();
+		}
+		return map;
+	}
 }
