@@ -25,8 +25,9 @@ public class MysqlUtil {
 	 */
 	public static String backup(String name) {
 		String mysqlPath = PropertiesUtil.readProperty("database.mysqlpath");
-		String filePath = PropertiesUtil.readProperty("database.export")
-				+ File.separator + name;
+		String filePath = PropertiesUtil.readProperty("database.export");
+		FileUtils.createFile(filePath);
+		filePath += File.separator + name;
 		try {
 			Runtime rt = Runtime.getRuntime();
 
@@ -66,7 +67,7 @@ public class MysqlUtil {
 			fout.close();
 
 			logger.info("数据库备份成功");
-			System.out.println("success");
+			logger.info("success");
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,14 @@ public class OrganizationController extends BaseController<Organization> {
 	@Autowired
 	private IUserService userService;
 
-	// @RequiresPermissions("organization:create")
+	@RequiresPermissions("organization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Organization organization, Model uiModel) {
 		uiModel.addAttribute("organization", organization);
 		return root+"admin/modules/organization/organization_create";
 	}
 
-	// @RequiresPermissions("organization:create")
+	@RequiresPermissions("organization:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Organization organization,
 			RedirectAttributes redirectAttributes, Model uiModel,
@@ -69,7 +70,7 @@ public class OrganizationController extends BaseController<Organization> {
 		return "redirect:/" + Global.getAdminPath() + "/organization/create";
 	}
 
-	// @RequiresPermissions("organization:update")
+	@RequiresPermissions("organization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
@@ -77,7 +78,7 @@ public class OrganizationController extends BaseController<Organization> {
 		return root+"admin/modules/organization/organization_update";
 	}
 
-	// @RequiresPermissions("organization:update")
+	@RequiresPermissions("organization:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(Organization organization,
 			RedirectAttributes redirectAttributes, Model uiModel,
@@ -92,7 +93,7 @@ public class OrganizationController extends BaseController<Organization> {
 				+ organization.getId();
 	}
 
-	// @RequiresPermissions("organization:show")
+	@RequiresPermissions("organization:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
@@ -101,7 +102,7 @@ public class OrganizationController extends BaseController<Organization> {
 		return root+"admin/modules/organization/organization_show";
 	}
 
-	// @RequiresPermissions("organization:view")
+	@RequiresPermissions("organization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return root+"admin/modules/organization/organization_list";

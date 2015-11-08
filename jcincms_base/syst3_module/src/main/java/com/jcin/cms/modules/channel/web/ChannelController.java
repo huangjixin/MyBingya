@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +35,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.ChannelCriteria;
 import com.jcin.cms.modules.channel.service.IChannelService;
@@ -47,14 +49,14 @@ public class ChannelController extends BaseController<Channel>{
 	@Resource
 	private IChannelService channelService;
 
-//	@RequiresPermissions("channel:create")
+	@RequiresPermissions("channel:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Channel channel, Model uiModel) {
 		uiModel.addAttribute("channel", channel);
 		return root+"admin/modules/channel/channel_create";
 	}
 
-//	@RequiresPermissions("channel:create")
+	@RequiresPermissions("channel:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Channel channel, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -73,7 +75,7 @@ public class ChannelController extends BaseController<Channel>{
 		return "redirect:/"+Global.getAdminPath()+"/channel/create";
 	}
 	
-//	@RequiresPermissions("channel:update")
+	@RequiresPermissions("channel:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Channel channel = channelService.selectByPrimaryKey(id);
@@ -81,7 +83,7 @@ public class ChannelController extends BaseController<Channel>{
 		return root+"admin/modules/channel/channel_update";
 	}
 
-//	@RequiresPermissions("channel:update")
+	@RequiresPermissions("channel:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(Channel channel,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -106,7 +108,7 @@ public class ChannelController extends BaseController<Channel>{
 		return "redirect:/"+Global.getAdminPath()+"/channel/update/"+channel.getId();
 	}
 
-//	@RequiresPermissions("channel:show")
+	@RequiresPermissions("channel:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Channel channel = channelService.selectByPrimaryKey(id);
@@ -115,13 +117,13 @@ public class ChannelController extends BaseController<Channel>{
 		return root+"admin/modules/channel/channel_show";
 	}
 
-//	@RequiresPermissions("channel:view")
+	@RequiresPermissions("channel:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return root+"admin/modules/channel/channel_list";
 	}
 
-//	@RequiresPermissions("channel:delete")
+	@RequiresPermissions("channel:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		channelService.deleteByPrimaryKey(id);
@@ -146,7 +148,7 @@ public class ChannelController extends BaseController<Channel>{
 		return pathSegment;
 	}
 
-//	@RequiresPermissions("channel:view")
+	@RequiresPermissions("channel:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute Channel channel,Model uiModel,
@@ -183,7 +185,7 @@ public class ChannelController extends BaseController<Channel>{
 		return page;
 	}
 	
-//	@RequiresPermissions("channel:delete")
+	@RequiresPermissions("channel:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -198,6 +200,19 @@ public class ChannelController extends BaseController<Channel>{
 		int result = channelService.deleteBatch(list);
 
 		return result;
+	}
+	
+	/**
+	 * 刷新前台菜单。
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/getChannels")
+	@ResponseBody
+	public void getChannels(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		UserUtils.getChannels(true);
 	}
 	
 

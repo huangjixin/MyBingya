@@ -51,14 +51,14 @@ public class DictionaryController extends BaseController<Dictionary>{
 	@Resource
 	private IDictionaryService dictionaryService;
 
-//	@RequiresPermissions("dictionary:create")
+	@RequiresPermissions("dictionary:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Dictionary dictionary, Model uiModel) {
 		uiModel.addAttribute("dictionary", dictionary);
 		return root+"admin/modules/dictionary/dictionary_create";
 	}
 
-//	@RequiresPermissions("dictionary:create")
+	@RequiresPermissions("dictionary:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Dictionary dictionary, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -70,7 +70,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 		return "redirect:/"+Global.getAdminPath()+"/dictionary/create";
 	}
 	
-//	@RequiresPermissions("dictionary:update")
+	@RequiresPermissions("dictionary:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Dictionary dictionary = dictionaryService.selectByPrimaryKey(id);
@@ -78,7 +78,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 		return root+"admin/modules/dictionary/dictionary_update";
 	}
 
-//	@RequiresPermissions("dictionary:update")
+	@RequiresPermissions("dictionary:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(Dictionary dictionary ,@RequestParam(required=false) String roleId,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -90,7 +90,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 		return "redirect:/"+Global.getAdminPath()+"/dictionary/update/"+dictionary.getId();
 	}
 
-//	@RequiresPermissions("dictionary:show")
+	@RequiresPermissions("dictionary:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Dictionary dictionary = dictionaryService.selectByPrimaryKey(id);
@@ -99,7 +99,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 		return root+"admin/modules/dictionary/dictionary_show";
 	}
 
-//	@RequiresPermissions("dictionary:view")
+	@RequiresPermissions("dictionary:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return root+"admin/modules/dictionary/dictionary_list";

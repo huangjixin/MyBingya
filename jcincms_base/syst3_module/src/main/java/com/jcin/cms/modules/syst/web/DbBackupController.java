@@ -19,13 +19,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +35,11 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
-import com.jcin.cms.common.MysqlUtil;
 import com.jcin.cms.modules.syst.domain.DbBackup;
 import com.jcin.cms.modules.syst.domain.DbBackupCriteria;
 import com.jcin.cms.modules.syst.service.IDbBackupService;
-import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
+import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -51,14 +48,14 @@ public class DbBackupController extends BaseController<DbBackup>{
 	@Resource
 	private IDbBackupService dbBackupService;
 
-//	@RequiresPermissions("dbBackup:create")
+	@RequiresPermissions("dbBackup:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(DbBackup dbBackup, Model uiModel) {
 		uiModel.addAttribute("dbBackup", dbBackup);
 		return root+"admin/modules/dbBackup/dbBackup_create";
 	}
 
-//	@RequiresPermissions("dbBackup:create")
+	@RequiresPermissions("dbBackup:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(DbBackup dbBackup, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -70,7 +67,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return "redirect:/"+Global.getAdminPath()+"/dbBackup/create";
 	}
 	
-//	@RequiresPermissions("dbBackup:update")
+	@RequiresPermissions("dbBackup:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		DbBackup dbBackup = dbBackupService.selectByPrimaryKey(id);
@@ -78,7 +75,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return root+"admin/modules/dbBackup/dbBackup_update";
 	}
 
-//	@RequiresPermissions("dbBackup:update")
+	@RequiresPermissions("dbBackup:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(DbBackup dbBackup,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -90,7 +87,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return "redirect:/"+Global.getAdminPath()+"/dbBackup/update/"+dbBackup.getId();
 	}
 
-//	@RequiresPermissions("dbBackup:show")
+	@RequiresPermissions("dbBackup:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		DbBackup dbBackup = dbBackupService.selectByPrimaryKey(id);
@@ -99,13 +96,13 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return root+"admin/modules/dbBackup/dbBackup_show";
 	}
 
-//	@RequiresPermissions("dbBackup:view")
+	@RequiresPermissions("dbBackup:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return root+"admin/modules/dbBackup/dbBackup_list";
 	}
 
-//	@RequiresPermissions("dbBackup:delete")
+	@RequiresPermissions("dbBackup:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		dbBackupService.deleteByPrimaryKey(id);
@@ -130,7 +127,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return pathSegment;
 	}
 
-//	@RequiresPermissions("dbBackup:view")
+	@RequiresPermissions("dbBackup:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page, @ModelAttribute DbBackup dbBackup,Model uiModel,
@@ -158,7 +155,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		return page;
 	}
 	
-//	@RequiresPermissions("dbBackup:delete")
+	@RequiresPermissions("dbBackup:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
