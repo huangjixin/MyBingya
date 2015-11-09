@@ -58,7 +58,7 @@ public class Page {
 	}
 
 	public int getPage() {
-		return page;
+		return start/pageSize+1;
 	}
 
 	public void setPage(int page) {
