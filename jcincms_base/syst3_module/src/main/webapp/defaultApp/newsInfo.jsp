@@ -43,12 +43,6 @@
 		<div class="top">
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
-			<div id="lang">
-				<a
-					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="${ctx}/defaultApp/default/images/gb.gif" width="16" height="11"
-					alt="English" />English</a>
-			</div>
 		</div>
 		<div id="MainMenu" class="ddsmoothmenu">
 			<ul>

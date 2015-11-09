@@ -23,7 +23,7 @@
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
-	src="scripts/jquery.KinSlideshow-1.2.1.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"
@@ -42,11 +42,6 @@
 	<div id="wrapper">
 		<div class="top">
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90" alt="上海网聚化工有限公司" />
-			<div id="lang">
-				<a
-					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="images/gb.gif" width="16" height="11" alt="English" />English</a>
-			</div>
 		</div>
 		<div id="MainMenu" class="ddsmoothmenu">
 			<ul>
@@ -119,9 +114,21 @@
 					</table>
 					<div class="page_list">
 						<div class="list_info">
-							共${page.total}个/${page.totalPage+1}页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
-								class="disabled">&nbsp;&lt;&nbsp;</span><span class="current">${page.page}</span><span
-								class="disabled">&nbsp;&gt;&nbsp;</span><span class="disabled">&nbsp;&gt;&gt;&nbsp;</span>
+							共${page.total}个/${page.totalPage+1}页
+							<c:if test="${page.page>1}">
+								<span
+									onclick="javascript:window.location.href='${ctx}/channel/news?page=1'">&nbsp;&lt;&lt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page>1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page-1}'">&nbsp;&lt;&nbsp;</span>
+							</c:if>
+							<span class="current">${page.page}</span>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page+1}'">&nbsp;&gt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.totalPage+1}'">&nbsp;&gt;&gt;&nbsp;</span>
+							</c:if>
 						</div>
 					</div>
 				</div>

@@ -23,7 +23,7 @@
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
-	src="scripts/jquery.KinSlideshow-1.2.1.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"
@@ -43,12 +43,6 @@
 		<div class="top">
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
-			<div id="lang">
-				<a
-					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="${ctx}/defaultApp/images/gb.gif" width="16" height="11"
-					alt="English" />English</a>
-			</div>
 		</div>
 		<div id="MainMenu" class="ddsmoothmenu">
 			<ul>
@@ -64,27 +58,6 @@
 							</ul>
 						</c:if></li>
 				</c:forEach>
-				<!-- <li><a href="index.html" title="公司主页"><span>公司主页</span></a></li>
-				<li><a href="single.html" title="关于我们" id="menu_selected"><span>关于我们</span></a>
-				<ul class="menulevel">
-						<li><a href="single.html" title="组织构架">组织构架</a></li>
-						<li><a href="single.html" title="公司历史">公司历史</a></li>
-						<li><a href="single.html" title="联系我们">联系我们</a></li>
-					</ul></li>
-				<li><a href="products.html" title="产品展示"><span>产品展示</span></a>
-				<ul class="menulevel">
-						<li><a href="products.html" title="医药原料及中间体">医药原料及中间体</a></li>
-						<li><a href="products.html" title="无机化工产品">无机化工产品</a></li>
-						<li><a href="products.html" title="香精香料及植物提取物">香精香料及植物提取物</a></li>
-						<li><a href="products.html" title="食品化工产品">食品化工产品</a></li>
-						<li><a href="products.html" title="有机化工产品">有机化工产品</a></li>
-						<li><a href="products.html" title="农资化工产品">农资化工产品</a></li>
-					</ul></li>
-				<li><a href="news.html" title="新闻中心"><span>新闻中心</span></a></li>
-				<li><a href="jobs.html" title="招聘信息"><span>招聘信息</span></a></li>
-				<li><a href="guestbook.html" title="留言反馈"><span>留言反馈</span></a></li>
-				<li><a href="http://www.netgather.com" target="_blank"
-					title="网聚网"><span>网聚网</span></a></li> -->
 			</ul>
 		</div>
 		<script type="text/javascript">
@@ -136,15 +109,29 @@
 						<c:forEach var="doc" items="${page.rows}">
 							<tr>
 								<td class="time-list"><span>2015.10.27</span></td>
-								<td style="text-align: center;"><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank" title="${doc.title}">${doc.title}</a></td>
+								<td style="text-align: center;"><a
+									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank"
+									title="${doc.title}">${doc.title}</a></td>
 							</tr>
 						</c:forEach>
 					</table>
 					<div class="page_list">
 						<div class="list_info">
-							共${page.total}个/${page.totalPage+1}页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
-								class="disabled">&nbsp;&lt;&nbsp;</span><span class="current">${page.page}</span><span
-								class="disabled">&nbsp;&gt;&nbsp;</span><span class="disabled">&nbsp;&gt;&gt;&nbsp;</span>
+							共${page.total}个/${page.totalPage+1}页
+							<c:if test="${page.page>1}">
+								<span
+									onclick="javascript:window.location.href='${ctx}/channel/news?page=1'">&nbsp;&lt;&lt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page>1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page-1}'">&nbsp;&lt;&nbsp;</span>
+							</c:if>
+							<span class="current">${page.page}</span>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page+1}'">&nbsp;&gt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.totalPage+1}'">&nbsp;&gt;&gt;&nbsp;</span>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -180,7 +167,8 @@
 						</span>netgather@netgather.com
 					</p>
 				</div>
-				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59" alt="联系我们" />
+				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59"
+					alt="联系我们" />
 			</div>
 		</div>
 		<div id="copyright">

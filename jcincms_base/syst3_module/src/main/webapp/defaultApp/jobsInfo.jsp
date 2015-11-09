@@ -23,7 +23,7 @@
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
-	src="scripts/jquery.KinSlideshow-1.2.1.js"></script>
+	src="${ctx}/defaultApp/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"

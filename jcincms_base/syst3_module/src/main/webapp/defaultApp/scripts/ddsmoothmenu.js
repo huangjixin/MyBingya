@@ -15,7 +15,7 @@
 
 var ddsmoothmenu={
 //Specify full URL to down and right arrow images (23 is padding-right added to top level LIs with drop downs):
-arrowimages: {down:['downarrowclass', 'default/images/down.gif', 10], right:['rightarrowclass', 'default/images/right.gif']},
+arrowimages: {down:['downarrowclass', 'defaultApp/images/down.gif', 10], right:['rightarrowclass', 'defaultApp/images/right.gif']},
 transition: {overtime:300, outtime:300}, //duration of slide in/ out animation, in milliseconds
 shadow: {enable:true, offsetx:4, offsety:5}, //enable shadow?
 showhidedelay: {showdelay: 100, hidedelay: 200}, //set delay in milliseconds before sub menus appear and disappear, respectively
@@ -62,11 +62,11 @@ buildmenu:function($, setting){
 		this._dimensions={w:this.offsetWidth, h:this.offsetHeight, subulw:$subul.outerWidth(), subulh:$subul.outerHeight()}
 		this.istopheader=$curobj.parents("ul").length==1? true : false //is top level header?
 		$subul.css({top:this.istopheader && setting.orientation!='v'? this._dimensions.h+"px" : 0})
-		/*$curobj.children("a:eq(0)").css(this.istopheader? {paddingRight: smoothmenu.arrowimages.down[2]} : {}).append( //add arrow images
-			'<img src="'+ (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[1] : smoothmenu.arrowimages.right[1])
+		$curobj.children("a:eq(0)").css(this.istopheader? {paddingRight: smoothmenu.arrowimages.down[2]} : {}).append( //add arrow images
+			'<img src="/syst/'+ (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[1] : smoothmenu.arrowimages.right[1])
 			+'" class="' + (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[0] : smoothmenu.arrowimages.right[0])
 			+ '" style="border:0;" />'
-		)*/
+		)
 		if (smoothmenu.shadow.enable){
 			this._shadowoffset={x:(this.istopheader?$subul.offset().left+smoothmenu.shadow.offsetx : this._dimensions.w), y:(this.istopheader? $subul.offset().top+smoothmenu.shadow.offsety : $curobj.position().top)} //store this shadow's offsets
 			if (this.istopheader)
