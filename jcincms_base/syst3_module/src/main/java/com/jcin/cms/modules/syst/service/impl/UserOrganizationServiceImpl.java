@@ -99,6 +99,11 @@ public class UserOrganizationServiceImpl extends BaseServiceImpl<UserOrganizatio
 	//@Override
 	public Page select(UserOrganizationCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = userOrganizationMapper.selectByExample(criteria);
 		page.setRows(list);

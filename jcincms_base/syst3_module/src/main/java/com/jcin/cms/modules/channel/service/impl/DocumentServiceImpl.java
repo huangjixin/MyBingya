@@ -101,6 +101,11 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	//@Override
 	public Page select(DocumentCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = documentMapper.selectByExample(criteria);
 		page.setRows(list);

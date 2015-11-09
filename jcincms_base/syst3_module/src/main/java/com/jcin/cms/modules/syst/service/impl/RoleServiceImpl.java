@@ -108,6 +108,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	// @Override
 	public Page select(RoleCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = roleMapper.selectByExample(criteria);
 		page.setRows(list);

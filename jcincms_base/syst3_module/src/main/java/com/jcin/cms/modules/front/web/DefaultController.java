@@ -55,6 +55,7 @@ public class DefaultController extends BaseController {
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		setPage(page, httpServletRequest);
 		// String requestRri = httpServletRequest.getRequestURI(); :^(?!${excludePath}).*$
 		// 检查栏目是否存在；
 		Channel channel = channelService.getByCode(channels);
@@ -97,7 +98,7 @@ public class DefaultController extends BaseController {
 			DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 			criteria.andChannelIdEqualTo(channel.getId());
 			documentCriteria.setPage(page);
-			// documentCriteria.setOrderByClause("id desc");
+			documentCriteria.setOrderByClause("id desc");
 
 			page = documentService.select(documentCriteria);
 
@@ -293,6 +294,8 @@ public class DefaultController extends BaseController {
 			start = (intPage - 1) * number;
 		} else if (startStr != null) {
 			start = Integer.parseInt(startStr);
+		}else if (pageStr != null) {
+			start = (intPage - 1) * number;
 		}
 
 		page.setStart(start);

@@ -125,6 +125,11 @@ public class OrganizationServiceImpl extends
 	// @Override
 	public Page select(OrganizationCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = organizationMapper.selectByExample(criteria);
 		page.setRows(list);

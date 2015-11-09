@@ -102,6 +102,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	//@Override
 	public Page select(ChannelCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = channelMapper.selectByExample(criteria);
 		page.setRows(list);

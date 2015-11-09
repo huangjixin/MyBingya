@@ -104,6 +104,11 @@ public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 	//@Override
 	public Page select(DbBackupCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = dbBackupMapper.selectByExample(criteria);
 		page.setRows(list);

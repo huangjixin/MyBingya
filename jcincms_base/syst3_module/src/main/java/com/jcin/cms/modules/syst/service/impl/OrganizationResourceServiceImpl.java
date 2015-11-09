@@ -99,6 +99,11 @@ public class OrganizationResourceServiceImpl extends BaseServiceImpl<Organizatio
 	//@Override
 	public Page select(OrganizationResourceCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = organizationResourceMapper.selectByExample(criteria);
 		page.setRows(list);

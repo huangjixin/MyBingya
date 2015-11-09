@@ -100,6 +100,11 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	// @Override
 	public Page select(TqunhuInfoCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = tqunhuInfoMapper.selectByExample(criteria);
 		page.setRows(list);

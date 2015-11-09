@@ -99,6 +99,11 @@ public class DictionaryServiceImpl extends BaseServiceImpl<Dictionary, String>
 	//@Override
 	public Page select(DictionaryCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = dictionaryMapper.selectByExample(criteria);
 		page.setRows(list);

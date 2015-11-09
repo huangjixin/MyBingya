@@ -123,6 +123,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	// @Override
 	public Page select(UserCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = userMapper.selectByExample(criteria);
 		page.setRows(list);

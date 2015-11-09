@@ -99,6 +99,11 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 	//@Override
 	public Page select(CommentCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = commentMapper.selectByExample(criteria);
 		page.setRows(list);

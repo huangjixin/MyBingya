@@ -96,6 +96,11 @@ public class LogServiceImpl extends BaseServiceImpl<Log, String> implements
 	// @Override
 	public Page select(LogCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = logMapper.selectByExample(criteria);
 		page.setRows(list);

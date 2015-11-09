@@ -125,6 +125,11 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	// @Override
 	public Page select(ResourceCriteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = resourceMapper.selectByExample(criteria);
 		page.setRows(list);
