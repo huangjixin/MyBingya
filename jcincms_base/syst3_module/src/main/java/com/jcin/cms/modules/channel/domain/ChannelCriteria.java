@@ -8,42 +8,42 @@ public class ChannelCriteria {
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public ChannelCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -52,7 +52,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -61,7 +61,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -70,7 +70,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -79,7 +79,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public boolean isDistinct() {
         return distinct;
@@ -88,7 +88,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -97,7 +97,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -106,7 +106,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -117,7 +117,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -130,7 +130,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -140,7 +140,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void clear() {
         oredCriteria.clear();
@@ -151,7 +151,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void setPage(Page page) {
         this.page=page;
@@ -160,7 +160,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public Page getPage() {
         return page;
@@ -169,7 +169,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -178,7 +178,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public String getDialect() {
         return dialect;
@@ -187,7 +187,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1120,6 +1120,66 @@ public class ChannelCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andSortIsNull() {
+            addCriterion("sort is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIsNotNull() {
+            addCriterion("sort is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortEqualTo(Integer value) {
+            addCriterion("sort =", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotEqualTo(Integer value) {
+            addCriterion("sort <>", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortGreaterThan(Integer value) {
+            addCriterion("sort >", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sort >=", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortLessThan(Integer value) {
+            addCriterion("sort <", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortLessThanOrEqualTo(Integer value) {
+            addCriterion("sort <=", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIn(List<Integer> values) {
+            addCriterion("sort in", values, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotIn(List<Integer> values) {
+            addCriterion("sort not in", values, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortBetween(Integer value1, Integer value2) {
+            addCriterion("sort between", value1, value2, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotBetween(Integer value1, Integer value2) {
+            addCriterion("sort not between", value1, value2, "sort");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1179,7 +1239,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated do_not_delete_during_merge 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2015年11月09日 16时07分12秒 星期一
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1191,7 +1251,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年10月26日 12时53分54秒 星期一
+     * @mbggenerated 2015年11月09日 16时07分12秒 星期一
      */
     public static class Criterion {
         private String condition;

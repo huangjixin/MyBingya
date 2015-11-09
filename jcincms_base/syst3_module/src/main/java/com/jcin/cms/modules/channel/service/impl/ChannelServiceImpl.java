@@ -208,7 +208,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	public List<Channel> getChannelTree(List<Channel> channels) {
 		ChannelCriteria channelExample = new ChannelCriteria();
 		channelExample.createCriteria().andParentIdIsNull();
-
+		channelExample.setOrderByClause("sort asc");
 		List<Channel> list = channelMapper.selectByExample(channelExample);
 		List<Channel> children = new ArrayList<Channel>();
 		for (Channel object : list) {

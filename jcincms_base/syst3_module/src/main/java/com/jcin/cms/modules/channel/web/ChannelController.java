@@ -159,7 +159,7 @@ public class ChannelController extends BaseController<Channel>{
 		ChannelCriteria channelCriteria = new ChannelCriteria();
 		ChannelCriteria.Criteria criteria = channelCriteria.createCriteria();
 		channelCriteria.setPage(page);
-		channelCriteria.setOrderByClause("id desc");
+		channelCriteria.setOrderByClause("sort desc");
 		if (null != channel.getId()  && !"".equals(channel.getId())) {
 		  	criteria.andIdLike("%" + channel.getId() + "%");
 		}

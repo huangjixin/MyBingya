@@ -40,9 +40,11 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.Global;
 import com.jcin.cms.common.UserUtils;
+import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
+import com.jcin.cms.modules.channel.service.IAssetsService;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.utils.ExcelUtil;
@@ -56,12 +58,14 @@ public class DocumentController extends BaseController<Document> {
 	private IDocumentService documentService;
 	@Resource
 	private IChannelService channelService;
+	@Resource
+	private IAssetsService assetsService;
 
 	// @RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Document document, Model uiModel) {
 		uiModel.addAttribute("document", document);
-		return root+"admin/modules/document/document_create";
+		return root + "admin/modules/document/document_create";
 	}
 
 	// @RequiresPermissions("document:create")
@@ -70,15 +74,15 @@ public class DocumentController extends BaseController<Document> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		/*if (bindingResult.hasErrors()) {
-			populateEditForm(uiModel, document);
-			return root+"admin/modules/document/document_create";
-		}*/
+		/*
+		 * if (bindingResult.hasErrors()) { populateEditForm(uiModel, document);
+		 * return root+"admin/modules/document/document_create"; }
+		 */
 		if ("".equals(document.getChannelId())
 				&& null == document.getChannelId()) {
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
-			return root+"admin/modules/document/document_create";
+			return root + "admin/modules/document/document_create";
 		}
 		documentService.insert(document);
 
@@ -92,7 +96,7 @@ public class DocumentController extends BaseController<Document> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
 		uiModel.addAttribute("document", document);
-		return root+"admin/modules/document/document_update";
+		return root + "admin/modules/document/document_update";
 	}
 
 	// @RequiresPermissions("document:update")
@@ -115,13 +119,13 @@ public class DocumentController extends BaseController<Document> {
 		Document document = documentService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("document", document);
-		return root+"admin/modules/document/document_show";
+		return root + "admin/modules/document/document_show";
 	}
 
 	// @RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/document/document_list";
+		return root + "admin/modules/document/document_list";
 	}
 
 	// @RequiresPermissions("document:delete")
@@ -243,45 +247,46 @@ public class DocumentController extends BaseController<Document> {
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		String uploadWeb = "";
-		if (file != null) {
-			// 组合零时图片名
-			String imageName = file.getOriginalFilename();
-			String file_ext = imageName
-					.substring(imageName.lastIndexOf(".") + 1);
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
-			String imgeName = df.format(new Date());
-			String tempImageName = File.separator + UserUtils.getUserId()
-					+ File.separator + imgeName + "." + file_ext;
-//			String uploadPath = Global.getUploadpath() + tempImageName;
-			@SuppressWarnings("deprecation")
-			String uploadPath = httpServletRequest.getRealPath("/")+File.separator+"upload"+File.separator + tempImageName;
-//			application.getRealPath("/");
-			uploadWeb = "/upload/" + UserUtils.getUserId() + "/"
-					+ imgeName + "." + file_ext;
-			File targetFile = new File(uploadPath);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
-			}
-
-			if (file.getSize() > 0) {
-				try {
-					file.transferTo(targetFile);
-				} catch (IllegalStateException e1) {
-
-					e1.printStackTrace();
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-			}
-			FileUtils.createFile(uploadPath);
+		// 组合零时图片名
+		String imageName = file.getOriginalFilename();
+		String file_ext = imageName.substring(imageName.lastIndexOf(".") + 1);
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
+		String imgeName = df.format(new Date());
+		String tempImageName = imgeName + "." + file_ext;
+		// String uploadPath = Global.getUploadpath() + tempImageName;
+		@SuppressWarnings("deprecation")
+		String uploadPath = httpServletRequest.getRealPath("/")
+				+ File.separator + "upload" + File.separator
+				+ UserUtils.getUserId() + File.separator + tempImageName;
+		// application.getRealPath("/");
+		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;
+		File targetFile = new File(uploadPath);
+		if (!targetFile.exists()) {
+			targetFile.mkdirs();
 		}
+
+		if (file.getSize() > 0) {
+			try {
+				file.transferTo(targetFile);
+			} catch (IllegalStateException e1) {
+
+				e1.printStackTrace();
+			} catch (IOException e1) {
+
+				e1.printStackTrace();
+			}
+		}
+		FileUtils.createFile(uploadPath);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "上传成功");
-		map.put("fileName", file.getOriginalFilename());
+		map.put("fileName", tempImageName);
 		map.put("fileAddr", uploadWeb);
 		map.put("size", file.getSize());
+
+		Assets assets = new Assets();
+		assets.setName(tempImageName);
+		assetsService.insert(assets);
 		return map;
 	}
 
