@@ -62,7 +62,7 @@ public class Page {
 	}
 
 	public void setPage(int page) {
-		this.page = page;
+		this.page = start/pageSize;
 	}
 
 	public int getTotalPage(){
