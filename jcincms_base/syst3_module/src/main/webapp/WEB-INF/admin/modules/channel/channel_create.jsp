@@ -196,13 +196,21 @@ th {
 									path="descrition" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+							<th>&nbsp;手工排序：</th>
+							<td style="text-align: left;" colspan="6">
+								<form:input id="sort" path="sort" value="${channel.sort}" />&nbsp;
+								<form:errors path="sort" cssStyle="color:red;"></form:errors>
+							</td>
+						</tr>
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th style="width: 150px;">&nbsp;</th>
 							<td style="text-align: left;" colspan="6"><input
 								type="submit" value="保存" />&nbsp;&nbsp;<input type="reset"
 								value="重置" />&nbsp;&nbsp;<input type="button" value="清空"
 								onclick="clearForm();" />&nbsp;&nbsp;<input type="button"
 								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/channel'" /></td>
+								onclick="javascript:window.location.href='${ctxAdmin}/channel'" />
+							</td>
 						</tr>
 					</table>
 				</td>
