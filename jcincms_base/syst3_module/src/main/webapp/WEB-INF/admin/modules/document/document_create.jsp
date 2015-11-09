@@ -103,27 +103,22 @@ th {
 				$('#fileName').val(data.fileName);
 				$('#fileAddr').val(data.fileAddr);
 				$('#size').val(data.size);
-				$('#assetsIds').append(data.assetsId);
-
-				//上传成功后，直接跳出截图框，使用imgAreaSelect插件
-				// 		            piso = $('#photo').imgAreaSelect({ 
-				// 		                  x1: 0, y1: 0, x2:480 , y2: 520 ,onSelectEnd: preview,
-				// 		            resizable: false,
-				// 		            instance: true,
-				// 		            persistent:true
-				// 		            });
-				// 		           // 这个方法是现实一个div，托住截图框
-				// 		            showCutImage();
-				// 		           // 一些变量在页面的隐藏input的设置
-				// 		            document.getElementById("photo").src = data.tempPath;
-				// 		            document.getElementById("currentPath").value = data.tempPath;
-
+				if(''==$('#assetsIds').val()){
+					$('#assetsIds').val(data.assetsId);
+				}else{
+					$('#assetsIds').append(","+data.assetsId);
+				}
+				
 			},
 			error : function(data, status, e) {
 				alert("图片上传失败,请重新选择图片");
 			}
 		});
 		return false;
+	}
+	
+	function insert(){
+		
 	}
 </script>
 <title>文档添加</title>
@@ -213,7 +208,7 @@ th {
 							<th>&nbsp;文件地址：</th>
 							<td nowrap="nowrap" align="left"><form:input path="fileAddr"
 									value="${document.fileAddr}"  disabled="true"/>&nbsp;<form:errors
-									path="fileAddr" cssStyle="color:red;"></form:errors></td>
+									path="fileAddr" cssStyle="color:red;"></form:errors><input id="insertBtn" value="插入" type="button" onclick="insert();"/></td>
 							<th>&nbsp;大小：</th>
 							<td nowrap="nowrap" align="left"><form:input path="size"
 									value="${document.size}"  disabled="true"/>&nbsp;<form:errors path="size"

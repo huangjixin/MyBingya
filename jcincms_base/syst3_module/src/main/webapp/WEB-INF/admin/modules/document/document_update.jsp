@@ -108,19 +108,11 @@ th {
 				$('#fileName').val(data.fileName);
 				$('#fileAddr').val(data.fileAddr);
 				$('#size').val(data.size);
-
-				//上传成功后，直接跳出截图框，使用imgAreaSelect插件
-				// 		            piso = $('#photo').imgAreaSelect({ 
-				// 		                  x1: 0, y1: 0, x2:480 , y2: 520 ,onSelectEnd: preview,
-				// 		            resizable: false,
-				// 		            instance: true,
-				// 		            persistent:true
-				// 		            });
-				// 		           // 这个方法是现实一个div，托住截图框
-				// 		            showCutImage();
-				// 		           // 一些变量在页面的隐藏input的设置
-				// 		            document.getElementById("photo").src = data.tempPath;
-				// 		            document.getElementById("currentPath").value = data.tempPath;
+				if(''==$('#assetsIds').val()){
+					$('#assetsIds').val(data.assetsId);
+				}else{
+					$('#assetsIds').append(","+data.assetsId);
+				}
 
 			},
 			error : function(data, status, e) {
