@@ -103,6 +103,7 @@ th {
 				$('#fileName').val(data.fileName);
 				$('#fileAddr').val(data.fileAddr);
 				$('#size').val(data.size);
+				$('#assetsIds').append(data.assetsId);
 
 				//上传成功后，直接跳出截图框，使用imgAreaSelect插件
 				// 		            piso = $('#photo').imgAreaSelect({ 
@@ -130,6 +131,7 @@ th {
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/document/create"
 		method="post" commandName="document" enctype="multipart/form-data">
+		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
 		<div class="desc">
 			<b>文档信息添加</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
 		</div>

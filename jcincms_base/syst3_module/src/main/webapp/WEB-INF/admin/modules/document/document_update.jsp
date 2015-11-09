@@ -137,6 +137,7 @@ th {
 		action="${ctxAdmin}/document/update/${document.id}" method="post"
 		commandName="document">
 		<input name="id" value="${document.id}" type="hidden" />
+		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
 		<div class="desc">
 			<b onclick="appendCon()">文档信息修改</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
