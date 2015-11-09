@@ -99,6 +99,11 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	//@Override
 	public Page select(${domainObjectName}Criteria criteria) {
 		Page page = new Page();
+		if(null != criteria){
+			if(null != criteria.getPage()){
+				page = criteria.getPage();
+			}
+		}
 		@SuppressWarnings("rawtypes")
 		List list = ${daoMapper}Mapper.selectByExample(criteria);
 		page.setRows(list);
