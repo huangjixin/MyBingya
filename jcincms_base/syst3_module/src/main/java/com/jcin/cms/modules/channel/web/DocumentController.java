@@ -286,7 +286,10 @@ public class DocumentController extends BaseController<Document> {
 
 		Assets assets = new Assets();
 		assets.setName(tempImageName);
+		assets.setPath(uploadPath);
+		assets.setUrl(uploadWeb);
 		assetsService.insert(assets);
+		map.put("assetsId", assets.getId());
 		return map;
 	}
 
