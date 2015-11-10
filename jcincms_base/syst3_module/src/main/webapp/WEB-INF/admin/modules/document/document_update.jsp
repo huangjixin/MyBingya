@@ -121,6 +121,11 @@ th {
 		});
 		return false;
 	}
+	
+	function insert(){
+		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="1447082469980038891.jpg" alt="ole-58728.jpg"/></p>';
+		ue.execCommand( 'inserthtml', str);
+	}
 </script>
 <title>文档修改</title>
 </head>
@@ -205,18 +210,18 @@ th {
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;文件名：</th>
-							<td nowrap="nowrap" align="left"><form:input path="fileName"
-									value="${document.fileName}" disabled="true" />&nbsp;<input
+							<td nowrap="nowrap" align="left"><form:input id="fileName" path="fileName"
+									value="${document.fileName}"/>&nbsp;<input
 								id="fileUploadBtn" type="button" value="上传"
 								onclick="selectFile()" /><input style="display: none"
 								type="file" id="file" name="file" onchange="uploadImage()" />&nbsp;<form:errors
 									path="fileName" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文件地址：</th>
-							<td nowrap="nowrap" align="left"><form:input path="fileAddr"
-									value="${document.fileAddr}" />&nbsp;<form:errors
+							<td nowrap="nowrap" align="left"><form:input id="fileAddr" path="fileAddr"
+									value="${document.fileAddr}" /><input id="insertBtn" value="插入" type="button" onclick="insert();"/>&nbsp;<form:errors
 									path="fileAddr" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;大小：</th>
-							<td nowrap="nowrap" align="left"><form:input path="size"
+							<td nowrap="nowrap" align="left"><form:input id="size" path="size"
 									value="${document.size}" />&nbsp;<form:errors path="size"
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
