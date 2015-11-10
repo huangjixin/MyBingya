@@ -35,9 +35,10 @@ th {
 	//实例化编辑器
 	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 	var ue = UE.getEditor('editor');
-
+	var docTemp = "${document.documentTemplete}";
 	$().ready(function() {
 		createDocumentTree();
+		createFileTree()
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
 			ue.setContent('${document.content}');
@@ -66,6 +67,52 @@ th {
 		});
 	}
 
+	//创建文件树。
+	function createFileTree() {
+		$('#docTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#docTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${document.documentTemplete}";
+				if (dTemplete != "") {
+					var index = dTemplete.lastIndexOf("/");
+					if(index>0){
+						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
+						$('#docTemplete').combotree("setValue", dTemplete);
+					}else{
+						$('#docTemplete').combotree("setValue", dTemplete+".jsp");
+					}
+					
+				}
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#docTemplete').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                docTemp = pathStr; 
+            }  
+		});
+	}
+	
 	function clearParentInput() {
 		$('#channelId').combotree('clear');
 	}
@@ -73,6 +120,10 @@ th {
 	function submitForm() {
 		var cont = ue.getContent();
 		$('#content').val(cont);
+		if(docTemp.indexOf(".") > 0){
+			docTemp = docTemp.substring(0,docTemp.indexOf("."));
+		}
+		$('#documentTemplete').val(docTemp);
 		$('#validForm').submit();
 	}
 	
@@ -135,6 +186,7 @@ th {
 		commandName="document">
 		<input name="id" value="${document.id}" type="hidden" />
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
+		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
 		<div class="desc">
 			<b onclick="appendCon()">文档信息修改</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
@@ -203,9 +255,8 @@ th {
 								id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文档模板：</th>
-							<td nowrap="nowrap" align="left"><form:input
-									id="documentTemplete" path="documentTemplete"
-									value="${document.documentTemplete}" />&nbsp;<form:errors
+							<td nowrap="nowrap" align="left">
+							<input id="docTemplete"/>&nbsp;<form:errors
 									path="documentTemplete" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
@@ -218,7 +269,7 @@ th {
 									path="fileName" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文件地址：</th>
 							<td nowrap="nowrap" align="left"><form:input id="fileAddr" path="fileAddr"
-									value="${document.fileAddr}" /><input id="insertBtn" value="插入" type="button" onclick="insert();"/>&nbsp;<form:errors
+									value="${document.fileAddr}" />&nbsp;<input id="insertBtn" value="插入" type="button" onclick="insert();"/>&nbsp;<form:errors
 									path="fileAddr" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;大小：</th>
 							<td nowrap="nowrap" align="left"><form:input id="size" path="size"
