@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -61,14 +62,14 @@ public class DocumentController extends BaseController<Document> {
 	@Resource
 	private IAssetsService assetsService;
 
-	// @RequiresPermissions("document:create")
+	@RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Document document, Model uiModel) {
 		uiModel.addAttribute("document", document);
 		return root + "admin/modules/document/document_create";
 	}
 
-	// @RequiresPermissions("document:create")
+	@RequiresPermissions("document:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(@Valid Document document, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model uiModel,
@@ -91,7 +92,7 @@ public class DocumentController extends BaseController<Document> {
 		return "redirect:/" + Global.getAdminPath() + "/document/create";
 	}
 
-	// @RequiresPermissions("document:update")
+	@RequiresPermissions("document:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
@@ -99,7 +100,7 @@ public class DocumentController extends BaseController<Document> {
 		return root + "admin/modules/document/document_update";
 	}
 
-	// @RequiresPermissions("document:update")
+	@RequiresPermissions("document:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(Document document,
 			RedirectAttributes redirectAttributes, Model uiModel,
@@ -113,7 +114,7 @@ public class DocumentController extends BaseController<Document> {
 				+ document.getId();
 	}
 
-	// @RequiresPermissions("document:show")
+	@RequiresPermissions("document:show")
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
@@ -122,13 +123,13 @@ public class DocumentController extends BaseController<Document> {
 		return root + "admin/modules/document/document_show";
 	}
 
-	// @RequiresPermissions("document:view")
+	@RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
 		return root + "admin/modules/document/document_list";
 	}
 
-	// @RequiresPermissions("document:delete")
+	@RequiresPermissions("document:delete")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") String id, Model uiModel) {
 		documentService.deleteByPrimaryKey(id);
@@ -161,7 +162,7 @@ public class DocumentController extends BaseController<Document> {
 		return list;
 	}
 
-	// @RequiresPermissions("document:view")
+	@RequiresPermissions("document:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public Page select(@ModelAttribute Page page,
@@ -223,7 +224,7 @@ public class DocumentController extends BaseController<Document> {
 		return page;
 	}
 
-	// @RequiresPermissions("document:delete")
+	@RequiresPermissions("document:delete")
 	@RequestMapping(value = "/deleteById")
 	@ResponseBody
 	public int deleteById(@RequestParam(value = "idstring") String idstring,
@@ -255,8 +256,7 @@ public class DocumentController extends BaseController<Document> {
 		String tempImageName = imgeName + "." + file_ext;
 		// String uploadPath = Global.getUploadpath() + tempImageName;
 		@SuppressWarnings("deprecation")
-		String uploadPath = httpServletRequest.getRealPath("/")
-				+ File.separator + "upload" + File.separator
+		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator
 				+ UserUtils.getUserId() + File.separator + tempImageName;
 		// application.getRealPath("/");
 		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;

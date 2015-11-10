@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.modules.channel.service.impl;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,7 +15,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.common.FileUtils;
+import com.jcin.cms.modules.channel.dao.AssetsMapper;
 import com.jcin.cms.modules.channel.dao.DocumentMapper;
+import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
 import com.jcin.cms.modules.channel.service.IDocumentService;
@@ -34,6 +38,8 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 
 	@Resource
 	private DocumentMapper documentMapper;
+	@Resource
+	private AssetsMapper assetsMapper;
 
 	/*
 	 * (non-Javadoc)
@@ -172,6 +178,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	}
 
 	/*
+	 * 删除文档的时候，要先删除附件。
 	 * (non-Javadoc)
 	 * 
 	 * @see
@@ -180,6 +187,24 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	@Override
 	@Transactional
 	public int deleteBatch(List<String> list) {
+		if(list.size()>0){
+			for (String id : list) {
+				Document document = documentMapper.selectByPrimaryKey(id);
+				String assetsIds = document.getAssetsIds();
+				if(null != assetsIds && !"".equals(assetsIds)){
+					String[] ids = assetsIds.split(",");
+					for (String assetid : ids) {
+						Assets assets = assetsMapper.selectByPrimaryKey(assetid);
+						String uploadPath = assets.getPath();
+						File file = new File(uploadPath);
+						logger.info(file.exists());
+						FileUtils.deleteFile(uploadPath);
+						
+						assetsMapper.deleteByPrimaryKey(assetid);
+					}
+				}
+			}
+		}
 		DocumentCriteria documentCriteria = new DocumentCriteria();
 		documentCriteria.createCriteria().andIdIn(list);
 		int result = documentMapper.deleteByExample(documentCriteria);
