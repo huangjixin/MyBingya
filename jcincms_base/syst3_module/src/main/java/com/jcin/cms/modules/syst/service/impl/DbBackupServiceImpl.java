@@ -6,6 +6,7 @@
  */
 package com.jcin.cms.modules.syst.service.impl;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.MysqlUtil;
+import com.jcin.cms.modules.channel.domain.Assets;
+import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.syst.dao.DbBackupMapper;
 import com.jcin.cms.modules.syst.domain.DbBackup;
 import com.jcin.cms.modules.syst.domain.DbBackupCriteria;
@@ -183,6 +187,17 @@ public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 	@Override
 	@Transactional
 	public int deleteBatch(List<String> list) {
+		if(list.size()>0){
+			for (String id : list) {
+				DbBackup dbBackup = dbBackupMapper.selectByPrimaryKey(id);
+				String path = dbBackup.getPath();
+				if(null != path && !"".equals(path)){
+//					File file = new File(path);
+					logger.info("删除文件："+path);
+					FileUtils.deleteFile(path);
+				}
+			}
+		}
 		DbBackupCriteria dbBackupCriteria = new DbBackupCriteria();
 		dbBackupCriteria.createCriteria().andIdIn(list);
 		int result = dbBackupMapper.deleteByExample(dbBackupCriteria);
@@ -200,7 +215,7 @@ public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 	@Override
 	@Transactional(readOnly=false)
 	public void backup() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
 		String name = sdf.format(new Date());
 		name+=".sql";
 		String path = MysqlUtil.backup(name);
@@ -223,7 +238,7 @@ public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 		System.out.println("hello,world");
 	}*/  
 	
-	@Scheduled(cron = "0 0 12 * * ?")//每天凌晨两点执行  
+	@Scheduled(cron = "0 0 12 * * ?")//每天中午十二点执行  
     void doSomethingWith(){  
         logger.info("定时任务开始......");  
         long begin = System.currentTimeMillis();  

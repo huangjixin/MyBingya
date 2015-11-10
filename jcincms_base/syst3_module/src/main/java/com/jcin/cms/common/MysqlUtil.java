@@ -26,7 +26,11 @@ public class MysqlUtil {
 	public static String backup(String name) {
 		String mysqlPath = PropertiesUtil.readProperty("database.mysqlpath");
 		String filePath = PropertiesUtil.readProperty("database.export");
-		FileUtils.createFile(filePath);
+		File f = new File(filePath);
+		if(!f.exists()){
+			FileUtils.createFile(filePath);
+		}
+		
 		filePath += File.separator + name;
 		try {
 			Runtime rt = Runtime.getRuntime();

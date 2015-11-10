@@ -45,9 +45,12 @@ import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
+import com.jcin.cms.modules.channel.domain.FileVO;
 import com.jcin.cms.modules.channel.service.IAssetsService;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.syst.domain.Organization;
+import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
@@ -256,9 +259,9 @@ public class DocumentController extends BaseController<Document> {
 		String tempImageName = imgeName + "." + file_ext;
 		// String uploadPath = Global.getUploadpath() + tempImageName;
 		@SuppressWarnings("deprecation")
-		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator
-				+ UserUtils.getUserId() + File.separator + tempImageName;
-		// application.getRealPath("/");
+		String uploadPath = httpServletRequest.getRealPath("/") + "upload"
+				+ File.separator + UserUtils.getUserId() + File.separator
+				+ tempImageName;
 		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
@@ -301,7 +304,7 @@ public class DocumentController extends BaseController<Document> {
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
-	// @RequiresPermissions("document:view")
+	@RequiresPermissions("document:view")
 	@RequestMapping(value = "/exportExcel")
 	public void exportExcel(@ModelAttribute Document document,
 			HttpServletRequest httpServletRequest,
@@ -366,8 +369,62 @@ public class DocumentController extends BaseController<Document> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		DocumentController documentController = new DocumentController();
+		File file = new File("D:/workspace/.metadata/.me_tcat7/webapps/syst/");
+		List<FileVO> list = documentController.getWebsiteFiles(file);
 	}
 
+	@RequestMapping(value = "/getWebsiteFiles")
+	@ResponseBody
+	public List<FileVO> getWebsiteFiles(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		String webroot = httpServletRequest.getRealPath("/");
+		File file = new File(webroot);
+		List<FileVO> list = getWebsiteFiles(file);
+		return list;
+	}
+
+	public List<FileVO> getWebsiteFiles(File file) {
+		List<FileVO> children = new ArrayList<FileVO>();
+		File[] childs = file.listFiles();
+		for (File object : childs) {
+			FileVO fileVO = null;
+			fileVO = searialFileVO(object);
+			if (fileVO != null) {
+				children.add(fileVO);
+			}
+		}
+		return children;
+	}
+
+	public FileVO searialFileVO(File file) {
+
+		FileVO fileVO = new FileVO();
+		fileVO.setName(file.getName());
+
+		List<FileVO> list = searialChild(file);
+		if (null != list) {
+			fileVO.setChildren(list);
+		}
+
+		return fileVO;
+	}
+
+	public List<FileVO> searialChild(File file) {
+		List children = null;
+		File[] list = file.listFiles();
+		if (list != null && list.length > 0) {
+			children = new ArrayList();
+		}
+		if (list != null) {
+			for (File object : list) {
+				FileVO jsonObject = searialFileVO(object);
+				if (jsonObject != null) {
+					children.add(jsonObject);
+				}
+			}
+		}
+
+		return children;
+	}
 }

@@ -138,7 +138,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 		DbBackupCriteria dbBackupCriteria = new DbBackupCriteria();
 		DbBackupCriteria.Criteria criteria = dbBackupCriteria.createCriteria();
 		dbBackupCriteria.setPage(page);
-		dbBackupCriteria.setOrderByClause("id desc");
+		dbBackupCriteria.setOrderByClause("create_date desc");
 		if (null != dbBackup.getId()  && !"".equals(dbBackup.getId())) {
 		  	criteria.andIdLike("%" + dbBackup.getId() + "%");
 		}
