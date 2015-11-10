@@ -28,7 +28,7 @@ public class MysqlUtil {
 		String filePath = PropertiesUtil.readProperty("database.export");
 		File f = new File(filePath);
 		if(!f.exists()){
-			FileUtils.createFile(filePath);
+			FileUtils.createDirectory(filePath);
 		}
 		
 		filePath += File.separator + name;
