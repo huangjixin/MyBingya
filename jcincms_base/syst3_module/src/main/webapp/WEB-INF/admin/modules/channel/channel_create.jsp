@@ -17,8 +17,11 @@ th {
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
+	var chanTemp = "${channel.channelTemplete}";
+	
 	$().ready(function() {
 		createOrganizationTree();
+		createFileTree();
 	});
 
 	function createOrganizationTree() {
@@ -39,6 +42,52 @@ th {
 		});
 	}
 
+	//创建文件树。
+	function createFileTree() {
+		$('#chanTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#chanTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.channelTemplete}";
+				if (dTemplete != "") {
+					var index = dTemplete.lastIndexOf("/");
+					if(index>0){
+						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
+						$('#chanTemplete').combotree("setValue", dTemplete);
+					}else{
+						$('#chanTemplete').combotree("setValue", dTemplete+".jsp");
+					}
+					
+				}
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#chanTemplete').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                chanTemp = pathStr; 
+            }  
+		});
+	}
+	
 	function oncodeComplete() {
 		$('#linkAddr').val("");
 		var node = $('#parentId').combotree('tree').tree("getSelected");
@@ -81,10 +130,14 @@ th {
 		}
 	}
 
+	
 	function onsubmitHandler() {
+		if(chanTemp.indexOf(".") > 0){
+			chanTemp = chanTemp.substring(0,chanTemp.indexOf("."));
+		}
+		$('#channelTemplete').val(chanTemp);
 		var row = $('#tgrid').datagrid('getSelected');
 		if (row) {
-			//$.messager.alert('Info', row.id);
 			$("#documentId").val(row.id);
 		}
 	}
@@ -118,8 +171,8 @@ th {
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/channel/create"
 		method="post" commandName="channel" onsubmit="onsubmitHandler()">
-		<input id="documentId" name="documentId" value="${channel.documentId}"
-			type="hidden" />
+		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
+		<input id="documentId" name="documentId" value="${channel.documentId}" type="hidden" />
 		<div class="descrition">
 			<b>栏目信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
@@ -163,9 +216,7 @@ th {
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;栏目模板：</th>
-							<td nowrap="nowrap" align="left"><form:input
-									id="channelTemplete" path="channelTemplete"
-									value="${channel.channelTemplete}" />&nbsp;<b
+							<td nowrap="nowrap" align="left"><input id="chanTemplete" path="chanTemplete" />&nbsp;<b
 								id="channelTempleteTip"></b>
 							<form:errors path="channelTemplete" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否隐藏：</th>
