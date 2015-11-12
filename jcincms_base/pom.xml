@@ -80,11 +80,13 @@
 			<version>2.10.0</version>
 		</dependency>
 		<!-- activity 流程引擎 -->
-		<!-- <dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>5.19.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.activiti</groupId> <artifactId>activiti-engine</artifactId> 
+			<version>5.19.0</version> </dependency> <dependency> <groupId>org.activiti</groupId> 
+			<artifactId>activiti-spring</artifactId> <version>5.19.0</version> </dependency> 
+			<dependency> <groupId>org.activiti</groupId> <artifactId>activiti-process-validation</artifactId> 
+			<version>5.19.0</version> </dependency> <dependency> <groupId>org.activiti</groupId> 
+			<artifactId>activiti-bpmn-converter</artifactId> <version>5.19.0</version> 
+			</dependency> -->
 		<!-- <dependency> <groupId>org.quartz-scheduler</groupId> <artifactId>quartz</artifactId> 
 			<version>2.2.1</version> </dependency> -->
 		<dependency>
@@ -351,7 +353,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.0.6</version>
+			<version>3.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
