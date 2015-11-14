@@ -42,21 +42,7 @@
 					src="${ctx}/defaultApp/images/gb.gif" width="16" height="11" alt="English" />English</a>
 			</div>
 		</div>
-		<div id="MainMenu" class="ddsmoothmenu">
-			<ul>
-				<c:forEach var="channel" items="${list}">
-					<li><a href="${ctx}/${channel.linkAddr}" title="${channel.name}"
-						<c:if test="${channel.linkAddr=='/'}">id="menu_selected"</c:if>><span>${channel.name}</span></a>
-						<c:if test="${channel.children!= null }">
-							<ul class="menulevel">
-								<c:forEach var="chan" items="${channel.children}">
-									<li><a href="${ctx}/${chan.linkAddr}" title="${chan.name}"><span>${chan.name}</span></a></li>
-								</c:forEach>
-							</ul>
-						</c:if></li>
-				</c:forEach>
-			</ul>
-		</div>
+		<%@include file="menu.jsp" %>
 		<script type="text/javascript">
 			$(function() {
 				$("#banner").KinSlideshow({
@@ -117,9 +103,6 @@
 									<li><a href="${ctx}/${chan.linkAddr }" title="${chan.name}"><span>${chan.name}</span></a></li>
 								</c:forEach>
 							</c:if>
-							<!-- <li><a href="single.html" title="组织构架"><span>组织构架</span></a></li>
-							<li><a href="single.html" title="公司历史"><span>公司历史</span></a></li>
-							<li><a href="single.html" title="联系我们"><span>联系我们</span></a></li> -->
 						</ul>
 					</div>
 					<script type="text/javascript">

@@ -223,7 +223,7 @@ th {
 								name="hidden" style="width:100px;">
 									<c:forEach var="sh" items="${fns:getByType('hidden')}">
 										<option value="${sh.value}"
-											<c:if test="${sh.value == channel.hidden}">selected="selected"</c:if>>${sh.label}</option>
+											<c:if test="${sh.value == document.hidden}">selected="selected"</c:if>>${sh.label}</option>
 									</c:forEach>
 							</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
 						</tr>
@@ -275,6 +275,14 @@ th {
 							<td nowrap="nowrap" align="left"><form:input id="size" path="size"
 									value="${document.size}" />&nbsp;<form:errors path="size"
 									cssStyle="color:red;"></form:errors></td>
+						</tr>
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+							<th>&nbsp;是否推荐：</th>
+							<td nowrap="nowrap" align="left"  colspan="6"><select  id="recommend" name="recommend" style="width:100px;">
+										<c:forEach var="sh" items="${fns:getByType('recommend')}">
+											<option value="${sh.value}" <c:if test="${sh.value == document.recommend}">selected="selected"</c:if>>${sh.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="recommend" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th style="width: 150px;">&nbsp;</th>

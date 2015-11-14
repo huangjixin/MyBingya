@@ -17,10 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.modules.channel.dao.AssetsMapper;
+import com.jcin.cms.modules.channel.dao.ChannelMapper;
 import com.jcin.cms.modules.channel.dao.DocumentMapper;
 import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.domain.DocumentCriteria;
+import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
@@ -36,6 +38,9 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	private static Logger logger = Logger.getLogger(DocumentServiceImpl.class
 			.getName());
 
+	@Resource
+	private IChannelService channelService;
+	
 	@Resource
 	private DocumentMapper documentMapper;
 	@Resource
@@ -235,6 +240,17 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		criteria.andChannelIdEqualTo(channelId);
+		List<Document> list  = documentMapper.selectByExample(documentCriteria);
+		return list;
+	}
+
+	@Override
+	public List<Document> getRecommendDoc(Page page) {
+		DocumentCriteria documentCriteria = new DocumentCriteria();
+		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+		criteria.andRecommendEqualTo(true);
+		documentCriteria.setPage(page);
+		documentCriteria.setOrderByClause("recommend desc, id desc");
 		List<Document> list  = documentMapper.selectByExample(documentCriteria);
 		return list;
 	}

@@ -20,6 +20,7 @@
     <result column="document_templete" property="documentTemplete" jdbcType="VARCHAR" />
     <result column="hidden" property="hidden" jdbcType="BIT" />
     <result column="assets_ids" property="assetsIds" jdbcType="VARCHAR" />
+    <result column="recommend" property="recommend" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,7 +83,7 @@
   <sql id="Base_Column_List" >
     id, channel_id, title, color, keyword, descrition, priority, source, source_addr, 
     author, title_image, file_name, file_addr, size, content, document_templete, hidden, 
-    assets_ids
+    assets_ids, recommend
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -122,15 +123,15 @@
       priority, source, source_addr, 
       author, title_image, file_name, 
       file_addr, size, content, 
-      document_templete, hidden, assets_ids
-      )
+      document_templete, hidden, assets_ids, 
+      recommend)
     values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
       #{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{sourceAddr,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
       #{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
-      #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{assetsIds,jdbcType=VARCHAR}
-      )
+      #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{assetsIds,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Document" >
     insert into busi_document
@@ -189,6 +190,9 @@
       <if test="assetsIds != null" >
         assets_ids,
       </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -244,6 +248,9 @@
       </if>
       <if test="assetsIds != null" >
         #{assetsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -310,6 +317,9 @@
       <if test="record.assetsIds != null" >
         assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
       </if>
+      <if test="record.recommend != null" >
+        recommend = #{record.recommend,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -334,7 +344,8 @@
       content = #{record.content,jdbcType=VARCHAR},
       document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
       hidden = #{record.hidden,jdbcType=BIT},
-      assets_ids = #{record.assetsIds,jdbcType=VARCHAR}
+      assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
+      recommend = #{record.recommend,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -393,6 +404,9 @@
       <if test="assetsIds != null" >
         assets_ids = #{assetsIds,jdbcType=VARCHAR},
       </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -414,13 +428,14 @@
       content = #{content,jdbcType=VARCHAR},
       document_templete = #{documentTemplete,jdbcType=VARCHAR},
       hidden = #{hidden,jdbcType=BIT},
-      assets_ids = #{assetsIds,jdbcType=VARCHAR}
+      assets_ids = #{assetsIds,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, content, document_templete, hidden, assets_ids) values 
+    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, content, document_templete, hidden, assets_ids, recommend) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR}, #{item.recommend,jdbcType=BIT})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

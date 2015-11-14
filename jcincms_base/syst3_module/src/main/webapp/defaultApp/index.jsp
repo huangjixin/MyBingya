@@ -44,7 +44,7 @@
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
 		</div>
-		<div id="MainMenu" class="ddsmoothmenu">
+		<%-- <div id="MainMenu" class="ddsmoothmenu">
 			<ul>
 				<c:forEach var="channel" items="${list}">
 					<li><a href="${ctx}/${channel.linkAddr}" title="${channel.name}"
@@ -52,32 +52,23 @@
 						<c:if test="${channel.children!= null }">
 							<ul class="menulevel">
 								<c:forEach var="chan" items="${channel.children}">
-									<li><a href="${ctx}/${chan.linkAddr}" title="${chan.name}"><span>${chan.name}</span></a></li>
+									<li><a href="${ctx}/${chan.linkAddr}" title="${chan.name}"><span>${chan.name}</span></a>
+										<c:if test="${chan.children!= null }">
+											<ul class="menulevel">
+												<c:forEach var="ch" items="${chan.children}">
+													<li><a href="${ctx}/${ch.linkAddr}" title="${ch.name}"><span>${ch.name}</span></a>
+													</li>
+												</c:forEach>
+											</ul>
+										</c:if>
+									</li>
 								</c:forEach>
 							</ul>
 						</c:if></li>
 				</c:forEach>
-				<%-- <li><a href="${ctx}/" title="公司主页" id="menu_selected"><span>公司主页</span></a></li>
-				<li><a href="${ctx}/defaultApp/single.html" title="关于我们"><span>关于我们</span></a>
-				<ul class="menulevel">
-						<li><a href="${ctx}/defaultApp/single.html" title="组织构架">组织构架</a></li>
-						<li><a href="${ctx}/defaultApp/single.html" title="公司历史">公司历史</a></li>
-						<li><a href="${ctx}/defaultApp/single.html" title="联系我们">联系我们</a></li>
-					</ul></li>
-				<li><a href="${ctx}/defaultApp/products.html" title="产品展示"><span>产品展示</span></a>
-				<ul class="menulevel">
-						<li><a href="${ctx}/defaultApp/products.html" title="医药原料及中间体">医药原料及中间体</a></li>
-						<li><a href="${ctx}/defaultApp/products.html" title="无机化工产品">无机化工产品</a></li>
-						<li><a href="products.html" title="香精香料及植物提取物">香精香料及植物提取物</a></li>
-						<li><a href="${ctx}/defaultApp/products.html" title="食品化工产品">食品化工产品</a></li>
-						<li><a href="${ctx}/defaultApp/products.html" title="有机化工产品">有机化工产品</a></li>
-						<li><a href="${ctx}/defaultApp/products.html" title="农资化工产品">农资化工产品</a></li>
-					</ul></li>
-				<li><a href="${ctx}/defaultApp/news.html" title="新闻中心"><span>新闻中心</span></a></li>
-				<li><a href="${ctx}/defaultApp/jobs.html" title="招聘信息"><span>招聘信息</span></a></li>
-				<li><a href="${ctx}/defaultApp/guestbook.html" title="留言反馈"><span>留言反馈</span></a></li> --%>
 			</ul>
-		</div>
+		</div> --%>
+		<%@include file="menu.jsp" %>
 		<script type="text/javascript">
 			$(function() {
 				$("#banner").KinSlideshow({
@@ -124,7 +115,17 @@
 						<div id="LeftArr1"></div>
 						<div id="RightArr1"></div>
 						<ul id="ScrollBox" class="clearfix">
-							<li><a href="products.html" title="覆盆子酮"><img
+						<c:set var="recommendDocs" value="${fns:getRecommendDoc()}"></c:set>
+							<c:if test="${recommendDocs!=null}">
+								<c:forEach var="doc" items="${recommendDocs}">
+									<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
+									<li><a href="products.html" title="覆盆子酮"><img
+									src="${ctx}${doc.fileAddr}" alt="覆盆子酮"
+									width="140" height="100" /><span>覆盆子酮</span></a></li>
+									</c:if>
+								</c:forEach>
+							</c:if>
+							<%-- <li><a href="products.html" title="覆盆子酮"><img
 									src="${ctx}/defaultApp/uploadfile/20110611023489748974.jpg" alt="覆盆子酮"
 									width="140" height="100" /><span>覆盆子酮</span></a></li>
 							<li><a href="products.html" title="氯霉素"><img
@@ -138,7 +139,7 @@
 									width="140" height="100" /><span>土霉素</span></a></li>
 							<li><a href="products.html" title="盐酸特比奈芬"><img
 									src="${ctx}/defaultApp/uploadfile/20110611014993929392.jpg" alt="盐酸特比奈芬"
-									width="140" height="100" /><span>盐酸特比奈芬</span></a></li>
+									width="140" height="100" /><span>盐酸特比奈芬</span></a></li> --%>
 						</ul>
 						<script language="javascript" type="text/javascript">
 						<!--//--><![CDATA[//><!--

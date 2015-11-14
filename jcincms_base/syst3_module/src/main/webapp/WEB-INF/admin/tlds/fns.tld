@@ -60,6 +60,15 @@
 		</function-signature>
 		<example>${fns:getDocByChannelId(id)}</example>
 	</function>
+	<!-- 查询图集 -->
+	<function>
+		<description>查询推荐文档</description>
+		<name>getRecommendDoc</name>
+		<function-class>com.jcin.cms.common.UserUtils</function-class>
+		<function-signature>java.util.List getRecommendDoc()
+		</function-signature>
+		<example>${fns:getRecommendDoc()}</example>
+	</function>
 	<function>
 		<description>根据栏目名称查询栏目</description>
 		<name>getByCode</name>

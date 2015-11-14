@@ -11,8 +11,8 @@
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="false" />
-		<property name="activityFontName" value="宋体" />
-		<property name="labelFontName" value="宋体" />
+		<!-- <property name="activityFontName" value="宋体" />
+		<property name="labelFontName" value="宋体" /> -->
 	</bean>
 
 	<!-- activiti的各种服务接口 -->

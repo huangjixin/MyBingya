@@ -120,6 +120,12 @@ public class UserUtils {
 		return getUser().getId();
 	}
 	
+	public static List getRecommendDoc(){
+		Page page = new Page();
+		List list = documentService.getRecommendDoc(page);
+		return list==null || list.size()==0?null:list;
+	}
+	
 	public static List getDocByChannelId(String id){
 		Page page = new Page();
 		return documentService.getDocByChannelId(id,page);

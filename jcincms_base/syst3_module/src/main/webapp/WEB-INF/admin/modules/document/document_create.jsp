@@ -156,9 +156,10 @@ th {
 				if(''==$('#assetsIds').val()){
 					$('#assetsIds').val(data.assetsId);
 				}else{
-					$('#assetsIds').append(","+data.assetsId);
+					var assIds = $('#assetsIds').val();
+					assIds += ","+data.assetsId;
+					$('#assetsIds').val(assIds);
 				}
-				
 			},
 			error : function(data, status, e) {
 				alert("图片上传失败,请重新选择图片");
@@ -168,7 +169,7 @@ th {
 	}
 	
 	function insert(){
-		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="1447082469980038891.jpg" alt="ole-58728.jpg"/></p>';
+		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="$('#fileName').val()" alt="$('#fileName').val()"/></p>';
 		ue.execCommand( 'inserthtml', str);
 	}
 </script>
@@ -268,6 +269,14 @@ th {
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+							<th>&nbsp;是否推荐：</th>
+							<td nowrap="nowrap" align="left"  colspan="6"><select  id="recommend" name="recommend" style="width:100px;">
+										<c:forEach var="sh" items="${fns:getByType('recommend')}">
+											<option value="${sh.value}" <c:if test="${sh.value == false}">selected="selected"</c:if>>${sh.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="recommend" cssStyle="color:red;"></form:errors></td>
+						</tr>
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th style="width: 150px;">&nbsp;</th>
 							<td style="text-align: left;" colspan="6"><input
 								type="button" value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
@@ -279,7 +288,6 @@ th {
 				</td>
 			</tr>
 		</table>
-		<%-- <img src="${ctx }/upload/1/20151021_111608.jpg"/> --%>
 		<div>
 			<b>正文</b>
 			<script id="editor" type="text/plain"

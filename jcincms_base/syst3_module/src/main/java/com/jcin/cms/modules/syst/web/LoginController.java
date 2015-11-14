@@ -6,6 +6,8 @@
  */
 package com.jcin.cms.modules.syst.web;
 
+import java.util.Properties;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -52,6 +54,22 @@ public class LoginController extends BaseController<User> {
 	@RequestMapping(value = {"","/"})
 	public String index(Model uiModel) {
 		return root+"admin/modules/index";
+	}
+	
+	@RequestMapping(value = {"system"})
+	public String system(Model uiModel,HttpServletRequest request) {
+		Properties props=System.getProperties(); //获得系统属性集    
+		String osName = props.getProperty("os.name"); //操作系统名称    
+		String osArch = props.getProperty("os.arch"); //操作系统构架    
+		String osVersion = props.getProperty("os.version"); //操作系统版本 
+		String version = props.getProperty("java.version"); //    Java 运行时环境版本  
+		String vendor = props.getProperty("java.vendor"); //    Java 运行时环境供应商  
+		uiModel.addAttribute("osName", osName);
+		uiModel.addAttribute("osArch", osArch);
+		uiModel.addAttribute("osVersion", osVersion);
+		uiModel.addAttribute("version", version);
+		uiModel.addAttribute("vendor", vendor);
+		return root+"admin/modules/system";
 	}
 
 }
