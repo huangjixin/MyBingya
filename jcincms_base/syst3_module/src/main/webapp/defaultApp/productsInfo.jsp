@@ -23,7 +23,7 @@
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
-	src="${ctx}/defaultApp/scripts/jquery.KinSlideshow-1.2.1.js"></script>
+	src="scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript"
 	src="${ctx}/defaultApp/scripts/webtry_roll.js"></script>
 <script type="text/javascript"
@@ -43,12 +43,6 @@
 		<div class="top">
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
-			<div id="lang">
-				<a
-					href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-					src="${ctx}/defaultApp/default/images/gb.gif" width="16" height="11"
-					alt="English" />English</a>
-			</div>
 		</div>
 		<%@include file="menu.jsp" %>
 		<script type="text/javascript">
@@ -89,7 +83,7 @@
 			<div class="page-right">
 				<div class="site-nav">
 					<span>当前位置 : </span><a href="${ctx}">公司主页</a> &gt;&gt; <a
-						href="${ctx}/channel/jobs" title="新闻中心">招聘信息</a> &gt;&gt; 正文
+						href="${ctx}/channel/products" title="产品展示">产品展示</a> &gt;&gt; 正文
 				</div>
 				<div class="page-single">
 					<p style="LINE-HEIGHT: 25px">
@@ -106,8 +100,8 @@
 					<form action="" method="post" id="sitesearch" name="sitesearch">
 						<p>
 							<select name="searchid" id="searchid"><option value="2">产品展示</option>
-								<option value="3" selected="selected">招聘信息</option>
-								<option value="4">新闻中心</option></select>
+								<option value="3" selected="selected">新闻中心</option>
+								<option value="4">招聘信息</option></select>
 						</p>
 						<p>
 							<input name="searchtext" type="text" id="searchtext" />

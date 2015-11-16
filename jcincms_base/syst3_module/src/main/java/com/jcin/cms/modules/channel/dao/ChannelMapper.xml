@@ -349,7 +349,8 @@
       hidden = #{hidden,jdbcType=BIT},
       asdocument = #{asdocument,jdbcType=BIT},
       document_id = #{documentId,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER}
+      sort = #{sort,jdbcType=INTEGER},
+      parent_ids = #{parentIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >

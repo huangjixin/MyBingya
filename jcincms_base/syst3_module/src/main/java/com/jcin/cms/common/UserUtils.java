@@ -9,6 +9,7 @@ import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
 
 import com.jcin.cms.modules.channel.domain.Channel;
+import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
@@ -83,17 +84,17 @@ public class UserUtils {
 	
 	public static List<Channel> getChannels(boolean isRefresh){
 		if (isRefresh){
-			removeCache("chennels");
+			removeCache("channels");
 		}
 		return getChannels();
 	}
 	
 	public static List<Channel> getChannels(){
-		List<Channel> list = (List<Channel>)getCache("chennels");
+		List<Channel> list = (List<Channel>)getCache("channels");
 
         if (list == null){
             list = channelService.getChannelTree();
-            putCache("chennels", list);
+            putCache("channels", list);
 		}
 		return list;
 	}
@@ -133,6 +134,10 @@ public class UserUtils {
 	
 	public static Channel getByCode(String code){
 		return channelService.getByCode(code);
+	}
+	
+	public static List<Document> getDocByChannelCode(String code){
+		return documentService.getDocByChannelCode(code);
 	}
 	// ============== User Cache ==============
 	

@@ -38,7 +38,12 @@ th {
 			onClick : function(node) {
 				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
 				$('#parentId').val(node.id);*/
-				$('#linkAddr').val(node.code);
+// 				$('#linkAddr').val(node.code);
+				if(node.parentIds=='' ||node.parentIds==null){
+					$('#parentIds').val(node.id);
+				}else{
+					$('#parentIds').val(node.parentIds+","+node.id);
+				}
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#parentId').combotree('tree').tree("collapseAll");
@@ -113,6 +118,7 @@ th {
 
 	function clearParentInput() {
 		$('#parentId').combotree('clear');
+		$('#parentIds').val('');
 	}
 
 	function clearForm() {
@@ -183,6 +189,7 @@ th {
 		commandName="channel" onsubmit="onsubmitHandler()">
 		<input name="id" value="${channel.id}" type="hidden" />
 		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
+		<input id="parentIds" name="parentIds" value="${channel.parentIds}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
 			type="hidden" />
 		<div class="descrition">

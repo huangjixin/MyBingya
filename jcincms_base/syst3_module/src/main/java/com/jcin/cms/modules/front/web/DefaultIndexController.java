@@ -49,7 +49,7 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping
 	public String index(Model uiModel, HttpServletRequest httpServletRequest) {
 		// List<Channel> list = channelService.getChannelTree();
-		List<Channel> list = getChannels(false); //利用缓存。
+		List<Channel> list = UserUtils.getChannels(); //利用缓存。
 		uiModel.addAttribute("list", list);
 		return "defaultApp/index";
 	}
@@ -58,8 +58,6 @@ public class DefaultIndexController extends BaseController {
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		// String requestRri = httpServletRequest.getRequestURI();
-		// :(?!${includePath}).*$}
 		// 检查栏目是否存在；
 		Channel channel = getChannelByCode(true,channels);
 //		Channel channel = channelService.getByCode(channels);

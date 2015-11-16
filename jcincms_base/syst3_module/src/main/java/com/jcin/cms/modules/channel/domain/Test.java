@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Test implements Serializable {
+	
     /**
      *   所属表字段为test.id
      *

@@ -1,6 +1,7 @@
 package com.jcin.cms.modules.channel.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Channel implements Serializable {
@@ -102,6 +103,8 @@ public class Channel implements Serializable {
      */
     private Integer sort;
 
+    private String parentIds;
+    
     /**
      * 该字段对应数据库表 busi_channel
      *
@@ -417,6 +420,16 @@ public class Channel implements Serializable {
         this.sort = sort;
     }
     
+    public String getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(String parentIds) {
+		this.parentIds = parentIds;
+	}
+	
+    private List<String> childrenids = new ArrayList<String>() ;
+    
     private List<Channel> children ;
 
 	private boolean checked;
@@ -444,4 +457,13 @@ public class Channel implements Serializable {
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
+
+	public List<String> getChildrenids() {
+		return childrenids;
+	}
+
+	public void setChildrenids(List<String> childrenids) {
+		this.childrenids = childrenids;
+	}
+
 }

@@ -162,7 +162,9 @@ th {
 				if(''==$('#assetsIds').val()){
 					$('#assetsIds').val(data.assetsId);
 				}else{
-					$('#assetsIds').append(","+data.assetsId);
+					var assIds = $('#assetsIds').val();
+					assIds += ","+data.assetsId;
+					$('#assetsIds').val(assIds);
 				}
 
 			},
@@ -174,7 +176,7 @@ th {
 	}
 	
 	function insert(){
-		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="1447082469980038891.jpg" alt="ole-58728.jpg"/></p>';
+		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="'+$('#fileName').val()+'" alt="'+$('#fileName').val()+'"/></p>';
 		ue.execCommand( 'inserthtml', str);
 	}
 </script>

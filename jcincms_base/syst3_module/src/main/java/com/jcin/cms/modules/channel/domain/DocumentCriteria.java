@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DocumentCriteria {
+	private String code;
     /**
      * 该字段对应数据库表 busi_document
      *
@@ -184,14 +185,22 @@ public class DocumentCriteria {
         return dialect;
     }
 
-    /**
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
      * 该类对应于数据库表 busi_document
      *
      * @mbggenerated 2015年11月14日 11时16分29秒 星期六
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
-
+        
         protected GeneratedCriteria() {
             super();
             criteria = new ArrayList<Criterion>();

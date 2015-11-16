@@ -34,7 +34,12 @@ th {
 			onClick : function(node) {
 				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
 				$('#parentId').val(node.id);*/
-				$('#linkAddr').val(node.code);
+// 				$('#linkAddr').val(node.code);
+				if(node.parentIds=='' ||node.parentIds==null){
+					$('#parentIds').val(node.id);
+				}else{
+					$('#parentIds').val(node.parentIds+","+node.id);
+				}
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#parentId').combotree('tree').tree("collapseAll");
@@ -105,6 +110,7 @@ th {
 
 	function clearParentInput() {
 		$('#parentId').combotree('clear');
+		$('#parentIds').val('');
 	}
 
 	function clearForm() {
@@ -173,6 +179,7 @@ th {
 		method="post" commandName="channel" onsubmit="onsubmitHandler()">
 		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}" type="hidden" />
+		<input id="parentIds" name="parentIds" value="${channel.parentIds}" type="hidden" />
 		<div class="descrition">
 			<b>栏目信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>

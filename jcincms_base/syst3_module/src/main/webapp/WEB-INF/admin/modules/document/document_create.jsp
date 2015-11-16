@@ -169,7 +169,7 @@ th {
 	}
 	
 	function insert(){
-		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="$('#fileName').val()" alt="$('#fileName').val()"/></p>';
+		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="'+$('#fileName').val()+'" alt="'+$('#fileName').val()+'"/></p>';
 		ue.execCommand( 'inserthtml', str);
 	}
 </script>
@@ -288,6 +288,7 @@ th {
 				</td>
 			</tr>
 		</table>
+		<%-- <img src="${ctx }/upload/1/20151021_111608.jpg"/> --%>
 		<div>
 			<b>正文</b>
 			<script id="editor" type="text/plain"

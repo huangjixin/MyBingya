@@ -96,4 +96,11 @@ public interface DocumentMapper {
      * @mbggenerated 2015年11月14日 11时16分29秒 星期六
      */
     int updateByPrimaryKey(Document record);
+    
+    /**
+     * 该方法由系统生成 busi_document
+     *
+     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     */
+    List<Document> selectByChannelCodeExample(DocumentCriteria example);
 }

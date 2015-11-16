@@ -44,30 +44,6 @@
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
 		</div>
-		<%-- <div id="MainMenu" class="ddsmoothmenu">
-			<ul>
-				<c:forEach var="channel" items="${list}">
-					<li><a href="${ctx}/${channel.linkAddr}" title="${channel.name}"
-						<c:if test="${channel.linkAddr=='/'}">id="menu_selected"</c:if>><span>${channel.name}</span></a>
-						<c:if test="${channel.children!= null }">
-							<ul class="menulevel">
-								<c:forEach var="chan" items="${channel.children}">
-									<li><a href="${ctx}/${chan.linkAddr}" title="${chan.name}"><span>${chan.name}</span></a>
-										<c:if test="${chan.children!= null }">
-											<ul class="menulevel">
-												<c:forEach var="ch" items="${chan.children}">
-													<li><a href="${ctx}/${ch.linkAddr}" title="${ch.name}"><span>${ch.name}</span></a>
-													</li>
-												</c:forEach>
-											</ul>
-										</c:if>
-									</li>
-								</c:forEach>
-							</ul>
-						</c:if></li>
-				</c:forEach>
-			</ul>
-		</div> --%>
 		<%@include file="menu.jsp" %>
 		<script type="text/javascript">
 			$(function() {
@@ -119,9 +95,9 @@
 							<c:if test="${recommendDocs!=null}">
 								<c:forEach var="doc" items="${recommendDocs}">
 									<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
-									<li><a href="products.html" title="覆盆子酮"><img
-									src="${ctx}${doc.fileAddr}" alt="覆盆子酮"
-									width="140" height="100" /><span>覆盆子酮</span></a></li>
+									<li><a href="${ctx}/channel/products/doc/${doc.id}" title="${doc.fileName}" target="blank"><img
+									src="${ctx}${doc.fileAddr}" alt="${doc.fileName}"
+									width="140" height="100" /><span>${doc.title}</span></a></li>
 									</c:if>
 								</c:forEach>
 							</c:if>
@@ -188,13 +164,13 @@
 				</div>
 				<div class="index-about">
 					<h2>
-						<span>关于我们</span><a href="single.html"><img
+						<span>关于我们</span><a href="${ctx}/channel/aboutus"><img
 							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="关于我们" /></a>
 					</h2>
 					<p>
 						<img src="${ctx}/defaultApp/images/index_AboutPic.jpg" alt="关于我们"
-							width="145" height="181" /><a href="single.html" title="关于我们">
+							width="145" height="181" /><a href="${ctx}/channel/aboutus" title="关于我们">
 							上海网聚化工有限公司和进出口有限公司是以无机化工、有机化工、精细化工、香精香料、食品添加剂、医药原料及中间体等经营、销售为一体的高科技化工企业。公司位于上海市商业中心,交通十分便捷。<br />
 							我公司华东地区总经销双氧水，品质保证...
 						</a>
@@ -202,12 +178,22 @@
 				</div>
 				<div class="index-products">
 					<h2>
-						<span>产品展示</span><a href="products.html"><img
+						<span>产品展示</span><a href="${ctx}/channel/products"><img
 							src="${ctx}/defaultApp/images/more.gif" width="32" height="5"
 							alt="产品展示" /></a>
 					</h2>
 					<ul class="clearfix">
-						<li><a href="products.html" title="氯化钾"><img
+						<c:set var="productsdocs" value="${fns:getDocByChannelCode('products')}"></c:set>
+							<c:if test="${productsdocs!=null}">
+								<c:forEach var="doc" items="${productsdocs}">
+									<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
+									<li><a href="${ctx}/channel/products" title="${doc.fileName}" target="blank"><img
+									src="${ctx}/${doc.fileAddr}" alt="${doc.fileName}"
+									width="150" height="110" /><span>${doc.title}</span></a></li>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						<%-- <li><a href="products.html" title="氯化钾"><img
 								src="${ctx}/defaultApp/uploadfile/20110611032733583358.jpg" alt="氯化钾"
 								width="154" height="110" /><span>氯化钾</span></a></li>
 						<li><a href="products.html" title="磷酸二氢钾"><img
@@ -230,7 +216,7 @@
 								width="154" height="110" /><span>香兰素</span></a></li>
 						<li><a href="products.html" title="丁香罗勒油"><img
 								src="${ctx}/defaultApp/uploadfile/20110611031086798679.jpg" alt="丁香罗勒油"
-								width="154" height="110" /><span>丁香罗勒油</span></a></li>
+								width="154" height="110" /><span>丁香罗勒油</span></a></li> --%>
 					</ul>
 				</div>
 			</div>
@@ -269,7 +255,8 @@
 						<li><a href="jobs.html" title="营销总监"><span> - 营销总监</span></a></li>
 					</ul>
 				</div>
-				<div class="index-contact">
+				<%@include file="contact.jsp" %>
+				<%-- <div class="index-contact">
 					<h2>
 						<span>联系我们</span>
 					</h2>
@@ -281,16 +268,10 @@
 					</p>
 				</div>
 				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59"
-					alt="联系我们" />
+					alt="联系我们" /> --%>
 			</div>
 		</div>
-		<div id="copyright">
-			Copyright ©2004-2011&nbsp;<a href="http://www.netgather.com"
-				title="上海网聚化工有限公司">上海网聚化工有限公司www.netgather.com</a> All Rights
-			Reserved.<br /> <span>地址: </span>上海市嘉定区华亭镇 <span>邮编: </span>200000 <span>联系人:
-			</span>网聚化工<br /> <span>电话: </span>021-58888888 <span>传真: </span>021-58888888
-			<span>手机: </span>13888888888<br /> <span>邮箱: </span>netgather@netgather.com
-		</div>
+		<%@include file="footer.jsp" %>
 	</div>
 </body>
 </html>
