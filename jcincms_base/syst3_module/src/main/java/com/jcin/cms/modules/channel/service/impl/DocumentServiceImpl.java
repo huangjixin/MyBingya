@@ -236,11 +236,13 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	}
 
 	@Override
-	public List<Document> getDocByChannelCode(String code) {
+	public List<Document> getDocByChannelCode(String code,Page page) {
 		DocumentCriteria documentCriteria = new DocumentCriteria();
+		documentCriteria.setPage(page);
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		documentCriteria.setCode(code);
 		List<Document> list  = documentMapper.selectByChannelCodeExample(documentCriteria);
+		page.setRows(list);
 		return list;
 	}
 	

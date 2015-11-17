@@ -136,8 +136,10 @@ public class UserUtils {
 		return channelService.getByCode(code);
 	}
 	
-	public static List<Document> getDocByChannelCode(String code){
-		return documentService.getDocByChannelCode(code);
+	public static List<Document> getDocByChannelCode(String code,Integer pageSize){
+		Page page = new Page();
+		page.setPageSize(pageSize);
+		return documentService.getDocByChannelCode(code,page);
 	}
 	// ============== User Cache ==============
 	

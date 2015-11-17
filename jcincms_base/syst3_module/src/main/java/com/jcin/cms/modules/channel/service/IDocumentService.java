@@ -50,5 +50,5 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	 * @param documentCriteria
 	 * @return
 	 */
-	List<Document> getDocByChannelCode(String code);
+	List<Document> getDocByChannelCode(String code,Page page);
 }

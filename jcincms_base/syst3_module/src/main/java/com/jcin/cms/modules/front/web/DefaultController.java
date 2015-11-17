@@ -159,13 +159,14 @@ public class DefaultController extends BaseController {
 
 		channel.setLinkAddr(requestRri);
 
-		DocumentCriteria documentCriteria = new DocumentCriteria();
+		documentService.getDocByChannelCode(code, page);
+		/*DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		criteria.andChannelIdEqualTo(channel.getId());
-		documentCriteria.setPage(page);
+		documentCriteria.setPage(page);*/
 		// documentCriteria.setOrderByClause("id desc");
 
-		page = documentService.select(documentCriteria);
+		//page = documentService.select(documentCriteria);
 
 		uiModel.addAttribute("page", page);
 		if (null != channel.getChannelTemplete()
