@@ -94,14 +94,15 @@ public class DefaultController extends BaseController {
 		// 栏目模板不为空返回模板。
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
-			DocumentCriteria documentCriteria = new DocumentCriteria();
+			/*DocumentCriteria documentCriteria = new DocumentCriteria();
 			DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 			criteria.andChannelIdEqualTo(channel.getId());
 			documentCriteria.setPage(page);
 			documentCriteria.setOrderByClause("id desc");
 
-			page = documentService.select(documentCriteria);
-
+			page = documentService.select(documentCriteria);*/
+			documentService.getDocByChannelCode(channels, page);
+			
 			uiModel.addAttribute("page", page);
 			
 			return channel.getChannelTemplete();

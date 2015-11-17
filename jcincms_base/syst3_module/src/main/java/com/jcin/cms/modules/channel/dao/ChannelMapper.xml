@@ -16,6 +16,7 @@
     <result column="asdocument" property="asdocument" jdbcType="BIT" />
     <result column="document_id" property="documentId" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, 
-    document_templete, hidden, asdocument, document_id, sort
+    document_templete, hidden, asdocument, document_id, sort, parent_ids
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.ChannelCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -116,12 +117,14 @@
       keyword, link_addr, open_mode, 
       descrition, parent_id, channel_templete, 
       document_templete, hidden, asdocument, 
-      document_id, sort)
+      document_id, sort, parent_ids
+      )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{keyword,jdbcType=VARCHAR}, #{linkAddr,jdbcType=VARCHAR}, #{openMode,jdbcType=VARCHAR}, 
       #{descrition,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{channelTemplete,jdbcType=VARCHAR}, 
       #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{asdocument,jdbcType=BIT}, 
-      #{documentId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
+      #{documentId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{parentIds,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
     insert into busi_channel
@@ -168,6 +171,9 @@
       <if test="sort != null" >
         sort,
       </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -211,6 +217,9 @@
       </if>
       <if test="sort != null" >
         #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -265,6 +274,9 @@
       <if test="record.sort != null" >
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
+      <if test="record.parentIds != null" >
+        parent_ids = #{record.parentIds,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -285,7 +297,8 @@
       hidden = #{record.hidden,jdbcType=BIT},
       asdocument = #{record.asdocument,jdbcType=BIT},
       document_id = #{record.documentId,jdbcType=VARCHAR},
-      sort = #{record.sort,jdbcType=INTEGER}
+      sort = #{record.sort,jdbcType=INTEGER},
+      parent_ids = #{record.parentIds,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -332,6 +345,9 @@
       <if test="sort != null" >
         sort = #{sort,jdbcType=INTEGER},
       </if>
+      <if test="parentIds != null" >
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -354,9 +370,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_channel (id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, document_templete, hidden, asdocument, document_id, sort) values 
+    insert into busi_channel (id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, document_templete, hidden, asdocument, document_id, sort, parent_ids) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.linkAddr,jdbcType=VARCHAR}, #{item.openMode,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.channelTemplete,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.asdocument,jdbcType=BIT}, #{item.documentId,jdbcType=VARCHAR}, #{item.sort,jdbcType=INTEGER})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.linkAddr,jdbcType=VARCHAR}, #{item.openMode,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.channelTemplete,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.asdocument,jdbcType=BIT}, #{item.documentId,jdbcType=VARCHAR}, #{item.sort,jdbcType=INTEGER}, #{item.parentIds,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

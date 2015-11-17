@@ -26,6 +26,7 @@ th {
 	$().ready(function() {
 		createOrganizationTree();
 		createFileTree();
+		/* alert($('#parentIds').val()); */
 	});
 
 	function createOrganizationTree() {
@@ -190,8 +191,7 @@ th {
 		<input name="id" value="${channel.id}" type="hidden" />
 		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}" type="hidden" />
-		<input id="documentId" name="documentId" value="${channel.documentId}"
-			type="hidden" />
+		<input id="documentId" name="documentId" value="${channel.documentId}" type="hidden" />
 		<div class="descrition">
 			<b>栏目信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>

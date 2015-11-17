@@ -81,16 +81,12 @@
 				<div class="page-products">
 					<ul class="clearfix">
 						<c:forEach var="doc" items="${page.rows}">
-							<tr>
-								<td class="time-list"><span>2015.10.27</span></td>
-								<td style="text-align: center;"><a
-									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank"
-									title="${doc.title}">${doc.title}</a></td>
-							</tr>
+							<li><a href="${ctx}/channel/products/doc/${doc.id}" title="${doc.title}"><img
+								src="${ctx}/${doc.fileAddr}" width="210"
+								height="150" alt="${doc.title}" /><span>${doc.title}</span></a></li>
 						</c:forEach>
-						
 
-						<li><a href="products.html" title="氯霉素"><img
+						<%-- <li><a href="products.html" title="氯霉素"><img
 								src="${ctx}/defaultApp/uploadfile/20110611023092419241.jpg" width="210"
 								height="150" alt="氯霉素" /><span>氯霉素</span></a></li>
 
@@ -144,7 +140,7 @@
 
 						<li><a href="products.html" title="次磷酸"><img
 								src="${ctx}/defaultApp/uploadfile/20110611025642914291.jpg" width="210"
-								height="150" alt="次磷酸" /><span>次磷酸</span></a></li>
+								height="150" alt="次磷酸" /><span>次磷酸</span></a></li> --%>
 					</ul>
 					<div class="page_list">
 						<div class="list_info">
