@@ -20,26 +20,62 @@
 	$().ready(function() {
 		$('#tgrid').treegrid({
 			onClickRow : function(row) {
-				doLink(row.path);
+				doLink(row.text,row.path);
 			}
 		});
 	});
 	
 	//打开连接。
-	function doLink(url) {
+	function doLink(title,url) {
 		if (url == null||url=="") {
 			return;
 		}
-		$("#ifrContentArea").attr("src",'${ctxAdmin}/'+url);
+// 		$("#ifrContentArea").attr("src",'${ctxAdmin}/'+url);
+		addTab(title, url);
 	}
 	
 	function showUser(){
-		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/show/'+$('#userId').val());
+// 		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/show/'+$('#userId').val());
 	}
 	
 	function changePassword(){
-		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/changePassword');
+// 		$("#ifrContentArea").attr("src",'${ctxAdmin}/user/changePassword');
 	}
+	
+	function addTab(title, url){  
+		    var tt = $('#tabs');  
+		    if (tt.tabs('exists', title)){//如果tab已经存在,则选中并刷新该tab          
+		        tt.tabs('select', title);  
+// 		        refreshTab({tabTitle:title,url:href});  
+		    } else {  
+		        if (url){  
+		            var content = '<iframe id="ifrContentArea" frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
+		        } else {  
+		            var content = '未实现';  
+		        }  
+		        tt.tabs('add',{  
+		            title:title,  
+		            closable:true,  
+		            content:content
+		        });  
+		    }  
+		}  
+		/**     
+		 * 刷新tab 
+		 * @cfg  
+		 *example: {tabTitle:'tabTitle',url:'refreshUrl'} 
+		 *如果tabTitle为空，则默认刷新当前选中的tab 
+		 *如果url为空，则默认以原来的url进行reload 
+		 */  
+		/* function refreshTab(cfg){  
+		    var refresh_tab = cfg.tabTitle?$('#tabs').tabs('getTab',cfg.tabTitle):$('#tabs').tabs('getSelected');  
+		    if(refresh_tab && refresh_tab.find('iframe').length > 0){  
+		    var _refresh_ifram = refresh_tab.find('iframe')[0];  
+		    var refresh_url = cfg.url?cfg.url:_refresh_ifram.src;  
+		    //_refresh_ifram.src = refresh_url;  
+		    _refresh_ifram.contentWindow.location.href=refresh_url;  
+		    }  
+		} */
 </script>
 <style type="text/css">
 html,body {
@@ -127,9 +163,13 @@ html,body {
 			</table>
 		</div>
 		<div data-options="region:'center',title:''">
-			<iframe id="ifrContentArea" frameborder="0" name="main"
-					style="width:100%;height:99%;" border="0"  scrolling="auto"
-					src="${ctxAdmin}/system"></iframe>
+			<div class="easyui-tabs" fit="true" border="false" id="tabs">
+      			<div title="首页">
+      				<iframe id="ifrContentArea" frameborder="0" name="main"
+						style="width:100%;height:99%;" border="0"  scrolling="auto"
+						src="${ctxAdmin}/system"></iframe>
+      			</div>
+   			</div>
 		</div>
 		<!-- <div data-options="region:'south'"
 			style="text-align:center;height:25px;padding-top: 2px;">

@@ -80,9 +80,15 @@
 				</div>
 				<div class="page-products">
 					<ul class="clearfix">
-						<li><a href="products.html" title="覆盆子酮"><img
-								src="${ctx}/defaultApp/uploadfile/20110611023489748974.jpg" width="210"
-								height="150" alt="覆盆子酮" /><span>覆盆子酮</span></a></li>
+						<c:forEach var="doc" items="${page.rows}">
+							<tr>
+								<td class="time-list"><span>2015.10.27</span></td>
+								<td style="text-align: center;"><a
+									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank"
+									title="${doc.title}">${doc.title}</a></td>
+							</tr>
+						</c:forEach>
+						
 
 						<li><a href="products.html" title="氯霉素"><img
 								src="${ctx}/defaultApp/uploadfile/20110611023092419241.jpg" width="210"
@@ -142,10 +148,21 @@
 					</ul>
 					<div class="page_list">
 						<div class="list_info">
-							共18个/2页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
-								class="disabled">&nbsp;&lt;&nbsp;</span><span class="current">1</span><a
-								href="#">2</a><a href="?menuid=2&amp;page=2">&nbsp;&gt;&nbsp;</a><a
-								href="#">&nbsp;&gt;&gt;&nbsp;</a>
+							共${page.total}个/${page.totalPage+1}页
+							<c:if test="${page.page>1}">
+								<span
+									onclick="javascript:window.location.href='${ctx}/channel/news?page=1'">&nbsp;&lt;&lt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page>1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page-1}'">&nbsp;&lt;&nbsp;</span>
+							</c:if>
+							<span class="current">${page.page}</span>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.page+1}'">&nbsp;&gt;&nbsp;</span>
+							</c:if>
+							<c:if test="${page.page < page.totalPage+1}">
+								<span onclick="javascript:window.location.href='${ctx}/channel/news?page=${page.totalPage+1}'">&nbsp;&gt;&gt;&nbsp;</span>
+							</c:if>
 						</div>
 					</div>
 				</div>

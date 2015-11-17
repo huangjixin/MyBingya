@@ -44,7 +44,7 @@
 			<img src="${ctx}/defaultApp/images/logo.gif" width="650" height="90"
 				alt="上海网聚化工有限公司" />
 		</div>
-		<%@include file="menu.jsp" %>
+		<%@include file="menu.jsp"%>
 		<script type="text/javascript">
 			$(function() {
 				$("#banner").KinSlideshow({
@@ -91,13 +91,14 @@
 						<div id="LeftArr1"></div>
 						<div id="RightArr1"></div>
 						<ul id="ScrollBox" class="clearfix">
-						<c:set var="recommendDocs" value="${fns:getRecommendDoc()}"></c:set>
+							<c:set var="recommendDocs" value="${fns:getRecommendDoc()}"></c:set>
 							<c:if test="${recommendDocs!=null}">
 								<c:forEach var="doc" items="${recommendDocs}">
 									<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
-									<li><a href="${ctx}/channel/products/doc/${doc.id}" title="${doc.fileName}" target="blank"><img
-									src="${ctx}${doc.fileAddr}" alt="${doc.fileName}"
-									width="140" height="100" /><span>${doc.title}</span></a></li>
+										<li><a href="${ctx}/channel/products/doc/${doc.id}"
+											title="${doc.fileName}" target="blank"><img
+												src="${ctx}${doc.fileAddr}" alt="${doc.fileName}"
+												width="140" height="100" /><span>${doc.title}</span></a></li>
 									</c:if>
 								</c:forEach>
 							</c:if>
@@ -141,7 +142,7 @@
 							alt="新闻中心" /></a>
 					</h2>
 					<ul>
-						<li class="clearfix"><a href="news.html"
+						<li class="clearfix"><a href="${ctx}/channel/news"
 							title="未来几年北美聚酯纤维需求快速增长"><img
 								src="${ctx}/defaultApp/images/index_NewsPic.jpg"
 								alt="未来几年北美聚酯纤维需求快速增长" width="110" height="80" /></a>
@@ -152,14 +153,21 @@
 								据英国PCI二甲苯和聚酯公司高级咨询师MichaelBermish日前表示，受包括服装、家庭装饰、...<a
 									href="news.html" title="未来几年北美聚酯纤维需求快速增长">[详细]</a>
 							</p></li>
-						<li><a href="news.html" title="江苏化工企业接受环境风险全面排查"><span>2011/6/11</span>-
+						<c:set var="newsdocs" value="${fns:getDocByChannelCode('news',4)}"></c:set>
+						<c:if test="${newsdocs!=null}">
+							<c:forEach var="doc" items="${newsdocs}">
+								<li><a href="${ctx}/channel/news/doc/${doc.id}"
+									title="${doc.title}" target="blank"><span>2011/6/11</span>-${doc.title}</a></li>
+							</c:forEach>
+						</c:if>
+						<!-- <li><a href="news.html" title="江苏化工企业接受环境风险全面排查"><span>2011/6/11</span>-
 								江苏化工企业接受环境风险全面排查</a></li>
 						<li><a href="news.html" title="资源税飙升稀土价格面临再次上涨"><span>2011/6/11</span>-
 								资源税飙升稀土价格面临再次上涨</a></li>
 						<li><a href="news.html" title="煤炭煤化工机会凸显"><span>2011/6/10</span>-
 								煤炭煤化工机会凸显</a></li>
 						<li><a href="news.html" title="德国巴斯夫三峡库区化工项目开建在即"><span>2011/6/10</span>-
-								德国巴斯夫三峡库区化工项目开建在即</a></li>
+								德国巴斯夫三峡库区化工项目开建在即</a></li> -->
 					</ul>
 				</div>
 				<div class="index-about">
@@ -170,7 +178,8 @@
 					</h2>
 					<p>
 						<img src="${ctx}/defaultApp/images/index_AboutPic.jpg" alt="关于我们"
-							width="145" height="181" /><a href="${ctx}/channel/aboutus" title="关于我们">
+							width="145" height="181" /><a href="${ctx}/channel/aboutus"
+							title="关于我们">
 							上海网聚化工有限公司和进出口有限公司是以无机化工、有机化工、精细化工、香精香料、食品添加剂、医药原料及中间体等经营、销售为一体的高科技化工企业。公司位于上海市商业中心,交通十分便捷。<br />
 							我公司华东地区总经销双氧水，品质保证...
 						</a>
@@ -183,16 +192,18 @@
 							alt="产品展示" /></a>
 					</h2>
 					<ul class="clearfix">
-						<c:set var="productsdocs" value="${fns:getDocByChannelCode('products')}"></c:set>
-							<c:if test="${productsdocs!=null}">
-								<c:forEach var="doc" items="${productsdocs}">
-									<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
-									<li><a href="${ctx}/channel/products" title="${doc.fileName}" target="blank"><img
-									src="${ctx}/${doc.fileAddr}" alt="${doc.fileName}"
-									width="150" height="110" /><span>${doc.title}</span></a></li>
-									</c:if>
-								</c:forEach>
-							</c:if>
+						<c:set var="productsdocs"
+							value="${fns:getDocByChannelCode('products',8)}"></c:set>
+						<c:if test="${productsdocs!=null}">
+							<c:forEach var="doc" items="${productsdocs}">
+								<c:if test="${doc.fileAddr!=null && doc.fileAddr!=''}">
+									<li><a href="${ctx}/channel/products"
+										title="${doc.fileName}" target="blank"><img
+											src="${ctx}/${doc.fileAddr}" alt="${doc.fileName}"
+											width="150" height="110" /><span>${doc.title}</span></a></li>
+								</c:if>
+							</c:forEach>
+						</c:if>
 						<%-- <li><a href="products.html" title="氯化钾"><img
 								src="${ctx}/defaultApp/uploadfile/20110611032733583358.jpg" alt="氯化钾"
 								width="154" height="110" /><span>氯化钾</span></a></li>
@@ -255,23 +266,10 @@
 						<li><a href="jobs.html" title="营销总监"><span> - 营销总监</span></a></li>
 					</ul>
 				</div>
-				<%@include file="contact.jsp" %>
-				<%-- <div class="index-contact">
-					<h2>
-						<span>联系我们</span>
-					</h2>
-					<p>
-						<span>地址: </span>上海市嘉定区华亭镇<br /> <span>邮编: </span>200000<br /> <span>联系人:
-						</span>网聚化工<br /> <span>电话: </span>021-58888888<br /> <span>传真:
-						</span>021-58888888<br /> <span>手机: </span>13888888888<br /> <span>邮箱:
-						</span>netgather@netgather.com
-					</p>
-				</div>
-				<img src="${ctx}/defaultApp/images/tel.gif" width="240" height="59"
-					alt="联系我们" /> --%>
+				<%@include file="contact.jsp"%>
 			</div>
 		</div>
-		<%@include file="footer.jsp" %>
+		<%@include file="footer.jsp"%>
 	</div>
 </body>
 </html>

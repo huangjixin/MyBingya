@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 	$().ready(function() {
+		$('#tgrid').treegrid('collapseAll');
 	});
 
 	// 移除条目；
@@ -97,6 +98,7 @@
 								method: 'get',
 								rownumbers: false,
 								idField: 'id',
+								collapsible:true,
 								treeField: 'name',
 								showHeader: true,
 								lines: true,

@@ -74,9 +74,9 @@
 		<description>查询推荐文档</description>
 		<name>getDocByChannelCode</name>
 		<function-class>com.jcin.cms.common.UserUtils</function-class>
-		<function-signature>java.util.List getDocByChannelCode(java.lang.String)
+		<function-signature>java.util.List getDocByChannelCode(java.lang.String,java.lang.Integer)
 		</function-signature>
-		<example>${fns:getDocByChannelCode(code)}</example>
+		<example>${fns:getDocByChannelCode(code,8)}</example>
 	</function>
 	<function>
 		<description>根据栏目名称查询栏目</description>
