@@ -15,8 +15,8 @@
 		<spring-version>4.1.5.RELEASE</spring-version>
 		<build.war.name>jcincms</build.war.name>
 		<!-- Logging -->
-		<slf4j.version>1.7.12</slf4j.version>
-		<slf4j-log4j12.version>1.7.12</slf4j-log4j12.version>
+		<slf4j.version>1.7.13</slf4j.version>
+		<slf4j-log4j12.version>1.7.13</slf4j-log4j12.version>
 		<log4j.version>1.2.15</log4j.version>
 		<activiti>5.17.0</activiti>
 	</properties>
@@ -247,37 +247,6 @@
 			<version>5.1.3.Final</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>1.2.7.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-			<version>1.2.7.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-logback-classic</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-			<version>1.2.7.RELEASE</version>
-		</dependency>
-		<!-- <dependency> <groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-jasper</artifactId> 
-			<scope>provided</scope> </dependency> -->
 		<!-- Spring framework 4中的orm包已经单独拿出来了，所以要和hibernate集成，需要此包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
