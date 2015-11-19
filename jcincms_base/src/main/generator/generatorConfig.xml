@@ -56,8 +56,8 @@
 		</javaClientGenerator>
 		<!-- <table tableName="tb_assets" domainObjectName="Assets" /> -->
 		<!-- <table tableName="busi_comment" domainObjectName="Comment" />  -->
-       <!--  <table tableName="busi_channel" domainObjectName="Channel" /> -->
-		<table tableName="busi_document" domainObjectName="Document" />
+        <table tableName="busi_channel" domainObjectName="Channel" />
+		<!-- <table tableName="busi_document" domainObjectName="Document" /> -->
 		<!-- <table tableName="tb_db_backup" domainObjectName="DbBackup" /> -->
 <!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->
 		<!-- <table tableName="tb_role_resource" domainObjectName="RoleResource" /> -->
