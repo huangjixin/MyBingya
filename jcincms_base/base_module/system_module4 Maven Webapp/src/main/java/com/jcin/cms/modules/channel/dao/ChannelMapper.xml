@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.modules.channel.dao.ChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.modules.channel.domain.Channel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="link_addr" property="linkAddr" jdbcType="VARCHAR" />
+    <result column="open_mode" property="openMode" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="channel_templete" property="channelTemplete" jdbcType="VARCHAR" />
+    <result column="document_templete" property="documentTemplete" jdbcType="VARCHAR" />
+    <result column="hidden" property="hidden" jdbcType="BIT" />
+    <result column="asdocument" property="asdocument" jdbcType="BIT" />
+    <result column="document_id" property="documentId" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, 
+    document_templete, hidden, asdocument, document_id, sort, parent_ids
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.ChannelCriteria" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from busi_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from busi_channel
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from busi_channel
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcin.cms.modules.channel.domain.ChannelCriteria" >
+    delete from busi_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
+    insert into busi_channel (id, name, code, 
+      keyword, link_addr, open_mode, 
+      descrition, parent_id, channel_templete, 
+      document_templete, hidden, asdocument, 
+      document_id, sort, parent_ids
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{linkAddr,jdbcType=VARCHAR}, #{openMode,jdbcType=VARCHAR}, 
+      #{descrition,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{channelTemplete,jdbcType=VARCHAR}, 
+      #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{asdocument,jdbcType=BIT}, 
+      #{documentId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{parentIds,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
+    insert into busi_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="linkAddr != null" >
+        link_addr,
+      </if>
+      <if test="openMode != null" >
+        open_mode,
+      </if>
+      <if test="descrition != null" >
+        descrition,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="channelTemplete != null" >
+        channel_templete,
+      </if>
+      <if test="documentTemplete != null" >
+        document_templete,
+      </if>
+      <if test="hidden != null" >
+        hidden,
+      </if>
+      <if test="asdocument != null" >
+        asdocument,
+      </if>
+      <if test="documentId != null" >
+        document_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddr != null" >
+        #{linkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="openMode != null" >
+        #{openMode,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTemplete != null" >
+        #{channelTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="documentTemplete != null" >
+        #{documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null" >
+        #{hidden,jdbcType=BIT},
+      </if>
+      <if test="asdocument != null" >
+        #{asdocument,jdbcType=BIT},
+      </if>
+      <if test="documentId != null" >
+        #{documentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcin.cms.modules.channel.domain.ChannelCriteria" resultType="java.lang.Integer" >
+    select count(*) from busi_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update busi_channel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkAddr != null" >
+        link_addr = #{record.linkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openMode != null" >
+        open_mode = #{record.openMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrition != null" >
+        descrition = #{record.descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelTemplete != null" >
+        channel_templete = #{record.channelTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.documentTemplete != null" >
+        document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hidden != null" >
+        hidden = #{record.hidden,jdbcType=BIT},
+      </if>
+      <if test="record.asdocument != null" >
+        asdocument = #{record.asdocument,jdbcType=BIT},
+      </if>
+      <if test="record.documentId != null" >
+        document_id = #{record.documentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentIds != null" >
+        parent_ids = #{record.parentIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update busi_channel
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      link_addr = #{record.linkAddr,jdbcType=VARCHAR},
+      open_mode = #{record.openMode,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
+      channel_templete = #{record.channelTemplete,jdbcType=VARCHAR},
+      document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
+      hidden = #{record.hidden,jdbcType=BIT},
+      asdocument = #{record.asdocument,jdbcType=BIT},
+      document_id = #{record.documentId,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      parent_ids = #{record.parentIds,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
+    update busi_channel
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddr != null" >
+        link_addr = #{linkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="openMode != null" >
+        open_mode = #{openMode,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTemplete != null" >
+        channel_templete = #{channelTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="documentTemplete != null" >
+        document_templete = #{documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null" >
+        hidden = #{hidden,jdbcType=BIT},
+      </if>
+      <if test="asdocument != null" >
+        asdocument = #{asdocument,jdbcType=BIT},
+      </if>
+      <if test="documentId != null" >
+        document_id = #{documentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="parentIds != null" >
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
+    update busi_channel
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      link_addr = #{linkAddr,jdbcType=VARCHAR},
+      open_mode = #{openMode,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      channel_templete = #{channelTemplete,jdbcType=VARCHAR},
+      document_templete = #{documentTemplete,jdbcType=VARCHAR},
+      hidden = #{hidden,jdbcType=BIT},
+      asdocument = #{asdocument,jdbcType=BIT},
+      document_id = #{documentId,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      parent_ids = #{parentIds,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into busi_channel (id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, document_templete, hidden, asdocument, document_id, sort, parent_ids) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.linkAddr,jdbcType=VARCHAR}, #{item.openMode,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.channelTemplete,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.asdocument,jdbcType=BIT}, #{item.documentId,jdbcType=VARCHAR}, #{item.sort,jdbcType=INTEGER}, #{item.parentIds,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        select * from ( select row_.*, rownum rownum_ from ( 
+      </if>
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        <![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>
+      </if>
+      <if test="dialect == 'mysql'" >
+        limit #{page.start} , #{page.pageSize}
+      </if>
+    </if>
+  </sql>
+</mapper>

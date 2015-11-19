@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.modules.syst.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.modules.syst.domain.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="login_date" property="loginDate" jdbcType="DATE" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, password, login_date, create_date, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+    delete from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcin.cms.modules.syst.domain.User" >
+    insert into tb_user (id, username, password, 
+      login_date, create_date, update_date
+      )
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{loginDate,jdbcType=DATE}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcin.cms.modules.syst.domain.User" >
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="loginDate != null" >
+        login_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=DATE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginDate != null" >
+        login_date = #{record.loginDate,jdbcType=DATE},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      login_date = #{record.loginDate,jdbcType=DATE},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.syst.domain.User" >
+    update tb_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        login_date = #{loginDate,jdbcType=DATE},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.syst.domain.User" >
+    update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      login_date = #{loginDate,jdbcType=DATE},
+      create_date = #{createDate,jdbcType=DATE},
+      update_date = #{updateDate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_user (id, username, password, login_date, create_date, update_date) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=DATE}, #{item.createDate,jdbcType=DATE}, #{item.updateDate,jdbcType=DATE})
+    </foreach>
+  </insert>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        select * from ( select row_.*, rownum rownum_ from ( 
+      </if>
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        <![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>
+      </if>
+      <if test="dialect == 'mysql'" >
+        limit #{page.start} , #{page.pageSize}
+      </if>
+    </if>
+  </sql>
+  <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	<include refid="OracleDialectPrefix" />
+  	SELECT 
+    	*
+	FROM
+   		tb_user
+        	left join
+    	tb_user_organization ON tb_user.id = tb_user_organization.user_id
+        	left join
+    	tb_organization ON tb_organization.id = tb_user_organization.organization_id
+	where
+    	tb_organization.id = #{orgId,jdbcType=VARCHAR}
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="countByOrgId" resultType="java.lang.Integer" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	SELECT 
+    	count(*)
+	FROM
+   		tb_user
+        	left join
+    	tb_user_organization ON tb_user.id = tb_user_organization.user_id
+        	left join
+    	tb_organization ON tb_organization.id = tb_user_organization.organization_id
+	where
+    	tb_organization.id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	<include refid="OracleDialectPrefix" />
+  	SELECT 
+    	*
+	FROM
+   		tb_user
+        	left join
+    	tb_user_role ON tb_user.id = tb_user_role.user_id
+        	left join
+    	tb_role ON tb_user_role.tb_role_id = tb_role.id
+	where
+    	tb_role.id = #{roleId,jdbcType=VARCHAR}
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="countByRoleId" resultType="java.lang.Integer" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
+  	SELECT 
+    	count(*)
+	FROM
+   		tb_user
+        	left join
+    	tb_user_role ON tb_user.id = tb_user_role.user_id
+        	left join
+    	tb_role ON tb_user_role.tb_role_id = tb_role.id
+	where
+    	tb_role.id = #{roleId,jdbcType=VARCHAR}
+  </select>
+</mapper>
