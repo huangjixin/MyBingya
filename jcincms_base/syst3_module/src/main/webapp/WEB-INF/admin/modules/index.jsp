@@ -46,7 +46,7 @@
 		    var tt = $('#tabs');  
 		    if (tt.tabs('exists', title)){//如果tab已经存在,则选中并刷新该tab          
 		        tt.tabs('select', title);  
-// 		        refreshTab({tabTitle:title,url:href});  
+// 		        refreshTab({tabTitle:title,url:url});  
 		    } else {  
 		        if (url){  
 		            var content = '<iframe id="ifrContentArea" frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
@@ -67,7 +67,7 @@
 		 *如果tabTitle为空，则默认刷新当前选中的tab 
 		 *如果url为空，则默认以原来的url进行reload 
 		 */  
-		/* function refreshTab(cfg){  
+		function refreshTab(cfg){  
 		    var refresh_tab = cfg.tabTitle?$('#tabs').tabs('getTab',cfg.tabTitle):$('#tabs').tabs('getSelected');  
 		    if(refresh_tab && refresh_tab.find('iframe').length > 0){  
 		    var _refresh_ifram = refresh_tab.find('iframe')[0];  
@@ -75,7 +75,7 @@
 		    //_refresh_ifram.src = refresh_url;  
 		    _refresh_ifram.contentWindow.location.href=refresh_url;  
 		    }  
-		} */
+		}
 </script>
 <style type="text/css">
 html,body {

@@ -43,7 +43,7 @@
 							<td>
 								<div class="loginipt">
 									<span class="useric"></span> <input type="text"
-										name="username" id="username" value="" />
+										name="username" id="username" value="admin" />
 								</div>
 							</td>
 						</tr>
@@ -52,7 +52,7 @@
 							<td>
 								<div class="loginipt focus">
 									<span class="lockic"></span> <input type="password"
-										name="password" id="password" value="" />
+										name="password" id="password" value="123456" />
 								</div>
 								<p id="hintMsg" class="remind">&emsp;${error}</p>
 							</td>
