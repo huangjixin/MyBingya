@@ -160,7 +160,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	 * Document)
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly=false)
 	public String update(Document record) {
 		// super.update(record);
 //		record.setUpdateDate(new Date());

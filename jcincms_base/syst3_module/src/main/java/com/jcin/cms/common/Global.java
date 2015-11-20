@@ -33,8 +33,8 @@ public class Global {
 	}
 	
 	public static String getUploadpath(){
-		return System.getProperty("user.dir")+File.separator+"webapp"+File.separator+"upload"+File.separator;
-//		return getConfig("uploadPath");
+//		return System.getProperty("user.dir")+File.separator+"webapp"+File.separator+"upload"+File.separator;
+		return getConfig("uploadPath");
 	}
 	
 	private static Properties loadProperties(String resources) {
