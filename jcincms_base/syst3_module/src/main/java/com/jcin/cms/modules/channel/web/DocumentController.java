@@ -180,6 +180,9 @@ public class DocumentController extends BaseController<Document> {
 		if (null != document.getId() && !"".equals(document.getId())) {
 			criteria.andIdLike("%" + document.getId() + "%");
 		}
+		if (null != document.getDocumentTemplete() && !"".equals(document.getDocumentTemplete())) {
+			criteria.andDocumentTempleteLike("%" + document.getDocumentTemplete() + "%");
+		}
 		if (null != document.getChannelId()
 				&& !"".equals(document.getChannelId())) {
 			criteria.andChannelIdLike("%" + document.getChannelId() + "%");
@@ -257,11 +260,11 @@ public class DocumentController extends BaseController<Document> {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
 		String imgeName = df.format(new Date());
 		String tempImageName = imgeName + "." + file_ext;
-		// String uploadPath = Global.getUploadpath() + tempImageName;
-		@SuppressWarnings("deprecation")
+		String uploadPath = Global.getUploadpath() + UserUtils.getUserId() + File.separator+ tempImageName;
+		/*@SuppressWarnings("deprecation")
 		String uploadPath = httpServletRequest.getRealPath("/") + "upload"
 				+ File.separator + UserUtils.getUserId() + File.separator
-				+ tempImageName;
+				+ tempImageName;*/
 		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
