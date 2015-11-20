@@ -33,10 +33,10 @@ th {
 	$().ready(function() {
 		createDocumentTree();
 		createFileTree();
-		/* ue.addListener("ready", function() {
+		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
 			ue.setContent('${document.content}');
-		}); */
+		});
 	});
 
 	//创建文档树。
@@ -112,8 +112,8 @@ th {
 
 	//jquery 提交表单。
 	function submitForm() {
-		/* var cont = ue.getContent();
-		$('#content').val(cont); */
+		var cont = ue.getContent();
+		$('#content').val(cont);
 		if(docTemp.indexOf(".") > 0){
 			docTemp = docTemp.substring(0,docTemp.indexOf("."));
 		}
@@ -243,7 +243,7 @@ th {
 									path="titleImage" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;：</th>
 							<td nowrap="nowrap" align="left">
-								<!-- <input id="content" name="content" type="hidden" value="" /> -->&nbsp;<form:errors
+								<input id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
@@ -291,9 +291,9 @@ th {
 		<%-- <img src="${ctx }/upload/1/20151021_111608.jpg"/> --%>
 		<div>
 			<b>正文</b>
-			<!-- <script id="editor" type="text/plain"
-				style="width:100%;height:500px;"></script> -->
-			<textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> 
+			<script id="editor" type="text/plain"
+				style="width:100%;height:500px;"></script>
+			<%-- <textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> --%> 
 		</div>
 	</form:form>
 </body>
