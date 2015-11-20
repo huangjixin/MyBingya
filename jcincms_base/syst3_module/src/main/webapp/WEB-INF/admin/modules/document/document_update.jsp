@@ -11,26 +11,20 @@ th {
 	font-size: 12px;
 }
 </style>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="${ctx}/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="${ctx}/ueditor/ueditor.all.min.js">
-	
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/ajaxfileupload.js"></script>
+<script type="text/javascript" charset="utf-8">
+	window.UEDITOR_HOME_URL = "${ctx}/ueditor/"; //UEDITOR_HOME_URL、config、all这三个顺序不能改变
 </script>
+<script type="text/javascript" src="${ctx}/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="${ctx}/ueditor/ueditor.all.min.js"></script>
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
 <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-<script type="text/javascript" charset="utf-8"
-	src="${ctx}/ueditor/lang/zh-cn/zh-cn.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/icon.css">
+<script type="text/javascript" src="${ctx}/ueditor/lang/zh-cn/zh-cn.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
 	//实例化编辑器
 	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
@@ -38,11 +32,11 @@ th {
 	var docTemp = "${document.documentTemplete}";
 	$().ready(function() {
 		createDocumentTree();
-		createFileTree()
-		ue.addListener("ready", function() {
+		createFileTree();
+		/* ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
 			ue.setContent('${document.content}');
-		});
+		}); */
 	});
 
 	//创建文档树。
@@ -56,8 +50,7 @@ th {
 			onClick : function(node) {
 				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
 				$('#parentId').val(node.id);*/
-			}, //全部折叠
-			onLoadSuccess : function(node, data) {
+			}, onLoadSuccess : function(node, data) {
 				$('#channelId').combotree('tree').tree("collapseAll");
 				var cId = "${document.channelId}";
 				if (cId != "") {
@@ -66,7 +59,7 @@ th {
 			}
 		});
 	}
-
+	
 	//创建文件树。
 	function createFileTree() {
 		$('#docTemplete').combotree({
@@ -112,21 +105,22 @@ th {
             }  
 		});
 	}
-	
+
 	function clearParentInput() {
 		$('#channelId').combotree('clear');
 	}
 
+	//jquery 提交表单。
 	function submitForm() {
-		var cont = ue.getContent();
-		$('#content').val(cont);
+		/* var cont = ue.getContent();
+		$('#content').val(cont); */
 		if(docTemp.indexOf(".") > 0){
 			docTemp = docTemp.substring(0,docTemp.indexOf("."));
 		}
 		$('#documentTemplete').val(docTemp);
 		$('#validForm').submit();
 	}
-	
+
 	function selectFile() {
 		$('#file').click();
 	}
@@ -166,7 +160,6 @@ th {
 					assIds += ","+data.assetsId;
 					$('#assetsIds').val(assIds);
 				}
-
 			},
 			error : function(data, status, e) {
 				alert("图片上传失败,请重新选择图片");
@@ -180,17 +173,16 @@ th {
 		ue.execCommand( 'inserthtml', str);
 	}
 </script>
-<title>文档修改</title>
+<title>文档添加</title>
 </head>
 <body>
 	<form:form id="validForm"
-		action="${ctxAdmin}/document/update/${document.id}" method="post"
-		commandName="document">
+		action="${ctxAdmin}/document/update/${document.id}" method="post" commandName="document">
 		<input name="id" value="${document.id}" type="hidden" />
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
 		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
 		<div class="desc">
-			<b onclick="appendCon()">文档信息修改</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+			<b>文档信息添加</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
 		</div>
 		<table width="100%" border="0" cellpadding="2" cellspacing="0">
 			<tr>
@@ -221,13 +213,11 @@ th {
 									value="${document.keyword}" />&nbsp;<form:errors path="keyword"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否显示：</th>
-							<td nowrap="nowrap" align="left"><select id="hidden"
-								name="hidden" style="width:100px;">
-									<c:forEach var="sh" items="${fns:getByType('hidden')}">
-										<option value="${sh.value}"
-											<c:if test="${sh.value == document.hidden}">selected="selected"</c:if>>${sh.label}</option>
-									</c:forEach>
-							</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><select  id="hidden" name="hidden" style="width:100px;">
+										<c:forEach var="sh" items="${fns:getByType('hidden')}">
+											<option value="${sh.value}" <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
+										</c:forEach>
+									</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<%-- <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 									<th style="width: 150px;">&nbsp;描述：</th>
@@ -252,29 +242,30 @@ th {
 							<td nowrap="nowrap" align="left"><form:input
 									path="titleImage" value="${document.titleImage}" />&nbsp;<form:errors
 									path="titleImage" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"><input
-								id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
+							<th>&nbsp;：</th>
+							<td nowrap="nowrap" align="left">
+								<!-- <input id="content" name="content" type="hidden" value="" /> -->&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
-							<input id="docTemplete"/>&nbsp;<form:errors
-									path="documentTemplete" cssStyle="color:red;"></form:errors></td>
+								<input id="docTemplete"/>
+								&nbsp;<form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
+							</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;文件名：</th>
-							<td nowrap="nowrap" align="left"><form:input id="fileName" path="fileName"
-									value="${document.fileName}"/>&nbsp;<input
-								id="fileUploadBtn" type="button" value="上传"
-								onclick="selectFile()" /><input style="display: none"
-								type="file" id="file" name="file" onchange="uploadImage()" />&nbsp;<form:errors
-									path="fileName" cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><form:input path="fileName"
+									value="${document.fileName}" />&nbsp;<input id="fileUploadBtn"
+								type="button" value="上传" onclick="selectFile()" /><input
+								style="display: none" type="file" id="file" name="file"
+								onchange="uploadImage()" />&nbsp;<form:errors path="fileName"
+									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文件地址：</th>
-							<td nowrap="nowrap" align="left"><form:input id="fileAddr" path="fileAddr"
-									value="${document.fileAddr}" />&nbsp;<input id="insertBtn" value="插入" type="button" onclick="insert();"/>&nbsp;<form:errors
-									path="fileAddr" cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><form:input path="fileAddr"
+									value="${document.fileAddr}" />&nbsp;<form:errors
+									path="fileAddr" cssStyle="color:red;"></form:errors><input id="insertBtn" value="插入" type="button" onclick="insert();"/></td>
 							<th>&nbsp;大小：</th>
-							<td nowrap="nowrap" align="left"><form:input id="size" path="size"
+							<td nowrap="nowrap" align="left"><form:input path="size"
 									value="${document.size}" />&nbsp;<form:errors path="size"
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
@@ -282,7 +273,7 @@ th {
 							<th>&nbsp;是否推荐：</th>
 							<td nowrap="nowrap" align="left"  colspan="6"><select  id="recommend" name="recommend" style="width:100px;">
 										<c:forEach var="sh" items="${fns:getByType('recommend')}">
-											<option value="${sh.value}" <c:if test="${sh.value == document.recommend}">selected="selected"</c:if>>${sh.label}</option>
+											<option value="${sh.value}" <c:if test="${sh.value == false}">selected="selected"</c:if> <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
 										</c:forEach>
 									</select>&nbsp;<form:errors path="recommend" cssStyle="color:red;"></form:errors></td>
 						</tr>
@@ -298,10 +289,12 @@ th {
 				</td>
 			</tr>
 		</table>
+		<%-- <img src="${ctx }/upload/1/20151021_111608.jpg"/> --%>
 		<div>
 			<b>正文</b>
-			<script id="editor" type="text/plain"
-				style="width:100%;height:500px;"></script>
+			<!-- <script id="editor" type="text/plain"
+				style="width:100%;height:500px;"></script> -->
+			<textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> 
 		</div>
 	</form:form>
 </body>
