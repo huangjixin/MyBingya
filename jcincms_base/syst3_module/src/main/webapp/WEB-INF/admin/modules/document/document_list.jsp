@@ -136,6 +136,7 @@
 	function clearSearch() {
 			$("#titleInput").val("");
 			$("#authorInput").val("");
+			$("#documentTempleteInput").val("");
 	}
 
 	//格式化用户状态显示。
