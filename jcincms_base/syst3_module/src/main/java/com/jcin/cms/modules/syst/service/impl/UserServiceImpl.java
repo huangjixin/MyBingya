@@ -180,6 +180,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional(readOnly = false)
 	public String update(User record) {
 		// super.update(record);
+		String password = PasswordHelper.encryptPassword(record.getPassword());
+		record.setPassword(password);
 		record.setUpdateDate(new Date());
 		int result = userMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
@@ -195,6 +197,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	public int insertBatch(List<User> list) {
 		int result = userMapper.insertBatch(list);
 		super.insertBatch(list);
+		for (User user : list) {
+			String password = PasswordHelper.encryptPassword(user.getPassword());
+			user.setPassword(password);
+		}
 		return result;
 	}
 
