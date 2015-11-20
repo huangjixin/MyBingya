@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.common.PasswordHelper;
 import com.jcin.cms.modules.syst.dao.ResourceMapper;
 import com.jcin.cms.modules.syst.dao.RoleMapper;
 import com.jcin.cms.modules.syst.dao.UserMapper;
@@ -40,8 +41,13 @@ import com.jcin.cms.utils.Page;
 @Service(value="userService")
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		IUserService {
-	private static Logger logger = Logger.getLogger(UserServiceImpl.class
-			.getName());
+	private static final String SHA1 = "SHA-1";
+	private static final String MD5 = "MD5";
+	public static final String HASH_ALGORITHM = "SHA-1";
+    public static final int HASH_INTERATIONS = 1024;
+    public static final int SALT_SIZE = 8;
+    
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
 
 	@javax.annotation.Resource
 	private UserMapper userMapper;
@@ -85,7 +91,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional(readOnly = false)
 	public String insert(User record) {
 		super.insert(record);
-
+		String password = PasswordHelper.encryptPassword(record.getPassword());
+		record.setPassword(password);
 		record.setCreateDate(new Date());
 		int result = userMapper.insert(record);
 		String id = record.getId();

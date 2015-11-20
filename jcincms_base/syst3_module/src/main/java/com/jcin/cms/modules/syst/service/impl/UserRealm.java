@@ -27,89 +27,93 @@ import com.jcin.cms.modules.syst.service.IUserService;
 public class UserRealm extends AuthorizingRealm {
 
 	@Resource
-    private IUserService userService;
+	private IUserService userService;
 
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = (String)principals.getPrimaryPrincipal();
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(
+			PrincipalCollection principals) {
+		String username = (String) principals.getPrimaryPrincipal();
 
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(userService.findRoles(username));
-        Set<String>set = userService.findPermissions(username);
-        authorizationInfo.setStringPermissions(set);
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		authorizationInfo.setRoles(userService.findRoles(username));
+		Set<String> set = userService.findPermissions(username);
+		authorizationInfo.setStringPermissions(set);
 
-        return authorizationInfo;
-    }
+		return authorizationInfo;
+	}
 
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(
+			AuthenticationToken token) throws AuthenticationException {
 
-        String username = (String)token.getPrincipal();
+		String username = (String) token.getPrincipal();
 
-        User user = userService.findByUsername(username);
+		User user = userService.findByUsername(username);
 
-        if(user == null) {
-            throw new UnknownAccountException();//没找到帐号
-        }
+		if (user == null) {
+			throw new UnknownAccountException();// 没找到帐号
+		}
 
-        /*if(Boolean.TRUE.equals(user.getLocked())) {
-            throw new LockedAccountException(); //帐号锁定
-        }*/
-//        AuthenticationInfo info = super.doGetAuthenticationInfo(token);
-//        
-        SimpleAuthenticationInfo authenticationInfo;
-      //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-        authenticationInfo = new SimpleAuthenticationInfo(
-                user.getUsername(), //用户名
-                user.getPassword(), //密码
-//                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
-                getName()  //realm name
-        );
-        clearCache(authenticationInfo.getPrincipals());
-        return authenticationInfo;
-    }
-    /**
+		/*
+		 * if(Boolean.TRUE.equals(user.getLocked())) { throw new
+		 * LockedAccountException(); //帐号锁定 }
+		 */
+		// AuthenticationInfo info = super.doGetAuthenticationInfo(token);
+		//
+		SimpleAuthenticationInfo authenticationInfo;
+		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
+		authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(), // 用户名
+				user.getPassword(), // 密码
+				// ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
+				getName() // realm name
+		);
+		clearCache(authenticationInfo.getPrincipals());
+		return authenticationInfo;
+	}
+
+	/**
 	 * 清空用户关联权限认证，待下次使用时重新加载
 	 */
 	public void clearCachedAuthorizationInfo(String principal) {
-		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principal, getName());
 		clearCachedAuthorizationInfo(principals);
 	}
 
-    @Override
-    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthorizationInfo(principals);
-    }
+	@Override
+	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthorizationInfo(principals);
+	}
 
-    @Override
-    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthenticationInfo(principals);
-    }
+	@Override
+	public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthenticationInfo(principals);
+	}
 
-    @Override
-    public void clearCache(PrincipalCollection principals) {
-        super.clearCache(principals);
-    }
+	@Override
+	public void clearCache(PrincipalCollection principals) {
+		super.clearCache(principals);
+	}
 
-    public void clearAllCachedAuthorizationInfo() {
-        getAuthorizationCache().clear();
-    }
+	public void clearAllCachedAuthorizationInfo() {
+		getAuthorizationCache().clear();
+	}
 
-    public void clearAllCachedAuthenticationInfo() {
-        getAuthenticationCache().clear();
-    }
+	public void clearAllCachedAuthenticationInfo() {
+		getAuthenticationCache().clear();
+	}
 
-    public void clearAllCache() {
-        clearAllCachedAuthenticationInfo();
-        clearAllCachedAuthorizationInfo();
-    }
+	public void clearAllCache() {
+		clearAllCachedAuthenticationInfo();
+		clearAllCachedAuthorizationInfo();
+	}
 
-//	public IUserService getUserService() {
-//		return userServiceImpl;
-//	}
-//
-//	public void setUserService(IUserService userService) {
-//		this.userServiceImpl = userService;
-//	}
+	// public IUserService getUserService() {
+	// return userServiceImpl;
+	// }
+	//
+	// public void setUserService(IUserService userService) {
+	// this.userServiceImpl = userService;
+	// }
 
 }

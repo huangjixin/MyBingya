@@ -7,6 +7,8 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 
+import com.jcin.cms.common.PasswordHelper;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -42,6 +44,8 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         if(password.equals(dbPassword)){
         	matches=true;
         }
+        
+        matches = PasswordHelper.validatePassword(password, dbPassword);
         if(matches) {
             //clear retry count
             passwordRetryCache.remove(username);
