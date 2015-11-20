@@ -109,7 +109,7 @@
 		<property name="redirectUrl" value="/admin/login" />
 	</bean>
 
-	 <bean id="sysUserFilter" class="com.jcin.cms.modules.syst.SysUserFilter"/>
+	 <!-- <bean id="sysUserFilter" class="com.jcin.cms.modules.syst.SysUserFilter"/> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/admin/login" />
@@ -118,7 +118,7 @@
 			<util:map>
 				<entry key="authc" value-ref="formAuthenticationFilter" />
 				<entry key="logout" value-ref="logoutFilter" />
-				<entry key="sysUser" value-ref="sysUserFilter" />
+				<!-- <entry key="sysUser" value-ref="sysUserFilter" /> -->
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">

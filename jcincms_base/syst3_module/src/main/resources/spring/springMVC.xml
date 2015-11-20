@@ -13,16 +13,11 @@
                http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                http://www.springframework.org/schema/mvc  
    			   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-	<bean
+	<!-- <bean
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
-	</bean>
+	</bean> -->
 	<context:property-placeholder location="classpath*:spring/web.properties" />
-	<!-- 自动扫描的包名 -->
-	<context:component-scan base-package="com.jcin.cms.modules.*.web">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
 
 	<!-- 默认的注解映射的支持 -->
 	<mvc:annotation-driven>
@@ -30,6 +25,11 @@
 			<bean class="com.jcin.cms.web.system.bind.method.CurrentUserMethodArgumentResolver"/> 
 			</mvc:argument-resolvers> -->
 	</mvc:annotation-driven>
+	<!-- 自动扫描的包名 -->
+	<context:component-scan base-package="com.jcin.cms.modules.*.web">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 	<!-- 视图解释类 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
