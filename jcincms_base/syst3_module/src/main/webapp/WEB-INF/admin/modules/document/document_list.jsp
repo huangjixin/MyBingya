@@ -120,6 +120,9 @@
 		if ($("authorInput").val() != "") {
 			queryParams.author = $("#authorInput").val();
 		}
+		if ($("documentTempleteInput").val() != "") {
+			queryParams.documentTemplete = $("#documentTempleteInput").val();
+		}
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -184,6 +187,8 @@
 			<input  id="titleInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>作者:</label>
 			<input  id="authorInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>模板:</label>
+			<input  id="documentTempleteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
