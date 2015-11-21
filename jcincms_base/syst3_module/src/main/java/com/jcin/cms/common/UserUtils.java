@@ -40,24 +40,22 @@ public class UserUtils {
 	public static final String CACHE_RESOURCE = "resource";
 	
 	public static User getUser(){
-		User user = (User)getCache(CACHE_USER);
-
-        if (user == null){
-            try{
-            	Subject currentUser = SecurityUtils.getSubject();
-            	Object object = null;
-            	if(null != currentUser){
-            		object = currentUser.getPrincipal();
-            	}
-            	
-                if (object!=null){
-                    user = userService.findByUsername(object.toString());
-                    putCache(CACHE_USER, user);
-                }
-            }catch (UnavailableSecurityManagerException e){
-                return null;
+		User user = null;//(User)getCache(CACHE_USER);
+		try{
+        	Subject currentUser = SecurityUtils.getSubject();
+        	Object object = null;
+        	if(null != currentUser){
+        		object = currentUser.getPrincipal();
+        	}
+        	
+            if (object!=null){
+                user = userService.findByUsername(object.toString());
+                putCache(CACHE_USER, user);
             }
-		}
+        }catch (UnavailableSecurityManagerException e){
+            return null;
+        }
+		
 		if (user == null){
 			user = new User();
             if(SecurityUtils.getSecurityManager()!=null&&SecurityUtils.getSubject()!=null)
