@@ -75,8 +75,8 @@ th {
 							<th>&nbsp;类型：</th>
 							<td nowrap="nowrap" align="left"><select id="type"
 								name="type" style="width: 141px;">
-									<option value="menu">菜单</option>
-									<option value="button">按钮</option>
+									<option value="menu" <c:if test="${resource.type == 'menu'}">selected="selected"</c:if>>菜单</option>
+									<option value="button" <c:if test="${resource.type == 'button'}">selected="selected"</c:if>>按钮</option>
 							</select>&nbsp;<form:errors path="type"
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;父亲节点：</th>
