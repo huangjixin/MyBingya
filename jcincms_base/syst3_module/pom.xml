@@ -90,11 +90,6 @@
 		</dependency> -->
 
 		<dependency>
-			<groupId>com.github.livesense</groupId>
-			<artifactId>jodconverter-core</artifactId>
-			<version>1.0.5</version>
-		</dependency>
-		<dependency>
 			<groupId>com.jcin.cms</groupId>
 			<artifactId>base_module</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
