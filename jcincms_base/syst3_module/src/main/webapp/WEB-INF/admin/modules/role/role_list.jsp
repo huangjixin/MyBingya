@@ -20,9 +20,8 @@
 	$()
 			.ready(
 					function() {
-						$('#tgrid')
-								.datagrid(
-										{
+						$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
+						$('#tgrid').datagrid({
 											pageSize : 10,
 											pageList : [ 5, 10, 15, 20 ],
 											nowrap : true,

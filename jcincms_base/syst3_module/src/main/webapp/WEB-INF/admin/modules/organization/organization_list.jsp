@@ -39,6 +39,8 @@
 	}
 
 	$().ready(function() {
+		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
+		
 	    $('#orgTree').tree({
 	    	url:'${ctxAdmin}/organization/getOrganizationTree',method:'get',animate:true,checkbox:true,onSelect: function(node){
 	    		$('#resourceTree').tree("options").url = '${ctxAdmin}/organization/getResourceCheckboxTree?organizationId='+node.id;

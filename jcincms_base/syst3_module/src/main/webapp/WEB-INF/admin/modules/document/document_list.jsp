@@ -39,8 +39,32 @@
 	}
 
 	$().ready(function() {
+		createChannelTree();
+		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
 	});
 
+	function createChannelTree() {
+		$('#channelInput').combotree({
+			url : '${ctxAdmin}/channel/getChannelTree',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+// 				$('#linkAddr').val(node.code);
+				if(node){
+					$('#channelId').val(node.id);
+				}else{
+					$('#channelId').val("");
+				}
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#channelInput').combotree('tree').tree("collapseAll");
+			}
+		});
+	}
 	// 移除条目；
 	function deleteRows(selecedRow) {
 		var pamameter = null;
@@ -123,6 +147,9 @@
 		if ($("documentTempleteInput").val() != "") {
 			queryParams.documentTemplete = $("#documentTempleteInput").val();
 		}
+		if ($("channelId").val() != "") {
+			queryParams.channelId = $("#channelId").val();
+		}
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -137,6 +164,8 @@
 			$("#titleInput").val("");
 			$("#authorInput").val("");
 			$("#documentTempleteInput").val("");
+			$("#channelId").val("");
+			$("#channelInput").combotree('clear');
 	}
 
 	//格式化用户状态显示。
@@ -184,12 +213,15 @@
 				value="导入excel" onclick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
+			<input  id="channelId" type="hidden">
 			<label>标题:</label>
 			<input  id="titleInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>作者:</label>
 			<input  id="authorInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>模板:</label>
 			<input  id="documentTempleteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>栏目:</label>
+			<input  id="channelInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"

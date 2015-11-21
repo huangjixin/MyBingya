@@ -20,11 +20,11 @@ th {
 	var chanTemp = "${channel.channelTemplete}";
 	
 	$().ready(function() {
-		createOrganizationTree();
+		createChannelTree();
 		createFileTree();
 	});
 
-	function createOrganizationTree() {
+	function createChannelTree() {
 		$('#parentId').combotree({
 			url : '${ctxAdmin}/channel/getChannelTree',
 			valuefield : 'id',
