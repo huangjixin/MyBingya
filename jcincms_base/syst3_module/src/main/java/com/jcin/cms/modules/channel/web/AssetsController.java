@@ -45,7 +45,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/assets")
+@RequestMapping(value = "admin/assets")
 public class AssetsController extends BaseController<Assets>{
 	@Autowired
 	private IAssetsService assetsService;

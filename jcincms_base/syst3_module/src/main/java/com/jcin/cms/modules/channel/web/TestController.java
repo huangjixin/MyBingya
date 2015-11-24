@@ -45,7 +45,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/test")
+@RequestMapping(value = "admin/test")
 public class TestController extends BaseController<Test>{
 	@Resource
 	private ITestService testService;

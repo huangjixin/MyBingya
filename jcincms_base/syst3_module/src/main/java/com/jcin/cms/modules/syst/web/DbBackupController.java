@@ -43,7 +43,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/dbBackup")
+@RequestMapping(value = "admin/dbBackup")
 public class DbBackupController extends BaseController<DbBackup>{
 	@Resource
 	private IDbBackupService dbBackupService;

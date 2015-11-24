@@ -45,7 +45,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/role")
+@RequestMapping(value = "admin/role")
 public class RoleController extends BaseController<Role> {
 	@Autowired
 	private IRoleService roleService;

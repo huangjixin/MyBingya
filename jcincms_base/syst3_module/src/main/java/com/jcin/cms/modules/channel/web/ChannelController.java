@@ -44,7 +44,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/channel")
+@RequestMapping(value = "admin/channel")
 public class ChannelController extends BaseController<Channel>{
 	@Resource
 	private IChannelService channelService;

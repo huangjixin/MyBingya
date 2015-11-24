@@ -30,7 +30,7 @@ public class PasswordHelper {
 	}
 
 	public static String encryptPassword(String password) {
-		byte[] salt = password.length()>6?password.substring(0, 6).getBytes():password.substring(0, password.length()).getBytes();
+		byte[] salt = password.length()>=6?password.substring(0, 6).getBytes():password.substring(0, password.length()).getBytes();
 
 		String newPassword = new SimpleHash(algorithmName, password,
 				ByteSource.Util.bytes(salt), hashIterations).toHex();
@@ -38,7 +38,7 @@ public class PasswordHelper {
 	}
 
 	public static boolean validatePassword(String plainPassword, String password) {
-		byte[] salt = password.length()>6?password.substring(0, 6).getBytes():password.substring(0, password.length()).getBytes();
+		byte[] salt = plainPassword.length()>=6?plainPassword.substring(0, 6).getBytes():plainPassword.substring(0, plainPassword.length()).getBytes();
 
 		String newPassword = new SimpleHash(algorithmName, plainPassword,
 				ByteSource.Util.bytes(salt), hashIterations).toHex();

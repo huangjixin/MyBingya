@@ -45,7 +45,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/roleResource")
+@RequestMapping(value = "admin/roleResource")
 public class RoleResourceController extends BaseController<RoleResource>{
 	@Resource
 	private IRoleResourceService roleResourceService;

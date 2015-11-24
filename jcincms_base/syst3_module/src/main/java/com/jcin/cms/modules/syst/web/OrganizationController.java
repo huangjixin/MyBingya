@@ -41,7 +41,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/organization")
+@RequestMapping(value = "admin/organization")
 public class OrganizationController extends BaseController<Organization> {
 	@Autowired
 	private IOrganizationService organizationService;

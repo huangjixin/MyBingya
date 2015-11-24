@@ -46,7 +46,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/comment")
+@RequestMapping(value = "admin/comment")
 public class CommentController extends BaseController<Comment> {
 	@Autowired
 	private ICommentService commentService;

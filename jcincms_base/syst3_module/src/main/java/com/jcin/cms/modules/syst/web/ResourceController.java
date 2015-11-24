@@ -40,7 +40,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/resource")
+@RequestMapping(value = "admin/resource")
 public class ResourceController extends BaseController<Resource> {
 	@Autowired
 	private IResourceService resourceService;

@@ -46,7 +46,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/dictionary")
+@RequestMapping(value = "admin/dictionary")
 public class DictionaryController extends BaseController<Dictionary>{
 	@Resource
 	private IDictionaryService dictionaryService;

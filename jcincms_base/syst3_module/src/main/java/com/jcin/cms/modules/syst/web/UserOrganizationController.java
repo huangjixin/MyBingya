@@ -45,7 +45,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/userOrganization")
+@RequestMapping(value = "admin/userOrganization")
 public class UserOrganizationController extends BaseController<UserOrganization>{
 	@Resource
 	private IUserOrganizationService userOrganizationService;

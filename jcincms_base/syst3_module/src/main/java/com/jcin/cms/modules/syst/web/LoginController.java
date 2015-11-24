@@ -24,7 +24,7 @@ import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}")
+@RequestMapping(value = "admin")
 public class LoginController extends BaseController<User> {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)

@@ -45,7 +45,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/user")
+@RequestMapping(value = "admin/user")
 public class UserController extends BaseController<User> {
 	@Autowired
 	private IUserService userService;

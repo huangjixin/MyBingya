@@ -45,7 +45,7 @@ import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/organizationResource")
+@RequestMapping(value = "admin/organizationResource")
 public class OrganizationResourceController extends BaseController<OrganizationResource>{
 	@Resource
 	private IOrganizationResourceService organizationResourceService;

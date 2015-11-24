@@ -36,7 +36,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/log")
+@RequestMapping(value = "admin/log")
 public class LogController extends BaseController<Log> {
 	@Autowired
 	private ILogService logService;

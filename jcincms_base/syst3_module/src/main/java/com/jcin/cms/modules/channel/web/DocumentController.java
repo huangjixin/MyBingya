@@ -56,7 +56,7 @@ import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 @Controller
-@RequestMapping(value = "${adminPath}/document")
+@RequestMapping(value = "admin/document")
 public class DocumentController extends BaseController<Document> {
 	@Resource
 	private IDocumentService documentService;
