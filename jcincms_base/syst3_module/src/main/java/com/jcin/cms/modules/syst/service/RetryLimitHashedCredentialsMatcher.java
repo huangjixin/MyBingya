@@ -47,7 +47,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         
         matches = PasswordHelper.validatePassword(password, dbPassword);
         if(matches) {
-            //clear retry count
             passwordRetryCache.remove(username);
         }
         return matches;
