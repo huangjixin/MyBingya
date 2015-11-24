@@ -103,17 +103,17 @@
 		<property name="usernameParam" value="username" />
 		<property name="passwordParam" value="password" />
 		<property name="rememberMeParam" value="rememberMe" />
-		<property name="loginUrl" value="/admin/login" />
+		<property name="loginUrl" value="/${adminPath}/login" />
 	</bean>
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-		<property name="redirectUrl" value="/admin/login" />
+		<property name="redirectUrl" value="/${adminPath}/login" />
 	</bean>
 
 	 <!-- <bean id="sysUserFilter" class="com.jcin.cms.modules.syst.SysUserFilter"/> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/admin/login" />
-		<property name="successUrl" value="/admin/user" />
+		<property name="loginUrl" value="/${adminPath}/login" />
+		<property name="successUrl" value="/${adminPath}" />
 		<property name="filters">
 			<util:map>
 				<entry key="authc" value-ref="formAuthenticationFilter" />
