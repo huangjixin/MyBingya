@@ -63,7 +63,7 @@ buildmenu:function($, setting){
 		this.istopheader=$curobj.parents("ul").length==1? true : false //is top level header?
 		$subul.css({top:this.istopheader && setting.orientation!='v'? this._dimensions.h+"px" : 0})
 		$curobj.children("a:eq(0)").css(this.istopheader? {paddingRight: smoothmenu.arrowimages.down[2]} : {}).append( //add arrow images
-			'<img src="/'+ (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[1] : smoothmenu.arrowimages.right[1])
+			'<img src="/syst/'+ (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[1] : smoothmenu.arrowimages.right[1])
 			+'" class="' + (this.istopheader && setting.orientation!='v'? smoothmenu.arrowimages.down[0] : smoothmenu.arrowimages.right[0])
 			+ '" style="border:0;" />'
 		)
