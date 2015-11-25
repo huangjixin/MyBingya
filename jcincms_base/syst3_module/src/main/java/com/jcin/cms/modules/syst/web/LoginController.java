@@ -14,6 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,15 +22,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jcin.cms.modules.syst.domain.User;
+import com.jcin.cms.modules.syst.web.captchaexception.IncorrectCaptchaException;
 import com.jcin.cms.web.BaseController;
 
 @Controller
 @RequestMapping(value = "admin")
 public class LoginController extends BaseController<User> {
 
+	@Autowired
+	private CaptchaFormAuthenticationFilter formAuthenticationFilter;
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model uiModel, HttpServletRequest request) {
-
+		uiModel.addAttribute("captchaEnabled", formAuthenticationFilter.isCaptchaEnabled());
 		return root+"admin/modules/login";
 	}
 
@@ -44,6 +49,9 @@ public class LoginController extends BaseController<User> {
 		} else if (IncorrectCredentialsException.class.getName().equals(
 				exceptionClassName)) {
 			error = "用户名/密码错误";
+		} else if (IncorrectCaptchaException.class.getName().equals(
+				exceptionClassName)) {
+			error = "验证码错误";
 		} else if (exceptionClassName != null) {
 			error = "其他错误：" + exceptionClassName;
 		}
@@ -51,7 +59,7 @@ public class LoginController extends BaseController<User> {
 		return root+"admin/modules/login";
 	}
 
-	@RequestMapping(value = {"","/"})
+	@RequestMapping(value = {"","/","index"})
 	public String index(Model uiModel) {
 		return root+"admin/modules/index";
 	}
