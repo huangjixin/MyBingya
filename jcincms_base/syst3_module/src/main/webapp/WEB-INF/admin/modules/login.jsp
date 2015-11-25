@@ -25,6 +25,9 @@
 	function submitData(){
 		document.getElementById("formLogin").submit();
 	}
+	function refreshCaptcha(){  
+		    document.getElementById("img_captcha").src="${ctx}/images/kaptcha.jpg?t=" + Math.random();  
+	}
 </script>
 </head>
 
@@ -54,13 +57,27 @@
 									<span class="lockic"></span> <input type="password"
 										name="password" id="password" value="123456" />
 								</div>
-								<p id="hintMsg" class="remind">&emsp;${error}</p>
 							</td>
 						</tr>
+						<c:if test="${captchaEnabled==true}">
+						<tr>
+							<th>验证码</th>
+							<td>
+								<div class="loginipt focus">
+									<input type="text" name="captcha" />
+								</div>
+							</td>
+						</tr>
+						</c:if>
 					</table>
-					<div class="btns">
+					<div>
+						<c:if test="${captchaEnabled==true}">
+							<img id="img_captcha" alt="验证码" src="${ctx}/images/kaptcha.jpg" title="点击更换"  onclick="javascript:refreshCaptcha();">
+						</c:if>
 						<a id="btn_login" class="greBtn" onclick="submitData();">登录</a><input id="subBtn" type="submit" style="display: none;">
 					</div>
+					
+					<p id="hintMsg" class="remind">&emsp;${error}</p>
 				</form>
 			</div>
 		</div>
