@@ -100,7 +100,7 @@
 
 	<bean id="formAuthenticationFilter"
 		class="com.jcin.cms.modules.syst.web.CaptchaFormAuthenticationFilter">
-		<property name="captchaEnabled" value="true" />
+		<property name="captchaEnabled" value="false" />
 		<property name="usernameParam" value="username" />
 		<property name="passwordParam" value="password" />
 		<property name="rememberMeParam" value="rememberMe" />
