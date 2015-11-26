@@ -13,10 +13,13 @@
                http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                http://www.springframework.org/schema/mvc  
    			   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-	<!-- <bean
+<!-- <bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" /> -->
+	<bean
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
-	</bean> -->
+	</bean>
 	<context:property-placeholder location="classpath*:spring/web.properties" />
 
 	<!-- 默认的注解映射的支持 -->
@@ -55,12 +58,11 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 对静态资源文件的访问 方案二 （二选一） -->
-	<mvc:resources mapping="/logincss/**" location="/logincss/"/>
-	<mvc:resources mapping="/images/**" location="/images/"/>
-	<mvc:resources mapping="/js/**" location="/js/"/>
-	<mvc:resources mapping="/ueditor/**" location="/ueditor/"/>
-	<mvc:resources mapping="/upload/**" location="/upload/"/>
-	<mvc:resources mapping="/defaultApp/**" location="/defaultApp/" />
+	<!-- <mvc:resources mapping="/logincss/**" location="/logincss/"/> <mvc:resources 
+		mapping="/images/**" location="/images/"/> <mvc:resources mapping="/js/**" 
+		location="/js/"/> <mvc:resources mapping="/ueditor/**" location="/ueditor/"/> 
+		<mvc:resources mapping="/upload/**" location="/upload/"/> <mvc:resources 
+		mapping="/defaultApp/**" location="/defaultApp/" /> -->
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
