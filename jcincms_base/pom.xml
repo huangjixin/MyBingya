@@ -20,6 +20,19 @@
 	</properties>
 
 	<dependencies>
+		<!-- <dependency> <groupId>com.octo.captcha</groupId> <artifactId>jcaptcha-all</artifactId> 
+			<version>1.0-RC6</version> <exclusions> <exclusion> <artifactId>servlet-api</artifactId> 
+			<groupId>javax.servlet</groupId> </exclusion> </exclusions> </dependency> -->
+		<!-- <dependency> <groupId>com.octo.captcha</groupId> <artifactId>jcaptcha</artifactId> 
+			<version>2.0-alpha-1</version> </dependency> <dependency> <groupId>com.octo.captcha</groupId> 
+			<artifactId>jcaptcha-integration-simple-servlet</artifactId> <version>2.0-alpha-1</version> 
+			<exclusions> <exclusion> <artifactId>servlet-api</artifactId> <groupId>javax.servlet</groupId> 
+			</exclusion> </exclusions> </dependency> -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -327,11 +340,8 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
-			<version>5.11.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-all</artifactId> 
+			<version>5.11.1</version> </dependency> -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -347,7 +357,7 @@
 			<artifactId>cglib</artifactId>
 			<version>3.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
@@ -364,7 +374,7 @@
 			<version>1.3.2</version>
 			<!-- <scope>provided</scope> -->
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
