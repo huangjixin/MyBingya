@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>slider.js实现经典的图片轮播焦点图特效-无限设计网-5xsj.net</title>
+<style>
+body,h1,h2,h3,h4,blockquote,p,dl,dt,dd,ul,ol,li,th,td,form,fieldset,legend,button,input,textarea{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 \5b8b\4f53,arial,sans-serif; color:#444;text-align:left}
+button,input,select,textarea,h1,h2,h3,h4{font-size:100%}
+em,i{font-style:normal}
+ol,ul{list-style:none; list-style-position:outside}
+table{border-collapse:collapse;border-spacing:0}
+th{ text-align:left; font-weight:400}
+img,fieldset{border:0;vertical-align:middle}
+a{color:#444;text-decoration:none;outline:none}
+a:hover{color:#c00;text-decoration:underline}
+
+/* 焦点图 */
+.focus{width:304px; height:294px; padding:2px; border:1px solid #E1E1E1; background:#fff; position:relative}
+.focus .sliderwrapper span{display:block; width:304px; height:32px; background:#000;filter:alpha(opacity=70);-moz-opacity:0.7;opacity:0.7; position:absolute; left:2px; top:264px}
+.focus .pagination{position:absolute; top:272px; right:0}
+.focus .pagination a{width:19px;height:19px; line-height:19px; display:inline; float:left; margin-right:7px; cursor:pointer; background:#fff; text-align:center}
+.focus .pagination a:hover, .focus .pagination a.selected{ background:#FB7E39; color:#fff}
+</style>
+</head>
+<body>
+
+<div class="focus">
+  <div id="sliderA" class="sliderwrapper">
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79064170.jpg" alt="外" width="304" height="294" border="0" /></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79084479.jpg" alt="马" width="304" height="294" border="0" /></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79084750.jpg" alt="房" width="305" height="295" border="0" ></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79084993.jpg" alt="远" width="304" height="294" border="0" ></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79085270.jpg" alt="招" width="304" height="294" border="0" ></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79085271.jpg" alt="新" width="304" height="294" border="0" ></a><a href="#" target="_blank"></a></div><span></span></div>
+    <div class="contentdiv">
+      <div class="slPic"><a href="#" target="_blank"><img src="images/79085272.jpg" alt="颂" width="304" height="294" border="0" ></a><a href="#" target="_blank"></a></div><span></span></div>
+  </div>
+  <div id="paginate-sliderA" class="pagination"> <i class="toc"></i><i class="toc"></i><i class="toc"></i><i class="toc"></i> </div>
+</div>
+<script src="slider.js"></script>
+<script type="text/javascript">
+featuredcontentslider.init({id: "sliderA",contentsource: ["inline", ""],toc: "#increment",nextprev: ["", ""], revealtype: "mouseover", enablefade: [true, 0.15], autorotate: [true, 3500], delay: 150,onChange: function(previndex, curindex){}});
+</script>
+</body>
+</html>
