@@ -69,7 +69,7 @@ public class DocumentController extends BaseController<Document> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Document document, Model uiModel) {
 		uiModel.addAttribute("document", document);
-		return root + "admin/modules/document/document_create";
+		return root + "admin/modules/document/document_create.jsp";
 	}
 
 	@RequiresPermissions("document:create")
@@ -86,7 +86,7 @@ public class DocumentController extends BaseController<Document> {
 				&& null == document.getChannelId()) {
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
-			return root + "admin/modules/document/document_create";
+			return root + "admin/modules/document/document_create.jsp";
 		}
 		documentService.insert(document);
 
@@ -100,7 +100,7 @@ public class DocumentController extends BaseController<Document> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
 		uiModel.addAttribute("document", document);
-		return root + "admin/modules/document/document_update";
+		return root + "admin/modules/document/document_update.jsp";
 	}
 
 	@RequiresPermissions("document:update")
@@ -123,13 +123,13 @@ public class DocumentController extends BaseController<Document> {
 		Document document = documentService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("document", document);
-		return root + "admin/modules/document/document_show";
+		return root + "admin/modules/document/document_show.jsp";
 	}
 
 	@RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root + "admin/modules/document/document_list";
+		return root + "admin/modules/document/document_list.jsp";
 	}
 
 	@RequiresPermissions("document:delete")

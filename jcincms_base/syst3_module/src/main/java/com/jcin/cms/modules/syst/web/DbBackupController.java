@@ -52,7 +52,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(DbBackup dbBackup, Model uiModel) {
 		uiModel.addAttribute("dbBackup", dbBackup);
-		return root+"admin/modules/dbBackup/dbBackup_create";
+		return root+"admin/modules/dbBackup/dbBackup_create.jsp";
 	}
 
 	@RequiresPermissions("dbBackup:create")
@@ -72,7 +72,7 @@ public class DbBackupController extends BaseController<DbBackup>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		DbBackup dbBackup = dbBackupService.selectByPrimaryKey(id);
 		uiModel.addAttribute("dbBackup", dbBackup);
-		return root+"admin/modules/dbBackup/dbBackup_update";
+		return root+"admin/modules/dbBackup/dbBackup_update.jsp";
 	}
 
 	@RequiresPermissions("dbBackup:update")
@@ -93,13 +93,13 @@ public class DbBackupController extends BaseController<DbBackup>{
 		DbBackup dbBackup = dbBackupService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("dbBackup", dbBackup);
-		return root+"admin/modules/dbBackup/dbBackup_show";
+		return root+"admin/modules/dbBackup/dbBackup_show.jsp";
 	}
 
 	@RequiresPermissions("dbBackup:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/dbBackup/dbBackup_list";
+		return root+"admin/modules/dbBackup/dbBackup_list.jsp";
 	}
 
 	@RequiresPermissions("dbBackup:delete")

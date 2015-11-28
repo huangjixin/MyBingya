@@ -55,7 +55,7 @@ public class CommentController extends BaseController<Comment> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Comment comment, Model uiModel) {
 		uiModel.addAttribute("comment", comment);
-		return root+"admin/modules/comment/comment_create";
+		return root+"admin/modules/comment/comment_create.jsp";
 	}
 
 	// @RequiresPermissions("comment:create")
@@ -76,7 +76,7 @@ public class CommentController extends BaseController<Comment> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Comment comment = commentService.selectByPrimaryKey(id);
 		uiModel.addAttribute("comment", comment);
-		return root+"admin/modules/comment/comment_update";
+		return root+"admin/modules/comment/comment_update.jsp";
 	}
 
 	// @RequiresPermissions("comment:update")
@@ -99,13 +99,13 @@ public class CommentController extends BaseController<Comment> {
 		Comment comment = commentService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("comment", comment);
-		return root+"admin/modules/comment/comment_show";
+		return root+"admin/modules/comment/comment_show.jsp";
 	}
 
 	// @RequiresPermissions("comment:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/comment/comment_list";
+		return root+"admin/modules/comment/comment_list.jsp";
 	}
 
 	// @RequiresPermissions("comment:delete")

@@ -55,7 +55,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Dictionary dictionary, Model uiModel) {
 		uiModel.addAttribute("dictionary", dictionary);
-		return root+"admin/modules/dictionary/dictionary_create";
+		return root+"admin/modules/dictionary/dictionary_create.jsp";
 	}
 
 	@RequiresPermissions("dictionary:create")
@@ -75,7 +75,7 @@ public class DictionaryController extends BaseController<Dictionary>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Dictionary dictionary = dictionaryService.selectByPrimaryKey(id);
 		uiModel.addAttribute("dictionary", dictionary);
-		return root+"admin/modules/dictionary/dictionary_update";
+		return root+"admin/modules/dictionary/dictionary_update.jsp";
 	}
 
 	@RequiresPermissions("dictionary:update")
@@ -96,13 +96,13 @@ public class DictionaryController extends BaseController<Dictionary>{
 		Dictionary dictionary = dictionaryService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("dictionary", dictionary);
-		return root+"admin/modules/dictionary/dictionary_show";
+		return root+"admin/modules/dictionary/dictionary_show.jsp";
 	}
 
 	@RequiresPermissions("dictionary:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/dictionary/dictionary_list";
+		return root+"admin/modules/dictionary/dictionary_list.jsp";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

@@ -54,7 +54,7 @@ public class OrganizationController extends BaseController<Organization> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Organization organization, Model uiModel) {
 		uiModel.addAttribute("organization", organization);
-		return root+"admin/modules/organization/organization_create";
+		return root+"admin/modules/organization/organization_create.jsp";
 	}
 
 	@RequiresPermissions("organization:create")
@@ -75,7 +75,7 @@ public class OrganizationController extends BaseController<Organization> {
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Organization organization = organizationService.selectByPrimaryKey(id);
 		uiModel.addAttribute("organization", organization);
-		return root+"admin/modules/organization/organization_update";
+		return root+"admin/modules/organization/organization_update.jsp";
 	}
 
 	@RequiresPermissions("organization:update")
@@ -99,7 +99,7 @@ public class OrganizationController extends BaseController<Organization> {
 		Organization organization = organizationService.selectByPrimaryKey(id);
 
 		uiModel.addAttribute("organization", organization);
-		return root+"admin/modules/organization/organization_show";
+		return root+"admin/modules/organization/organization_show.jsp";
 	}
 
 	@RequiresPermissions("organization:view")

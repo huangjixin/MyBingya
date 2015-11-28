@@ -54,7 +54,7 @@ public class AssetsController extends BaseController<Assets>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Assets assets, Model uiModel) {
 		uiModel.addAttribute("assets", assets);
-		return root+"admin/modules/assets/assets_create";
+		return root+"admin/modules/assets/assets_create.jsp";
 	}
 
 	@RequiresPermissions("assets:create")
@@ -74,7 +74,7 @@ public class AssetsController extends BaseController<Assets>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Assets assets = assetsService.selectByPrimaryKey(id);
 		uiModel.addAttribute("assets", assets);
-		return root+"admin/modules/assets/assets_update";
+		return root+"admin/modules/assets/assets_update.jsp";
 	}
 
 	@RequiresPermissions("assets:update")
@@ -95,13 +95,13 @@ public class AssetsController extends BaseController<Assets>{
 		Assets assets = assetsService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("assets", assets);
-		return root+"admin/modules/assets/assets_show";
+		return root+"admin/modules/assets/assets_show.jsp";
 	}
 
 	@RequiresPermissions("assets:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/assets/assets_list";
+		return root+"admin/modules/assets/assets_list.jsp";
 	}
 
 //	@RequiresPermissions("assets:delete")

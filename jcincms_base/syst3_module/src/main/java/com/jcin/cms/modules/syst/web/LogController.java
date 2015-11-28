@@ -45,7 +45,7 @@ public class LogController extends BaseController<Log> {
 	@RequiresPermissions("log:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/log/log_list";
+		return root+"admin/modules/log/log_list.jsp";
 	}
 
 	@RequestMapping(value = "/select")

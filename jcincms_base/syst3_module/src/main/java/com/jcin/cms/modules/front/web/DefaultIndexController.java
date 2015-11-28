@@ -50,7 +50,7 @@ public class DefaultIndexController extends BaseController {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); //利用缓存。
 		uiModel.addAttribute("list", list);
-		return "defaultApp/index";
+		return "defaultApp/index.jsp";
 	}
 
 //	@RequestMapping(value = "{channels}")
@@ -61,7 +61,7 @@ public class DefaultIndexController extends BaseController {
 		Channel channel = getChannelByCode(true,channels);
 //		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
-			return root + "defaultApp/channelNotExsit";
+			return root + "defaultApp/channelNotExsit.jsp";
 		}
 
 		// channel.setLinkAddr(requestRri);
@@ -77,7 +77,7 @@ public class DefaultIndexController extends BaseController {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
 				uiModel.addAttribute("msg", "栏目所对应的");
-				return root + "defaultApp/channelNotExsit";
+				return root + "defaultApp/channelNotExsit.jsp";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
@@ -89,7 +89,7 @@ public class DefaultIndexController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return root + "defaultApp/document";
+			return root + "defaultApp/document.jsp";
 		}
 
 		// 栏目模板不为空返回模板。
@@ -130,7 +130,7 @@ public class DefaultIndexController extends BaseController {
 			channel = getChannelByCode(true, code);
 		}
 		if (null == channel || null == channel.getId()) {
-			return root + "defaultApp/channelNotExsit";
+			return root + "defaultApp/channelNotExsit.jsp";
 		}
 
 		uiModel.addAttribute("name", channel.getName());
@@ -144,7 +144,7 @@ public class DefaultIndexController extends BaseController {
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
-				return root + "defaultApp/channelNotExsit";
+				return root + "defaultApp/channelNotExsit.jsp";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
@@ -156,7 +156,7 @@ public class DefaultIndexController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return root + "defaultApp/document";
+			return root + "defaultApp/document.jsp";
 		}
 
 		channel.setLinkAddr(requestRri);
@@ -174,7 +174,7 @@ public class DefaultIndexController extends BaseController {
 				&& !"".equals(channel.getChannelTemplete())) {
 			return channel.getChannelTemplete();
 		}
-		return root + "defaultApp/channelDetail";
+		return root + "defaultApp/channelDetail.jsp";
 	}
 
 //	@RequestMapping(value = "{channels}/doc/{id}")
@@ -185,7 +185,7 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
-			return root + "defaultApp/channelNotExsit";
+			return root + "defaultApp/channelNotExsit.jsp";
 		}
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
@@ -194,7 +194,7 @@ public class DefaultIndexController extends BaseController {
 			return document.getDocumentTemplete();
 		}
 
-		return root + "defaultApp/document";
+		return root + "defaultApp/document.jsp";
 	}
 	
 //	@RequestMapping(value = "{channels}/{channel}/{code}",method=RequestMethod.GET)
@@ -215,7 +215,7 @@ public class DefaultIndexController extends BaseController {
 			return document.getDocumentTemplete();
 		}*/
 
-		return root + "defaultApp/document";
+		return root + "defaultApp/document.jsp";
 	}
 	
 	/**

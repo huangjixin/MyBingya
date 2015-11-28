@@ -53,7 +53,7 @@ public class ChannelController extends BaseController<Channel>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Channel channel, Model uiModel) {
 		uiModel.addAttribute("channel", channel);
-		return root+"admin/modules/channel/channel_create";
+		return root+"admin/modules/channel/channel_create.jsp";
 	}
 
 	@RequiresPermissions("channel:create")
@@ -80,7 +80,7 @@ public class ChannelController extends BaseController<Channel>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Channel channel = channelService.selectByPrimaryKey(id);
 		uiModel.addAttribute("channel", channel);
-		return root+"admin/modules/channel/channel_update";
+		return root+"admin/modules/channel/channel_update.jsp";
 	}
 
 	@RequiresPermissions("channel:update")
@@ -114,13 +114,13 @@ public class ChannelController extends BaseController<Channel>{
 		Channel channel = channelService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("channel", channel);
-		return root+"admin/modules/channel/channel_show";
+		return root+"admin/modules/channel/channel_show.jsp";
 	}
 
 	@RequiresPermissions("channel:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/channel/channel_list";
+		return root+"admin/modules/channel/channel_list.jsp";
 	}
 
 	@RequiresPermissions("channel:delete")

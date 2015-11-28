@@ -60,7 +60,7 @@ public class RoleController extends BaseController<Role> {
 		uiModel.addAttribute("role", role);
 		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		return root+"admin/modules/role/role_create";
+		return root+"admin/modules/role/role_create.jsp";
 	}
 
 	@RequiresPermissions("role:create")
@@ -95,7 +95,7 @@ public class RoleController extends BaseController<Role> {
 		 * if (null != list && list.size() > 0) { uiModel.addAttribute("roleId",
 		 * list.get(0).getId()); }
 		 */
-		return root+"admin/modules/role/role_update";
+		return root+"admin/modules/role/role_update.jsp";
 	}
 
 	@RequiresPermissions("role:update")
@@ -134,13 +134,13 @@ public class RoleController extends BaseController<Role> {
 		 * 
 		 * uiModel.addAttribute("role", role);
 		 */
-		return root+"admin/modules/role/role_show";
+		return root+"admin/modules/role/role_show.jsp";
 	}
 
 	@RequiresPermissions("role:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/role/role_list";
+		return root+"admin/modules/role/role_list.jsp";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)

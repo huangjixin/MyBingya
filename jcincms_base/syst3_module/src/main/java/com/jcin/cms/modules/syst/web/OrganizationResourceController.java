@@ -54,7 +54,7 @@ public class OrganizationResourceController extends BaseController<OrganizationR
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(OrganizationResource organizationResource, Model uiModel) {
 		uiModel.addAttribute("organizationResource", organizationResource);
-		return "admin/modules/organizationResource/organizationResource_create";
+		return "admin/modules/organizationResource/organizationResource_create.jsp";
 	}
 
 //	@RequiresPermissions("organizationResource:create")
@@ -74,7 +74,7 @@ public class OrganizationResourceController extends BaseController<OrganizationR
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		OrganizationResource organizationResource = organizationResourceService.selectByPrimaryKey(id);
 		uiModel.addAttribute("organizationResource", organizationResource);
-		return "admin/modules/organizationResource/organizationResource_update";
+		return "admin/modules/organizationResource/organizationResource_update.jsp";
 	}
 
 //	@RequiresPermissions("organizationResource:update")
@@ -95,7 +95,7 @@ public class OrganizationResourceController extends BaseController<OrganizationR
 		OrganizationResource organizationResource = organizationResourceService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("organizationResource", organizationResource);
-		return "admin/modules/organizationResource/organizationResource_show";
+		return "admin/modules/organizationResource/organizationResource_show.jsp";
 	}
 
 //	@RequiresPermissions("organizationResource:view")

@@ -46,7 +46,7 @@ public class TqunhuInfoController extends BaseController<TqunhuInfo> {
 	@RequestMapping(value = { "", "create" }, method = RequestMethod.GET)
 	public String list(Model uiModel,TqunhuInfo tqunhuInfo,HttpServletRequest httpServletRequest) {
 		uiModel.addAttribute("tqunhuInfo", tqunhuInfo);
-		return root+"admin/modules/tqunhuInfo/tqunhuInfo_create";
+		return root+"admin/modules/tqunhuInfo/tqunhuInfo_create.jsp";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -165,6 +165,6 @@ public class TqunhuInfoController extends BaseController<TqunhuInfo> {
 		/**/
 		redirectAttributes.addFlashAttribute("tqunhuInfo", tqunhuInfo);
 		redirectAttributes.addFlashAttribute("msg", "上传成功");
-		return root+"admin/modules/tqunhuInfo/tqunhuInfo_success";
+		return root+"admin/modules/tqunhuInfo/tqunhuInfo_success.jsp";
 	}
 }

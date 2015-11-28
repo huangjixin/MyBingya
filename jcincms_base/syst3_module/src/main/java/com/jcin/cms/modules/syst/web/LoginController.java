@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jcin.cms.common.Global;
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.web.captchaexception.IncorrectCaptchaException;
 import com.jcin.cms.web.BaseController;
@@ -35,7 +36,7 @@ public class LoginController extends BaseController<User> {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model uiModel, HttpServletRequest request) {
 		uiModel.addAttribute("captchaEnabled", formAuthenticationFilter.isCaptchaEnabled());
-		return root+"admin/modules/login";
+		return root+"admin/modules/login.jsp";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -56,12 +57,12 @@ public class LoginController extends BaseController<User> {
 			error = "其他错误：" + exceptionClassName;
 		}
 		uiModel.addAttribute("error", error);
-		return root+"admin/modules/login";
+		return root+"admin/modules/login.jsp";
 	}
 
 	@RequestMapping(value = {"","/","index"})
 	public String index(Model uiModel) {
-		return root+"admin/modules/index";
+		return root+"admin/modules/index.jsp";
 	}
 	
 	@RequestMapping(value = {"system"})
@@ -77,7 +78,7 @@ public class LoginController extends BaseController<User> {
 		uiModel.addAttribute("osVersion", osVersion);
 		uiModel.addAttribute("version", version);
 		uiModel.addAttribute("vendor", vendor);
-		return root+"admin/modules/system";
+		return root+"admin/modules/system.jsp";
 	}
 
 }

@@ -54,7 +54,7 @@ public class RoleResourceController extends BaseController<RoleResource>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(RoleResource roleResource, Model uiModel) {
 		uiModel.addAttribute("roleResource", roleResource);
-		return "admin/modules/roleResource/roleResource_create";
+		return "admin/modules/roleResource/roleResource_create.jsp";
 	}
 
 	@RequiresPermissions("roleResource:create")
@@ -74,7 +74,7 @@ public class RoleResourceController extends BaseController<RoleResource>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		RoleResource roleResource = roleResourceService.selectByPrimaryKey(id);
 		uiModel.addAttribute("roleResource", roleResource);
-		return "admin/modules/roleResource/roleResource_update";
+		return "admin/modules/roleResource/roleResource_update.jsp";
 	}
 
 	@RequiresPermissions("roleResource:update")
@@ -95,13 +95,13 @@ public class RoleResourceController extends BaseController<RoleResource>{
 		RoleResource roleResource = roleResourceService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("roleResource", roleResource);
-		return "admin/modules/roleResource/roleResource_show";
+		return "admin/modules/roleResource/roleResource_show.jsp";
 	}
 
 	@RequiresPermissions("roleResource:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/roleResource/roleResource_list";
+		return "admin/modules/roleResource/roleResource_list.jsp";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

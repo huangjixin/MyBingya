@@ -60,7 +60,7 @@ public class UserController extends BaseController<User> {
 		uiModel.addAttribute("user", user);
 		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		return root+"admin/modules/user/user_create";
+		return root+"admin/modules/user/user_create.jsp";
 	}
 
 	@RequiresPermissions("user:create")
@@ -109,7 +109,7 @@ public class UserController extends BaseController<User> {
 			uiModel.addAttribute("organizationId", list2.get(0).getId());
 		}
 
-		return root+"admin/modules/user/user_update";
+		return root+"admin/modules/user/user_update.jsp";
 	}
 
 	@RequiresPermissions("user:update")
@@ -170,7 +170,7 @@ public class UserController extends BaseController<User> {
 		}
 
 		uiModel.addAttribute("user", user);
-		return root+"admin/modules/user/user_show";
+		return root+"admin/modules/user/user_show.jsp";
 	}
 
 	@RequiresPermissions("user:update")
@@ -180,7 +180,7 @@ public class UserController extends BaseController<User> {
 			HttpServletResponse httpServletResponse) {
 		User user = UserUtils.getUser();
 		uiModel.addAttribute("user", user);
-		return root+"admin/modules/user/changePassword";
+		return root+"admin/modules/user/changePassword.jsp";
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class UserController extends BaseController<User> {
 	@RequiresPermissions("user:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/user/user_list";
+		return root+"admin/modules/user/user_list.jsp";
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class UserController extends BaseController<User> {
 	 */
 	@RequestMapping(value = { "productInfo" })
 	public String productInfo(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/user/product_info";
+		return root+"admin/modules/user/product_info.jsp";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)

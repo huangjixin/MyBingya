@@ -54,7 +54,7 @@ public class TestController extends BaseController<Test>{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Test test, Model uiModel) {
 		uiModel.addAttribute("test", test);
-		return "admin/modules/test/test_create";
+		return "admin/modules/test/test_create.jsp";
 	}
 
 //	@RequiresPermissions("test:create")
@@ -74,7 +74,7 @@ public class TestController extends BaseController<Test>{
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		Test test = testService.selectByPrimaryKey(id);
 		uiModel.addAttribute("test", test);
-		return "admin/modules/test/test_update";
+		return "admin/modules/test/test_update.jsp";
 	}
 
 //	@RequiresPermissions("test:update")
@@ -95,13 +95,13 @@ public class TestController extends BaseController<Test>{
 		Test test = testService.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("test", test);
-		return "admin/modules/test/test_show";
+		return "admin/modules/test/test_show.jsp";
 	}
 
 //	@RequiresPermissions("test:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return "admin/modules/test/test_list";
+		return "admin/modules/test/test_list.jsp";
 	}
 
 //	@RequiresPermissions("test:delete")
