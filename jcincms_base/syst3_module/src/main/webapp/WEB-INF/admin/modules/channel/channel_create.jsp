@@ -61,8 +61,9 @@ th {
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#chanTemplete').combotree('tree').tree("collapseAll");
-				var dTemplete = "${channel.channelTemplete}";
-				if (dTemplete != "") {
+				 var dTemplete = "${channel.channelTemplete}";
+				 $('#chanTemplete').combotree("setValue", dTemplete);
+				 /*if (dTemplete != "") {
 					var index = dTemplete.lastIndexOf("/");
 					if(index>0){
 						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
@@ -71,7 +72,7 @@ th {
 						$('#chanTemplete').combotree("setValue", dTemplete+".jsp");
 					}
 					
-				}
+				} */
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#chanTemplete').combotree('tree');  
@@ -138,9 +139,9 @@ th {
 
 	
 	function onsubmitHandler() {
-		if(chanTemp.indexOf(".") > 0){
+		/* if(chanTemp.indexOf(".") > 0){
 			chanTemp = chanTemp.substring(0,chanTemp.indexOf("."));
-		}
+		} */
 		$('#channelTemplete').val(chanTemp);
 		var row = $('#tgrid').datagrid('getSelected');
 		if (row) {

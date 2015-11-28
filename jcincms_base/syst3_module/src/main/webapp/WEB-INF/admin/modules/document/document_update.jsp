@@ -74,8 +74,9 @@ th {
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#docTemplete').combotree('tree').tree("collapseAll");
-				var dTemplete = "${document.documentTemplete}";
-				if (dTemplete != "") {
+					var dTemplete = "${document.documentTemplete}";
+				   $('#docTemplete').combotree("setValue", dTemplete);
+				   /* if (dTemplete != "") {
 					var index = dTemplete.lastIndexOf("/");
 					if(index>0){
 						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
@@ -84,7 +85,7 @@ th {
 						$('#docTemplete').combotree("setValue", dTemplete+".jsp");
 					}
 					
-				}
+				} */
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#docTemplete').combotree('tree');  
@@ -114,9 +115,9 @@ th {
 	function submitForm() {
 		var cont = ue.getContent();
 		$('#content').val(cont);
-		if(docTemp.indexOf(".") > 0){
+		/* if(docTemp.indexOf(".") > 0){
 			docTemp = docTemp.substring(0,docTemp.indexOf("."));
-		}
+		} */
 		$('#documentTemplete').val(docTemp);
 		$('#validForm').submit();
 	}
