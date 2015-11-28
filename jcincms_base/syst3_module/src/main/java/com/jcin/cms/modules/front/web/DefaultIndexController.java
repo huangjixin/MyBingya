@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,7 +34,8 @@ import com.jcin.cms.web.BaseController;
  * 
  */
 @Controller
-@RequestMapping(value = {"","/","index"})
+@RequestMapping(value = { "", "/", "index" })
+// @Scope(value="prototype")
 public class DefaultIndexController extends BaseController {
 
 	private static IChannelService channelServ = SpringUtils
@@ -48,18 +50,18 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping
 	public String index(Model uiModel, HttpServletRequest httpServletRequest) {
 		// List<Channel> list = channelService.getChannelTree();
-		List<Channel> list = UserUtils.getChannels(); //利用缓存。
+		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
 		return "defaultApp/index.jsp";
 	}
 
-//	@RequestMapping(value = "{channels}")
+	// @RequestMapping(value = "{channels}")
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		// 检查栏目是否存在；
-		Channel channel = getChannelByCode(true,channels);
-//		Channel channel = channelService.getByCode(channels);
+		Channel channel = getChannelByCode(true, channels);
+		// Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
 			return root + "defaultApp/channelNotExsit.jsp";
 		}
@@ -69,7 +71,7 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("channel", channel);
 
 		// 菜单
-		List<Channel> list = getChannels(true); //利用缓存。
+		List<Channel> list = getChannels(true); // 利用缓存。
 		uiModel.addAttribute("list", list);
 
 		// 检查栏目是否为文档。；
@@ -119,7 +121,7 @@ public class DefaultIndexController extends BaseController {
 		return root + "defaultApp/channels";
 	}
 
-//	@RequestMapping(value = "{channels}/{code}")
+	// @RequestMapping(value = "{channels}/{code}")
 	public String channel(@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -177,11 +179,11 @@ public class DefaultIndexController extends BaseController {
 		return root + "defaultApp/channelDetail.jsp";
 	}
 
-//	@RequestMapping(value = "{channels}/doc/{id}")
-	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
-			@ModelAttribute Page page, Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		List<Channel> list = UserUtils.getChannels();//:^(?!${excludePath}).*$
+	// @RequestMapping(value = "{channels}/doc/{id}")
+	public String doc(@PathVariable("channels") String channels,
+			@PathVariable("id") String id, @ModelAttribute Page page,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		List<Channel> list = UserUtils.getChannels();// :^(?!${excludePath}).*$
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
@@ -196,28 +198,28 @@ public class DefaultIndexController extends BaseController {
 
 		return root + "defaultApp/document.jsp";
 	}
-	
-//	@RequestMapping(value = "{channels}/{channel}/{code}",method=RequestMethod.GET)
-	public String doc(@PathVariable("channels") String channels,@PathVariable("channel") String channel,
-			@PathVariable("code") String code,
-			@ModelAttribute Page page, Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		/*List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
-		Document document = documentService.selectByPrimaryKey(id);
-		if (null == document) {
-			return root + "defaultApp/channelNotExsit";
-		}
-		uiModel.addAttribute("document", document);
-		uiModel.addAttribute("page", page);
-		if (null != document.getDocumentTemplete()
-				&& !"".equals(document.getDocumentTemplete())) {
-			return document.getDocumentTemplete();
-		}*/
+
+	// @RequestMapping(value =
+	// "{channels}/{channel}/{code}",method=RequestMethod.GET)
+	public String doc(@PathVariable("channels") String channels,
+			@PathVariable("channel") String channel,
+			@PathVariable("code") String code, @ModelAttribute Page page,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		/*
+		 * List<Channel> list = UserUtils.getChannels();
+		 * uiModel.addAttribute("list", list); Document document =
+		 * documentService.selectByPrimaryKey(id); if (null == document) {
+		 * return root + "defaultApp/channelNotExsit"; }
+		 * uiModel.addAttribute("document", document);
+		 * uiModel.addAttribute("page", page); if (null !=
+		 * document.getDocumentTemplete() &&
+		 * !"".equals(document.getDocumentTemplete())) { return
+		 * document.getDocumentTemplete(); }
+		 */
 
 		return root + "defaultApp/document.jsp";
 	}
-	
+
 	/**
 	 * 设置page。
 	 * 
@@ -284,14 +286,14 @@ public class DefaultIndexController extends BaseController {
 		}
 		return list;
 	}
-	
-	public static Channel getChannelByCode(boolean isRefresh,String code) {
+
+	public static Channel getChannelByCode(boolean isRefresh, String code) {
 		if (isRefresh) {
 			removeCache(code);
 		}
 		return getChannelByCode(code);
 	}
-	
+
 	public static Channel getChannelByCode(String code) {
 		Channel channel = channelServ.getByCode(code);
 		if (channel == null) {

@@ -1,5 +1,6 @@
 package com.jcin.cms.common;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +163,8 @@ public class UserUtils {
 	
 	public static Map<String, Object> getCacheMap(){
 		if(map == null){
-			map = new HashMap<String, Object>();
+//			map = new HashMap<String, Object>();
+			map = Collections.synchronizedMap(new HashMap<String, Object>());;
 		}
 		return map;
 	}
