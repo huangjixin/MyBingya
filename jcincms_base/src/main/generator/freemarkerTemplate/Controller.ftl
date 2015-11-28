@@ -54,7 +54,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(${domainObjectName} ${objInst}, Model uiModel) {
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return root+"admin/modules/${objInst}/${objInst}_create";
+		return root+"admin/modules/${objInst}/${objInst}_create.jsp";
 	}
 
 //	@RequiresPermissions("${objInst}:create")
@@ -74,7 +74,7 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return root+"admin/modules/${objInst}/${objInst}_update";
+		return root+"admin/modules/${objInst}/${objInst}_update.jsp";
 	}
 
 //	@RequiresPermissions("${objInst}:update")
@@ -95,13 +95,13 @@ public class ${domainObjectName}Controller extends BaseController<${domainObject
 		${domainObjectName} ${objInst} = ${objInst}Service.selectByPrimaryKey(id);
 		
 		uiModel.addAttribute("${objInst}", ${objInst});
-		return root+"admin/modules/${objInst}/${objInst}_show";
+		return root+"admin/modules/${objInst}/${objInst}_show.jsp";
 	}
 
 //	@RequiresPermissions("${objInst}:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/${objInst}/${objInst}_list";
+		return root+"admin/modules/${objInst}/${objInst}_list.jsp";
 	}
 
 //	@RequiresPermissions("${objInst}:delete")
