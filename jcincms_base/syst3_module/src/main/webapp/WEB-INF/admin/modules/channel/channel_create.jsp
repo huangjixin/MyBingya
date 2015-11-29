@@ -113,6 +113,11 @@ th {
 		$('#parentId').combotree('clear');
 		$('#parentIds').val('');
 	}
+	
+	function clearChanelTemplateInput() {
+		$('#chanTemplete').combotree('clear');
+		chanTemp='';
+	}
 
 	function clearForm() {
 		$('#parentId').combotree('clear');
@@ -224,7 +229,8 @@ th {
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;栏目模板：</th>
-							<td nowrap="nowrap" align="left"><input id="chanTemplete" path="chanTemplete" />&nbsp;<b
+							<td nowrap="nowrap" align="left"><input id="chanTemplete" path="chanTemplete" />&nbsp;<input type="button"
+								value="清除" onclick="clearChanelTemplateInput();" /><b
 								id="channelTempleteTip"></b>
 							<form:errors path="channelTemplete" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否隐藏：</th>
