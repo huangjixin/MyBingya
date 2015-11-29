@@ -48,7 +48,7 @@ public class DefaultController extends BaseController {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
-		return "defaultApp/index.jsp";
+		return "index.jsp";
 	}
 
 	@RequestMapping(value = "{channels}")
@@ -88,7 +88,7 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return root + "defaultApp/document.jsp";
+			return "doc.jsp";
 		}
 
 		// 栏目模板不为空返回模板。
@@ -115,7 +115,7 @@ public class DefaultController extends BaseController {
 		 */
 
 		// 返回默认。
-		return root + "defaultApp/channels";
+		return "channel.jsp";
 	}
 
 	@RequestMapping(value = "{channels}/{code}")
