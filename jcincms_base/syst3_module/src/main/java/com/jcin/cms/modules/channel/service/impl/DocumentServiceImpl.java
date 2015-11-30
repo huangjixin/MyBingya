@@ -7,6 +7,7 @@
 package com.jcin.cms.modules.channel.service.impl;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.modules.channel.dao.AssetsMapper;
-import com.jcin.cms.modules.channel.dao.ChannelMapper;
 import com.jcin.cms.modules.channel.dao.DocumentMapper;
 import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Document;
@@ -76,7 +76,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 			super.insert(record);
 		}
 
-//		record.setCreateDate(new Date());
+		record.setCreateDate(new Date());
 		int result = documentMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -162,8 +162,8 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	@Override
 	@Transactional(readOnly=false)
 	public String update(Document record) {
-		// super.update(record);
-//		record.setUpdateDate(new Date());
+		 super.update(record);
+		record.setUpdateDate(new Date());
 		int result = documentMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

@@ -239,6 +239,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		Channel jsonObject = new Channel();
 		jsonObject.setId(channel.getId());
 		jsonObject.setParentId(channel.getParentId());
+		jsonObject.setParentIds(channel.getParentIds());
 		jsonObject.setCode(channel.getCode());
 		jsonObject.setDescrition(channel.getDescrition());
 		jsonObject.setKeyword(channel.getKeyword());
