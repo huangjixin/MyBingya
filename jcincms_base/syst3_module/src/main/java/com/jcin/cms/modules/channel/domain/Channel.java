@@ -8,112 +8,119 @@ public class Channel implements Serializable {
     /**
      *  id标识符 所属表字段为busi_channel.id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String id;
 
     /**
      *  名称 所属表字段为busi_channel.name
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String name;
 
     /**
      *  代码 所属表字段为busi_channel.code
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String code;
 
     /**
      *  关键词 所属表字段为busi_channel.keyword
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String keyword;
 
     /**
      *  链接地址 所属表字段为busi_channel.link_addr
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String linkAddr;
 
     /**
      *  打开模式 所属表字段为busi_channel.open_mode
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String openMode;
 
     /**
      *  描述 所属表字段为busi_channel.descrition
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String descrition;
 
     /**
      *   所属表字段为busi_channel.parent_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String parentId;
 
     /**
      *  栏目模板 所属表字段为busi_channel.channel_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String channelTemplete;
 
     /**
      *  文档模板 所属表字段为busi_channel.document_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String documentTemplete;
 
     /**
      *  是否显示 所属表字段为busi_channel.hidden
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private Boolean hidden;
 
     /**
      *   所属表字段为busi_channel.asdocument
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private Boolean asdocument;
 
     /**
      *   所属表字段为busi_channel.document_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String documentId;
 
     /**
      *   所属表字段为busi_channel.sort
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private Integer sort;
 
     /**
      *   所属表字段为busi_channel.parent_ids
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private String parentIds;
 
     /**
+     *  中文连接导航 所属表字段为busi_channel.link_addr_zh
+     *
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
+     */
+    private String linkAddrZh;
+
+    /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     private static final long serialVersionUID = 1L;
 
@@ -122,7 +129,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getId() {
         return id;
@@ -133,7 +140,7 @@ public class Channel implements Serializable {
      *
      * @param id 赋值 busi_channel.id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -144,7 +151,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.name
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getName() {
         return name;
@@ -155,7 +162,7 @@ public class Channel implements Serializable {
      *
      * @param name 赋值 busi_channel.name
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -166,7 +173,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.code
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getCode() {
         return code;
@@ -177,7 +184,7 @@ public class Channel implements Serializable {
      *
      * @param code 赋值 busi_channel.code
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
@@ -188,7 +195,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.keyword
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getKeyword() {
         return keyword;
@@ -199,7 +206,7 @@ public class Channel implements Serializable {
      *
      * @param keyword 赋值 busi_channel.keyword
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setKeyword(String keyword) {
         this.keyword = keyword == null ? null : keyword.trim();
@@ -210,7 +217,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.link_addr
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getLinkAddr() {
         return linkAddr;
@@ -221,7 +228,7 @@ public class Channel implements Serializable {
      *
      * @param linkAddr 赋值 busi_channel.link_addr
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setLinkAddr(String linkAddr) {
         this.linkAddr = linkAddr == null ? null : linkAddr.trim();
@@ -232,7 +239,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.open_mode
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getOpenMode() {
         return openMode;
@@ -243,7 +250,7 @@ public class Channel implements Serializable {
      *
      * @param openMode 赋值 busi_channel.open_mode
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setOpenMode(String openMode) {
         this.openMode = openMode == null ? null : openMode.trim();
@@ -254,7 +261,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.descrition
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getDescrition() {
         return descrition;
@@ -265,7 +272,7 @@ public class Channel implements Serializable {
      *
      * @param descrition 赋值 busi_channel.descrition
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setDescrition(String descrition) {
         this.descrition = descrition == null ? null : descrition.trim();
@@ -276,7 +283,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.parent_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getParentId() {
         return parentId;
@@ -287,7 +294,7 @@ public class Channel implements Serializable {
      *
      * @param parentId 赋值 busi_channel.parent_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setParentId(String parentId) {
         this.parentId = parentId == null ? null : parentId.trim();
@@ -298,7 +305,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.channel_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getChannelTemplete() {
         return channelTemplete;
@@ -309,7 +316,7 @@ public class Channel implements Serializable {
      *
      * @param channelTemplete 赋值 busi_channel.channel_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setChannelTemplete(String channelTemplete) {
         this.channelTemplete = channelTemplete == null ? null : channelTemplete.trim();
@@ -320,7 +327,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.document_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getDocumentTemplete() {
         return documentTemplete;
@@ -331,7 +338,7 @@ public class Channel implements Serializable {
      *
      * @param documentTemplete 赋值 busi_channel.document_templete
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setDocumentTemplete(String documentTemplete) {
         this.documentTemplete = documentTemplete == null ? null : documentTemplete.trim();
@@ -342,7 +349,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.hidden
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public Boolean getHidden() {
         return hidden;
@@ -353,7 +360,7 @@ public class Channel implements Serializable {
      *
      * @param hidden 赋值 busi_channel.hidden
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setHidden(Boolean hidden) {
         this.hidden = hidden;
@@ -364,7 +371,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.asdocument
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public Boolean getAsdocument() {
         return asdocument;
@@ -375,7 +382,7 @@ public class Channel implements Serializable {
      *
      * @param asdocument 赋值 busi_channel.asdocument
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setAsdocument(Boolean asdocument) {
         this.asdocument = asdocument;
@@ -386,7 +393,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.document_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getDocumentId() {
         return documentId;
@@ -397,7 +404,7 @@ public class Channel implements Serializable {
      *
      * @param documentId 赋值 busi_channel.document_id
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setDocumentId(String documentId) {
         this.documentId = documentId == null ? null : documentId.trim();
@@ -408,7 +415,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.sort
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public Integer getSort() {
         return sort;
@@ -419,7 +426,7 @@ public class Channel implements Serializable {
      *
      * @param sort 赋值 busi_channel.sort
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setSort(Integer sort) {
         this.sort = sort;
@@ -430,7 +437,7 @@ public class Channel implements Serializable {
      *
      * @return 返回 busi_channel.parent_ids
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public String getParentIds() {
         return parentIds;
@@ -441,10 +448,32 @@ public class Channel implements Serializable {
      *
      * @param parentIds 赋值 busi_channel.parent_ids
      *
-     * @mbggenerated 2015年11月17日 17时51分44秒 星期二
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
      */
     public void setParentIds(String parentIds) {
         this.parentIds = parentIds == null ? null : parentIds.trim();
+    }
+
+    /**
+     * 所属表字段为 busi_channel.link_addr_zh
+     *
+     * @return 返回 busi_channel.link_addr_zh
+     *
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
+     */
+    public String getLinkAddrZh() {
+        return linkAddrZh;
+    }
+
+    /**
+     * setter方法 busi_channel.link_addr_zh
+     *
+     * @param linkAddrZh 赋值 busi_channel.link_addr_zh
+     *
+     * @mbggenerated 2015年11月30日 17时22分54秒 星期一
+     */
+    public void setLinkAddrZh(String linkAddrZh) {
+        this.linkAddrZh = linkAddrZh == null ? null : linkAddrZh.trim();
     }
     
 private List<String> childrenids = new ArrayList<String>() ;
