@@ -99,6 +99,20 @@ th {
                 }  
                 
                 chanTemp = pathStr; 
+                
+                var pathZh = new Array();
+                do {  
+                	pathZh.unshift(parent.name);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);
+                var pathZhStr = '';  
+                for (var i = 0; i < pathZh.length; i++) {  
+                	pathZhStr += pathZh[i];  
+                    if (i < pathZh.length - 1) {  
+                    	pathZhStr += '/';  
+                    }  
+                }
+                $('#linkAddrZh').val(pathZhStr);
             }  
 		});
 	}
@@ -198,6 +212,7 @@ th {
 		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}" type="hidden" />
+		<input id="linkAddrZh" name="linkAddrZh" value="${channel.linkAddrZh}" type="hidden" />
 		<div class="descrition">
 			<b>栏目信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
