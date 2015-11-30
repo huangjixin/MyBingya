@@ -113,6 +113,13 @@ th {
 
 	//jquery 提交表单。
 	function submitForm() {
+		//文章截取前面两百个字。
+		var contxt = ue.getContentTxt();
+		if(contxt.length>200){
+			contxt = contxt.substring(0,200);
+		}
+		$('#contentShort').val(contxt);
+		
 		var cont = ue.getContent();
 		$('#content').val(cont);
 		/* if(docTemp.indexOf(".") > 0){
@@ -180,6 +187,7 @@ th {
 	<form:form id="validForm" action="${ctxAdmin}/document/create"
 		method="post" commandName="document" enctype="multipart/form-data">
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
+		<input id="contentShort" name="contentShort" value="${document.contentShort}" type="hidden" />
 		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
 		<div class="desc">
 			<b>文档信息添加</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>

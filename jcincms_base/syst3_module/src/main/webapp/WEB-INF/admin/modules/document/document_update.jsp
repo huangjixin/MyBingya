@@ -113,6 +113,14 @@ th {
 
 	//jquery 提交表单。
 	function submitForm() {
+		var contxt = ue.getContentTxt();
+		if(contxt!=$('#contentShort').val()){
+			if(contxt.length>200){
+				contxt = contxt.substring(0,200);
+			}
+			$('#contentShort').val(contxt);
+		}
+		
 		var cont = ue.getContent();
 		$('#content').val(cont);
 		/* if(docTemp.indexOf(".") > 0){
@@ -180,6 +188,7 @@ th {
 	<form:form id="validForm"
 		action="${ctxAdmin}/document/update/${document.id}" method="post" commandName="document">
 		<input name="id" value="${document.id}" type="hidden" />
+		<input id="contentShort" name="contentShort" value="${document.contentShort}" type="hidden" />
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
 		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
 		<div class="desc">
