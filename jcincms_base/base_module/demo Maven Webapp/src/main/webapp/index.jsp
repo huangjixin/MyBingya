@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/slider.js"></script>
 </head>
-<body> 
+<body>
 	<div id="container">
 		<div id="header">
 			<div id="logo">

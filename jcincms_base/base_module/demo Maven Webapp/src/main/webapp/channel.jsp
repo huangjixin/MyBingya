@@ -37,12 +37,14 @@
 						<div class="article">
 							<div class="info">
 								<span style="font-weight: bold;font-size: 14px;"><a
-									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;<span
-									style="font-size: 12px;"><fmt:formatDate
-										value="${doc.createDate}" pattern="yyyy.MM.dd" /></span>
+									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;
 								<hr>
-								<p></p>
-								<div style="font-size: 12px;">${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;${doc.createDate}</div>
+								<p>文章摘要：${doc.contentShort}</p>
+								<div style="font-size: 12px;">
+									${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
+										style="font-size: 12px;"><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
