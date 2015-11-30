@@ -71,7 +71,8 @@ public class DefaultController extends BaseController {
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
-
+		List<Channel> navChan = getParentChannels(list,channel);
+		uiModel.addAttribute("navChan", navChan);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -139,7 +140,8 @@ public class DefaultController extends BaseController {
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
-
+		List<Channel> navChan = getParentChannels(list,channel);
+		uiModel.addAttribute("navChan", navChan);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -204,6 +206,8 @@ public class DefaultController extends BaseController {
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
 		
+		List<Channel> navChan = getParentChannels(list,channel);
+		uiModel.addAttribute("navChan", navChan);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null

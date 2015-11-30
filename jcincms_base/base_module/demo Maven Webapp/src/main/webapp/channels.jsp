@@ -23,6 +23,18 @@
 		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
+				<div class="position">
+					<div
+						style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+						<span>当前位置: <a href="${ctx}/">首页</a>
+						<c:if test="${navChan !=null}">
+							<c:forEach var="chan" items="${navChan}">
+										><a href="${ctx}/${chan.linkAddr}">${chan.name}</a>
+								</c:forEach>
+						</c:if></span>
+					</div>
+				</div>
+				<div class="spacer"></div>
 				<div id="picnav">
 					<div class="focus">
 						<div id="sliderA" class="sliderwrapper">
