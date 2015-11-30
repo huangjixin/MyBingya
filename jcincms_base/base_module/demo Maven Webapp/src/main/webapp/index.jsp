@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/slider.js"></script>
-</head>
+</head> 
 <body>
 	<div id="container">
 		<div id="header">
@@ -59,7 +59,7 @@
 										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
 									</c:if>
 								</c:forEach>
-							</c:if>
+							</c:if> 
 							<!-- <li>elasticsearch ik分词插件es-ik发布</li>
 							<li>solr4的solr-ik插件</li>
 							<li>当前几个主要的Lucene中文分词器的比较</li>
