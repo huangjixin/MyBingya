@@ -37,26 +37,12 @@
 						<div class="article">
 							<div class="info">
 								<span style="font-weight: bold;font-size: 14px;"><a
-									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>
+									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;<span
+									style="font-size: 12px;"><fmt:formatDate
+										value="${doc.createDate}" pattern="yyyy.MM.dd" /></span>
 								<hr>
-								<p>
-									<%-- <c:set var="contentStr" value="做一个截取字符串长度的测试"></c:set>
-									<c:choose>  
-    									<c:when  test="${fn:length(contentStr) > 100}">  
-        									<c:out  value="${fn:substring(contentStr, 0, 100)}......"  />  
-    									</c:when>  
-   									<c:otherwise>  
-      									<c:out  value="${contentStr}"  />  
-   										</c:otherwise>  
-									</c:choose> --%>
-									<%-- ${doc.content} --%>
-									现象： 日志中输出DEBUG级别的日志：Could not
-									retrieve login configuration: java.lang.SecurityException:
-									无法定位登录配置 分析：
-									此为未使用sasl连接zookeeper时，zookeeper客户端提示的日志。参见：https://cwiki.apache.org/confluence/display/ZOOKEEPER/Zookeeper+and+SASL
-									解决： 忽略此日志。 提高全部logg ...
-								</p>
-								<div>${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;${doc.createDate}</div>
+								<p></p>
+								<div style="font-size: 12px;">${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;${doc.createDate}</div>
 							</div>
 						</div>
 					</c:forEach>
