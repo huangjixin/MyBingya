@@ -1,492 +1,524 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jcin.cms.modules.channel.dao.DocumentMapper">
-	<resultMap id="BaseResultMap" type="com.jcin.cms.modules.channel.domain.Document">
-		<id column="id" property="id" jdbcType="VARCHAR" />
-		<result column="channel_id" property="channelId" jdbcType="VARCHAR" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="color" property="color" jdbcType="VARCHAR" />
-		<result column="keyword" property="keyword" jdbcType="VARCHAR" />
-		<result column="descrition" property="descrition" jdbcType="VARCHAR" />
-		<result column="priority" property="priority" jdbcType="INTEGER" />
-		<result column="source" property="source" jdbcType="VARCHAR" />
-		<result column="source_addr" property="sourceAddr" jdbcType="VARCHAR" />
-		<result column="author" property="author" jdbcType="VARCHAR" />
-		<result column="title_image" property="titleImage" jdbcType="VARCHAR" />
-		<result column="file_name" property="fileName" jdbcType="VARCHAR" />
-		<result column="file_addr" property="fileAddr" jdbcType="VARCHAR" />
-		<result column="size" property="size" jdbcType="BIGINT" />
-		<result column="content" property="content" jdbcType="VARCHAR" />
-		<result column="document_templete" property="documentTemplete"
-			jdbcType="VARCHAR" />
-		<result column="hidden" property="hidden" jdbcType="BIT" />
-		<result column="assets_ids" property="assetsIds" jdbcType="VARCHAR" />
-		<result column="recommend" property="recommend" jdbcType="BIT" />
-	</resultMap>
-	<sql id="Example_Where_Clause">
-		<where>
-			<foreach collection="oredCriteria" item="criteria" separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" suffix=")" prefixOverrides="and">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach collection="criterion.value" item="listItem"
-										open="(" close=")" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Update_By_Example_Where_Clause">
-		<where>
-			<foreach collection="example.oredCriteria" item="criteria"
-				separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" suffix=")" prefixOverrides="and">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach collection="criterion.value" item="listItem"
-										open="(" close=")" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Base_Column_List">
-		id, channel_id, title, color, keyword, descrition, priority, source,
-		source_addr,
-		author, title_image, file_name, file_addr, size, content, document_templete,
-		hidden,
-		assets_ids, recommend
-	</sql>
-	<select id="selectByExample" resultMap="BaseResultMap"
-		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
-		<include refid="OracleDialectPrefix" />
-		select
-		<if test="distinct">
-			distinct
-		</if>
-		<include refid="Base_Column_List" />
-		from busi_document
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-		<if test="orderByClause != null">
-			order by ${orderByClause}
-		</if>
-		<include refid="OracleDialectSuffix" />
-	</select>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from busi_document
-		where id = #{id,jdbcType=VARCHAR}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from busi_document
-		where id = #{id,jdbcType=VARCHAR}
-	</delete>
-	<delete id="deleteByExample"
-		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
-		delete from busi_document
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</delete>
-	<insert id="insert" parameterType="com.jcin.cms.modules.channel.domain.Document">
-		insert into busi_document (id, channel_id, title,
-		color, keyword, descrition,
-		priority, source, source_addr,
-		author, title_image, file_name,
-		file_addr, size, content,
-		document_templete, hidden, assets_ids,
-		recommend)
-		values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR},
-		#{title,jdbcType=VARCHAR},
-		#{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR},
-		#{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR},
-		#{sourceAddr,jdbcType=VARCHAR},
-		#{author,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR},
-		#{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT},
-		#{content,jdbcType=VARCHAR},
-		#{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{assetsIds,jdbcType=VARCHAR},
-		#{recommend,jdbcType=BIT})
-	</insert>
-	<insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Document">
-		insert into busi_document
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="channelId != null">
-				channel_id,
-			</if>
-			<if test="title != null">
-				title,
-			</if>
-			<if test="color != null">
-				color,
-			</if>
-			<if test="keyword != null">
-				keyword,
-			</if>
-			<if test="descrition != null">
-				descrition,
-			</if>
-			<if test="priority != null">
-				priority,
-			</if>
-			<if test="source != null">
-				source,
-			</if>
-			<if test="sourceAddr != null">
-				source_addr,
-			</if>
-			<if test="author != null">
-				author,
-			</if>
-			<if test="titleImage != null">
-				title_image,
-			</if>
-			<if test="fileName != null">
-				file_name,
-			</if>
-			<if test="fileAddr != null">
-				file_addr,
-			</if>
-			<if test="size != null">
-				size,
-			</if>
-			<if test="content != null">
-				content,
-			</if>
-			<if test="documentTemplete != null">
-				document_templete,
-			</if>
-			<if test="hidden != null">
-				hidden,
-			</if>
-			<if test="assetsIds != null">
-				assets_ids,
-			</if>
-			<if test="recommend != null">
-				recommend,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=VARCHAR},
-			</if>
-			<if test="channelId != null">
-				#{channelId,jdbcType=VARCHAR},
-			</if>
-			<if test="title != null">
-				#{title,jdbcType=VARCHAR},
-			</if>
-			<if test="color != null">
-				#{color,jdbcType=VARCHAR},
-			</if>
-			<if test="keyword != null">
-				#{keyword,jdbcType=VARCHAR},
-			</if>
-			<if test="descrition != null">
-				#{descrition,jdbcType=VARCHAR},
-			</if>
-			<if test="priority != null">
-				#{priority,jdbcType=INTEGER},
-			</if>
-			<if test="source != null">
-				#{source,jdbcType=VARCHAR},
-			</if>
-			<if test="sourceAddr != null">
-				#{sourceAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="author != null">
-				#{author,jdbcType=VARCHAR},
-			</if>
-			<if test="titleImage != null">
-				#{titleImage,jdbcType=VARCHAR},
-			</if>
-			<if test="fileName != null">
-				#{fileName,jdbcType=VARCHAR},
-			</if>
-			<if test="fileAddr != null">
-				#{fileAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="size != null">
-				#{size,jdbcType=BIGINT},
-			</if>
-			<if test="content != null">
-				#{content,jdbcType=VARCHAR},
-			</if>
-			<if test="documentTemplete != null">
-				#{documentTemplete,jdbcType=VARCHAR},
-			</if>
-			<if test="hidden != null">
-				#{hidden,jdbcType=BIT},
-			</if>
-			<if test="assetsIds != null">
-				#{assetsIds,jdbcType=VARCHAR},
-			</if>
-			<if test="recommend != null">
-				#{recommend,jdbcType=BIT},
-			</if>
-		</trim>
-	</insert>
-	<select id="countByExample"
-		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria"
-		resultType="java.lang.Integer">
-		select count(*) from busi_document
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</select>
-	<update id="updateByExampleSelective" parameterType="map">
-		update busi_document
-		<set>
-			<if test="record.id != null">
-				id = #{record.id,jdbcType=VARCHAR},
-			</if>
-			<if test="record.channelId != null">
-				channel_id = #{record.channelId,jdbcType=VARCHAR},
-			</if>
-			<if test="record.title != null">
-				title = #{record.title,jdbcType=VARCHAR},
-			</if>
-			<if test="record.color != null">
-				color = #{record.color,jdbcType=VARCHAR},
-			</if>
-			<if test="record.keyword != null">
-				keyword = #{record.keyword,jdbcType=VARCHAR},
-			</if>
-			<if test="record.descrition != null">
-				descrition = #{record.descrition,jdbcType=VARCHAR},
-			</if>
-			<if test="record.priority != null">
-				priority = #{record.priority,jdbcType=INTEGER},
-			</if>
-			<if test="record.source != null">
-				source = #{record.source,jdbcType=VARCHAR},
-			</if>
-			<if test="record.sourceAddr != null">
-				source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="record.author != null">
-				author = #{record.author,jdbcType=VARCHAR},
-			</if>
-			<if test="record.titleImage != null">
-				title_image = #{record.titleImage,jdbcType=VARCHAR},
-			</if>
-			<if test="record.fileName != null">
-				file_name = #{record.fileName,jdbcType=VARCHAR},
-			</if>
-			<if test="record.fileAddr != null">
-				file_addr = #{record.fileAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="record.size != null">
-				size = #{record.size,jdbcType=BIGINT},
-			</if>
-			<if test="record.content != null">
-				content = #{record.content,jdbcType=VARCHAR},
-			</if>
-			<if test="record.documentTemplete != null">
-				document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
-			</if>
-			<if test="record.hidden != null">
-				hidden = #{record.hidden,jdbcType=BIT},
-			</if>
-			<if test="record.assetsIds != null">
-				assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
-			</if>
-			<if test="record.recommend != null">
-				recommend = #{record.recommend,jdbcType=BIT},
-			</if>
-		</set>
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByExample" parameterType="map">
-		update busi_document
-		set id = #{record.id,jdbcType=VARCHAR},
-		channel_id = #{record.channelId,jdbcType=VARCHAR},
-		title = #{record.title,jdbcType=VARCHAR},
-		color = #{record.color,jdbcType=VARCHAR},
-		keyword = #{record.keyword,jdbcType=VARCHAR},
-		descrition = #{record.descrition,jdbcType=VARCHAR},
-		priority = #{record.priority,jdbcType=INTEGER},
-		source = #{record.source,jdbcType=VARCHAR},
-		source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
-		author = #{record.author,jdbcType=VARCHAR},
-		title_image = #{record.titleImage,jdbcType=VARCHAR},
-		file_name = #{record.fileName,jdbcType=VARCHAR},
-		file_addr = #{record.fileAddr,jdbcType=VARCHAR},
-		size = #{record.size,jdbcType=BIGINT},
-		content = #{record.content,jdbcType=VARCHAR},
-		document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
-		hidden = #{record.hidden,jdbcType=BIT},
-		assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
-		recommend = #{record.recommend,jdbcType=BIT}
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.channel.domain.Document">
-		update busi_document
-		<set>
-			<if test="channelId != null">
-				channel_id = #{channelId,jdbcType=VARCHAR},
-			</if>
-			<if test="title != null">
-				title = #{title,jdbcType=VARCHAR},
-			</if>
-			<if test="color != null">
-				color = #{color,jdbcType=VARCHAR},
-			</if>
-			<if test="keyword != null">
-				keyword = #{keyword,jdbcType=VARCHAR},
-			</if>
-			<if test="descrition != null">
-				descrition = #{descrition,jdbcType=VARCHAR},
-			</if>
-			<if test="priority != null">
-				priority = #{priority,jdbcType=INTEGER},
-			</if>
-			<if test="source != null">
-				source = #{source,jdbcType=VARCHAR},
-			</if>
-			<if test="sourceAddr != null">
-				source_addr = #{sourceAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="author != null">
-				author = #{author,jdbcType=VARCHAR},
-			</if>
-			<if test="titleImage != null">
-				title_image = #{titleImage,jdbcType=VARCHAR},
-			</if>
-			<if test="fileName != null">
-				file_name = #{fileName,jdbcType=VARCHAR},
-			</if>
-			<if test="fileAddr != null">
-				file_addr = #{fileAddr,jdbcType=VARCHAR},
-			</if>
-			<if test="size != null">
-				size = #{size,jdbcType=BIGINT},
-			</if>
-			<if test="content != null">
-				content = #{content,jdbcType=VARCHAR},
-			</if>
-			<if test="documentTemplete != null">
-				document_templete = #{documentTemplete,jdbcType=VARCHAR},
-			</if>
-			<if test="hidden != null">
-				hidden = #{hidden,jdbcType=BIT},
-			</if>
-			<if test="assetsIds != null">
-				assets_ids = #{assetsIds,jdbcType=VARCHAR},
-			</if>
-			<if test="recommend != null">
-				recommend = #{recommend,jdbcType=BIT},
-			</if>
-		</set>
-		where id = #{id,jdbcType=VARCHAR}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.channel.domain.Document">
-		update busi_document
-		set channel_id = #{channelId,jdbcType=VARCHAR},
-		title = #{title,jdbcType=VARCHAR},
-		color = #{color,jdbcType=VARCHAR},
-		keyword = #{keyword,jdbcType=VARCHAR},
-		descrition = #{descrition,jdbcType=VARCHAR},
-		priority = #{priority,jdbcType=INTEGER},
-		source = #{source,jdbcType=VARCHAR},
-		source_addr = #{sourceAddr,jdbcType=VARCHAR},
-		author = #{author,jdbcType=VARCHAR},
-		title_image = #{titleImage,jdbcType=VARCHAR},
-		file_name = #{fileName,jdbcType=VARCHAR},
-		file_addr = #{fileAddr,jdbcType=VARCHAR},
-		size = #{size,jdbcType=BIGINT},
-		content = #{content,jdbcType=VARCHAR},
-		document_templete = #{documentTemplete,jdbcType=VARCHAR},
-		hidden = #{hidden,jdbcType=BIT},
-		assets_ids = #{assetsIds,jdbcType=VARCHAR},
-		recommend = #{recommend,jdbcType=BIT}
-		where id = #{id,jdbcType=VARCHAR}
-	</update>
-	<insert id="insertBatch" parameterType="java.util.List">
-		insert into busi_document (id, channel_id, title, color, keyword,
-		descrition, priority, source, source_addr, author, title_image,
-		file_name, file_addr, size, content, document_templete, hidden,
-		assets_ids, recommend) values
-		<foreach collection="list" item="item" index="index"
-			separator=",">
-			(#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR},
-			#{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR},
-			#{item.descrition,jdbcType=VARCHAR},
-			#{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR},
-			#{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR},
-			#{item.titleImage,jdbcType=VARCHAR},
-			#{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR},
-			#{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR},
-			#{item.documentTemplete,jdbcType=VARCHAR},
-			#{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR},
-			#{item.recommend,jdbcType=BIT})
-		</foreach>
-	</insert>
-	<sql id="OracleDialectPrefix">
-		<if test="page != null">
-			<if test="dialect == 'oracle'">
-				select * from ( select row_.*, rownum rownum_ from (
-			</if>
-		</if>
-	</sql>
-	<sql id="OracleDialectSuffix">
-		<if test="page != null">
-			<if test="dialect == 'oracle'">
+<mapper namespace="com.jcin.cms.modules.channel.dao.DocumentMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.modules.channel.domain.Document" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="source_addr" property="sourceAddr" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="title_image" property="titleImage" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_addr" property="fileAddr" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="document_templete" property="documentTemplete" jdbcType="VARCHAR" />
+    <result column="hidden" property="hidden" jdbcType="BIT" />
+    <result column="assets_ids" property="assetsIds" jdbcType="VARCHAR" />
+    <result column="recommend" property="recommend" jdbcType="BIT" />
+    <result column="click_count" property="clickCount" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="content_short" property="contentShort" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel_id, title, color, keyword, descrition, priority, source, source_addr, 
+    author, title_image, file_name, file_addr, size, content, document_templete, hidden, 
+    assets_ids, recommend, click_count, create_date, update_date, content_short
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from busi_document
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from busi_document
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from busi_document
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" >
+    delete from busi_document
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    insert into busi_document (id, channel_id, title, 
+      color, keyword, descrition, 
+      priority, source, source_addr, 
+      author, title_image, file_name, 
+      file_addr, size, content, 
+      document_templete, hidden, assets_ids, 
+      recommend, click_count, create_date, 
+      update_date, content_short)
+    values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{sourceAddr,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+      #{fileAddr,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{documentTemplete,jdbcType=VARCHAR}, #{hidden,jdbcType=BIT}, #{assetsIds,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=BIT}, #{clickCount,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{contentShort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    insert into busi_document
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="descrition != null" >
+        descrition,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="sourceAddr != null" >
+        source_addr,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="titleImage != null" >
+        title_image,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="fileAddr != null" >
+        file_addr,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="documentTemplete != null" >
+        document_templete,
+      </if>
+      <if test="hidden != null" >
+        hidden,
+      </if>
+      <if test="assetsIds != null" >
+        assets_ids,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="clickCount != null" >
+        click_count,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="contentShort != null" >
+        content_short,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAddr != null" >
+        #{sourceAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAddr != null" >
+        #{fileAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="documentTemplete != null" >
+        #{documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null" >
+        #{hidden,jdbcType=BIT},
+      </if>
+      <if test="assetsIds != null" >
+        #{assetsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=BIT},
+      </if>
+      <if test="clickCount != null" >
+        #{clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contentShort != null" >
+        #{contentShort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria" resultType="java.lang.Integer" >
+    select count(*) from busi_document
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update busi_document
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelId != null" >
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrition != null" >
+        descrition = #{record.descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceAddr != null" >
+        source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleImage != null" >
+        title_image = #{record.titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileAddr != null" >
+        file_addr = #{record.fileAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=BIGINT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.documentTemplete != null" >
+        document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hidden != null" >
+        hidden = #{record.hidden,jdbcType=BIT},
+      </if>
+      <if test="record.assetsIds != null" >
+        assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommend != null" >
+        recommend = #{record.recommend,jdbcType=BIT},
+      </if>
+      <if test="record.clickCount != null" >
+        click_count = #{record.clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contentShort != null" >
+        content_short = #{record.contentShort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update busi_document
+    set id = #{record.id,jdbcType=VARCHAR},
+      channel_id = #{record.channelId,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=INTEGER},
+      source = #{record.source,jdbcType=VARCHAR},
+      source_addr = #{record.sourceAddr,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      title_image = #{record.titleImage,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_addr = #{record.fileAddr,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=VARCHAR},
+      document_templete = #{record.documentTemplete,jdbcType=VARCHAR},
+      hidden = #{record.hidden,jdbcType=BIT},
+      assets_ids = #{record.assetsIds,jdbcType=VARCHAR},
+      recommend = #{record.recommend,jdbcType=BIT},
+      click_count = #{record.clickCount,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      content_short = #{record.contentShort,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    update busi_document
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAddr != null" >
+        source_addr = #{sourceAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        title_image = #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAddr != null" >
+        file_addr = #{fileAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="documentTemplete != null" >
+        document_templete = #{documentTemplete,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null" >
+        hidden = #{hidden,jdbcType=BIT},
+      </if>
+      <if test="assetsIds != null" >
+        assets_ids = #{assetsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=BIT},
+      </if>
+      <if test="clickCount != null" >
+        click_count = #{clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contentShort != null" >
+        content_short = #{contentShort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    update busi_document
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      source_addr = #{sourceAddr,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      title_image = #{titleImage,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_addr = #{fileAddr,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      document_templete = #{documentTemplete,jdbcType=VARCHAR},
+      hidden = #{hidden,jdbcType=BIT},
+      assets_ids = #{assetsIds,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=BIT},
+      click_count = #{clickCount,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      content_short = #{contentShort,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, content, document_templete, hidden, assets_ids, recommend, click_count, create_date, update_date, content_short) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR}, #{item.recommend,jdbcType=BIT}, #{item.clickCount,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.contentShort,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        select * from ( select row_.*, rownum rownum_ from ( 
+      </if>
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
         <![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>
-			</if>
-			<if test="dialect == 'mysql'">
-				limit #{page.start} , #{page.pageSize}
-			</if>
-		</if>
-	</sql>
-
-	<select id="selectByChannelCodeExample" resultMap="BaseResultMap"
+      </if>
+      <if test="dialect == 'mysql'" >
+        limit #{page.start} , #{page.pageSize}
+      </if>
+    </if>
+  </sql>
+  
+  <select id="selectByChannelCodeExample" resultMap="BaseResultMap"
 		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
 		<include refid="OracleDialectPrefix" />
 		select
@@ -496,9 +528,7 @@
 			left join
 		busi_channel channel ON doc.channel_id = channel.id
 			where
-				channel.code in (select
-					code from busi_channel where id like ('%'+(select id from busi_channel where code=#{code})+'%')
-						or parent_ids like ('%'+(select id from busi_channel where code=#{code})+'%'))
+				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
 		order by doc.id desc
 		<include refid="OracleDialectSuffix" />
 	</select>

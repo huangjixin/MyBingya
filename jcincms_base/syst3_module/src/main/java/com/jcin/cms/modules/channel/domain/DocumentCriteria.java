@@ -2,49 +2,59 @@ package com.jcin.cms.modules.channel.domain;
 
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DocumentCriteria {
 	private String code;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public DocumentCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +63,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +72,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +81,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +90,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +99,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +108,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +117,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +128,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +141,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +151,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +162,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +171,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public Page getPage() {
         return page;
@@ -170,7 +180,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,28 +189,20 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public String getDialect() {
         return dialect;
     }
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	/**
+    /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
-        
+
         protected GeneratedCriteria() {
             super();
             criteria = new ArrayList<Criterion>();
@@ -1529,6 +1531,256 @@ public class DocumentCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andClickCountIsNull() {
+            addCriterion("click_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountIsNotNull() {
+            addCriterion("click_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountEqualTo(Integer value) {
+            addCriterion("click_count =", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountNotEqualTo(Integer value) {
+            addCriterion("click_count <>", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountGreaterThan(Integer value) {
+            addCriterion("click_count >", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("click_count >=", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountLessThan(Integer value) {
+            addCriterion("click_count <", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountLessThanOrEqualTo(Integer value) {
+            addCriterion("click_count <=", value, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountIn(List<Integer> values) {
+            addCriterion("click_count in", values, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountNotIn(List<Integer> values) {
+            addCriterion("click_count not in", values, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountBetween(Integer value1, Integer value2) {
+            addCriterion("click_count between", value1, value2, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andClickCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("click_count not between", value1, value2, "clickCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateIsNull() {
+            addCriterion("create_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateIsNotNull() {
+            addCriterion("create_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateEqualTo(Date value) {
+            addCriterion("create_date =", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotEqualTo(Date value) {
+            addCriterion("create_date <>", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateGreaterThan(Date value) {
+            addCriterion("create_date >", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_date >=", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateLessThan(Date value) {
+            addCriterion("create_date <", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateLessThanOrEqualTo(Date value) {
+            addCriterion("create_date <=", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateIn(List<Date> values) {
+            addCriterion("create_date in", values, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotIn(List<Date> values) {
+            addCriterion("create_date not in", values, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateBetween(Date value1, Date value2) {
+            addCriterion("create_date between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotBetween(Date value1, Date value2) {
+            addCriterion("create_date not between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIsNull() {
+            addCriterion("update_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIsNotNull() {
+            addCriterion("update_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateEqualTo(Date value) {
+            addCriterion("update_date =", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotEqualTo(Date value) {
+            addCriterion("update_date <>", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThan(Date value) {
+            addCriterion("update_date >", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_date >=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThan(Date value) {
+            addCriterion("update_date <", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThanOrEqualTo(Date value) {
+            addCriterion("update_date <=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIn(List<Date> values) {
+            addCriterion("update_date in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotIn(List<Date> values) {
+            addCriterion("update_date not in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateBetween(Date value1, Date value2) {
+            addCriterion("update_date between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotBetween(Date value1, Date value2) {
+            addCriterion("update_date not between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortIsNull() {
+            addCriterion("content_short is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortIsNotNull() {
+            addCriterion("content_short is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortEqualTo(String value) {
+            addCriterion("content_short =", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortNotEqualTo(String value) {
+            addCriterion("content_short <>", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortGreaterThan(String value) {
+            addCriterion("content_short >", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortGreaterThanOrEqualTo(String value) {
+            addCriterion("content_short >=", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortLessThan(String value) {
+            addCriterion("content_short <", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortLessThanOrEqualTo(String value) {
+            addCriterion("content_short <=", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortLike(String value) {
+            addCriterion("content_short like", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortNotLike(String value) {
+            addCriterion("content_short not like", value, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortIn(List<String> values) {
+            addCriterion("content_short in", values, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortNotIn(List<String> values) {
+            addCriterion("content_short not in", values, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortBetween(String value1, String value2) {
+            addCriterion("content_short between", value1, value2, "contentShort");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentShortNotBetween(String value1, String value2) {
+            addCriterion("content_short not between", value1, value2, "contentShort");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1603,12 +1855,17 @@ public class DocumentCriteria {
             addCriterion("upper(assets_ids) like", value.toUpperCase(), "assetsIds");
             return (Criteria) this;
         }
+
+        public Criteria andContentShortLikeInsensitive(String value) {
+            addCriterion("upper(content_short) like", value.toUpperCase(), "contentShort");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated do_not_delete_during_merge 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated do_not_delete_during_merge 2015年11月30日 15时00分52秒 星期一
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1620,7 +1877,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
      */
     public static class Criterion {
         private String condition;
