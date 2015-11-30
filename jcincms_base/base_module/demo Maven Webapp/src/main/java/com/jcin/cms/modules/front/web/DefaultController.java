@@ -60,7 +60,7 @@ public class DefaultController extends BaseController {
 		// 检查栏目是否存在；
 		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
-			return root + "defaultApp/channelNotExsit.jsp";
+			return "channelNotExsit.jsp";
 		}
 
 		// channel.setLinkAddr(requestRri);
@@ -76,7 +76,7 @@ public class DefaultController extends BaseController {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
 				uiModel.addAttribute("msg", "栏目所对应的");
-				return root + "defaultApp/channelNotExsit.jsp";
+				return "channelNotExsit.jsp";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
@@ -115,7 +115,7 @@ public class DefaultController extends BaseController {
 		 */
 
 		// 返回默认。
-		return "channel.jsp";
+		return "channels.jsp";
 	}
 
 	@RequestMapping(value = "{channels}/{code}")
@@ -123,13 +123,13 @@ public class DefaultController extends BaseController {
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-		String requestRri = httpServletRequest.getRequestURI();
+//		String requestRri = httpServletRequest.getRequestURI();
 		setPage(page, httpServletRequest);
 		if (null == channel || null == channel.getId()) {
 			channel = channelService.getByCode(code);
 		}
 		if (null == channel || null == channel.getId()) {
-			return root + "defaultApp/channelNotExsit.jsp";
+			return "channelNotExsit.jsp";
 		}
 
 		uiModel.addAttribute("name", channel.getName());
@@ -143,7 +143,7 @@ public class DefaultController extends BaseController {
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
-				return root + "defaultApp/channelNotExsit.jsp";
+				return "channelNotExsit.jsp";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
@@ -155,12 +155,11 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return root + "defaultApp/document.jsp";
+			return "doc.jsp";
 		}
 
-		channel.setLinkAddr(requestRri);
+//		channel.setLinkAddr(requestRri);
 
-		documentService.getDocByChannelCode(code, page);
 		/*DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		criteria.andChannelIdEqualTo(channel.getId());
@@ -169,12 +168,18 @@ public class DefaultController extends BaseController {
 
 		//page = documentService.select(documentCriteria);
 
-		uiModel.addAttribute("page", page);
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
 			return channel.getChannelTemplete();
 		}
-		return root + "defaultApp/channelDetail.jsp";
+		
+		if (null == channel.getChildren()||channel.getChildren().size()==0) {
+			documentService.getDocByChannelCode(code, page);
+			uiModel.addAttribute("page", page);
+			return "channel.jsp";
+		}
+		
+		return "channels.jsp";
 	}
 	
 	@RequestMapping(value = "{channels}/{channel}/**/{code}")
@@ -182,13 +187,13 @@ public class DefaultController extends BaseController {
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-		String requestRri = httpServletRequest.getRequestURI();
+//		String requestRri = httpServletRequest.getRequestURI();
 		setPage(page, httpServletRequest);
 		if (null == channel || null == channel.getId()) {
 			channel = channelService.getByCode(code);
 		}
 		if (null == channel || null == channel.getId()) {
-			return root + "defaultApp/channelNotExsit.jsp";
+			return "channelNotExsit.jsp";
 		}
 		
 		uiModel.addAttribute("name", channel.getName());
@@ -202,7 +207,7 @@ public class DefaultController extends BaseController {
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
 					|| "".equals(channel.getDocumentId())) {
-				return root + "defaultApp/channelNotExsit.jsp";
+				return "channelNotExsit.jsp";
 			}
 			Document document = documentService.selectByPrimaryKey(channel
 					.getDocumentId());
@@ -214,25 +219,29 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 			
-			return root + "defaultApp/document.jsp";
+			return "doc.jsp";
 		}
 		
-		channel.setLinkAddr(requestRri);
+//		channel.setLinkAddr(requestRri);
 		
-		DocumentCriteria documentCriteria = new DocumentCriteria();
-		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
-		criteria.andChannelIdEqualTo(channel.getId());
-		documentCriteria.setPage(page);
+//		DocumentCriteria documentCriteria = new DocumentCriteria();
+//		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+//		criteria.andChannelIdEqualTo(channel.getId());
+//		documentCriteria.setPage(page);
 		// documentCriteria.setOrderByClause("id desc");
 		
-		page = documentService.select(documentCriteria);
+//		page = documentService.select(documentCriteria);
 		
-		uiModel.addAttribute("page", page);
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
 			return channel.getChannelTemplete();
 		}
-		return root + "defaultApp/channelDetail.jsp";
+		if (null == channel.getChildren()||channel.getChildren().size()==0) {
+			documentService.getDocByChannelCode(code, page);
+			uiModel.addAttribute("page", page);
+			return "channel.jsp";
+		}
+		return "channels.jsp";
 	}
 
 	@RequestMapping(value = "{channels}/**/doc/{id}")
@@ -243,7 +252,7 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("list", list);
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
-			return root + "defaultApp/channelNotExsit.jsp";
+			return "channelNotExsit.jsp";
 		}
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
@@ -252,7 +261,7 @@ public class DefaultController extends BaseController {
 			return document.getDocumentTemplete();
 		}
 
-		return root + "defaultApp/document.jsp";
+		return "doc.jsp";
 	}
 
 	/**
