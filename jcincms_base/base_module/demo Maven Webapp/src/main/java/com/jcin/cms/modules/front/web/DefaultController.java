@@ -9,6 +9,7 @@
  */
 package com.jcin.cms.modules.front.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -248,12 +249,17 @@ public class DefaultController extends BaseController {
 	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		List<Channel> list = UserUtils.getChannels();//:^(?!${excludePath}).*$
+		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		
 		Document document = documentService.selectByPrimaryKey(id);
 		if (null == document) {
 			return "channelNotExsit.jsp";
 		}
+		Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+		List<Channel> navChan = getParentChannels(list,channel);
+		uiModel.addAttribute("navChan", navChan);
+		uiModel.addAttribute("channel", channel);
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
 		if (null != document.getDocumentTemplete()
@@ -263,7 +269,39 @@ public class DefaultController extends BaseController {
 
 		return "doc.jsp";
 	}
+	
+	private List<Channel> getParentChannels(List<Channel> list,Channel currentChannel){
+		List<Channel> result = new ArrayList<Channel>();
+		while (currentChannel!=null && !"".equals(currentChannel.getParentId()) && null !=currentChannel.getParentId()) {
+			result.add(currentChannel);
+			List<Channel> res = new ArrayList<Channel>();
+			searchChannel( list,currentChannel,res);
+			if(res.size()>0){
+				currentChannel = res.get(0);
+			}
+		} 
+		result.add(currentChannel);
+		List<Channel> temp = new ArrayList<Channel>();
+		for (int i = result.size()-1; i >=0; i--) {
+			temp.add(result.get(i));
+		}
+		result = temp;
+		return result;
+	}
 
+	private Channel searchChannel(List<Channel> list,Channel currentChannel,List<Channel> result){
+		Channel chan = null;
+		for (Channel channel : list) {
+			if(channel.getId().equals(currentChannel.getParentId())){
+				result.add(chan = channel);
+				break;
+			}
+			if(channel.getChildren()!=null && channel.getChildren().size()>0){
+				chan = searchChannel(channel.getChildren(), currentChannel,result);
+			}
+		}
+		return null;
+	}
 	/**
 	 * 设置page。
 	 * 
