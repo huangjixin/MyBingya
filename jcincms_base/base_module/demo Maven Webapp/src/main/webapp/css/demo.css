@@ -185,7 +185,7 @@ body {
 	width: 400px;
 	height: 32px;
 	background: #000;
-	filter: alpha(opacity =                         70);
+	filter: alpha(opacity =                             70);
 	-moz-opacity: 0.7;
 	opacity: 0.7;
 	position: absolute;
@@ -249,7 +249,90 @@ a:focus {
 	outline: none;
 } */
 
+.menu {
+	width: 100%;
+	height: 40px;
+	font-size: 14px;
+	background: #212121;
+	z-index:3;
+	display:block;
+}
 
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #222;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	color: #FFF;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	background: #62b00e;
+}
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+
+/* productsroll Start */
+#LeftArr1,#RightArr1{background-image:url(images/product_arrow.gif);width:25px;height:130px;cursor:pointer;position:absolute;top:0px;z-index:1}
+#LeftArr1{background-position:-25px 0px;float:left;left:8px}
+#RightArr1{background-position:-50px 0px;float:right;right:0px}
+#ScrollBox{width:648px;overflow:hidden}
+#ScrollBox li{float:left;display:inline;width:162px;text-align:center}
+#ScrollBox li a{display:block;border:#e5e5e5 1px solid;padding:5px 5px 0px 5px;margin:0px 5px}
+#ScrollBox li a:link,#ScrollBox li a:visited,#ScrollBox li a:active{color:#000}
+#ScrollBox li a:hover{border:#008aff 1px solid;color:#008aff}
+#ScrollBox li a span{display:block;padding-top:4px}
+/* productsroll End */
+
+/* 
 .hnav {
 	height: 40px;
 	float: left;
@@ -267,7 +350,7 @@ a:focus {
 .hnav li a {
 	color: #fff;
 	display: block;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 42px;
 	padding: 0 20px;
 	font-family: "微软雅黑";
@@ -283,7 +366,6 @@ a:focus {
 }
 
 .hnav li ul {
-	/* display: block; */
 	padding: 0px 0 10px 0;
 	position: absolute;
 	z-index: 9999;
@@ -313,7 +395,7 @@ a:focus {
 
 .hnav li ul li a:hover {
 	background: #454648;
-}
+} */
 
 .position {
 	overflow: hidden;
