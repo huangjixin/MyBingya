@@ -168,7 +168,6 @@
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th data-options="field:'linkAddrZh',align:'center'" width="100%">名称</th>
 					<th data-options="field:'name',align:'center'" width="100%">路径</th>
 					<th data-options="field:'code',align:'center'" width="100%">编码</th>
 					<th data-options="field:'channelTemplete',align:'center'" width="100%">栏目模板</th>
