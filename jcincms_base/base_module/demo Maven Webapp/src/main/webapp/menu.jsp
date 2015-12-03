@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div class="menu">
 	<div
-		style="width:100%;height:40px;z-index:3;background:#212121;margin-left:20px; top:0; left:0; display:block;">
+		style="height:40px;z-index:3;background:#212121;margin-left:20px; top:0; left:0; display:block;">
 		<ul>
 			<li><a href="${ctx}">首页</a></li>
 			<c:if test="${list!=null}">
@@ -53,7 +53,7 @@
 					</c:if>
 				</c:forEach>
 			</c:if>
-			<li><a href="/program/1/index.html">网页编程</a>
+			<!-- <li><a href="/program/1/index.html">网页编程</a>
 				<ul>
 					<li><a href="/program/1/index.html"> ASP编程教程</a></li>
 					<li><a href="/program/2/index.html"> PHP编程教程</a></li>
@@ -62,7 +62,7 @@
 					<li><a href="/program/8/index.html"> jQuery编程</a></li>
 					<li><a href="/program/10/index.html"> Javascript编程</a></li>
 				</ul></li>
-			<li>
+			<li> -->
 		</ul>
 	</div>
 </div>

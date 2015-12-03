@@ -62,50 +62,48 @@
 									</c:if>
 								</c:forEach>
 							</c:if>
-							<!-- <li>elasticsearch ik分词插件es-ik发布</li>
-							<li>solr4的solr-ik插件</li>
-							<li>当前几个主要的Lucene中文分词器的比较</li>
-							<li>elasticsearch查询优化案例</li>
-							<li>JMeter压力测试及并发量计算-2</li>
-							<li>solr4的solr-ik插件</li>
-							<li>elasticsearch查询优化案例</li>
-							<li>JMeter压力测试及并发量计算-2</li> -->
 						</ul>
 					</div>
 				</div>
 				<div class="spacer"></div>
+				<div class="box" style="float: left;width: 100%;min-height: 140px;">
+					<div class="box-header" style="width: 25%;">图文资讯</div>
+					<div class="box-center" style="text-align: center;">
+						<ul id="ScrollBox">
+							<li><a href="products.html" title="覆盆子酮"><img
+									src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+									height="100" /><span>覆盆子酮</span></a></li>
+							<li><a href="products.html" title="氯霉素"><img
+									src="${ctx}/images/slide-2.jpg" alt="氯霉素" width="140"
+									height="100" /><span>氯霉素</span></a></li>
+							<li><a href="products.html" title="利巴韦林(病毒唑）"><img
+									src="${ctx}/images/slide-3.jpg" alt="利巴韦林(病毒唑）" width="140"
+									height="100" /><span>利巴韦林(病毒唑）</span></a></li>
+							<li><a href="products.html" title="土霉素"><img
+									src="${ctx}/images/slide-4.jpg" alt="土霉素" width="140"
+									height="100" /><span>土霉素</span></a></li>
+						</ul>
+						<script language="javascript" type="text/javascript">
+						<!--//--><![CDATA[//><!--
+							var scrollPic_01 = new ScrollPic();
+							scrollPic_01.scrollContId = "ScrollBox"; //内容容器ID
+							scrollPic_01.arrLeftId = "LeftArr1";//左箭头ID
+							scrollPic_01.arrRightId = "RightArr1"; //右箭头ID
+							scrollPic_01.frameWidth = 648;//显示框宽度
+							scrollPic_01.pageWidth = 162; //翻页宽度
+							scrollPic_01.speed = 10; //移动速度(单位毫秒，越小越快)
+							scrollPic_01.space = 5; //每次移动像素(单位px，越大越快)
+							scrollPic_01.autoPlay = true; //自动播放
+							scrollPic_01.autoPlayTime = 3; //自动播放间隔时间(秒)
+							scrollPic_01.initialize(); //初始化
+							//--><!]]>
+						</script>
+					</div>
+				</div>
 				<div>
 					<!-- <div id="LeftArr1"></div>
 					<div id="RightArr1"></div> -->
-					<ul id="ScrollBox">
-						<li><a href="products.html" title="覆盆子酮"><img
-								src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
-								height="100" /><span>覆盆子酮</span></a></li>
-						<li><a href="products.html" title="氯霉素"><img
-								src="${ctx}/images/slide-2.jpg" alt="氯霉素" width="140"
-								height="100" /><span>氯霉素</span></a></li>
-						<li><a href="products.html" title="利巴韦林(病毒唑）"><img
-								src="${ctx}/images/slide-3.jpg" alt="利巴韦林(病毒唑）" width="140"
-								height="100" /><span>利巴韦林(病毒唑）</span></a></li>
-						<li><a href="products.html" title="土霉素"><img
-								src="${ctx}/images/slide-4.jpg" alt="土霉素" width="140"
-								height="100" /><span>土霉素</span></a></li>
-					</ul>
-					<script language="javascript" type="text/javascript">
-					<!--//--><![CDATA[//><!--
-						var scrollPic_01 = new ScrollPic();
-						scrollPic_01.scrollContId = "ScrollBox"; //内容容器ID
-						scrollPic_01.arrLeftId = "LeftArr1";//左箭头ID
-						scrollPic_01.arrRightId = "RightArr1"; //右箭头ID
-						scrollPic_01.frameWidth = 648;//显示框宽度
-						scrollPic_01.pageWidth = 162; //翻页宽度
-						scrollPic_01.speed = 10; //移动速度(单位毫秒，越小越快)
-						scrollPic_01.space = 5; //每次移动像素(单位px，越大越快)
-						scrollPic_01.autoPlay = true; //自动播放
-						scrollPic_01.autoPlayTime = 3; //自动播放间隔时间(秒)
-						scrollPic_01.initialize(); //初始化
-						//--><!]]>
-					</script>
+
 				</div>
 				<div class="spacer"></div>
 				<c:if test="${list!=null}">
@@ -118,7 +116,7 @@
 								<div class="box" style="float: right;">
 							</c:if>
 							<div class="box-header">
-								<a href="${ctx}/${channel.linkAddr}">${channel.name}</a>
+								<a href="${ctx}/${channel.linkAddr}" style="color: #ffffff;">${channel.name}</a>
 							</div>
 							<div class="box-center">
 								<ul>
@@ -127,20 +125,10 @@
 									<c:if test="${docs!=null}">
 										<c:forEach var="doc" items="${docs}">
 											<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
-												target="blank">${doc.title}</a></li>
+												target="blank">${doc.title}<span><fmt:formatDate
+									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
 										</c:forEach>
 									</c:if>
-									<!-- <li>elasticsearch ik分词插件es-ik发布</li>
-									<li>elasticsearch ik分词插件es-ik发布</li>
-									<li>solr4的solr-ik插件</li>
-									<li>当前几个主要的Lucene中文分词器的比较</li>
-									<li>elasticsearch查询优化案例</li>
-									<li>JMeter压力测试及并发量计算-2</li>
-									<li>solr4的solr-ik插件</li>
-									<li>elasticsearch查询优化案例</li>
-									<li>JMeter压力测试及并发量计算-2</li>
-									<li>solr4的solr-ik插件</li>
-									<li>elasticsearch查询优化案例</li> -->
 								</ul>
 							</div>
 			</div>
@@ -151,75 +139,6 @@
 			</c:forEach>
 			</c:if>
 			<div class="spacer"></div>
-			<div class="box" style="float: left;">
-				<div class="box-header">智慧互联网解决方案</div>
-				<div class="box-center">
-					<ul>
-						<li>elasticsearch ik分词插件es-ik发布</li>
-						<li>solr4的solr-ik插件</li>
-						<li>当前几个主要的Lucene中文分词器的比较</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-					</ul>
-				</div>
-			</div>
-			<div class="box" style="float: right;">
-				<div class="box-header">企业社交商务云平台</div>
-				<div class="box-center">
-					<ul>
-						<li>elasticsearch ik分词插件es-ik发布</li>
-						<li>solr4的solr-ik插件</li>
-						<li>当前几个主要的Lucene中文分词器的比较</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-					</ul>
-				</div>
-			</div>
-			<div class="spacer"></div>
-			<div class="box" style="float: left;">
-				<div class="box-header">企业互联网咨询</div>
-				<div class="box-center">
-					<ul>
-						<li>elasticsearch ik分词插件es-ik发布</li>
-						<li>solr4的solr-ik插件</li>
-						<li>当前几个主要的Lucene中文分词器的比较</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-					</ul>
-				</div>
-			</div>
-			<div class="box" style="float: right;">
-				<div class="box-header">智慧互联网平台</div>
-				<div class="box-center">
-					<ul>
-						<li>elasticsearch ik分词插件es-ik发布</li>
-						<li>solr4的solr-ik插件</li>
-						<li>当前几个主要的Lucene中文分词器的比较</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-						<li>JMeter压力测试及并发量计算-2</li>
-						<li>solr4的solr-ik插件</li>
-						<li>elasticsearch查询优化案例</li>
-					</ul>
-				</div>
-			</div>
 		</div>
 		<!-- 右边导航 -->
 		<jsp:include page="right_side.jsp" flush="true"></jsp:include>

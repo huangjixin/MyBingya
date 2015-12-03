@@ -122,7 +122,7 @@ body {
 	font-size: 14px;
 }
 
-.box-header a:LINK,a:VISITED {
+.box-header a{
 	color: #ffffff;
 }
 
@@ -160,6 +160,11 @@ body {
 .box-center li {
 	margin-top: 5px;
 	list-style-type: square;
+}
+
+.box-center li span{
+	position:absolute;
+	 right:0px;
 }
 
 .box .center li {
@@ -249,8 +254,9 @@ a:focus {
 	outline: none;
 } */
 
+/************** 菜单开始****************************/
 .menu {
-	width: 100%;
+	
 	height: 40px;
 	font-size: 14px;
 	background: #212121;
@@ -320,13 +326,35 @@ a:focus {
 	right: 100%;
 }
 
+/************** 菜单结束 **************************/
+/* #scrolldiv.scroll-img ul {
+	width: 1500px;
+}
+.scroll-img {
+	border: 1px solid red;
+	width: 680px;
+	height: 142px;
+	overflow: hidden;
+	font-size: 0;
+	line-height: 142px;
+}
+.scroll-img ul {
+	width: 700px;
+	height: 600px;
+	margin: 0;
+}
+.scroll-img ul li {
+	display: inline-block;
+	margin: 10px 0 10px 10px;
+} */
+
 /* productsroll Start */
-#LeftArr1,#RightArr1{background-image:url(images/product_arrow.gif);width:25px;height:130px;cursor:pointer;position:absolute;top:0px;z-index:1}
+#LeftArr1,#RightArr1{background-image:url(/demo/images/product_arrow.gif);width:25px;height:130px;cursor:pointer;position:absolute;top:0px;z-index:1}
 #LeftArr1{background-position:-25px 0px;float:left;left:8px}
 #RightArr1{background-position:-50px 0px;float:right;right:0px}
-#ScrollBox{width:648px;overflow:hidden}
+#ScrollBox{width:100%;overflow:hidden;}
 #ScrollBox li{float:left;display:inline;width:162px;text-align:center}
-#ScrollBox li a{display:block;border:#e5e5e5 1px solid;padding:5px 5px 0px 5px;margin:0px 5px}
+#ScrollBox li a{display:block;border:#e5e5e5 1px solid;padding:-155px 5px 5px 5px;margin:0px 5px}
 #ScrollBox li a:link,#ScrollBox li a:visited,#ScrollBox li a:active{color:#000}
 #ScrollBox li a:hover{border:#008aff 1px solid;color:#008aff}
 #ScrollBox li a span{display:block;padding-top:4px}
@@ -403,6 +431,7 @@ a:focus {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #CCCCCC;
+	font-size: 12px;
 	/* 	padding: 5px; */
 	/* 	padding-right: 0px; */
 }
