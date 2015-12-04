@@ -1,0 +1,453 @@
+@CHARSET "UTF-8";
+
+body {
+	
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#header {
+	width: 100%;
+}
+
+#headerContact {
+	position: absolute;
+	right: 200px;
+	top: 0px;
+}
+
+#nav {
+	width: 100%;
+}
+
+#main {
+	width: 100%;
+}
+
+#content {
+	float: left;
+	width: 690px;
+}
+
+#picnav {
+	float: left;
+	width: 404px;
+	height: 200px;
+	border-radius: 5px 5px 5px 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+#recommend {
+	float: right;
+	width: 275px;
+	height: 200px;
+	border-radius: 5px 5px 5px 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+	text-decoration: none;
+}
+
+#recommend a,a:LINK,a:VISITED {
+	color: #0088DD;
+	text-decoration: none;
+}
+
+#recommend a:HOVER {
+	text-decoration: underline;
+}
+
+#left_side {
+	float: right;
+	/* 	width: 250px; */
+	/* 	height: 100px; */
+	/* 	background-color: #0dffee */
+}
+
+#footer {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 12px;
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0px;
+}
+
+#menu ul li {
+	float: left;
+}
+
+.spacer {
+	clear: both;
+	width: 100%;
+	height: 5px;
+}
+
+.box {
+	width: 340px;
+	/* height: 250px; */
+	min-height: 255px;
+	overflow: hidden;
+	border-radius: 5px 5px 5px 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+	border-width: 1px;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.box a {
+	text-decoration: none;
+}
+
+.box-header {
+	margin: 0 auto;
+	width: 50%;
+	height: 25px;
+	text-align: center;
+	vertical-align: middle;
+	color: #ffffff;
+	background-color: #C01E22;
+	line-height: 25px;
+	font-size: 14px;
+}
+
+.box-header a{
+	color: #ffffff;
+}
+
+.box-center {
+	color: #0088DD;
+	font-size: 14px;
+	width: 100%;
+	/* 	height: 100%; */
+	overflow: auto;
+	font-size: 12px;
+}
+
+.box-center li a:LINK,a:VISITED {
+	color: #0088DD;;
+}
+
+.box-center li a:HOVER {
+	text-decoration: underline;
+}
+
+.box-center ul {
+	position: relative;
+	left: -12px;
+	top: -5px;
+}
+
+.box-center .category {
+	float: left;
+	width: 100px;
+	margin-left: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.box-center li {
+	margin-top: 5px;
+	list-style-type: square;
+}
+
+.box-center li span{
+	position:absolute;
+	 right:0px;
+}
+
+.box .center li {
+	list-style-type: none;
+}
+
+.clear {
+	clear: both;
+}
+
+/*************** 幻灯片开始***********************/
+.focus {
+	width: 400px;
+	height: 194px;
+	padding: 2px;
+	border: 1px solid #E1E1E1;
+	background: #fff;
+	position: relative
+}
+
+.focus .sliderwrapper span {
+	display: block;
+	width: 400px;
+	height: 32px;
+	background: #000;
+	filter: alpha(opacity =                             70);
+	-moz-opacity: 0.7;
+	opacity: 0.7;
+	position: absolute;
+	left: 2px;
+	top: 160px
+}
+
+.focus .pagination {
+	position: absolute;
+	top: 170px;
+	right: 0
+}
+
+.focus .pagination a {
+	width: 19px;
+	height: 19px;
+	line-height: 19px;
+	display: inline;
+	float: left;
+	margin-right: 7px;
+	cursor: pointer;
+	background: #fff;
+	text-align: center
+}
+
+.focus .pagination a:hover,.focus .pagination a.selected {
+	background: #FB7E39;
+	color: #fff
+}
+
+.focus a {
+	color: #444;
+	text-decoration: none;
+	outline: none
+}
+
+.focus a:hover {
+	color: #c00;
+	text-decoration: underline
+}
+/************** 幻灯片结束***********************/
+/* a {
+	text-decoration: none;
+} */
+
+/* a:link {
+	color: #333;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #333;
+	font-size: 12px;
+}
+
+a:hover {
+	color: #666;
+}
+
+a:focus {
+	outline: none;
+} */
+
+/************** 菜单开始****************************/
+.menu {
+	
+	height: 40px;
+	font-size: 14px;
+	background: #212121;
+	z-index:3;
+	display:block;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #222;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	color: #FFF;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	background: #62b00e;
+}
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+
+/************** 菜单结束 **************************/
+/* #scrolldiv.scroll-img ul {
+	width: 1500px;
+}
+.scroll-img {
+	border: 1px solid red;
+	width: 680px;
+	height: 142px;
+	overflow: hidden;
+	font-size: 0;
+	line-height: 142px;
+}
+.scroll-img ul {
+	width: 700px;
+	height: 600px;
+	margin: 0;
+}
+.scroll-img ul li {
+	display: inline-block;
+	margin: 10px 0 10px 10px;
+} */
+
+/* productsroll Start */
+#LeftArr1,#RightArr1{background-image:url(/demo/images/product_arrow.gif);width:25px;height:130px;cursor:pointer;position:absolute;top:0px;z-index:1}
+#LeftArr1{background-position:-25px 0px;float:left;left:8px}
+#RightArr1{background-position:-50px 0px;float:right;right:0px}
+#ScrollBox{width:100%;overflow:hidden;}
+#ScrollBox li{float:left;display:inline;width:162px;text-align:center}
+#ScrollBox li a{display:block;border:#e5e5e5 1px solid;padding:-155px 5px 5px 5px;margin:0px 5px}
+#ScrollBox li a:link,#ScrollBox li a:visited,#ScrollBox li a:active{color:#000}
+#ScrollBox li a:hover{border:#008aff 1px solid;color:#008aff}
+#ScrollBox li a span{display:block;padding-top:4px}
+/* productsroll End */
+
+/* 
+.hnav {
+	height: 40px;
+	float: left;
+	margin-left: 20px;
+	display: block;
+}
+
+.hnav li {
+	height: 40px;
+	float: left;
+	display: block;
+	position: relative;
+}
+
+.hnav li a {
+	color: #fff;
+	display: block;
+	font-size: 14px;
+	line-height: 42px;
+	padding: 0 20px;
+	font-family: "微软雅黑";
+	margin-right: 1px;
+}
+
+.hnav li a:hover {
+	color: #FFF;
+}
+
+.hnav li:hover a,.hnav li.hover a {
+	background: #62b00e;
+}
+
+.hnav li ul {
+	padding: 0px 0 10px 0;
+	position: absolute;
+	z-index: 9999;
+	display: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+}
+
+.hnav li:HOVER ul {
+	display: block;
+}
+
+.hnav li ul li {
+	width: 100%;
+	height: 40px;
+	display: block;
+	clear: both;
+}
+
+.hnav li ul li a {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	clear: both;
+	padding: 0 25px;
+}
+
+.hnav li ul li a:hover {
+	background: #454648;
+} */
+
+.position {
+	overflow: hidden;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+	font-size: 12px;
+	/* 	padding: 5px; */
+	/* 	padding-right: 0px; */
+}
+
+.article {
+	overflow: hidden;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+.article .info {
+	overflow: auto;
+	width: 90%;
+	padding: 20px;
+	color: #333333;
+	/* 	font-size: 12px; */
+}
