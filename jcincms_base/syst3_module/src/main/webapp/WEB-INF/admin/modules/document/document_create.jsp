@@ -62,8 +62,9 @@ th {
 	
 	//创建文件树。
 	function createFileTree() {
+		var checked = $('#refreshFiles').is(':checked')?true:false;
 		$('#docTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles',
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh='+checked,
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
@@ -257,7 +258,10 @@ th {
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
 								<input id="docTemplete"/>
-								&nbsp;<form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
+								&nbsp;
+								<input id="refreshFiles" type="checkbox" value="刷新缓存"/>
+								&nbsp;
+								<input value="重新获取" type="button" onclick="createFileTree();" ><form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
 							</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">

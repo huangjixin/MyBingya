@@ -58,8 +58,9 @@ th {
 
 	//创建文件树。
 	function createFileTree() {
+		var checked = $('#refreshFiles').is(':checked')?true:false;
 		$('#chanTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles',
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh='+checked,
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
@@ -99,20 +100,6 @@ th {
                 }  
                 
                 chanTemp = pathStr; 
-                
-                var pathZh = new Array();
-                do {  
-                	pathZh.unshift(parent.name);  
-                    var parent = tree.tree('getParent', parent.target);  
-                } while (parent);
-                var pathZhStr = '';  
-                for (var i = 0; i < pathZh.length; i++) {  
-                	pathZhStr += pathZh[i];  
-                    if (i < pathZh.length - 1) {  
-                    	pathZhStr += '/';  
-                    }  
-                }
-                $('#linkAddrZh').val(pathZhStr);
             }  
 		});
 	}
@@ -212,7 +199,6 @@ th {
 		<input id="channelTemplete" name="channelTemplete" value="${channel.channelTemplete}" type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}" type="hidden" />
-		<input id="linkAddrZh" name="linkAddrZh" value="${channel.linkAddrZh}" type="hidden" />
 		<div class="descrition">
 			<b>栏目信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
@@ -257,7 +243,11 @@ th {
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;栏目模板：</th>
 							<td nowrap="nowrap" align="left"><input id="chanTemplete" path="chanTemplete" />&nbsp;<input type="button"
-								value="清除" onclick="clearChanelTemplateInput();" /><form:errors
+								value="清除" onclick="clearChanelTemplateInput();" />
+								<input id="refreshFiles" type="checkbox" value="刷新"/>
+								&nbsp;
+								<input value="重新获取" type="button"  onclick="createFileTree();" >
+								<form:errors
 									path="channelTemplete" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;是否显示：</th>
 							<td nowrap="nowrap" align="left"><select id="hidden"

@@ -88,7 +88,28 @@ th {
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
-			    alert("生成首页成功");
+				$('#tip').innerHTML="删除首页成功";
+			    alert("删除首页成功");
+			}, error:function(){  
+			    alert("出错了");  
+			}  
+		 });
+	}
+	
+	//生成栏目
+	function generateChannel() {
+		var node = $('#channlTree').combotree('tree').tree("getSelected");
+		if(node==null){
+			$('#tip')[0].innerHTML="请选中栏目";
+			return;
+		}
+		var checked = $('#generateSubchannel').is(':checked')?true:false;
+		$.ajax({  
+			url:"${ctxAdmin}/htmlgenerate/generateChannel?id="+node.id+"&generateSubchannel="+checked,  
+			//data可以传参多个参数"name=John&location=Boston",    
+			//data: "subcompanyId="+subcompanyId,  
+			success:function(data){ 
+				$('#tip')[0].innerHTML="生成栏目成功";
 			}, error:function(){  
 			    alert("出错了");  
 			}  
@@ -101,7 +122,7 @@ th {
 </head>
 <body>
 	<div class="descrition">
-		<b>页面生成</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+		<b>页面生成</b>&nbsp;&nbsp;<span id="tip" style="color: red;">${msg}</span>
 	</div>
 	<hr>
 	<table width="100%" border="0" cellpadding="2" cellspacing="0">
@@ -125,7 +146,7 @@ th {
 						<td style="text-align: left;" colspan="6"><input
 							id="channlTree" />&nbsp;&nbsp;<input type="button" value="清除"
 							onclick="clearChannelTree();" />&nbsp;&nbsp;<input type="button"
-							value="生成栏目html" /></td>
+							value="生成栏目html" onclick="generateChannel()" />&nbsp;&nbsp;<input id="generateSubchannel" type="checkbox">子栏目</input></td>
 					</tr>
 					<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 						<th style="width: 150px;">&nbsp;文档html：</th>
