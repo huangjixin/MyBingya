@@ -58,6 +58,10 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "admin/document")
 public class DocumentController extends BaseController<Document> {
+	private static Map<String, Object> cache = new HashMap<String, Object>();
+
+	private static final String FILES_CACHE = "filesCache";// 文件缓存。
+
 	@Resource
 	private IDocumentService documentService;
 	@Resource
@@ -180,8 +184,10 @@ public class DocumentController extends BaseController<Document> {
 		if (null != document.getId() && !"".equals(document.getId())) {
 			criteria.andIdLike("%" + document.getId() + "%");
 		}
-		if (null != document.getDocumentTemplete() && !"".equals(document.getDocumentTemplete())) {
-			criteria.andDocumentTempleteLike("%" + document.getDocumentTemplete() + "%");
+		if (null != document.getDocumentTemplete()
+				&& !"".equals(document.getDocumentTemplete())) {
+			criteria.andDocumentTempleteLike("%"
+					+ document.getDocumentTemplete() + "%");
 		}
 		if (null != document.getChannelId()
 				&& !"".equals(document.getChannelId())) {
@@ -260,11 +266,13 @@ public class DocumentController extends BaseController<Document> {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
 		String imgeName = df.format(new Date());
 		String tempImageName = imgeName + "." + file_ext;
-		String uploadPath = Global.getUploadpath() + UserUtils.getUserId() + File.separator+ tempImageName;
-		/*@SuppressWarnings("deprecation")
-		String uploadPath = httpServletRequest.getRealPath("/") + "upload"
-				+ File.separator + UserUtils.getUserId() + File.separator
-				+ tempImageName;*/
+		String uploadPath = Global.getUploadpath() + UserUtils.getUserId()
+				+ File.separator + tempImageName;
+		/*
+		 * @SuppressWarnings("deprecation") String uploadPath =
+		 * httpServletRequest.getRealPath("/") + "upload" + File.separator +
+		 * UserUtils.getUserId() + File.separator + tempImageName;
+		 */
 		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
@@ -379,12 +387,43 @@ public class DocumentController extends BaseController<Document> {
 
 	@RequestMapping(value = "/getWebsiteFiles")
 	@ResponseBody
-	public List<FileVO> getWebsiteFiles(HttpServletRequest httpServletRequest,
+	public List<FileVO> getWebsiteFiles(
+			@RequestParam(value = "refresh",required=false) boolean refresh,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 		File file = new File(webroot);
-		List<FileVO> list = getWebsiteFiles(file);
+		List<FileVO> list = getFiles(refresh, file);
 		return list;
+	}
+
+	/**
+	 * 刷新缓存去文件数组。
+	 * @param refresh
+	 * @param file
+	 * @return
+	 */
+	private List<FileVO> getFiles(boolean refresh, File file) {
+		if (refresh) {
+			cache.remove(FILES_CACHE);
+			List<FileVO> list = getWebsiteFiles(file);
+			if (list != null && list.size() > 0) {
+				cache.put(FILES_CACHE, list);
+			}
+			return list;
+		} else {
+			@SuppressWarnings("unchecked")
+			List<FileVO> list = (List<FileVO>) cache.get(FILES_CACHE);
+			if (list == null) {
+				list = getWebsiteFiles(file);
+				if (list != null && list.size() > 0) {
+					cache.put(FILES_CACHE, list);
+				}
+			}
+			return list;
+		}
+
 	}
 
 	public List<FileVO> getWebsiteFiles(File file) {

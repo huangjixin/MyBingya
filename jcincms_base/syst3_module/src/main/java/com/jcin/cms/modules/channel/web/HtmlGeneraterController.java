@@ -9,6 +9,7 @@ package com.jcin.cms.modules.channel.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,7 @@ public class HtmlGeneraterController extends BaseController {
 		
 		// 菜单
 		List<Channel> menus = UserUtils.getChannels();
+		
 		page.setPageSize(10);
 		
 		Map<String,Object> menusMap=new HashMap<String, Object>();
@@ -90,9 +92,7 @@ public class HtmlGeneraterController extends BaseController {
 
 	@RequestMapping(value = "/deleteIndex")
 	@ResponseBody
-	public String deleteIndex(
-			@RequestParam(value = "idstring") String idstring,
-			HttpServletRequest httpServletRequest,
+	public String deleteIndex(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/") + "index.html";
@@ -105,11 +105,11 @@ public class HtmlGeneraterController extends BaseController {
 
 	@RequestMapping(value = "/generateChannel")
 	@ResponseBody
-	public String generateChannel(
-			@RequestParam(value = "idstring") String idstring,
+	public String generateChannel(@RequestParam(value = "id") String id,
+			@RequestParam(value = "generateSubchannel",required=false) boolean generateSubchannel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-
+		
 		return "";
 	}
 
