@@ -18,19 +18,21 @@
 				<span>2015年11月26日 星期四</span>
 			</div>
 		</div>
-		<!-- <div class="spacer"></div> -->
+		<div class="spacer"></div>
 		<!-- 导航菜单 -->
 		<jsp:include page="menu.jsp" flush="true"></jsp:include>
-
 		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
+				<!-- 位置-->
+				<jsp:include page="nav.jsp" flush="true"></jsp:include>
+				<div class="spacer"></div>
 				<div id="picnav">
 					<div class="focus">
 						<div id="sliderA" class="sliderwrapper">
 							<div class="contentdiv">
 								<div class="slPic">
-									<a href="#" target="_blank"><img src="images/79064170.jpg"
+									<a href="#" target="_blank"><img src="${ctx}/images/79064170.jpg"
 										alt="" width="400" height="194" border="0" /></a><a href="#"
 										target="_blank"></a>
 								</div>
@@ -38,7 +40,7 @@
 							</div>
 							<div class="contentdiv">
 								<div class="slPic">
-									<a href="#" target="_blank"><img src="images/79084479.jpg"
+									<a href="#" target="_blank"><img src="${ctx}/images/79084479.jpg"
 										alt="" width="400" height="194" border="0" /></a><a href="#"
 										target="_blank"></a>
 								</div>
@@ -52,13 +54,14 @@
 					</div>
 				</div>
 				<div id="recommend">
-					<div class="box-header">热点推荐</div>
+					<div class="box-header">栏目头条</div>
 					<div class="box-center">
 						<ul>
 							<c:if test="${recommendDocs!=null}">
 								<c:forEach var="doc" items="${recommendDocs}">
 									<c:if test="${doc.title!=null && doc.title!=''}">
-										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}<span><fmt:formatDate
+									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
 									</c:if>
 								</c:forEach>
 							</c:if>
@@ -100,36 +103,37 @@
 						</script>
 					</div>
 				</div>
-				<div>
-					<!-- <div id="LeftArr1"></div>
-					<div id="RightArr1"></div> -->
-
-				</div>
 				<div class="spacer"></div>
-				<c:if test="${list!=null}">
-					<c:forEach var="channel" items="${list}" varStatus="status">
-						<c:if test="${channel.name!=null && channel.name!=''}">
+				<c:if test="${channel!=null}">
+					<c:forEach var="chan" items="${channel.children}" varStatus="status">
+						<c:if test="${chan.name!=null && chan.name!=''}">
 							<c:if test="${status.index%2==0}">
 								<div class="box" style="float: left;">
 							</c:if>
 							<c:if test="${status.index%2==1}">
 								<div class="box" style="float: right;">
 							</c:if>
-							<div class="box-header">
-								<a href="${ctx}/${channel.linkAddr}" style="color: #ffffff;">${channel.name}</a>
-							</div>
+							<div class="box-header"><a href="${ctx}/${chan.linkAddr}" style="color: #ffffff;">${chan.name}</a></div>
 							<div class="box-center">
 								<ul>
-									<c:set var="docs"
-										value="${fns:getDocByChannelCode(channel.code,10)}"></c:set>
+									<c:set var="docs" value="${fns:getDocByChannelCode(chan.code,10)}"></c:set>
 									<c:if test="${docs!=null}">
 										<c:forEach var="doc" items="${docs}">
-											<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
-												target="blank">${doc.title}<span><fmt:formatDate
+										<li><a href="${ctx}/${chan.linkAddr}/doc/${doc.id}" target="blank">${doc.title}<span><fmt:formatDate
 									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
-									<hr style="height:1px;border:none;border-top:1px dashed #CCCCCC;"/>
 										</c:forEach>
 									</c:if>
+									<!-- <li>elasticsearch ik分词插件es-ik发布</li>
+									<li>elasticsearch ik分词插件es-ik发布</li>
+									<li>solr4的solr-ik插件</li>
+									<li>当前几个主要的Lucene中文分词器的比较</li>
+									<li>elasticsearch查询优化案例</li>
+									<li>JMeter压力测试及并发量计算-2</li>
+									<li>solr4的solr-ik插件</li>
+									<li>elasticsearch查询优化案例</li>
+									<li>JMeter压力测试及并发量计算-2</li>
+									<li>solr4的solr-ik插件</li>
+									<li>elasticsearch查询优化案例</li> -->
 								</ul>
 							</div>
 			</div>
@@ -143,9 +147,9 @@
 		</div>
 		<!-- 右边导航 -->
 		<jsp:include page="right_side.jsp" flush="true"></jsp:include>
-
 	</div>
 	<div class="clear"></div>
+	<!-- 网页底部 -->
 	<jsp:include page="footer.jsp" flush="true"></jsp:include>
 	<script type="text/javascript">
 		featuredcontentslider.init({
