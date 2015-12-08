@@ -74,6 +74,16 @@
 		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
+				<div class="position">
+					<div style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+					<span>当前位置: <a href="${ctx}/">首页</a> 
+						<#list navChan as chan>
+							><a href="${ctx}/${chan.linkAddr}">${chan.name}</a>
+						</#list>
+					</span>
+					</div>
+				</div>
+				<div class="spacer"></div>
 				<div id="picnav">
 					<div class="focus">
 						<div id="sliderA" class="sliderwrapper">
@@ -101,7 +111,7 @@
 					</div>
 				</div>
 				<div id="recommend">
-					<div class="box-header">热点推荐</div>
+					<div class="box-header">栏目推荐</div>
 					<div class="box-center">
 						<ul>
 							<#if recommendDocs ??>
