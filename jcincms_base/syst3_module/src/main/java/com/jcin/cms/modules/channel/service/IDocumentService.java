@@ -51,4 +51,17 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	 * @return
 	 */
 	List<Document> getDocByChannelCode(String code,Page page);
+	
+	 /**
+     * 查询上一条记录
+     * @param id
+     * @return
+     */
+    Document selectLastRecord(Document document);
+    /**
+     * 查询下一条记录
+     * @param id
+     * @return
+     */
+    Document selectNextRecord(Document document);
 }
