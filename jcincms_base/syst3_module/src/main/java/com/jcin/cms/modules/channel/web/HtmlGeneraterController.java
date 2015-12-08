@@ -8,6 +8,7 @@ package com.jcin.cms.modules.channel.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,10 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.FreeMarkerUtil;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
+import com.jcin.cms.modules.channel.domain.FileVO;
+import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
@@ -37,6 +41,9 @@ public class HtmlGeneraterController extends BaseController {
 
 	@Autowired
 	private IDocumentService documentService;
+	
+	@Autowired
+	private IChannelService channelService;
 	
 	@RequiresPermissions("htmlgenerate:view")
 	@RequestMapping(value = { "", "htmlgenerate" })
@@ -110,19 +117,328 @@ public class HtmlGeneraterController extends BaseController {
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		
-		return "";
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		Map<String,Object> root=new HashMap<String, Object>();
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,id,result);
+		if(result.size()==0){
+			return "生成栏目失败，注意刷新栏目";
+		} 
+		
+		Page page = new Page();
+		page.setPageSize(8);
+		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		
+		page.setPageSize(10);
+		Map<String,Object> menusMap=new HashMap<String, Object>();
+		Channel toGeneratedChannel = result.get(0);
+		for (Channel channel : toGeneratedChannel.getChildren()) {
+			List<Document> documents = documentService.getDocByChannelCode(channel.getCode(), page);
+			menusMap.put(channel.getCode(), documents);
+			root.put(channel.getCode(), menusMap);
+		}
+		
+		if (null == toGeneratedChannel.getChildren()||toGeneratedChannel.getChildren().size()==0) {
+			documentService.getDocByChannelCode(toGeneratedChannel.getCode(), page);
+			root.put("page", page);
+		}
+		
+		root.put("channel", toGeneratedChannel);
+		root.put("menusMap", menusMap);
+		root.put("path", webroot);
+		root.put("ctx", conPath);
+		root.put("menus", menus);
+		root.put("recommendDocs", recommendDocs);//推荐文章。
+		List<Channel> navChan = getParentChannels(menus,toGeneratedChannel);
+		root.put("navChan", navChan);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr;
+		File file = new File(toGeneratedFiles);
+		if(!file.exists()){
+			FileUtils.createDirectory(toGeneratedFiles);
+		}
+		 
+		String templatesPath=webroot;
+		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
+		String htmlFile=toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html";
+		
+		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+		
+		//生成子栏目。
+		if(generateSubchannel){
+			if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
+				for (Channel channel : toGeneratedChannel.getChildren()) {
+					generateSubChannel(channel,httpServletRequest);
+				}
+			}
+		}
+		
+		return "生成栏目失败，注意刷新栏目";
+	}
+	
+	private void generateSubChannel(Channel toChannel,HttpServletRequest httpServletRequest){
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		Map<String,Object> root=new HashMap<String, Object>();
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,toChannel.getId(),result);
+		if(result.size()==0){
+			return;
+		} 
+		
+		Page page = new Page();
+		page.setPageSize(8);
+		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		
+		page.setPageSize(10);
+		Map<String,Object> menusMap=new HashMap<String, Object>();
+		Channel toGeneratedChannel = result.get(0);
+		if(null!=toGeneratedChannel.getChildren()&& toGeneratedChannel.getChildren().size()>0){
+			for (int i=0;i<toGeneratedChannel.getChildren().size();i++) {
+				Channel channel  = toGeneratedChannel.getChildren().get(i);
+				List<Document> documents = documentService.getDocByChannelCode(channel.getCode(), page);
+				menusMap.put(channel.getCode(), documents);
+				root.put(channel.getCode(), menusMap);
+			}
+		}
+		
+		if (null == toGeneratedChannel.getChildren()||toGeneratedChannel.getChildren().size()==0) {
+			documentService.getDocByChannelCode(toGeneratedChannel.getCode(), page);
+			root.put("page", page);
+		}
+		
+		root.put("channel", toGeneratedChannel);
+		root.put("menusMap", menusMap);
+		root.put("path", webroot);
+		root.put("ctx", conPath);
+		root.put("menus", menus);
+		root.put("recommendDocs", recommendDocs);//推荐文章。
+		List<Channel> navChan = getParentChannels(menus,toGeneratedChannel);
+		root.put("navChan", navChan);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr;
+		File file = new File(toGeneratedFiles);
+		if(!file.exists()){
+			FileUtils.createDirectory(toGeneratedFiles);
+		}
+		 
+		String templatesPath=webroot;
+		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
+		String htmlFile=toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html";
+		
+		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+		if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
+			for (Channel channel : toGeneratedChannel.getChildren()) {
+				generateSubChannel(channel,httpServletRequest);
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/deleleChannel")
+	@ResponseBody
+	public String deleleChannel(@RequestParam(value = "id") String id,
+			@RequestParam(value = "deleteSubchannel",required=false) boolean deleteSubchannel,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,id,result);
+		if(result.size()==0){
+			return "获取栏目失败，注意刷新栏目";
+		} 
+		
+		Channel toGeneratedChannel = result.get(0);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr;
+		File file = new File(toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html");
+		if(file.exists()){
+			file.delete();
+		}
+		if(deleteSubchannel){
+			file = new File(toGeneratedFiles);
+			if(file.exists()){
+				FileUtils.deleteDirectory(toGeneratedFiles);
+			}
+		}
+		
+		return "删除栏目成功";
+	}
+	
+	@RequestMapping(value = "/deleteChannelDoc")
+	@ResponseBody
+	public String deleteChannelDoc(@RequestParam(value = "id") String id,
+			@RequestParam(value = "deleteSubchannelDoc",required=false) boolean deleteSubchannelDoc,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,id,result);
+		if(result.size()==0){
+			return "获取栏目失败，注意刷新栏目";
+		} 
+		
+		Channel toGeneratedChannel = result.get(0);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr;
+		File file = new File(toGeneratedFiles+File.separator+"doc");
+		if(file.exists()){
+			file.delete();
+		}
+		if(deleteSubchannelDoc){
+			file = new File(toGeneratedFiles);
+			if(file.exists()){
+				deleteSubDoc(file);
+			}
+		}
+		
+		return "删除栏目文档成功";
 	}
 
+	public void deleteSubDoc(File file) {
+		File[] list = file.listFiles();
+		if (list != null) {
+			for (File object : list) {
+				String path = object.getAbsolutePath()+File.separator+"doc";
+				File f = new File(path);
+				if(f.exists()){
+					f.delete();
+				}
+				deleteSubDoc(object);
+			}
+		}
+
+	}
+	
+	/**
+	 * 生成栏目文档。
+	 * @param id
+	 * @param generateSubchannelDoc
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/generateDocs")
 	@ResponseBody
 	public String generateDocs(
-			@RequestParam(value = "idstring") String idstring,
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "generateSubchannelDoc",required=false) boolean generateSubchannelDoc,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-
-		return "";
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,id,result);
+		if(result.size()==0){
+			return "获取栏目失败，注意刷新栏目";
+		} 
+		
+		Channel toGeneratedChannel = result.get(0);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr+File.separator+"doc";
+		File file = new File(toGeneratedFiles);
+		if(!file.exists()){
+			FileUtils.createDirectory(toGeneratedFiles);
+		}
+		
+		List<Channel> navChan = getParentChannels(menus,toGeneratedChannel);
+		
+		List<Document>documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+		if(null!=documents&&documents.size()>0){
+			for (Document document : documents) {
+				Map<String,Object> root=new HashMap<String, Object>();
+				String templatesPath=webroot;
+				String templateFile= "template"+File.separator+"doc.ftl";
+				String htmlFile=toGeneratedFiles+File.separator+document.getId()+".html";
+				
+				root.put("channel", toGeneratedChannel);
+				root.put("path", webroot);
+				root.put("ctx", conPath);
+				root.put("menus", menus);
+				root.put("navChan", navChan);
+				root.put("document", document);
+				
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+			}
+		}
+		
+		return "生成栏目文档成功";
 	}
 
+	private List<Channel> getParentChannels(List<Channel> list,Channel currentChannel){
+		List<Channel> result = new ArrayList<Channel>();
+		while (currentChannel!=null && !"".equals(currentChannel.getParentId()) && null !=currentChannel.getParentId()) {
+			result.add(currentChannel);
+			List<Channel> res = new ArrayList<Channel>();
+			searchChannel( list,currentChannel,res);
+			if(res.size()>0){
+				currentChannel = res.get(0);
+			}
+		} 
+		result.add(currentChannel);
+		List<Channel> temp = new ArrayList<Channel>();
+		for (int i = result.size()-1; i >=0; i--) {
+			temp.add(result.get(i));
+		}
+		result = temp;
+		return result;
+	}
+	
+	private Channel searchChannel(List<Channel> list,String id,List<Channel> result){
+		Channel chan = null;
+		for (Channel channel : list) {
+			if(channel.getId().equals(id)){
+				result.add((chan = channel));
+				break;
+			}
+			if(channel.getChildren()!=null && channel.getChildren().size()>0){
+				chan = searchChannel(channel.getChildren(), id,result);
+			}
+		}
+		return null;
+	}
+	
+	private Channel searchChannel(List<Channel> list,Channel currentChannel,List<Channel> result){
+		Channel chan = null;
+		for (Channel channel : list) {
+			if(channel.getId().equals(currentChannel.getParentId())){
+				result.add(chan = channel);
+				break;
+			}
+			if(channel.getChildren()!=null && channel.getChildren().size()>0){
+				chan = searchChannel(channel.getChildren(), currentChannel,result);
+			}
+		}
+		return null;
+	}
 	/**
 	 * @param args
 	 */
