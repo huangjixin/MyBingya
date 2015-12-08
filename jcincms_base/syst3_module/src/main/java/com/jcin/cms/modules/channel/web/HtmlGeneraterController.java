@@ -166,8 +166,8 @@ public class HtmlGeneraterController extends BaseController {
 		 
 		String templatesPath=webroot;
 		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
-		String htmlFile=toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html";
-		
+		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+".html";
+		FileUtils.createDirectory(toGeneratedFiles+File.separator+"docs");
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		
 		//生成子栏目。
@@ -235,7 +235,8 @@ public class HtmlGeneraterController extends BaseController {
 		 
 		String templatesPath=webroot;
 		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
-		String htmlFile=toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html";
+		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+".html";
+		FileUtils.createDirectory(toGeneratedFiles+File.separator+"docs");
 		
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
@@ -267,18 +268,37 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot+linkAddr;
-		File file = new File(toGeneratedFiles+File.separator+toGeneratedChannel.getCode()+".html");
+		File file = new File(toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+".html");
 		if(file.exists()){
 			file.delete();
 		}
 		if(deleteSubchannel){
 			file = new File(toGeneratedFiles);
-			if(file.exists()){
+			deleteSubChannel(file,toGeneratedChannel);
+			/*if(file.exists()){
 				FileUtils.deleteDirectory(toGeneratedFiles);
-			}
+			}*/
 		}
 		
 		return "删除栏目成功";
+	}
+
+	public void deleteSubChannel(File file,Channel channel) {
+		File[] list = file.listFiles();
+		if (list != null) {
+			for (File object : list) {
+				if(channel.getChildren()!=null && channel.getChildren().size()>0){
+					for (Channel chan : channel.getChildren()) {
+						String path = object.getAbsolutePath()+File.separator+"docs"+File.separator+chan.getCode()+".html";
+						File f = new File(path);
+						if(f.exists()){
+							f.delete();
+						}
+						deleteSubChannel(object,chan);
+					}
+				}
+			}
+		}
 	}
 	
 	@RequestMapping(value = "/deleteChannelDoc")
@@ -303,9 +323,9 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot+linkAddr;
-		File file = new File(toGeneratedFiles+File.separator+"doc");
+		File file = new File(toGeneratedFiles+File.separator+"docs");
 		if(file.exists()){
-			file.delete();
+			FileUtils.deleteDirectory(toGeneratedFiles+File.separator+"docs");
 		}
 		if(deleteSubchannelDoc){
 			file = new File(toGeneratedFiles);
@@ -321,7 +341,7 @@ public class HtmlGeneraterController extends BaseController {
 		File[] list = file.listFiles();
 		if (list != null) {
 			for (File object : list) {
-				String path = object.getAbsolutePath()+File.separator+"doc";
+				String path = object.getAbsolutePath()+File.separator+"docs";
 				File f = new File(path);
 				if(f.exists()){
 					f.delete();
@@ -329,7 +349,6 @@ public class HtmlGeneraterController extends BaseController {
 				deleteSubDoc(object);
 			}
 		}
-
 	}
 	
 	/**
@@ -363,7 +382,7 @@ public class HtmlGeneraterController extends BaseController {
 		
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot+linkAddr+File.separator+"doc";
+		String toGeneratedFiles = webroot+linkAddr+File.separator+"docs";//不要生成在doc里面，免得引起路径问题。
 		File file = new File(toGeneratedFiles);
 		if(!file.exists()){
 			FileUtils.createDirectory(toGeneratedFiles);
