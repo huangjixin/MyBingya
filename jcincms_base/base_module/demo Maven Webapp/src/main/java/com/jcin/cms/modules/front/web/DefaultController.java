@@ -9,6 +9,7 @@
  */
 package com.jcin.cms.modules.front.web;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +57,11 @@ public class DefaultController extends BaseController {
 	public String channels(@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		setPage(page, httpServletRequest);
-		// String requestRri = httpServletRequest.getRequestURI(); :^(?!${excludePath}).*$
+		String result = getChannelFile(httpServletRequest,channels);
+		if(result!=null){
+			return result;
+		}
+		
 		// 检查栏目是否存在；
 		Channel channel = channelService.getByCode(channels);
 		if (null == channel) {
@@ -125,7 +129,11 @@ public class DefaultController extends BaseController {
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-//		String requestRri = httpServletRequest.getRequestURI();
+		String result = getChannelFile(httpServletRequest,code);
+		if(result!=null){
+			return result;
+		}
+		
 		setPage(page, httpServletRequest);
 		if (null == channel || null == channel.getId()) {
 			channel = channelService.getByCode(code);
@@ -190,7 +198,10 @@ public class DefaultController extends BaseController {
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-//		String requestRri = httpServletRequest.getRequestURI();
+		String result = getChannelFile(httpServletRequest,code);
+		if(result!=null){
+			return result;
+		}
 		setPage(page, httpServletRequest);
 		if (null == channel || null == channel.getId()) {
 			channel = channelService.getByCode(code);
@@ -249,10 +260,16 @@ public class DefaultController extends BaseController {
 		return "channels.jsp";
 	}
 
+	
 	@RequestMapping(value = "{channels}/**/doc/{id}")
 	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		String result = getDocFile(httpServletRequest,id);
+		if(result!=null){
+			return result;
+		}
+		
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
 		
@@ -266,12 +283,54 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("channel", channel);
 		uiModel.addAttribute("document", document);
 		uiModel.addAttribute("page", page);
+		Document lastdoc = documentService.selectLastRecord(document);
+		Document nextdoc = documentService.selectNextRecord(document);
+		uiModel.addAttribute("lastdoc", lastdoc);
+		uiModel.addAttribute("nextdoc", nextdoc);
 		if (null != document.getDocumentTemplete()
 				&& !"".equals(document.getDocumentTemplete())) {
 			return document.getDocumentTemplete();
 		}
 
 		return "doc.jsp";
+	}
+	
+	private String getChannelFile(HttpServletRequest httpServletRequest,String channelOrCode){
+		@SuppressWarnings({ "deprecation"})
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		
+		String requestRri = httpServletRequest.getRequestURI();
+		int index = requestRri.lastIndexOf(conPath);
+		if(index!=-1){
+			requestRri = requestRri.substring(index+conPath.length()+1);
+			requestRri = requestRri.replaceAll("//", File.separator);
+			webroot+=requestRri;
+			File file = new File(webroot+channelOrCode+".html");
+			if(file.exists()){
+				return requestRri+channelOrCode+".html";
+			}
+		}
+		return null;
+	}
+	
+	private String getDocFile(HttpServletRequest httpServletRequest,String id){
+		@SuppressWarnings({ "deprecation"})
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		
+		String requestRri = httpServletRequest.getRequestURI();
+		int index = requestRri.lastIndexOf(conPath);
+		if(index!=-1){
+			requestRri = requestRri.substring(index+conPath.length()+1);
+			requestRri = requestRri.replaceAll("//", File.separator);
+			webroot+=requestRri;
+			File file = new File(webroot);
+			if(file.exists()){
+				return requestRri;
+			}
+		}
+		return null;
 	}
 	
 	private List<Channel> getParentChannels(List<Channel> list,Channel currentChannel){
