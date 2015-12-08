@@ -242,6 +242,8 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		documentCriteria.setCode(code);
 		List<Document> list  = documentMapper.selectByChannelCodeExample(documentCriteria);
+		int count =  documentMapper.selectCountByChannelCodeExample(documentCriteria);
+		page.setTotal(count);
 		page.setRows(list);
 		return list;
 	}
@@ -264,6 +266,20 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		documentCriteria.setOrderByClause("recommend desc, id desc");
 		List<Document> list  = documentMapper.selectByExample(documentCriteria);
 		return list;
+	}
+
+	@Override
+	public Document selectLastRecord(Document document) {
+		return  documentMapper.selectLastRecord(document);
+	}
+    /**
+     * 查询下一条记录
+     * @param id
+     * @return
+     */
+	@Override
+	public Document selectNextRecord(Document document) {
+		return  documentMapper.selectNextRecord(document);
 	}
 
 }
