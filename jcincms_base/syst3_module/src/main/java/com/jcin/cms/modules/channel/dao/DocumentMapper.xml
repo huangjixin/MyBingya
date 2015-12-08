@@ -532,4 +532,29 @@
 		order by doc.id desc
 		<include refid="OracleDialectSuffix" />
 	</select>
+  	<select id="selectCountByChannelCodeExample" resultType="java.lang.Integer" 
+		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
+		select
+			count(*)
+		from
+			busi_document doc
+			left join
+		busi_channel channel ON doc.channel_id = channel.id
+			where
+				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
+	</select>
+	
+	<select id="selectLastRecord" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    	select 
+    	<include refid="Base_Column_List" />
+    	from busi_document
+    	where id = (select id from busi_document where id &gt; #{id,jdbcType=VARCHAR} and channel_id=#{channelId,jdbcType=VARCHAR} order by id asc limit 1)
+  	</select>
+	
+	<select id="selectNextRecord" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.Document" >
+    	select 
+    	<include refid="Base_Column_List" />
+    	from busi_document
+    	where id = (select id from busi_document where id &lt; #{id,jdbcType=VARCHAR} and channel_id=#{channelId,jdbcType=VARCHAR} order by id desc limit 1)
+  	</select>
 </mapper>
