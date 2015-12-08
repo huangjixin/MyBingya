@@ -324,6 +324,7 @@ public class DefaultController extends BaseController {
 		if(index!=-1){
 			requestRri = requestRri.substring(index+conPath.length()+1);
 			requestRri = requestRri.replaceAll("//", File.separator);
+			requestRri = requestRri.replaceAll("doc", "docs");
 			webroot+=requestRri;
 			File file = new File(webroot);
 			if(file.exists()){
