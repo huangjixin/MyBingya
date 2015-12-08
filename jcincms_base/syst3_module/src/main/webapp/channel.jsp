@@ -5,8 +5,8 @@
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <style type="text/css"></style>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script src="js/slider.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/js/slider.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -34,7 +34,7 @@
 							<div class="info">
 								<span style="font-weight: bold;font-size: 14px;"><a
 									href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;
-								<hr>
+								<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 								<p>文章摘要：${doc.contentShort}</p>
 								<div style="font-size: 12px;">
 									${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
@@ -44,6 +44,20 @@
 							</div>
 						</div>
 					</c:forEach>
+				</c:if>
+				<c:if test="${docs!=null}">
+					<div class="spacer"></div>
+					<div style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
+							<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
+							<c:if test="${page.page>1}">
+								<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</c:if>
+							<span>${page.page}</span>&nbsp;&nbsp;
+							<c:if test="${page.page < page.totalPage+1}">
+								<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</c:if>
+							<c:if test="${page.page < page.totalPage+1}">
+								<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</c:if>
+							&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
+					 </div>
 				</c:if>
 			</div>
 			<!-- 右边导航 -->

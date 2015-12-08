@@ -30,7 +30,7 @@
 						<div style="width: 100%;text-align: center;">
 							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
 						</div>
-						<hr>
+						<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 						<div style="width: 100%;text-align: center;font-size: 12px;">
 							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
 								style="font-size: 12px;"><fmt:formatDate
@@ -39,6 +39,17 @@
 						<p>${document.content}</p>
 					</div>
 				</div>
+				<div class="spacer"></div>
+				<c:if test="${lastdoc!=null}">
+					<div>
+						<span>上一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
+					</div>
+				</c:if>
+				<c:if test="${nextdoc!=null}">
+					<div>
+						<span>下一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
+					</div>
+				</c:if>
 			</div>
 			<!-- 右边导航 -->
 			<jsp:include page="right_side.jsp" flush="true"></jsp:include>

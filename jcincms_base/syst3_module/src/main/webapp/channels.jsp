@@ -121,6 +121,7 @@
 										<c:forEach var="doc" items="${docs}">
 										<li><a href="${ctx}/${chan.linkAddr}/doc/${doc.id}" target="blank">${doc.title}<span><fmt:formatDate
 									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+										<hr style="height:1px;border:none;border-top:1px dashed #CCCCCC;"/>
 										</c:forEach>
 									</c:if>
 									<!-- <li>elasticsearch ik分词插件es-ik发布</li>
