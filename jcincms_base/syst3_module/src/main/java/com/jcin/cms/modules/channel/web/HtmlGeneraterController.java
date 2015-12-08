@@ -362,7 +362,7 @@ public class HtmlGeneraterController extends BaseController {
 	 */
 	@RequestMapping(value = "/generateDocs")
 	@ResponseBody
-	public String generateDocs(
+	public String generateChannelDocs(
 			@RequestParam(value = "id") String id,
 			@RequestParam(value = "generateSubchannelDoc",required=false) boolean generateSubchannelDoc,
 			HttpServletRequest httpServletRequest,
@@ -409,9 +409,67 @@ public class HtmlGeneraterController extends BaseController {
 			}
 		}
 		
+		if(generateSubchannelDoc){
+			if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
+				for (Channel channel : toGeneratedChannel.getChildren()) {
+					generateSubChannelDocs(channel,httpServletRequest);
+				}
+			}
+		}
+		
 		return "生成栏目文档成功";
 	}
 
+	private void generateSubChannelDocs(Channel toChannel,HttpServletRequest httpServletRequest){
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+		
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus,toChannel.getId(),result);
+		if(result.size()==0){
+			return;
+		} 
+		
+		Channel toGeneratedChannel = result.get(0);
+		
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot+linkAddr+File.separator+"docs";//不要生成在doc里面，免得引起路径问题。
+		File file = new File(toGeneratedFiles);
+		if(!file.exists()){
+			FileUtils.createDirectory(toGeneratedFiles);
+		}
+		
+		List<Channel> navChan = getParentChannels(menus,toGeneratedChannel);
+		
+		List<Document>documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+		if(null!=documents&&documents.size()>0){
+			for (Document document : documents) {
+				Map<String,Object> root=new HashMap<String, Object>();
+				String templatesPath=webroot;
+				String templateFile= "template"+File.separator+"doc.ftl";
+				String htmlFile=toGeneratedFiles+File.separator+document.getId()+".html";
+				
+				root.put("channel", toGeneratedChannel);
+				root.put("path", webroot);
+				root.put("ctx", conPath);
+				root.put("menus", menus);
+				root.put("navChan", navChan);
+				root.put("document", document);
+				
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+			}
+		}
+		
+		if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
+			for (Channel channel : toGeneratedChannel.getChildren()) {
+				generateSubChannelDocs(channel,httpServletRequest);
+			}
+		}
+	}
+	
 	private List<Channel> getParentChannels(List<Channel> list,Channel currentChannel){
 		List<Channel> result = new ArrayList<Channel>();
 		while (currentChannel!=null && !"".equals(currentChannel.getParentId()) && null !=currentChannel.getParentId()) {
