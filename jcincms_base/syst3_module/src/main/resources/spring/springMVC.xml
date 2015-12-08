@@ -57,6 +57,7 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 对静态资源文件的访问 方案二 （二选一） -->
+	<mvc:resources mapping="/channel/**" location="/channel/" />
 	<mvc:resources mapping="/logincss/**" location="/logincss/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
