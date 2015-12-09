@@ -219,7 +219,7 @@ th {
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;编码：</th>
 							<td nowrap="nowrap" align="left"><form:input path="code"
-									value="${channel.code}" onchange="oncodeComplete()" />&nbsp;<form:errors
+									value="${channel.code}" onchange="oncodeComplete()" onkeyup="value=value.replace(/[^a-zA-Z]/g,'')"/>&nbsp;<form:errors
 									path="code" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
