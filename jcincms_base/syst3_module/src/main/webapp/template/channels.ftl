@@ -15,7 +15,7 @@
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<img alt="logo" src="images/logo.gif" />
+				<img alt="logo" src="${ctx}/images/logo.gif" />
 			</div>
 			<div id="headerContact">
 				<span>2015年11月26日 星期四</span>
@@ -114,9 +114,9 @@
 					<div class="box-header">栏目推荐</div>
 					<div class="box-center">
 						<ul>
-							<#if recommendDocs ??>
+							<#if recommendDocs ?exists>
 								<#list recommendDocs as doc>
-									<#if doc.title ??>
+									<#if doc.title ?exists>
 										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
 									</#if>
 								</#list>
@@ -165,7 +165,8 @@
 
 				</div>
 				<div class="spacer"></div>
-				<#list menus as channel>
+				<#if subChannels ??>
+					<#list subChannels as channel>
 						<#if channel.name ??>
 							<#if channel_index%2==0>
 								<div class="box" style="float: left;">
@@ -194,12 +195,13 @@
 									
 								</ul>
 							</div>
-			</div>
-			<#if channel_index%2==1>
-				<div class="spacer"></div>
+						</div>
+						<#if channel_index%2==1>
+							<div class="spacer"></div>
+						</#if>
+					</#if>
+				</#list>
 			</#if>
-			</#if>
-			</#list>
 		</div>
 		<!-- 右边导航 -->
 		

@@ -9,13 +9,13 @@
 <script type="text/javascript" src="${ctx}/js/slider.js"></script>
 <script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
 
-<title>首页</title>
+<title>${channel.name}</title>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<img alt="logo" src="images/logo.gif" />
+				<img alt="logo" src="${ctx}/images/logo.gif" />
 			</div>
 			<div id="headerContact">
 				<span>2015年11月26日 星期四</span>
@@ -103,15 +103,15 @@
 				</#if>
 				<#if page ??>
 					<div class="spacer"></div>
-					<div  style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
+					<div style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
 							<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
-							<c:if test="${page.page>1}">
-								<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</c:if>
+							<#if (page.page>1)>
+								<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</#if>
 							<span>${page.page}</span>&nbsp;&nbsp;
-							<c:if test="${page.page < page.totalPage+1}">
-								<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</c:if>
-							<c:if test="${page.page < page.totalPage+1}">
-								<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</c:if>
+							<#if (page.page < page.totalPage+1)>
+								<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</#if>
+							<#if (page.page < page.totalPage+1)>
+								<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</#if>
 							&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
 					 </div>
 				</#if>

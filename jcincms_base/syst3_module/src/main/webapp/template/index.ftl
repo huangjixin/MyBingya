@@ -15,7 +15,7 @@
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<img alt="logo" src="images/logo.gif" />
+				<img alt="logo" src="${ctx}/images/logo.gif" />
 			</div>
 			<div id="headerContact">
 				<span>2015年11月26日 星期四</span>
