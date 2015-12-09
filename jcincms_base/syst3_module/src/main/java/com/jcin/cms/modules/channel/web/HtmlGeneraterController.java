@@ -186,7 +186,6 @@ public class HtmlGeneraterController extends BaseController {
 			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		}
 		
-		
 		//生成子栏目。
 		if(generateSubchannel){
 			if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
