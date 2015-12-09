@@ -61,13 +61,15 @@ public class ChannelController extends BaseController<Channel>{
 	public String create(Channel channel, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		/*if(channel.getCode()!=null && !"".equals(channel.getCode())){
-			String endChactor = channel.getCode().substring(channel.getCode().length()-1, channel.getCode().length());
-			if(!"s".equals(endChactor)){
-				uiModel.addAttribute("channel", channel);
+		if(channel.getCode()!=null && !"".equals(channel.getCode())){
+			ChannelCriteria channelCriteria = new ChannelCriteria();
+			channelCriteria.createCriteria().andCodeEqualTo(channel.getCode());
+			List<Channel>channels = channelService.selectByExample(channelCriteria);
+			if(channels.size()>0){
+				uiModel.addAttribute("msg", "编码不唯一，请修改");
 				return root+"admin/modules/channel/channel_create";
 			}
-		}*/
+		}
 		channelService.insert(channel);
 		
 		redirectAttributes.addFlashAttribute("channel", channel);
