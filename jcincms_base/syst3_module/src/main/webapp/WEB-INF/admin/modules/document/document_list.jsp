@@ -159,6 +159,10 @@
 		$("#tgrid").datagrid("reload");
 	}
 
+	function clearChannelIdInput() {
+		$("#channelInput").combotree('clear');
+	}
+	
 	//清除
 	function clearSearch() {
 			$("#titleInput").val("");
@@ -222,6 +226,7 @@
 			<input  id="documentTempleteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>栏目:</label>
 			<input  id="channelInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input type="button" value="清除" onclick="clearChannelIdInput();" />
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
