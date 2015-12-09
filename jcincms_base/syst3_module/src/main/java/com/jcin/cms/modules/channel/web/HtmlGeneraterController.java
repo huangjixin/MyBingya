@@ -171,7 +171,21 @@ public class HtmlGeneraterController extends BaseController {
 		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
 		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1.html";
 		FileUtils.createDirectory(toGeneratedFiles+File.separator+"docs");
-		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+		
+		//栏目的叶子节点生成。
+		if (null == toGeneratedChannel.getChildren()||toGeneratedChannel.getChildren().size()==0) {
+			int totalPage = page.getTotalPage();
+			for (int i = 0; i <= totalPage; i++) {
+				htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+(i+1)+".html";
+				page.setStart(i*page.getPageSize());
+				documentService.getDocByChannelCode(toGeneratedChannel.getCode(), page);
+				root.put("page", page);
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+			}
+		}else{ //非叶子节点生成使用channels模板，叶子节点使用channel模板
+			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+		}
+		
 		
 		//生成子栏目。
 		if(generateSubchannel){
