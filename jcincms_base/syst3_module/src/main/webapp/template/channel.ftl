@@ -90,7 +90,7 @@
 								<div class="info">
 									<span style="font-weight: bold;font-size: 14px;"><a
 										href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;
-									<hr>
+									<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 									<p>文章摘要：${doc.contentShort}</p>
 									<div style="font-size: 12px;">
 										<#setting date_format="yyyy.MM.dd">
