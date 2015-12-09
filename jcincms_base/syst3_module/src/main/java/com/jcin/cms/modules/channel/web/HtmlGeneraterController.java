@@ -136,10 +136,12 @@ public class HtmlGeneraterController extends BaseController {
 		page.setPageSize(10);
 		Map<String,Object> menusMap=new HashMap<String, Object>();
 		Channel toGeneratedChannel = result.get(0);
-		for (Channel channel : toGeneratedChannel.getChildren()) {
-			List<Document> documents = documentService.getDocByChannelCode(channel.getCode(), page);
-			menusMap.put(channel.getCode(), documents);
-			root.put(channel.getCode(), menusMap);
+		if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
+			for (Channel channel : toGeneratedChannel.getChildren()) {
+				List<Document> documents = documentService.getDocByChannelCode(channel.getCode(), page);
+				menusMap.put(channel.getCode(), documents);
+				root.put(channel.getCode(), menusMap);
+			}
 		}
 		
 		if (null == toGeneratedChannel.getChildren()||toGeneratedChannel.getChildren().size()==0) {
@@ -148,6 +150,7 @@ public class HtmlGeneraterController extends BaseController {
 		}
 		
 		root.put("channel", toGeneratedChannel);
+		root.put("subChannels", toGeneratedChannel.getChildren());
 		root.put("menusMap", menusMap);
 		root.put("path", webroot);
 		root.put("ctx", conPath);
@@ -166,7 +169,7 @@ public class HtmlGeneraterController extends BaseController {
 		 
 		String templatesPath=webroot;
 		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
-		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+".html";
+		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1.html";
 		FileUtils.createDirectory(toGeneratedFiles+File.separator+"docs");
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		
@@ -179,7 +182,7 @@ public class HtmlGeneraterController extends BaseController {
 			}
 		}
 		
-		return "生成栏目失败，注意刷新栏目";
+		return "生成栏目成功";
 	}
 	
 	private void generateSubChannel(Channel toChannel,HttpServletRequest httpServletRequest){
@@ -217,6 +220,7 @@ public class HtmlGeneraterController extends BaseController {
 		}
 		
 		root.put("channel", toGeneratedChannel);
+		root.put("subChannels", toGeneratedChannel.getChildren());
 		root.put("menusMap", menusMap);
 		root.put("path", webroot);
 		root.put("ctx", conPath);
@@ -235,7 +239,7 @@ public class HtmlGeneraterController extends BaseController {
 		 
 		String templatesPath=webroot;
 		String templateFile= toGeneratedChannel.getChildren()!=null && toGeneratedChannel.getChildren().size()>0?"template"+File.separator+"channels.ftl":"template"+File.separator+"channel.ftl";
-		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+".html";
+		String htmlFile=toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1.html";
 		FileUtils.createDirectory(toGeneratedFiles+File.separator+"docs");
 		
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
@@ -397,7 +401,10 @@ public class HtmlGeneraterController extends BaseController {
 				String templatesPath=webroot;
 				String templateFile= "template"+File.separator+"doc.ftl";
 				String htmlFile=toGeneratedFiles+File.separator+document.getId()+".html";
-				
+				Document lastdoc = documentService.selectLastRecord(document);
+				Document nextdoc = documentService.selectNextRecord(document);
+				root.put("lastdoc", lastdoc);
+				root.put("nextdoc", nextdoc);
 				root.put("channel", toGeneratedChannel);
 				root.put("path", webroot);
 				root.put("ctx", conPath);
@@ -453,6 +460,10 @@ public class HtmlGeneraterController extends BaseController {
 				String htmlFile=toGeneratedFiles+File.separator+document.getId()+".html";
 				
 				root.put("channel", toGeneratedChannel);
+				Document lastdoc = documentService.selectLastRecord(document);
+				Document nextdoc = documentService.selectNextRecord(document);
+				root.put("lastdoc", lastdoc);
+				root.put("nextdoc", nextdoc);
 				root.put("path", webroot);
 				root.put("ctx", conPath);
 				root.put("menus", menus);
