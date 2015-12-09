@@ -5,12 +5,13 @@
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<title>${document.title}</title>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<img alt="logo" src="${ctx }/images/logo.gif" />
+				<img alt="logo" src="${ctx}/images/logo.gif" />
 			</div>
 			<div id="headerContact">
 				<span>2015年11月26日 星期四</span>
@@ -41,12 +42,12 @@
 				</div>
 				<div class="spacer"></div>
 				<c:if test="${lastdoc!=null}">
-					<div>
+					<div style="font-size: 12px;">
 						<span>上一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 					</div>
 				</c:if>
 				<c:if test="${nextdoc!=null}">
-					<div>
+					<div style="font-size: 12px;">
 						<span>下一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 					</div>
 				</c:if>

@@ -8,6 +8,7 @@
 <script type="text/javascript" src="${ctx}/js/slider.js"></script>
 <script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
 </head>
+<title>首页</title>
 <body>
 	<div id="container">
 		<div id="header">
