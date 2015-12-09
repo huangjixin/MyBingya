@@ -69,11 +69,13 @@ th {
 	
 	//生成首页
 	function generateIndex() {
+		$('#tip')[0].innerHTML="正在生成首页……";
 		$.ajax({  
 			url:"${ctxAdmin}/htmlgenerate/generateIndex",  
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
+				$('#tip')[0].innerHTML="生成首页成功";
 // 			    alert("生成首页成功");
 			}, error:function(){  
 			    alert("出错了");  
@@ -83,13 +85,13 @@ th {
 	
 	//删除首页
 	function deleteIndex() {
+		$('#tip')[0].innerHTML="正在删除首页……";
 		$.ajax({  
 			url:"${ctxAdmin}/htmlgenerate/deleteIndex",  
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
 				$('#tip').innerHTML="删除首页成功";
-			    alert("删除首页成功");
 			}, error:function(){  
 			    alert("出错了");  
 			}  
@@ -104,6 +106,7 @@ th {
 			return;
 		}
 		var checked = $('#generateSubchannel').is(':checked')?true:false;
+		$('#tip')[0].innerHTML="正在生成选中的栏目……";
 		$.ajax({  
 			url:"${ctxAdmin}/htmlgenerate/generateChannel?id="+node.id+"&generateSubchannel="+checked,  
 			//data可以传参多个参数"name=John&location=Boston",    
@@ -123,6 +126,7 @@ th {
 			$('#tip')[0].innerHTML="请选中栏目";
 			return;
 		}
+		$('#tip')[0].innerHTML="正在删除选中的栏目……";
 		var checked = $('#generateSubchannel').is(':checked')?true:false;
 		$.ajax({  
 			url:"${ctxAdmin}/htmlgenerate/deleleChannel?id="+node.id+"&deleteSubchannel="+checked,  
@@ -141,6 +145,7 @@ th {
 			$('#tip')[0].innerHTML="请选中栏目";
 			return;
 		}
+		$('#tip')[0].innerHTML="正在删除选中的栏目文档……";
 		var checked = $('#deleteSubchannelDoc').is(':checked')?true:false;
 		$.ajax({  
 			url:"${ctxAdmin}/htmlgenerate/deleteChannelDoc?id="+node.id+"&deleteSubchannelDoc="+checked,  
@@ -154,20 +159,21 @@ th {
 		 });
 	}
 	
-	//删除栏目文档
+	//生成栏目文档
 	function generateDocs() {
 		var node = $('#docTree').combotree('tree').tree("getSelected");
 		if(node==null){
 			$('#tip')[0].innerHTML="请选中栏目";
 			return;
 		}
+		$('#tip')[0].innerHTML="正在生成选中的栏目文档……";
 		var checked = $('#deleteSubchannelDoc').is(':checked')?true:false;
 		$.ajax({  
-			url:"${ctxAdmin}/htmlgenerate/generateDocs?id="+node.id+"&deleteSubchannelDoc="+checked,  
+			url:"${ctxAdmin}/htmlgenerate/generateDocs?id="+node.id+"&generateSubchannelDoc="+checked,  
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){ 
-				$('#tip')[0].innerHTML="删除栏目文档成功";
+				$('#tip')[0].innerHTML="生成栏目文档成功";
 			}, error:function(){  
 			    alert("出错了");  
 			}  
