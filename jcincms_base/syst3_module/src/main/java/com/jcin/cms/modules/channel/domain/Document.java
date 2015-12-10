@@ -683,4 +683,14 @@ public class Document implements Serializable {
     public void setContentShort(String contentShort) {
         this.contentShort = contentShort == null ? null : contentShort.trim();
     }
+    
+    public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	private Channel channel;
 }
