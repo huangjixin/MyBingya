@@ -107,7 +107,11 @@
 							<#if recommendDocs ??>
 								<#list recommendDocs as doc>
 									<#if doc.title ??>
-										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+										<#if doc.channel ??>
+											<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+											<#else>
+											<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+										</#if>
 									</#if>
 								</#list>
 							</#if>
