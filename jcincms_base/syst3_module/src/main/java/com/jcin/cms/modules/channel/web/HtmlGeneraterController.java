@@ -68,9 +68,12 @@ public class HtmlGeneraterController extends BaseController {
 		String conPath = httpServletRequest.getContextPath();
 		Map<String,Object> root=new HashMap<String, Object>();
 		Page page = new Page();
-		page.setPageSize(8);
+		page.setPageSize(10);
 		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-		
+		for (Document document : recommendDocs) {
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			document.setChannel(channel);
+		}
 		// 菜单
 		List<Channel> menus = UserUtils.getChannels();
 		

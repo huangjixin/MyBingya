@@ -55,7 +55,11 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("list", list);
 		
 		Page page = new Page();
-		List recommendDocs = documentService.getRecommendDoc(page);
+		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		for (Document document : recommendDocs) {
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			document.setChannel(channel);
+		}
 		uiModel.addAttribute("recommendDocs", recommendDocs);
 		
 		return "index.jsp";
