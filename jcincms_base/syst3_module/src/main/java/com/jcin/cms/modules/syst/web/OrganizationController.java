@@ -105,7 +105,7 @@ public class OrganizationController extends BaseController<Organization> {
 	@RequiresPermissions("organization:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/organization/organization_list";
+		return root+"admin/modules/organization/organization_list.jsp";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
