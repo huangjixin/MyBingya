@@ -58,9 +58,15 @@
 						<ul>
 							<c:if test="${recommendDocs!=null}">
 								<c:forEach var="doc" items="${recommendDocs}">
-									<c:if test="${doc.title!=null && doc.title!=''}">
-										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
-									</c:if>
+									<c:choose>
+										<c:when
+											test="${doc.channel!=null}">
+											<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</c:if>
 						</ul>
@@ -127,8 +133,9 @@
 										<c:forEach var="doc" items="${docs}">
 											<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
 												target="blank">${doc.title}<span><fmt:formatDate
-									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
-									<hr style="height:1px;border:none;border-top:1px dashed #CCCCCC;"/>
+															value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+											<hr
+												style="height:1px;border:none;border-top:1px dashed #CCCCCC;" />
 										</c:forEach>
 									</c:if>
 								</ul>
