@@ -13,7 +13,13 @@
 	<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 	$().ready(function() {
-		$('#tgrid').treegrid('collapseAll');
+		/* $('#tgrid').treegrid({  
+		    onLoadSuccess:function(node,data){  
+		    	/* $('#tgrid').treegrid.tree("collapseAll"); */
+			}  
+		}) */
+// 		$('#tgrid').treegrid('collapseAll');
+// 		$('#tgrid').treegrid.tree("collapseAll");
 	});
 
 	// 移除条目；

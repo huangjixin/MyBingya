@@ -50,6 +50,26 @@
 												title : '角色名',
 												align : 'center',
 												width : 100
+											}, {
+												field : 'createDate',
+												title : '创建日期',
+												align : 'center',
+												width : 100
+											}, {
+												field : 'updateDate',
+												title : '更新日期',
+												align : 'center',
+												width : 100
+											}, {
+												field : 'createBy',
+												title : '创建人',
+												align : 'center',
+												width : 100
+											}, {
+												field : 'updateBy',
+												title : '更新人',
+												align : 'center',
+												width : 100
 											} ] ],
 											onClickRow : function(index, row) {
 												var queryParams = {};
@@ -68,8 +88,11 @@
 							url : '${ctxAdmin}/role/getResourceCheckboxTree',
 							method : 'get',
 							animate : true,
-							checkbox : true
-						});
+							checkbox : true, //全部折叠
+							onLoadSuccess : function(node, data) {
+								$('#resourceTree').tree("collapseAll");
+							}
+						})
 						
 						$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
 						$('#usergrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
@@ -258,10 +281,12 @@
 							">
 			<thead>
 				<tr>
-					<th id="idFieldTh"
-						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th id="usernameFieldTh"
-						data-options="field:'username',align:'center'" width="100%">用户名</th>
+					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
+					<th data-options="field:'username',align:'center'" width="100%">用户名</th>
+					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
+					<th data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
+					<th data-options="field:'createBy',align:'center'" width="100%">创建人</th>
+					<th data-options="field:'updateBy',align:'center'" width="100%">更新人</th>
 				</tr>
 			</thead>
 		</table>

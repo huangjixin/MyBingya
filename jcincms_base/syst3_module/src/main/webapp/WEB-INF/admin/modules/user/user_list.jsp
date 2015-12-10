@@ -58,13 +58,21 @@
 	function create(){
 		window.location.href='${ctxAdmin}/user/create'; 
 	}
+	
 	function update(){
 		var row = $('#tgrid').datagrid('getSelections');
 		if (row == null || row.length==0) {
 			return;
 		}
-		
 		window.location.href='${ctxAdmin}/user/update/'+row[0].id+''; 
+	}
+	
+	function updatePass(){
+		/* var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		window.location.href='${ctxAdmin}/user/update/'+row[0].id+''; */ 
 	}
 
 	function show(){
@@ -126,6 +134,9 @@
 			<shiro:hasPermission name="user:update">
 				<input type="button" value="更新" onclick="update();" /> 
 			</shiro:hasPermission>
+			<shiro:hasPermission name="user:update">
+				<input type="button" value="重置密码" onclick="updatePass();" /> 
+			</shiro:hasPermission>
 			<shiro:hasPermission name="user:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>
@@ -169,9 +180,12 @@
 					<th data-options="field:'roleName',align:'center'" width="100%">角色名</th>
 					<th data-options="field:'sex',align:'center'" width="100%">性别</th>
 					<th data-options="field:'loginCount',align:'center'" width="100%">登录次数</th>
-					<th data-options="field:'loginCount',align:'center'" width="100%">最后登录IP</th>
-					<th data-options="field:'loginCount',align:'center'" width="100%">创建日期</th>
-					<th data-options="field:'loginCount',align:'center'" width="100%">更新日期</th>
+					<th data-options="field:'loginIp',align:'center'" width="100%">最后登录IP</th>
+					<th data-options="field:'loginDate',align:'center'" width="100%">登录日期</th>
+					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
+					<th data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
+					<th data-options="field:'createBy',align:'center'" width="100%">创建人</th>
+					<th data-options="field:'updateBy',align:'center'" width="100%">更新人</th>
 				</tr>
 			</thead>
 		</table>
