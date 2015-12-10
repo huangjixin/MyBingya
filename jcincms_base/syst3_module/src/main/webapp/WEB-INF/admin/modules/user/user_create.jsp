@@ -85,20 +85,27 @@ function clearRoleInput(){
 							</select>&nbsp; <input type="button" value="清除"
 								onclick="clearRoleInput();" /></td>
 						</tr>
-						<tr
-							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
 							<th>&nbsp;组织：</th>
 							<td nowrap="nowrap" align="left"><input id="organizationId"
 								name="organizationId">&nbsp; <input type="button" value="清除"
 								onclick="clearParentInput();" /></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;性别：</th>
+							<td nowrap="nowrap" align="left"><select id="sex"
+								name="sex" style="width:100px;">
+									<c:forEach var="sh" items="${fns:getByType('sex')}">
+										<option value="${sh.value}"
+											<c:if test="${sh.value == 'true'}">selected="selected"</c:if>
+											<c:if test="${sh.value == 'false'}">selected="selected"</c:if>>${sh.label}</option>
+									</c:forEach>
+							</select></td>
+							<th>&nbsp;邮箱：</th>
+							<td nowrap="nowrap" align="left">
+								<input id="email" name="email" value="${user.email}">
+							</td>
 						</tr>
 						
-						<tr
-							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 							<th style="width: 150px;">&nbsp;</th>
 							<td style="text-align: left;" colspan="6"><input
 								type="submit" value="保存" />&nbsp;&nbsp;<input type="button"

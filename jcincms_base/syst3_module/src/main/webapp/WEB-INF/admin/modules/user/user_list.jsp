@@ -165,11 +165,21 @@
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th id="idFieldTh"
 						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th id="usernameFieldTh"
-						data-options="field:'username',align:'center'" width="100%">用户名</th>
+					<th data-options="field:'username',align:'center'" width="100%">用户名</th>
+					<th data-options="field:'roleName',align:'center'" width="100%">角色名</th>
+					<th data-options="field:'sex',align:'center'" width="100%">性别</th>
+					<th data-options="field:'loginCount',align:'center'" width="100%">登录次数</th>
+					<th data-options="field:'loginCount',align:'center'" width="100%">最后登录IP</th>
+					<th data-options="field:'loginCount',align:'center'" width="100%">创建日期</th>
+					<th data-options="field:'loginCount',align:'center'" width="100%">更新日期</th>
 				</tr>
 			</thead>
 		</table>
-
+		<script type="text/javascript">
+		/* ,formatter:formatRolename */
+			function formatRolename(val,row,index){
+				return '<a href="#" onclick="editUser('+index+')">修改</a>';
+			}
+		</script>
 </body>
 </html>

@@ -101,10 +101,39 @@ function clearRoleInput(){
 							<td nowrap="nowrap" align="left"><input id="organizationId"
 								name="organizationId" value="${organizationId}">&nbsp; <input type="button" value="清除"
 								onclick="clearOrgInput();" /></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;性别：</th>
+							<td nowrap="nowrap" align="left"><select id="sex"
+								name="sex" style="width:100px;">
+									<c:forEach var="sh" items="${fns:getByType('sex')}">
+										<option value="${sh.value}"
+											<c:if test="${sh.value == 'true'}">selected="selected"</c:if>
+											<c:if test="${sh.value == 'false'}">selected="selected"</c:if>>${sh.label}</option>
+									</c:forEach>
+							</select></td>
+							<th>&nbsp;邮箱：</th>
+							<td nowrap="nowrap" align="left">
+								<input id="email" name="email" value="${user.email}">
+							</td>
+						</tr>
+						<tr
+							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
+							<th>&nbsp;父亲节点：</th>
+							<td nowrap="nowrap" align="left"><input id="organizationId"
+								name="organizationId" value="${organizationId}">&nbsp; <input type="button" value="清除"
+								onclick="clearOrgInput();" /></td>
+							<th>&nbsp;性别：</th>
+							<td nowrap="nowrap" align="left"><select id="sex"
+								name="sex" style="width:100px;">
+									<c:forEach var="sh" items="${fns:getByType('sex')}">
+										<option value="${sh.value}"
+											<c:if test="${sh.value == 'true'}">selected="selected"</c:if>
+											<c:if test="${sh.value == 'false'}">selected="selected"</c:if>>${sh.label}</option>
+									</c:forEach>
+							</select></td>
+							<th>&nbsp;邮箱：</th>
+							<td nowrap="nowrap" align="left">
+								<input id="email" name="email">
+							</td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
