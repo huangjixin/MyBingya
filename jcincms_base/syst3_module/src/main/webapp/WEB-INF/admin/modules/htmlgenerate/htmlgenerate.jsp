@@ -91,7 +91,7 @@ th {
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
-				$('#tip').innerHTML="删除首页成功";
+				$('#tip')[0].innerHTML="删除首页成功";
 			}, error:function(){  
 			    alert("出错了");  
 			}  
