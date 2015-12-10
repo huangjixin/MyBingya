@@ -256,6 +256,15 @@ public class UserController extends BaseController<User> {
 			criteria.andPasswordLike("%" + user.getPassword() + "%");
 		}
 		page = userService.select(userCriteria);
+		if(page.getRows()!=null && page.getRows().size()>0){
+			List<User>users = page.getRows();
+			for (User user2 : users) {
+				List<Role>roles = roleService.selectByUsername(user2.getUsername());
+				if(roles!=null && roles.size()>0){
+					user2.setRoleName(roles.get(0).getName());
+				}
+			}
+		}
 		return page;
 	}
 
