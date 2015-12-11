@@ -60,6 +60,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             user.setLoginDate(new Date());
             userService.update(user);
         }
-        return true;
+        return matches;
     }
 }

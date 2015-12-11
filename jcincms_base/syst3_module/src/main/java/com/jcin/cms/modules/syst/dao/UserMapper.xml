@@ -5,9 +5,19 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="login_date" property="loginDate" jdbcType="DATE" />
-    <result column="create_date" property="createDate" jdbcType="DATE" />
-    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="show_name" property="showName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="login_count" property="loginCount" jdbcType="VARCHAR" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="last_login" property="lastLogin" jdbcType="TIMESTAMP" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="head_image" property="headImage" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, login_date, create_date, update_date
+    id, username, password, login_date, create_date, update_date, show_name, email, mobile, 
+    login_count, login_ip, last_login, sex, create_by, update_by, head_image
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -104,11 +115,17 @@
   </delete>
   <insert id="insert" parameterType="com.jcin.cms.modules.syst.domain.User" >
     insert into tb_user (id, username, password, 
-      login_date, create_date, update_date
-      )
+      login_date, create_date, update_date, 
+      show_name, email, mobile, 
+      login_count, login_ip, last_login, 
+      sex, create_by, update_by, 
+      head_image)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{loginDate,jdbcType=DATE}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}
-      )
+      #{loginDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{showName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{loginCount,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{lastLogin,jdbcType=TIMESTAMP}, 
+      #{sex,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{headImage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.syst.domain.User" >
     insert into tb_user
@@ -131,6 +148,36 @@
       <if test="updateDate != null" >
         update_date,
       </if>
+      <if test="showName != null" >
+        show_name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="loginCount != null" >
+        login_count,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="lastLogin != null" >
+        last_login,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="headImage != null" >
+        head_image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -143,13 +190,43 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="loginDate != null" >
-        #{loginDate,jdbcType=DATE},
+        #{loginDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createDate != null" >
-        #{createDate,jdbcType=DATE},
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="updateDate != null" >
-        #{updateDate,jdbcType=DATE},
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showName != null" >
+        #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null" >
+        #{loginCount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        #{headImage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -172,13 +249,43 @@
         password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.loginDate != null" >
-        login_date = #{record.loginDate,jdbcType=DATE},
+        login_date = #{record.loginDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createDate != null" >
-        create_date = #{record.createDate,jdbcType=DATE},
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateDate != null" >
-        update_date = #{record.updateDate,jdbcType=DATE},
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.showName != null" >
+        show_name = #{record.showName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginCount != null" >
+        login_count = #{record.loginCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginIp != null" >
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogin != null" >
+        last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImage != null" >
+        head_image = #{record.headImage,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -190,9 +297,19 @@
     set id = #{record.id,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      login_date = #{record.loginDate,jdbcType=DATE},
-      create_date = #{record.createDate,jdbcType=DATE},
-      update_date = #{record.updateDate,jdbcType=DATE}
+      login_date = #{record.loginDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      show_name = #{record.showName,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      login_count = #{record.loginCount,jdbcType=VARCHAR},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
+      sex = #{record.sex,jdbcType=TINYINT},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      head_image = #{record.headImage,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,13 +324,43 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="loginDate != null" >
-        login_date = #{loginDate,jdbcType=DATE},
+        login_date = #{loginDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=DATE},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=DATE},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showName != null" >
+        show_name = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null" >
+        login_count = #{loginCount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        head_image = #{headImage,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -222,15 +369,25 @@
     update tb_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      login_date = #{loginDate,jdbcType=DATE},
-      create_date = #{createDate,jdbcType=DATE},
-      update_date = #{updateDate,jdbcType=DATE}
+      login_date = #{loginDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      show_name = #{showName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      sex = #{sex,jdbcType=TINYINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_user (id, username, password, login_date, create_date, update_date) values 
+    insert into tb_user (id, username, password, login_date, create_date, update_date, show_name, email, mobile, login_count, login_ip, last_login, sex, create_by, update_by, head_image) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=DATE}, #{item.createDate,jdbcType=DATE}, #{item.updateDate,jdbcType=DATE})
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.showName,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.loginCount,jdbcType=VARCHAR}, #{item.loginIp,jdbcType=VARCHAR}, #{item.lastLogin,jdbcType=TIMESTAMP}, #{item.sex,jdbcType=TINYINT}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.headImage,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
