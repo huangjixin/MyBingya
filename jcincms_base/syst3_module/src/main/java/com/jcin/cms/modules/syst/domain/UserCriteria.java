@@ -9,6 +9,22 @@ import java.util.List;
 public class UserCriteria {
 	private String orgId;
 	private String roleId;
+	
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
     /**
      * 
      *
@@ -188,21 +204,6 @@ public class UserCriteria {
         return dialect;
     }
 
-    public String getOrgId() {
-		return orgId;
-	}
-
-	public void setOrgId(String orgId) {
-		this.orgId = orgId;
-	}
-
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
 
 	/**
      * 该类对应于数据库表 tb_user
