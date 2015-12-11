@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,8 +133,9 @@ html,body {
 	<div class="easyui-layout" fit="true">
 		<div data-options="region:'north',split:true" style="height:80px;background:-moz-linear-gradient(top,#DBEAF9,#ffffff);/*火狐*/background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f6f6f8));">
 			<div class="logo">J2EE应用开发平台</div>
+			<c:set var="user" value="${fns:getUser()}"></c:set>
 			<div class="topNav">
-				欢迎<a onclick="showUser();"><b style="color: red;">${fns:getUsername()}</b></a>，上次登录是：<b style="color: red;">2015/10/11</b> &nbsp;&nbsp;<a  onclick="changePassword();">密码修改</a>&nbsp;&nbsp;<a href="../index.html">首页</a> | <a href="../demo/index.html">在线示例</a>
+				欢迎<a onclick="showUser();"><b style="color: red;">${user.username}</b></a>，上次登录是：<b style="color: red;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.lastLogin}" /></b> &nbsp;&nbsp;<a  onclick="changePassword();">密码修改</a>&nbsp;&nbsp;<a href="../index.html">首页</a> | <a href="../demo/index.html">在线示例</a>
 				| <a href="../docs/api/index.html">Api手册</a> | <a
 					href="../index.html#tutorial">开发教程</a> | <a
 					href="${ctxAdmin}/logout">退出</a>

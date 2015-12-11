@@ -57,12 +57,24 @@ function clearOrgInput(){
 function clearRoleInput(){
 	$('#organizationId').combotree('clear');
 }
+
+function onsubmitEventHandler(){
+	var szReg=/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/; 
+	var bChk=szReg.test($('#email').val()); 
+	if(bChk==false){
+		$('#tip')[0].innerHTML="email格式不对";
+		return false; 
+	}else{
+		$('#tip')[0].innerHTML="";
+	}
+	return true; 
+}
 </script>
 <title>用户修改</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/user/update/${user.id}"
-		method="post" commandName="user">
+		method="post" commandName="user" onsubmit="return onsubmitEventHandler();">
 		<input name="id" value="${user.id}" type="hidden" />
 		<input id="organizationIdInput" value="${organizationId}" type="hidden" />
 		<div class="desc">
@@ -114,7 +126,7 @@ function clearRoleInput(){
 							</select></td>
 							<th>&nbsp;邮箱：</th>
 							<td nowrap="nowrap" align="left">
-								<input id="email" name="email" value="${user.email}">
+								<input id="email" name="email" value="${user.email}">&nbsp;<span style="color: red;">*</span>
 							</td> 
 						</tr>
 						<tr

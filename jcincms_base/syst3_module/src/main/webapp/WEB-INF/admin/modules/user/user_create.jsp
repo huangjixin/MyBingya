@@ -49,14 +49,26 @@ function clearParentInput(){
 function clearRoleInput(){
 	$('#roleIdSelect').val("");
 }
+
+function onsubmitEventHandler(){
+	var szReg=/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/; 
+	var bChk=szReg.test($('#email').val()); 
+	if(bChk==false){
+		$('#tip')[0].innerHTML="email格式不对";
+		return false; 
+	}else{
+		$('#tip')[0].innerHTML="";
+	}
+	return true; 
+}
 </script>
 <title>用户添加</title>
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/user/create"
-		method="post" commandName="user">
-		<div class="desc">
-			<b>用户信息添加</b>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+		method="post" commandName="user" onsubmit="return onsubmitEventHandler();">
+		<div class="desc"><!-- //注意此处不能写成 onsubmit="submitFun();"否则将表单总是提交 -->
+			<b>用户信息添加</b>&nbsp;&nbsp;&nbsp;&nbsp;<b id="tip" style="color: red;">${msg}</b>
 		</div>
 		<table width="100%" border="0" cellpadding="2" cellspacing="0">
 			<tr>
@@ -103,7 +115,7 @@ function clearRoleInput(){
 							</select></td>
 							<th>&nbsp;邮箱：</th>
 							<td nowrap="nowrap" align="left">
-								<input id="email" name="email" value="${user.email}">
+								<input id="email" name="email" value="${user.email}">&nbsp;<span style="color: red;">*</span>
 							</td> 
 						</tr>
 						
