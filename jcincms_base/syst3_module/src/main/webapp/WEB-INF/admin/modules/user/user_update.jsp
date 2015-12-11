@@ -79,9 +79,9 @@ function clearRoleInput(){
 							<td nowrap="nowrap" align="left"><form:input path="username"
 									value="${user.username}" />&nbsp;<form:errors path="username"
 									cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;密码：</th>
-							<td nowrap="nowrap" align="left"><form:password
-									path="password" value="${user.password}" />&nbsp;<form:errors
+							<th>&nbsp;</th>
+							<td nowrap="nowrap" align="left"><input type="password"
+									name="password" value="${user.password}" />&nbsp;<form:errors
 									path="password" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;角色组：</th>
 							<td nowrap="nowrap" align="left"><select id="roleIdSelect"
