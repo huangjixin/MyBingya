@@ -121,6 +121,8 @@ public class UserController extends BaseController<User> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		user.setUpdateBy(UserUtils.getUsername());
+		user.setUpdateDate(new Date());
 		userService.update(user);
 		if("".equals(roleId)){
 			roleId = null;
