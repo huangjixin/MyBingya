@@ -180,8 +180,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Transactional(readOnly = false)
 	public String update(User record) {
 		// super.update(record);
-		String password = PasswordHelper.encryptPassword(record.getPassword());
-		record.setPassword(password);
 		record.setUpdateDate(new Date());
 		int result = userMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
