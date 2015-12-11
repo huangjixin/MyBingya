@@ -34,6 +34,7 @@
 				<div class="desc">
 					<b>${objInst}信息添加</b>&nbsp;&nbsp;<b style="color: red;">${r'${msg}'}</b>
 				</div>
+				<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
 						<td width="100%">
@@ -45,7 +46,7 @@
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 								</#if>
 									<th>&nbsp;${introspectedColumn}：</th>
-									<td nowrap="nowrap" align="left"><form:input id="${introspectedColumn}" path="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<form:errors path="${introspectedColumn}" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><form:input id="${introspectedColumn}" path="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<span style="color: red;">*</span>&nbsp;<form:errors path="${introspectedColumn}" cssStyle="color:red;"></form:errors></td>
 								<#if (iSum%3!=0 && iSum%3==2)>
 								</tr>
 								</#if>
