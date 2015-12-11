@@ -93,16 +93,18 @@ function clearRoleInput(){
 							<th>&nbsp;性别：</th>
 							<td nowrap="nowrap" align="left"><select id="sex"
 								name="sex" style="width:100px;">
+								<%-- <option value="1" >男</option>
+								<option value="0" <c:if test="${user.sex==0}">selected="selected"</c:if>>女</option> --%>
 									<c:forEach var="sh" items="${fns:getByType('sex')}">
 										<option value="${sh.value}"
-											<c:if test="${sh.value == 'true'}">selected="selected"</c:if>
-											<c:if test="${sh.value == 'false'}">selected="selected"</c:if>>${sh.label}</option>
+											<c:if test="${sh.value == user.sex}">selected="selected"</c:if>
+											<c:if test="${sh.value == user.sex}">selected="selected"</c:if>>${sh.label}</option>
 									</c:forEach>
 							</select></td>
 							<th>&nbsp;邮箱：</th>
 							<td nowrap="nowrap" align="left">
 								<input id="email" name="email" value="${user.email}">
-							</td>
+							</td> 
 						</tr>
 						
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
