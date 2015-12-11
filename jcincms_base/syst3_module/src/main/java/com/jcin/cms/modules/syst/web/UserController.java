@@ -72,6 +72,8 @@ public class UserController extends BaseController<User> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		user.setCreateBy(UserUtils.getUsername());
+		user.setCreateDate(new Date());
 		userService.insert(user);
 		if (null != roleId && !"".equals(roleId)) { // 关联用户角色
 			userService.connectUserRole(user.getId(), roleId);
