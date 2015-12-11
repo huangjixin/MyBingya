@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.PasswordHelper;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.Role;
@@ -200,11 +201,12 @@ public class UserController extends BaseController<User> {
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		User user2 = UserUtils.getUser();
-		if (!user2.getPassword().equals(user.getPassword())) {
+		if (!user2.getPassword().equals(PasswordHelper.encryptPassword(user.getPassword()))) {
 			uiModel.addAttribute("msg", "旧密码输入有误");
 			return root+"admin/modules/user/changePassword";
 		}
 		User user3 = new User();
+		newPassword = PasswordHelper.encryptPassword(newPassword);
 		user3.setPassword(newPassword);
 		user3.setId(user2.getId());
 		userService.updatePassword(user3);
