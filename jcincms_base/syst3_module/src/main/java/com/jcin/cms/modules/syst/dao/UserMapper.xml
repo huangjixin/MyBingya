@@ -11,7 +11,7 @@
     <result column="show_name" property="showName" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="login_count" property="loginCount" jdbcType="VARCHAR" />
+    <result column="login_count" property="loginCount" jdbcType="INTEGER" />
     <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
     <result column="last_login" property="lastLogin" jdbcType="TIMESTAMP" />
     <result column="sex" property="sex" jdbcType="TINYINT" />
@@ -123,7 +123,7 @@
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{loginDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{showName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{loginCount,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{lastLogin,jdbcType=TIMESTAMP}, 
+      #{loginCount,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{lastLogin,jdbcType=TIMESTAMP}, 
       #{sex,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
       #{headImage,jdbcType=VARCHAR})
   </insert>
@@ -208,7 +208,7 @@
         #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="loginCount != null" >
-        #{loginCount,jdbcType=VARCHAR},
+        #{loginCount,jdbcType=INTEGER},
       </if>
       <if test="loginIp != null" >
         #{loginIp,jdbcType=VARCHAR},
@@ -267,7 +267,7 @@
         mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.loginCount != null" >
-        login_count = #{record.loginCount,jdbcType=VARCHAR},
+        login_count = #{record.loginCount,jdbcType=INTEGER},
       </if>
       <if test="record.loginIp != null" >
         login_ip = #{record.loginIp,jdbcType=VARCHAR},
@@ -303,7 +303,7 @@
       show_name = #{record.showName,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
-      login_count = #{record.loginCount,jdbcType=VARCHAR},
+      login_count = #{record.loginCount,jdbcType=INTEGER},
       login_ip = #{record.loginIp,jdbcType=VARCHAR},
       last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
       sex = #{record.sex,jdbcType=TINYINT},
@@ -342,7 +342,7 @@
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="loginCount != null" >
-        login_count = #{loginCount,jdbcType=VARCHAR},
+        login_count = #{loginCount,jdbcType=INTEGER},
       </if>
       <if test="loginIp != null" >
         login_ip = #{loginIp,jdbcType=VARCHAR},
@@ -375,7 +375,7 @@
       show_name = #{showName,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
-      login_count = #{loginCount,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=INTEGER},
       login_ip = #{loginIp,jdbcType=VARCHAR},
       last_login = #{lastLogin,jdbcType=TIMESTAMP},
       sex = #{sex,jdbcType=TINYINT},
@@ -387,7 +387,7 @@
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into tb_user (id, username, password, login_date, create_date, update_date, show_name, email, mobile, login_count, login_ip, last_login, sex, create_by, update_by, head_image) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.showName,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.loginCount,jdbcType=VARCHAR}, #{item.loginIp,jdbcType=VARCHAR}, #{item.lastLogin,jdbcType=TIMESTAMP}, #{item.sex,jdbcType=TINYINT}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.headImage,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.showName,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.loginCount,jdbcType=INTEGER}, #{item.loginIp,jdbcType=VARCHAR}, #{item.lastLogin,jdbcType=TIMESTAMP}, #{item.sex,jdbcType=TINYINT}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.headImage,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

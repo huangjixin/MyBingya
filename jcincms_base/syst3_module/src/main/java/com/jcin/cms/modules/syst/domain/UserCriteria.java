@@ -9,14 +9,6 @@ public class UserCriteria {
 	private String orgId;
 	private String roleId;
 	
-	public String getOrgId() {
-		return orgId;
-	}
-
-	public void setOrgId(String orgId) {
-		this.orgId = orgId;
-	}
-
 	public String getRoleId() {
 		return roleId;
 	}
@@ -24,45 +16,53 @@ public class UserCriteria {
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
+
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public UserCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -71,7 +71,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -80,7 +80,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -89,7 +89,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -98,7 +98,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public boolean isDistinct() {
         return distinct;
@@ -107,7 +107,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -116,7 +116,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -125,7 +125,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -136,7 +136,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -149,7 +149,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -159,7 +159,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     public void clear() {
         oredCriteria.clear();
@@ -170,7 +170,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     public void setPage(Page page) {
         this.page=page;
@@ -179,7 +179,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     public Page getPage() {
         return page;
@@ -188,7 +188,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -197,7 +197,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     public String getDialect() {
         return dialect;
@@ -206,7 +206,7 @@ public class UserCriteria {
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -859,62 +859,52 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountEqualTo(String value) {
+        public Criteria andLoginCountEqualTo(Integer value) {
             addCriterion("login_count =", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountNotEqualTo(String value) {
+        public Criteria andLoginCountNotEqualTo(Integer value) {
             addCriterion("login_count <>", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountGreaterThan(String value) {
+        public Criteria andLoginCountGreaterThan(Integer value) {
             addCriterion("login_count >", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountGreaterThanOrEqualTo(String value) {
+        public Criteria andLoginCountGreaterThanOrEqualTo(Integer value) {
             addCriterion("login_count >=", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountLessThan(String value) {
+        public Criteria andLoginCountLessThan(Integer value) {
             addCriterion("login_count <", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountLessThanOrEqualTo(String value) {
+        public Criteria andLoginCountLessThanOrEqualTo(Integer value) {
             addCriterion("login_count <=", value, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountLike(String value) {
-            addCriterion("login_count like", value, "loginCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andLoginCountNotLike(String value) {
-            addCriterion("login_count not like", value, "loginCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andLoginCountIn(List<String> values) {
+        public Criteria andLoginCountIn(List<Integer> values) {
             addCriterion("login_count in", values, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountNotIn(List<String> values) {
+        public Criteria andLoginCountNotIn(List<Integer> values) {
             addCriterion("login_count not in", values, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountBetween(String value1, String value2) {
+        public Criteria andLoginCountBetween(Integer value1, Integer value2) {
             addCriterion("login_count between", value1, value2, "loginCount");
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountNotBetween(String value1, String value2) {
+        public Criteria andLoginCountNotBetween(Integer value1, Integer value2) {
             addCriterion("login_count not between", value1, value2, "loginCount");
             return (Criteria) this;
         }
@@ -1349,11 +1339,6 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLoginCountLikeInsensitive(String value) {
-            addCriterion("upper(login_count) like", value.toUpperCase(), "loginCount");
-            return (Criteria) this;
-        }
-
         public Criteria andLoginIpLikeInsensitive(String value) {
             addCriterion("upper(login_ip) like", value.toUpperCase(), "loginIp");
             return (Criteria) this;
@@ -1378,7 +1363,7 @@ public class UserCriteria {
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated do_not_delete_during_merge 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated do_not_delete_during_merge 2015年12月11日 17时18分16秒 星期五
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1390,7 +1375,7 @@ public class UserCriteria {
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 11时12分30秒 星期五
+     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
     public static class Criterion {
         private String condition;
