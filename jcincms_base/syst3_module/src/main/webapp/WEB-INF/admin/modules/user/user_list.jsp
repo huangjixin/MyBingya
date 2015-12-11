@@ -178,9 +178,10 @@
 						data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th data-options="field:'username',align:'center'" width="100%">用户名</th>
 					<th data-options="field:'roleName',align:'center'" width="100%">角色名</th>
-					<th data-options="field:'sex',align:'center'" width="100%">性别</th>
+					<th data-options="field:'sex',align:'center',formatter:formatSex" width="100%">性别</th>
 					<th data-options="field:'loginCount',align:'center'" width="100%">登录次数</th>
 					<th data-options="field:'loginIp',align:'center'" width="100%">最后登录IP</th>
+					<th data-options="field:'lastLogin',align:'center'" width="100%">上一次登录</th>
 					<th data-options="field:'loginDate',align:'center'" width="100%">登录日期</th>
 					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 					<th data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
@@ -193,6 +194,10 @@
 		/* ,formatter:formatRolename */
 			function formatRolename(val,row,index){
 				return '<a href="#" onclick="editUser('+index+')">修改</a>';
+			}
+		
+			function formatSex(val,row,index){
+				return val=='1'?'男':'女';
 			}
 		</script>
 </body>
