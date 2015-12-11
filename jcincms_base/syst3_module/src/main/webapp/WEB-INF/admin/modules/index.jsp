@@ -22,6 +22,9 @@
 		$('#tgrid').treegrid({
 			onClickRow : function(row) {
 				doLink(row.text,row.path);
+			},
+			onLoadSuccess:function (row, data){
+				$('#tgrid').treegrid('collapseAll');
 			}
 		});
 	});
