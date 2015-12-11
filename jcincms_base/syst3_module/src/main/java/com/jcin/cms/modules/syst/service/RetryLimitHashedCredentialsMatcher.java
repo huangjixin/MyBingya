@@ -65,6 +65,7 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         if(matches){
         	User user = userService.findByUsername(username);
             user.setLoginCount(1+user.getLoginCount());
+            user.setLastLogin(user.getLoginDate());
             user.setLoginDate(new Date());
 			user.setLoginIp(getIpAddr(request));
             userService.update(user);

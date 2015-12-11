@@ -72,6 +72,12 @@ public class UserController extends BaseController<User> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		User user2 = userService.findByUsername(user.getUsername());
+		if(user2!=null){
+			redirectAttributes.addFlashAttribute("user", user);
+			redirectAttributes.addFlashAttribute("msg", "用户名已经存在");
+			return "redirect:/" + Global.getAdminPath() + "/user/create";
+		}
 		user.setCreateBy(UserUtils.getUsername());
 		user.setCreateDate(new Date());
 		userService.insert(user);
@@ -93,6 +99,7 @@ public class UserController extends BaseController<User> {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		User user = userService.selectByPrimaryKey(id);
+		
 		uiModel.addAttribute("user", user);
 
 		List<Role> roles = roleService.selectAll();
@@ -123,6 +130,21 @@ public class UserController extends BaseController<User> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		UserCriteria userCriteria = new UserCriteria();
+		userCriteria.createCriteria().andUsernameEqualTo(user.getUsername());
+		Page page = userService.select(userCriteria);
+		if(page.getRows()!=null && page.getRows().size()>0){
+			if(page.getRows().size()==1){
+				User user2 = (User) page.getRows().get(0);
+				if(!user2.getId().equals(user.getId())){
+					uiModel.addAttribute("user", user);
+					redirectAttributes.addFlashAttribute("msg", "用户名已经存在");
+					return "redirect:/" + Global.getAdminPath() + "/user/update/"
+					+ user.getId();
+				}
+			}
+		}
+		
 		user.setUpdateBy(UserUtils.getUsername());
 		user.setUpdateDate(new Date());
 		userService.update(user);
