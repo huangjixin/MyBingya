@@ -1,7 +1,11 @@
 package com.jcin.cms.modules.syst.service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -21,6 +25,9 @@ import com.jcin.cms.modules.syst.domain.User;
  */
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
+	@Autowired
+	private  HttpServletRequest request;
+	
 	@Autowired
 	private IUserService userService;
 	
@@ -58,8 +65,23 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         if(matches){
         	User user = userService.findByUsername(username);
             user.setLoginDate(new Date());
+			user.setLoginIp(getIpAddr(request));
             userService.update(user);
         }
         return matches;
     }
+    
+    public String getIpAddr(HttpServletRequest request) {  
+        String ip = request.getHeader("x-forwarded-for");  
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }  
+        return ip;  
+    } 
 }
