@@ -67,6 +67,37 @@ th {
 		$('#channlTree').combotree('clear');
 	}
 	
+	//生成全部
+	function generateAll() {
+		$('#tip')[0].innerHTML="正在生成全部……";
+		$.ajax({  
+			url:"${ctxAdmin}/htmlgenerate/generateAll",  
+			//data可以传参多个参数"name=John&location=Boston",    
+			//data: "subcompanyId="+subcompanyId,  
+			success:function(data){  
+				$('#tip')[0].innerHTML="生成全部成功";
+// 			    alert("生成首页成功");
+			}, error:function(){  
+			    alert("出错了");  
+			}  
+		 });
+	}
+	//删除全部
+	function deleteAll() {
+		$('#tip')[0].innerHTML="正在删除全部……";
+		$.ajax({  
+			url:"${ctxAdmin}/htmlgenerate/deleteAll",  
+			//data可以传参多个参数"name=John&location=Boston",    
+			//data: "subcompanyId="+subcompanyId,  
+			success:function(data){  
+				$('#tip')[0].innerHTML="删除全部成功";
+// 			    alert("生成首页成功");
+			}, error:function(){  
+			    alert("出错了");  
+			}  
+		 });
+	}
+	
 	//生成首页
 	function generateIndex() {
 		$('#tip')[0].innerHTML="正在生成首页……";
@@ -196,7 +227,8 @@ th {
 					<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 						<th style="width: 150px;">&nbsp;所有html：</th>
 						<td style="text-align: left;" colspan="6"><input
-							type="button" value="生成所有html" /></td>
+							type="button" value="生成所有html"  onclick="generateAll();" />&nbsp;<input
+							type="button" value="删除所有html"  onclick="deleteAll();" /></td>
 					</tr>
 					<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 						<th style="width: 150px;">&nbsp;首页html：</th>

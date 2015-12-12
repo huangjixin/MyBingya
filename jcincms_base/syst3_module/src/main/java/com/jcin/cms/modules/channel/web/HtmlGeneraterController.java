@@ -51,11 +51,29 @@ public class HtmlGeneraterController extends BaseController {
 		return root + "admin/modules/htmlgenerate/htmlgenerate.jsp";
 	}
 
+	@RequestMapping(value = "/deleteAll")
+	@ResponseBody
+	public String deleteAll(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/") + "channel";
+		File file = new File(webroot);
+		if (file.exists()) {
+			FileUtils.deleteDirectory(webroot);
+		}
+		return "删除所有成功";
+	}
+	
 	@RequestMapping(value = "/generateAll")
 	@ResponseBody
 	public String generateAll(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-
+		generateIndex(httpServletRequest, httpServletResponse);
+		List<Channel> menus = UserUtils.getChannels();//菜单。
+		for (Channel channel : menus) {
+			generateChannel(channel.getId(),true,httpServletRequest,httpServletResponse);
+			generateChannelDocs(channel.getId(),true,httpServletRequest,httpServletResponse);
+		}
 		return "生成所有成功";
 	}
 

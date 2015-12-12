@@ -54,10 +54,12 @@ public class UserRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();// 没找到帐号
 		}
 
-		/*
-		 * if(Boolean.TRUE.equals(user.getLocked())) { throw new
-		 * LockedAccountException(); //帐号锁定 }
-		 */
+		
+		 /*if(Boolean.TRUE.equals(user.get)) { 
+			 throw new LockedAccountException(); //帐号锁定 
+		 }*/
+		 
+		 
 		// AuthenticationInfo info = super.doGetAuthenticationInfo(token);
 		//
 		SimpleAuthenticationInfo authenticationInfo;
