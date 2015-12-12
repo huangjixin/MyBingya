@@ -23,6 +23,12 @@
 
 	<!-- 默认的注解映射的支持 -->
 	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean
+				class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+			<bean
+				class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver" />
+		</mvc:argument-resolvers>
 		<!-- <mvc:argument-resolvers> conversion-service="applicationConversionService" 
 			<bean class="com.jcin.cms.web.system.bind.method.CurrentUserMethodArgumentResolver"/> 
 			</mvc:argument-resolvers> -->
@@ -45,6 +51,12 @@
 	<!-- 拦截器配置 -->
 	<mvc:interceptors>
 		<bean class="com.jcin.cms.modules.syst.LogInterceptor" />
+		<!-- On pre-handle, resolve the device that originated the web request -->
+		<bean
+			class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+		<!-- On pre-handle, manage the user's site preference (declare after DeviceResolverHandlerInterceptor) -->
+		<bean
+			class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor" />
 	</mvc:interceptors>
 	<!-- 拦截器 -->
 	<!-- <mvc:interceptors> -->
@@ -120,12 +132,12 @@
 		</property>
 		<property name="defaultErrorView" value="error/genericView" />
 	</bean>
-	
-	 <mvc:annotation-driven   conversion-service="conversionService" />
-     <bean id="conversionService"
-         class="org.springframework.format.support.FormattingConversionServiceFactoryBean">        
-     </bean>
-	
+
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</bean>
+
 	<!-- 控制器异常处理 -->
 	<!-- <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"> 
 		</bean> <bean class="com.jcin.cms.web.DefaultExceptionHandler"/> -->
