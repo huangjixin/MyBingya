@@ -55,10 +55,10 @@ public class DefaultController extends BaseController {
 	}
 
 	@RequestMapping(value = "{channels:[a-z-]+}")
-	public String channels(@PathVariable("channels") String channels,
+	public String channels(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		String result = getChannelFile(httpServletRequest,channels);
+		String result = getChannelFile(sitePreference,httpServletRequest,channels);
 		if(result!=null){
 			return result;
 		}
@@ -126,11 +126,11 @@ public class DefaultController extends BaseController {
 	}
 
 	@RequestMapping(value = "{channels}/{code:[a-z-]+}")
-	public String channel(@PathVariable("channels") String channels,
+	public String channel(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-		String result = getChannelFile(httpServletRequest,code);
+		String result = getChannelFile(sitePreference,httpServletRequest,code);
 		if(result!=null){
 			return result;
 		}
@@ -195,11 +195,11 @@ public class DefaultController extends BaseController {
 	}
 	
 	@RequestMapping(value = "{channels}/{channel}/**/{code:[a-z-]+}")
-	public String channels(@PathVariable("channels") String channels,
+	public String channels(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			Channel channel) {
-		String result = getChannelFile(httpServletRequest,code);
+		String result = getChannelFile(sitePreference,httpServletRequest,code);
 		if(result!=null){
 			return result;
 		}
@@ -269,10 +269,10 @@ public class DefaultController extends BaseController {
 //	}
 	
 	@RequestMapping(value = "{channels}/**/doc/{id}")
-	public String doc(@PathVariable("channels") String channels,@PathVariable("id") String id,
+	public String doc(SitePreference sitePreference,@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		String result = getDocFile(httpServletRequest,id);
+		String result = getDocFile(sitePreference,httpServletRequest,id);
 		if(result!=null){
 			return result;
 		}
@@ -307,7 +307,7 @@ public class DefaultController extends BaseController {
 	
 	
 	@SuppressWarnings("deprecation")
-	private String getChannelFile(HttpServletRequest httpServletRequest,String channelOrCode){
+	private String getChannelFile(SitePreference sitePreference,HttpServletRequest httpServletRequest,String channelOrCode){
 		if(webrootPath==null){
 			webrootPath = httpServletRequest.getRealPath("/");
 		}
@@ -343,7 +343,7 @@ public class DefaultController extends BaseController {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private String getDocFile(HttpServletRequest httpServletRequest,String id){
+	private String getDocFile(SitePreference sitePreference,HttpServletRequest httpServletRequest,String id){
 		if(webrootPath==null){
 			webrootPath = httpServletRequest.getRealPath("/");
 		}
