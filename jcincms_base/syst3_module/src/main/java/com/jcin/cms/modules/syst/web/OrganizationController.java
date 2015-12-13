@@ -9,6 +9,7 @@ package com.jcin.cms.modules.syst.web;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,8 @@ public class OrganizationController extends BaseController<Organization> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+//		organization.setCreateBy(UserUtils.getUsername());
+		organization.setCreateDate(new Date());
 		organizationService.insert(organization);
 
 		redirectAttributes.addFlashAttribute("organization", organization);

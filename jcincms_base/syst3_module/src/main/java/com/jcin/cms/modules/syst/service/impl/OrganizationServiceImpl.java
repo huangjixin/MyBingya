@@ -275,6 +275,8 @@ public class OrganizationServiceImpl extends
 		jsonObject.setId(organization.getId());
 		jsonObject.setParentId(organization.getParentId());
 		jsonObject.setName(organization.getName());
+		jsonObject.setCreateDate(organization.getCreateDate());
+		jsonObject.setUpdateDate(organization.getUpdateDate());
 
 		jsonObject.setParentIds(organization.getParentIds());
 

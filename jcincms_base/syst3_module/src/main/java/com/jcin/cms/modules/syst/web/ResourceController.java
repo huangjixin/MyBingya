@@ -8,6 +8,7 @@ package com.jcin.cms.modules.syst.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -63,7 +64,8 @@ public class ResourceController extends BaseController<Resource> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
-		
+		resource.setCreateBy(UserUtils.getUsername());
+		resource.setCreateDate(new Date());
 		resourceService.insert(resource);
 		redirectAttributes.addFlashAttribute("resource", resource);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
@@ -92,7 +94,8 @@ public class ResourceController extends BaseController<Resource> {
 			return "redirect:/" + Global.getAdminPath() + "/resource/update/"
 					+ resource.getId();
 		}
-
+		resource.setUpdateBy(UserUtils.getUsername());
+		resource.setUpdateDate(new Date());
 		resourceService.update(resource);
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");

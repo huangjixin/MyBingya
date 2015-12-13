@@ -309,6 +309,10 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 				jsonObject.setPath(resource.getPath());
 				jsonObject.setAuthName(resource.getAuthName());
 				jsonObject.setParentids(resource.getParentids());
+				jsonObject.setCreateBy(resource.getCreateBy());
+				jsonObject.setCreateDate(resource.getCreateDate());
+				jsonObject.setUpdateBy(resource.getUpdateBy());
+				jsonObject.setUpdateDate(resource.getUpdateDate());
 			}
 		}else{
 			jsonObject.setId(resource.getId());
@@ -318,6 +322,10 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 			jsonObject.setPath(resource.getPath());
 			jsonObject.setAuthName(resource.getAuthName());
 			jsonObject.setParentids(resource.getParentids());
+			jsonObject.setCreateBy(resource.getCreateBy());
+			jsonObject.setCreateDate(resource.getCreateDate());
+			jsonObject.setUpdateBy(resource.getUpdateBy());
+			jsonObject.setUpdateDate(resource.getUpdateDate());
 		}
 
 		List<Resource> list = searialChild(resource, permission, menuOnly);
