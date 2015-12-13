@@ -5,7 +5,7 @@
 	<div
 		style="height:40px;z-index:3;background:#212121;margin-left:20px; top:0; left:0; display:block;">
 		<ul>
-			<li><a href="${ctx}">首页</a></li>
+			<li><a href="${ctx}/">首页</a></li>
 			<c:if test="${list!=null}">
 				<c:forEach var="channel" items="${list}">
 					<c:if test="${channel.name!=null && channel.name!=''}">
