@@ -26,7 +26,7 @@
 			<div
 				style="height:40px;z-index:3;background:#212121;margin-left:20px; top:0; left:0; display:block;">
 				<ul>
-					<li><a href="${ctx}">首页</a></li>
+					<li><a href="${ctx}/">首页</a></li>
 					<#list menus as menu>
 						<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
 							<#if menu.children ??>
