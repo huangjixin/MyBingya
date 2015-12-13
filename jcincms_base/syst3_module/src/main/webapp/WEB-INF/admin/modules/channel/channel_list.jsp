@@ -39,7 +39,11 @@
 	}
 
 	$().ready(function() {
-		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
+		$('#tgrid').treegrid({
+			onLoadSuccess:function (row, data){
+				$('#tgrid').treegrid('collapseAll');
+			}
+		});
 	});
 
 	// 移除条目；
