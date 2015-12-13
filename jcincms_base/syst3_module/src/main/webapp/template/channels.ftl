@@ -131,10 +131,14 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 					<div class="box-header">栏目推荐</div>
 					<div class="box-center">
 						<ul>
-							<#if recommendDocs ?exists>
+							<#if recommendDocs ??>
 								<#list recommendDocs as doc>
-									<#if doc.title ?exists>
-										<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+									<#if doc.title ??>
+										<#if doc.channel ??>
+											<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+											<#else>
+											<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+										</#if>
 									</#if>
 								</#list>
 							</#if>
