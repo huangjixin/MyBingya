@@ -153,6 +153,10 @@ public class HtmlGeneraterController extends BaseController {
 		Page page = new Page();
 		page.setPageSize(8);
 		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		for (Document document : recommendDocs) {
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			document.setChannel(channel);
+		}
 		
 		page.setPageSize(10);
 		Map<String,Object> menusMap=new HashMap<String, Object>();
