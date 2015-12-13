@@ -118,14 +118,22 @@
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th data-options="field:'name',align:'center'" width="100%">名称</th>
-					<th data-options="field:'description',align:'center'" width="100%">描述</th>
+					<!-- <th data-options="field:'description',align:'center'" width="100%">描述</th> -->
 					<th data-options="field:'path',align:'center'" width="100%">路径</th>
-					<th data-options="field:'parentId',align:'center'" width="100%">父亲Id</th>
-					<th data-options="field:'type',align:'center'" width="100%">类型</th>
+					<th data-options="field:'parentId',align:'center',hidden:true" width="100%">父亲Id</th>
+					<th data-options="field:'type',align:'center',formatter:formatType" width="100%">类型</th>
 					<th data-options="field:'authName',align:'center'" width="100%">权限名</th>
+					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
+					<th data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
+					<th data-options="field:'createBy',align:'center'" width="100%">创建人</th>
+					<th data-options="field:'updateBy',align:'center'" width="100%">更新人</th>
 				</tr>
 			</thead>
 		</table>
-
+		<script type="text/javascript">
+			function formatType(val,row,index){
+				return val=='menu'?'菜单':'按钮';
+			}
+		</script>
 </body>
 </html>

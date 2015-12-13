@@ -9,6 +9,10 @@
     <result column="auth_name" property="authName" jdbcType="VARCHAR" />
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, parentids, parent_id, auth_name, path, type
+    id, name, parentids, parent_id, auth_name, path, type, create_date, update_date, 
+    create_by, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.ResourceCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -106,10 +111,12 @@
   <insert id="insert" parameterType="com.jcin.cms.modules.syst.domain.Resource" >
     insert into tb_resource (id, name, parentids, 
       parent_id, auth_name, path, 
-      type)
+      type, create_date, update_date, 
+      create_by, update_by)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{parentids,jdbcType=VARCHAR}, 
       #{parentId,jdbcType=VARCHAR}, #{authName,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.syst.domain.Resource" >
     insert into tb_resource
@@ -135,6 +142,18 @@
       <if test="type != null" >
         type,
       </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -157,6 +176,18 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -190,6 +221,18 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -203,7 +246,11 @@
       parent_id = #{record.parentId,jdbcType=VARCHAR},
       auth_name = #{record.authName,jdbcType=VARCHAR},
       path = #{record.path,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -229,6 +276,18 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -239,13 +298,17 @@
       parent_id = #{parentId,jdbcType=VARCHAR},
       auth_name = #{authName,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_resource (id, name, parentids, parent_id, auth_name, path, type) values 
+    insert into tb_resource (id, name, parentids, parent_id, auth_name, path, type, create_date, update_date, create_by, update_by) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.parentids,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.authName,jdbcType=VARCHAR}, #{item.path,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.parentids,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.authName,jdbcType=VARCHAR}, #{item.path,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
