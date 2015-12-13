@@ -322,7 +322,7 @@ public class DefaultController extends BaseController {
 		String requestRri = httpServletRequest.getRequestURI();
 		int index = -1;
 		if("".equals(conPath)){
-			 index = -1;
+			 index = 0;
 		}else{
 			index = requestRri.lastIndexOf(conPath);
 		}
@@ -361,7 +361,7 @@ public class DefaultController extends BaseController {
 		String requestRri = httpServletRequest.getRequestURI();
 		int index = -1;
 		if("".equals(conPath)){
-			 index = -1;
+			 index = 0;
 		}else{
 			index = requestRri.lastIndexOf(conPath);
 		}
