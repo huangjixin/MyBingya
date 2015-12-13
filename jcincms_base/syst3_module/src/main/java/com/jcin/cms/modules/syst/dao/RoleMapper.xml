@@ -4,6 +4,10 @@
   <resultMap id="BaseResultMap" type="com.jcin.cms.modules.syst.domain.Role" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name
+    id, name, create_date, update_date, create_by, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.RoleCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -99,8 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jcin.cms.modules.syst.domain.Role" >
-    insert into tb_role (id, name)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+    insert into tb_role (id, name, create_date, 
+      update_date, create_by, update_by
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.syst.domain.Role" >
     insert into tb_role
@@ -111,6 +119,18 @@
       <if test="name != null" >
         name,
       </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -118,6 +138,18 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -136,6 +168,18 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -144,7 +188,11 @@
   <update id="updateByExample" parameterType="map" >
     update tb_role
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -155,18 +203,34 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.syst.domain.Role" >
     update tb_role
-    set name = #{name,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_role (id, name) values 
+    insert into tb_role (id, name, create_date, update_date, create_by, update_by) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
@@ -187,7 +251,7 @@
     </if>
   </sql>
   
-  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
   	SELECT 
     	role . *
 	FROM
