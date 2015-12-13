@@ -320,7 +320,12 @@ public class DefaultController extends BaseController {
 		String page = httpServletRequest.getParameter("page");
 		
 		String requestRri = httpServletRequest.getRequestURI();
-		int index = requestRri.lastIndexOf(conPath);
+		int index = -1;
+		if("".equals(conPath)){
+			 index = -1;
+		}else{
+			index = requestRri.lastIndexOf(conPath);
+		}
 		if(index!=-1){
 			requestRri = requestRri.substring(index+conPath.length()+1);
 			requestRri = requestRri.replaceAll("//", File.separator);
@@ -354,7 +359,13 @@ public class DefaultController extends BaseController {
 		String conPath = contextPath;
 		
 		String requestRri = httpServletRequest.getRequestURI();
-		int index = requestRri.lastIndexOf(conPath);
+		int index = -1;
+		if("".equals(conPath)){
+			 index = -1;
+		}else{
+			index = requestRri.lastIndexOf(conPath);
+		}
+		
 		if(index!=-1){
 			requestRri = requestRri.substring(index+conPath.length()+1);
 			requestRri = requestRri.replaceAll("//", File.separator);
