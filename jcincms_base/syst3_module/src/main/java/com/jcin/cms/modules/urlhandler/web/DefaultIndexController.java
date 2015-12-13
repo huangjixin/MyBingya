@@ -52,15 +52,15 @@ public class DefaultIndexController extends BaseController {
 	@Autowired
 	private IDocumentService documentService;
 
+	/**
+	 * 首页跳转。
+	 * @param sitePreference
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@RequestMapping
 	public String index(SitePreference sitePreference,Model uiModel, HttpServletRequest httpServletRequest) {
-		
-		if (sitePreference == SitePreference.MOBILE) {
-			logger.info("手机来的网页请求home-mobile");
-        } else {
-        	logger.info("PC来的网页请求");
-        }
-		
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
@@ -72,7 +72,12 @@ public class DefaultIndexController extends BaseController {
 			document.setChannel(channel);
 		}
 		uiModel.addAttribute("recommendDocs", recommendDocs);
-		
-		return "index.jsp";
+		if (sitePreference == SitePreference.MOBILE) {
+			logger.info("手机来的网页请求home-mobile");
+			return "m-index.jsp";
+        } else {
+        	logger.info("PC来的网页请求");
+        	return "index.jsp";
+        }
 	}
 }

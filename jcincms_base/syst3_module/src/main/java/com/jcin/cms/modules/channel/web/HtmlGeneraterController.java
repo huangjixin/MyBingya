@@ -55,11 +55,16 @@ public class HtmlGeneraterController extends BaseController {
 	@ResponseBody
 	public String deleteAll(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
+		deleteIndex(httpServletRequest, httpServletResponse);
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/") + "channel";
 		File file = new File(webroot);
 		if (file.exists()) {
-			FileUtils.deleteDirectory(webroot);
+			File[]files = file.listFiles();
+			for (File file2 : files) {
+				file2.delete();
+				FileUtils.deleteDirectory(file2.getAbsolutePath());
+			}
 		}
 		return "删除所有成功";
 	}
