@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta name="keywords" content="jsp,cms,jcincms,java,建站系统,免费,开源,首页">
-<meta name="description" content="jsp,cms,jcincms,java,建站系统,免费,开源,首页">
+<meta name="keywords" content="${channel.name},${channel.keyword},jsp,cms,jcincms,java,建站系统,免费,开源">
+<meta name="description" content="${channel.name},${channel.keyword},jsp,cms,jcincms,java,建站系统,免费,开源">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>

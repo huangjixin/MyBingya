@@ -3,6 +3,8 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <html>
 <head>
+<meta name="keywords" content="${channel.name},${channel.keyword}">
+<meta name="description" content="${channel.name},${channel.keyword}">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/slider.js"></script>

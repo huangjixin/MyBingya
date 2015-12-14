@@ -3,6 +3,8 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <html>
 <head>
+<meta name="keywords" content="${channel.name},${channel.keyword}">
+<meta name="description" content="${channel.name},${channel.keyword}">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <style type="text/css"></style>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
@@ -65,19 +67,5 @@
 		</div>
 		<div class="clear"></div>
 		<jsp:include page="footer.jsp" flush="true"></jsp:include>
-		<script type="text/javascript">
-			featuredcontentslider.init({
-				id : "sliderA",
-				contentsource : [ "inline", "" ],
-				toc : "#increment",
-				nextprev : [ "", "" ],
-				revealtype : "mouseover",
-				enablefade : [ true, 0.15 ],
-				autorotate : [ true, 3500 ],
-				delay : 150,
-				onChange : function(previndex, curindex) {
-				}
-			});
-		</script>
 </body>
 </html>

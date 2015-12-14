@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>移动端首页</title>
+<title>${document.title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。 -->
-<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="keywords" content="${document.title},${document.keyword}">
 <meta name="description" content="this is my page">
 <meta name="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
