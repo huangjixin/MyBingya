@@ -51,7 +51,11 @@ public class DefaultController extends BaseController {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
-		return "index.jsp";
+		if (sitePreference == SitePreference.MOBILE) {
+			return "m-index.jsp";
+        } else {
+        	return "index.jsp";
+        }
 	}
 
 	@RequestMapping(value = "{channels:[a-z-]+}")
@@ -95,7 +99,11 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return "doc.jsp";
+			if (sitePreference == SitePreference.MOBILE) {
+				return "m-doc.jsp";
+	        } else {
+	        	return "doc.jsp";
+	        }
 		}
 
 		// 栏目模板不为空返回模板。
@@ -167,7 +175,11 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
-			return "doc.jsp";
+			if (sitePreference == SitePreference.MOBILE) {
+				return "m-doc.jsp";
+	        } else {
+	        	return "doc.jsp";
+	        }
 		}
 
 //		channel.setLinkAddr(requestRri);
@@ -235,8 +247,11 @@ public class DefaultController extends BaseController {
 					&& !"".equals(document.getDocumentTemplete())) {
 				return document.getDocumentTemplete();
 			}
-			
-			return "doc.jsp";
+			if (sitePreference == SitePreference.MOBILE) {
+				return "m-doc.jsp";
+	        } else {
+	        	return "doc.jsp";
+	        }
 		}
 		
 //		channel.setLinkAddr(requestRri);
@@ -299,7 +314,11 @@ public class DefaultController extends BaseController {
 			return document.getDocumentTemplete();
 		}
 
-		return "doc.jsp";
+		if (sitePreference == SitePreference.MOBILE) {
+			return "m-doc.jsp";
+        } else {
+        	return "doc.jsp";
+        }
 	}
 	
 	private static String webrootPath;
