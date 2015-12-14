@@ -112,6 +112,11 @@ th {
 		$('#channelId').combotree('clear');
 	}
 
+	function cleardocTemplete() {
+		$('#docTemplete').combotree('clear');
+		docTemp = "";
+	}
+	
 	//jquery 提交表单。
 	function submitForm() {
 		var contxt = ue.getContentTxt();
@@ -260,7 +265,10 @@ th {
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
 								<input id="docTemplete"/>
-								&nbsp;<input id="refreshFiles" type="checkbox" value="刷新"/>
+								&nbsp;
+								<input type="button" onclick="cleardocTemplete();" value="清除"/>
+								&nbsp;
+								<input id="refreshFiles" type="checkbox">刷新</input>
 								&nbsp;
 								<input value="重新获取" type="button"  onclick="createFileTree();" ><form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
 							</td>
