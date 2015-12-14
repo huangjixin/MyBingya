@@ -130,7 +130,11 @@ public class DefaultController extends BaseController {
 		 */
 
 		// 返回默认。
-		return "channels.jsp";
+		if (sitePreference == SitePreference.MOBILE) {
+			return "m-channels.jsp";
+        } else {
+        	return "channels.jsp";
+        }
 	}
 
 	@RequestMapping(value = "{channels}/{code:[a-z-]+}")
