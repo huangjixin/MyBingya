@@ -1,0 +1,444 @@
+@charset "utf-8";
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video
+	{
+	margin: 0;
+	padding: 0;
+}
+
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {
+	display: block;
+}
+
+body { /* font: normal 100% Helvetica, Arial, sans-serif; */
+	font-size: 100%;
+	font-family: Helvetica, STHeiti, Droid Sans Fallback;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+textarea {
+	resize: none;
+}
+
+iframe,img {
+	border: 0;
+}
+
+ul,ol {
+	list-style: none;
+}
+
+input,select,textarea {
+	outline: 0;
+	-webkit-user-modify: read-write-plaintext-only;
+}
+
+input {
+	-webkit-appearance: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+body,.global {
+	background: #fafafa
+}
+
+/*header*/
+.header {
+	width: 100%;
+	border-bottom: 2px solid #317ecb;
+}
+
+.logo {
+	display: inline-block;
+	text-indent: -9999em;
+	width: 102px;
+	height: 30px;
+	background-image: url(http://mat1.gtimg.com/www/mobi/image/logo.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	-webkit-background-size: 102px 30px;
+	-moz-background-size: 102px 30px;
+	-o-background-size: 102px 30px;
+	background-size: 102px 30px;
+	margin: 7px 0 0 10px;
+}
+
+.logo a {
+	display: block;
+}
+
+/*************** 幻灯片开始***********************/
+.focus {
+	width: 100%;
+    min-height: 165px; max-height: 165px;
+	/* padding: 2px;
+	border: 1px solid #E1E1E1; */
+	background: #fff;
+	position: relative
+}
+.focus img{
+    max-width: 100%;
+    margin: 0 auto
+}
+.focus .sliderwrapper span {
+	display: block;
+	width: 100%;
+	height: 32px;
+	background: #000;
+	filter: alpha(opacity = 70);
+	-moz-opacity: 0.7;
+	opacity: 0.7;
+	position: absolute;
+	left: 0px;
+	top: 150px
+}
+
+.focus .pagination {
+	position: absolute;
+	top:155px;
+	right:0;
+}
+
+.focus .pagination a {
+	width: 19px;
+	height: 19px;
+	line-height: 19px;
+	display: inline;
+	float: left;
+	margin-right: 7px;
+	cursor: pointer;
+	background: #fff;
+	text-align: center
+}
+
+.focus .pagination a:hover,.focus .pagination a.selected {
+	background: #FB7E39;
+	color: #fff
+}
+
+.focus a {
+	color: #444;
+	text-decoration: none;
+	outline: none
+}
+
+.focus a:hover {
+	color: #c00;
+	text-decoration: underline
+}
+/************** 幻灯片结束***********************/
+
+/************** 菜单开始 **************************/
+.menu {
+	height: 40px;
+	font-size: 14px;
+	background: #212121;
+	z-index: 3;
+	display: block;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #222;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	color: #FFF;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	background: #62b00e;
+}
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+
+/************** 菜单结束 **************************/
+
+/*------
+list*/
+.list {
+	padding: 0 8px 0;
+}
+
+.list li {
+	overflow: hidden;
+	border-bottom: 1px solid #eceef0;
+	box-shadow: 0 1px 1px #fff;
+}
+
+.list li a {
+	display: block;
+	color: #000;
+}
+
+/*topnews 要闻*/
+.topnews {
+	padding: 5px 8px;
+}
+
+.topnews li {
+	height: 35px;
+	line-height: 35px;
+	/*padding: 0 9px 0 60px;*/
+	position: relative;
+	min-width: 234px;
+	word-wrap: break-word;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.topnews li strong {
+	font-style: normal;
+	font-weight: normal;
+	position: relative;
+
+	/*    position: absolute;
+    left: 9px;*/
+}
+
+.topnews li strong a {
+	color: #458fce;
+	display: inline-block;
+}
+
+.list li strong a {
+	color: #458fce;
+}
+
+.list li strong a:visited {
+	color: #458fce;
+}
+
+.topnews li strong,.topnews li span {
+	font-size: 1.0625em;
+	/*font-size: 1em;*/
+}
+
+.topnews li span { /*display: inline-block;*/
+	/*width: 100%; */
+	
+}
+
+.topnews li span a {
+	color: #111;
+	display: inline;
+}
+
+.topnews li strong:after {
+	content: "|";
+	color: #d5d5d5;
+	/*display: inline-block;*/
+	font-size: 1em;
+	margin: 0 6px;
+	/*    position: absolute;
+    right: -10px;
+    top: 0;*/
+}
+
+.topnews li:last-of-type {
+	border-bottom: none;
+	box-shadow: none;
+	/*display: none;*/
+}
+
+.topnews li:last-child() {
+	
+}
+
+/*module*/
+.module {
+	overflow: hidden;
+}
+
+.module,.module .content {
+	width: 100%;
+}
+
+.module .content {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	padding-bottom: 23px;
+}
+
+.module .panel {
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+/*head*/
+.head {
+	height: 38px;
+	border-top: 2px solid #9ac7ed;
+	background-image: url(http://mat1.gtimg.com/www/mobi/image/headbg.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: 320px 62px;
+	-moz-background-size: 320px 62px;
+	-o-background-size: 320px 62px;
+	background-size: 320px 62px;
+	background-position: left -31px;
+}
+
+.head h2 { /*font-size: 1em;*/
+	font-size: 1em;
+	font-weight: normal;
+	display: inline-block;
+	text-align: center;
+	float: left;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	color: #2a70be;
+}
+
+.head h2.current {
+	border-top: 2px solid #2a70be;
+	margin-top: -2px;
+	background-image: url(http://mat1.gtimg.com/www/mobi/image/tab_ui.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: 80px 40px;
+	-moz-background-size: 80px 40px;
+	-o-background-size: 80px 40px;
+	background-size: 80px 40px;
+	background-position: left top;
+	color: #c14545;
+}
+
+/*primary*/
+.primary{
+    /*border-top: 2px solid #317ecb;*/
+   /* padding: 0 8px; */overflow: hidden;
+}
+.primary .more{
+    margin: 0 10px 10px;
+}
+.primary .title{
+    font-size: 1.375em;
+    color: #000; text-align: left;
+    padding: 15px 0 5px; font-weight: 700;
+    line-height: 26px;
+    margin: 0 8px;
+}
+.primary .meta{
+    margin: 0 8px;
+    overflow: hidden;
+    font-size: 0.8125em;
+    position: relative;
+    height: 26px;
+    border-bottom: 1px solid #eceef0;
+}
+.primary .time{
+    font-family: Helvetica;
+}
+.primary .time,.primary .author{
+    color: #666;
+    line-height: 26px;
+}
+.primary .time{
+    display: inline-block;
+    width: 70px;
+    overflow: hidden;
+    float: left;
+}
+
+/*.primary content*/
+.primary .content{
+    border-top: 1px solid #fff;
+    padding: 12px 0;
+}
+.primary .content p{
+    /*font-size: 0.9375em;*/
+    padding: 0 9px;
+    /*font-size: 1.125em;*/
+    font-size: 0.9375em;
+    color: #393939;
+    line-height: 30px;
+    word-wrap:break-word;
+    margin-bottom: 5px;
+    /*text-indent: 1em;*/
+    text-align: justify;
+}
+.pcglobal .primary .content p{
+    text-indent: 1em;
+}
+.primary .content .video p{
+    text-indent: 0;
+    text-align: center;
+}
+
+.fontsmall .image {
+    margin-bottom: 10px
+}
+.primary .fontsmall p{
+    /*font-size: 1.125em*/
+    /*2013.12.24 15:00 璁捐璋冩暣鈫�*/
+    /*font-size: 1.063em; 璁捐璋冩暣鈫�*/
+    font-size: 1.125em;
+}
+
+#footer {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 0.75em;
+}
