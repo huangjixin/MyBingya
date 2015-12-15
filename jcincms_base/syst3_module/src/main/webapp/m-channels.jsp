@@ -94,6 +94,7 @@
 					</ul>
 				</div>
 			</div>
+			<div style="width: 100%;text-align: center;"><a href="${ctx}/${channel.linkAddr}">进入${channel.name}</a></div>
 		</c:forEach>
 	</c:if>
 	<div>

@@ -35,30 +35,6 @@
 			</c:if>
 		</ul>
 	</div>
-	<div id="picnav">
-		<div class="focus">
-			<div id="sliderA" class="sliderwrapper">
-				<div class="contentdiv">
-					<div>
-						<a href="#" target="_blank"><img src="${ctx}/images/0.jpg"
-							alt="" border="0" /></a>
-					</div>
-					<span>野猴占宅为王 房东用计抓捕</span>
-				</div>
-				<div class="contentdiv">
-					<div>
-						<a href="#" target="_blank"><img src="${ctx}/images/1.jpg"
-							alt="" border="0" /></a>
-					</div>
-					<span>中国海军舰艇将赴南海训练</span>
-				</div>
-			</div>
-			<div id="paginate-sliderA" class="pagination">
-				<i class="toc"></i><i class="toc"></i><i class="toc"></i><i
-					class="toc"></i>
-			</div>
-		</div>
-	</div>
 	<div style="height: 20px;"></div>
 	<div class="list topnews">
 		<ul>
@@ -76,44 +52,45 @@
 			</c:if>
 		</ul>
 	</div>
-	<c:if test="${channel.children!=null}">
-		<c:forEach var="channel" items="${channel.children}" varStatus="status">
-			<div class="module">
-				<div class="head">
-					<h2 class="current" data-tab="news">${channel.name}</h2>
+	<div id="content">
+		<c:set var="docs" value="${page.rows}"></c:set>
+		<c:if test="${docs!=null}">
+			<c:forEach var="doc" items="${docs}">
+				<div class="spacer"></div>
+				<div class="article">
+					<div class="info">
+						<span style="font-weight: bold;font-size: 14px;"><a
+							href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;
+						<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
+						<p>文章摘要：${doc.contentShort}</p>
+						<div style="font-size: 12px;">
+							${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
+								style="font-size: 12px;"><fmt:formatDate
+									value="${doc.createDate}" pattern="yyyy.MM.dd" /></span>
+						</div>
+					</div>
 				</div>
-				<div class="list topnews">
-					<ul>
-						<c:set var="docs"
-							value="${fns:getDocByChannelCode(channel.code,10)}"></c:set>
-						<c:if test="${docs!=null}">
-							<c:forEach var="doc" items="${docs}">
-								<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
-							</c:forEach>
-						</c:if>
-					</ul>
-				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${docs!=null}">
+			<div class="spacer"></div>
+			<div style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
+				<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
+				<c:if test="${page.page>1}">
+					<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</c:if>
+				<span>${page.page}</span>&nbsp;&nbsp;
+				<c:if test="${page.page < page.totalPage+1}">
+					<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</c:if>
+				<c:if test="${page.page < page.totalPage+1}">
+					<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</c:if>
+				&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
 			</div>
-		</c:forEach>
-	</c:if>
+		</c:if>
+	</div>
 	<div>
 		<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
 	</div>
 	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
 		© 2011-2015 jcincms内容管理系统.</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
-	</script>
 </body>
 </html>

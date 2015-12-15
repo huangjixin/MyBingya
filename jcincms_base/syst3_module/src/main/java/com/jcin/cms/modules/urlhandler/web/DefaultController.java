@@ -204,7 +204,11 @@ public class DefaultController extends BaseController {
 		if (null == channel.getChildren()||channel.getChildren().size()==0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
-			return "channel.jsp";
+			if (sitePreference == SitePreference.MOBILE) {
+				return "m-channel.jsp";
+	        } else {
+	        	return "channel.jsp";
+	        }
 		}
 		
 		return "channels.jsp";
@@ -275,7 +279,11 @@ public class DefaultController extends BaseController {
 		if (null == channel.getChildren()||channel.getChildren().size()==0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
-			return "channel.jsp";
+			if (sitePreference == SitePreference.MOBILE) {
+				return "m-channel.jsp";
+	        } else {
+	        	return "channel.jsp";
+	        }
 		}
 		return "channels.jsp";
 	}
