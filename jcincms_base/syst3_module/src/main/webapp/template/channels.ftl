@@ -15,7 +15,7 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
       if(window.location.href.indexOf("?mobile")<0){
 		try{
 			if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
-				window.location.href="${ctx}/${channel.linkAddr}/docs/m-${channel.code}1.html";
+				window.location.href="${ctx}/${channel.linkAddr}/docs/${channel.code}1m.html";
 			}/*else if(/iPad/i.test(navigator.userAgent)){
               	window.location.href="http://www.qq.com/pad/"
 			}else{

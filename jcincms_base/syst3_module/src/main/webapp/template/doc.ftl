@@ -8,7 +8,24 @@
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/slider.js"></script>
 <script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
-
+<script type="text/javascript">
+if(window.location.toString().indexOf('pref=padindex') != -1){
+}else{
+	if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){  
+      if(window.location.href.indexOf("?mobile")<0){
+		try{
+			if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+				window.location.href="${ctx}/${channel.linkAddr}/docs/${document.id}m.html";
+			}/*else if(/iPad/i.test(navigator.userAgent)){
+              	window.location.href="http://www.qq.com/pad/"
+			}else{
+				window.location.href="http://xw.qq.com/simple/s/index/"
+			}*/
+		}catch(e){}
+	}
+	}
+}
+</script>
 <title><#if document.title ??>${document.title}</#if></title>
 </head>
 <body>

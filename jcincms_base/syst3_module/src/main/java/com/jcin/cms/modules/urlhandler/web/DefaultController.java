@@ -295,7 +295,7 @@ public class DefaultController extends BaseController {
 //		
 //	}
 	
-	@RequestMapping(value = "{channels}/**/doc/{id}")
+	@RequestMapping(value = "{channels}/**/doc/{id:[\\d]+}")
 	public String doc(SitePreference sitePreference,@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -401,11 +401,19 @@ public class DefaultController extends BaseController {
 			requestRri = requestRri.substring(index+conPath.length()+1);
 			requestRri = requestRri.replaceAll("//", File.separator);
 			requestRri = requestRri.replaceAll("doc", "docs");
-			webroot+=requestRri+".html";
-			File file = new File(webroot);
-			if(file.exists()){
-				return requestRri+".html";
-			}
+			if (sitePreference == SitePreference.MOBILE) {
+				webroot+=requestRri+"m.html";
+				File file = new File(webroot);
+				if(file.exists()){
+					return requestRri+"m.html";
+				}
+	        } else {
+	        	webroot+=requestRri+".html";
+	        	File file = new File(webroot);
+				if(file.exists()){
+					return requestRri+".html";
+				}
+	        }
 		}
 		return null;
 	}

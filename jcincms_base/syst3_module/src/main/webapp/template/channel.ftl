@@ -15,7 +15,7 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
       if(window.location.href.indexOf("?mobile")<0){
 		try{
 			if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
-				window.location.href="${ctx}/${channel.linkAddr}/docs/m-${channel.code}.html";
+				window.location.href="${ctx}/${channel.linkAddr}/docs/${channel.code}${i}m.html";
 			}/*else if(/iPad/i.test(navigator.userAgent)){
               	window.location.href="http://www.qq.com/pad/"
 			}else{
@@ -108,7 +108,7 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 									<span style="font-weight: bold;font-size: 14px;"><a
 										href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">${doc.title}</a></span>&nbsp;&nbsp;
 									<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
-									<p>文章摘要：${doc.contentShort}</p>
+									<p>文章摘要：<#if doc.contentShort ??>${doc.contentShort}</#if></p>
 									<div style="font-size: 12px;">
 										<#setting date_format="yyyy.MM.dd">
 										${doc.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
