@@ -58,7 +58,7 @@ public class DefaultController extends BaseController {
         }
 	}
 
-	@RequestMapping(value = "{channels:[a-z-]+}")
+	@RequestMapping(value = "{channels:^[a-z]+$}")
 	public String channels(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -137,7 +137,7 @@ public class DefaultController extends BaseController {
         }
 	}
 
-	@RequestMapping(value = "{channels}/{code:[a-z-]+}")
+	@RequestMapping(value = "{channels}/{code:^[a-z]+$}")
 	public String channel(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -214,7 +214,7 @@ public class DefaultController extends BaseController {
 		return "channels.jsp";
 	}
 	
-	@RequestMapping(value = "{channels}/{channel}/**/{code:[a-z-]+}")
+	@RequestMapping(value = "{channels}/{channel}/**/{code:^[a-z]+$}")
 	public String channels(SitePreference sitePreference,@PathVariable("channels") String channels,
 			@PathVariable("code") String code, @ModelAttribute Page page,
 			Model uiModel, HttpServletRequest httpServletRequest,
@@ -295,7 +295,7 @@ public class DefaultController extends BaseController {
 //		
 //	}
 	
-	@RequestMapping(value = "{channels}/**/doc/{id:[\\d]+}")
+	@RequestMapping(value = "{channels}/**/doc/{id:^[0-9]+$}")
 	public String doc(SitePreference sitePreference,@PathVariable("channels") String channels,@PathVariable("id") String id,
 			@ModelAttribute Page page, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -362,18 +362,31 @@ public class DefaultController extends BaseController {
 			requestRri = requestRri.replaceAll("//", File.separator);
 			webroot+=requestRri; 
 			File file = null;
-			if(page!=null){
-				file = new File(webroot+"docs"+File.separator+channelOrCode+page+".html");
-				if(file.exists()){
-					return requestRri+"docs"+File.separator+channelOrCode+page+".html";
+			if (sitePreference == SitePreference.MOBILE) {
+				if(page!=null){
+					file = new File(webroot+"docs"+File.separator+channelOrCode+page+"m.html");
+					if(file.exists()){
+						return requestRri+"docs"+File.separator+channelOrCode+page+"m.html";
+					}
+				}else{
+					file = new File(webroot+"docs"+File.separator+channelOrCode+"1m.html");
+					if(file.exists()){
+						return requestRri+"docs"+File.separator+channelOrCode+"1m.html";
+					}
 				}
-			}else{
-				file = new File(webroot+"docs"+File.separator+channelOrCode+"1.html");
-				if(file.exists()){
-					return requestRri+"docs"+File.separator+channelOrCode+"1.html";
+	        } else {
+	        	if(page!=null){
+					file = new File(webroot+"docs"+File.separator+channelOrCode+page+".html");
+					if(file.exists()){
+						return requestRri+"docs"+File.separator+channelOrCode+page+".html";
+					}
+				}else{
+					file = new File(webroot+"docs"+File.separator+channelOrCode+"1.html");
+					if(file.exists()){
+						return requestRri+"docs"+File.separator+channelOrCode+"1.html";
+					}
 				}
-			}
-			
+	        }
 		}
 		return null;
 	}
