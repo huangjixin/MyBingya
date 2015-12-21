@@ -138,16 +138,16 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("titleInput").val() != "") {
+		if ($("#titleInput").val() != "") {
 			queryParams.title = $("#titleInput").val();
 		}
-		if ($("authorInput").val() != "") {
+		if ($("#authorInput").val() != "") {
 			queryParams.author = $("#authorInput").val();
 		}
-		if ($("documentTempleteInput").val() != "") {
+		if ($("#documentTempleteInput").val() != "") {
 			queryParams.documentTemplete = $("#documentTempleteInput").val();
 		}
-		if ($("channelId").val() != "") {
+		if ($("#channelId").val() != "") {
 			queryParams.channelId = $("#channelId").val();
 		}
 
