@@ -70,6 +70,8 @@ public class ChannelController extends BaseController<Channel>{
 				return root+"admin/modules/channel/channel_create";
 			}
 		}
+		channel.setCreateBy(UserUtils.getUsername());
+		channel.setCreateDate(new Date());
 		channelService.insert(channel);
 		
 		redirectAttributes.addFlashAttribute("channel", channel);
@@ -103,6 +105,8 @@ public class ChannelController extends BaseController<Channel>{
 				return root+"admin/modules/channel/channel_create";
 			}
 		}*/
+		channel.setCreateBy(UserUtils.getUsername());
+		channel.setCreateDate(new Date());
 		channelService.update(channel);
 		
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
