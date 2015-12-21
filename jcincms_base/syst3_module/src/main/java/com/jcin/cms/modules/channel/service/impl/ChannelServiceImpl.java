@@ -252,6 +252,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		jsonObject.setHidden(channel.getHidden());
 		jsonObject.setDocumentId(channel.getDocumentId());
 		jsonObject.setLinkAddrZh(channel.getLinkAddrZh());
+		jsonObject.setCreateBy(channel.getCreateBy());
+		jsonObject.setCreateDate(channel.getCreateDate());
+		jsonObject.setUpdateBy(channel.getUpdateBy());
+		jsonObject.setUpdateDate(channel.getUpdateDate());
+		jsonObject.setGeneTemplate(channel.getGeneTemplate());
 		
 		List<Channel> list = searialChild(channel,orgs);
 		if (null != list) {

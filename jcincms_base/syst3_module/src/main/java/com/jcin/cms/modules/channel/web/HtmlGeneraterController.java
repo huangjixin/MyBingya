@@ -232,9 +232,9 @@ public class HtmlGeneraterController extends BaseController {
 			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 			
 			//移动端；
-//			templateFile = "template"+File.separator+"m-channels.ftl";
-//			htmlFile = toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1m.html";
-//			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+			templateFile = "template"+File.separator+"m-channels.ftl";
+			htmlFile = toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1m.html";
+			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		}
 		
 		//生成子栏目。
@@ -327,9 +327,9 @@ public class HtmlGeneraterController extends BaseController {
 			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 			
 			//移动端；
-//			templateFile = "template"+File.separator+"m-channels.ftl";
-//			htmlFile = toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1m.html";
-//			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
+			templateFile = "template"+File.separator+"m-channels.ftl";
+			htmlFile = toGeneratedFiles+File.separator+"docs"+File.separator+toGeneratedChannel.getCode()+"1m.html";
+			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile, root);
 		}		
 
 		if (null != toGeneratedChannel.getChildren()&&toGeneratedChannel.getChildren().size()>0) {
