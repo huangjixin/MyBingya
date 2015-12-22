@@ -333,7 +333,7 @@ list*/
 
 /*head*/
 .head {
-	height: 38px;
+	height: 36px;
 	border-top: 2px solid #9ac7ed;
 	background-image: url(http://mat1.gtimg.com/www/mobi/image/headbg.png);
 	background-repeat: no-repeat;
@@ -350,21 +350,21 @@ list*/
 	display: inline-block;
 	text-align: center;
 	float: left;
-	width: 80px;
-	height: 40px;
-	line-height: 40px;
+	min-width: 90px;
+	height: 38px;
+	line-height: 38px;
 	color: #2a70be;
 }
 
 .head h2.current {
 	border-top: 2px solid #2a70be;
-	margin-top: -2px;
+	margin-top: 0px;
 	background-image: url(http://mat1.gtimg.com/www/mobi/image/tab_ui.png);
 	background-repeat: no-repeat;
-	-webkit-background-size: 80px 40px;
-	-moz-background-size: 80px 40px;
-	-o-background-size: 80px 40px;
-	background-size: 80px 40px;
+	-webkit-background-size: 90px 38px;
+	-moz-background-size: 90px 38px;
+	-o-background-size: 90px 38px;
+	background-size: 90px 38px;
 	background-position: left top;
 	color: #c14545;
 }
@@ -464,4 +464,12 @@ list*/
 	padding: 20px;
 	color: #333333;
 	/* 	font-size: 12px; */
+}
+
+.nav{
+	
+}
+
+.nav a,a:VISITED,a:LINK{
+	color: #333333;
 }

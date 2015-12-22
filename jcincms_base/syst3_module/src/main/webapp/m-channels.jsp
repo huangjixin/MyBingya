@@ -59,6 +59,18 @@
 			</div>
 		</div>
 	</div>
+	<div style="width: 100%;background-color: #ececec;">
+		<div style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<c:if test="${navChan !=null}">
+					<c:forEach var="chan" items="${navChan}" varStatus="status">
+							<c:if test="${status.index!=0}">
+								>
+							</c:if>
+						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
+					</c:forEach>
+				</c:if>
+		</div>
+	</div>
 	<div style="height: 20px;"></div>
 	<div class="list topnews">
 		<ul>
@@ -94,7 +106,8 @@
 					</ul>
 				</div>
 			</div>
-			<div style="width: 100%;text-align: center;"><a href="${ctx}/${channel.linkAddr}">进入${channel.name}</a></div>
+			<div style="width: 100%;text-align: center;background-color: #F3F3F9;line-height: 30px;height: 30px;"><a href="${ctx}/${channel.linkAddr}" style="color: #333333;">进入${channel.name}</a></div>
+			<div style="height: 5px;"></div>
 		</c:forEach>
 	</c:if>
 	<div>

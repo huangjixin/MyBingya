@@ -35,6 +35,18 @@
 			</c:if>
 		</ul>
 	</div>
+	<div style="width: 100%;background-color: #ececec;">
+		<div style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<c:if test="${navChan !=null}">
+					<c:forEach var="chan" items="${navChan}" varStatus="status">
+							<c:if test="${status.index!=0}">
+								>
+							</c:if>
+						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
+					</c:forEach>
+				</c:if>
+		</div>
+	</div>
 	<div style="height: 20px;"></div>
 	<div class="list topnews">
 		<ul>

@@ -31,11 +31,13 @@
 						<div style="width: 100%;text-align: center;">
 							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
 						</div>
-						<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
+						<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
 						<div style="width: 100%;text-align: center;font-size: 12px;">
-							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
-								style="font-size: 12px;"><fmt:formatDate
-									value="${document.createDate}" pattern="yyyy.MM.dd" /></span>
+							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span><fmt:formatDate
+									value="${document.createDate}" pattern="yyyy.MM.dd" /></span>&nbsp;&nbsp;阅读:
+							<span id="hits"><script type="text/javascript">
+								$("#hits").load('${ctx}/channel/getClickCount?id=${document.id}');
+							</script></span>
 						</div>
 						<p>${document.content}</p>
 					</div>
@@ -43,12 +45,14 @@
 				<div class="spacer"></div>
 				<c:if test="${lastdoc!=null}">
 					<div style="font-size: 12px;">
-						<span>上一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
+						<span>上一篇：</span><a
+							href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 					</div>
 				</c:if>
 				<c:if test="${nextdoc!=null}">
 					<div style="font-size: 12px;">
-						<span>下一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
+						<span>下一篇：</span><a
+							href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 					</div>
 				</c:if>
 			</div>

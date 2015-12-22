@@ -96,6 +96,8 @@
 					</#if>
 				</div>
 			</div>
+			<div style="width: 100%;text-align: center;background-color: #F3F3F9;line-height: 30px;height: 30px;"><a href="${ctx}/${channel.linkAddr}" style="color: #333333;">进入${channel.name}</a></div>
+			<div style="height: 5px;"></div>
 		</#list>
 	</#if>
 	<hr style="width:100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />

@@ -33,6 +33,18 @@
 			</#if>
 		</ul>
 	</div>
+	<div style="width: 100%;background-color: #ececec;">
+		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<#if navChan ??>
+				<#list navChan as channel>
+					<#if channel_index==0>
+						>
+					</#if>
+					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+				</#list>
+			</#if>
+		</div>
+	</div>
 	<div id="content">
 		<#if page ??>
 					<#list page.rows as doc>

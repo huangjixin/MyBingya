@@ -282,4 +282,13 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		return  documentMapper.selectNextRecord(document);
 	}
 
+	@Override
+	public int updateClickCount(String id, int count) {
+		Document document = new Document();
+		document.setId(id);
+		document.setClickCount(count);
+		int result = documentMapper.updateByPrimaryKeySelective(document);
+		return result;
+	}
+
 }

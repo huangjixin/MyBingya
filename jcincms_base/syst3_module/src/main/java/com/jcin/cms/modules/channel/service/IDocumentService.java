@@ -64,4 +64,12 @@ public interface IDocumentService extends IBaseService<Document, String> {
      * @return
      */
     Document selectNextRecord(Document document);
+    
+    /**
+     * 修改文章点击次数。
+     * @param id
+     * @param count
+     * @return
+     */
+    int updateClickCount(String id,int count);
 }

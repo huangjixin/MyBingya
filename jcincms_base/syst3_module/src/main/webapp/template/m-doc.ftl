@@ -31,6 +31,18 @@
 			</#if>
 		</ul>
 	</div>
+	<div style="width: 100%;background-color: #ececec;">
+		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<#if navChan ??>
+				<#list navChan as channel>
+					<#if channel_index!=0>
+						>
+					</#if>
+					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+				</#list>
+			</#if>
+		</div>
+	</div>
 	<div class="primary" style="overflow: hidden;">
 		<#setting date_format="yyyy.MM.dd">
 		<!-- title/S -->
@@ -39,6 +51,11 @@
 		<div class="meta"
 			style="margin: 0 8px;overflow: hidden;font-size: 0.8125em;position: relative;height: 26px;border-bottom: 1px solid #eceef0;">
 			<span class="time"><#if document.createDate ??>${document.createDate?date}</#if></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="author">${document.author}</span>
+			&nbsp;&nbsp;阅读:
+			<span id="hits">
+			<script type="text/javascript">
+				$("#hits").load('${ctx}/channel/getClickCount?id=${document.id}');
+			</script></span>
 		</div>
 		<div class="content fontsmall">
 			<p

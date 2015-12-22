@@ -33,6 +33,18 @@
 			</#if>
 		</ul>
 	</div>
+	<div style="width: 100%;background-color: #ececec;">
+		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<#if navChan ??>
+				<#list navChan as channel>
+					<#if channel_index==0>
+						>
+					</#if>
+					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+				</#list>
+			</#if>
+		</div>
+	</div>
 	<div class="list topnews">
 		<ul>
 			<#if recommendDocs ??>
@@ -69,6 +81,8 @@
 					</#if>
 				</div>
 			</div>
+			<div style="width: 100%;text-align: center;background-color: #F3F3F9;line-height: 30px;height: 30px;"><a href="${ctx}/${channel.linkAddr}" style="color: #333333;">进入${channel.name}</a></div>
+			<div style="height: 5px;"></div>
 		</#list>
 	</#if>
 	<hr style="width:100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />

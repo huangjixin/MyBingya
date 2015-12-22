@@ -34,14 +34,28 @@
 			</c:if>
 		</ul>
 	</div>
-	
+	<div style="width: 100%;background-color: #ececec;">
+		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<c:if test="${navChan !=null}">
+					<c:forEach var="chan" items="${navChan}" varStatus="status">
+							<c:if test="${status.index!=0}">
+								>
+							</c:if>
+						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
+					</c:forEach>
+				</c:if>
+		</div>
+	</div>
 	<div class="primary" style="overflow: hidden;">
 		<!-- title/S -->
 		<h1 class="title"
 			style="font-size:1.375em;color: #000;text-align:left;padding: 15px 0 5px;font-weight: 700;line-height: 26px;margin: 0 8px;">${document.title}</h1>
 		<div class="meta"
 			style="margin: 0 8px;overflow: hidden;font-size: 0.8125em;position: relative;height: 26px;border-bottom: 1px solid #eceef0;">
-			<span class="time"><fmt:formatDate value="${document.createDate}" pattern="yyyy.MM.dd" /></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="author">${document.author}</span>
+			<span class="time"><fmt:formatDate value="${document.createDate}" pattern="yyyy.MM.dd" /></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="author">${document.author}</span>&nbsp;&nbsp;阅读:
+			<span id="hits"><script type="text/javascript">
+				$("#hits").load('${ctx}/channel/getClickCount?id=${document.id}');
+			</script></span>
 		</div>
 		<div class="content fontsmall">
 			<p

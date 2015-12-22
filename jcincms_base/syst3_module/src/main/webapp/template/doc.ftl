@@ -110,8 +110,11 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 						</div>
 						<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 						<div style="width: 100%;text-align: center;font-size: 12px;">
-							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span
-								style="font-size: 12px;"><#if document.createDate ??>${document.createDate?date}</#if></span>
+							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span><#if document.createDate ??>${document.createDate?date}</#if></span>
+							&nbsp;&nbsp;阅读:
+							<span id="hits"><script type="text/javascript">
+								$("#hits").load('${ctx}/channel/getClickCount?id=${document.id}');
+							</script></span>
 						</div>
 						<p>${document.content}</p>
 					</div>

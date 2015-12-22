@@ -34,6 +34,10 @@ public class SpringCacheManagerWrapper implements CacheManager {
 			org.springframework.cache.CacheManager cacheManager) {
 		this.cacheManager = cacheManager;
 	}
+	
+	public CacheManager getCacheManager(){
+		return (CacheManager) this.cacheManager;
+	}
 
 	@Override
 	public <K, V> Cache<K, V> getCache(String name) throws CacheException {
