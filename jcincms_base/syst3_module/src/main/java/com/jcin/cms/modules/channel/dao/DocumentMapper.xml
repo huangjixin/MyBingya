@@ -544,6 +544,36 @@
 				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
 	</select>
 	
+  <select id="selectTopClickCount" resultMap="BaseResultMap"
+		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
+		<include refid="OracleDialectPrefix" />
+		select
+			doc . *
+		from
+			busi_document doc
+			left join
+		busi_channel channel ON doc.channel_id = channel.id
+		<if test="code != null" >
+        	where
+				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
+      	</if>
+		order by doc.click_count desc, doc.recommend desc
+		<include refid="OracleDialectSuffix" />
+	</select>
+  	<select id="selectCountTopClickCount" resultType="java.lang.Integer" 
+		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
+		select
+			count(*)
+		from
+			busi_document doc
+			left join
+		busi_channel channel ON doc.channel_id = channel.id
+		<if test="code != null" >
+        	where
+				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
+      	</if>
+	</select>
+	
 	<select id="selectLastRecord" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.Document" >
     	select 
     	<include refid="Base_Column_List" />

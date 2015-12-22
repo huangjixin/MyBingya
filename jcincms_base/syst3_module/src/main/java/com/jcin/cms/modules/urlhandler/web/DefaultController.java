@@ -98,6 +98,16 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("list", list);
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
+
+		// 高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
+				page);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -125,28 +135,12 @@ public class DefaultController extends BaseController {
 		// 栏目模板不为空返回模板。
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
-			/*
-			 * DocumentCriteria documentCriteria = new DocumentCriteria();
-			 * DocumentCriteria.Criteria criteria =
-			 * documentCriteria.createCriteria();
-			 * criteria.andChannelIdEqualTo(channel.getId());
-			 * documentCriteria.setPage(page);
-			 * documentCriteria.setOrderByClause("id desc");
-			 * 
-			 * page = documentService.select(documentCriteria);
-			 */
 			documentService.getDocByChannelCode(channels, page);
 
 			uiModel.addAttribute("page", page);
 
 			return channel.getChannelTemplete();
 		}
-		/*
-		 * if (channel.hasChildren()) { // 此处应该返回栏目一级级模板目录。 if (null !=
-		 * channel.getChannelTemplete() &&
-		 * !"".equals(channel.getChannelTemplete())) { return
-		 * channel.getChannelTemplete(); } return root+"defaultApp/channels"; }
-		 */
 
 		// 返回默认。
 		if (sitePreference == SitePreference.MOBILE) {
@@ -183,6 +177,15 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("list", list);
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
+		// 高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
+				page);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -268,6 +271,17 @@ public class DefaultController extends BaseController {
 
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
+
+		Page page1 = new Page();
+		// 高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
+				page1);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -351,8 +365,16 @@ public class DefaultController extends BaseController {
 
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
-		
-		if(document==null){
+		// 高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
+				page);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		if (document == null) {
 			document = documentService.selectByPrimaryKey(id);
 		}
 		count = docCache.get(id);
@@ -363,18 +385,18 @@ public class DefaultController extends BaseController {
 		if (count == null) {
 			count = 0;
 		}
-		
+
 		if (null == document) {
 			return "channelNotExsit.jsp";
 		}
-		
-		//更新文章点击次数，满十就更新到数据库。
+
+		// 更新文章点击次数，满十就更新到数据库。
 		count += 1;
 		if (count % 10 == 0) {
 			documentService.updateClickCount(id, count);
 		}
 		docCache.put(id, count);
-		
+
 		Channel channel = channelService.selectByPrimaryKey(document
 				.getChannelId());
 		List<Channel> navChan = getParentChannels(list, channel);
@@ -386,6 +408,7 @@ public class DefaultController extends BaseController {
 		Document nextdoc = documentService.selectNextRecord(document);
 		uiModel.addAttribute("lastdoc", lastdoc);
 		uiModel.addAttribute("nextdoc", nextdoc);
+
 		if (null != document.getDocumentTemplete()
 				&& !"".equals(document.getDocumentTemplete())) {
 			return document.getDocumentTemplete();
@@ -592,11 +615,12 @@ public class DefaultController extends BaseController {
 		page.setStart(start);
 		page.setPageSize(number);
 	}
-	
+
 	@RequestMapping(value = "getClickCount")
 	@ResponseBody
-	public int getClickCount(@RequestParam("id") String id, HttpServletRequest httpServletRequest) {
+	public int getClickCount(@RequestParam("id") String id,
+			HttpServletRequest httpServletRequest) {
 		Integer count = this.docCache.get(id);
-		return count == null?0:count;
+		return count == null ? 0 : count;
 	}
 }

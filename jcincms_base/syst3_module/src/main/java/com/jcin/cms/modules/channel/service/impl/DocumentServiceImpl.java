@@ -267,6 +267,16 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		List<Document> list  = documentMapper.selectByExample(documentCriteria);
 		return list;
 	}
+	
+	@Override
+	public List<Document> getClickCountDoc(String code, Page page) {
+		DocumentCriteria documentCriteria = new DocumentCriteria();
+		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+		documentCriteria.setCode(code);
+		documentCriteria.setPage(page);
+		List<Document> list  = documentMapper.selectTopClickCount(documentCriteria);
+		return list;
+	}
 
 	@Override
 	public Document selectLastRecord(Document document) {

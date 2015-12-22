@@ -38,11 +38,18 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	List<Document> getDocByChannelId(String channelId);
 	
 	/**
-	 * 根据栏目名查询文档
+	 * 查询推荐文档。
 	 * @param id
 	 * @return
 	 */
 	List<Document> getRecommendDoc(Page page);
+	
+	/**
+	 * 查询栏目点击率前十的文档,如果channelId不为空则查询该栏目点击率前十的文档。
+	 * @param id
+	 * @return
+	 */
+	List<Document> getClickCountDoc(String code,Page page);
 
 	/**
 	 * 根据栏目代码进行查询。

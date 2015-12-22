@@ -110,6 +110,19 @@ public interface DocumentMapper {
      * @mbggenerated 2015年11月14日 11时16分29秒 星期六
      */
     int selectCountByChannelCodeExample(DocumentCriteria example);
+    /**
+     * 该方法由系统生成 busi_document
+     *
+     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     */
+    List<Document> selectTopClickCount(DocumentCriteria example);
+    
+    /**
+     * 该方法由系统生成 busi_document
+     *
+     * @mbggenerated 2015年11月14日 11时16分29秒 星期六
+     */
+    int selectCountTopClickCount(DocumentCriteria example);
     
     /**
      * 查询上一条记录

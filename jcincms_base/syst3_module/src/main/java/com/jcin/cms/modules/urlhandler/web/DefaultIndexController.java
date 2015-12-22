@@ -71,7 +71,15 @@ public class DefaultIndexController extends BaseController {
 			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
 			document.setChannel(channel);
 		}
+		//高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(null, page);
+		for (Document document : clickCountDocs) {
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			document.setChannel(channel);
+		}
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 		uiModel.addAttribute("recommendDocs", recommendDocs);
+		
 		if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");
 			return "m-index.jsp";
