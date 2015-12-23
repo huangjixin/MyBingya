@@ -299,6 +299,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	public List<Channel> getByParentId(String id) {
 		ChannelCriteria channelCriteria = new ChannelCriteria();
 		channelCriteria.createCriteria().andParentIdEqualTo(id);
+		channelCriteria.setOrderByClause("sort asc");
 		List<Channel> list = channelMapper.selectByExample(channelCriteria);
 
 		return list;

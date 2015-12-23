@@ -244,6 +244,63 @@ public class ChannelController extends BaseController<Channel>{
 		return list;
 	}
 	
+	@RequestMapping(value = "/toUp")
+	@ResponseBody
+	public void toUp(@RequestParam(value = "id", required = false) String id,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		Channel channel = channelService.selectByPrimaryKey(id);
+		ChannelCriteria channelCriteria = new ChannelCriteria();
+		channelCriteria.setOrderByClause("sort asc LIMIT 1");
+		ChannelCriteria.Criteria criteria = channelCriteria.createCriteria();
+		if(channel.getParentId()==null){
+			criteria.andParentIdIsNull().andSortLessThan(channel.getSort());;
+		}else{
+			criteria.andParentIdEqualTo(channel.getParentId()).andSortLessThan(channel.getSort());;
+		}
+		
+//		select * from busi_channel where sort < 2 and parent_id is null order by sort asc LIMIT 1
+		List<Channel> list = channelService.selectByExample(channelCriteria);
+		if(null==list||list.size()==0){
+			
+		}else{
+			Channel channel2 = list.get(0);
+			Integer sort = channel2.getSort();
+			channel2.setSort(channel.getSort());
+			channel.setSort(sort);
+			channelService.update(channel);
+			channelService.update(channel2);
+		}
+	}
+	@RequestMapping(value = "/toDown")
+	@ResponseBody
+	public void toDown(@RequestParam(value = "id", required = true) String id,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		Channel channel = channelService.selectByPrimaryKey(id);
+		ChannelCriteria channelCriteria = new ChannelCriteria();
+		channelCriteria.setOrderByClause("sort asc LIMIT 1");
+		ChannelCriteria.Criteria criteria = channelCriteria.createCriteria();
+		if(channel.getParentId()==null){
+			criteria.andParentIdIsNull().andSortGreaterThan(channel.getSort());;
+		}else{
+			criteria.andParentIdEqualTo(channel.getParentId()).andSortGreaterThan(channel.getSort());;
+		}
+		
+//		select * from busi_channel where sort < 2 and parent_id is null order by sort asc LIMIT 1
+		List<Channel> list = channelService.selectByExample(channelCriteria);
+		if(null==list||list.size()==0){
+			
+		}else{
+			Channel channel2 = list.get(0);
+			Integer sort = channel2.getSort();
+			channel2.setSort(channel.getSort());
+			channel.setSort(sort);
+			channelService.update(channel);
+			channelService.update(channel2);
+		}
+	}
+	
 	/**
 	 * 全部导出Excel.
 	 * @param channel
