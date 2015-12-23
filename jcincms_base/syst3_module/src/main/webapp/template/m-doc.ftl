@@ -36,7 +36,7 @@
 			<#if navChan ??>
 				<#list navChan as channel>
 					<#if channel_index!=0>
-						>
+						-
 					</#if>
 					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
 				</#list>

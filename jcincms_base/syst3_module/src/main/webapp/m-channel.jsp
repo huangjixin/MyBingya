@@ -40,7 +40,7 @@
 			<c:if test="${navChan !=null}">
 					<c:forEach var="chan" items="${navChan}" varStatus="status">
 							<c:if test="${status.index!=0}">
-								>
+								-
 							</c:if>
 						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
 					</c:forEach>
