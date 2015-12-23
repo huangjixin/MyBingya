@@ -38,6 +38,7 @@ import com.jcin.cms.common.Global;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.ChannelCriteria;
+import com.jcin.cms.modules.channel.domain.ChannelCriteria.Criteria;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
@@ -61,8 +62,9 @@ public class ChannelController extends BaseController<Channel>{
 	public String create(Channel channel, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		ChannelCriteria channelCriteria = null;
 		if(channel.getCode()!=null && !"".equals(channel.getCode())){
-			ChannelCriteria channelCriteria = new ChannelCriteria();
+			channelCriteria = new ChannelCriteria();
 			channelCriteria.createCriteria().andCodeEqualTo(channel.getCode());
 			List<Channel>channels = channelService.selectByExample(channelCriteria);
 			if(channels.size()>0){
@@ -70,6 +72,16 @@ public class ChannelController extends BaseController<Channel>{
 				return root+"admin/modules/channel/channel_create";
 			}
 		}
+		channelCriteria = new ChannelCriteria();
+		Criteria criteria  = channelCriteria.createCriteria();
+		if(channel.getParentId()==null){
+			criteria.andParentIdIsNull();
+		}else{
+			criteria.andParentIdEqualTo(channel.getParentId());
+		}
+		int count = channelService.countByExample(channelCriteria);
+		count+=1;
+		channel.setSort(count);
 		channel.setCreateBy(UserUtils.getUsername());
 		channel.setCreateDate(new Date());
 		channelService.insert(channel);

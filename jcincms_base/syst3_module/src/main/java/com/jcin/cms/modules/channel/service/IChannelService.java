@@ -24,6 +24,12 @@ public interface IChannelService extends IBaseService<Channel, String> {
 	 * @return
 	 */
 	List<Channel> selectByExample(ChannelCriteria criteria);
+	/**
+	 * 根据查询条件进行查询总数。
+	 * @param dictionaryCriteria
+	 * @return
+	 */
+	int countByExample(ChannelCriteria criteria);
 
 	/**
 	 * 创建组织树。

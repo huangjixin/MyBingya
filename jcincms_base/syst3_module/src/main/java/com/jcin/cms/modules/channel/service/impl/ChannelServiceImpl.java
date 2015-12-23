@@ -252,6 +252,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		jsonObject.setHidden(channel.getHidden());
 		jsonObject.setDocumentId(channel.getDocumentId());
 		jsonObject.setLinkAddrZh(channel.getLinkAddrZh());
+		jsonObject.setSort(channel.getSort());
 		jsonObject.setCreateBy(channel.getCreateBy());
 		jsonObject.setCreateDate(channel.getCreateDate());
 		jsonObject.setUpdateBy(channel.getUpdateBy());
@@ -343,5 +344,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int countByExample(ChannelCriteria criteria) {
+		int count = channelMapper.countByExample(criteria);
+		return count;
 	}
 }
