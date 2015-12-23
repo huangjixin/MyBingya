@@ -13,14 +13,6 @@
 												target="blank">${doc.title}</a></li>
 					</c:forEach>
 				</c:if>
-				<!-- <li>elasticsearch ik分词插件es-ik发布</li>
-				<li>solr4的solr-ik插件</li>
-				<li>当前几个主要的Lucene中文分词器的比较</li>
-				<li>elasticsearch查询优化案例</li>
-				<li>JMeter压力测试及并发量计算-2</li>
-				<li>solr4的solr-ik插件</li>
-				<li>elasticsearch查询优化案例</li>
-				<li>JMeter压力测试及并发量计算-2</li> -->
 			</ul>
 		</div>
 	</div>

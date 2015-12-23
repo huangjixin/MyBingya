@@ -85,8 +85,11 @@ th {
 							<td nowrap="nowrap" align="left"><input id="parentId"
 								name="parentId">&nbsp; <input type="button" value="清除"
 								onclick="clearParentInput();" /></td>
-							<th>&nbsp;</th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>&nbsp;手工排序：</th>
+							<td style="text-align: left;" colspan="6">
+								<form:input id="sort" path="sort" value="${resource.sort}" />&nbsp;
+								<form:errors path="sort" cssStyle="color:red;"></form:errors>
+							</td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">

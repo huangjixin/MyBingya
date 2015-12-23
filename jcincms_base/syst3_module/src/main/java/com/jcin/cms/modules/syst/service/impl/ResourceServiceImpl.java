@@ -16,6 +16,8 @@ import org.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jcin.cms.modules.channel.domain.Channel;
+import com.jcin.cms.modules.channel.domain.ChannelCriteria;
 import com.jcin.cms.modules.syst.dao.ResourceMapper;
 import com.jcin.cms.modules.syst.dao.RoleMapper;
 import com.jcin.cms.modules.syst.dao.RoleResourceMapper;
@@ -272,7 +274,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 			boolean menuOnly) {
 		ResourceCriteria resourceExample = new ResourceCriteria();
 		resourceExample.createCriteria().andParentIdIsNull();
-
+		resourceExample.setOrderByClause("sort asc");
 		List<Resource> list = resourceMapper.selectByExample(resourceExample);
 		List<Resource> children = new ArrayList<Resource>();
 		for (Resource object : list) {
@@ -313,6 +315,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 				jsonObject.setCreateDate(resource.getCreateDate());
 				jsonObject.setUpdateBy(resource.getUpdateBy());
 				jsonObject.setUpdateDate(resource.getUpdateDate());
+				jsonObject.setSort(resource.getSort());
 			}
 		}else{
 			jsonObject.setId(resource.getId());
@@ -326,6 +329,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 			jsonObject.setCreateDate(resource.getCreateDate());
 			jsonObject.setUpdateBy(resource.getUpdateBy());
 			jsonObject.setUpdateDate(resource.getUpdateDate());
+			jsonObject.setSort(resource.getSort());
 		}
 
 		List<Resource> list = searialChild(resource, permission, menuOnly);
@@ -360,6 +364,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	public List<Resource> getByParentId(String id) {
 		ResourceCriteria resourceExample = new ResourceCriteria();
 		resourceExample.createCriteria().andParentIdEqualTo(id);
+		resourceExample.setOrderByClause("sort asc");
 		List<Resource> list = resourceMapper.selectByExample(resourceExample);
 
 		return list;
@@ -411,6 +416,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		jsonObject.setCreateDate(resource.getCreateDate());
 		jsonObject.setUpdateBy(resource.getUpdateBy());
 		jsonObject.setUpdateDate(resource.getUpdateDate());
+		jsonObject.setSort(resource.getSort());
 		
 		List<Resource> list = searialChild(resource, resources);
 		if (null != list) {
@@ -461,4 +467,15 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		return resourceMapper.selectByOrgId(orgId);
 	}
 
+	@Override
+	public List<Resource> selectByExample(
+			ResourceCriteria criteria) {
+		return  resourceMapper.selectByExample(criteria);
+	}
+	
+	@Override
+	public int countByExample(
+			ResourceCriteria criteria) {
+		return  resourceMapper.countByExample(criteria);
+	}
 }

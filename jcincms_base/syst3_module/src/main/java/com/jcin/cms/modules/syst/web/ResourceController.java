@@ -33,6 +33,7 @@ import com.jcin.cms.common.Global;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.ResourceCriteria;
+import com.jcin.cms.modules.syst.domain.ResourceCriteria.Criteria;
 import com.jcin.cms.modules.syst.domain.Role;
 import com.jcin.cms.modules.syst.service.IResourceService;
 import com.jcin.cms.modules.syst.service.IRoleService;
@@ -54,7 +55,7 @@ public class ResourceController extends BaseController<Resource> {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Resource resource, Model uiModel) {
 		uiModel.addAttribute("resource", resource);
-		return root+"admin/modules/resource/resource_create.jsp";
+		return root + "admin/modules/resource/resource_create.jsp";
 	}
 
 	@RequiresPermissions("resource:create")
@@ -64,6 +65,31 @@ public class ResourceController extends BaseController<Resource> {
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		ResourceCriteria resourceCriteria = null;
+		if (resource.getName() != null && !"".equals(resource.getName())) {
+			resourceCriteria = new ResourceCriteria();
+			resourceCriteria.createCriteria()
+					.andNameEqualTo(resource.getName());
+			List<Resource> resources = resourceService
+					.selectByExample(resourceCriteria);
+			if (resources.size() > 0) {
+				uiModel.addAttribute("msg", "名称唯一，请修改");
+				return root + "admin/modules/resource/resource_create";
+			}
+		}
+
+		if (resource.getSort() == null) {
+			resourceCriteria = new ResourceCriteria();
+			Criteria criteria = resourceCriteria.createCriteria();
+			if (resource.getParentId() == null) {
+				criteria.andParentIdIsNull();
+			} else {
+				criteria.andParentIdEqualTo(resource.getParentId());
+			}
+			int count = resourceService.countByExample(resourceCriteria);
+			count += 1;
+			resource.setSort(count);
+		}
 		resource.setCreateBy(UserUtils.getUsername());
 		resource.setCreateDate(new Date());
 		resourceService.insert(resource);
@@ -78,7 +104,7 @@ public class ResourceController extends BaseController<Resource> {
 		Resource resource = resourceService.selectByPrimaryKey(id);
 		uiModel.addAttribute("resource", resource);
 
-		return root+"admin/modules/resource/resource_update.jsp";
+		return root + "admin/modules/resource/resource_update.jsp";
 	}
 
 	@RequiresPermissions("resource:update")
@@ -120,13 +146,13 @@ public class ResourceController extends BaseController<Resource> {
 		 */
 
 		uiModel.addAttribute("resource", resource);
-		return root+"admin/modules/resource/resource_show.jsp";
+		return root + "admin/modules/resource/resource_show.jsp";
 	}
 
 	@RequiresPermissions("resource:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/resource/resource_list.jsp";
+		return root + "admin/modules/resource/resource_list.jsp";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)
@@ -199,4 +225,68 @@ public class ResourceController extends BaseController<Resource> {
 		return list;
 	}
 
+	@RequestMapping(value = "/toUp")
+	@ResponseBody
+	public void toUp(@RequestParam(value = "id", required = false) String id,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		Resource resource = resourceService.selectByPrimaryKey(id);
+		if (resource.getSort() == null) {
+			resource.setSort(0);
+		}
+		ResourceCriteria resourceCriteria = new ResourceCriteria();
+		resourceCriteria.setOrderByClause("sort desc LIMIT 1");
+		ResourceCriteria.Criteria criteria = resourceCriteria.createCriteria();
+		if (resource.getParentId() == null) {
+			criteria.andParentIdIsNull().andSortLessThan(resource.getSort());
+		} else {
+			criteria.andParentIdEqualTo(resource.getParentId())
+					.andSortLessThan(resource.getSort());
+		}
+
+		// select * from busi_resource where sort < 2 and parent_id is null
+		// order by sort asc LIMIT 1
+		List<Resource> list = resourceService.selectByExample(resourceCriteria);
+		if (null == list || list.size() == 0) {
+
+		} else {
+			Resource resource2 = list.get(0);
+			Integer sort = resource2.getSort();
+			resource2.setSort(resource.getSort());
+			resource.setSort(sort);
+			resourceService.update(resource);
+			resourceService.update(resource2);
+		}
+	}
+
+	@RequestMapping(value = "/toDown")
+	@ResponseBody
+	public void toDown(@RequestParam(value = "id", required = true) String id,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		Resource resource = resourceService.selectByPrimaryKey(id);
+		ResourceCriteria resourceCriteria = new ResourceCriteria();
+		resourceCriteria.setOrderByClause("sort asc LIMIT 1");
+		ResourceCriteria.Criteria criteria = resourceCriteria.createCriteria();
+		if (resource.getParentId() == null) {
+			criteria.andParentIdIsNull().andSortGreaterThan(resource.getSort());
+		} else {
+			criteria.andParentIdEqualTo(resource.getParentId())
+					.andSortGreaterThan(resource.getSort());
+		}
+
+		// select * from busi_resource where sort < 2 and parent_id is null
+		// order by sort asc LIMIT 1
+		List<Resource> list = resourceService.selectByExample(resourceCriteria);
+		if (null == list || list.size() == 0) {
+
+		} else {
+			Resource resource2 = list.get(0);
+			Integer sort = resource2.getSort();
+			resource2.setSort(resource.getSort());
+			resource.setSort(sort);
+			resourceService.update(resource);
+			resourceService.update(resource2);
+		}
+	}
 }

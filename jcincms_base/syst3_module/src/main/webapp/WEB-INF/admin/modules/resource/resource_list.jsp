@@ -81,6 +81,53 @@
 		
 		window.location.href='${ctxAdmin}/resource/show/'+row[0].id; 
 	}
+	
+	function up(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			$("#tooltip")[0].innerHTML="请选择一个节点";
+			return;
+		}else{
+			$("#tooltip")[0].innerHTML="";
+		}
+		$.ajax({
+			cache : true,
+			url : '${ctxAdmin}/resource/toUp?id='+row[0].id,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$('#tgrid').datagrid('clearSelections');
+				$('#tgrid').treegrid('reload');
+			}
+		});
+		
+	}
+
+	function down(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			$("#tooltip")[0].innerHTML="请选择一个节点";
+			return;
+		}else{
+			$("#tooltip")[0].innerHTML="";
+		}
+		$.ajax({
+			cache : true,
+			url : '${ctxAdmin}/resource/toDown?id='+row[0].id,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$('#tgrid').datagrid('clearSelections');
+				$('#tgrid').treegrid('reload');
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -97,6 +144,13 @@
 			<shiro:hasPermission name="resource:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>
+			<shiro:hasPermission name="resource:update">
+				<input type="button" value="上升" onclick="up();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="resource:update">
+				<input type="button" value="下降" onclick="down();" /> 
+			</shiro:hasPermission>
+			&nbsp;&nbsp;<span id="tooltip" style="color: red;"></span>
 		</div>
 		<table id="tgrid" title="" class="easyui-treegrid"
 			data-options="
@@ -123,6 +177,7 @@
 					<th data-options="field:'parentId',align:'center',hidden:true" width="100%">父亲Id</th>
 					<th data-options="field:'type',align:'center',formatter:formatType" width="100%">类型</th>
 					<th data-options="field:'authName',align:'center'" width="100%">权限名</th>
+					<th data-options="field:'sort',align:'center'" width="100%">序号</th>
 					<th data-options="field:'createDate',align:'center'" width="100%">创建日期</th>
 					<th data-options="field:'updateDate',align:'center'" width="100%">更新日期</th>
 					<th data-options="field:'createBy',align:'center'" width="100%">创建人</th>

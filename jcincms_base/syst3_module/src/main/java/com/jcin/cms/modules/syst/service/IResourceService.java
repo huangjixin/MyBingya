@@ -66,4 +66,7 @@ public interface IResourceService extends IBaseService<Resource, String> {
 	 * @return
 	 */
 	List<Resource> selectByOrgId(String orgId);
+
+	List<Resource> selectByExample(ResourceCriteria criteria);
+	int countByExample(ResourceCriteria criteria);
 }

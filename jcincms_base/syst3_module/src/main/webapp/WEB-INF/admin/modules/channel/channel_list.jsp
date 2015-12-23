@@ -130,6 +130,52 @@
 		return result;
 	}
 
+	function up(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			$("#tooltip")[0].innerHTML="请选择一个节点";
+			return;
+		}else{
+			$("#tooltip")[0].innerHTML="";
+		}
+		$.ajax({
+			cache : true,
+			url : '${ctxAdmin}/channel/toUp?id='+row[0].id+'&time='+new Date(),
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$('#tgrid').datagrid('clearSelections');
+				$('#tgrid').treegrid('reload');
+			}
+		});
+		
+	}
+
+	function down(){
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			$("#tooltip")[0].innerHTML="请选择一个节点";
+			return;
+		}else{
+			$("#tooltip")[0].innerHTML="";
+		}
+		$.ajax({
+			cache : true,
+			url : '${ctxAdmin}/channel/toDown?id='+row[0].id+'&time='+new Date(),
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$('#tgrid').datagrid('clearSelections');
+				$('#tgrid').treegrid('reload');
+			}
+		});
+	}
 </script>
 </head>
 
@@ -150,7 +196,16 @@
 			<shiro:hasPermission name="channel:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>   
-			<input type="button" value="刷新栏目缓存" onclick="refreshMenu();" />
+			<shiro:hasPermission name="channel:update">
+				<input type="button" value="上升" onclick="up();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="channel:update">
+				<input type="button" value="下降" onclick="down();" /> 
+			</shiro:hasPermission>
+			<shiro:hasPermission name="channel:update">
+				<input type="button" value="刷新栏目缓存" onclick="refreshMenu();" /> 
+			</shiro:hasPermission>
+			&nbsp;&nbsp;<span id="tooltip" style="color: red;"></span>
 		</div>
 		
 		<table id="tgrid" title="" class="easyui-treegrid"
@@ -177,8 +232,9 @@
 					<th data-options="field:'channelTemplete',align:'center'" width="100%">栏目模板</th>
 					<th data-options="field:'keyword',align:'center'" width="100%">关键字</th>
 					<th data-options="field:'linkAddr',align:'center'" width="100%">链接地址</th>
-					<th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th>
-					<th data-options="field:'descrition',align:'center'" width="100%">描述</th>
+					<th data-options="field:'sort',align:'center'" width="100%">排序序号</th>
+					<!-- <th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th> -->
+					<!-- <th data-options="field:'descrition',align:'center'" width="100%">描述</th> -->
 				</tr>
 			</thead>
 		</table>

@@ -9,42 +9,42 @@ public class ResourceCriteria {
     /**
      * 该字段对应数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public ResourceCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class ResourceCriteria {
     /**
      * 该方法由系统生成 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class ResourceCriteria {
     /**
      * 该类对应于数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -981,6 +981,66 @@ public class ResourceCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andSortIsNull() {
+            addCriterion("sort is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIsNotNull() {
+            addCriterion("sort is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortEqualTo(Integer value) {
+            addCriterion("sort =", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotEqualTo(Integer value) {
+            addCriterion("sort <>", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortGreaterThan(Integer value) {
+            addCriterion("sort >", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sort >=", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortLessThan(Integer value) {
+            addCriterion("sort <", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortLessThanOrEqualTo(Integer value) {
+            addCriterion("sort <=", value, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIn(List<Integer> values) {
+            addCriterion("sort in", values, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotIn(List<Integer> values) {
+            addCriterion("sort not in", values, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortBetween(Integer value1, Integer value2) {
+            addCriterion("sort between", value1, value2, "sort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortNotBetween(Integer value1, Integer value2) {
+            addCriterion("sort not between", value1, value2, "sort");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1030,7 +1090,7 @@ public class ResourceCriteria {
     /**
      * 该类对应于数据库表 tb_resource
      *
-     * @mbggenerated do_not_delete_during_merge 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated do_not_delete_during_merge 2015年12月23日 16时11分07秒 星期三
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1042,7 +1102,7 @@ public class ResourceCriteria {
     /**
      * 该类对应于数据库表 tb_resource
      *
-     * @mbggenerated 2015年12月13日 10时47分30秒 星期日
+     * @mbggenerated 2015年12月23日 16时11分07秒 星期三
      */
     public static class Criterion {
         private String condition;

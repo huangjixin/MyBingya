@@ -72,16 +72,19 @@ public class ChannelController extends BaseController<Channel>{
 				return root+"admin/modules/channel/channel_create";
 			}
 		}
-		channelCriteria = new ChannelCriteria();
-		Criteria criteria  = channelCriteria.createCriteria();
-		if(channel.getParentId()==null){
-			criteria.andParentIdIsNull();
-		}else{
-			criteria.andParentIdEqualTo(channel.getParentId());
+		if(channel.getSort()==null){
+			channelCriteria = new ChannelCriteria();
+			Criteria criteria  = channelCriteria.createCriteria();
+			if(channel.getParentId()==null){
+				criteria.andParentIdIsNull();
+			}else{
+				criteria.andParentIdEqualTo(channel.getParentId());
+			}
+			int count = channelService.countByExample(channelCriteria);
+			count+=1;
+			channel.setSort(count);
 		}
-		int count = channelService.countByExample(channelCriteria);
-		count+=1;
-		channel.setSort(count);
+		
 		channel.setCreateBy(UserUtils.getUsername());
 		channel.setCreateDate(new Date());
 		channelService.insert(channel);
@@ -246,12 +249,12 @@ public class ChannelController extends BaseController<Channel>{
 	
 	@RequestMapping(value = "/toUp")
 	@ResponseBody
-	public void toUp(@RequestParam(value = "id", required = false) String id,
+	public void toUp(@RequestParam(value = "id", required = true) String id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		Channel channel = channelService.selectByPrimaryKey(id);
 		ChannelCriteria channelCriteria = new ChannelCriteria();
-		channelCriteria.setOrderByClause("sort asc LIMIT 1");
+		channelCriteria.setOrderByClause("sort desc LIMIT 1");
 		ChannelCriteria.Criteria criteria = channelCriteria.createCriteria();
 		if(channel.getParentId()==null){
 			criteria.andParentIdIsNull().andSortLessThan(channel.getSort());;
