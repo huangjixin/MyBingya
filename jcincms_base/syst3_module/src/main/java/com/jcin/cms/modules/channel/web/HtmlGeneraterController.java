@@ -238,10 +238,26 @@ public class HtmlGeneraterController extends BaseController {
 		}
 
 		String templatesPath = webroot;
-		String templateFile = toGeneratedChannel.getChildren() != null
-				&& toGeneratedChannel.getChildren().size() > 0 ? "template"
-				+ File.separator + "channels.ftl" : "template" + File.separator
-				+ "channel.ftl";
+		String templateFile = "";
+		if(toGeneratedChannel.getChildren() != null
+				&& toGeneratedChannel.getChildren().size() > 0){
+			templateFile = "template" + File.separator + "channels.ftl";
+		}else{
+			templateFile = "template" + File.separator + "channel.ftl";
+		}
+		
+		//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+		if(toGeneratedChannel.getAsdocument()){
+			List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+			if(documents!=null&& documents.size()>0){
+				Document docu = documents.get(0);
+				if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+					templateFile = docu.getGeneTemplate();
+					root.put("document", docu);
+				}
+			}
+		}
+		
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -260,6 +276,18 @@ public class HtmlGeneraterController extends BaseController {
 						toGeneratedChannel.getCode(), page);
 				root.put("page", page);
 				root.put("i", i + 1);
+				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if(toGeneratedChannel.getAsdocument()){
+					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+					if(documents!=null&& documents.size()>0){
+						Document docu = documents.get(0);
+						if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+							templateFile = docu.getGeneTemplate();
+							root.put("document", docu);
+						}
+					}
+				}
+				
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 
@@ -268,6 +296,17 @@ public class HtmlGeneraterController extends BaseController {
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + "m.html";
+				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if(toGeneratedChannel.getAsdocument()){
+					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+					if(documents!=null&& documents.size()>0){
+						Document docu = documents.get(0);
+						if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+							templateFile = docu.getmGeneTemplate();
+							root.put("document", docu);
+						}
+					}
+				}
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 			}
@@ -279,6 +318,17 @@ public class HtmlGeneraterController extends BaseController {
 			templateFile = "template" + File.separator + "m-channels.ftl";
 			htmlFile = toGeneratedFiles + File.separator + "docs"
 					+ File.separator + toGeneratedChannel.getCode() + "1m.html";
+			//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+			if(toGeneratedChannel.getAsdocument()){
+				List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+				if(documents!=null&& documents.size()>0){
+					Document docu = documents.get(0);
+					if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+						templateFile = docu.getmGeneTemplate();
+						root.put("document", docu);
+					}
+				}
+			}
 			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 					htmlFile, root);
 		}
@@ -364,10 +414,29 @@ public class HtmlGeneraterController extends BaseController {
 		}
 
 		String templatesPath = webroot;
-		String templateFile = toGeneratedChannel.getChildren() != null
+		String templateFile = "";
+		if(toGeneratedChannel.getChildren() != null
+				&& toGeneratedChannel.getChildren().size() > 0){
+			templateFile = "template" + File.separator + "channels.ftl";
+		}else{
+			templateFile = "template" + File.separator + "channel.ftl";
+		}
+		
+		//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+		if(toGeneratedChannel.getAsdocument()){
+			List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+			if(documents!=null&& documents.size()>0){
+				Document docu = documents.get(0);
+				if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+					templateFile = docu.getGeneTemplate();
+					root.put("document", docu);
+				}
+			}
+		}
+		/*String templateFile = toGeneratedChannel.getChildren() != null
 				&& toGeneratedChannel.getChildren().size() > 0 ? "template"
 				+ File.separator + "channels.ftl" : "template" + File.separator
-				+ "channel.ftl";
+				+ "channel.ftl";*/
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -386,11 +455,33 @@ public class HtmlGeneraterController extends BaseController {
 						toGeneratedChannel.getCode(), page);
 				root.put("page", page);
 				root.put("i", i + 1);
+				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if(toGeneratedChannel.getAsdocument()){
+					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+					if(documents!=null&& documents.size()>0){
+						Document docu = documents.get(0);
+						if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+							templateFile = docu.getGeneTemplate();
+							root.put("document", docu);
+						}
+					}
+				}
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 
 				// 移动端；
 				templateFile = "template" + File.separator + "m-channel.ftl";
+				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if(toGeneratedChannel.getAsdocument()){
+					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+					if(documents!=null&& documents.size()>0){
+						Document docu = documents.get(0);
+						if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+							templateFile = docu.getmGeneTemplate();
+							root.put("document", docu);
+						}
+					}
+				}
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + "m.html";
@@ -403,6 +494,17 @@ public class HtmlGeneraterController extends BaseController {
 
 			// 移动端；
 			templateFile = "template" + File.separator + "m-channels.ftl";
+			//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+			if(toGeneratedChannel.getAsdocument()){
+				List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
+				if(documents!=null&& documents.size()>0){
+					Document docu = documents.get(0);
+					if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+						templateFile = docu.getmGeneTemplate();
+						root.put("document", docu);
+					}
+				}
+			}
 			htmlFile = toGeneratedFiles + File.separator + "docs"
 					+ File.separator + toGeneratedChannel.getCode() + "1m.html";
 			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,

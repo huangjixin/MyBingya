@@ -19,42 +19,42 @@ public class DocumentCriteria {
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public DocumentCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -63,7 +63,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -72,7 +72,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -81,7 +81,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -90,7 +90,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public boolean isDistinct() {
         return distinct;
@@ -99,7 +99,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -108,7 +108,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -117,7 +117,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -128,7 +128,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -141,7 +141,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -151,7 +151,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void clear() {
         oredCriteria.clear();
@@ -162,7 +162,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void setPage(Page page) {
         this.page=page;
@@ -171,7 +171,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public Page getPage() {
         return page;
@@ -180,7 +180,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -189,7 +189,7 @@ public class DocumentCriteria {
     /**
      * 该方法由系统生成 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public String getDialect() {
         return dialect;
@@ -198,7 +198,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1781,6 +1781,146 @@ public class DocumentCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andMGeneTemplateIsNull() {
+            addCriterion("m_gene_template is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateIsNotNull() {
+            addCriterion("m_gene_template is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateEqualTo(String value) {
+            addCriterion("m_gene_template =", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotEqualTo(String value) {
+            addCriterion("m_gene_template <>", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateGreaterThan(String value) {
+            addCriterion("m_gene_template >", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateGreaterThanOrEqualTo(String value) {
+            addCriterion("m_gene_template >=", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLessThan(String value) {
+            addCriterion("m_gene_template <", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLessThanOrEqualTo(String value) {
+            addCriterion("m_gene_template <=", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLike(String value) {
+            addCriterion("m_gene_template like", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotLike(String value) {
+            addCriterion("m_gene_template not like", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateIn(List<String> values) {
+            addCriterion("m_gene_template in", values, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotIn(List<String> values) {
+            addCriterion("m_gene_template not in", values, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateBetween(String value1, String value2) {
+            addCriterion("m_gene_template between", value1, value2, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotBetween(String value1, String value2) {
+            addCriterion("m_gene_template not between", value1, value2, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateIsNull() {
+            addCriterion("gene_template is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateIsNotNull() {
+            addCriterion("gene_template is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateEqualTo(String value) {
+            addCriterion("gene_template =", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateNotEqualTo(String value) {
+            addCriterion("gene_template <>", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateGreaterThan(String value) {
+            addCriterion("gene_template >", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateGreaterThanOrEqualTo(String value) {
+            addCriterion("gene_template >=", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateLessThan(String value) {
+            addCriterion("gene_template <", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateLessThanOrEqualTo(String value) {
+            addCriterion("gene_template <=", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateLike(String value) {
+            addCriterion("gene_template like", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateNotLike(String value) {
+            addCriterion("gene_template not like", value, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateIn(List<String> values) {
+            addCriterion("gene_template in", values, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateNotIn(List<String> values) {
+            addCriterion("gene_template not in", values, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateBetween(String value1, String value2) {
+            addCriterion("gene_template between", value1, value2, "geneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateNotBetween(String value1, String value2) {
+            addCriterion("gene_template not between", value1, value2, "geneTemplate");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1860,12 +2000,22 @@ public class DocumentCriteria {
             addCriterion("upper(content_short) like", value.toUpperCase(), "contentShort");
             return (Criteria) this;
         }
+
+        public Criteria andMGeneTemplateLikeInsensitive(String value) {
+            addCriterion("upper(m_gene_template) like", value.toUpperCase(), "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneTemplateLikeInsensitive(String value) {
+            addCriterion("upper(gene_template) like", value.toUpperCase(), "geneTemplate");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated do_not_delete_during_merge 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2015年12月23日 21时14分39秒 星期三
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1877,7 +2027,7 @@ public class DocumentCriteria {
     /**
      * 该类对应于数据库表 busi_document
      *
-     * @mbggenerated 2015年11月30日 15时00分52秒 星期一
+     * @mbggenerated 2015年12月23日 21时14分39秒 星期三
      */
     public static class Criterion {
         private String condition;
