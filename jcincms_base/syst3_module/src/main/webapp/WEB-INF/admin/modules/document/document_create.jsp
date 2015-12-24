@@ -30,9 +30,15 @@ th {
 	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 	var ue = UE.getEditor('editor');
 	var docTemp = "${document.documentTemplete}";
+	var geneTemp = "${document.geneTemplate}";
+	var mGeneTemp = "${document.mGeneTemplate}";
+	
 	$().ready(function() {
 		createDocumentTree();
 		createFileTree();
+		createGeneTempleteTree();
+		createmGeneTemplateTree();
+		
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
 			ue.setContent('${document.content}');
@@ -77,16 +83,6 @@ th {
 				$('#docTemplete').combotree('tree').tree("collapseAll");
 				var dTemplete = "${document.documentTemplete}";
 				$('#docTemplete').combotree("setValue", dTemplete);
-				/* if (dTemplete != "") {
-					var index = dTemplete.lastIndexOf("/");
-					if(index>0){
-						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
-						$('#docTemplete').combotree("setValue", dTemplete);
-					}else{
-						$('#docTemplete').combotree("setValue", dTemplete+".jsp");
-					}
-					
-				} */
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#docTemplete').combotree('tree');  
@@ -107,6 +103,79 @@ th {
             }  
 		});
 	}
+	
+	//创建页面模板树。
+	function createGeneTempleteTree() {
+		$('#geneTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#geneTemplate').combotree('tree').tree("collapseAll");
+				var gTemplete = "${document.geneTemplate}";
+				$('#geneTemplate').combotree("setValue", gTemplete);
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#geneTemplate').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                geneTemp = pathStr; 
+            }  
+		});
+	}
+	//创建移动页面模板树。
+	function createmGeneTemplateTree() {
+		$('#mGeneTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#mGeneTemplate').combotree('tree').tree("collapseAll");
+				var gTemplete = "${document.mGeneTemplate}";
+				$('#mGeneTemplate').combotree("setValue", gTemplete);
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#mGeneTemplate').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                mGeneTemp = pathStr; 
+            }  
+		});
+	}
 
 	function clearParentInput() {
 		$('#channelId').combotree('clear');
@@ -115,6 +184,16 @@ th {
 	function cleardocTemplete() {
 		$('#docTemplete').combotree('clear');
 		docTemp = "";
+	}
+	
+	function cleargeneTemplate(){
+		$('#geneTemplate').combotree('clear');
+		geneTemp = "";
+	}
+	
+	function clearmGeneTemplate(){
+		$('#mGeneTemplate').combotree('clear');
+		mGeneTemp = "";
 	}
 
 	//jquery 提交表单。
@@ -128,10 +207,9 @@ th {
 		
 		var cont = ue.getContent();
 		$('#content').val(cont);
-		/* if(docTemp.indexOf(".") > 0){
-			docTemp = docTemp.substring(0,docTemp.indexOf("."));
-		} */
 		$('#documentTemplete').val(docTemp);
+		$('#gTemplete').val(geneTemp);
+		$('#mgTemplete').val(mGeneTemp);
 		$('#validForm').submit();
 	}
 
@@ -195,6 +273,8 @@ th {
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
 		<input id="contentShort" name="contentShort" value="${document.contentShort}" type="hidden" />
 		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
+		<input id="gTemplete" name="geneTemplate" value="${document.geneTemplate}" type="hidden" />
+		<input id="mgTemplete" name="mGeneTemplate" value="${document.mGeneTemplate}" type="hidden" />
 		<div class="desc">
 			<b>文档信息添加</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
 		</div>
@@ -290,11 +370,25 @@ th {
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;是否推荐：</th>
-							<td nowrap="nowrap" align="left"  colspan="6"><select  id="recommend" name="recommend" style="width:100px;">
+							<td nowrap="nowrap" align="left"><select  id="recommend" name="recommend" style="width:100px;">
 										<c:forEach var="sh" items="${fns:getByType('recommend')}">
 											<option value="${sh.value}" <c:if test="${sh.value == false}">selected="selected"</c:if> <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
 										</c:forEach>
 									</select>&nbsp;<form:errors path="recommend" cssStyle="color:red;"></form:errors></td>
+							<th>&nbsp;页面生成模板：</th>
+							<td nowrap="nowrap" align="left">
+								<input id="geneTemplate"/>
+								&nbsp;
+								<input type="button" onclick="cleargeneTemplate();" value="清除"/>
+								<form:errors path="geneTemplate" cssStyle="color:red;"></form:errors>
+							</td>
+							<th>&nbsp;手机页面生成模板：</th>
+							<td nowrap="nowrap" align="left">
+								<input id="mGeneTemplate"/>
+								&nbsp;
+								<input type="button" onclick="clearmGeneTemplate();" value="清除"/>
+								<form:errors path="geneTemplate" cssStyle="color:red;"></form:errors>
+							</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th style="width: 150px;">&nbsp;</th>
