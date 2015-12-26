@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
+<c:set var="modules" value="${list}"/>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
@@ -113,8 +114,8 @@
 
 				</div>
 				<div class="spacer"></div>
-				<c:if test="${list!=null}">
-					<c:forEach var="channel" items="${list}" varStatus="status">
+				<c:if test="${modules!=null}">
+					<c:forEach var="channel" items="${modules}" varStatus="status">
 						<c:if test="${channel.name!=null && channel.name!=''}">
 							<c:if test="${status.index%2==0}">
 								<div class="box" style="float: left;">
