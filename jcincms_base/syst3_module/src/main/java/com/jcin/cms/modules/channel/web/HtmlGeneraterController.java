@@ -102,6 +102,14 @@ public class HtmlGeneraterController extends BaseController {
 		}
 		// 菜单
 		List<Channel> menus = UserUtils.getChannels();
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		root.put("modules", modules);
 
 		page.setPageSize(10);
 
@@ -174,6 +182,15 @@ public class HtmlGeneraterController extends BaseController {
 		Map<String, Object> root = new HashMap<String, Object>();
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		root.put("modules", modules);
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
@@ -239,25 +256,27 @@ public class HtmlGeneraterController extends BaseController {
 
 		String templatesPath = webroot;
 		String templateFile = "";
-		if(toGeneratedChannel.getChildren() != null
-				&& toGeneratedChannel.getChildren().size() > 0){
+		if (toGeneratedChannel.getChildren() != null
+				&& toGeneratedChannel.getChildren().size() > 0) {
 			templateFile = "template" + File.separator + "channels.ftl";
-		}else{
+		} else {
 			templateFile = "template" + File.separator + "channel.ftl";
 		}
-		
-		//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-		if(toGeneratedChannel.getAsdocument()){
-			List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-			if(documents!=null&& documents.size()>0){
+
+		// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+		if (toGeneratedChannel.getAsdocument()) {
+			List<Document> documents = documentService
+					.getDocByChannelId(toGeneratedChannel.getId());
+			if (documents != null && documents.size() > 0) {
 				Document docu = documents.get(0);
-				if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+				if (docu.getGeneTemplate() != null
+						&& !"".equals(docu.getGeneTemplate())) {
 					templateFile = docu.getGeneTemplate();
 					root.put("document", docu);
 				}
 			}
 		}
-		
+
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -276,18 +295,20 @@ public class HtmlGeneraterController extends BaseController {
 						toGeneratedChannel.getCode(), page);
 				root.put("page", page);
 				root.put("i", i + 1);
-				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-				if(toGeneratedChannel.getAsdocument()){
-					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-					if(documents!=null&& documents.size()>0){
+				// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if (toGeneratedChannel.getAsdocument()) {
+					List<Document> documents = documentService
+							.getDocByChannelId(toGeneratedChannel.getId());
+					if (documents != null && documents.size() > 0) {
 						Document docu = documents.get(0);
-						if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+						if (docu.getGeneTemplate() != null
+								&& !"".equals(docu.getGeneTemplate())) {
 							templateFile = docu.getGeneTemplate();
 							root.put("document", docu);
 						}
 					}
 				}
-				
+
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 
@@ -296,12 +317,14 @@ public class HtmlGeneraterController extends BaseController {
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + "m.html";
-				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-				if(toGeneratedChannel.getAsdocument()){
-					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-					if(documents!=null&& documents.size()>0){
+				// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if (toGeneratedChannel.getAsdocument()) {
+					List<Document> documents = documentService
+							.getDocByChannelId(toGeneratedChannel.getId());
+					if (documents != null && documents.size() > 0) {
 						Document docu = documents.get(0);
-						if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+						if (docu.getmGeneTemplate() != null
+								&& !"".equals(docu.getmGeneTemplate())) {
 							templateFile = docu.getmGeneTemplate();
 							root.put("document", docu);
 						}
@@ -318,12 +341,14 @@ public class HtmlGeneraterController extends BaseController {
 			templateFile = "template" + File.separator + "m-channels.ftl";
 			htmlFile = toGeneratedFiles + File.separator + "docs"
 					+ File.separator + toGeneratedChannel.getCode() + "1m.html";
-			//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-			if(toGeneratedChannel.getAsdocument()){
-				List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-				if(documents!=null&& documents.size()>0){
+			// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+			if (toGeneratedChannel.getAsdocument()) {
+				List<Document> documents = documentService
+						.getDocByChannelId(toGeneratedChannel.getId());
+				if (documents != null && documents.size() > 0) {
 					Document docu = documents.get(0);
-					if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+					if (docu.getmGeneTemplate() != null
+							&& !"".equals(docu.getmGeneTemplate())) {
 						templateFile = docu.getmGeneTemplate();
 						root.put("document", docu);
 					}
@@ -354,6 +379,15 @@ public class HtmlGeneraterController extends BaseController {
 		Map<String, Object> root = new HashMap<String, Object>();
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		root.put("modules", modules);
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, toChannel.getId(), result);
 		if (result.size() == 0) {
@@ -415,28 +449,32 @@ public class HtmlGeneraterController extends BaseController {
 
 		String templatesPath = webroot;
 		String templateFile = "";
-		if(toGeneratedChannel.getChildren() != null
-				&& toGeneratedChannel.getChildren().size() > 0){
+		if (toGeneratedChannel.getChildren() != null
+				&& toGeneratedChannel.getChildren().size() > 0) {
 			templateFile = "template" + File.separator + "channels.ftl";
-		}else{
+		} else {
 			templateFile = "template" + File.separator + "channel.ftl";
 		}
-		
-		//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-		if(toGeneratedChannel.getAsdocument()){
-			List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-			if(documents!=null&& documents.size()>0){
+
+		// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+		if (toGeneratedChannel.getAsdocument()) {
+			List<Document> documents = documentService
+					.getDocByChannelId(toGeneratedChannel.getId());
+			if (documents != null && documents.size() > 0) {
 				Document docu = documents.get(0);
-				if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+				if (docu.getGeneTemplate() != null
+						&& !"".equals(docu.getGeneTemplate())) {
 					templateFile = docu.getGeneTemplate();
 					root.put("document", docu);
 				}
 			}
 		}
-		/*String templateFile = toGeneratedChannel.getChildren() != null
-				&& toGeneratedChannel.getChildren().size() > 0 ? "template"
-				+ File.separator + "channels.ftl" : "template" + File.separator
-				+ "channel.ftl";*/
+		/*
+		 * String templateFile = toGeneratedChannel.getChildren() != null &&
+		 * toGeneratedChannel.getChildren().size() > 0 ? "template" +
+		 * File.separator + "channels.ftl" : "template" + File.separator +
+		 * "channel.ftl";
+		 */
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -455,12 +493,14 @@ public class HtmlGeneraterController extends BaseController {
 						toGeneratedChannel.getCode(), page);
 				root.put("page", page);
 				root.put("i", i + 1);
-				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-				if(toGeneratedChannel.getAsdocument()){
-					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-					if(documents!=null&& documents.size()>0){
+				// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if (toGeneratedChannel.getAsdocument()) {
+					List<Document> documents = documentService
+							.getDocByChannelId(toGeneratedChannel.getId());
+					if (documents != null && documents.size() > 0) {
 						Document docu = documents.get(0);
-						if(docu.getGeneTemplate()!=null && !"".equals(docu.getGeneTemplate())){
+						if (docu.getGeneTemplate() != null
+								&& !"".equals(docu.getGeneTemplate())) {
 							templateFile = docu.getGeneTemplate();
 							root.put("document", docu);
 						}
@@ -471,12 +511,14 @@ public class HtmlGeneraterController extends BaseController {
 
 				// 移动端；
 				templateFile = "template" + File.separator + "m-channel.ftl";
-				//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-				if(toGeneratedChannel.getAsdocument()){
-					List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-					if(documents!=null&& documents.size()>0){
+				// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+				if (toGeneratedChannel.getAsdocument()) {
+					List<Document> documents = documentService
+							.getDocByChannelId(toGeneratedChannel.getId());
+					if (documents != null && documents.size() > 0) {
 						Document docu = documents.get(0);
-						if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+						if (docu.getmGeneTemplate() != null
+								&& !"".equals(docu.getmGeneTemplate())) {
 							templateFile = docu.getmGeneTemplate();
 							root.put("document", docu);
 						}
@@ -494,12 +536,14 @@ public class HtmlGeneraterController extends BaseController {
 
 			// 移动端；
 			templateFile = "template" + File.separator + "m-channels.ftl";
-			//如果栏目直接是文档的话,那应该找到相应的文档生成模板。
-			if(toGeneratedChannel.getAsdocument()){
-				List<Document> documents = documentService.getDocByChannelId(toGeneratedChannel.getId());
-				if(documents!=null&& documents.size()>0){
+			// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
+			if (toGeneratedChannel.getAsdocument()) {
+				List<Document> documents = documentService
+						.getDocByChannelId(toGeneratedChannel.getId());
+				if (documents != null && documents.size() > 0) {
 					Document docu = documents.get(0);
-					if(docu.getmGeneTemplate()!=null && !"".equals(docu.getmGeneTemplate())){
+					if (docu.getmGeneTemplate() != null
+							&& !"".equals(docu.getmGeneTemplate())) {
 						templateFile = docu.getmGeneTemplate();
 						root.put("document", docu);
 					}
@@ -531,6 +575,7 @@ public class HtmlGeneraterController extends BaseController {
 		String webroot = httpServletRequest.getRealPath("/");
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
@@ -591,6 +636,7 @@ public class HtmlGeneraterController extends BaseController {
 		String webroot = httpServletRequest.getRealPath("/");
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
@@ -661,6 +707,14 @@ public class HtmlGeneraterController extends BaseController {
 		String conPath = httpServletRequest.getContextPath();
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
@@ -705,6 +759,7 @@ public class HtmlGeneraterController extends BaseController {
 				root.put("path", webroot);
 				root.put("ctx", conPath);
 				root.put("menus", menus);
+				root.put("modules", modules);
 				root.put("navChan", navChan);
 				root.put("clickCountDocs", clickCountDocs);
 				root.put("document", document);
@@ -739,6 +794,14 @@ public class HtmlGeneraterController extends BaseController {
 		String conPath = httpServletRequest.getContextPath();
 
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, toChannel.getId(), result);
 		if (result.size() == 0) {
@@ -783,6 +846,7 @@ public class HtmlGeneraterController extends BaseController {
 				root.put("path", webroot);
 				root.put("ctx", conPath);
 				root.put("menus", menus);
+				root.put("modules", modules);
 				root.put("navChan", navChan);
 				root.put("clickCountDocs", clickCountDocs);
 				root.put("document", document);

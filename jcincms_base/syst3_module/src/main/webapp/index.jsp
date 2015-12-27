@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<c:set var="modules" value="${list}"/>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">

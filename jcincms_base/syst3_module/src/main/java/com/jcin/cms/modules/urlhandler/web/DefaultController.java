@@ -65,6 +65,14 @@ public class DefaultController extends BaseController {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
 		if (sitePreference == SitePreference.MOBILE) {
 			return "m-index.jsp";
 		} else {
@@ -96,12 +104,20 @@ public class DefaultController extends BaseController {
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 
 		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
-				page);
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				channel.getCode(), page);
 		for (Document document1 : clickCountDocs) {
 			Channel channel1 = channelService.selectByPrimaryKey(document1
 					.getChannelId());
@@ -175,11 +191,19 @@ public class DefaultController extends BaseController {
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
-				page);
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				channel.getCode(), page);
 		for (Document document1 : clickCountDocs) {
 			Channel channel1 = channelService.selectByPrimaryKey(document1
 					.getChannelId());
@@ -268,14 +292,22 @@ public class DefaultController extends BaseController {
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
 
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 
 		Page page1 = new Page();
 		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(),
-				page1);
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				channel.getCode(), page1);
 		for (Document document1 : clickCountDocs) {
 			Channel channel1 = channelService.selectByPrimaryKey(document1
 					.getChannelId());
@@ -365,6 +397,14 @@ public class DefaultController extends BaseController {
 
 		List<Channel> list = UserUtils.getChannels();
 		uiModel.addAttribute("list", list);
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
 		// 高点击率
 		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
 				page);

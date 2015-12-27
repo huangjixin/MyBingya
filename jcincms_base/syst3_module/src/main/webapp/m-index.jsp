@@ -77,7 +77,7 @@
 			</c:if>
 		</ul>
 	</div>
-	<c:if test="${list!=null}">
+	<c:if test="${modules!=null}">
 		<c:forEach var="channel" items="${list}" varStatus="status">
 			<div class="module">
 				<div class="head">

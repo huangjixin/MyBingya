@@ -6,6 +6,8 @@
  */
 package com.jcin.cms.modules.urlhandler.web;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +43,8 @@ import com.jcin.cms.web.BaseController;
 @RequestMapping(value = { "", "/" })
 // @Scope(value="prototype")
 public class DefaultIndexController extends BaseController {
-	private static Logger logger = Logger.getLogger(DefaultIndexController.class
-			.getName());
-	private static IChannelService channelServ = SpringUtils
-			.getBean(ChannelServiceImpl.class);
+	private static Logger logger = Logger
+			.getLogger(DefaultIndexController.class.getName());
 
 	@Autowired
 	private IChannelService channelService;
@@ -54,38 +54,59 @@ public class DefaultIndexController extends BaseController {
 
 	/**
 	 * 首页跳转。
+	 * 
 	 * @param sitePreference
 	 * @param uiModel
 	 * @param httpServletRequest
 	 * @return
 	 */
 	@RequestMapping
-	public String index(SitePreference sitePreference,Model uiModel, HttpServletRequest httpServletRequest) {
+	public String index(SitePreference sitePreference, Model uiModel,
+			HttpServletRequest httpServletRequest) {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
-		
+		/*Iterator<Channel>iterator = list.iterator();
+		while (iterator.hasNext()) {
+			Channel channel2 = iterator.next();
+			if (!channel2.getAsdocument()) {
+				list.remove(channel2);
+			}
+		}*/
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : list) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+		uiModel.addAttribute("modules", modules);
+
+		//查询推荐文档。
 		Page page = new Page();
 		List<Document> recommendDocs = documentService.getRecommendDoc(page);
 		for (Document document : recommendDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			Channel channel = channelService.selectByPrimaryKey(document
+					.getChannelId());
 			document.setChannel(channel);
 		}
-		//高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(null, page);
+		// 高点击率
+		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
+				page);
 		for (Document document : clickCountDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			Channel channel = channelService.selectByPrimaryKey(document
+					.getChannelId());
 			document.setChannel(channel);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 		uiModel.addAttribute("recommendDocs", recommendDocs);
-		
+
 		if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");
 			return "m-index.jsp";
-        } else {
-        	logger.info("PC来的网页请求");
-        	return "index.jsp";
-        }
+		} else {
+			logger.info("PC来的网页请求");
+			return "index.jsp";
+		}
 	}
 }
