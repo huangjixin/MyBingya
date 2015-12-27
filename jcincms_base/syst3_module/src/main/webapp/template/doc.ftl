@@ -39,55 +39,7 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 			</div>
 		</div>
 		<!-- 导航菜单 -->
-		<div class="menu">
-			<div
-				style="height:40px;z-index:3;background:#212121;margin-left:20px; top:0; left:0; display:block;">
-				<ul>
-					<li><a href="${ctx}/">首页</a></li>
-					<#list menus as menu>
-						<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
-							<#if menu.children ??>
-								<ul>
-									<#list menu.children as menu>
-											<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
-												<#if menu.children ??>
-													<ul>
-														<#list menu.children as menu>
-															<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
-															<#if menu.children ??>
-																<ul>
-																	<#list menu.children as menu>
-																		<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
-																		<#if menu.children ??>
-																			<ul>
-																				<#list menu.children as menu>
-																					<li><a href="${ctx}/${menu.linkAddr}">${menu.name}</a>
-																					<#if menu.children ??>
-																						<ul>
-														
-																						</ul>
-																					</#if>
-																					</li>
-																				</#list>
-																			</ul>
-																		</#if>
-																		</li>
-																	</#list>
-																</ul>
-															</#if>
-															</li>
-														</#list>
-													</ul>
-												</#if>
-											</li>
-									</#list>	
-								</ul>
-							</#if>
-						</li>
-					</#list>
-				</ul>
-			</div>
-		</div>
+		<#include "template/menu.ftl" >
 		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
