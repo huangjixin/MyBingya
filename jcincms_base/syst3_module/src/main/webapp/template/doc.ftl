@@ -134,50 +134,10 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 			</div>		
 		</div>
 		<!-- 右边导航 -->
-		<div id="left_side">
-			<div class="box" style="width: 250px;">
-				<div class="box-header">点击率排行榜</div>
-				<!-- <div><hr style="width:100%;height:1px;border:none;border-top:1px solid #0088DD;" /></div> -->
-				<div class="box-center">
-					<ul style="list-style:none;">
-						<#if clickCountDocs ??>
-							<#list clickCountDocs as doc>
-								<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}"
-														target="blank">${doc.title}</a></li>
-							</#list>
-						</#if>
-					</ul>
-				</div>
-			</div>
-			<div class="spacer"></div>
-			<div class="box" style="width: 250px;">
-				<div class="box-header">分类目录</div>
-				<!-- <div><hr style="width:100%;height:1px;border:none;border-top:1px solid #0088DD;" /></div> -->
-				<div class="box-center" style="font-size: 14px;">
-					<div class="category">elasticsearch</div>
-					<div class="category">hadoop</div>
-					<div class="category">Java</div>
-					<div class="category">linux</div>
-					<div class="category">lucene</div>
-					<div class="category">memcached</div>
-					<div class="category">mongodb</div>
-					<div class="category">mysql</div>
-					<div class="category">Oracle</div>
-					<div class="category">redis</div>
-					<div class="category">中文分词</div>
-					<div class="category">产品</div>
-					<div class="category">分布式系统</div>
-					<div class="category">微博架构</div>
-					<div class="category">推荐系统</div>
-					<div class="category">操作系统</div>
-				</div>
-				<div style="height: 12px;"></div>
-			</div>
-		</div>
+		<#include "template/right_side.ftl" >
 	</div>
 		<div class="spacer"></div>
-		<div id="footer">Copyright © 2011-2015 jcincms内容管理系统. Powered by chepoo.com.京ICP备11014024号 .
-		</div>
+		<#include "template/footer.ftl" > 
 	<script type="text/javascript">
 		featuredcontentslider.init({
 			id : "sliderA",
