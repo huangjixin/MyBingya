@@ -80,7 +80,7 @@
 			<div id="content">
 				<div id="picnav">
 					<a class="arrow-left" href="#"></a> <a class="arrow-right" href="#"></a>
-					<div class="swiper-container">
+					<div class="swiper-container swiper-container-fade">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<img src="${ctx}/images/79084479.jpg" width="400" height="200"
@@ -125,10 +125,72 @@
 					</div>
 				</div>
 				<div class="spacer"></div>
-				<div class="box" style="float: left;width: 100%;min-height: 140px;">
+				<div class="box" style="float: left;width:100%;min-height: 140px;">
 					<div class="box-header" style="width: 25%;">图文资讯</div>
-					<div class="box-center" style="text-align: center;">
-						<ul id="ScrollBox">
+					<div class="box-center" style="text-align: center;padding-top: 5px;">
+						<div class="swiper-container swiper-container-scroll" style="height:125px;">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">Slide 3</div>
+								<div class="swiper-slide">Slide 4</div>
+								<div class="swiper-slide">Slide 5</div>
+								<div class="swiper-slide">Slide 6</div>
+								<div class="swiper-slide">Slide 7</div>
+								<div class="swiper-slide">Slide 8</div>
+								<div class="swiper-slide">Slide 9</div>
+								<div class="swiper-slide">Slide 10</div>
+							</div>
+							<!-- Add Pagination -->
+							<div class="swiper-pagination swiper-pagination-pictrueScroll"></div>
+						</div>
+						<%-- <ul id="ScrollBox">
 							<li><a href="products.html" title="覆盆子酮"><img
 									src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
 									height="100" /><span>覆盆子酮</span></a></li>
@@ -156,7 +218,7 @@
 							scrollPic_01.autoPlayTime = 3; //自动播放间隔时间(秒)
 							scrollPic_01.initialize(); //初始化
 							//--><!]]>
-						</script>
+						</script> --%>
 					</div>
 				</div>
 				<div>
@@ -209,17 +271,28 @@
 	<jsp:include page="footer.jsp" flush="true"></jsp:include>
 	<script src="${ctx}/js/swiper.js"></script>
 	<script>
-	 var swiper = new Swiper('.swiper-container', {
-	        pagination: '.swiper-pagination',
-	        paginationClickable: '.swiper-pagination',
-	        nextButton: '.swiper-button-next',
-	        prevButton: '.swiper-button-prev',
-	        loop : true,
-	        autoplay : 2500,
+		var swiper = new Swiper('.swiper-container-fade', {
+			pagination : '.swiper-pagination-white',
+			paginationClickable : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			loop : true,
+			autoplay : 2500,
 			autoplayDisableOnInteraction : true,
-	        spaceBetween: 30,
-	        effect: 'fade'
-	    });
+			spaceBetween : 30,
+			effect : 'fade'
+		});
+		var swiper1 = new Swiper('.swiper-container-scroll', {
+			pagination : '.swiper-pagination-pictrueScroll',
+			loop : true,
+			autoplay : 2500,
+			autoplayDisableOnInteraction : true,
+			slidesPerView : 4,
+			paginationClickable : true,
+			spaceBetween : 30,
+			grabCursor: true
+			
+		});
 	</script>
 </body>
 </html>
