@@ -4,9 +4,63 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
 <script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<style type="text/css">
+#picnav .arrow-left {
+	background: url(images/arrows.png) no-repeat left top;
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	margin-top: -15px;
+	width: 17px;
+	height: 30px;
+}
+
+#picnav .arrow-right {
+	background: url(images/arrows.png) no-repeat left bottom;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -15px;
+	width: 17px;
+	height: 30px;
+}
+
+.swiper-container {
+	height: 200px;
+	width: 100%;
+}
+
+.pagination {
+	position: absolute;
+	left: 0;
+	text-align: center;
+	bottom: 5px;
+	width: 100%;
+}
+
+.swiper-pagination-switch {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background: #999;
+	box-shadow: 0px 1px 2px #555 inset;
+	margin: 0 3px;
+	cursor: pointer;
+}
+
+.swiper-active-switch {
+	background: #fff;
+}
+
+.swiper-slide { /* padding-left: 1px;
+	padding-top: 2px; */
+	
+}
+</style>
 </head>
 <title>首页</title>
 <body>
@@ -19,37 +73,35 @@
 				<span>2015年11月26日 星期四</span>
 			</div>
 		</div>
-		<!-- <div class="spacer"></div> -->
 		<!-- 导航菜单 -->
 		<jsp:include page="menu.jsp" flush="true"></jsp:include>
-
 		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
 				<div id="picnav">
-					<div class="focus">
-						<div id="sliderA" class="sliderwrapper">
-							<div class="contentdiv">
-								<div class="slPic">
-									<a href="#" target="_blank"><img src="images/79064170.jpg"
-										alt="" width="400" height="194" border="0" /></a><a href="#"
-										target="_blank"></a>
-								</div>
-								<span></span>
+					<a class="arrow-left" href="#"></a> <a class="arrow-right" href="#"></a>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79084479.jpg" width="400" height="200"
+									border="0" />
 							</div>
-							<div class="contentdiv">
-								<div class="slPic">
-									<a href="#" target="_blank"><img src="images/79084479.jpg"
-										alt="" width="400" height="194" border="0" /></a><a href="#"
-										target="_blank"></a>
-								</div>
-								<span></span>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79064170.jpg" width="400" height="200"
+									border="0" />
+							</div>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79084750.jpg" width="400" height="200"
+									border="0" />
+							</div>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79085270.jpg" width="400" height="200"
+									border="0" />
 							</div>
 						</div>
-						<div id="paginate-sliderA" class="pagination">
-							<i class="toc"></i><i class="toc"></i><i class="toc"></i><i
-								class="toc"></i>
-						</div>
+						<div class="swiper-pagination swiper-pagination-white"></div>
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 					</div>
 				</div>
 				<div id="recommend">
@@ -59,9 +111,9 @@
 							<c:if test="${recommendDocs!=null}">
 								<c:forEach var="doc" items="${recommendDocs}">
 									<c:choose>
-										<c:when
-											test="${doc.channel!=null}">
-											<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+										<c:when test="${doc.channel!=null}">
+											<li><a
+												href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
 										</c:when>
 										<c:otherwise>
 											<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
@@ -155,19 +207,19 @@
 	</div>
 	<div class="clear"></div>
 	<jsp:include page="footer.jsp" flush="true"></jsp:include>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
+	<script src="${ctx}/js/swiper.js"></script>
+	<script>
+	 var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: '.swiper-pagination',
+	        nextButton: '.swiper-button-next',
+	        prevButton: '.swiper-button-prev',
+	        loop : true,
+	        autoplay : 2500,
+			autoplayDisableOnInteraction : true,
+	        spaceBetween: 30,
+	        effect: 'fade'
+	    });
 	</script>
 </body>
 </html>
