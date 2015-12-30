@@ -100,19 +100,5 @@
 		<!-- 网页底部 -->
 		<jsp:include page="footer.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
-	</script>
 </body>
 </html>

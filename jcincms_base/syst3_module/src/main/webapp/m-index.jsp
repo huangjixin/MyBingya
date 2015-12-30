@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>移动端首页</title>
+<title>首页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。 -->
 <meta name="keywords" content="keyword1,keyword2,keyword3">
@@ -14,10 +14,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/m-demo.css">
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/js/swiper.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -37,48 +37,53 @@
 		</ul>
 	</div>
 	<div id="picnav">
-		<div class="focus">
-			<div id="sliderA" class="sliderwrapper">
-				<div class="contentdiv">
-					<div>
-						<a href="#" target="_blank"><img src="${ctx}/images/0.jpg"
-							alt="" border="0" /></a>
-					</div>
-					<span>野猴占宅为王 房东用计抓捕</span>
+		<div class="swiper-container swiper-container-fade">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="${ctx}/images/79084479.jpg" width="400" height="200"
+						border="0" />
 				</div>
-				<div class="contentdiv">
-					<div>
-						<a href="#" target="_blank"><img src="${ctx}/images/1.jpg"
-							alt="" border="0" /></a>
-					</div>
-					<span>中国海军舰艇将赴南海训练</span>
+				<div class="swiper-slide">
+					<img src="${ctx}/images/79064170.jpg" width="400" height="200"
+						border="0" />
+				</div>
+				<div class="swiper-slide">
+					<img src="${ctx}/images/79084750.jpg" width="400" height="200"
+						border="0" />
+				</div>
+				<div class="swiper-slide">
+					<img src="${ctx}/images/79085270.jpg" width="400" height="200"
+						border="0" />
 				</div>
 			</div>
-			<div id="paginate-sliderA" class="pagination">
-				<i class="toc"></i><i class="toc"></i><i class="toc"></i><i
-					class="toc"></i>
-			</div>
+			<div class="swiper-pagination swiper-pagination-white"></div>
 		</div>
 	</div>
-	<div style="height: 20px;"></div>
-	<div class="list topnews">
-		<ul>
-			<c:if test="${recommendDocs!=null}">
-				<c:forEach var="doc" items="${recommendDocs}">
-					<c:choose>
-						<c:when test="${doc.channel!=null}">
-							<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</c:if>
-		</ul>
+	<div style="height: 10px;"></div>
+	<div class="module">
+		<div class="head">
+			<h2 class="current" data-tab="news">热点推荐</h2>
+		</div>
+		<div class="list topnews">
+			<ul>
+				<c:if test="${recommendDocs!=null}">
+					<c:forEach var="doc" items="${recommendDocs}">
+						<c:choose>
+							<c:when test="${doc.channel!=null}">
+								<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:if>
+			</ul>
+		</div>
 	</div>
+
 	<c:if test="${modules!=null}">
-		<c:forEach var="channel" items="${list}" varStatus="status">
+		<c:forEach var="channel" items="${modules}" varStatus="status">
 			<div class="module">
 				<div class="head">
 					<h2 class="current" data-tab="news">${channel.name}</h2>
@@ -95,27 +100,23 @@
 					</ul>
 				</div>
 			</div>
-			<div style="width: 100%;text-align: center;background-color: #F3F3F9;line-height: 30px;height: 30px;"><a href="${ctx}/${channel.linkAddr}" style="color: #333333;">进入${channel.name}</a></div>
+			<div
+				style="width: 100%;text-align: center;background-color: #F3F3F9;line-height: 30px;height: 30px;">
+				<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">进入${channel.name}</a>
+			</div>
 			<div style="height: 5px;"></div>
 		</c:forEach>
 	</c:if>
-	<div>
-		<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	</div>
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
+	<jsp:include page="footer.jsp" flush="true"></jsp:include>
+	<script>
+		var swiper = new Swiper('.swiper-container-fade', {
+			pagination : '.swiper-pagination-white',
+			paginationClickable : true,
+			loop : true,
+			autoplay : 2500,
+			autoplayDisableOnInteraction : true,
+			spaceBetween : 30,
+			effect : 'fade'
 		});
 	</script>
 </body>

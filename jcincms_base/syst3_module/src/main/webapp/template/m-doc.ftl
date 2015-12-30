@@ -34,11 +34,9 @@
 	<div style="width: 100%;background-color: #ececec;">
 		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
 			<#if navChan ??>
+				<a href="${ctx}/" style="color: #333333;">首页</a>
 				<#list navChan as channel>
-					<#if channel_index!=0>
-						-
-					</#if>
-					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+					-<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
 				</#list>
 			</#if>
 		</div>
@@ -74,22 +72,6 @@
 			<span>下一篇：</span><a href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 		</div>
 	</#if>
-	<hr style="width:100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
-	</script>	
+	<#include "template/m-footer.ftl" >
 </body>
 </html>

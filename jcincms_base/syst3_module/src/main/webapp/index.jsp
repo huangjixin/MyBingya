@@ -6,61 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
-<style type="text/css">
-#picnav .arrow-left {
-	background: url(images/arrows.png) no-repeat left top;
-	position: absolute;
-	left: 10px;
-	top: 50%;
-	margin-top: -15px;
-	width: 17px;
-	height: 30px;
-}
-
-#picnav .arrow-right {
-	background: url(images/arrows.png) no-repeat left bottom;
-	position: absolute;
-	right: 10px;
-	top: 50%;
-	margin-top: -15px;
-	width: 17px;
-	height: 30px;
-}
-
-.swiper-container {
-	height: 200px;
-	width: 100%;
-}
-
-.pagination {
-	position: absolute;
-	left: 0;
-	text-align: center;
-	bottom: 5px;
-	width: 100%;
-}
-
-.swiper-pagination-switch {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	border-radius: 10px;
-	background: #999;
-	box-shadow: 0px 1px 2px #555 inset;
-	margin: 0 3px;
-	cursor: pointer;
-}
-
-.swiper-active-switch {
-	background: #fff;
-}
-
-.swiper-slide { /* padding-left: 1px;
-	padding-top: 2px; */
-	
-}
-</style>
+<script src="${ctx}/js/swiper.js"></script>
 </head>
 <title>首页</title>
 <body>
@@ -178,53 +124,11 @@
 									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
 										height="100" />
 								</div>
-								<div class="swiper-slide">Slide 3</div>
-								<div class="swiper-slide">Slide 4</div>
-								<div class="swiper-slide">Slide 5</div>
-								<div class="swiper-slide">Slide 6</div>
-								<div class="swiper-slide">Slide 7</div>
-								<div class="swiper-slide">Slide 8</div>
-								<div class="swiper-slide">Slide 9</div>
-								<div class="swiper-slide">Slide 10</div>
 							</div>
 							<!-- Add Pagination -->
 							<div class="swiper-pagination swiper-pagination-pictrueScroll"></div>
 						</div>
-						<%-- <ul id="ScrollBox">
-							<li><a href="products.html" title="覆盆子酮"><img
-									src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
-									height="100" /><span>覆盆子酮</span></a></li>
-							<li><a href="products.html" title="氯霉素"><img
-									src="${ctx}/images/slide-2.jpg" alt="氯霉素" width="140"
-									height="100" /><span>氯霉素</span></a></li>
-							<li><a href="products.html" title="利巴韦林(病毒唑）"><img
-									src="${ctx}/images/slide-3.jpg" alt="利巴韦林(病毒唑）" width="140"
-									height="100" /><span>利巴韦林(病毒唑）</span></a></li>
-							<li><a href="products.html" title="土霉素"><img
-									src="${ctx}/images/slide-4.jpg" alt="土霉素" width="140"
-									height="100" /><span>土霉素</span></a></li>
-						</ul>
-						<script language="javascript" type="text/javascript">
-						<!--//--><![CDATA[//><!--
-							var scrollPic_01 = new ScrollPic();
-							scrollPic_01.scrollContId = "ScrollBox"; //内容容器ID
-							scrollPic_01.arrLeftId = "LeftArr1";//左箭头ID
-							scrollPic_01.arrRightId = "RightArr1"; //右箭头ID
-							scrollPic_01.frameWidth = 648;//显示框宽度
-							scrollPic_01.pageWidth = 162; //翻页宽度
-							scrollPic_01.speed = 10; //移动速度(单位毫秒，越小越快)
-							scrollPic_01.space = 5; //每次移动像素(单位px，越大越快)
-							scrollPic_01.autoPlay = true; //自动播放
-							scrollPic_01.autoPlayTime = 3; //自动播放间隔时间(秒)
-							scrollPic_01.initialize(); //初始化
-							//--><!]]>
-						</script> --%>
 					</div>
-				</div>
-				<div>
-					<!-- <div id="LeftArr1"></div>
-					<div id="RightArr1"></div> -->
-
 				</div>
 				<div class="spacer"></div>
 				<c:if test="${modules!=null}">
@@ -269,7 +173,6 @@
 	</div>
 	<div class="clear"></div>
 	<jsp:include page="footer.jsp" flush="true"></jsp:include>
-	<script src="${ctx}/js/swiper.js"></script>
 	<script>
 		var swiper = new Swiper('.swiper-container-fade', {
 			pagination : '.swiper-pagination-white',

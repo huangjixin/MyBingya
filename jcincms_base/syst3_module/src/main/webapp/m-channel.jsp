@@ -13,10 +13,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/m-demo.css">
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/js/swiper.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -38,31 +38,12 @@
 	<div style="width: 100%;background-color: #ececec;">
 		<div style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
 			<c:if test="${navChan !=null}">
-					<c:forEach var="chan" items="${navChan}" varStatus="status">
-							<c:if test="${status.index!=0}">
-								-
-							</c:if>
-						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
-					</c:forEach>
-				</c:if>
-		</div>
-	</div>
-	<div style="height: 20px;"></div>
-	<div class="list topnews">
-		<ul>
-			<c:if test="${recommendDocs!=null}">
-				<c:forEach var="doc" items="${recommendDocs}">
-					<c:choose>
-						<c:when test="${doc.channel!=null}">
-							<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
-						</c:otherwise>
-					</c:choose>
+				<a href="${ctx}/" style="color: #333333;">首页</a>
+				<c:forEach var="chan" items="${navChan}" varStatus="status">
+					-<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
 				</c:forEach>
 			</c:if>
-		</ul>
+		</div>
 	</div>
 	<div id="content">
 		<c:set var="docs" value="${page.rows}"></c:set>
@@ -99,10 +80,6 @@
 			</div>
 		</c:if>
 	</div>
-	<div>
-		<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	</div>
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
+	<jsp:include page="m-footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

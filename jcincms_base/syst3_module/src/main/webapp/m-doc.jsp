@@ -36,12 +36,10 @@
 	</div>
 	<div style="width: 100%;background-color: #ececec;">
 		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<a href="${ctx}/" style="color: #333333;">首页</a>
 			<c:if test="${navChan !=null}">
 					<c:forEach var="chan" items="${navChan}" varStatus="status">
-							<c:if test="${status.index!=0}">
-								-
-							</c:if>
-						<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
+						-<a href="${ctx}/${chan.linkAddr}" style="color: #333333;">${chan.name}</a>
 					</c:forEach>
 				</c:if>
 		</div>
@@ -76,10 +74,6 @@
 				href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 		</div>
 	</c:if>
-	<div>
-		<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	</div>
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
+	<jsp:include page="m-footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

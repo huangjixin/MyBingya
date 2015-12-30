@@ -10,10 +10,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/m-demo.css">
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/js/swiper.js"></script>
 <title>${channel.name}</title>
 </head>
 <body>
@@ -35,31 +35,35 @@
 	</div>
 	<div style="width: 100%;background-color: #ececec;">
 		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
+			<a href="${ctx}/" style="color: #333333;">首页</a>
 			<#if navChan ??>
 				<#list navChan as channel>
-					<#if channel_index==0>
-						-
-					</#if>
-					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+					-<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
 				</#list>
 			</#if>
 		</div>
 	</div>
-	<div class="list topnews">
-		<ul>
-			<#if recommendDocs ??>
-				<#list recommendDocs as doc>
-					<#if doc.title ??>
-							<#if doc.channel ??>
-								<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
-							<#else>
-								<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
-							</#if>
-					</#if>
-				</#list>
-			</#if>
-		</ul>
+	<div class="module">
+		<div class="head">
+			<h2 class="current" data-tab="news">热点推荐</h2>
+		</div>
+		<div class="list topnews">
+			<ul>
+				<#if recommendDocs ??>
+					<#list recommendDocs as doc>
+						<#if doc.title ??>
+								<#if doc.channel ??>
+									<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}">${doc.title}</a></li>
+								<#else>
+									<li><a href="${ctx}/channel/recommend/doc/${doc.id}">${doc.title}</a></li>
+								</#if>
+						</#if>
+					</#list>
+				</#if>
+			</ul>
+		</div>
 	</div>
+	
 	<#if channel.children ??>
 		<#list channel.children as channel>
 			<div class="module">
@@ -85,8 +89,6 @@
 			<div style="height: 5px;"></div>
 		</#list>
 	</#if>
-	<hr style="width:100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
+	<#include "template/m-footer.ftl" >
 </body>
 </html>

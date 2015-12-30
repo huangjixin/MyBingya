@@ -10,10 +10,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/m-demo.css">
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/js/swiper.js"></script>
 <title>${channel.name}</title>
 </head>
 <body>
@@ -36,11 +36,9 @@
 	<div style="width: 100%;background-color: #ececec;">
 		<div class="nav" style="padding-left: 5px;padding-top: 5px;padding-bottom: 5px;">
 			<#if navChan ??>
+				<a href="${ctx}/" style="color: #333333;">首页</a>
 				<#list navChan as channel>
-					<#if channel_index==0>
-						-
-					</#if>
-					<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
+					-<a href="${ctx}/${channel.linkAddr}" style="color: #333333;">${channel.name}</a>
 				</#list>
 			</#if>
 		</div>
@@ -79,8 +77,6 @@
 					 </div>
 				</#if>
 	</div>
-	<hr style="width:100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-	<div id="footer" style="text-align: center;padding-bottom: 5px;">Copyright
-		© 2011-2015 jcincms内容管理系统.</div>
+	<#include "template/m-footer.ftl" >
 </body>
 </html>

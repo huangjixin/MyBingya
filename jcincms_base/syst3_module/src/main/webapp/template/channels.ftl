@@ -5,9 +5,9 @@
 <meta name="description" content="${channel.name},${channel.keyword},jsp,cms,jcincms,java,建站系统,免费,开源">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/slider.js"></script>
-<script type="text/javascript" src="${ctx}/js/webtry_roll.js"></script>
+<script src="${ctx}/js/swiper.js"></script>
 <script type="text/javascript">
 if(window.location.toString().indexOf('pref=padindex') != -1){
 }else{
@@ -54,29 +54,29 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 				</div>
 				<div class="spacer"></div>
 				<div id="picnav">
-					<div class="focus">
-						<div id="sliderA" class="sliderwrapper">
-							<div class="contentdiv">
-								<div class="slPic">
-									<a href="#" target="_blank"><img src="${ctx}/images/79064170.jpg"
-										alt="" width="400" height="194" border="0" /></a><a href="#"
-										target="_blank"></a>
-								</div>
-								<span></span>
+					<a class="arrow-left" href="#"></a> <a class="arrow-right" href="#"></a>
+					<div class="swiper-container swiper-container-fade">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79084479.jpg" width="400" height="200"
+									border="0" />
 							</div>
-							<div class="contentdiv">
-								<div class="slPic">
-									<a href="#" target="_blank"><img src="${ctx}/images/79084479.jpg"
-										alt="" width="400" height="194" border="0" /></a><a href="#"
-										target="_blank"></a>
-								</div>
-								<span></span>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79064170.jpg" width="400" height="200"
+									border="0" />
+							</div>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79084750.jpg" width="400" height="200"
+									border="0" />
+							</div>
+							<div class="swiper-slide">
+								<img src="${ctx}/images/79085270.jpg" width="400" height="200"
+									border="0" />
 							</div>
 						</div>
-						<div id="paginate-sliderA" class="pagination">
-							<i class="toc"></i><i class="toc"></i><i class="toc"></i><i
-								class="toc"></i>
-						</div>
+						<div class="swiper-pagination swiper-pagination-white"></div>
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 					</div>
 				</div>
 				<div id="recommend">
@@ -100,42 +100,62 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 				<div class="spacer"></div>
 				<div class="box" style="float: left;width: 100%;min-height: 140px;">
 					<div class="box-header" style="width: 25%;">图文资讯</div>
-					<div class="box-center" style="text-align: center;">
-						<ul id="ScrollBox">
-							<li><a href="products.html" title="覆盆子酮"><img
-									src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
-									height="100" /><span>覆盆子酮</span></a></li>
-							<li><a href="products.html" title="氯霉素"><img
-									src="${ctx}/images/slide-2.jpg" alt="氯霉素" width="140"
-									height="100" /><span>氯霉素</span></a></li>
-							<li><a href="products.html" title="利巴韦林(病毒唑）"><img
-									src="${ctx}/images/slide-3.jpg" alt="利巴韦林(病毒唑）" width="140"
-									height="100" /><span>利巴韦林(病毒唑）</span></a></li>
-							<li><a href="products.html" title="土霉素"><img
-									src="${ctx}/images/slide-4.jpg" alt="土霉素" width="140"
-									height="100" /><span>土霉素</span></a></li>
-						</ul>
-						<script language="javascript" type="text/javascript">
-						<!--//--><![CDATA[//><!--
-							var scrollPic_01 = new ScrollPic();
-							scrollPic_01.scrollContId = "ScrollBox"; //内容容器ID
-							scrollPic_01.arrLeftId = "LeftArr1";//左箭头ID
-							scrollPic_01.arrRightId = "RightArr1"; //右箭头ID
-							scrollPic_01.frameWidth = 648;//显示框宽度
-							scrollPic_01.pageWidth = 162; //翻页宽度
-							scrollPic_01.speed = 10; //移动速度(单位毫秒，越小越快)
-							scrollPic_01.space = 5; //每次移动像素(单位px，越大越快)
-							scrollPic_01.autoPlay = true; //自动播放
-							scrollPic_01.autoPlayTime = 3; //自动播放间隔时间(秒)
-							scrollPic_01.initialize(); //初始化
-							//--><!]]>
-						</script>
+					<div class="box-center" style="text-align: center;padding-top: 5px;">
+						<div class="swiper-container swiper-container-scroll" style="height:125px;">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-2.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-3.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-1.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+								<div class="swiper-slide">
+									<img src="${ctx}/images/slide-4.jpg" alt="覆盆子酮" width="140"
+										height="100" />
+								</div>
+							</div>
+							<!-- Add Pagination -->
+							<div class="swiper-pagination swiper-pagination-pictrueScroll"></div>
+						</div>
 					</div>
-				</div>
-				<div>
-					<!-- <div id="LeftArr1"></div>
-					<div id="RightArr1"></div> -->
-
 				</div>
 				<div class="spacer"></div>
 				<#if subChannels ??>
@@ -181,18 +201,28 @@ if(window.location.toString().indexOf('pref=padindex') != -1){
 	</div>
 		<div class="spacer"></div>
 		<#include "template/footer.ftl" > 
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
+	<script>
+		var swiper = new Swiper('.swiper-container-fade', {
+			pagination : '.swiper-pagination-white',
+			paginationClickable : true,
+			nextButton : '.swiper-button-next',
+			prevButton : '.swiper-button-prev',
+			loop : true,
+			autoplay : 2500,
+			autoplayDisableOnInteraction : true,
+			spaceBetween : 30,
+			effect : 'fade'
+		});
+		var swiper1 = new Swiper('.swiper-container-scroll', {
+			pagination : '.swiper-pagination-pictrueScroll',
+			loop : true,
+			autoplay : 2500,
+			autoplayDisableOnInteraction : true,
+			slidesPerView : 4,
+			paginationClickable : true,
+			spaceBetween : 30,
+			grabCursor: true
+			
 		});
 	</script>	
 </body>

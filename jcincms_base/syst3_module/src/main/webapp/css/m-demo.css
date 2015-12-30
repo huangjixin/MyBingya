@@ -84,67 +84,6 @@ body,.global {
 	display: block;
 }
 
-/*************** 幻灯片开始***********************/
-.focus {
-	width: 100%;
-    min-height: 165px; max-height: 165px;
-	/* padding: 2px;
-	border: 1px solid #E1E1E1; */
-	background: #fff;
-	position: relative
-}
-.focus img{
-    max-width: 100%;
-    margin: 0 auto
-}
-.focus .sliderwrapper span {
-	display: block;
-	width: 100%;
-	height: 32px;
-	background: #000;
-	filter: alpha(opacity = 70);
-	-moz-opacity: 0.7;
-	opacity: 0.7;
-	position: absolute;
-	left: 0px;
-	top: 150px
-}
-
-.focus .pagination {
-	position: absolute;
-	top:155px;
-	right:0;
-}
-
-.focus .pagination a {
-	width: 19px;
-	height: 19px;
-	line-height: 19px;
-	display: inline;
-	float: left;
-	margin-right: 7px;
-	cursor: pointer;
-	background: #fff;
-	text-align: center
-}
-
-.focus .pagination a:hover,.focus .pagination a.selected {
-	background: #FB7E39;
-	color: #fff
-}
-
-.focus a {
-	color: #444;
-	text-decoration: none;
-	outline: none
-}
-
-.focus a:hover {
-	color: #c00;
-	text-decoration: underline
-}
-/************** 幻灯片结束***********************/
-
 /************** 菜单开始 **************************/
 .menu {
 	height: 40px;
@@ -472,4 +411,36 @@ list*/
 
 .nav a,a:VISITED,a:LINK{
 	color: #333333;
+}
+
+.swiper-container {
+	height: 200px;
+	width: 100%;
+}
+
+.pagination {
+	position: absolute;
+	left: 0;
+	text-align: center;
+	bottom: 5px;
+	width: 100%;
+}
+
+.swiper-pagination-switch {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background: #999;
+	box-shadow: 0px 1px 2px #555 inset;
+	margin: 0 3px;
+	cursor: pointer;
+}
+
+.swiper-active-switch {
+	background: #fff;
+}
+
+.swiper-slide { /* padding-left: 1px;
+	padding-top: 2px; */	
 }
