@@ -6,49 +6,55 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <style type="text/css">
-	.table{
-	width:700px;
-	margin:10px auto 7px;
-	font-size:12px;
-	overflow:hidden;
-	border:1px solid #DDD;
-	border-collapse:collapse;
-}
-.table * td{
-	padding:6px;
-	border:1px solid #EEE;
+.table {
+	width: 700px;
+	margin: 10px auto 7px;
+	font-size: 12px;
+	overflow: hidden;
+	border: 1px solid #DDD;
+	border-collapse: collapse;
 }
 
-.table thead * th{
-	background:#FFF url(table_tbg.gif) 0px 1px repeat-x;
-	border:1px solid #E3E3E3;
-	padding:6px;
-	color:#999;
+.table * td {
+	padding: 6px;
+	border: 1px solid #EEE;
 }
-.table tbody * th{
-	text-align:left;
-	background:#FFA;
-	border:1px solid #DDD;
-} 
-.table tbody * th strong{
-	line-height:21px;
-	text-indent:10px;
-	color:#999;
+
+.table thead * th {
+	background: #FFF url(table_tbg.gif) 0px 1px repeat-x;
+	border: 1px solid #E3E3E3;
+	padding: 6px;
+	color: #999;
 }
-.td1{
-	text-align:right;
-	color:#666;
+
+.table tbody * th {
+	text-align: left;
+	background: #FFA;
+	border: 1px solid #DDD;
 }
-.td2,.td3,.td4,.td5,.td6,.td7,.td8,.td9{
-	text-align:center;
+
+.table tbody * th strong {
+	line-height: 21px;
+	text-indent: 10px;
+	color: #999;
 }
-.td5{
-	background:#FAFAFA;
+
+.td1 {
+	text-align: right;
+	color: #666;
 }
-.td6,.td7,.td8,.td9{
-	background:#F5F9F0;
+
+.td2,.td3,.td4,.td5,.td6,.td7,.td8,.td9 {
+	text-align: center;
 }
-	
+
+.td5 {
+	background: #FAFAFA;
+}
+
+.td6,.td7,.td8,.td9 {
+	background: #F5F9F0;
+}
 </style>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <title>${document.title}</title>
@@ -82,7 +88,9 @@
 							${document.author}&nbsp;&nbsp;&nbsp;&nbsp;<span><fmt:formatDate
 									value="${document.createDate}" pattern="yyyy.MM.dd" /></span>&nbsp;&nbsp;阅读:
 							<span id="hits"><script type="text/javascript">
-								$("#hits").load('${ctx}/channel/getClickCount?id=${document.id}');
+								$("#hits")
+										.load(
+												'${ctx}/channel/getClickCount?id=${document.id}');
 							</script></span>
 						</div>
 						<p>${document.content}</p>
@@ -103,25 +111,30 @@
 				</c:if>
 			</div>
 			<!-- 右边导航 -->
-			<jsp:include page="right_side.jsp" flush="true"></jsp:include>
+			<div id="left_side">
+				<div class="box" style="width: 250px;">
+					<div class="box-header">${channel.name}</div>
+					<div class="box-center">
+						<c:forEach items="${navChan}" var="chan" varStatus="status">
+							<c:if test="${status.index==0}">
+								<c:if test="${chan.children!=null}">
+									<h2 id="${chan.code}" onclick="setUlCss('${chan.code}')">${chan.name}</h2>
+									<ul>
+										<c:forEach items="${chan.children}" var="chan">
+											<li><a href="${ctx}/${chan.linkAddr}">${chan.name}</a></li>
+										</c:forEach>
+									</ul>
+
+								</c:if>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="clear"></div>
 		<!-- 网页底部 -->
 		<jsp:include page="footer.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
-	</script>
 </body>
 </html>

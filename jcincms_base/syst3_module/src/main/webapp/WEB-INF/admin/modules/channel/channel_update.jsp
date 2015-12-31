@@ -15,6 +15,7 @@ th {
 	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
 <script type="text/javascript"
 	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/ajaxfileupload.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -27,6 +28,7 @@ th {
 		createOrganizationTree();
 		createFileTree();
 		/* alert($('#parentIds').val()); */
+		$('#channelImg').attr("src",'${channel.image}');
 	});
 
 	function createOrganizationTree() {
@@ -188,6 +190,45 @@ th {
 			$("#titleInput").val("");
 			$("#authorInput").val("");
 	}
+	
+	function selectFile() {
+		$('#file').click();
+	}
+	
+	function uploadImage() {
+		//alert("图片上传失败,请重新选择图片");
+		//$('#msg').text('正在上传'');
+		// 检查图片格式
+		var f = document.getElementById("file").value;
+		if (!/.(gif|jpg|jpeg|png|JPG|PNG)$/.test(f)) {
+			alert("图片类型必须是.jpeg,jpg,png中的一种")
+			return false;
+		}
+		// 利用ajaxFileUpload js 插件上传图片
+		$.ajaxFileUpload({
+			url : '${ctxAdmin}/document/uploadFile',
+			secureuri : false,
+			fileElementId : "file",
+			dataType : "text",
+			success : function(data, status) {
+				alert('上传成功');
+				data = data.replace(/<pre.*?>/g, ''); //ajaxFileUpload会对服务器响应回来的text内容加上<pre style="....">text</pre>前后缀   
+				data = data.replace(/<PRE.*?>/g, ''); 
+				data = data.replace("<PRE>", ''); 
+				data = data.replace("</PRE>", ''); 
+				data = data.replace("<pre>", ''); 
+				data = data.replace("</pre>", ''); 
+				data = jQuery.parseJSON( data );
+// 				var a_id=eval('data'）;
+				$('#image').val(data.fileAddr);
+				$('#channelImg').attr("src",data.fileAddr);
+			},
+			error : function(data, status, e) {
+				alert("图片上传失败,请重新选择图片");
+			}
+		});
+		return false;
+	}
 </script>
 <title>栏目更新</title>
 </head>
@@ -279,9 +320,21 @@ th {
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;手工排序：</th>
-							<td style="text-align: left;" colspan="6">
+							<td style="text-align: left;">
 								<form:input id="sort" path="sort" value="${channel.sort}" />&nbsp;
 								<form:errors path="sort" cssStyle="color:red;"></form:errors>
+							</td>
+							<th>&nbsp;图片：</th>
+							<td style="text-align: left;">
+								<form:input id="image" path="image" value="${channel.image}" />&nbsp;
+								<form:errors path="image" cssStyle="color:red;"></form:errors>
+								<input id="fileUploadBtn"
+								type="button" value="上传" onclick="selectFile()" /><input
+								style="display: none" type="file" id="file" name="file"
+								onchange="uploadImage()" />
+							</td>
+							<th>&nbsp;</th>
+							<td>
 							</td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
@@ -298,6 +351,10 @@ th {
 			</tr>
 		</table>
 	</form:form>
+	<div>
+		<img id="channelImg" alt="" src="${ctx}/${channel.image}"/>
+	</div>
+	
 	<div id="dlg" class="easyui-dialog" title="文档选择"
 		data-options="iconCls:'icon-save',closed: true"
 		style="width:600px;height:350px;padding:10px">

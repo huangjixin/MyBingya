@@ -47,7 +47,7 @@
 					<div class="box-header">${channel.name}</div>
 					<!-- <div><hr style="width:100%;height:1px;border:none;border-top:1px solid #0088DD;" /></div> -->
 					<div class="box-center">
-						<div>
+						<%-- <div>
 							<ul
 								style="color:#333;list-style-image:url('${ctx}/images/left_sider_menu_arow.png;')">
 								<li><a onclick="setUlCss('test')" href="javascript:void(0)">test</a>
@@ -77,21 +77,22 @@
 									</c:if>
 								</c:forEach>
 							</ul>
-						</div>
-						<%-- <c:forEach items="${navChan}" var="chan" varStatus="status">
+						</div> --%>
+						<c:forEach items="${navChan}" var="chan" varStatus="status">
 							<c:if test="${status.index==0}">
 								<c:if test="${chan.children!=null}">
-									<h2><a id="${chan.code}" onclick="setUlCss('${chan.code}')" href="javascript:void(0)" style="color:#4d6a94">企事业单位</a></h2>
-									<h2 id="${chan.code}" onclick="setUlCss('${chan.code}')">${chan.name}</h2>
-									<ul>
+									<ul style="color:#333;list-style-image:url('${ctx}/images/left_sider_menu_arow.png;')">
 										<c:forEach  items="${chan.children}" var="chan">
-											<li><a href="${ctx}/${chan.linkAddr}">${chan.name}</a></li>
+											<li><a <c:if test="${chan.children!=null }">onclick="setUlCss('${chan.code}')" href="javascript:void(0)"</c:if> <c:if test="${chan.children==null }">href="${ctx}/${chan.linkAddr}"</c:if>>${chan.name}</a>
+												<c:set var="children" value="${chan.children}" scope="request" />
+												<jsp:include page="subnav.jsp"></jsp:include>
+											</li>
 										</c:forEach>
 									</ul>
 									
 								</c:if>
 							</c:if>
-						</c:forEach> --%>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

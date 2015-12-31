@@ -40,7 +40,7 @@ th {
 		createmGeneTemplateTree();
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
-			ue.setContent($("#content").val());
+			ue.setContent('${document.content}');
 		});
 	});
 
@@ -339,7 +339,7 @@ th {
 									path="titleImage" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;：</th>
 							<td nowrap="nowrap" align="left">
-								<input id="content" name="content" type="hidden" value="${document.content}" />&nbsp;<form:errors
+								<input id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
