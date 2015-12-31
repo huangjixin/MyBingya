@@ -164,7 +164,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	public String update(Document record) {
 		 super.update(record);
 		record.setUpdateDate(new Date());
-		int result = documentMapper.updateByPrimaryKeySelective(record);
+		int result = documentMapper.updateByPrimaryKeyWithBLOBs(record);
 		return record.getId();
 	}
 
