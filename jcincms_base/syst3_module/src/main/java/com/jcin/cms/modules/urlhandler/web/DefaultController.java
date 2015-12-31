@@ -115,6 +115,18 @@ public class DefaultController extends BaseController {
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				channels, recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+		uiModel.addAttribute("recommendDocs", recommendDocs);
+
 		// 高点击率
 		List<Document> clickCountDocs = documentService.getClickCountDoc(
 				channel.getCode(), page);
@@ -210,6 +222,19 @@ public class DefaultController extends BaseController {
 			document1.setChannel(channel1);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
+
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				code, recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+		uiModel.addAttribute("recommendDocs", recommendDocs);
+
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -232,19 +257,6 @@ public class DefaultController extends BaseController {
 				return "doc.jsp";
 			}
 		}
-
-		// channel.setLinkAddr(requestRri);
-
-		/*
-		 * DocumentCriteria documentCriteria = new DocumentCriteria();
-		 * DocumentCriteria.Criteria criteria =
-		 * documentCriteria.createCriteria();
-		 * criteria.andChannelIdEqualTo(channel.getId());
-		 * documentCriteria.setPage(page);
-		 */
-		// documentCriteria.setOrderByClause("id desc");
-
-		// page = documentService.select(documentCriteria);
 
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
@@ -304,16 +316,27 @@ public class DefaultController extends BaseController {
 		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 
-		Page page1 = new Page();
+		Page clickCountPage = new Page();
 		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(
-				channel.getCode(), page1);
+		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(), clickCountPage);
 		for (Document document1 : clickCountDocs) {
 			Channel channel1 = channelService.selectByPrimaryKey(document1
 					.getChannelId());
 			document1.setChannel(channel1);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
+
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(code, recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+		uiModel.addAttribute("recommendDocs", recommendDocs);
+
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null

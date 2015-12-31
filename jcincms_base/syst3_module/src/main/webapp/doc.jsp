@@ -4,6 +4,51 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/demo.css">
+<style type="text/css">
+	.table{
+	width:700px;
+	margin:10px auto 7px;
+	font-size:12px;
+	overflow:hidden;
+	border:1px solid #DDD;
+	border-collapse:collapse;
+}
+.table * td{
+	padding:6px;
+	border:1px solid #EEE;
+}
+
+.table thead * th{
+	background:#FFF url(table_tbg.gif) 0px 1px repeat-x;
+	border:1px solid #E3E3E3;
+	padding:6px;
+	color:#999;
+}
+.table tbody * th{
+	text-align:left;
+	background:#FFA;
+	border:1px solid #DDD;
+} 
+.table tbody * th strong{
+	line-height:21px;
+	text-indent:10px;
+	color:#999;
+}
+.td1{
+	text-align:right;
+	color:#666;
+}
+.td2,.td3,.td4,.td5,.td6,.td7,.td8,.td9{
+	text-align:center;
+}
+.td5{
+	background:#FAFAFA;
+}
+.td6,.td7,.td8,.td9{
+	background:#F5F9F0;
+}
+	
+</style>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <title>${document.title}</title>
 </head>

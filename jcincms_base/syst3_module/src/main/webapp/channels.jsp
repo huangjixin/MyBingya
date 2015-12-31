@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/swiper.js"></script>
+<title>${channel.name}</title>
 </head>
 <body>
 	<div id="container">

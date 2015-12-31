@@ -92,14 +92,7 @@ public class HtmlGeneraterController extends BaseController {
 		String webroot = httpServletRequest.getRealPath("/");
 		String conPath = httpServletRequest.getContextPath();
 		Map<String, Object> root = new HashMap<String, Object>();
-		Page page = new Page();
-		page.setPageSize(10);
-		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-		for (Document document : recommendDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel);
-		}
+
 		// 菜单
 		List<Channel> menus = UserUtils.getChannels();
 		// 约定指向文档的栏目不会出现在模块内容当中。
@@ -111,8 +104,8 @@ public class HtmlGeneraterController extends BaseController {
 		}
 		root.put("modules", modules);
 
+		Page page = new Page();
 		page.setPageSize(10);
-
 		Map<String, Object> menusMap = new HashMap<String, Object>();
 		for (Channel channel : menus) {
 			List<Document> documents = documentService.getDocByChannelCode(
@@ -120,6 +113,18 @@ public class HtmlGeneraterController extends BaseController {
 			menusMap.put(channel.getCode(), documents);
 			root.put(channel.getCode(), menusMap);
 		}
+
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				null, recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+
 		// 点击率排名
 		Page page1 = new Page();
 		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
@@ -198,14 +203,6 @@ public class HtmlGeneraterController extends BaseController {
 		}
 
 		Page page = new Page();
-		page.setPageSize(8);
-		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-		for (Document document : recommendDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel);
-		}
-
 		page.setPageSize(10);
 		Map<String, Object> menusMap = new HashMap<String, Object>();
 		Channel toGeneratedChannel = result.get(0);
@@ -217,6 +214,17 @@ public class HtmlGeneraterController extends BaseController {
 				menusMap.put(channel.getCode(), documents);
 				root.put(channel.getCode(), menusMap);
 			}
+		}
+
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				toGeneratedChannel.getCode(), recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
 		}
 
 		if (null == toGeneratedChannel.getChildren()
@@ -395,9 +403,6 @@ public class HtmlGeneraterController extends BaseController {
 		}
 
 		Page page = new Page();
-		page.setPageSize(8);
-		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-
 		page.setPageSize(10);
 		Map<String, Object> menusMap = new HashMap<String, Object>();
 		Channel toGeneratedChannel = result.get(0);
@@ -417,6 +422,17 @@ public class HtmlGeneraterController extends BaseController {
 			documentService.getDocByChannelCode(toGeneratedChannel.getCode(),
 					page);
 			root.put("page", page);
+		}
+
+		// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				toGeneratedChannel.getCode(), recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
 		}
 
 		// 点击率排名

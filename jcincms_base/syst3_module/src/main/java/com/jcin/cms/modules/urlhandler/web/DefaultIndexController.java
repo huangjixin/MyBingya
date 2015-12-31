@@ -66,13 +66,6 @@ public class DefaultIndexController extends BaseController {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
-		/*Iterator<Channel>iterator = list.iterator();
-		while (iterator.hasNext()) {
-			Channel channel2 = iterator.next();
-			if (!channel2.getAsdocument()) {
-				list.remove(channel2);
-			}
-		}*/
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -84,13 +77,16 @@ public class DefaultIndexController extends BaseController {
 
 		//查询推荐文档。
 		Page page = new Page();
-		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		page.setPageSize(8);
+//		List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(null,page);
 		for (Document document : recommendDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document
-					.getChannelId());
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
 			document.setChannel(channel);
 		}
+		uiModel.addAttribute("recommendDocs", recommendDocs);
 		// 高点击率
+		page.setPageSize(10);
 		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
 				page);
 		for (Document document : clickCountDocs) {
@@ -99,7 +95,6 @@ public class DefaultIndexController extends BaseController {
 			document.setChannel(channel);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-		uiModel.addAttribute("recommendDocs", recommendDocs);
 
 		if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");

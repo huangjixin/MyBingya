@@ -558,11 +558,13 @@
 			doc . *
 		from
 			busi_document doc
-			left join
+		<if test="code != null" >
+        	left join
 		busi_channel channel ON doc.channel_id = channel.id
 			where
 				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
-		order by doc.id desc
+      	</if>
+		order by doc.recommend desc,doc.id desc
 		<include refid="OracleDialectSuffix" />
 	</select>
   	<select id="selectCountByChannelCodeExample" resultType="java.lang.Integer" 
@@ -571,10 +573,12 @@
 			count(*)
 		from
 			busi_document doc
-			left join
+			<if test="code != null" >
+        	left join
 		busi_channel channel ON doc.channel_id = channel.id
 			where
 				channel.code in (SELECT code FROM busi_channel where link_addr like '%${code}%')
+      	</if>
 	</select>
 	
   <select id="selectTopClickCount" resultMap="BaseResultMap"

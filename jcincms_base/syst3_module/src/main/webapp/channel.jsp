@@ -9,6 +9,7 @@
 <style type="text/css"></style>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/slider.js"></script>
+<title>${channel.name}</title>
 </head>
 <body>
 	<div id="container">
