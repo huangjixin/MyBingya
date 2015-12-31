@@ -9,42 +9,42 @@ public class ChannelCriteria {
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public ChannelCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class ChannelCriteria {
     /**
      * 该方法由系统生成 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1651,6 +1651,76 @@ public class ChannelCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andImageIsNull() {
+            addCriterion("image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageIsNotNull() {
+            addCriterion("image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageEqualTo(String value) {
+            addCriterion("image =", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotEqualTo(String value) {
+            addCriterion("image <>", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageGreaterThan(String value) {
+            addCriterion("image >", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageGreaterThanOrEqualTo(String value) {
+            addCriterion("image >=", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageLessThan(String value) {
+            addCriterion("image <", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageLessThanOrEqualTo(String value) {
+            addCriterion("image <=", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageLike(String value) {
+            addCriterion("image like", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotLike(String value) {
+            addCriterion("image not like", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageIn(List<String> values) {
+            addCriterion("image in", values, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotIn(List<String> values) {
+            addCriterion("image not in", values, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageBetween(String value1, String value2) {
+            addCriterion("image between", value1, value2, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotBetween(String value1, String value2) {
+            addCriterion("image not between", value1, value2, "image");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1730,12 +1800,17 @@ public class ChannelCriteria {
             addCriterion("upper(gene_template) like", value.toUpperCase(), "geneTemplate");
             return (Criteria) this;
         }
+
+        public Criteria andImageLikeInsensitive(String value) {
+            addCriterion("upper(image) like", value.toUpperCase(), "image");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated do_not_delete_during_merge 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2015年12月31日 16时41分47秒 星期四
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1747,7 +1822,7 @@ public class ChannelCriteria {
     /**
      * 该类对应于数据库表 busi_channel
      *
-     * @mbggenerated 2015年12月21日 18时39分56秒 星期一
+     * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public static class Criterion {
         private String condition;
