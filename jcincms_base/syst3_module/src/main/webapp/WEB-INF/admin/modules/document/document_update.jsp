@@ -40,7 +40,7 @@ th {
 		createmGeneTemplateTree();
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
-			ue.setContent('${document.content}');
+			ue.setContent($("#content").val());
 		});
 	});
 
@@ -82,16 +82,6 @@ th {
 				$('#docTemplete').combotree('tree').tree("collapseAll");
 					var dTemplete = "${document.documentTemplete}";
 				   $('#docTemplete').combotree("setValue", dTemplete);
-				   /* if (dTemplete != "") {
-					var index = dTemplete.lastIndexOf("/");
-					if(index>0){
-						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
-						$('#docTemplete').combotree("setValue", dTemplete);
-					}else{
-						$('#docTemplete').combotree("setValue", dTemplete+".jsp");
-					}
-					
-				} */
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#docTemplete').combotree('tree');  
@@ -217,9 +207,6 @@ th {
 		
 		var cont = ue.getContent();
 		$('#content').val(cont);
-		/* if(docTemp.indexOf(".") > 0){
-			docTemp = docTemp.substring(0,docTemp.indexOf("."));
-		} */
 		$('#documentTemplete').val(docTemp);
 		$('#gTemplete').val(geneTemp);
 		$('#mgTemplete').val(mGeneTemp);
@@ -352,7 +339,7 @@ th {
 									path="titleImage" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;：</th>
 							<td nowrap="nowrap" align="left">
-								<input id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
+								<input id="content" name="content" type="hidden" value="${document.content}" />&nbsp;<form:errors
 									path="content" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;文档模板：</th>
 							<td nowrap="nowrap" align="left">
