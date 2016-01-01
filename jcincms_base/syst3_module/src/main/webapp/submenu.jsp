@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <ul>
+	
 	<c:if test="${list!=null}">
 		<c:forEach var="channel" items="${list}">
 			<c:if test="${channel.name!=null && channel.name!=''}">

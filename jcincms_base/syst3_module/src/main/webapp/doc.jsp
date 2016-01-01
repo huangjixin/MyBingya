@@ -55,14 +55,8 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<div id="logo">
-				<img alt="logo" src="${ctx}/images/logo.gif" />
-			</div>
-			<div id="headerContact">
-				<span>2015年11月26日 星期四</span>
-			</div>
-		</div>
+		<!-- 头部 -->
+		<jsp:include page="header.jsp" flush="true"></jsp:include>
 		<div class="spacer"></div>
 		<!-- 导航菜单 -->
 		<jsp:include page="menu.jsp" flush="true"></jsp:include>
@@ -109,19 +103,5 @@
 		<!-- 网页底部 -->
 		<jsp:include page="footer.jsp" flush="true"></jsp:include>
 	</div>
-	<script type="text/javascript">
-		featuredcontentslider.init({
-			id : "sliderA",
-			contentsource : [ "inline", "" ],
-			toc : "#increment",
-			nextprev : [ "", "" ],
-			revealtype : "mouseover",
-			enablefade : [ true, 0.15 ],
-			autorotate : [ true, 3500 ],
-			delay : 150,
-			onChange : function(previndex, curindex) {
-			}
-		});
-	</script>
 </body>
 </html>
