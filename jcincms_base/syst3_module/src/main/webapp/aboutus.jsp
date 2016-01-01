@@ -20,11 +20,15 @@
 		<!-- 导航菜单 -->
 		<jsp:include page="menu.jsp" flush="true"></jsp:include>
 		<div class="spacer"></div>
+		<!-- 位置-->
+		<jsp:include page="nav.jsp" flush="true"></jsp:include>
+		<div class="spacer"></div>
+		<div>
+			<img src="${ctx}/images/aboutus.png">
+		</div>
+		<div class="spacer"></div>
 		<div id="main">
 			<div id="content">
-				<!-- 位置-->
-				<jsp:include page="nav.jsp" flush="true"></jsp:include>
-				<div class="spacer"></div>
 				<div class="article">
 					<div class="info">
 						<div style="width: 100%;text-align: center;">
