@@ -45,6 +45,13 @@ public interface IDocumentService extends IBaseService<Document, String> {
 	List<Document> getRecommendDoc(Page page);
 	
 	/**
+	 * 查询推荐图片。
+	 * @param id
+	 * @return
+	 */
+	List<Document> getRecommendImage(Page page);
+	
+	/**
 	 * 查询栏目点击率前十的文档,如果channelId不为空则查询该栏目点击率前十的文档。
 	 * @param id
 	 * @return

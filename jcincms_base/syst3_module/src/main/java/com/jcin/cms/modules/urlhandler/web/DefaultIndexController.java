@@ -85,6 +85,13 @@ public class DefaultIndexController extends BaseController {
 			document.setChannel(channel);
 		}
 		uiModel.addAttribute("recommendDocs", recommendDocs);
+		page.setPageSize(5);
+		List<Document> recommendImage = documentService.getRecommendImage(page);
+		for (Document document : recommendImage) {
+			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
+			document.setChannel(channel);
+		}
+		uiModel.addAttribute("recommendImage", recommendImage);
 		// 高点击率
 		page.setPageSize(10);
 		List<Document> clickCountDocs = documentService.getClickCountDoc(null,

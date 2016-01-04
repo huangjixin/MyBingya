@@ -269,6 +269,17 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	}
 	
 	@Override
+	public List<Document> getRecommendImage(Page page) {
+		DocumentCriteria documentCriteria = new DocumentCriteria();
+		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
+		criteria.andRecommendEqualTo(true).andFileNameIsNotNull();
+		documentCriteria.setPage(page);
+		documentCriteria.setOrderByClause("recommend desc,image desc, id desc");
+		List<Document> list  = documentMapper.selectByExample(documentCriteria);
+		return list;
+	}
+	
+	@Override
 	public List<Document> getClickCountDoc(String code, Page page) {
 		DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
