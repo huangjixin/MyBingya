@@ -4,7 +4,7 @@
  * @date 2015-10-27,上午11:44:01
  *
  */
-package com.jcin.cms.modules.front.web;
+package com.jcin.cms.modules.urlhandler.web;
 
 import java.io.BufferedReader;
 import java.io.File;
