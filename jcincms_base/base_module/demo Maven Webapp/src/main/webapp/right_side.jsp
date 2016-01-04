@@ -3,25 +3,24 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div id="left_side">
 	<div class="box" style="width: 250px;">
-		<div class="box-header">热点专题</div>
+		<div class="box-header">点击率排行榜</div>
 		<!-- <div><hr style="width:100%;height:1px;border:none;border-top:1px solid #0088DD;" /></div> -->
 		<div class="box-center">
-			<ul style="">
-				<li>elasticsearch ik分词插件es-ik发布</li>
-				<li>solr4的solr-ik插件</li>
-				<li>当前几个主要的Lucene中文分词器的比较</li>
-				<li>elasticsearch查询优化案例</li>
-				<li>JMeter压力测试及并发量计算-2</li>
-				<li>solr4的solr-ik插件</li>
-				<li>elasticsearch查询优化案例</li>
-				<li>JMeter压力测试及并发量计算-2</li>
+			<ul style="list-style:none;">
+				<c:if test="${clickCountDocs!=null}">
+					<c:forEach items="${clickCountDocs}" var="doc">
+						<li><a href="${ctx}/${doc.channel.linkAddr}/doc/${doc.id}"
+												target="blank">${doc.title}</a></li>
+					</c:forEach>
+				</c:if>
 			</ul>
 		</div>
 	</div>
 	<div class="spacer"></div>
-	<div class="box" style="width: 250px;">
+	<jsp:include page="contact.jsp" flush="true"></jsp:include>
+	<!-- <div class="box" style="width: 250px;">
+		
 		<div class="box-header">分类目录</div>
-		<!-- <div><hr style="width:100%;height:1px;border:none;border-top:1px solid #0088DD;" /></div> -->
 		<div class="box-center" style="font-size: 14px;">
 			<div class="category">elasticsearch</div>
 			<div class="category">hadoop</div>
@@ -41,5 +40,5 @@
 			<div class="category">操作系统</div>
 		</div>
 		<div style="height: 12px;"></div>
-	</div>
+	</div> -->
 </div>
