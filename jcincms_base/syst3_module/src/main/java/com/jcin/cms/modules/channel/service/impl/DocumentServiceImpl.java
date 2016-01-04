@@ -274,7 +274,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		criteria.andRecommendEqualTo(true).andFileNameIsNotNull();
 		documentCriteria.setPage(page);
-		documentCriteria.setOrderByClause("recommend desc,image desc, id desc");
+		documentCriteria.setOrderByClause("recommend desc,id desc");
 		List<Document> list  = documentMapper.selectByExample(documentCriteria);
 		return list;
 	}
