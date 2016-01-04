@@ -14,7 +14,17 @@
 	<packaging>war</packaging>
 	<name>demo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<basedir>D:\\workspace\\jcincms_base\\base_module\\demo Maven Webapp</basedir>
+	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-device</artifactId>
+			<version>1.1.5.RELEASE</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/spring-mobile-device-1.1.5.RELEASE.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -28,6 +38,7 @@
 			<type>war</type>
 			<scope>runtime</scope>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>demo</finalName>
