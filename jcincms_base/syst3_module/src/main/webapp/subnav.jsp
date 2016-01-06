@@ -4,12 +4,12 @@
 <c:if test="${chan!=null }">
 	<c:if test="${chan.children!=null }">
 		<c:forEach items="${chan.children}" var="chan">
-			<li><a
+			<li style="text-align: left;margin-bottom:0px;"><a
 				<c:if test="${chan.children!=null}">onclick="setUlCss('${chan.id}')"</c:if>
-				<c:if test="${chan.children==null}">style="color:#333;" href="${ctx}/${chan.linkAddr}"</c:if>
-				<c:if test="${chan.children!=null}">href="#"</c:if>>${chan.name}</a>
+				<c:if test="${chan.children==null}">href="${ctx}/${chan.linkAddr}"</c:if>
+				<c:if test="${chan.children!=null}"></c:if>>${chan.name}</a>
 				<c:if test="${chan.children!=null}">
-					<ul id="${chan.id}" style="display:none;color:#333;">
+					<ul id="${chan.id}" style="display:none;color:#333;margin-top:5px;">
 						<c:set var="chan" value="${chan}" scope="request" />
 						<jsp:include page="subnav.jsp"></jsp:include>
 					</ul>
