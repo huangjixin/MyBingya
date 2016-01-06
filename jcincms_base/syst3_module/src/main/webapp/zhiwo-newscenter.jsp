@@ -28,11 +28,15 @@
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth">
+		<div class="globalWidth" style="position:relative;width: 100%;">
 			<div class="swiper-container">
 				<img src="${ctx}/images/swiper1.png">
 			</div>
-			<div class="contentWidth" style="position:abslute;bottom: 0;">wfwewefw
+			<div
+				style="background:black; filter: alpha(opacity=60); opacity:0.6; position: absolute;bottom: 0px;z-index: 1;width:100%;height: 20px;line-height: 20px;">
+				<div class="contentWidth">
+					<span style="color: #ffffff;font-size: 12px;">当前位置：首页>新闻中心</span>
+				</div>
 			</div>
 		</div>
 		<div class="devider"></div>
@@ -48,11 +52,12 @@
 						<c:if test="${docs!=null}">
 							<ul style="list-style-type: square;list-style: square;">
 								<c:forEach var="doc" items="${docs}">
-									<li style="text-align: left;margin-bottom: 10px;">
-									<span style="font-size: 14px;"><a style="text-decoration: none;color: #333333;"
+									<li style="text-align: left;margin-bottom: 10px;"><span
+										style="font-size: 14px;"><a
+											style="text-decoration: none;color: #333333;"
 											href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
 											target="blank">${doc.title}</a></span></li>
-									<hrstyle="height:1px;border:none;border-top:1px solid #CCCCCC;" />
+									<hrstyle ="height:1px;border:none;border-top:1px solid #CCCCCC;" />
 								</c:forEach>
 							</ul>
 						</c:if>
