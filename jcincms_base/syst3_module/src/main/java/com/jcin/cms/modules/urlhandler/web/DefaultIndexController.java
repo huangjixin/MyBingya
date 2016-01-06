@@ -108,7 +108,7 @@ public class DefaultIndexController extends BaseController {
 			return "m-index.jsp";
 		} else {
 			logger.info("PC来的网页请求");
-			return "index.jsp";
+			return "zhiwo-index.jsp";
 		}
 	}
 }

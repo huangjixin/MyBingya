@@ -28,10 +28,12 @@
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth">
+		<div class="globalWidth" style="position:relative;width: 100%;">
 			<div class="swiper-container">
 				<img src="${ctx}/images/swiper1.png">
 			</div>
+			<!-- 导航 -->
+			<jsp:include page="zhiwo-nav.jsp"></jsp:include>
 		</div>
 		<div class="devider"></div>
 		<div class="globalWidth">

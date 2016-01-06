@@ -19,19 +19,22 @@
 		</div>
 		<div class="globalWidth" id="navigation">
 			<div class="contentWidth">
-				<!-- 导航菜单 -->
+				<!-- 菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth">
-			<div class="swiper-container">
-				<img src="${ctx}/images/swiper1.png">
-			</div>
+		<div class="globalWidth" style="position:relative;width: 100%;">
+			<!-- 图片展示 -->
+			<jsp:include page="zhiwo-index-swiper.jsp"></jsp:include>	
+			<!-- 导航 -->
+			<jsp:include page="zhiwo-nav.jsp"></jsp:include>
 		</div>
 		<div class="devider"></div>
 		<div class="globalWidth">
 			<div class="contentWidth" style="text-align: center;">
-				<div class="property" onmouseover="javascript:this.style.background-color='#cccccc';" onmouseout="javascript:this.style.background-color='#ffffff';">
+				<div class="property"
+					onmouseover="javascript:this.style.background-color='#cccccc';"
+					onmouseout="javascript:this.style.background-color='#ffffff';">
 					<img src="${ctx}/images/ddd.png">
 					<div style="width: 100px;text-align: center;">
 						<span>良好的用户口碑 丰富的开发经验</span>
@@ -83,23 +86,8 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div style="width: 100%;">
-			<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;" />
-		</div>
-		<div class="globalWidth">
-			<div class="contentWidth">
-				<div style="right: 0;position: relative;">
-					<span style="border: solid #cccccc 1px;padding: 5px;">网站地图</span>
-				</div>
-			</div>
-		</div>
-		<div class="globalWidth">
-			<div class="contentWidth"
-				style="text-align: center;height: 50px;line-height: 50px;">
-				<!-- 导航菜单 -->
-				<jsp:include page="zhiwo-footer.jsp" flush="true"></jsp:include>
-			</div>
-		</div>
+		<!-- 底部 -->
+		<jsp:include page="zhiwo-footer.jsp" flush="true"></jsp:include>
 	</div>
 </body>
 </html>

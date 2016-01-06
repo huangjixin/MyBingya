@@ -136,6 +136,12 @@ public class DefaultController extends BaseController {
 			document1.setChannel(channel1);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		
+		//页面请求。
+		setPage(page, httpServletRequest);
+		documentService.getDocByChannelCode(channels, page);
+		uiModel.addAttribute("page", page);
+		
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -359,17 +365,6 @@ public class DefaultController extends BaseController {
 			}
 		}
 
-		// channel.setLinkAddr(requestRri);
-
-		// DocumentCriteria documentCriteria = new DocumentCriteria();
-		// DocumentCriteria.Criteria criteria =
-		// documentCriteria.createCriteria();
-		// criteria.andChannelIdEqualTo(channel.getId());
-		// documentCriteria.setPage(page);
-		// documentCriteria.setOrderByClause("id desc");
-
-		// page = documentService.select(documentCriteria);
-
 		if (null != channel.getChannelTemplete()
 				&& !"".equals(channel.getChannelTemplete())) {
 			return channel.getChannelTemplete();
@@ -385,14 +380,6 @@ public class DefaultController extends BaseController {
 		}
 		return "channels.jsp";
 	}
-
-	// @RequestMapping(value = "{channels}/**/docs/{channel}")
-	// public String channeldoc(@PathVariable("channels") String
-	// channels,@PathVariable("channel") String channel,
-	// @ModelAttribute Page page, Model uiModel,
-	// HttpServletRequest httpServletRequest) {
-	//
-	// }
 
 	@RequestMapping(value = "{channels}/**/doc/{id:^[0-9]+$}")
 	public String doc(SitePreference sitePreference,

@@ -32,12 +32,8 @@
 			<div class="swiper-container">
 				<img src="${ctx}/images/swiper1.png">
 			</div>
-			<div
-				style="background:black; filter: alpha(opacity=60); opacity:0.6; position: absolute;bottom: 0px;z-index: 1;width:100%;height: 20px;line-height: 20px;">
-				<div class="contentWidth">
-					<span style="color: #ffffff;font-size: 12px;">当前位置：首页>新闻中心</span>
-				</div>
-			</div>
+			<!-- 导航 -->
+			<jsp:include page="zhiwo-nav.jsp"></jsp:include>
 		</div>
 		<div class="devider"></div>
 		<div class="globalWidth">
