@@ -24,14 +24,13 @@
 		</div>
 		<div class="globalWidth" id="navigation">
 			<div class="contentWidth">
-				<!-- 导航菜单 -->
+				<!-- 菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
 		<div class="globalWidth" style="position:relative;width: 100%;">
-			<div class="swiper-container">
-				<img src="${ctx}/images/swiper1.png">
-			</div>
+			<!-- 图片展示 -->
+			<jsp:include page="zhiwo-channel-swiper.jsp"></jsp:include>
 			<!-- 导航 -->
 			<jsp:include page="zhiwo-nav.jsp"></jsp:include>
 		</div>

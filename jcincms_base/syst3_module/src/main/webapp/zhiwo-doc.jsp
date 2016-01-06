@@ -54,10 +54,13 @@
 								<div class="panel-header">
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${chan.name}</span>
 								</div>
-								<ul
-									style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
-									<li><a href="${ctx}/${channel.linkAddr}">智沃新闻</a></li>
-								</ul>
+								<c:if test="${chan.children!=null}">
+									<ul
+										style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
+										<c:set var="chan" value="${chan}" scope="request" />
+										<jsp:include page="subnav.jsp"></jsp:include>
+									</ul>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</div>
