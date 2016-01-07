@@ -13,7 +13,7 @@
 	}
 </script>
 </head>
-<title>${document.title}</title>
+<title>${channel.name}</title>
 <body>
 	<div id="container">
 		<div class="globalWidth">
@@ -24,7 +24,7 @@
 		</div>
 		<div class="globalWidth" id="navigation">
 			<div class="contentWidth">
-				<!-- 导航菜单 -->
+				<!-- 菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
@@ -38,12 +38,38 @@
 		<div class="globalWidth">
 			<div class="contentWidth" style="text-align: center;">
 				<div style="width:750px;float: left;">
-					<div class="doc">
-						<div style="width: 100%;text-align: center;">
-							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
+					<div style="border: 1px solid #cccccc;padding-top: 20px;">
+						<div style="width: 100%;text-align: left;margin-bottom: 10px;">
+							<span
+								style="padding-left:24px;font-weight: bold;font-size: 16px;">${channel.name}</span>
 						</div>
-						<hr class="hr" style="width: 90%;" />
-						<div class="content"><p>${document.content}</p></div>
+						<c:set var="docs" value="${page.rows}"></c:set>
+						<c:if test="${docs!=null}">
+							<ul style="list-style-type: square;list-style: square;">
+								<c:forEach var="doc" items="${docs}">
+									<li style="text-align: left;margin-bottom: 10px;"><span
+										style="font-size: 14px;"><a
+											style="text-decoration: none;color: #333333;"
+											href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
+											target="blank">${doc.title}</a></span></li>
+									<hrstyle ="height:1px;border:none;border-top:1px solid #CCCCCC;" />
+								</c:forEach>
+							</ul>
+						</c:if>
+						<c:if test="${docs!=null}">
+							<div class="spacer"></div>
+							<div style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
+								<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
+								<c:if test="${page.page>1}">
+									<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</c:if>
+								<span>${page.page}</span>&nbsp;&nbsp;
+								<c:if test="${page.page < page.totalPage+1}">
+									<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</c:if>
+								<c:if test="${page.page < page.totalPage+1}">
+									<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</c:if>
+								&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
+							</div>
+						</c:if>
 					</div>
 				</div>
 				<div id="rightside" style="width:200px;float: right;">
@@ -53,10 +79,13 @@
 								<div class="panel-header">
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${chan.name}</span>
 								</div>
-								<ul
-									style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
-									<li><a href="${ctx}/${channel.linkAddr}">智沃新闻</a></li>
-								</ul>
+								<c:if test="${chan.children!=null}">
+									<ul
+										style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
+										<c:set var="chan" value="${chan}" scope="request" />
+										<jsp:include page="subnav.jsp"></jsp:include>
+									</ul>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</div>

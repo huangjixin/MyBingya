@@ -13,7 +13,7 @@
 	}
 </script>
 </head>
-<title>${document.title}</title>
+<title>${channel.name}</title>
 <body>
 	<div id="container">
 		<div class="globalWidth">

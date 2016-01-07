@@ -38,13 +38,12 @@
 		<div class="globalWidth">
 			<div class="contentWidth" style="text-align: center;">
 				<div style="width:750px;float: left;">
-					<div style="border: 1px solid #cccccc;padding-top: 20px;">
+					<div class="doc">
 						<div style="width: 100%;text-align: center;">
 							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
 						</div>
-						<hr
-							style="width: 93%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-						<div>${document.content}</div>
+						<hr class="hr" style="width: 90%;" />
+						<div class="content"><p>${document.content}</p></div>
 					</div>
 				</div>
 				<div id="rightside" style="width:200px;float: right;">
