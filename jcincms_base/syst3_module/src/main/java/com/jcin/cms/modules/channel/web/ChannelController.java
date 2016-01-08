@@ -72,18 +72,16 @@ public class ChannelController extends BaseController<Channel>{
 				return root+"admin/modules/channel/channel_create";
 			}
 		}
-		if(channel.getSort()==null){
-			channelCriteria = new ChannelCriteria();
-			Criteria criteria  = channelCriteria.createCriteria();
-			if(channel.getParentId()==null){
-				criteria.andParentIdIsNull();
-			}else{
-				criteria.andParentIdEqualTo(channel.getParentId());
-			}
-			int count = channelService.countByExample(channelCriteria);
-			count+=1;
-			channel.setSort(count);
+		channelCriteria = new ChannelCriteria();
+		Criteria criteria  = channelCriteria.createCriteria();
+		if(channel.getParentId()==null){
+			criteria.andParentIdIsNull();
+		}else{
+			criteria.andParentIdEqualTo(channel.getParentId());
 		}
+		int count = channelService.countByExample(channelCriteria);
+		count+=1;
+		channel.setSort(count);
 		
 		channel.setCreateBy(UserUtils.getUsername());
 		channel.setCreateDate(new Date());
