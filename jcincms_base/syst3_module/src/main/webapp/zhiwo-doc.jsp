@@ -22,7 +22,7 @@
 				<jsp:include page="zhiwo-header.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth" id="navigation">
+		<div class="globalWidth" id="navigation" style="background-image: url('${ctx}/images/navigationBg.png');">
 			<div class="contentWidth">
 				<!-- 导航菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
@@ -43,7 +43,7 @@
 							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
 						</div>
 						<hr
-							style="width: 93%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
+							style="width: 95%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
 						<div>${document.content}</div>
 					</div>
 				</div>

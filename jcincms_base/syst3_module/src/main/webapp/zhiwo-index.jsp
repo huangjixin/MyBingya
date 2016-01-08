@@ -17,7 +17,7 @@
 				<jsp:include page="zhiwo-header.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth" id="navigation">
+		<div class="globalWidth" id="navigation" style="background-image: url('${ctx}/images/navigationBg.png');">
 			<div class="contentWidth">
 				<!-- 菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
