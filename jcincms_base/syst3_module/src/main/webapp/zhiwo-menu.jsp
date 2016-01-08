@@ -8,8 +8,8 @@
 			<c:forEach var="channel" items="${list}">
 				<c:if test="${channel.name!=null && channel.name!=''}">
 					<li><a href="${ctx}/${channel.linkAddr}">${channel.name}</a> <c:set
-							var="list" value="${channel.children}" scope="request" /> <jsp:include
-							page="submenu.jsp"></jsp:include></li>
+							var="list" value="${channel.children}" scope="request" /> 
+							<%-- <jsp:include page="submenu.jsp"></jsp:include> --%></li>
 				</c:if>
 			</c:forEach>
 		</c:if>

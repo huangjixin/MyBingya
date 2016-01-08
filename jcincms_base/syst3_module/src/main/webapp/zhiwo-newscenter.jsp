@@ -8,10 +8,18 @@
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/swiper.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#scrollDiv").textSlider({
+			line : 1,
+			speed : 500,
+			timer : 3000
+		});
+	});
 	function setUlCss(id) {
 		$('#' + id).toggle();
 	}
 </script>
+
 </head>
 <title>${channel.name}</title>
 <body>
@@ -22,7 +30,8 @@
 				<jsp:include page="zhiwo-header.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth" id="navigation" style="background-image: url('${ctx}/images/navigationBg.png');">
+		<div class="globalWidth" id="navigation"
+			style="background-image: url('${ctx}/images/navigationBg.png');">
 			<div class="contentWidth">
 				<!-- 菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
@@ -45,14 +54,11 @@
 						</div>
 						<c:set var="docs" value="${page.rows}"></c:set>
 						<c:if test="${docs!=null}">
-							<ul style="list-style-type: square;list-style: square;">
+							<ul class="news">
 								<c:forEach var="doc" items="${docs}">
-									<li style="text-align: left;margin-bottom: 10px;"><span
-										style="font-size: 14px;"><a
-											style="text-decoration: none;color: #333333;"
-											href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
-											target="blank">${doc.title}</a></span></li>
-									<hrstyle ="height:1px;border:none;border-top:1px solid #CCCCCC;" />
+									<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
+										target="blank">${doc.title}</a> <span style="font-size: 14px;"></span></li>
+									<!-- <hr class="hr" style="width: 90%;" /> -->
 								</c:forEach>
 							</ul>
 						</c:if>
