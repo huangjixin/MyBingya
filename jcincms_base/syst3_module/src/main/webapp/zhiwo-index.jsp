@@ -7,24 +7,6 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/css/swiper.css">
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script src="${ctx}/js/swiper.js"></script>
-<style type="text/css">
-#scrollDiv {
-	overflow: auto
-}
-
-.scrollText {
-	height: 250px;
-	min-height: 250px;
-	line-height: 250px;
-	/* float: left; */
-	overflow: hidden;
-}
-
-.scrollText li {
-	height: 25px;
-	padding-left: 10px;
-}
-</style>
 </head>
 <title>智沃首页</title>
 <body>
@@ -84,7 +66,7 @@
 							<hr class="hr">
 							<div>
 								<img src="${ctx}/images/zidingyi.gif" style="float:right;">
-								通过模型增加删除字段，调整后台功能；支持新闻、图片、视频、作品、下载、产品等模型；支持可查询字段，构建复杂模型。
+								通过模型增加删除字段，调整后台功能；支持新闻、图片、视频、作品、下载、产品等模型；支持可查询字段，构建复杂模型，无限级添加栏目。
 							</div>
 						</div>
 					</div>

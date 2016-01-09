@@ -25,7 +25,47 @@ th {
 	$().ready(function() {
 		createChannelTree();
 		createDocTree();
+		createFileTree();
 	});
+	
+	var indexTemp;
+	//创建文件树。
+	function createFileTree() {
+		$('#indexTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#indexTemplete').combotree('tree').tree("collapseAll");
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#indexTemplete').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                indexTemp = pathStr; 
+            }  
+		});
+	}
+	
+	function clearIndexTemplateInput(){
+		$('#indexTemplete').combotree('clear');
+		indexTemp='';
+	}
 	
 	function createChannelTree() {
 		$('#channlTree').combotree({
@@ -71,7 +111,7 @@ th {
 	function generateAll() {
 		$('#tip')[0].innerHTML="正在生成全部……";
 		$.ajax({  
-			url:"${ctxAdmin}/htmlgenerate/generateAll",  
+			url:"${ctxAdmin}/htmlgenerate/generateAll?indexTemp="+indexTemp,  
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
@@ -102,7 +142,7 @@ th {
 	function generateIndex() {
 		$('#tip')[0].innerHTML="正在生成首页……";
 		$.ajax({  
-			url:"${ctxAdmin}/htmlgenerate/generateIndex",  
+			url:"${ctxAdmin}/htmlgenerate/generateIndex?indexTemp="+indexTemp,  
 			//data可以传参多个参数"name=John&location=Boston",    
 			//data: "subcompanyId="+subcompanyId,  
 			success:function(data){  
@@ -234,7 +274,9 @@ th {
 						<th style="width: 150px;">&nbsp;首页html：</th>
 						<td style="text-align: left;" colspan="6"><input
 							type="button" value="生成首页html" onclick="generateIndex();" />&nbsp;&nbsp;<input
-							type="button" value="删除首页html" onclick="deleteIndex();"/></td>
+							type="button" value="删除首页html" onclick="deleteIndex();"/>
+							<input id="indexTemplete" />&nbsp;<input type="button"
+								value="清除" onclick="clearIndexTemplateInput();" /></td>
 					</tr>
 					<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 						<th style="width: 150px;">&nbsp;栏目html：</th>
