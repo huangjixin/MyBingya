@@ -30,7 +30,7 @@
 		$('#' + id).toggle();
 	}
 </script>
-<title>智沃首页</title>
+<title>${channel.name}</title>
 </head>
 <body>
 	<div id="container">
