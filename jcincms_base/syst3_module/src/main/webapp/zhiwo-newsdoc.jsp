@@ -22,7 +22,8 @@
 				<jsp:include page="zhiwo-header.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
-		<div class="globalWidth" id="navigation" style="background-image: url('${ctx}/images/navigationBg.png');">
+		<div class="globalWidth" id="navigation"
+			style="background-image: url('${ctx}/images/navigationBg.png');">
 			<div class="contentWidth">
 				<!-- 导航菜单 -->
 				<jsp:include page="zhiwo-menu.jsp" flush="true"></jsp:include>
@@ -43,7 +44,22 @@
 							<span style="font-weight: bold;font-size: 16px;">${document.title}</span>
 						</div>
 						<hr class="hr" style="width: 95%;" />
-						<div class="content"><p>${document.content}</p></div>
+						<div class="content">
+							<p>${document.content}</p>
+						</div>
+						<div class="spacer"></div>
+						<c:if test="${lastdoc!=null}">
+							<div style="width: 100%;text-align: left;font-size: 12px;">
+								<span>上一篇：</span><a style="text-decoration: none;color: #0;"
+									href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
+							</div>
+						</c:if>
+						<c:if test="${nextdoc!=null}">
+							<div style="width: 100%;text-align: left;font-size: 12px;">
+								<span>下一篇：</span><a style="text-decoration: none;color: #0;"
+									href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 				<div id="rightside" style="width:200px;float: right;">
