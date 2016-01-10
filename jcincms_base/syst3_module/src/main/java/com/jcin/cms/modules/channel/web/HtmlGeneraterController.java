@@ -280,6 +280,10 @@ public class HtmlGeneraterController extends BaseController {
 			templateFile = "template" + File.separator + "channel.ftl";
 		}
 
+		if(null != toGeneratedChannel.getGeneTemplate() && !"".equals(toGeneratedChannel.getGeneTemplate())){
+			templateFile = toGeneratedChannel.getGeneTemplate();
+			
+		}
 		// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
 		if (toGeneratedChannel.getAsdocument()) {
 			List<Document> documents = documentService
@@ -305,6 +309,10 @@ public class HtmlGeneraterController extends BaseController {
 			int totalPage = page.getTotalPage();
 			for (int i = 0; i <= totalPage; i++) {
 				templateFile = "template" + File.separator + "channel.ftl";
+				if(null != toGeneratedChannel.getGeneTemplate()&& !"".equals(toGeneratedChannel.getGeneTemplate())){
+					templateFile = toGeneratedChannel.getGeneTemplate();
+					
+				}
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + ".html";
@@ -482,7 +490,10 @@ public class HtmlGeneraterController extends BaseController {
 		} else {
 			templateFile = "template" + File.separator + "channel.ftl";
 		}
-
+		if(null != toGeneratedChannel.getGeneTemplate() && !"".equals(toGeneratedChannel.getGeneTemplate())){
+			templateFile = toGeneratedChannel.getGeneTemplate();
+			
+		}
 		// 如果栏目直接是文档的话,那应该找到相应的文档生成模板。
 		if (toGeneratedChannel.getAsdocument()) {
 			List<Document> documents = documentService
@@ -512,6 +523,10 @@ public class HtmlGeneraterController extends BaseController {
 			int totalPage = page.getTotalPage();
 			for (int i = 0; i <= totalPage; i++) {
 				templateFile = "template" + File.separator + "channel.ftl";
+				if(null != toGeneratedChannel.getGeneTemplate()){
+					templateFile = toGeneratedChannel.getGeneTemplate();
+					
+				}
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + ".html";
@@ -776,6 +791,10 @@ public class HtmlGeneraterController extends BaseController {
 				Map<String, Object> root = new HashMap<String, Object>();
 				String templatesPath = webroot;
 				String templateFile = "template" + File.separator + "doc.ftl";
+				if(null != document.getGeneTemplate() && !"".equals(document.getGeneTemplate())){
+					templateFile = document.getGeneTemplate();
+					
+				}
 				String htmlFile = toGeneratedFiles + File.separator
 						+ document.getId() + ".html";
 				Document lastdoc = documentService.selectLastRecord(document);
@@ -795,6 +814,10 @@ public class HtmlGeneraterController extends BaseController {
 						htmlFile, root);
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
+				if(null != document.getmGeneTemplate()&& !"".equals(document.getmGeneTemplate())){
+					templateFile = document.getmGeneTemplate();
+					
+				}
 				htmlFile = toGeneratedFiles + File.separator + document.getId()
 						+ "m.html";
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
@@ -862,6 +885,10 @@ public class HtmlGeneraterController extends BaseController {
 				Map<String, Object> root = new HashMap<String, Object>();
 				String templatesPath = webroot;
 				String templateFile = "template" + File.separator + "doc.ftl";
+				if(null != document.getGeneTemplate()&& !"".equals(document.getGeneTemplate())){
+					templateFile = document.getGeneTemplate();
+					
+				}
 				String htmlFile = toGeneratedFiles + File.separator
 						+ document.getId() + ".html";
 
@@ -882,6 +909,10 @@ public class HtmlGeneraterController extends BaseController {
 						htmlFile, root);
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
+				if(null != document.getmGeneTemplate()&& !"".equals(document.getmGeneTemplate())){
+					templateFile = document.getmGeneTemplate();
+					
+				}
 				htmlFile = toGeneratedFiles + File.separator + document.getId()
 						+ "m.html";
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,

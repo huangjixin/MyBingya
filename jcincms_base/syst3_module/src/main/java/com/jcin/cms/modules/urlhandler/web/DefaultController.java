@@ -396,6 +396,9 @@ public class DefaultController extends BaseController {
 				count = document.getClickCount();
 				docCache.put(id, count);
 			}
+			if (count == null) {
+				count = new Integer(0);
+			}
 
 			count += 1;
 			if (count % 10 == 0) {

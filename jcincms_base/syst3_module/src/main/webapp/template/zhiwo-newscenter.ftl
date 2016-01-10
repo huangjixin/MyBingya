@@ -57,13 +57,34 @@
 		<div class="globalWidth">
 			<div class="contentWidth" style="text-align: center;">
 				<div style="width:750px;float: left;">
-					<div class="doc">
-						<div style="width: 100%;text-align: center;">
-							<span style="font-weight: bold;font-size: 16px;"><#if document.title??>${document.title}</#if></span>
-						</div>
-						<hr class="hr" style="width: 95%;" />
-						<div class="content"><p><#if document.content??>${document.content}</#if></p></div>
+					<div style="width: 100%;text-align: left;margin-bottom: 10px;">
+							<span
+								style="padding-left:24px;font-weight: bold;font-size: 16px;">新闻中心</span>
 					</div>
+					<#assign docs=page.rows>
+					<#if docs??>
+							<ul class="news">
+								<#list docs as doc>
+									<li><a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
+										target="blank">${doc.title}</a> <span style="font-size: 14px;"></span></li>
+									<!-- <hr class="hr" style="width: 90%;" /> -->
+								</#list>
+							</ul>
+						</#if>
+						<#if docs ??>
+							<div class="spacer"></div>
+							<div style="width:auto;padding: 5px 0px 5px 5px;font-size: 12px;">
+								<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
+								<#if (page.page>1)>
+									<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</#if>
+								<span>${page.page}</span>&nbsp;&nbsp;
+								<#if (page.page < page.totalPage+1)>
+									<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</#if>
+								<#if (page.page < page.totalPage+1)>
+									<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</#if>
+								&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
+							</div>
+						</#if>
 				</div>
 				<div id="rightside" style="width:200px;float: right;">
 					<div class="panel">
@@ -72,13 +93,11 @@
 								<div class="panel-header">
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${nchan.name}</span>
 								</div>
-								<#if nchan.children??>
-									<ul
-										style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
-										<#assign chan=nchan>
-										<#include "zhiwo-subnav.ftl">
-									</ul>
-								</#if>
+								<ul style="list-style-image: url('${ctx}/images/left_sider_menu_arow.png');">
+										<#--<#assign chan=nchan>
+										<#include "zhiwo-subnav.ftl">-->
+									<li><a href="${ctx}/${channel.linkAddr}">智沃新闻</a></li>
+								</ul>
 							</#if>
 						</#list>
 					</div>

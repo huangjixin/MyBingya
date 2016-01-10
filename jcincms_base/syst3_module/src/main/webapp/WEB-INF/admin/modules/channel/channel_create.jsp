@@ -24,10 +24,12 @@ th {
 	href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
 	var chanTemp = "${channel.channelTemplete}";
+	var geneTemp = "${channel.geneTemplate}";
 
 	$().ready(function() {
 		createChannelTree();
 		createFileTree();
+		createGeneTree();
 		$('#channelImg').attr("src", '${channel.image}');
 	});
 
@@ -64,23 +66,11 @@ th {
 			required : false,
 			editable : false,
 			onClick : function(node) {
-				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
-				$('#parentId').val(node.id);*/
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#chanTemplete').combotree('tree').tree("collapseAll");
 				var dTemplete = "${channel.channelTemplete}";
 				$('#chanTemplete').combotree("setValue", dTemplete);
-				/*if (dTemplete != "") {
-				var index = dTemplete.lastIndexOf("/");
-				if(index>0){
-					dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
-					$('#chanTemplete').combotree("setValue", dTemplete);
-				}else{
-					$('#chanTemplete').combotree("setValue", dTemplete+".jsp");
-				}
-				
-				} */
 			},
 			onSelect : function(item) {
 				var parent = item;
@@ -99,6 +89,43 @@ th {
 				}
 
 				chanTemp = pathStr;
+			}
+		});
+	}
+	
+	//创建生成模板文件树。
+	function createGeneTree() {
+		var checked = $('#refreshgeneFiles').is(':checked') ? true : false;
+		$('#geneTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#geneTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.geneTemplate}";
+				$('#geneTemplete').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#geneTemplete').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				geneTemp = pathStr;
 			}
 		});
 	}
@@ -126,6 +153,11 @@ th {
 	function clearChanelTemplateInput() {
 		$('#chanTemplete').combotree('clear');
 		chanTemp = '';
+	}
+
+	function clearGeneTemplateInput() {
+		$('#geneTemplete').combotree('clear');
+		geneTemp = '';
 	}
 
 	function clearForm() {
@@ -156,6 +188,7 @@ th {
 			chanTemp = chanTemp.substring(0,chanTemp.indexOf("."));
 		} */
 		$('#channelTemplete').val(chanTemp);
+		$('#gTemplete').val(geneTemp);
 		var row = $('#tgrid').datagrid('getSelected');
 		if (row) {
 			$("#documentId").val(row.id);
@@ -232,6 +265,8 @@ th {
 		method="post" commandName="channel" onsubmit="onsubmitHandler()">
 		<input id="channelTemplete" name="channelTemplete"
 			value="${channel.channelTemplete}" type="hidden" />
+		<input id="gTemplete" name="geneTemplate"
+			value="${channel.geneTemplate}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
 			type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
@@ -326,6 +361,19 @@ th {
 								id="fileUploadBtn" type="button" value="上传"
 								onclick="selectFile()" /><input style="display: none"
 								type="file" id="file" name="file" onchange="uploadImage()" /></td>
+							<th>&nbsp;</th>
+							<td></td>
+						</tr>
+						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+							<th>&nbsp;PC模板：</th>
+							<td nowrap="nowrap" align="left"><input id="geneTemplete"/>
+							&nbsp;<input type="button" value="清除"
+								onclick="clearGeneTemplateInput();" /><b
+								id="geneTempleteTip"></b> <input id="refreshgeneFiles"
+								type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
+								type="button" onclick="createGeneTree();"></td>
+							<th>&nbsp;</th>
+							<td></td>
 							<th>&nbsp;</th>
 							<td></td>
 						</tr>
