@@ -396,7 +396,11 @@ th {
 								type="button" value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
 								type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
 								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/document'" /></td>
+								onclick="javascript:window.location.href='${ctxAdmin}/document'" />
+								<c:if test="${document.id!=null}">
+									&nbsp;&nbsp;<input type="button" value="更新"
+										onclick="javascript:window.location.href='${ctxAdmin}/document/update/${document.id}'" />
+								</c:if></td>
 						</tr>
 					</table>
 				</td>

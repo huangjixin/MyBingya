@@ -344,7 +344,9 @@ th {
 								value="重置" />&nbsp;&nbsp;<input type="button" value="清空"
 								onclick="clearForm();" />&nbsp;&nbsp;<input type="button"
 								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/channel'" /></td>
+								onclick="javascript:window.location.href='${ctxAdmin}/channel'" />
+								&nbsp;&nbsp;<input type="button" value="新建"
+								onclick="javascript:window.location.href='${ctxAdmin}/channel/create'" /></td>
 						</tr>
 					</table>
 				</td>

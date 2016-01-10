@@ -74,7 +74,7 @@ public class ChannelController extends BaseController<Channel>{
 		}
 		channelCriteria = new ChannelCriteria();
 		Criteria criteria  = channelCriteria.createCriteria();
-		if(channel.getParentId()==null){
+		if(channel.getParentId()==null||"".equals(channel.getParentId())){
 			criteria.andParentIdIsNull();
 		}else{
 			criteria.andParentIdEqualTo(channel.getParentId());

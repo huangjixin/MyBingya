@@ -397,7 +397,9 @@ th {
 								type="button" value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
 								type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
 								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/document'" /></td>
+								onclick="javascript:window.location.href='${ctxAdmin}/document'" />
+								&nbsp;&nbsp;<input type="button" value="新建"
+								onclick="javascript:window.location.href='${ctxAdmin}/document/create'" /></td>
 						</tr>
 					</table>
 				</td>

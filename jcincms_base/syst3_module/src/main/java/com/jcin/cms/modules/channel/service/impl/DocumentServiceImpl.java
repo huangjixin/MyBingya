@@ -253,7 +253,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		DocumentCriteria documentCriteria = new DocumentCriteria();
 		DocumentCriteria.Criteria criteria = documentCriteria.createCriteria();
 		criteria.andChannelIdEqualTo(channelId);
-		List<Document> list  = documentMapper.selectByExample(documentCriteria);
+		List<Document> list  = documentMapper.selectByExampleWithBLOBs(documentCriteria);
 		return list;
 	}
 

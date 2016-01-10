@@ -71,9 +71,12 @@ public class HtmlGeneraterController extends BaseController {
 
 	@RequestMapping(value = "/generateAll")
 	@ResponseBody
-	public String generateAll(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-		generateIndex(httpServletRequest, httpServletResponse);
+	public String generateAll(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse,
+			@RequestParam(value = "indexTemp", required = false) String indexTemp)
+			throws IOException {
+		generateIndex(httpServletRequest, httpServletResponse, indexTemp);
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
 		for (Channel channel : menus) {
 			generateChannel(channel.getId(), true, httpServletRequest,
@@ -86,8 +89,11 @@ public class HtmlGeneraterController extends BaseController {
 
 	@RequestMapping(value = "/generateIndex")
 	@ResponseBody
-	public String generateIndex(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
+	public String generateIndex(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse,
+			@RequestParam(value = "indexTemp", required = false) String indexTemp)
+			throws IOException {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 		String conPath = httpServletRequest.getContextPath();
@@ -143,6 +149,9 @@ public class HtmlGeneraterController extends BaseController {
 
 		String templatesPath = webroot;
 		String templateFile = "template" + File.separator + "index.ftl";
+		if(null != indexTemp && !"".equals(indexTemp)){
+			templateFile = indexTemp;
+		}
 		String htmlFile = webroot + "index.html";
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
 				root);
@@ -280,6 +289,7 @@ public class HtmlGeneraterController extends BaseController {
 				if (docu.getGeneTemplate() != null
 						&& !"".equals(docu.getGeneTemplate())) {
 					templateFile = docu.getGeneTemplate();
+					templateFile = templateFile.replaceAll("//", File.separator);
 					root.put("document", docu);
 				}
 			}
@@ -334,6 +344,7 @@ public class HtmlGeneraterController extends BaseController {
 						if (docu.getmGeneTemplate() != null
 								&& !"".equals(docu.getmGeneTemplate())) {
 							templateFile = docu.getmGeneTemplate();
+							templateFile = templateFile.replaceAll("/", File.separator);
 							root.put("document", docu);
 						}
 					}
