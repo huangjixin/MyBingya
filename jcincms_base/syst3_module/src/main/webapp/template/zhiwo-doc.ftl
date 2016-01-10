@@ -89,13 +89,13 @@
 						<hr class="hr" style="width: 95%;" />
 						<div class="content"><p><#if document.content??>${document.content}</#if></p></div>
 						<#if lastdoc ??>
-							<div style="width: 100%;text-align: left;font-size: 12px;">
+							<div style="width: 100%;font-size: 12px;">
 								<span>上一篇：</span><a style="text-decoration: none;color: #0;"
 									href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 							</div>
 						</#if>
 						<#if nextdoc ??>
-							<div style="width: 100%;text-align: left;font-size: 12px;">
+							<div style="width: 100%;font-size: 12px;">
 								<span>下一篇：</span><a style="text-decoration: none;color: #0;"
 									href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 							</div>
