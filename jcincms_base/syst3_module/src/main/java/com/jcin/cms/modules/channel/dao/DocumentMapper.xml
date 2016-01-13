@@ -26,6 +26,7 @@
     <result column="content_short" property="contentShort" jdbcType="VARCHAR" />
     <result column="m_gene_template" property="mGeneTemplate" jdbcType="VARCHAR" />
     <result column="gene_template" property="geneTemplate" jdbcType="VARCHAR" />
+    <result column="enable_vote" property="enableVote" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.channel.domain.Document" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -92,7 +93,7 @@
     id, channel_id, title, color, keyword, descrition, priority, source, source_addr, 
     author, title_image, file_name, file_addr, size, document_templete, hidden, assets_ids, 
     recommend, click_count, create_date, update_date, content_short, m_gene_template, 
-    gene_template
+    gene_template, enable_vote
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -156,7 +157,7 @@
       hidden, assets_ids, recommend, 
       click_count, create_date, update_date, 
       content_short, m_gene_template, gene_template, 
-      content)
+      enable_vote, content)
     values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{color,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, 
       #{priority,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{sourceAddr,jdbcType=VARCHAR}, 
@@ -165,7 +166,7 @@
       #{hidden,jdbcType=BIT}, #{assetsIds,jdbcType=VARCHAR}, #{recommend,jdbcType=BIT}, 
       #{clickCount,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{contentShort,jdbcType=VARCHAR}, #{mGeneTemplate,jdbcType=VARCHAR}, #{geneTemplate,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{enableVote,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Document" >
     insert into busi_document
@@ -241,6 +242,9 @@
       </if>
       <if test="geneTemplate != null" >
         gene_template,
+      </if>
+      <if test="enableVote != null" >
+        enable_vote,
       </if>
       <if test="content != null" >
         content,
@@ -318,6 +322,9 @@
       </if>
       <if test="geneTemplate != null" >
         #{geneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="enableVote != null" >
+        #{enableVote,jdbcType=BIT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -405,6 +412,9 @@
       <if test="record.geneTemplate != null" >
         gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
       </if>
+      <if test="record.enableVote != null" >
+        enable_vote = #{record.enableVote,jdbcType=BIT},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -439,6 +449,7 @@
       content_short = #{record.contentShort,jdbcType=VARCHAR},
       m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
       gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      enable_vote = #{record.enableVote,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -469,7 +480,8 @@
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       content_short = #{record.contentShort,jdbcType=VARCHAR},
       m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
-      gene_template = #{record.geneTemplate,jdbcType=VARCHAR}
+      gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      enable_vote = #{record.enableVote,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -546,6 +558,9 @@
       <if test="geneTemplate != null" >
         gene_template = #{geneTemplate,jdbcType=VARCHAR},
       </if>
+      <if test="enableVote != null" >
+        enable_vote = #{enableVote,jdbcType=BIT},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -577,6 +592,7 @@
       content_short = #{contentShort,jdbcType=VARCHAR},
       m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
       gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      enable_vote = #{enableVote,jdbcType=BIT},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -604,13 +620,14 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       content_short = #{contentShort,jdbcType=VARCHAR},
       m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
-      gene_template = #{geneTemplate,jdbcType=VARCHAR}
+      gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      enable_vote = #{enableVote,jdbcType=BIT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, document_templete, hidden, assets_ids, recommend, click_count, create_date, update_date, content_short, m_gene_template, gene_template, content) values 
+    insert into busi_document (id, channel_id, title, color, keyword, descrition, priority, source, source_addr, author, title_image, file_name, file_addr, size, document_templete, hidden, assets_ids, recommend, click_count, create_date, update_date, content_short, m_gene_template, gene_template, enable_vote, content) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR}, #{item.recommend,jdbcType=BIT}, #{item.clickCount,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.contentShort,jdbcType=VARCHAR}, #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.channelId,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.color,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.source,jdbcType=VARCHAR}, #{item.sourceAddr,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileAddr,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.assetsIds,jdbcType=VARCHAR}, #{item.recommend,jdbcType=BIT}, #{item.clickCount,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.contentShort,jdbcType=VARCHAR}, #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.enableVote,jdbcType=BIT}, #{item.content,jdbcType=LONGVARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
