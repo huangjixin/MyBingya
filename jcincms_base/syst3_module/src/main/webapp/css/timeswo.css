@@ -39,12 +39,15 @@ body {
 	-webkit-box-shadow: 1px 1px 5px #909090; /*safari或chrome*/
 	box-shadow: 1px 1px 5px #909090; /*opera或ie9*/
 }
+.property:HOVER{
+	border: 1px solid #ff0000;
+}
 
 .swiper-container {
-	background: -moz-linear-gradient(top, #DBEAF9, #ffffff, #DBEAF9); /*火狐*/
+	/*background: -moz-linear-gradient(top, #DBEAF9, #ffffff, #DBEAF9); 
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b8c4cb),
 		to(#f6f6f8) );
-	/* width: 100%; */
+	 width: 100%; */
 }
 
 .clear {

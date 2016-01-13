@@ -96,6 +96,31 @@
 							</div>
 						</div>
 					</div>
+					<div class="clear"></div>
+					<div class="property" style="float: left;width: 440px;">
+						<div
+							style="text-align: left;padding-left: 10px;padding-right: 10px;">
+							<div>
+								<h3>智沃概况</h3>
+							</div>
+							<hr class="hr">
+							<div>
+								广州智沃信息科技有限公司是一家以网站设计开发为核心业务的 电子商务咨询服务机构。我们能 为你提供的不仅仅是网站建设， 而是一套适合您的解决方案及一 支全方位的护航编队。
+							</div>
+						</div>
+					</div>
+					<div class="property" style="float: left;width: 440px;">
+						<div
+							style="text-align: left;padding-left: 10px;padding-right: 10px;">
+							<div>
+								<h3>企业文化</h3>
+							</div>
+							<hr class="hr">
+							<div>
+								“简而不单、精而不多”的原则我们一直在努力践行，至简是我们追求的终极目标！专注·用心 专注电子商务9年，集策划、设计、开发、营销为一体的专业团队，为您朔造品牌形像、挖掘网络商机；每一个网站都是客户的希望，您寄语厚望，我们唯有用心回报。
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="clear"></div>
