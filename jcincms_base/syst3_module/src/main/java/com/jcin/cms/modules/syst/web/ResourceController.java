@@ -78,18 +78,16 @@ public class ResourceController extends BaseController<Resource> {
 			}
 		}
 
-		if (resource.getSort() == null) {
-			resourceCriteria = new ResourceCriteria();
-			Criteria criteria = resourceCriteria.createCriteria();
-			if (resource.getParentId() == null) {
-				criteria.andParentIdIsNull();
-			} else {
-				criteria.andParentIdEqualTo(resource.getParentId());
-			}
-			int count = resourceService.countByExample(resourceCriteria);
-			count += 1;
-			resource.setSort(count);
+		resourceCriteria = new ResourceCriteria();
+		Criteria criteria = resourceCriteria.createCriteria();
+		if (resource.getParentId() == null||"".equals(resource.getParentId())) {
+			criteria.andParentIdIsNull();
+		} else {
+			criteria.andParentIdEqualTo(resource.getParentId());
 		}
+		int count = resourceService.countByExample(resourceCriteria);
+		count += 1;
+		resource.setSort(count);
 		resource.setCreateBy(UserUtils.getUsername());
 		resource.setCreateDate(new Date());
 		resourceService.insert(resource);

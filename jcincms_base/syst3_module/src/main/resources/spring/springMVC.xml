@@ -134,10 +134,10 @@
 		<property name="defaultErrorView" value="error/genericView" />
 	</bean>
 
-	<mvc:annotation-driven conversion-service="conversionService" />
-	<bean id="conversionService"
+	<mvc:annotation-driven/>
+	<!-- <bean id="conversionService" conversion-service="conversionService" 
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-	</bean>
+	</bean> -->
 
 	<!-- 控制器异常处理 -->
 	<!-- <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"> 
