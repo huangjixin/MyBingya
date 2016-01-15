@@ -38,16 +38,9 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- j2ee end -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 	<!-- <modules> <module>system_module4</module> </modules> -->
-	<modules>
+	<!-- <modules>
 		<module>demo</module>
-	</modules>
+	</modules> -->
 </project>
