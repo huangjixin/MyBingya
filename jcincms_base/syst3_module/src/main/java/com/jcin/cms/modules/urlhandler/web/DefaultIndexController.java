@@ -7,30 +7,22 @@
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jcin.cms.common.SpringUtils;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
-import com.jcin.cms.modules.channel.domain.DocumentCriteria;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
-import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
-import com.jcin.cms.modules.syst.service.impl.DbBackupServiceImpl;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
