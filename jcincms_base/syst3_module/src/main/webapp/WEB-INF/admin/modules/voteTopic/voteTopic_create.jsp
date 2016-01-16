@@ -15,6 +15,8 @@ th {
 	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
 <script type="text/javascript"
 	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${ctx}/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -26,27 +28,6 @@ th {
 
 	});
 
-	function myformatter(date) {
-		var y = date.getFullYear();
-		var m = date.getMonth() + 1;
-		var d = date.getDate();
-		return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
-				+ (d < 10 ? ('0' + d) : d);
-	}
-	function myparser(s) {
-		if (!s)
-			return new Date();
-		var ss = (s.split('-'));
-		var y = parseInt(ss[0], 10);
-		var m = parseInt(ss[1], 10);
-		var d = parseInt(ss[2], 10);
-		if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-			return new Date(y, m - 1, d);
-		} else {
-			return new Date();
-		}
-	}
-	
 	function clearForm() {
 		$('#id').val("");
 		$('#type').val("");
@@ -83,7 +64,7 @@ th {
 									cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;结束时间：</th>
 							<td nowrap="nowrap" align="left">
-							<input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:myformatter,parser:myparser"  value="${voteTopic.endTime}"></input>&nbsp;<span
+							<input class="easyui-datetimebox" id="endTime" name="endTime"   value="${voteTopic.endTime}"></input>&nbsp;<span
 								style="color: red;">*</span>&nbsp;<form:errors path="endTime"
 									cssStyle="color:red;"></form:errors></td>
 						</tr>
