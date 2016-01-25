@@ -52,7 +52,7 @@
 											style="text-decoration: none;color: #333333;"
 											href="${ctx}/${channel.linkAddr}/doc/${doc.id}"
 											target="blank">${doc.title}</a></span></li>
-									<hrstyle ="height:1px;border:none;border-top:1px solid #CCCCCC;" />
+									<hr style ="height:1px;border:none;border-top:1px solid #CCCCCC;" />
 								</c:forEach>
 							</ul>
 						</c:if>

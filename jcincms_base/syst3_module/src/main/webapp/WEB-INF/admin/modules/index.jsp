@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +13,37 @@
 	href="${ctx}/js/jquery-easyui/demo/demo.css" />
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/js/jquery-easyui/themes/icon.css" />
+<link href="${ctxAdmin}/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
 <script type="text/javascript"
 	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
+</script>
+<script type="text/javascript">
 	$().ready(function() {
+		//顶部导航切换
+		$(".nav li a").click(function(){
+			$(".nav li a.selected").removeClass("selected")
+			$(this).addClass("selected");
+		})
+		
+		//导航切换
+		$(".menuson li").click(function(){
+			$(".menuson li.active").removeClass("active")
+			$(this).addClass("active");
+		});
+		
+		$('.title').click(function(){
+			var $ul = $(this).next('ul');
+			$('dd').find('ul').slideUp();
+			if($ul.is(':visible')){
+				$(this).next('ul').slideUp();
+			}else{
+				$(this).next('ul').slideDown();
+			}
+		});
+		
 		$('#tgrid').treegrid({
 			onClickRow : function(row) {
 				doLink(row.text,row.path);
@@ -132,23 +157,61 @@ html,body {
 </style>
 </head>
 <body>
-	<input type="hidden" id="userId" value="${fns:getUserId()}"/>
+	<input type="hidden" id="userId" value="${fns:getUserId()}" />
 	<div class="easyui-layout" fit="true">
-		<div data-options="region:'north',split:true" style="height:80px;background:-moz-linear-gradient(top,#DBEAF9,#ffffff);/*火狐*/background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f6f6f8));">
-			<div class="logo">J2EE应用开发平台</div>
+		<div data-options="region:'north',split:false"
+			style="overflow:hidden;height:90px;background:url(${ctxAdmin}/images/topbg.gif) repeat-x;)">
+			<div class="topleft">
+				<a href="${ctxAdmin}/"><img src="${ctxAdmin}/images/logo.png"
+					title="系统首页" /></a>
+			</div>
+			<ul class="nav">
+				<li><a href="default.html" class="selected"><img
+						src="${ctxAdmin}/images/icon01.png" title="工作台" />
+						<h2>工作台</h2></a></li>
+				<li><a href="imgtable.html"><img
+						src="${ctxAdmin}/images/icon02.png" title="模型管理" />
+						<h2>模型管理</h2></a></li>
+				<li><a href="imglist.html"><img
+						src="${ctxAdmin}/images/icon03.png" title="模块设计" />
+						<h2>模块设计</h2></a></li>
+				<li><a href="tools.html"><img
+						src="${ctxAdmin}/images/icon04.png" title="常用工具" />
+						<h2>常用工具</h2></a></li>
+				<li><a href="computer.html"><img
+						src="${ctxAdmin}/images/icon05.png" title="文件管理" />
+						<h2>文件管理</h2></a></li>
+				<li><a href="tab.html"><img
+						src="${ctxAdmin}/images/icon06.png" title="系统设置" />
+						<h2>系统设置</h2></a></li>
+			</ul>
+			<div class="topright">
+				<ul>
+					<li><span><img src="${ctxAdmin}/images/help.png"
+							title="帮助" class="helpimg" /></span><a href="#">帮助</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="${ctxAdmin}/logout">退出</a></li>
+				</ul>
+				<c:set var="user" value="${fns:getUser()}"></c:set>
+				<div class="user">
+					<span>${user.username}</span> <i>消息</i> <b>5</b>
+				</div>
+
+			</div>
+			<%-- <div class="logo">J2EE应用开发平台</div>
 			<c:set var="user" value="${fns:getUser()}"></c:set>
 			<div class="topNav">
 				欢迎<a onclick="showUser();"><b style="color: red;">${user.username}</b></a>，上次登录是：<b style="color: red;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${user.lastLogin}" /></b> &nbsp;&nbsp;<a  onclick="changePassword();">密码修改</a>&nbsp;&nbsp;<a href="../index.html">首页</a> | <a href="../demo/index.html">在线示例</a>
 				| <a href="../docs/api/index.html">Api手册</a> | <a
 					href="../index.html#tutorial">开发教程</a> | <a
 					href="${ctxAdmin}/logout">退出</a>
-			</div>
+			</div> --%>
 		</div>
 
-		<div data-options="region:'west',split:true" title="菜单"
-			style="width:230px;padding: 1px;">
-			<table id="tgrid" title="" class="easyui-treegrid"
-				style=""
+		<div data-options="region:'west',split:false" title=""
+			style="background:#f0f9fd;overflow: hidden;width: 187px;">
+			<jsp:include page="left.jsp" flush="true"></jsp:include>
+			<%-- <table id="tgrid" title="" class="easyui-treegrid" style=""
 				data-options="
 								url: '${ctxAdmin}/resource/getMenu',
 								method: 'get',
@@ -165,16 +228,16 @@ html,body {
 						<th id="nameFieldTh" data-options="field:'name'" width="100%">Name</th>
 					</tr>
 				</thead>
-			</table>
+			</table> --%>
 		</div>
 		<div data-options="region:'center',title:''">
 			<div class="easyui-tabs" fit="true" border="false" id="tabs">
-      			<div title="首页">
-      				<iframe id="ifrContentArea" frameborder="0" name="main"
-						style="width:100%;height:99%;" border="0"  scrolling="auto"
+				<div title="首页">
+					<iframe id="ifrContentArea" frameborder="0" name="main"
+						style="width:100%;height:99%;" border="0" scrolling="auto"
 						src="${ctxAdmin}/system"></iframe>
-      			</div>
-   			</div>
+				</div>
+			</div>
 		</div>
 		<!-- <div data-options="region:'south'"
 			style="text-align:center;height:25px;padding-top: 2px;">
