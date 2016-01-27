@@ -134,7 +134,7 @@
 		<property name="defaultErrorView" value="error/genericView" />
 	</bean>
 
-	<mvc:annotation-driven/>
+	<!-- <mvc:annotation-driven/> -->
 	<!-- <bean id="conversionService" conversion-service="conversionService" 
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 	</bean> -->
