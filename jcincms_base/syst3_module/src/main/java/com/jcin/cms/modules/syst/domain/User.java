@@ -80,7 +80,7 @@ public class User implements Serializable {
      *
      * @mbggenerated 2015年12月11日 17时18分16秒 星期五
      */
-    private Integer loginCount;
+    private Integer loginCount=0;
 
     /**
      *  登录IP 所属表字段为tb_user.login_ip

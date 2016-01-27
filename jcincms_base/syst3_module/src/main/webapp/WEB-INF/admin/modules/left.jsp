@@ -1,11 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
+<script type="text/javascript">
+	$().ready(function() {
+		//导航切换
+		$(".menuson li").click(function() {
+			$(".menuson li.active").removeClass("active")
+			$(this).addClass("active");
+		});
+	});
+</script>
 <div class="lefttop">
 	<span></span>主菜单
 </div>
 <dl class="leftmenu">
-	<dd>
+	<c:forEach var="resource" items="${menu}">
+		<dd>
+			<div class="title">
+				<span></span>${resource.name}
+			</div>
+			<c:if test="${resource.children!=null}">
+				<ul class="menuson">
+					<c:forEach var="resource" items="${resource.children}">
+						<li><cite></cite><a href="#"
+							onclick="javascript:doLink('${resource.name}','${resource.path}');">${resource.name}</a><i></i></li>
+					</c:forEach>
+				</ul>
+			</c:if>
+		</dd>
+	</c:forEach>
+	<!-- <dd>
 		<div class="title">
 			<span></span>管理信息
 		</div>
@@ -54,6 +78,6 @@
 			<li><cite></cite><a href="#">信息列表</a><i></i></li>
 			<li><cite></cite><a href="#">其他</a><i></i></li>
 		</ul>
-	</dd>
+	</dd> -->
 </dl>
 

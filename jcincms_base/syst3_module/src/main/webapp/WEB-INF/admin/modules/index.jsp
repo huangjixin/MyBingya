@@ -28,12 +28,6 @@
 			$(this).addClass("selected");
 		})
 		
-		//导航切换
-		$(".menuson li").click(function(){
-			$(".menuson li.active").removeClass("active")
-			$(this).addClass("active");
-		});
-		
 		$('.title').click(function(){
 			var $ul = $(this).next('ul');
 			$('dd').find('ul').slideUp();
@@ -196,7 +190,6 @@ html,body {
 				<div class="user">
 					<span>${user.username}</span> <i>消息</i> <b>5</b>
 				</div>
-
 			</div>
 			<%-- <div class="logo">J2EE应用开发平台</div>
 			<c:set var="user" value="${fns:getUser()}"></c:set>

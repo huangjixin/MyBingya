@@ -234,7 +234,7 @@
 		style="width:200px;padding:1px;">
 		<ul id="resourceTree"></ul>
 	</div>
-	<div data-options="region:'north'" style="padding:5px;">
+	<div data-options="region:'north'" style="padding:5px;overflow: hidden;">
 		<shiro:hasPermission name="role:create">
 				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
 			</shiro:hasPermission>

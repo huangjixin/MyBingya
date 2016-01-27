@@ -221,7 +221,7 @@ public class RoleController extends BaseController<Role> {
 			resources = resourceService.selectByRoleId(roleId);
 		}
 //		List<Resource> list = resourceService.getResourceCheckboxTree(resources);
-		List<Resource> list = UserUtils.getResource(false);
+		List<Resource> list = UserUtils.getResource(true);
 		getResourceCheckboxTree(list, resources);
 		return list;
 	}

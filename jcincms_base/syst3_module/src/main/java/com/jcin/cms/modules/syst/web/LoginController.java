@@ -6,7 +6,9 @@
  */
 package com.jcin.cms.modules.syst.web;
 
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.User;
+import com.jcin.cms.modules.syst.service.IResourceService;
+import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.modules.syst.web.captchaexception.IncorrectCaptchaException;
 import com.jcin.cms.web.BaseController;
 
@@ -32,6 +38,10 @@ public class LoginController extends BaseController<User> {
 
 	@Autowired
 	private CaptchaFormAuthenticationFilter formAuthenticationFilter;
+	@Autowired
+	private IResourceService resourceService;
+	@Autowired
+	private IUserService userService;
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model uiModel, HttpServletRequest request) {
@@ -62,6 +72,14 @@ public class LoginController extends BaseController<User> {
 
 	@RequestMapping(value = {"","/","index"})
 	public String index(Model uiModel) {
+		Subject currentUser = SecurityUtils.getSubject();
+		Object object = currentUser.getPrincipal();
+		Set<String> set = null;
+		if (object != null) {
+			set = userService.findPermissions(object.toString());
+		}
+		List<Resource> list = resourceService.getResourceTree(set, true);
+		uiModel.addAttribute("menu", list);
 		return root+"admin/modules/index.jsp";
 	}
 	

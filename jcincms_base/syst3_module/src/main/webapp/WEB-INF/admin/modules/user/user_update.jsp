@@ -59,14 +59,14 @@ function clearRoleInput(){
 }
 
 function onsubmitEventHandler(){
-	var szReg=/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/; 
+	/* var szReg=/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/; 
 	var bChk=szReg.test($('#email').val()); 
 	if(bChk==false){
 		$('#tip')[0].innerHTML="email格式不对";
 		return false; 
 	}else{
 		$('#tip')[0].innerHTML="";
-	}
+	} */
 	return true; 
 }
 </script>
