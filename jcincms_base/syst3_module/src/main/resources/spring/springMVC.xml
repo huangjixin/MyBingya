@@ -127,7 +127,7 @@
 				</prop>
 				<!-- 授权 -->
 				<prop key="org.apache.shiro.authz.UnauthorizedException">
-					redirect:/admin/modules/unauthorized.jsp
+					redirect:/WEB-INF/admin/modules/unauthorized.jsp
 				</prop>
 			</props>
 		</property>

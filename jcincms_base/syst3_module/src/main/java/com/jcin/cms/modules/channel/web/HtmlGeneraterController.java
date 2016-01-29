@@ -45,7 +45,7 @@ public class HtmlGeneraterController extends BaseController {
 	@Autowired
 	private IChannelService channelService;
 
-	@RequiresPermissions("htmlgenerate:view")
+	@RequiresPermissions("htmlgene:view")
 	@RequestMapping(value = { "", "htmlgenerate" })
 	public String htmlgenerate(HttpServletRequest httpServletRequest) {
 		return root + "admin/modules/htmlgenerate/htmlgenerate.jsp";
