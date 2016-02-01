@@ -1,0 +1,162 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: '微软雅黑';
+	margin: 0 auto;
+}
+
+a{
+	text-decoration: none;	
+}
+
+/* 全局宽度 */
+.globalWidth {
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* 内容宽度 */
+.contentWidth {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 全局div */
+.globalDiv {
+	color:#333333;
+	border: 1px solid #cccccc;
+	padding:20px; 
+}
+
+.devider{
+	height: 10px;
+}
+
+.clear{
+	clear: both;
+}
+
+.hr{
+	height:1px;border:none;border-top:1px solid #cccccc;
+}
+
+#header {
+	
+}
+
+#header #header-top {
+	color:#5E5E5E;
+	font-size: 12px;
+	height: 30px;
+	background-color: #F5F5F5;
+	height: 30px;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	border-bottom-color: #cccccc;
+}
+
+#header #header-top .left{
+	float: left;padding: 9px 0;
+}
+#header #header-top .right{
+	float: right;padding: 9px 0;
+}
+
+#header #logo {
+	color:#5E5E5E;
+	/* background-color: #F5F5F5; */
+	/* height: 110px; */
+	font-size: 12px;
+}
+
+#header #logo .left{
+	width:100%;
+	float:left;
+	padding:25px 0px;
+}
+
+#footer{
+	
+}
+
+/************** 菜单开始****************************/
+#menuContainer{
+	background: #212121;
+}
+.menu {
+	height: 50px;
+	font-size: 16px;
+	background: #212121;
+	z-index: 3;
+	display: block;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #212121;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	color: #FFF;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	/* background: #62b00e; */
+	background: #EC3901;
+}
+
+.menu ul li .selected {
+	position: relative;
+	background: #EC3901;
+}
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+/************** 菜单结束 **************************/
