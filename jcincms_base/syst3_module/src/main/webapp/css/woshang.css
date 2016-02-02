@@ -29,6 +29,12 @@ a{
 	padding:20px; 
 }
 
+/* 全局div */
+.globalDiv:HOVER {
+	color:#06A3E9;
+	border: 1px solid #06A3E9;
+}
+
 .devider{
 	height: 10px;
 }
@@ -160,3 +166,62 @@ a{
 	right: 100%;
 }
 /************** 菜单结束 **************************/
+
+/************** tab导航 **************************/
+.tab_conbox {
+	border: 1px solid #cccccc;
+	border-top: none;
+}
+
+.tab_con {
+	display: none;
+}
+
+.tabs {
+	margin: 0;
+	padding: 0;
+	height: 32px;
+	border-bottom: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	width: 100%;
+}
+
+.tabs a{
+	color: black;
+}
+
+.tabs li {
+	margin: 0;
+	padding: 0;
+	height: 31px;
+	line-height: 31px;
+	float: left;
+	border: 1px solid #cccccc;
+	border-left: none;
+	margin-bottom: -1px;
+	/* background: #e0e0e0; */
+	overflow: hidden;
+	position: relative;
+}
+
+.tabs li a {
+	display: block;
+	padding: 0 20px;
+	border: 1px solid #fff;
+	outline: none;
+}
+
+.tabs li a:hover {
+	background: #ccc;
+}
+
+.tabs .thistab,.tabs .thistab a:hover {
+	background: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.tab_con {
+	padding: 12px;
+	font-size: 14px;
+	line-height: 175%;
+}

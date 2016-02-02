@@ -182,7 +182,7 @@
 <body class="easyui-layout" data-options="fit:true">
 	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
 	<div data-options="region:'center'" title=""
-		style="padding:0px;background:#ffffff;">
+		style="padding:5px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<shiro:hasPermission name="channel:create">
 				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
