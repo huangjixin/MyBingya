@@ -40,7 +40,7 @@
 		</dependency>
 	</dependencies>
 	<!-- <modules> <module>system_module4</module> </modules> -->
-	<!-- <modules>
+	<modules>
 		<module>demo</module>
-	</modules> -->
+	</modules>
 </project>
