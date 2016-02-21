@@ -138,26 +138,10 @@
 		</ul>
 		<ul class="tab_conbox" id="tab_conbox" style="margin-top: 0;">
 			<li class="tab_con">
-				<ul>
-					<li><a>企业官网SEO到底该怎么做？免费推广技巧大汇总</a></li>
-					<li><a>企业官网SEO到底该怎么做？免费推广技巧大汇总</a></li>
-					<li><a>企业官网SEO到底该怎么做？免费推广技巧大汇总</a></li>
-					<li><a>企业官网SEO到底该怎么做？免费推广技巧大汇总</a></li>
-				</ul>
 			</li>
-
 			<li class="tab_con">
-				<p>
-					2<span><a href="http://www.51xuediannao.com/">懒人建站</a>2只收录实用和能提高用户体验的代码</span><br />
-					<span>我们只想解放出你的部分写代码时间来思考更高层次的设计，而不是要你懒惰、拼凑。</span>
-				</p>
 			</li>
-
 			<li class="tab_con">
-				<p>
-					3<span><a href="http://www.51xuediannao.com/">懒人建站</a>3只收录实用和能提高用户体验的代码</span><br />
-					<span>我们只想解放出你的部分写代码时间来思考更高层次的设计，而不是要你懒惰、拼凑。</span>
-				</p>
 			</li>
 		</ul>
 	</div>
