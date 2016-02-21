@@ -5,12 +5,12 @@ body {
 	margin: 0 auto;
 }
 
-a{
-	text-decoration: none;	
+a {
+	text-decoration: none;
 }
 
-a{
-	text-decoration: none;	
+a {
+	text-decoration: none;
 }
 
 /* 全局宽度 */
@@ -28,72 +28,95 @@ a{
 
 /* 全局div */
 .globalDiv {
-	color:#333333;
+	color: #333333;
 	border: 1px solid #cccccc;
-	padding:20px; 
+	padding: 20px;
 }
 
-/* 全局div */
 .globalDiv:HOVER {
-	color:#06A3E9;
+	color: #06A3E9;
 	border: 1px solid #06A3E9;
 }
 
+.serviceDiv {
+	width: 47%; 
+	border : 1px solid #cccccc;
+	padding: 10px;
+	border: 1px solid #cccccc;
+}
+
+.serviceDiv:HOVER {
+	border: 1px solid #EC3901;
+}
+
+.circle {
+	background-color:#f60;
+	/* border: 1px solid #f60; */
+	width: 100px;
+	height: 100px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+	border-radius: 50px;
+}
+
 .case {
-	color:#333333;
+	color: #333333;
 	border: 1px solid #cccccc;
-	padding:20px; 
+	padding: 20px;
 }
 
-.news{
-	width:45%;
-	float:left;
-	color:#333333;
+.news {
+	width: 45%;
+	float: left;
+	color: #333333;
 	border: 1px solid #cccccc;
-	padding:20px; 
+	padding: 20px;
 }
 
-.news li{
-	font-size:14px;
-	width:100%;
+.news li {
+	font-size: 14px; width : 100%;
 	list-style-type: none;
+	width: 100%;
 }
 
-.news li a{
-	color:#333333;
+.news li a {
+	color: #333333;
 }
 
-.news li a:HOVER{
+.news li a:HOVER {
 	text-decoration: underline;
 }
 
-.news li a:VISITED{
-	color:#333333;
+.news li a:VISITED {
+	color: #333333;
 }
 
-.news li span{
-	font-size:14px;
+.news li span {
+	font-size: 14px;
 	float: right;
 }
 
-.build{
-	width:45%;
-	float:right;
-	color:#333333;
+.build {
+	width: 45%;
+	float: right;
+	color: #333333;
 	border: 1px solid #cccccc;
-	padding:20px; 
+	padding: 20px;
 }
 
-.devider{
+.devider {
 	height: 10px;
 }
 
-.clear{
+.clear {
 	clear: both;
 }
 
-.hr{
-	height:1px;border:none;border-top:1px solid #cccccc;
+.hr {
+	height: 1px;
+	border: none;
+	border-top: 1px solid #cccccc;
 }
 
 #header {
@@ -101,7 +124,7 @@ a{
 }
 
 #header #header-top {
-	color:#5E5E5E;
+	color: #5E5E5E;
 	font-size: 12px;
 	height: 30px;
 	background-color: #F5F5F5;
@@ -111,34 +134,38 @@ a{
 	border-bottom-color: #cccccc;
 }
 
-#header #header-top .left{
-	float: left;padding: 9px 0;
+#header #header-top .left {
+	float: left;
+	padding: 9px 0;
 }
-#header #header-top .right{
-	float: right;padding: 9px 0;
+
+#header #header-top .right {
+	float: right;
+	padding: 9px 0;
 }
 
 #header #logo {
-	color:#5E5E5E;
+	color: #5E5E5E;
 	/* background-color: #F5F5F5; */
 	/* height: 110px; */
 	font-size: 12px;
 }
 
-#header #logo .left{
-	width:100%;
-	float:left;
-	padding:25px 0px;
+#header #logo .left {
+	width: 100%;
+	float: left;
+	padding: 25px 0px;
 }
 
-#footer{
+#footer {
 	
 }
 
 /************** 菜单开始****************************/
-#menuContainer{
+#menuContainer {
 	background: #212121;
 }
+
 .menu {
 	height: 50px;
 	font-size: 16px;

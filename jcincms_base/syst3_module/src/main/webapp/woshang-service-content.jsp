@@ -54,9 +54,15 @@
 		<div style="text-align: center;">
 			<h2>服务项目</h2>
 		</div>
+		<div class="serviceDiv" style="float: left;">
+			<div class="circle"></div>
+		</div>
+		<div class="serviceDiv" style="float: right;"></div>
+		<div class="clear"></div>
 		<div style="text-align: center;">
 			<h2>服务流程</h2>
-			<img alt="服务流程" src="${ctx}/images/process.jpg" style="width: 100%;height: auto;">
+			<img alt="服务流程" src="${ctx}/images/process.jpg"
+				style="width: 100%;height: auto;">
 		</div>
 	</div>
 
