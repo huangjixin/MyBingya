@@ -9,6 +9,10 @@ a{
 	text-decoration: none;	
 }
 
+a{
+	text-decoration: none;	
+}
+
 /* 全局宽度 */
 .globalWidth {
 	margin: 0 auto;
@@ -33,6 +37,51 @@ a{
 .globalDiv:HOVER {
 	color:#06A3E9;
 	border: 1px solid #06A3E9;
+}
+
+.case {
+	color:#333333;
+	border: 1px solid #cccccc;
+	padding:20px; 
+}
+
+.news{
+	width:45%;
+	float:left;
+	color:#333333;
+	border: 1px solid #cccccc;
+	padding:20px; 
+}
+
+.news li{
+	font-size:14px;
+	width:100%;
+	list-style-type: none;
+}
+
+.news li a{
+	color:#333333;
+}
+
+.news li a:HOVER{
+	text-decoration: underline;
+}
+
+.news li a:VISITED{
+	color:#333333;
+}
+
+.news li span{
+	font-size:14px;
+	float: right;
+}
+
+.build{
+	width:45%;
+	float:right;
+	color:#333333;
+	border: 1px solid #cccccc;
+	padding:20px; 
 }
 
 .devider{
@@ -168,7 +217,7 @@ a{
 /************** 菜单结束 **************************/
 
 /************** tab导航 **************************/
-.tab_conbox {
+/* .tab_conbox {
 	border: 1px solid #cccccc;
 	border-top: none;
 }
@@ -199,7 +248,7 @@ a{
 	border: 1px solid #cccccc;
 	border-left: none;
 	margin-bottom: -1px;
-	/* background: #e0e0e0; */
+	background: #e0e0e0;
 	overflow: hidden;
 	position: relative;
 }
@@ -224,4 +273,4 @@ a{
 	padding: 12px;
 	font-size: 14px;
 	line-height: 175%;
-}
+} */

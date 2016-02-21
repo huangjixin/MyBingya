@@ -120,9 +120,9 @@
 <div class="devider"></div>
 <div class="globalWidth">
 	<div class="contentWidth">
-		<div class="globalDiv">
+		<div class="case">
 			<div>
-				<span>成功案例</span>
+				<span style="font-weight: bold;">成功案例</span>
 			</div>
 			<hr class="hr">
 		</div>
@@ -131,18 +131,47 @@
 <div class="devider"></div>
 <div class="globalWidth">
 	<div class="contentWidth">
-		<ul class="tabs" id="tabs" style="margin-bottom: 0;">
+		<div>
+			<div class="news">
+				<div>
+					<span style="font-weight: bold;">公司动态</span>
+				</div>
+				<hr class="hr">
+				<ul style="width: 100%;position: relative;left: -40px;">
+					<c:set var="docs"
+						value="${fns:getDocByChannelCode('news',10)}"></c:set>
+					<c:if test="${docs!=null}">
+						<c:forEach var="doc" items="${docs}">
+							<li><a href="${ctx}/channel/news/doc/${doc.id}"
+								target="blank">${doc.title}<span><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+						</c:forEach>
+					</c:if>
+					<%-- <fmt:formatDate value="${doc.createDate}" pattern="yyyy.MM.dd" /> --%>
+				</ul>
+			</div>
+			<div class="build">
+				<div>
+					<span style="font-weight: bold;">网站建设</span>
+				</div>
+				<hr class="hr">
+				<ul>
+					<li>fdsafasf</li>
+					<li>fdsafasf</li>
+					<li>fdsafasf</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- <ul class="tabs" id="tabs" style="margin-bottom: 0;">
 			<li><a href="http://www.51xuediannao.com/js/nav/">公司动态</a></li>
 			<li><a href="http://www.51xuediannao.com/js/slide/">网站建设</a></li>
 			<li><a href="http://www.51xuediannao.com/js/gg/">营销干货</a></li>
 		</ul>
 		<ul class="tab_conbox" id="tab_conbox" style="margin-top: 0;">
-			<li class="tab_con">
-			</li>
-			<li class="tab_con">
-			</li>
-			<li class="tab_con">
-			</li>
-		</ul>
+			<li class="tab_con" style="list-style-type:none;"></li>
+			<li class="tab_con" style="list-style-type:none;"></li>
+			<li class="tab_con" style="list-style-type:none;"></li>
+		</ul> -->
 	</div>
 </div>

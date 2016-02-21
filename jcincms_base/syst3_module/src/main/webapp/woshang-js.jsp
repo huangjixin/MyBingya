@@ -5,7 +5,7 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				jQuery.jqtab = function(tabtit, tab_conbox, shijian) {
+				/* jQuery.jqtab = function(tabtit, tab_conbox, shijian) {
 					$(tab_conbox).find("li").hide();
 					$(tabtit).find("li:first").addClass("thistab").show();
 					$(tab_conbox).find("li:first").show();
@@ -23,11 +23,9 @@
 							});
 
 				};
+				$.jqtab("#tabs", "#tab_conbox", "mouseenter"); */
 				/*调用方法如下：*/
 				/* $.jqtab("#tabs", "#tab_conbox", "click"); */
-				$.jqtab("#tabs", "#tab_conbox", "mouseenter");
-
 				/* $.jqtab("#tabs2", "#tab_conbox2", "mouseenter"); */
-
 			});
 </script>
