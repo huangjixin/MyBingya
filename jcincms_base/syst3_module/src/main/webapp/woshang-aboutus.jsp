@@ -7,7 +7,7 @@
 <jsp:include page="woshang-css.jsp" flush="true"></jsp:include>
 <jsp:include page="woshang-js.jsp" flush="true"></jsp:include>
 </head>
-<title>智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>关于我们，智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 <body>
 	<!-- 头部 -->
 	<jsp:include page="woshang-header.jsp" flush="true"></jsp:include>

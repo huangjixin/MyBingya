@@ -58,62 +58,64 @@
 
 <div class="globalWidth">
 	<div class="contentWidth">
-		<div class="globalDiv"
-			style="float: left;width: 20%;text-align: center;margin-right: 9px;">
-			<img alt="智沃营销网站设计" src="${ctx}/images/web.png">
-			<div>
-				<h3>高端网站设计</h3>
+		<a href="${ctx}/channel/service">
+			<div class="globalDiv"
+				style="float: left;width: 20%;text-align: center;margin-right: 9px;">
+				<img alt="智沃营销网站设计" src="${ctx}/images/web.png">
+				<div>
+					<h3>高端网站设计</h3>
+				</div>
+				<div>
+					<h4>营销型网站</h4>
+				</div>
+				<div>
+					<h4>赚钱的网站</h4>
+				</div>
+				<hr class="hr">
 			</div>
-			<div>
-				<h4>营销型网站</h4>
+			<div class="globalDiv"
+				style="float: left;width: 20%;text-align: center;">
+				<img alt="智沃营销网站设计" src="${ctx}/images/mouse.png">
+				<div>
+					<h3>移动网站设计</h3>
+				</div>
+				<div>
+					<h4>手机网站</h4>
+				</div>
+				<div>
+					<h4>APP</h4>
+				</div>
+				<hr class="hr">
 			</div>
-			<div>
-				<h4>赚钱的网站</h4>
+			<div class="globalDiv"
+				style="float: right;width: 20%;text-align: center;">
+				<img alt="智沃营销网站设计" src="${ctx}/images/search.png">
+				<div>
+					<h3>网络营销策划</h3>
+				</div>
+				<div>
+					<h4>提升企业形象</h4>
+				</div>
+				<div>
+					<h4>带来订单</h4>
+				</div>
+				<hr class="hr">
 			</div>
-			<hr class="hr">
-		</div>
-		<div class="globalDiv"
-			style="float: left;width: 20%;text-align: center;">
-			<img alt="智沃营销网站设计" src="${ctx}/images/mouse.png">
-			<div>
-				<h3>移动网站设计</h3>
+			<div class="globalDiv"
+				style="float: right;width: 20%;text-align: center;margin-right: 9px;">
+				<img alt="智沃营销网站设计" src="${ctx}/images/project.png">
+				<div>
+					<h3>项目定制开发</h3>
+				</div>
+				<div>
+					<h4>网络定制开发</h4>
+				</div>
+				<div>
+					<h4>CMS内容管理</h4>
+				</div>
+				<hr class="hr">
 			</div>
-			<div>
-				<h4>手机网站</h4>
-			</div>
-			<div>
-				<h4>APP</h4>
-			</div>
-			<hr class="hr">
-		</div>
-		<div class="globalDiv"
-			style="float: right;width: 20%;text-align: center;">
-			<img alt="智沃营销网站设计" src="${ctx}/images/search.png">
-			<div>
-				<h3>网络营销策划</h3>
-			</div>
-			<div>
-				<h4>提升企业形象</h4>
-			</div>
-			<div>
-				<h4>带来订单</h4>
-			</div>
-			<hr class="hr">
-		</div>
-		<div class="globalDiv"
-			style="float: right;width: 20%;text-align: center;margin-right: 9px;">
-			<img alt="智沃营销网站设计" src="${ctx}/images/project.png">
-			<div>
-				<h3>项目定制开发</h3>
-			</div>
-			<div>
-				<h4>网络定制开发</h4>
-			</div>
-			<div>
-				<h4>CMS内容管理</h4>
-			</div>
-			<hr class="hr">
-		</div>
+		</a>
 	</div>
 </div>
 <div class="clear"></div>
@@ -138,8 +140,7 @@
 				</div>
 				<hr class="hr">
 				<ul style="width: 100%;position: relative;left: -40px;">
-					<c:set var="docs"
-						value="${fns:getDocByChannelCode('news',10)}"></c:set>
+					<c:set var="docs" value="${fns:getDocByChannelCode('news',10)}"></c:set>
 					<c:if test="${docs!=null}">
 						<c:forEach var="doc" items="${docs}">
 							<li><a href="${ctx}/channel/news/doc/${doc.id}"

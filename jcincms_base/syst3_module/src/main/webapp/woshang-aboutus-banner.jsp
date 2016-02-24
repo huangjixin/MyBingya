@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div style="width:100%;;text-align: center;position:relative;">
-	<img alt="服务流程" src="${ctx}/images/about-banner.png"
-		style="width: auto;height: auto;">
+	<img alt="服务流程" src="${ctx}/images/about_banner.jpg"
+		style="width: 100%;height: auto;">
 	<div
 		style="width:100%;position: absolute;bottom: 0px;text-align: center;"
 		class="contentWidth">

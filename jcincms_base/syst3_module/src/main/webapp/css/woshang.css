@@ -161,6 +161,14 @@ a {
 	padding: 25px 0px;
 }
 
+#newslist a{
+	color:#585858;
+}
+
+#newslist a:HOVER{
+	color:#387FFF;
+}
+
 #footer {
 	
 }
