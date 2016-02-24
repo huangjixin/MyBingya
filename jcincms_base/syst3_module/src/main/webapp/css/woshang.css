@@ -39,8 +39,8 @@ a {
 }
 
 .serviceDiv {
-	width: 47%; 
-	border : 1px solid #cccccc;
+	width: 47%;
+	border: 1px solid #cccccc;
 	padding: 10px;
 	border: 1px solid #cccccc;
 }
@@ -50,14 +50,17 @@ a {
 }
 
 .circle {
-	background-color:#f60;
+	color: #ffffff; background-color : #f60;
+	text-align: center;
 	/* border: 1px solid #f60; */
 	width: 100px;
 	height: 100px;
+	line-height: 100px;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
 	-o-border-radius: 50px;
 	border-radius: 50px;
+	background-color: #f60;
 }
 
 .case {
@@ -75,7 +78,8 @@ a {
 }
 
 .news li {
-	font-size: 14px; width : 100%;
+	font-size: 14px;
+	width: 100%;
 	list-style-type: none;
 	width: 100%;
 }
@@ -161,6 +165,38 @@ a {
 	
 }
 
+.navButton {
+	float:left;
+	margin-left:30px;
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #EAEAEA;
+	background-color: 0xffffff;
+	color: #444444;
+	font-size: 14px;
+}
+
+.navButton:HOVER {
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #1091CB;
+	background-color: #1091CB;
+	color: #ffffff;
+}
+
+.navButtonSelect {
+	float:left;
+	margin-left:30px;
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #1091CB;
+	background-color: #1091CB;
+	color: #444444;
+	font-size: 14px;
+}
 /************** 菜单开始****************************/
 #menuContainer {
 	background: #212121;
