@@ -4,8 +4,16 @@
 <div id="footer" class="globalWidth"
 	style="background-image: url('${ctx}/images/footer-bg.png');background-repeat: repeat;">
 	<div
-		style="text-align: center;height: 50px;line-height: 50px;font-size: 16px;color: #A7A7A7;">
-		<span>加入我们 </span>|<span> 联系我们 </span>|<span> 智沃作品</span>
+		style="text-align: center;height: 50px;line-height: 50px;font-size: 16px;color: #A7A7A7;width: 100%;">
+		<span style="display:inline-block;"> 加入我们 </span> <span
+			style="display:inline-block;margin-left: 10px;"> 联系我们 </span> <span
+			style="display:inline-block;margin-left: 10px;"> 智沃作品 </span>
+		<!-- <ul style="text-align: center;width: 500px;">
+			<li style="float: left;"><span>加入我们 </span></li>
+			<li style="float: left;"><span>联系我们 </span></li>
+			<li style="float: left;"><span>智沃作品</span></li>
+		</ul> -->
+		<!-- <span>加入我们 </span>|<span> 联系我们 </span>|<span> 智沃作品</span> -->
 	</div>
 	<div class="contentWidth">
 		<div>
