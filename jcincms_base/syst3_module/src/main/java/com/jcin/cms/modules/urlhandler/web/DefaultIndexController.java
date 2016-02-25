@@ -98,13 +98,13 @@ public class DefaultIndexController extends BaseController {
 			document.setChannel(channel);
 		}
 		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-
-		if (sitePreference == SitePreference.MOBILE) {
+		return "m-woshang-index.jsp";
+		/*if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");
-			return "m-index.jsp";
+			return "m-woshang-index.jsp";
 		} else {
 			logger.info("PC来的网页请求");
 			return "woshang-index.jsp";
-		}
+		}*/
 	}
 }

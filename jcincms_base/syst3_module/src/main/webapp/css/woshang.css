@@ -208,6 +208,8 @@ a {
 /************** 菜单开始****************************/
 #menuContainer {
 	background: #212121;
+	z-index:998;
+	display: block;
 }
 
 .menu {
