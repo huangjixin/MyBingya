@@ -2,14 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div class="globalWidth">
-	<div
-		style="background-color: #BD3E15;width:100%;padding-top: 40px;padding-bottom: 40px;text-align: center;">
-		<div>
-			<h1 style="color: #ffffff;font-weight: bold;">ONE STOP SERVICE</h1>
-		</div>
-		<div>
-			<h3 style="color: #ffffff;font-weight: bold;">一站式服务</h3>
-		</div>
+	<div style="width:100%;;text-align: center;position:relative;">
+		<img alt="服务流程" src="${ctx}/images/service_banner.jpg"
+			style="width: 100%;height: auto;">
 	</div>
 	<div class="devider"></div>
 	<div class="contentWidth">
@@ -82,7 +77,8 @@
 			<div class="clear"></div>
 		</div>
 		<div class="serviceDiv" style="float: right;margin-top: 10px;">
-			<div class="circle" style="float: left;background-color: #7DD300;">Micro WEB</div>
+			<div class="circle" style="float: left;background-color: #7DD300;">Micro
+				WEB</div>
 			<div
 				style="float: left;width: 300px;font-size: 14px;margin-left: 10px;">
 				<h3 style="color: #7DD300;">手机网站开发</h3>
@@ -114,8 +110,7 @@
 			<div
 				style="float: left;width: 300px;font-size: 14px;margin-left: 10px;">
 				<h3 style="color: #B397FD;">软件定制开发</h3>
-				<p>智沃信科顶尖的互动创意团队为您量身定造高端网站建设，
-			让视觉力量极致发挥出对品牌的影响力。</p>
+				<p>智沃信科顶尖的互动创意团队为您量身定造高端网站建设， 让视觉力量极致发挥出对品牌的影响力。</p>
 			</div>
 			<div class="clear"></div>
 		</div>
