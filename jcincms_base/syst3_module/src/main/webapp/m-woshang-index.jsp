@@ -13,6 +13,78 @@
 	<jsp:include page="m-woshang-header.jsp" flush="true"></jsp:include>
 	<div class="clear"></div>
 	<!-- 菜单 -->
-	<jsp:include page="woshang-menu.jsp" flush="true"></jsp:include>
+	<jsp:include page="m-woshang-menu.jsp" flush="true"></jsp:include>
+	<div style="padding: 5px 0px;">
+		<a href="${ctx}/"><img alt="智沃科技" src="${ctx}/images/m-banner.jpg"
+			style="height: auto;width: 100%;"></a>
+	</div>
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>成功案例</span>
+	</div>
+	<div style="padding-top: 5px;text-align: center;">
+		<img alt="智沃科技" src="${ctx}/images/m-case-banner1.jpg"
+			style="width: 49%;"> <img alt="智沃科技"
+			src="${ctx}/images/m-case-banner2.jpg" style="width: 49%;">
+	</div>
+
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>公司主营业务</span>
+	</div>
+	<div class="global" style="padding: 0px 10px;">
+		<div style="float: left;" class="case">
+			<img alt="网站建设" src="${ctx}/images/serv1.jpg" style="width:120px;height: auto;">
+			<div>网站建设</div>
+			<div>营销型网站</div>
+			<div>展示型网站</div>
+		</div>
+		<div style="float: right;" class="case">
+			<img alt="网站建设" src="${ctx}/images/serv2.jpg" style="width:120px;height: auto;">
+			<div>移动开发</div>
+			<div>手机网站开发</div>
+			<div>APP开发</div>
+		</div>
+		<div style="float: left;"  class="case">
+			<img alt="网站建设" src="${ctx}/images/serv3.jpg" style="width:120px;height: auto;">
+			<div>网络营销</div>
+			<div>SEO优化</div>
+			<div>网站推广</div>
+		</div>
+		<div style="float: right;" class="case">
+			<img alt="网站建设" src="${ctx}/images/serv4.jpg" style="width:120px;height: auto;">
+			<div>微信公众号开发</div>
+			<div>微网站开发</div>
+			<div>APP开发</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>公司新闻</span>
+	</div>
+	<div class="global">
+		<div class="news">
+			<ul style="padding-top: 10px;">
+				<c:set var="docs" value="${fns:getDocByChannelCode('news',10)}"></c:set>
+				<c:if test="${docs!=null}">
+					<c:forEach var="doc" items="${docs}">
+						<li><a href="${ctx}/channel/news/doc/${doc.id}"
+							target="blank">${doc.title}<span><fmt:formatDate
+										value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+						<hr class="hr"></hr>
+					</c:forEach>
+				</c:if>
+				<%-- <fmt:formatDate value="${doc.createDate}" pattern="yyyy.MM.dd" /> --%>
+			</ul>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+	<!-- 底部 -->
+	<jsp:include page="m-woshang-footer.jsp" flush="true"></jsp:include>
+
+	<!-- 菜单底部 -->
+	<jsp:include page="m-woshang-bottommenu.jsp" flush="true"></jsp:include>
 </body>
 </html>

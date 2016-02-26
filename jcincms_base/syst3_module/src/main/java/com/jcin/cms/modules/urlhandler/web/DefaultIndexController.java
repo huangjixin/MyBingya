@@ -55,9 +55,9 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		String uri =httpServletRequest.getRequestURI();
+		String uri =httpServletRequest.getScheme()+"://"+httpServletRequest.getServerName()+":"+httpServletRequest.getServerPort()+httpServletRequest.getRequestURI();
 		System.out.println(uri); 
-		String referer = httpServletRequest.getHeader("Referer");
+		String referer = httpServletRequest.getHeader("referer");
 		System.out.println(referer);
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
