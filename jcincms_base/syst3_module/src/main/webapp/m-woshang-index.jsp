@@ -14,10 +14,25 @@
 	<div class="clear"></div>
 	<!-- 菜单 -->
 	<jsp:include page="m-woshang-menu.jsp" flush="true"></jsp:include>
+	<div class="clear"></div>
+	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
 		<a href="${ctx}/"><img alt="智沃科技" src="${ctx}/images/m-banner.jpg"
 			style="height: auto;width: 100%;"></a>
 	</div>
+	<div class="banner">
+		<ul>
+			<li><a href="tel:13926205227"><img alt=""
+					src="${ctx}/channel/cases" style="width: 90%;height: auto;"></a></li>
+			<li><a href="sms:13926205227"><img alt=""
+					src="${ctx}/images/mob4.jpg" style="width: 90%;height: auto;"></a></li>
+			<li><a href="${ctx}/channel/service"><img
+					alt="" src="${ctx}/images/mob5.jpg" style="width: 90%;height: auto;"></a></li>
+			<li><a href="#"><img alt="" src="${ctx}/images/mob8.jpg" style="width: 90%;height: auto;"></a></li>
+		</ul>
+	</div>
+	<div class="clear"></div>
+	<div class="devider"></div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
 		<span>成功案例</span>
@@ -34,31 +49,37 @@
 	</div>
 	<div class="global" style="padding: 0px 10px;">
 		<div style="float: left;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv1.jpg" style="width:120px;height: auto;">
+			<img alt="网站建设" src="${ctx}/images/serv1.jpg"
+				style="width:120px;height: auto;">
 			<div>网站建设</div>
 			<div>营销型网站</div>
 			<div>展示型网站</div>
 		</div>
 		<div style="float: right;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv2.jpg" style="width:120px;height: auto;">
+			<img alt="网站建设" src="${ctx}/images/serv2.jpg"
+				style="width:120px;height: auto;">
 			<div>移动开发</div>
 			<div>手机网站开发</div>
 			<div>APP开发</div>
 		</div>
-		<div style="float: left;"  class="case">
-			<img alt="网站建设" src="${ctx}/images/serv3.jpg" style="width:120px;height: auto;">
+		<div class="clear"></div>
+		<div style="float: left;" class="case">
+			<img alt="网站建设" src="${ctx}/images/serv3.jpg"
+				style="width:120px;height: auto;">
 			<div>网络营销</div>
 			<div>SEO优化</div>
 			<div>网站推广</div>
 		</div>
 		<div style="float: right;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv4.jpg" style="width:120px;height: auto;">
+			<img alt="网站建设" src="${ctx}/images/serv4.jpg"
+				style="width:120px;height: auto;">
 			<div>微信公众号开发</div>
 			<div>微网站开发</div>
 			<div>APP开发</div>
 		</div>
 	</div>
 	<div class="clear"></div>
+	<div class="devider"></div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
 		<span>公司新闻</span>

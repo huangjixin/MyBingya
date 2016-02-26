@@ -133,6 +133,22 @@ a:VISITED {
 	font-size: 14px;
 }
 
+.banner {
+	background-color:#ffffff;
+	width: 100%;
+}
+
+.banner ul li {
+	float: left;
+	width: 25%;
+	text-align: center;
+	/* padding: 10px 10px; */
+}
+
+.banner ul li img{
+	
+}
+
 .news {
 	width: 100%;
 }
