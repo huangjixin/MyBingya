@@ -39,17 +39,23 @@
 	        changePos(id,_getHeight);
 	    }
 	}
+	var menuPosi='relative';
 	function changePos(id,height){
 	    var obj = document.getElementById(id);
 	    var scrollTop = document.body.scrollTop;
+	    
 	    if(scrollTop < height){
-	        obj.style.position = 'relative';
-	        obj.style.display = 'block';
+	    	if(menuPosi != 'relative'){
+	    		menuPosi = 'relative';
+	    		obj.style.position = 'relative';
+		        obj.style.display = 'block';
+	    	}
 	    }else{
-	    	/* obj.style.display = 'none'; */
-	        obj.style.position = 'fixed';
-	        obj.style.top = 0;
-	        /* $(id).fadeIn("slow"); */
+	    	if(menuPosi == 'relative'){
+	    		menuPosi = 'fixed';
+	    		obj.style.position = 'fixed';
+	 	        obj.style.top = 0;
+	    	}
 	    }
 	}
 </script>
