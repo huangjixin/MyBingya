@@ -130,6 +130,5 @@
 				style="width: 100%;height: auto;">
 		</div>
 	</div>
-
 </div>
 

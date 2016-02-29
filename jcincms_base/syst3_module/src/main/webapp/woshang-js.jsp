@@ -3,30 +3,29 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		/* jQuery.jqtab = function(tabtit, tab_conbox, shijian) {
-			$(tab_conbox).find("li").hide();
-			$(tabtit).find("li:first").addClass("thistab").show();
-			$(tab_conbox).find("li:first").show();
-
-			$(tabtit).find("li").bind(
-					shijian,
-					function() {
-						$(this).addClass("thistab").siblings("li")
-								.removeClass("thistab");
-						var activeindex = $(tabtit).find("li").index(
-								this);
-						$(tab_conbox).children().eq(activeindex).show()
-								.siblings().hide();
-						return false;
-					});
-
-		};
-		$.jqtab("#tabs", "#tab_conbox", "mouseenter"); */
-		/*调用方法如下：*/
-		/* $.jqtab("#tabs", "#tab_conbox", "click"); */
-		/* $.jqtab("#tabs2", "#tab_conbox2", "mouseenter"); */
-	});
+	if(window.location.toString().indexOf('pref=padindex') != -1){
+	}else{
+		if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){  
+	      if(window.location.href.indexOf("?mobile")<0){
+			try{
+				if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+					/* <c:choose>
+						<c:when test="${document!=null}">
+							window.location.href="${ctx}/${channel.linkAddr}/docs/${document.id}m.html";
+						</c:when>
+						<c:when test="${channel!=null}">
+						window.location.href="${ctx}/${channel.linkAddr}/docs/${channel.code}1m.html";
+						</c:when>
+						<c:otherwise>
+						window.location.href="${ctx}/m-index.html";
+						</c:otherwise>
+					</c:choose> */
+				}
+			}catch(e){}
+		  }
+		}
+	}
+	
 	window.onload = function() {
 		menuFixed('menuContainer');
 	}

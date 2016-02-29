@@ -7,11 +7,14 @@
 			try{
 				if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
 					window.location.href="${ctx}/m-index.html";
-				}/*else if(/iPad/i.test(navigator.userAgent)){
-	              	window.location.href="http://www.qq.com/pad/"
-				}else{
-					window.location.href="http://xw.qq.com/simple/s/index/"
-				}*/
+					<#--<#if document ??>
+						window.location.href="${ctx}/${channel.linkAddr}/docs/${document.id}m.html";
+						<#elseif channel ??>
+						window.location.href="${ctx}/${channel.linkAddr}/docs/${channel.code}1m.html";
+						<#else>
+						window.location.href="${ctx}/m-index.html";
+					</#if>-->
+				}
 			}catch(e){}
 		  }
 		}

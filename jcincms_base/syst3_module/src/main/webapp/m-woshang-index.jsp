@@ -22,9 +22,9 @@
 	</div>
 	<div class="banner">
 		<ul>
-			<li><a href="tel:13926205227"><img alt=""
-					src="${ctx}/channel/cases" style="width: 90%;height: auto;"></a></li>
-			<li><a href="sms:13926205227"><img alt=""
+			<li><a href="${ctx}/channel/cases"><img alt=""
+					src="${ctx}/images/mob2.jpg" style="width: 90%;height: auto;"></a></li>
+			<li><a href="#"><img alt=""
 					src="${ctx}/images/mob4.jpg" style="width: 90%;height: auto;"></a></li>
 			<li><a href="${ctx}/channel/service"><img
 					alt="" src="${ctx}/images/mob5.jpg" style="width: 90%;height: auto;"></a></li>
