@@ -7,14 +7,14 @@
 		<#assign docs=page.rows>
 		<#if docs ??>
 			<ul id="newslist">
-				<c:forEach var="doc" items="${docs}">
+				<#list docs as doc>
 					<li style="margin-top: 20px;margin-bottom: 20px;"><a
 						href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank"><span
 							style="font-weight: bold;">${doc.title}</span>
 							<div class="devider"></div>
 							<div style="font-size: 12px;">${doc.contentShort}……</div></a></li>
 					<hr class="hr" style="border-top:1px dashed #cccccc;"></hr>
-				</c:forEach>
+				</#list>
 			</ul>
 		</#if>
 		<#if docs!=null}">

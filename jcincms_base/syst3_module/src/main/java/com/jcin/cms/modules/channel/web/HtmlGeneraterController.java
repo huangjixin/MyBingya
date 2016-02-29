@@ -74,9 +74,10 @@ public class HtmlGeneraterController extends BaseController {
 	public String generateAll(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse,
-			@RequestParam(value = "indexTemp", required = false) String indexTemp)
+			@RequestParam(value = "indexTemp", required = false) String indexTemp,
+			@RequestParam(value = "mindexTemp", required = false) String mindexTemp)
 			throws IOException {
-		generateIndex(httpServletRequest, httpServletResponse, indexTemp);
+		generateIndex(httpServletRequest, httpServletResponse, indexTemp, mindexTemp);
 		List<Channel> menus = UserUtils.getChannels();// 菜单。
 		for (Channel channel : menus) {
 			generateChannel(channel.getId(), true, httpServletRequest,
@@ -92,7 +93,8 @@ public class HtmlGeneraterController extends BaseController {
 	public String generateIndex(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse,
-			@RequestParam(value = "indexTemp", required = false) String indexTemp)
+			@RequestParam(value = "indexTemp", required = false) String indexTemp,
+			@RequestParam(value = "mindexTemp", required = false) String mindexTemp)
 			throws IOException {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
@@ -157,6 +159,10 @@ public class HtmlGeneraterController extends BaseController {
 				root);
 
 		templateFile = "template" + File.separator + "m-index.ftl";
+		if(null != mindexTemp && !"".equals(mindexTemp)){
+			templateFile = mindexTemp;
+		}
+		
 		htmlFile = webroot + "m-index.html";
 		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
 				root);
