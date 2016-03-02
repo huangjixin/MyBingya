@@ -1,6 +1,5 @@
 package com.jcin.cms.common;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
 import com.jcin.cms.modules.channel.service.impl.DocumentServiceImpl;
-import com.jcin.cms.modules.syst.dao.UserMapper;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.service.IResourceService;
@@ -31,7 +29,6 @@ import com.jcin.cms.utils.Page;
  */
 public class UserUtils {
 	
-	private static UserMapper userDao = SpringUtils.getBean(UserMapper.class);
 	private static IUserService userService = SpringUtils.getBean(UserServiceImpl.class);
 	private static IResourceService resourceService = SpringUtils.getBean(ResourceServiceImpl.class);
 	private static IDocumentService documentService = SpringUtils.getBean(DocumentServiceImpl.class);
@@ -164,7 +161,7 @@ public class UserUtils {
 	public static Map<String, Object> getCacheMap(){
 		if(map == null){
 //			map = new HashMap<String, Object>();
-			map = Collections.synchronizedMap(new HashMap<String, Object>());;
+			map = new HashMap<String, Object>();
 		}
 		return map;
 	}
