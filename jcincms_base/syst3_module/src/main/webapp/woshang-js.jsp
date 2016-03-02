@@ -9,6 +9,7 @@
 	      if(window.location.href.indexOf("?mobile")<0){
 			try{
 				if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+// 					window.location.href="${ctx}/m-index"
 					/* <c:choose>
 						<c:when test="${document!=null}">
 							window.location.href="${ctx}/${channel.linkAddr}/docs/${document.id}m.html";

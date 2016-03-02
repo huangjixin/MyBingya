@@ -6,13 +6,13 @@
 	      if(window.location.href.indexOf("?mobile")<0){
 			try{
 				if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
-					window.location.href="${ctx}/m-index.html";
-					<#--<#if document ??>
+					<#--window.location.href="${ctx}/";
+					<#if document ??>
 						window.location.href="${ctx}/${channel.linkAddr}/docs/${document.id}m.html";
 						<#elseif channel ??>
 						window.location.href="${ctx}/${channel.linkAddr}/docs/${channel.code}1m.html";
 						<#else>
-						window.location.href="${ctx}/m-index.html";
+						window.location.href="${ctx}/";
 					</#if>-->
 				}
 			}catch(e){}

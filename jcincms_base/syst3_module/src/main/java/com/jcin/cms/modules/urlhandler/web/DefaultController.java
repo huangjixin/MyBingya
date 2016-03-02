@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,7 @@ import com.jcin.cms.web.BaseController;
  */
 @Controller
 @RequestMapping(value = "/channel")
+@Scope(value="prototype")
 public class DefaultController extends BaseController {
 
 	// 文章统计点击数缓存。
