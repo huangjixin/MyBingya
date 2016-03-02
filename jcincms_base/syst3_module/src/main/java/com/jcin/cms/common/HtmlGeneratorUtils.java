@@ -1,10 +1,4 @@
-/**
- * 一句话描述该类：前端HTML页面生成器。
- * @author 黄记新 <br/>
- * @date 2015-12-3,16:39 <br/>
- *
- */
-package com.jcin.cms.modules.channel.web;
+package com.jcin.cms.common;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,199 +10,40 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jcin.cms.common.FileUtils;
-import com.jcin.cms.common.FreeMarkerUtil;
-import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
-import com.jcin.cms.modules.urlhandler.domain.BasicConfig;
+import com.jcin.cms.modules.channel.service.impl.ChannelServiceImpl;
+import com.jcin.cms.modules.channel.service.impl.DocumentServiceImpl;
 import com.jcin.cms.utils.Page;
-import com.jcin.cms.web.BaseController;
 
-@Controller
-@RequestMapping(value = "admin/htmlgenerate")
-public class HtmlGeneraterController extends BaseController {
+/**
+ * 生成器工具类
+ * 
+ * @author lcw
+ * @version 2013-5-29
+ */
+public class HtmlGeneratorUtils {
 
-	@Autowired
-	private BasicConfig basicConfig;
-	
-	@Autowired
-	private IDocumentService documentService;
+	private static IDocumentService documentService = SpringUtils
+			.getBean(DocumentServiceImpl.class);
+	private static IChannelService channelService = SpringUtils
+			.getBean(ChannelServiceImpl.class);
 
-	@Autowired
-	private IChannelService channelService;
-
-	@RequiresPermissions("htmlgene:view")
-	@RequestMapping(value = { "", "htmlgenerate" })
-	public String htmlgenerate(HttpServletRequest httpServletRequest, Model uiModel) {
-		if(null!=basicConfig.getIndexTemp()){
-			/*System.out.println(basicConfig.getIndexTemp().replace("/", File.separator));
-			basicConfig.setIndexTemp(basicConfig.getIndexTemp().replaceAll("/", File.separator));	*/
-		}
-		/*if(null!=basicConfig.getMindexTemp()){
-			basicConfig.setMindexTemp(basicConfig.getMindexTemp().replaceAll("/", File.separator));	
-		}*/
-		
-		uiModel.addAttribute("basicConfig", basicConfig);
-		return root + "admin/modules/htmlgenerate/htmlgenerate.jsp";
-	}
-
-	@RequestMapping(value = "/deleteAll")
-	@ResponseBody
-	public String deleteAll(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-		deleteIndex(httpServletRequest, httpServletResponse);
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/") + "channel";
-		File file = new File(webroot);
-		if (file.exists()) {
-			File[] files = file.listFiles();
-			for (File file2 : files) {
-				file2.delete();
-				FileUtils.deleteDirectory(file2.getAbsolutePath());
-			}
-		}
-		return "删除所有成功";
-	}
-
-	@RequestMapping(value = "/generateAll")
-	@ResponseBody
-	public String generateAll(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse,
-			@RequestParam(value = "indexTemp", required = false) String indexTemp,
-			@RequestParam(value = "mindexTemp", required = false) String mindexTemp)
-			throws IOException {
-		generateIndex(httpServletRequest, httpServletResponse, indexTemp,
-				mindexTemp);
-		List<Channel> menus = UserUtils.getChannels();// 菜单。
-		for (Channel channel : menus) {
-			generateChannel(channel.getId(), true, httpServletRequest,
-					httpServletResponse);
-			generateChannelDocs(channel.getId(), true, httpServletRequest,
-					httpServletResponse);
-		}
-		return "生成所有成功";
-	}
-
-	@RequestMapping(value = "/generateIndex")
-	@ResponseBody
-	public String generateIndex(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse,
-			@RequestParam(value = "indexTemp", required = false) String indexTemp,
-			@RequestParam(value = "mindexTemp", required = false) String mindexTemp)
-			throws IOException {
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/");
-		String conPath = httpServletRequest.getContextPath();
-		Map<String, Object> root = new HashMap<String, Object>();
-
-		// 菜单
-		List<Channel> menus = UserUtils.getChannels();
-		// 约定指向文档的栏目不会出现在模块内容当中。
-		List<Channel> modules = new ArrayList<Channel>();
-		for (Channel channel2 : menus) {
-			if (!channel2.getAsdocument()) {
-				modules.add(channel2);
-			}
-		}
-
-		Page page = new Page();
-		page.setPageSize(10);
-		Map<String, Object> menusMap = new HashMap<String, Object>();
-		for (Channel channel : menus) {
-			List<Document> documents = documentService.getDocByChannelCode(channel.getCode(), page);
-			menusMap.put(channel.getCode(), documents);
-			root.put(channel.getCode(), menusMap);
-		}
-
-		/*// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(
-				null, recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-
-		// 点击率排名
-		Page page1 = new Page();
-		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
-				page1);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}*/
-//		root.put("clickCountDocs", clickCountDocs);
-//		root.put("recommendDocs", recommendDocs);// 推荐文章。
-		
-		root.put("modules", modules);
-		root.put("menusMap", menusMap);
-		root.put("path", webroot);
-		root.put("ctx", conPath);
-		root.put("menus", menus);
-
-		String templatesPath = webroot;
-		String templateFile = "template" + File.separator + "index.ftl";
-		if (null != indexTemp && !"".equals(indexTemp)) {
-			templateFile = indexTemp;
-		}
-		String htmlFile = webroot + "index.html";
-		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
-				root);
-
-		templateFile = "template" + File.separator + "m-index.ftl";
-		if (null != mindexTemp && !"".equals(mindexTemp)) {
-			templateFile = mindexTemp;
-		}
-
-		htmlFile = webroot + "m-index.html";
-		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
-				root);
-		return "生成首页成功";
-	}
-
-	@RequestMapping(value = "/deleteIndex")
-	@ResponseBody
-	public String deleteIndex(HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/") + "index.html";
-		File file = new File(webroot);
+	public static void deleteFile(File file) {
 		if (file.exists()) {
 			file.delete();
 		}
-		@SuppressWarnings("deprecation")
-		String m_index = httpServletRequest.getRealPath("/") + "m-index.html";
-		File m_file = new File(m_index);
-		if (m_file.exists()) {
-			m_file.delete();
-		}
-		return "删除首页成功";
 	}
 
-	@RequestMapping(value = "/generateChannel")
-	@ResponseBody
-	public String generateChannel(
-			@RequestParam(value = "id") String id,
-			@RequestParam(value = "generateSubchannel", required = false) boolean generateSubchannel,
+	public static void generateChannel(String id, boolean generateSubchannel,
 			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-
+			HttpServletResponse httpServletResponse) {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 		String conPath = httpServletRequest.getContextPath();
@@ -227,7 +62,7 @@ public class HtmlGeneraterController extends BaseController {
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
-			return "生成栏目失败，注意刷新栏目";
+			return ;
 		}
 
 		Page page = new Page();
@@ -244,27 +79,6 @@ public class HtmlGeneraterController extends BaseController {
 			}
 		}
 
-		/*// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(
-				toGeneratedChannel.getCode(), recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-
-		// 点击率排名
-		Page page1 = new Page();
-		List<Document> clickCountDocs = documentService.getClickCountDoc(
-				toGeneratedChannel.getCode(), page1);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}*/
-		
 		if (null == toGeneratedChannel.getChildren()
 				|| toGeneratedChannel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(toGeneratedChannel.getCode(),page);
@@ -426,11 +240,9 @@ public class HtmlGeneraterController extends BaseController {
 				}
 			}
 		}
-
-		return "生成栏目成功";
 	}
-
-	private void generateSubChannel(Channel toChannel,
+	
+	private static void generateSubChannel(Channel toChannel,
 			HttpServletRequest httpServletRequest) {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
@@ -474,31 +286,8 @@ public class HtmlGeneraterController extends BaseController {
 			root.put("page", page);
 		}
 
-		/*// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(
-				toGeneratedChannel.getCode(), recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-
-		// 点击率排名
-		Page page1 = new Page();
-		List<Document> clickCountDocs = documentService.getClickCountDoc(
-				toGeneratedChannel.getCode(), page1);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}*/
-		
 		List<Channel> navChan = getParentChannels(menus, toGeneratedChannel);
 		
-//		root.put("clickCountDocs", clickCountDocs);
-//		root.put("recommendDocs", recommendDocs);// 推荐文章。
 		root.put("channel", toGeneratedChannel);
 		root.put("subChannels", toGeneratedChannel.getChildren());
 		root.put("menusMap", menusMap);
@@ -541,12 +330,7 @@ public class HtmlGeneraterController extends BaseController {
 				}
 			}
 		}
-		/*
-		 * String templateFile = toGeneratedChannel.getChildren() != null &&
-		 * toGeneratedChannel.getChildren().size() > 0 ? "template" +
-		 * File.separator + "channels.ftl" : "template" + File.separator +
-		 * "channel.ftl";
-		 */
+		
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -645,144 +429,8 @@ public class HtmlGeneraterController extends BaseController {
 			}
 		}
 	}
-
-	@RequestMapping(value = "/deleleChannel")
-	@ResponseBody
-	public String deleleChannel(
-			@RequestParam(value = "id") String id,
-			@RequestParam(value = "deleteSubchannel", required = false) boolean deleteSubchannel,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/");
-
-		List<Channel> menus = UserUtils.getChannels();// 菜单。
-
-		List<Channel> result = new ArrayList<Channel>();
-		searchChannel(menus, id, result);
-		if (result.size() == 0) {
-			return "获取栏目失败，注意刷新栏目";
-		}
-
-		Channel toGeneratedChannel = result.get(0);
-
-		String linkAddr = toGeneratedChannel.getLinkAddr();
-		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot + linkAddr;
-		File file = new File(toGeneratedFiles + File.separator + "docs"
-				+ File.separator + toGeneratedChannel.getCode() + ".html");
-		if (file.exists()) {
-			file.delete();
-		}
-		if (deleteSubchannel) {
-			file = new File(toGeneratedFiles);
-			deleteSubChannel(file, toGeneratedChannel);
-			/*
-			 * if(file.exists()){ FileUtils.deleteDirectory(toGeneratedFiles); }
-			 */
-		}
-
-		return "删除栏目成功";
-	}
-
-	public void deleteSubChannel(File file, Channel channel) {
-		File[] list = file.listFiles();
-		if (list != null) {
-			for (File object : list) {
-				if (channel.getChildren() != null
-						&& channel.getChildren().size() > 0) {
-					for (Channel chan : channel.getChildren()) {
-						String path = object.getAbsolutePath() + File.separator
-								+ "docs" + File.separator + chan.getCode()
-								+ ".html";
-						File f = new File(path);
-						if (f.exists()) {
-							f.delete();
-						}
-						deleteSubChannel(object, chan);
-					}
-				}
-			}
-		}
-	}
-
-	@RequestMapping(value = "/deleteChannelDoc")
-	@ResponseBody
-	public String deleteChannelDoc(
-			@RequestParam(value = "id") String id,
-			@RequestParam(value = "deleteSubchannelDoc", required = false) boolean deleteSubchannelDoc,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws IOException {
-
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/");
-
-		List<Channel> menus = UserUtils.getChannels();// 菜单。
-
-		List<Channel> result = new ArrayList<Channel>();
-		searchChannel(menus, id, result);
-		if (result.size() == 0) {
-			return "获取栏目失败，注意刷新栏目";
-		}
-
-		Channel toGeneratedChannel = result.get(0);
-
-		String linkAddr = toGeneratedChannel.getLinkAddr();
-		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot + linkAddr;
-		String fileName = toGeneratedFiles + File.separator + "docs"
-				+ File.separator + toGeneratedChannel.getCode() + "1.html";
-		File file = new File(fileName);
-		if (file.exists()) {
-			FileUtils.deleteFile(fileName);
-		}
-		// 移动端，约定后缀名前面加“m”；
-		fileName = toGeneratedFiles + File.separator + "docs" + File.separator
-				+ toGeneratedChannel.getCode() + "1m.html";
-		file = new File(fileName);
-		if (file.exists()) {
-			FileUtils.deleteFile(fileName);
-		}
-
-		if (deleteSubchannelDoc) {
-			file = new File(toGeneratedFiles);
-			if (file.exists()) {
-				deleteSubDoc(file);
-			}
-		}
-
-		return "删除栏目文档成功";
-	}
-
-	public void deleteSubDoc(File file) {
-		File[] list = file.listFiles();
-		if (list != null) {
-			for (File object : list) {
-				if (object.getName().indexOf("1.html") != -1
-						|| object.getName().indexOf("1m.html") != -1) {
-					FileUtils.deleteFile(object.getAbsolutePath());
-				}
-				deleteSubDoc(object);
-			}
-		}
-	}
-
-	/**
-	 * 生成栏目文档。
-	 * 
-	 * @param id
-	 * @param generateSubchannelDoc
-	 * @param httpServletRequest
-	 * @param httpServletResponse
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/generateDocs")
-	@ResponseBody
-	public String generateChannelDocs(
-			@RequestParam(value = "id") String id,
-			@RequestParam(value = "generateSubchannelDoc", required = false) boolean generateSubchannelDoc,
+	
+	public static String generateChannelDocs(String id,boolean generateSubchannelDoc,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
 		@SuppressWarnings("deprecation")
@@ -878,7 +526,7 @@ public class HtmlGeneraterController extends BaseController {
 		return "生成栏目文档成功";
 	}
 
-	private void generateSubChannelDocs(Channel toChannel,
+	private static void generateSubChannelDocs(Channel toChannel,
 			HttpServletRequest httpServletRequest) {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
@@ -911,15 +559,6 @@ public class HtmlGeneraterController extends BaseController {
 
 		//导航
 		List<Channel> navChan = getParentChannels(menus, toGeneratedChannel);
-		
-		// 点击率排名
-		/*Page page1 = new Page();
-		List<Document> clickCountDocs = documentService.getClickCountDoc(toGeneratedChannel.getCode(), page1);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}*/
 		
 		List<Document> documents = documentService
 				.getDocByChannelId(toGeneratedChannel.getId());
@@ -970,8 +609,122 @@ public class HtmlGeneraterController extends BaseController {
 			}
 		}
 	}
+	
+	public static String deleleChannel(String id,boolean deleteSubchannel,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
 
-	private List<Channel> getParentChannels(List<Channel> list,
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+
+		List<Channel> menus = UserUtils.getChannels();// 菜单。
+
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus, id, result);
+		if (result.size() == 0) {
+			return "获取栏目失败，注意刷新栏目";
+		}
+
+		Channel toGeneratedChannel = result.get(0);
+
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot + linkAddr;
+		File file = new File(toGeneratedFiles + File.separator + "docs"
+				+ File.separator + toGeneratedChannel.getCode() + ".html");
+		if (file.exists()) {
+			file.delete();
+		}
+		if (deleteSubchannel) {
+			file = new File(toGeneratedFiles);
+			deleteSubChannel(file, toGeneratedChannel);
+			/*
+			 * if(file.exists()){ FileUtils.deleteDirectory(toGeneratedFiles); }
+			 */
+		}
+
+		return "删除栏目成功";
+	}
+
+	public  static void deleteSubChannel(File file, Channel channel) {
+		File[] list = file.listFiles();
+		if (list != null) {
+			for (File object : list) {
+				if (channel.getChildren() != null
+						&& channel.getChildren().size() > 0) {
+					for (Channel chan : channel.getChildren()) {
+						String path = object.getAbsolutePath() + File.separator
+								+ "docs" + File.separator + chan.getCode()
+								+ ".html";
+						File f = new File(path);
+						if (f.exists()) {
+							f.delete();
+						}
+						deleteSubChannel(object, chan);
+					}
+				}
+			}
+		}
+	}
+
+	public static String deleteChannelDoc(String id,boolean deleteSubchannelDoc,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+
+		List<Channel> menus = UserUtils.getChannels();// 菜单。
+
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus, id, result);
+		if (result.size() == 0) {
+			return "获取栏目失败，注意刷新栏目";
+		}
+
+		Channel toGeneratedChannel = result.get(0);
+
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot + linkAddr;
+		String fileName = toGeneratedFiles + File.separator + "docs"
+				+ File.separator + toGeneratedChannel.getCode() + "1.html";
+		File file = new File(fileName);
+		if (file.exists()) {
+			FileUtils.deleteFile(fileName);
+		}
+		// 移动端，约定后缀名前面加“m”；
+		fileName = toGeneratedFiles + File.separator + "docs" + File.separator
+				+ toGeneratedChannel.getCode() + "1m.html";
+		file = new File(fileName);
+		if (file.exists()) {
+			FileUtils.deleteFile(fileName);
+		}
+
+		if (deleteSubchannelDoc) {
+			file = new File(toGeneratedFiles);
+			if (file.exists()) {
+				deleteSubDoc(file);
+			}
+		}
+
+		return "删除栏目文档成功";
+	}
+
+	public static void deleteSubDoc(File file) {
+		File[] list = file.listFiles();
+		if (list != null) {
+			for (File object : list) {
+				if (object.getName().indexOf("1.html") != -1
+						|| object.getName().indexOf("1m.html") != -1) {
+					FileUtils.deleteFile(object.getAbsolutePath());
+				}
+				deleteSubDoc(object);
+			}
+		}
+	}
+	
+	private static List<Channel> getParentChannels(List<Channel> list,
 			Channel currentChannel) {
 		List<Channel> result = new ArrayList<Channel>();
 		while (currentChannel != null
@@ -993,7 +746,7 @@ public class HtmlGeneraterController extends BaseController {
 		return result;
 	}
 
-	private Channel searchChannel(List<Channel> list, String id,
+	private static Channel searchChannel(List<Channel> list, String id,
 			List<Channel> result) {
 		Channel chan = null;
 		for (Channel channel : list) {
@@ -1009,7 +762,7 @@ public class HtmlGeneraterController extends BaseController {
 		return null;
 	}
 
-	private Channel searchChannel(List<Channel> list, Channel currentChannel,
+	private static Channel searchChannel(List<Channel> list, Channel currentChannel,
 			List<Channel> result) {
 		Channel chan = null;
 		for (Channel channel : list) {
@@ -1025,13 +778,4 @@ public class HtmlGeneraterController extends BaseController {
 		}
 		return null;
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

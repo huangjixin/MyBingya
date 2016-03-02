@@ -25,11 +25,14 @@ th {
 <script type="text/javascript">
 	var chanTemp = "${channel.channelTemplete}";
 	var geneTemp = "${channel.geneTemplate}";
-
+	var mGeneTemp = "${channel.mGeneTemplate}";
+	
 	$().ready(function() {
 		createChannelTree();
 		createFileTree();
 		createGeneTree();
+		createmGeneTemplateTree();
+		
 		$('#channelImg').attr("src", '${channel.image}');
 	});
 
@@ -130,6 +133,43 @@ th {
 		});
 	}
 
+	//创建移动页面模板树。
+	function createmGeneTemplateTree() {
+		$('#mGeneTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			required : false,
+			editable : false,
+			onClick : function(node) {
+				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+				$('#parentId').val(node.id);*/
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#mGeneTemplate').combotree('tree').tree("collapseAll");
+				var gTemplete = "${channel.mGeneTemplate}";
+				$('#mGeneTemplate').combotree("setValue", gTemplete);
+			},onSelect: function (item) {  
+                var parent = item;  
+                var tree = $('#mGeneTemplate').combotree('tree');  
+                var path = new Array();  
+                do {  
+                    path.unshift(parent.text);  
+                    var parent = tree.tree('getParent', parent.target);  
+                } while (parent);  
+                var pathStr = '';  
+                for (var i = 0; i < path.length; i++) {  
+                    pathStr += path[i];  
+                    if (i < path.length - 1) {  
+                        pathStr += '/';  
+                    }  
+                }  
+                
+                mGeneTemp = pathStr; 
+            }  
+		});
+	}
+	
 	function oncodeComplete() {
 		$('#linkAddr').val("");
 		var node = $('#parentId').combotree('tree').tree("getSelected");
@@ -160,6 +200,11 @@ th {
 		geneTemp = '';
 	}
 
+	function clearmGeneTemplateInput(){
+		$('#mGeneTemplate').combotree('clear');
+		mGeneTemp = "";
+	}
+	
 	function clearForm() {
 		$('#parentId').combotree('clear');
 		$('#name').val("");
@@ -189,6 +234,7 @@ th {
 		} */
 		$('#channelTemplete').val(chanTemp);
 		$('#gTemplete').val(geneTemp);
+		$('#mgTemplete').val(mGeneTemp);
 		var row = $('#tgrid').datagrid('getSelected');
 		if (row) {
 			$("#documentId").val(row.id);
@@ -267,6 +313,7 @@ th {
 			value="${channel.channelTemplete}" type="hidden" />
 		<input id="gTemplete" name="geneTemplate"
 			value="${channel.geneTemplate}" type="hidden" />
+		<input id="mgTemplete" name="mGeneTemplate" value="${channel.mGeneTemplate}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
 			type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
@@ -372,8 +419,10 @@ th {
 								id="geneTempleteTip"></b> <input id="refreshgeneFiles"
 								type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
 								type="button" onclick="createGeneTree();"></td>
-							<th>&nbsp;</th>
-							<td></td>
+							<th>&nbsp;移动端模板：</th>
+							<td nowrap="nowrap" align="left"><input id="mGeneTemplate"/>
+							&nbsp;<input type="button" value="清除"
+								onclick="clearmGeneTemplateInput();" /></td>
 							<th>&nbsp;</th>
 							<td></td>
 						</tr>

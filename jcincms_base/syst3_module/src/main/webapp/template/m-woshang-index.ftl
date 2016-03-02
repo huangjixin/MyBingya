@@ -21,11 +21,12 @@
 		<ul>
 			<li><a href="${ctx}/channel/cases"><img alt=""
 					src="${ctx}/images/mob2.jpg" style="width: 90%;height: auto;"></a></li>
-			<li><a href="#"><img alt=""
-					src="${ctx}/images/mob4.jpg" style="width: 90%;height: auto;"></a></li>
-			<li><a href="${ctx}/channel/service"><img
-					alt="" src="${ctx}/images/mob5.jpg" style="width: 90%;height: auto;"></a></li>
-			<li><a href="#"><img alt="" src="${ctx}/images/mob8.jpg" style="width: 90%;height: auto;"></a></li>
+			<li><a href="#"><img alt="" src="${ctx}/images/mob4.jpg"
+					style="width: 90%;height: auto;"></a></li>
+			<li><a href="${ctx}/channel/service"><img alt=""
+					src="${ctx}/images/mob5.jpg" style="width: 90%;height: auto;"></a></li>
+			<li><a href="${ctx}/channel/aboutus"><img alt="" src="${ctx}/images/mob8.jpg"
+					style="width: 90%;height: auto;"></a></li>
 		</ul>
 	</div>
 	<div class="clear"></div>
@@ -45,34 +46,27 @@
 		<span>公司主营业务</span>
 	</div>
 	<div class="global" style="padding: 0px 10px;">
-		<div style="float: left;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv1.jpg"
-				style="width:120px;height: auto;">
-			<div>网站建设</div>
-			<div>营销型网站</div>
-			<div>展示型网站</div>
-		</div>
-		<div style="float: right;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv2.jpg"
-				style="width:120px;height: auto;">
-			<div>移动开发</div>
-			<div>手机网站开发</div>
-			<div>APP开发</div>
-		</div>
-		<div class="clear"></div>
-		<div style="float: left;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv3.jpg"
-				style="width:120px;height: auto;">
-			<div>网络营销</div>
-			<div>SEO优化</div>
-			<div>网站推广</div>
-		</div>
-		<div style="float: right;" class="case">
-			<img alt="网站建设" src="${ctx}/images/serv4.jpg"
-				style="width:120px;height: auto;">
-			<div>微信公众号开发</div>
-			<div>微网站开发</div>
-			<div>APP开发</div>
+		<div class="case">
+			<span> <img alt="网站建设" src="${ctx}/images/serv1.jpg">
+				<div>网站建设</div>
+				<div>营销型网站</div>
+				<div>展示型网站</div>
+			</span> 
+			<span> <img alt="网站建设" src="${ctx}/images/serv2.jpg">
+				<div>移动开发</div>
+				<div>手机网站开发</div>
+				<div>APP开发</div>
+			</span> 
+			<span> <img alt="网站建设" src="${ctx}/images/serv3.jpg">
+				<div>网络营销</div>
+				<div>SEO优化</div>
+				<div>网站推广</div>
+			</span> 
+			<span> <img alt="网站建设" src="${ctx}/images/serv4.jpg">
+				<div>微信公众号开发</div>
+				<div>微网站开发</div>
+				<div>APP开发</div>
+			</span>
 		</div>
 	</div>
 	<div class="clear"></div>

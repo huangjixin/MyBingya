@@ -268,11 +268,12 @@ public class DocumentController extends BaseController<Document> {
 		String tempImageName = imgeName + "." + file_ext;
 		/*String uploadPath = Global.getUploadpath() + UserUtils.getUserId()
 				+ File.separator + tempImageName;*/
-		
+		df = new SimpleDateFormat("yyyyMMdd");
+		String fileDir = df.format(new Date());
 		@SuppressWarnings("deprecation") 
-		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + tempImageName;
+		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
 		 
-		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + tempImageName;
+		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();

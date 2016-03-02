@@ -162,6 +162,12 @@ public class Channel implements Serializable {
     private String geneTemplate;
 
     /**
+     *  移动端页面生成模板 所属表字段为busi_channel.m_gene_template
+     *
+     * @mbggenerated 2016年01月13日 22时14分34秒 星期三
+     */
+    private String mGeneTemplate;
+    /**
      *  图片 所属表字段为busi_channel.image
      *
      * @mbggenerated 2015年12月31日 16时41分47秒 星期四
@@ -636,6 +642,14 @@ public class Channel implements Serializable {
     public void setGeneTemplate(String geneTemplate) {
         this.geneTemplate = geneTemplate == null ? null : geneTemplate.trim();
     }
+    
+    public String getmGeneTemplate() {
+		return mGeneTemplate;
+	}
+
+	public void setmGeneTemplate(String mGeneTemplate) {
+		this.mGeneTemplate = mGeneTemplate== null ? null : geneTemplate.trim();
+	}
 
     /**
      * 所属表字段为 busi_channel.image

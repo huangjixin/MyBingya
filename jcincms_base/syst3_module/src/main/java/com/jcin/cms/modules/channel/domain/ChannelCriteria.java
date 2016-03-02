@@ -1,5 +1,6 @@
 package com.jcin.cms.modules.channel.domain;
 
+import com.jcin.cms.modules.channel.domain.DocumentCriteria.Criteria;
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1651,6 +1652,76 @@ public class ChannelCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andMGeneTemplateIsNull() {
+            addCriterion("m_gene_template is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateIsNotNull() {
+            addCriterion("m_gene_template is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateEqualTo(String value) {
+            addCriterion("m_gene_template =", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotEqualTo(String value) {
+            addCriterion("m_gene_template <>", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateGreaterThan(String value) {
+            addCriterion("m_gene_template >", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateGreaterThanOrEqualTo(String value) {
+            addCriterion("m_gene_template >=", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLessThan(String value) {
+            addCriterion("m_gene_template <", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLessThanOrEqualTo(String value) {
+            addCriterion("m_gene_template <=", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateLike(String value) {
+            addCriterion("m_gene_template like", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotLike(String value) {
+            addCriterion("m_gene_template not like", value, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateIn(List<String> values) {
+            addCriterion("m_gene_template in", values, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotIn(List<String> values) {
+            addCriterion("m_gene_template not in", values, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateBetween(String value1, String value2) {
+            addCriterion("m_gene_template between", value1, value2, "mGeneTemplate");
+            return (Criteria) this;
+        }
+
+        public Criteria andMGeneTemplateNotBetween(String value1, String value2) {
+            addCriterion("m_gene_template not between", value1, value2, "mGeneTemplate");
+            return (Criteria) this;
+        }
+        
         public Criteria andImageIsNull() {
             addCriterion("image is null");
             return (Criteria) this;

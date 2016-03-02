@@ -177,12 +177,21 @@ a:VISITED {
 
 
 .case{
+	margin: 0 auto;text-align: center;padding-top: 10px;padding-bottom: 10px;
 	color:#cccccc;
-	text-align: center;border: 1px solid #cccccc;padding: 10px 20px;margin-top: 20px;
 }
 
-.case:HOVER{
-	/* border: 1px solid #06A3E9; */
+.case span{
+	display:inline-block;padding: 5px 20px;
+	border: 1px solid #cccccc;margin-top: 5px;
+}
+
+.case span:HOVER{
+	border: 1px solid #06A3E9;
+}
+
+.case span img{
+	width:120px;height: auto;
 }
 
 .devider{

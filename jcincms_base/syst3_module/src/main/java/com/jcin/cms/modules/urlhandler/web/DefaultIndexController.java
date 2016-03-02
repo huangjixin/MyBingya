@@ -72,10 +72,10 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("modules", modules);
 
 		//查询推荐文档。
-		Page page = new Page();
-		page.setPageSize(8);
+		/*Page page = new Page();
+		page.setPageSize(8);*/
 //		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(null,page);
+		/*List<Document> recommendDocs = documentService.getDocByChannelCode(null,page);
 		for (Document document : recommendDocs) {
 			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
 			document.setChannel(channel);
@@ -97,14 +97,14 @@ public class DefaultIndexController extends BaseController {
 					.getChannelId());
 			document.setChannel(channel);
 		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-//		return "m-woshang-index.jsp";
-		if (sitePreference == SitePreference.MOBILE) {
+		uiModel.addAttribute("clickCountDocs", clickCountDocs);*/
+		return "m-woshang-index.jsp";
+		/*if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");
 			return "m-woshang-index.jsp";
 		} else {
 			logger.info("PC来的网页请求");
 			return "woshang-index.jsp";
-		}
+		}*/
 	}
 }

@@ -22,6 +22,9 @@ th {
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/js/jquery-easyui/themes/icon.css">
 <script type="text/javascript">
+	var mindexTemplate = "${basicConfig.mindexTemp}";
+	var mindexTemp = "${basicConfig.mindexTemp}";
+	var indexTemp = "${basicConfig.indexTemp}";
 	$().ready(function() {
 		createChannelTree();
 		createDocTree();
@@ -29,7 +32,6 @@ th {
 		createMIndexTempleteFileTree();
 	});
 	
-	var indexTemp;
 	//创建PC端文件树。
 	function createFileTree() {
 		$('#indexTemplete').combotree({
@@ -42,6 +44,8 @@ th {
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#indexTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${basicConfig.indexTemp}";
+				$('#indexTemplete').combotree("setValue", dTemplete);
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#indexTemplete').combotree('tree');  
@@ -68,7 +72,6 @@ th {
 		indexTemp='';
 	}
 	
-	var mindexTemp;
 	//创建手机端文件树。
 	function createMIndexTempleteFileTree() {
 		$('#m-indexTemplete').combotree({
@@ -81,6 +84,8 @@ th {
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#m-indexTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${basicConfig.mindexTemp}";
+				$('#m-indexTemplete').combotree("setValue", dTemplete);
 			},onSelect: function (item) {  
                 var parent = item;  
                 var tree = $('#m-indexTemplete').combotree('tree');  
@@ -315,9 +320,10 @@ th {
 						<td style="text-align: left;" colspan="6"><input
 							type="button" value="生成首页html" onclick="generateIndex();" />&nbsp;&nbsp;<input
 							type="button" value="删除首页html" onclick="deleteIndex();" />
-							&nbsp;电脑端模板：&nbsp;<input id="indexTemplete" />&nbsp;手机端模板：&nbsp;<input
+							&nbsp;电脑端模板：&nbsp;<input id="indexTemplete" />&nbsp;<input type="button" value="清除"
+							onclick="clearIndexTemplateInput();" />&nbsp;手机端模板：&nbsp;<input
 							id="m-indexTemplete" />&nbsp;<input type="button" value="清除"
-							onclick="clearIndexTemplateInput();" /></td>
+							onclick="clearMIndexTemplateInput();" /></td>
 					</tr>
 					<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 						<th style="width: 150px;">&nbsp;栏目html：</th>

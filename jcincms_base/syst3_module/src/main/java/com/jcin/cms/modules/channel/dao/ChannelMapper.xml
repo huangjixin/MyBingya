@@ -23,6 +23,7 @@
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
     <result column="gene_template" property="geneTemplate" jdbcType="VARCHAR" />
+    <result column="m_gene_template" property="mGeneTemplate" jdbcType="VARCHAR" />
     <result column="image" property="image" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -86,7 +87,7 @@
   <sql id="Base_Column_List" >
     id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, 
     document_templete, hidden, asdocument, document_id, sort, parent_ids, link_addr_zh, 
-    create_date, update_date, create_by, update_by, gene_template, image
+    create_date, update_date, create_by, update_by, gene_template, m_gene_template, image
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.channel.domain.ChannelCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -128,7 +129,7 @@
       document_id, sort, parent_ids, 
       link_addr_zh, create_date, update_date, 
       create_by, update_by, gene_template, 
-      image)
+      m_gene_template,image)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{keyword,jdbcType=VARCHAR}, #{linkAddr,jdbcType=VARCHAR}, #{openMode,jdbcType=VARCHAR}, 
       #{descrition,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{channelTemplete,jdbcType=VARCHAR}, 
@@ -136,7 +137,7 @@
       #{documentId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{parentIds,jdbcType=VARCHAR}, 
       #{linkAddrZh,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{geneTemplate,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR})
+      #{mGeneTemplate,jdbcType=VARCHAR},#{image,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.channel.domain.Channel" >
     insert into busi_channel
@@ -203,6 +204,9 @@
       </if>
       <if test="geneTemplate != null" >
         gene_template,
+      </if>
+      <if test="mGeneTemplate != null" >
+        m_gene_template,
       </if>
       <if test="image != null" >
         image,
@@ -271,6 +275,9 @@
       </if>
       <if test="geneTemplate != null" >
         #{geneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="mGeneTemplate != null" >
+        #{mGeneTemplate,jdbcType=VARCHAR},
       </if>
       <if test="image != null" >
         #{image,jdbcType=VARCHAR},
@@ -349,6 +356,9 @@
       <if test="record.geneTemplate != null" >
         gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
       </if>
+      <if test="record.mGeneTemplate != null" >
+        m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
+      </if>
       <if test="record.image != null" >
         image = #{record.image,jdbcType=VARCHAR},
       </if>
@@ -380,6 +390,7 @@
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_by = #{record.updateBy,jdbcType=VARCHAR},
       gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      mGeneTemplate = #{record.mGeneTemplate,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -448,6 +459,9 @@
       <if test="geneTemplate != null" >
         gene_template = #{geneTemplate,jdbcType=VARCHAR},
       </if>
+      <if test="mGeneTemplate != null" >
+        m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
+      </if>
       <if test="image != null" >
         image = #{image,jdbcType=VARCHAR},
       </if>
@@ -476,13 +490,14 @@
       create_by = #{createBy,jdbcType=VARCHAR},
       update_by = #{updateBy,jdbcType=VARCHAR},
       gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into busi_channel (id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, document_templete, hidden, asdocument, document_id, sort, parent_ids, link_addr_zh, create_date, update_date, create_by, update_by, gene_template, image) values 
+    insert into busi_channel (id, name, code, keyword, link_addr, open_mode, descrition, parent_id, channel_templete, document_templete, hidden, asdocument, document_id, sort, parent_ids, link_addr_zh, create_date, update_date, create_by, update_by, gene_template,m_gene_template, image) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.linkAddr,jdbcType=VARCHAR}, #{item.openMode,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.channelTemplete,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.asdocument,jdbcType=BIT}, #{item.documentId,jdbcType=VARCHAR}, #{item.sort,jdbcType=INTEGER}, #{item.parentIds,jdbcType=VARCHAR}, #{item.linkAddrZh,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.image,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.keyword,jdbcType=VARCHAR}, #{item.linkAddr,jdbcType=VARCHAR}, #{item.openMode,jdbcType=VARCHAR}, #{item.descrition,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.channelTemplete,jdbcType=VARCHAR}, #{item.documentTemplete,jdbcType=VARCHAR}, #{item.hidden,jdbcType=BIT}, #{item.asdocument,jdbcType=BIT}, #{item.documentId,jdbcType=VARCHAR}, #{item.sort,jdbcType=INTEGER}, #{item.parentIds,jdbcType=VARCHAR}, #{item.linkAddrZh,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR},  #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.image,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

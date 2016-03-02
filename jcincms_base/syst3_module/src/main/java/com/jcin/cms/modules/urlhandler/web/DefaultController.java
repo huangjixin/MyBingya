@@ -64,7 +64,7 @@ public class DefaultController extends BaseController {
 			HttpServletRequest httpServletRequest) {
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
+
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -72,7 +72,10 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
+		// 返回属性集。
+		uiModel.addAttribute("list", list);
 		uiModel.addAttribute("modules", modules);
+
 		if (sitePreference == SitePreference.MOBILE) {
 			return "m-index.jsp";
 		} else {
@@ -91,19 +94,25 @@ public class DefaultController extends BaseController {
 			return result;
 		}
 
-		// 检查栏目是否存在；
-		Channel channel = channelService.getByCode(channels);
-		if (null == channel) {
-			return "channelNotExsit.jsp";
-		}
-
-		// channel.setLinkAddr(requestRri);
-		uiModel.addAttribute("name", channel.getName());
-		uiModel.addAttribute("channel", channel);
-
 		// 菜单
 		List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
+
+		// 检查栏目是否存在；
+		// Channel channel = channelService.getByCode(channels);
+		Channel channel = new Channel(); // 修改为从缓存当中取，减少性能损失。
+		channel.setCode(channels);
+		List<Channel> res = new ArrayList<Channel>();
+		searchChannel(list, channel, res);
+
+		/*
+		 * if (null == channel) { return "channelNotExsit.jsp"; }
+		 */
+		if (res.size() == 0) {
+			return "channelNotExsit.jsp"; // 修改为从缓存当中取，减少性能损失。
+		} else {
+			channel = res.get(0);
+		}
+
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -111,37 +120,39 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
-		uiModel.addAttribute("modules", modules);
+
 		List<Channel> navChan = getParentChannels(list, channel);
-		uiModel.addAttribute("navChan", navChan);
 
 		// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(
-				channels, recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-		uiModel.addAttribute("recommendDocs", recommendDocs);
+		/*
+		 * Page recommendPage = new Page(); recommendPage.setPageSize(8);
+		 * List<Document> recommendDocs = documentService.getDocByChannelCode(
+		 * channels, recommendPage); for (Document document : recommendDocs) {
+		 * Channel channel2 = channelService.selectByPrimaryKey(document
+		 * .getChannelId()); document.setChannel(channel2); }
+		 * uiModel.addAttribute("recommendDocs", recommendDocs);
+		 * 
+		 * // 高点击率 List<Document> clickCountDocs =
+		 * documentService.getClickCountDoc( channel.getCode(), page); for
+		 * (Document document1 : clickCountDocs) { Channel channel1 =
+		 * channelService.selectByPrimaryKey(document1 .getChannelId());
+		 * document1.setChannel(channel1); }
+		 * uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		 */
 
-		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(
-				channel.getCode(), page);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-		
-		//页面请求。
+		// 页面请求。
 		setPage(page, httpServletRequest);
 		documentService.getDocByChannelCode(channels, page);
+
+		// 返回属性集。
+		// channel.setLinkAddr(requestRri);
+		uiModel.addAttribute("list", list);
+		uiModel.addAttribute("name", channel.getName());
+		uiModel.addAttribute("channel", channel);
+		uiModel.addAttribute("modules", modules);
+		uiModel.addAttribute("navChan", navChan);
 		uiModel.addAttribute("page", page);
-		
+
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
 			if (channel.getDocumentId() == null
@@ -196,19 +207,31 @@ public class DefaultController extends BaseController {
 		}
 
 		setPage(page, httpServletRequest);
+
+		// 菜单
+		List<Channel> list = UserUtils.getChannels();
+
 		if (null == channel || null == channel.getId()) {
-			channel = channelService.getByCode(code);
+			// channel = channelService.getByCode(code);
+			// 检查栏目是否存在；
+			channel.setCode(channels);
+			List<Channel> res = new ArrayList<Channel>();
+			searchChannel(list, channel, res);
+
+			/*
+			 * if (null == channel) { return "channelNotExsit.jsp"; }
+			 */
+			if (res.size() == 0) {
+				return "channelNotExsit.jsp"; // 修改为从缓存当中取，减少性能损失。
+			} else {
+				channel = res.get(0);
+			}
 		}
+
 		if (null == channel || null == channel.getId()) {
 			return "channelNotExsit.jsp";
 		}
 
-		uiModel.addAttribute("name", channel.getName());
-		uiModel.addAttribute("channel", channel);
-
-		// 菜单
-		List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -216,30 +239,32 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
-		uiModel.addAttribute("modules", modules);
+		
 		List<Channel> navChan = getParentChannels(list, channel);
+		
+		// 返回属性集。
+		uiModel.addAttribute("list", list);
+		uiModel.addAttribute("name", channel.getName());
+		uiModel.addAttribute("channel", channel);
+		uiModel.addAttribute("modules", modules);
 		uiModel.addAttribute("navChan", navChan);
-		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(
-				channel.getCode(), page);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);
 
-		// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(
-				code, recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-		uiModel.addAttribute("recommendDocs", recommendDocs);
+		/*
+		 * // 高点击率 List<Document> clickCountDocs =
+		 * documentService.getClickCountDoc( channel.getCode(), page); for
+		 * (Document document1 : clickCountDocs) { Channel channel1 =
+		 * channelService.selectByPrimaryKey(document1 .getChannelId());
+		 * document1.setChannel(channel1); }
+		 * uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		 * 
+		 * // 查询栏目推荐。 Page recommendPage = new Page();
+		 * recommendPage.setPageSize(8); List<Document> recommendDocs =
+		 * documentService.getDocByChannelCode( code, recommendPage); for
+		 * (Document document : recommendDocs) { Channel channel2 =
+		 * channelService.selectByPrimaryKey(document .getChannelId());
+		 * document.setChannel(channel2); }
+		 * uiModel.addAttribute("recommendDocs", recommendDocs);
+		 */
 
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
@@ -272,6 +297,7 @@ public class DefaultController extends BaseController {
 		if (null == channel.getChildren() || channel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
+			
 			if (sitePreference == SitePreference.MOBILE) {
 				return "m-channel.jsp";
 			} else {
@@ -297,19 +323,33 @@ public class DefaultController extends BaseController {
 			return result;
 		}
 		setPage(page, httpServletRequest);
+
+		// 菜单
+		List<Channel> list = UserUtils.getChannels();
+
 		if (null == channel || null == channel.getId()) {
-			channel = channelService.getByCode(code);
+			// channel = channelService.getByCode(code);
+			if (null == channel || null == channel.getId()) {
+				// channel = channelService.getByCode(code);
+				// 检查栏目是否存在；
+				channel.setCode(channels);
+				List<Channel> res = new ArrayList<Channel>();
+				searchChannel(list, channel, res);
+
+				/*
+				 * if (null == channel) { return "channelNotExsit.jsp"; }
+				 */
+				if (res.size() == 0) {
+					return "channelNotExsit.jsp"; // 修改为从缓存当中取，减少性能损失。
+				} else {
+					channel = res.get(0);
+				}
+			}
 		}
 		if (null == channel || null == channel.getId()) {
 			return "channelNotExsit.jsp";
 		}
 
-		uiModel.addAttribute("name", channel.getName());
-		uiModel.addAttribute("channel", channel);
-
-		// 菜单
-		List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -317,31 +357,31 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
-		uiModel.addAttribute("modules", modules);
 
-		List<Channel> navChan = getParentChannels(list, channel);
+		List<Channel> navChan = getParentChannels(list, channel); // 导航
+
+		uiModel.addAttribute("list", list);
+		uiModel.addAttribute("name", channel.getName());
+		uiModel.addAttribute("channel", channel);
+		uiModel.addAttribute("modules", modules);
 		uiModel.addAttribute("navChan", navChan);
 
-		Page clickCountPage = new Page();
-		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(channel.getCode(), clickCountPage);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-
-		// 查询栏目推荐。
-		Page recommendPage = new Page();
-		recommendPage.setPageSize(8);
-		List<Document> recommendDocs = documentService.getDocByChannelCode(code, recommendPage);
-		for (Document document : recommendDocs) {
-			Channel channel2 = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel2);
-		}
-		uiModel.addAttribute("recommendDocs", recommendDocs);
+		/*
+		 * Page clickCountPage = new Page(); // 高点击率 List<Document>
+		 * clickCountDocs = documentService.getClickCountDoc( channel.getCode(),
+		 * clickCountPage); for (Document document1 : clickCountDocs) { Channel
+		 * channel1 = channelService.selectByPrimaryKey(document1
+		 * .getChannelId()); document1.setChannel(channel1); }
+		 * uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		 * 
+		 * // 查询栏目推荐。 Page recommendPage = new Page();
+		 * recommendPage.setPageSize(8); List<Document> recommendDocs =
+		 * documentService.getDocByChannelCode( code, recommendPage); for
+		 * (Document document : recommendDocs) { Channel channel2 =
+		 * channelService.selectByPrimaryKey(document .getChannelId());
+		 * document.setChannel(channel2); }
+		 * uiModel.addAttribute("recommendDocs", recommendDocs);
+		 */
 
 		// 检查栏目是否为文档。；
 		if (channel.getAsdocument()) {
@@ -388,28 +428,44 @@ public class DefaultController extends BaseController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		String result = getDocFile(sitePreference, httpServletRequest, id);
 		Document document = null;
-		Integer count = 0;// 文章点击次数。
-		if (result != null) {
-			count = docCache.get(id);
-			if (count == null) {
-				document = documentService.selectByPrimaryKey(id);
-				count = document.getClickCount();
-				docCache.put(id, count);
-			}
-			if (count == null) {
-				count = new Integer(0);
-			}
+		// Integer count = 0;// 文章点击次数。
 
-			count += 1;
-			if (count % 10 == 0) {
-				documentService.updateClickCount(id, count);
-			}
-			docCache.put(id, count);
+		if (result != null) {
+			/*
+			 * count = docCache.get(id); if (count == null) { document =
+			 * documentService.selectByPrimaryKey(id); count =
+			 * document.getClickCount(); docCache.put(id, count); } if (count ==
+			 * null) { count = new Integer(0); }
+			 * 
+			 * count += 1; if (count % 10 == 0) {
+			 * documentService.updateClickCount(id, count); } docCache.put(id,
+			 * count);
+			 */
 			return result;
 		}
 
+		document = documentService.selectByPrimaryKey(id);// 获取当前文档。
+
+		// 菜单缓存。
 		List<Channel> list = UserUtils.getChannels();
-		uiModel.addAttribute("list", list);
+		Channel channel = null;
+		if (null == channel || null == channel.getId()) {
+			if (null == channel || null == channel.getId()) {
+				channel = new Channel();
+				// 检查栏目是否存在；
+				channel.setId(document.getChannelId());
+				List<Channel> res = new ArrayList<Channel>();
+				searchChannel(list, channel, res);
+
+				if (res.size() == 0) {
+					channel = channelService.selectByPrimaryKey(document
+							.getChannelId());
+				} else {
+					channel = res.get(0);
+				}
+			}
+		}
+
 		// 约定指向文档的栏目不会出现在模块内容当中。
 		List<Channel> modules = new ArrayList<Channel>();
 		for (Channel channel2 : list) {
@@ -417,42 +473,34 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
+
+		/*
+		 * // 高点击率 List<Document> clickCountDocs =
+		 * documentService.getClickCountDoc(null, page); for (Document document1
+		 * : clickCountDocs) { Channel channel1 =
+		 * channelService.selectByPrimaryKey(document1 .getChannelId());
+		 * document1.setChannel(channel1); }
+		 * uiModel.addAttribute("clickCountDocs", clickCountDocs); if (document
+		 * == null) { document = documentService.selectByPrimaryKey(id); } count
+		 * = docCache.get(id); if (count == null) { document =
+		 * documentService.selectByPrimaryKey(id); count =
+		 * document.getClickCount(); } if (count == null) { count = 0; }
+		 * 
+		 * if (null == document) { return "channelNotExsit.jsp"; }
+		 * 
+		 * // 更新文章点击次数，满十就更新到数据库。 count += 1; if (count % 10 == 0) {
+		 * documentService.updateClickCount(id, count); } docCache.put(id,
+		 * count);
+		 */
+
+		// document = documentService.selectByPrimaryKey(id);
+		// Channel channel =
+		// channelService.selectByPrimaryKey(document.getChannelId());
+
+		List<Channel> navChan = getParentChannels(list, channel);// 导航。
+
+		uiModel.addAttribute("list", list);
 		uiModel.addAttribute("modules", modules);
-		// 高点击率
-		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
-				page);
-		for (Document document1 : clickCountDocs) {
-			Channel channel1 = channelService.selectByPrimaryKey(document1
-					.getChannelId());
-			document1.setChannel(channel1);
-		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);
-		if (document == null) {
-			document = documentService.selectByPrimaryKey(id);
-		}
-		count = docCache.get(id);
-		if (count == null) {
-			document = documentService.selectByPrimaryKey(id);
-			count = document.getClickCount();
-		}
-		if (count == null) {
-			count = 0;
-		}
-
-		if (null == document) {
-			return "channelNotExsit.jsp";
-		}
-
-		// 更新文章点击次数，满十就更新到数据库。
-		count += 1;
-		if (count % 10 == 0) {
-			documentService.updateClickCount(id, count);
-		}
-		docCache.put(id, count);
-
-		Channel channel = channelService.selectByPrimaryKey(document
-				.getChannelId());
-		List<Channel> navChan = getParentChannels(list, channel);
 		uiModel.addAttribute("navChan", navChan);
 		uiModel.addAttribute("channel", channel);
 		uiModel.addAttribute("document", document);
@@ -608,6 +656,10 @@ public class DefaultController extends BaseController {
 		Channel chan = null;
 		for (Channel channel : list) {
 			if (channel.getId().equals(currentChannel.getParentId())) {
+				result.add(chan = channel);
+				break;
+			}
+			if (channel.getCode().equals(currentChannel.getCode())) {
 				result.add(chan = channel);
 				break;
 			}
