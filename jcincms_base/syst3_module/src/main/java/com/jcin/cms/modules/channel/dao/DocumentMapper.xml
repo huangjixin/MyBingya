@@ -95,6 +95,12 @@
     recommend, click_count, create_date, update_date, content_short, m_gene_template, 
     gene_template, enable_vote
   </sql>
+  <sql id="Base_Column_List_alias" >
+    doc.id, doc.channel_id, doc.title, doc.color, doc.keyword, doc.descrition, doc.priority, doc.source, doc.source_addr, 
+    doc.author, doc.title_image, doc.file_name, doc.file_addr, doc.size, doc.document_templete, doc.hidden, doc.assets_ids, 
+    doc.recommend, doc.click_count, doc.create_date, doc.update_date, doc.content_short, doc.m_gene_template, doc.
+    gene_template, doc.enable_vote
+  </sql>
   <sql id="Blob_Column_List" >
     content
   </sql>
@@ -652,7 +658,7 @@
 		parameterType="com.jcin.cms.modules.channel.domain.DocumentCriteria">
 		<include refid="OracleDialectPrefix" />
 		select
-			doc . *
+			<include refid="Base_Column_List_alias" />
 		from
 			busi_document doc
 		<if test="code != null" >
