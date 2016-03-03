@@ -52,11 +52,11 @@ public class LoginController extends BaseController<User> {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@ModelAttribute User user, Model uiModel,
 			HttpServletRequest request) {
-		Object exceptionClassName = (Object) request
-				.getAttribute("shiroLoginFailure");
+		/*Object exceptionClassName = (Object) request
+				.getAttribute("shiroLoginFailure");*/
 		String error = "用户名/密码错误";
 		
-		if (UnknownAccountException.class.getName().equals(exceptionClassName.getClass().getName())) {
+		/*if (UnknownAccountException.class.getName().equals(exceptionClassName.getClass().getName())) {
 			error = "没有该账号";
 		} else if (IncorrectCredentialsException.class.getName().equals(
 				exceptionClassName.getClass().getName())) {
@@ -66,7 +66,7 @@ public class LoginController extends BaseController<User> {
 			error = "验证码错误";
 		} else if (exceptionClassName != null) {
 			error = "其他错误：" + exceptionClassName;
-		}
+		}*/
 		uiModel.addAttribute("error", error);
 		return root+"admin/modules/login.jsp";
 	}
