@@ -24,6 +24,7 @@ import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.urlhandler.domain.BasicConfig;
 import com.jcin.cms.web.BaseController;
 
 /**
@@ -33,16 +34,19 @@ import com.jcin.cms.web.BaseController;
 @SuppressWarnings("rawtypes")
 @Controller
 @RequestMapping(value = { "", "/" })
-//@Scope(value="prototype")
-//@Scope("session")
+// @Scope(value="prototype")
+// @Scope("session")
 public class DefaultIndexController extends BaseController {
 	private static Logger logger = Logger
 			.getLogger(DefaultIndexController.class.getName());
 
+	@Autowired
+	private BasicConfig basicConfig; // 注入基础配置。
+
 	private static String webrootPath;
 	private static String contextPath;
 	private static final String REDIRECT = "redirect:";
-	
+
 	@Autowired
 	private IChannelService channelService;
 
@@ -57,16 +61,19 @@ public class DefaultIndexController extends BaseController {
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping(value={"","/"})
+	@RequestMapping(value = { "", "/" })
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		
-		String result = getIndexFile(sitePreference,httpServletRequest);
-		if(null != result){
+
+		String result = getIndexFile(sitePreference, httpServletRequest);
+		if (null != result) {
 			return result;
 		}
-		String uri =httpServletRequest.getScheme()+"://"+httpServletRequest.getServerName()+":"+httpServletRequest.getServerPort()+httpServletRequest.getRequestURI();
-		System.out.println(uri); 
+		String uri = httpServletRequest.getScheme() + "://"
+				+ httpServletRequest.getServerName() + ":"
+				+ httpServletRequest.getServerPort()
+				+ httpServletRequest.getRequestURI();
+		System.out.println(uri);
 		String referer = httpServletRequest.getHeader("referer");
 		System.out.println(referer);
 		// List<Channel> list = channelService.getChannelTree();
@@ -81,44 +88,41 @@ public class DefaultIndexController extends BaseController {
 		}
 		uiModel.addAttribute("modules", modules);
 
-		//查询推荐文档。
-		/*Page page = new Page();
-		page.setPageSize(8);*/
-//		List<Document> recommendDocs = documentService.getRecommendDoc(page);
-		/*List<Document> recommendDocs = documentService.getDocByChannelCode(null,page);
-		for (Document document : recommendDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
-			document.setChannel(channel);
-		}
-		uiModel.addAttribute("recommendDocs", recommendDocs);
-		page.setPageSize(5);
-		List<Document> recommendImage = documentService.getRecommendImage(page);
-		for (Document document : recommendImage) {
-			Channel channel = channelService.selectByPrimaryKey(document.getChannelId());
-			document.setChannel(channel);
-		}
-		uiModel.addAttribute("recommendImage", recommendImage);
-		// 高点击率
-		page.setPageSize(10);
-		List<Document> clickCountDocs = documentService.getClickCountDoc(null,
-				page);
-		for (Document document : clickCountDocs) {
-			Channel channel = channelService.selectByPrimaryKey(document
-					.getChannelId());
-			document.setChannel(channel);
-		}
-		uiModel.addAttribute("clickCountDocs", clickCountDocs);*/
-//		return "m-woshang-index.jsp";
+		// 查询推荐文档。
+		/*
+		 * Page page = new Page(); page.setPageSize(8);
+		 */
+		// List<Document> recommendDocs = documentService.getRecommendDoc(page);
+		/*
+		 * List<Document> recommendDocs =
+		 * documentService.getDocByChannelCode(null,page); for (Document
+		 * document : recommendDocs) { Channel channel =
+		 * channelService.selectByPrimaryKey(document.getChannelId());
+		 * document.setChannel(channel); } uiModel.addAttribute("recommendDocs",
+		 * recommendDocs); page.setPageSize(5); List<Document> recommendImage =
+		 * documentService.getRecommendImage(page); for (Document document :
+		 * recommendImage) { Channel channel =
+		 * channelService.selectByPrimaryKey(document.getChannelId());
+		 * document.setChannel(channel); }
+		 * uiModel.addAttribute("recommendImage", recommendImage); // 高点击率
+		 * page.setPageSize(10); List<Document> clickCountDocs =
+		 * documentService.getClickCountDoc(null, page); for (Document document
+		 * : clickCountDocs) { Channel channel =
+		 * channelService.selectByPrimaryKey(document .getChannelId());
+		 * document.setChannel(channel); }
+		 * uiModel.addAttribute("clickCountDocs", clickCountDocs);
+		 */
+		// return "m-woshang-index.jsp";
 		if (sitePreference == SitePreference.MOBILE) {
 			logger.info("手机来的网页请求home-mobile");
-			return "m-woshang-index.jsp";
+			return basicConfig.getMindexJsp();// "m-woshang-index.jsp";
 		} else {
 			logger.info("PC来的网页请求");
-			return "woshang-index.jsp";
+			return basicConfig.getIndexJsp();// "woshang-index.jsp";
 		}
 	}
-	
-	@RequestMapping(value="m-index")
+
+	@RequestMapping(value = "m-index")
 	public String mindex(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (webrootPath == null) {
@@ -139,9 +143,9 @@ public class DefaultIndexController extends BaseController {
 		webroot += requestRri + ".html";
 		File file = new File(webroot);
 		if (file.exists()) {
-			return REDIRECT+requestRri + ".html";
+			return REDIRECT + requestRri + ".html";
 		}
-		
+
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
 		// 约定指向文档的栏目不会出现在模块内容当中。
@@ -152,10 +156,9 @@ public class DefaultIndexController extends BaseController {
 			}
 		}
 		uiModel.addAttribute("modules", modules);
-		
+
 		return "m-woshang-index.jsp";
 	}
-	
 
 	@SuppressWarnings("deprecation")
 	private String getIndexFile(SitePreference sitePreference,
@@ -180,18 +183,18 @@ public class DefaultIndexController extends BaseController {
 		if (index != -1) {
 			requestRri = requestRri.substring(index + conPath.length() + 1);
 			requestRri = requestRri.replaceAll("//", File.separator);
-			
+
 			if (sitePreference == SitePreference.MOBILE) {
 				webroot += requestRri + "m-index.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return REDIRECT+requestRri + "m-index.html";
+					return REDIRECT + requestRri + "m-index.html";
 				}
 			} else {
 				webroot += requestRri + "index.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return REDIRECT+requestRri + "index.html";
+					return REDIRECT + requestRri + "index.html";
 				}
 			}
 		}
