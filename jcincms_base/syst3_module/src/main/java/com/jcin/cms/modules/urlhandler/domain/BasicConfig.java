@@ -68,3 +68,4 @@ public class BasicConfig implements Serializable {
 		this.mindexJsp = mindexJsp;
 	}
 }
+
