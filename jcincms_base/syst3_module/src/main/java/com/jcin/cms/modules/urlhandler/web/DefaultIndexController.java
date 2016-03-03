@@ -33,13 +33,15 @@ import com.jcin.cms.web.BaseController;
 @SuppressWarnings("rawtypes")
 @Controller
 @RequestMapping(value = { "", "/" })
-@Scope(value="prototype")
+//@Scope(value="prototype")
+//@Scope("session")
 public class DefaultIndexController extends BaseController {
 	private static Logger logger = Logger
 			.getLogger(DefaultIndexController.class.getName());
 
 	private static String webrootPath;
 	private static String contextPath;
+	private static final String REDIRECT = "redirect:";
 	
 	@Autowired
 	private IChannelService channelService;
@@ -58,6 +60,7 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping(value={"","/"})
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		
 		String result = getIndexFile(sitePreference,httpServletRequest);
 		if(null != result){
 			return result;
@@ -115,7 +118,7 @@ public class DefaultIndexController extends BaseController {
 		}
 	}
 	
-	/*@RequestMapping(value="m-index")
+	@RequestMapping(value="m-index")
 	public String mindex(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (webrootPath == null) {
@@ -133,10 +136,10 @@ public class DefaultIndexController extends BaseController {
 		} else {
 			index = requestRri.lastIndexOf(conPath);
 		}
-		webroot += requestRri + "m-index.html";
+		webroot += requestRri + ".html";
 		File file = new File(webroot);
 		if (file.exists()) {
-			return requestRri + "m-index.html";
+			return REDIRECT+requestRri + ".html";
 		}
 		
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
@@ -151,7 +154,7 @@ public class DefaultIndexController extends BaseController {
 		uiModel.addAttribute("modules", modules);
 		
 		return "m-woshang-index.jsp";
-	}*/
+	}
 	
 
 	@SuppressWarnings("deprecation")
@@ -182,13 +185,13 @@ public class DefaultIndexController extends BaseController {
 				webroot += requestRri + "m-index.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return requestRri + "m-index.html";
+					return REDIRECT+requestRri + "m-index.html";
 				}
 			} else {
 				webroot += requestRri + "index.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return requestRri + "index.html";
+					return REDIRECT+requestRri + "index.html";
 				}
 			}
 		}

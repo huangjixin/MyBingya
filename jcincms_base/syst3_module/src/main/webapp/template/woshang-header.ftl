@@ -30,7 +30,7 @@
 				<i></i><span>致力华南品牌崛起[专注-用心-热情]</span>
 			</div>
 		</div>
-		<div id="timer">
+		<#--<div id="timer">
           <script language="Javascript">
               var datelocalweek=new Array("星期日", "星期一", "星期二","星期三","星期四", "星期五","星期六");
               var datelocalnow=new Date();
@@ -40,6 +40,6 @@
               var datelocalweekday=datelocalweek[datelocalnow.getDay()];
               document.write(datelocalyear+"年"+datelocalmonth+"月"+datelocalday+"日 "+datelocalweekday);
          </script>
-       </div>
+       </div>-->
 	</div>
 </div>

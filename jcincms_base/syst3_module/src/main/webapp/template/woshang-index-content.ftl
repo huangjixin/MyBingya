@@ -144,6 +144,7 @@
 									<#setting date_format="yyyy.MM.dd">
 									<li><a href="${ctx}/channel/news/doc/${doc.id}"
 												target="blank">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
+									<hr class="hr"></hr>
 								</#list>
 							</#if>
 						</#list>
