@@ -77,14 +77,14 @@
 					<li><input id="password" name="password" type="password"
 						class="loginpwd" value="123456" /></li>
 					<li><input type="submit" class="loginbtn" value="登录" />&nbsp;&nbsp;<input
-						type="reset" class="loginbtn" value="重置" /> <%-- <input name="captcha"
+						type="reset" class="loginbtn" value="重置" />&nbsp; <%-- <input name="captcha"
 						value=""
 						style="width: 50px;height: 30px;border:1px solid;border-color: #000;" /><img
 						id="img_captcha" alt="验证码" src="${ctx}/images/kaptcha.jpg" style="border: none;"
 						title="点击更换" onclick="javascript:refreshCaptcha();"> --%>
 					<!-- <label><a
 							href="#">忘记密码？</a></label> --></li>
-					<li></li>
+					<li><span style="color: red;">${error}</span></li>
 				</ul>
 			</div>
 		</form>
