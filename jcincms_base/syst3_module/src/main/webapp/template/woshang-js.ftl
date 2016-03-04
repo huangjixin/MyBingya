@@ -32,6 +32,7 @@
 	        changePos(id,_getHeight);
 	    }
 	}
+	
 	function changePos(id,height){
 	    var obj = document.getElementById(id);
 	    var scrollTop = document.body.scrollTop;
@@ -42,5 +43,10 @@
 	        obj.style.position = 'fixed';
 	        obj.style.top = 0;
 	    }
+	}
+	
+	function include(url)
+	{
+		$.get(url,function(data){document.write(data);})
 	}
 </script>

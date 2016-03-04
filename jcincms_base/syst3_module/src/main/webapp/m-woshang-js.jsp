@@ -37,4 +37,9 @@
 			}
 		}
 	}
+	
+	function include(url)
+	{
+		$.get(url,function(data){document.write(data);})
+	}
 </script>

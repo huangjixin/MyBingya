@@ -51,7 +51,7 @@
 		</init-param>
 	</filter>
 	
-	<filter>
+	<!--<filter>
         <filter-name>ssi</filter-name>
         <filter-class>
           org.apache.catalina.ssi.SSIFilter
@@ -74,10 +74,10 @@
         </init-param>
     </filter>
     
-    <filter-mapping>
+     <filter-mapping>
         <filter-name>ssi</filter-name>
         <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
@@ -88,7 +88,7 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<servlet> <!-- 记得在Context上面加上属性 privileged="true" -->
+	<!-- <servlet> 记得在Context上面加上属性 privileged="true"
 		<servlet-name>ssi</servlet-name>
 		<servlet-class>org.apache.catalina.ssi.SSIServlet</servlet-class>
 		<init-param>
@@ -116,7 +116,7 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 		<load-on-startup>4</load-on-startup>
-	</servlet>
+	</servlet> -->
 
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
@@ -154,11 +154,6 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>ssi</servlet-name>
-		<url-pattern>*.shtml</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.swf</url-pattern>
 	</servlet-mapping>
@@ -168,15 +163,11 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>*.ftl</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>*.shtml</url-pattern>
+		<url-pattern>*.ftl</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
@@ -223,23 +214,25 @@
 		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
 	
-	
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- <servlet-mapping>
+		<servlet-name>ssi</servlet-name>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.shtml</url-pattern>
+	</servlet-mapping> -->
+	
 	<servlet-mapping>
 		<servlet-name>kaptcha</servlet-name>
 		<url-pattern>/images/kaptcha.jpg</url-pattern>
 	</servlet-mapping>
 
-	<!-- <servlet-mapping> <servlet-name>springMVC</servlet-name> <url-pattern>*.html</url-pattern> 
-		</servlet-mapping> <servlet-mapping> <servlet-name>springMVC</servlet-name> 
-		<url-pattern>*.css</url-pattern> </servlet-mapping> <servlet-mapping> <servlet-name>springMVC</servlet-name> 
-		<url-pattern>*.js</url-pattern> </servlet-mapping> <servlet-mapping> <servlet-name>springMVC</servlet-name> 
-		<url-pattern>*.gif</url-pattern> </servlet-mapping> -->
+	
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>5</session-timeout>
 	</session-config>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

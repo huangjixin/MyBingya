@@ -35,7 +35,7 @@ th {
 	//创建PC端文件树。
 	function createFileTree() {
 		$('#indexTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles',
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
@@ -75,7 +75,7 @@ th {
 	//创建手机端文件树。
 	function createMIndexTempleteFileTree() {
 		$('#m-indexTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles',
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
