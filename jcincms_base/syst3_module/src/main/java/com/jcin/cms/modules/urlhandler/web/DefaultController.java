@@ -49,6 +49,8 @@ import com.jcin.cms.web.BaseController;
 @Scope(value="prototype")
 public class DefaultController extends BaseController {
 
+	private static final String REDIRECT = "redirect:/";
+	
 	// 文章统计点击数缓存。
 	public static final String DOC_CLICK_COUNT = "docClickCount";
 
@@ -558,14 +560,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + "m.html");
 					if (file.exists()) {
-						return requestRri + "docs" + File.separator
+						return REDIRECT+requestRri + "docs" + File.separator
 								+ channelOrCode + page + "m.html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1m.html");
 					if (file.exists()) {
-						return requestRri + "docs" + File.separator
+						return REDIRECT+requestRri + "docs" + File.separator
 								+ channelOrCode + "1m.html";
 					}
 				}
@@ -574,14 +576,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + ".html");
 					if (file.exists()) {
-						return requestRri + "docs" + File.separator
+						return REDIRECT+requestRri + "docs" + File.separator
 								+ channelOrCode + page + ".html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1.html");
 					if (file.exists()) {
-						return requestRri + "docs" + File.separator
+						return REDIRECT+requestRri + "docs" + File.separator
 								+ channelOrCode + "1.html";
 					}
 				}
@@ -618,13 +620,13 @@ public class DefaultController extends BaseController {
 				webroot += requestRri + "m.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return requestRri + "m.html";
+					return REDIRECT+requestRri + "m.html";
 				}
 			} else {
 				webroot += requestRri + ".html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return requestRri + ".html";
+					return REDIRECT+requestRri + ".html";
 				}
 			}
 		}
