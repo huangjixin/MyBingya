@@ -145,7 +145,7 @@ public class UserUtils {
 	
 	public static Object getCache(String key, Object defaultValue) {
 		Object obj = getCacheMap().get(key);
-		return obj==null?defaultValue:obj;
+		return obj;
 	}
 
 	public static void putCache(String key, Object value) {

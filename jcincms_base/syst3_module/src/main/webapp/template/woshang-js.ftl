@@ -29,7 +29,7 @@
 	    var _getHeight = obj.offsetTop;
 	    
 	    window.onscroll = function(){
-	        changePos(id,_getHeight);
+	       // changePos(id,_getHeight);
 	    }
 	}
 	

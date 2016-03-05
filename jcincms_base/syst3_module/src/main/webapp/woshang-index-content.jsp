@@ -124,9 +124,19 @@
 	<div class="contentWidth">
 		<div class="case">
 			<div>
-				<span style="font-weight: bold;">成功案例</span>
+				<span style="font-weight: bold;"><a href="${ctx}/channel/news">成功案例</a></span>
 			</div>
 			<hr class="hr">
+			<ul style="width: 100%;position: relative;left: -40px;">
+					<c:set var="casesdocs" value="${fns:getDocByChannelCode('cases',10)}"></c:set>
+					<c:if test="${casesdocs!=null}">
+						<c:forEach var="doc" items="${casesdocs}">
+							<li><a href="${ctx}/channel/news/doc/${doc.id}"
+								target="blank">${doc.title}<span><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+						</c:forEach>
+					</c:if>
+				</ul>
 		</div>
 	</div>
 </div>
@@ -136,7 +146,7 @@
 		<div>
 			<div class="news">
 				<div>
-					<span style="font-weight: bold;">公司动态</span>
+					<span style="font-weight: bold;"><a href="${ctx}/channel/news">公司动态</a></span>
 				</div>
 				<hr class="hr">
 				<ul style="width: 100%;position: relative;left: -40px;">
@@ -148,18 +158,22 @@
 											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
 						</c:forEach>
 					</c:if>
-					<%-- <fmt:formatDate value="${doc.createDate}" pattern="yyyy.MM.dd" /> --%>
 				</ul>
 			</div>
 			<div class="build">
 				<div>
-					<span style="font-weight: bold;">网站建设</span>
+					<span style="font-weight: bold;">网络营销</span>
 				</div>
 				<hr class="hr">
-				<ul>
-					<li>fdsafasf</li>
-					<li>fdsafasf</li>
-					<li>fdsafasf</li>
+				<ul style="width: 100%;position: relative;left: -40px;">
+					<c:set var="docs" value="${fns:getDocByChannelCode('yingxiao',10)}"></c:set>
+					<c:if test="${docs!=null}">
+						<c:forEach var="doc" items="${docs}">
+							<li><a href="${ctx}/channel/news/doc/${doc.id}"
+								target="blank">${doc.title}<span><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+						</c:forEach>
+					</c:if>
 				</ul>
 			</div>
 		</div>

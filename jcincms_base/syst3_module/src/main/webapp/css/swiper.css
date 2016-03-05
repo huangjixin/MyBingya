@@ -67,11 +67,16 @@
 	-webkit-flex-shrink: 0;
 	-ms-flex: 0 0 auto;
 	flex-shrink: 0;
-	width: 100%;
-	height: auto;
 	position: relative;
 	line-height: normal;
+	text-align: center;
 }
+
+.swiper-slide img{
+	width: 100%;
+	height: auto;
+}
+
 /* Auto Height */
 .swiper-container-autoheight,.swiper-container-autoheight .swiper-slide
 	{ /* height: auto; */

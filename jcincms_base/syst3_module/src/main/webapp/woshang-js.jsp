@@ -28,7 +28,7 @@
 	}
 	
 	window.onload = function() {
-		menuFixed('menuContainer');
+		//menuFixed('menuContainer');
 	}
 	
 	function menuFixed(id){

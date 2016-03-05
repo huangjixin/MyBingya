@@ -7,7 +7,7 @@
 <jsp:include page="woshang-css.jsp" flush="true"></jsp:include>
 <jsp:include page="woshang-js.jsp" flush="true"></jsp:include>
 </head>
-<title>智沃动态，智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>关于我们，智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 <body>
 	<!-- 头部 -->
 	<jsp:include page="woshang-header.jsp" flush="true"></jsp:include>
@@ -15,10 +15,10 @@
 	<!-- 菜单 -->
 	<jsp:include page="woshang-menu.jsp" flush="true"></jsp:include>
 	<div style="height: 10px;"></div>
-	<jsp:include page="woshang-news-doc.jsp" flush="true"></jsp:include>
+	<!-- 图片展示 -->
+	<jsp:include page="woshang-contact-content.jsp" flush="true"></jsp:include>
 	<div class="devider"></div>
 	<!-- 底部 -->
 	<jsp:include page="woshang-footer.jsp" flush="true"></jsp:include>
 </body>
 </html>
-

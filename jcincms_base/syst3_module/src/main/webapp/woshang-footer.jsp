@@ -20,7 +20,7 @@
 			<hr style="height:1px;border:none;border-top:1px dashed gray;" />
 		</div>
 
-		<div style="padding: 15px 0;">
+		<%-- <div style="padding: 15px 0;">
 			<div style="float: left;margin-left:10px; ">
 				<div
 					style="margin:0 auto;width:20px;line-height:24px;color: #CA2B2F;">关注我们</div>
@@ -46,11 +46,11 @@
 				style="float: left;margin-left:10px;color: #626262;height: 50px;line-height: 50px;">
 				<div>QQ群：40497044</div>
 			</div>
-		</div>
-		<div style="clear: both;height: 20px;"></div>
+		</div> --%>
+		<!-- <div style="clear: both;height: 20px;"></div> 
 		<div>
 			<hr style="height:1px;border:none;border-top:1px solid gray;" />
-		</div>
+		</div>-->
 	</div>
 	<div
 		style="text-align: center;height: 100px;line-height: 100px;font-size: 24px;color: #A7A7A7;">

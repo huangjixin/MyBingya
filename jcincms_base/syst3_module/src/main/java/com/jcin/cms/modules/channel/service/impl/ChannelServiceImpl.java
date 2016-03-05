@@ -299,7 +299,12 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	@Override
 	public List<Channel> getByParentId(String id) {
 		ChannelCriteria channelCriteria = new ChannelCriteria();
-		channelCriteria.createCriteria().andParentIdEqualTo(id);
+		if(null ==id){
+			channelCriteria.createCriteria().andParentIdIsNull();
+		}else{
+			channelCriteria.createCriteria().andParentIdEqualTo(id);
+		}
+		
 		channelCriteria.setOrderByClause("sort asc");
 		List<Channel> list = channelMapper.selectByExample(channelCriteria);
 
@@ -331,6 +336,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	public List<Channel> getChannelTree() {
 		ChannelCriteria channelCriteria = new ChannelCriteria();
 		channelCriteria.createCriteria().andParentIdIsNull();
+		channelCriteria.setOrderByClause("sort asc");
 		List<Channel> list = channelMapper.selectByExample(channelCriteria);
 		if(list!=null&&list.size()!=0){
 			List<Channel> children = new ArrayList<Channel>();
