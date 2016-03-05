@@ -4,9 +4,6 @@
  * @date 2015-10-21,下午4:00:41
  *
  */
-/**
- * 
- */
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.io.File;
@@ -16,9 +13,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.Cache.ValueWrapper;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
@@ -29,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jcin.cms.common.SpringCacheManagerWrapper;
-import com.jcin.cms.common.SpringUtils;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.Document;

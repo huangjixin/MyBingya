@@ -114,19 +114,21 @@
 	<aop:aspectj-autoproxy expose-proxy="true" />
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="WEB-INF/admin/exception.jsp" />
+		<property name="exceptionAttribute" value="exception"/> 
 		<property name="exceptionMappings">
 			<props>
 				<!-- 登录 -->
 				<prop key="org.apache.shiro.authz.UnauthenticatedException">
-					redirect:/${adminPath}/login
+					redirect:/admin/login
 				</prop>
 				<!-- 授权 -->
 				<prop key="org.apache.shiro.authz.UnauthorizedException">
-					redirect:/WEB-INF/admin/modules/unauthorized.jsp
+					redirect:/admin/login
+					<!-- redirect:/WEB-INF/admin/modules/unauthorized.jsp -->
 				</prop>
 			</props>
 		</property>
-		<!-- <property name="defaultErrorView" value="error/genericView" /> -->
 	</bean>
 
 	<!-- <mvc:annotation-driven/> -->
