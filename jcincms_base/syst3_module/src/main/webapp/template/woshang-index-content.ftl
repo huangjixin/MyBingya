@@ -124,6 +124,22 @@
 				<span style="font-weight: bold;">成功案例</span>
 			</div>
 			<hr class="hr">
+			<ul style="width: 100%;position: relative;left: -40px;">
+				<#if menusMap?exists>
+					<#list menusMap?keys as rootKey>
+							<#if rootKey=='cases'>
+								<#list menusMap[rootKey] as doc>
+									<#setting date_format="yyyy.MM.dd">
+									<li><a href="${ctx}/channel/news/doc/${doc.id}" target="blank">${doc.title}
+											<img src="${doc.fileAddr}" style="width: 120px;height: auto;float: left;margin-right: 10px;margin-top: 10px;">
+											<p style="font-size: 12px;">${doc.contentShort}</p>
+									</a></li>
+									<div class="clear"></div>
+								</#list>
+							</#if>
+					</#list>
+				</#if>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -144,7 +160,6 @@
 									<#setting date_format="yyyy.MM.dd">
 									<li><a href="${ctx}/channel/news/doc/${doc.id}"
 												target="blank">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
-									<hr class="hr"></hr>
 								</#list>
 							</#if>
 						</#list>
@@ -153,11 +168,21 @@
 			</div>
 			<div class="build">
 				<div>
-					<span style="font-weight: bold;">网站建设</span>
+					<span style="font-weight: bold;">网络营销</span>
 				</div>
 				<hr class="hr">
-				<ul>
-					
+				<ul style="width: 100%;position: relative;left: -40px;">
+					<#if menusMap?exists>
+						<#list menusMap?keys as rootKey>
+							<#if rootKey=='yingxiao'>
+								<#list menusMap[rootKey] as doc>
+									<#setting date_format="yyyy.MM.dd">
+									<li><a href="${ctx}/channel/news/doc/${doc.id}"
+												target="blank">${doc.title}</a></li>
+								</#list>
+							</#if>
+						</#list>
+					</#if>
 				</ul>
 			</div>
 		</div>

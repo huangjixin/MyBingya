@@ -124,29 +124,37 @@
 	<div class="contentWidth">
 		<div class="case">
 			<div>
-				<span style="font-weight: bold;"><a href="${ctx}/channel/news">成功案例</a></span>
+				<span style="font-weight: bold;"><a
+					href="${ctx}/channel/news">成功案例</a></span>
 			</div>
 			<hr class="hr">
 			<ul style="width: 100%;position: relative;left: -40px;">
-					<c:set var="casesdocs" value="${fns:getDocByChannelCode('cases',10)}"></c:set>
-					<c:if test="${casesdocs!=null}">
-						<c:forEach var="doc" items="${casesdocs}">
-							<li><a href="${ctx}/channel/news/doc/${doc.id}"
-								target="blank">${doc.title}<span><fmt:formatDate
-											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
-						</c:forEach>
-					</c:if>
-				</ul>
+				<c:set var="casesdocs"
+					value="${fns:getDocByChannelCode('cases',10)}"></c:set>
+				<c:if test="${casesdocs!=null}">
+					<c:forEach var="doc" items="${casesdocs}">
+						<li><a
+							href="${ctx}/channel/news/doc/${doc.id}" target="blank">${doc.title}
+							<img src="${doc.fileAddr}" style="width: 120px;height: auto;float: left;margin-right: 10px;margin-top: 10px;">
+							<p style="font-size: 12px;">${doc.contentShort}</p>
+							</a></li>
+							<%-- <span><fmt:formatDate value="${doc.createDate}" pattern="yyyy.MM.dd" /></span> --%>
+						<div class="clear"></div>
+					</c:forEach>
+				</c:if>
+			</ul>
 		</div>
 	</div>
 </div>
+<div class="clear"></div>
 <div class="devider"></div>
 <div class="globalWidth">
 	<div class="contentWidth">
 		<div>
 			<div class="news">
 				<div>
-					<span style="font-weight: bold;"><a href="${ctx}/channel/news">公司动态</a></span>
+					<span style="font-weight: bold;"><a
+						href="${ctx}/channel/news">公司动态</a></span>
 				</div>
 				<hr class="hr">
 				<ul style="width: 100%;position: relative;left: -40px;">
@@ -154,8 +162,8 @@
 					<c:if test="${docs!=null}">
 						<c:forEach var="doc" items="${docs}">
 							<li><a href="${ctx}/channel/news/doc/${doc.id}"
-								target="blank">${doc.title}<span><fmt:formatDate
-											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+								target="blank">${doc.title}<%-- <span><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span> --%></a></li>
 						</c:forEach>
 					</c:if>
 				</ul>
@@ -170,23 +178,13 @@
 					<c:if test="${docs!=null}">
 						<c:forEach var="doc" items="${docs}">
 							<li><a href="${ctx}/channel/news/doc/${doc.id}"
-								target="blank">${doc.title}<span><fmt:formatDate
-											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+								target="blank">${doc.title}<%-- <span><fmt:formatDate
+											value="${doc.createDate}" pattern="yyyy.MM.dd" /></span> --%></a></li>
 						</c:forEach>
 					</c:if>
 				</ul>
 			</div>
 		</div>
 		<div class="clear"></div>
-		<!-- <ul class="tabs" id="tabs" style="margin-bottom: 0;">
-			<li><a href="http://www.51xuediannao.com/js/nav/">公司动态</a></li>
-			<li><a href="http://www.51xuediannao.com/js/slide/">网站建设</a></li>
-			<li><a href="http://www.51xuediannao.com/js/gg/">营销干货</a></li>
-		</ul>
-		<ul class="tab_conbox" id="tab_conbox" style="margin-top: 0;">
-			<li class="tab_con" style="list-style-type:none;"></li>
-			<li class="tab_con" style="list-style-type:none;"></li>
-			<li class="tab_con" style="list-style-type:none;"></li>
-		</ul> -->
 	</div>
 </div>

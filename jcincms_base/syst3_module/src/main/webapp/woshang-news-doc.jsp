@@ -12,7 +12,7 @@
 		</div>
 		<hr
 			style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-		<div style="color:#585858;">${document.content}</div>
+		<div class="document">${document.content}</div>
 		<div class="devider"></div>
 		<c:if test="${lastdoc!=null}">
 			<div style="width: 100%;font-size: 12px;">

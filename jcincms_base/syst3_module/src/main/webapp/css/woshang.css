@@ -67,12 +67,24 @@ a {
 	color: #333333;
 	border: 1px solid #cccccc;
 	padding: 20px;
+	height: auto;
 }
+
+.case li {
+	font-size: 16px;
+	list-style-type: none;
+}
+
+.case li span{
+	float: right;
+}
+
 .case a{
 	color: #333333;
 }
-.case a:VISITED{
-	color: #333333;
+
+.case li a:HOVER{
+	text-decoration: underline;
 }
 
 .news {
@@ -88,7 +100,8 @@ a {
 }
 
 .news li {
-	font-size: 14px;
+	margin-top:5px;
+	font-size: 16px;
 	width: 100%;
 	list-style-type: none;
 	width: 100%;
@@ -117,6 +130,44 @@ a {
 	color: #333333;
 	border: 1px solid #cccccc;
 	padding: 20px;
+}
+
+.build a{
+	color: #333333;
+}
+
+.build li {
+	margin-top:5px;
+	font-size: 16px;
+	width: 100%;
+	list-style-type: none;
+	width: 100%;
+}
+
+.build li a {
+	color: #333333;
+}
+
+.build li a:HOVER {
+	text-decoration: underline;
+}
+
+.build li a:VISITED {
+	color: #333333;
+}
+
+.build li span {
+	font-size: 14px;
+	float: right;
+}
+
+.document{
+	color:#585858;
+}
+
+.document img{
+	width: 100%;
+	height:auto;
 }
 
 .devider {
