@@ -5,39 +5,8 @@
 <html>
 <head>
 <title>文档管理</title>
-
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="Document列表">
-<meta http-equiv="description" content="管理">
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css"/>
-<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
-	Date.prototype.format = function(format) {
-		var o = {
-			"M+" : this.getMonth() + 1, //month
-			"d+" : this.getDate(), //day
-			"h+" : this.getHours(), //hour
-			"m+" : this.getMinutes(), //minute
-			"s+" : this.getSeconds(), //second
-			"q+" : Math.floor((this.getMonth() + 3) / 3), //quarter
-			"S" : this.getMilliseconds()
-		//millisecond
-		}
-		if (/(y+)/.test(format))
-			format = format.replace(RegExp.$1, (this.getFullYear() + "")
-					.substr(4 - RegExp.$1.length));
-		for ( var k in o)
-			if (new RegExp("(" + k + ")").test(format))
-				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
-						: ("00" + o[k]).substr(("" + o[k]).length));
-		return format;
-	}
-
 	$().ready(function() {
 		createChannelTree();
 		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});

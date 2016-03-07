@@ -45,10 +45,10 @@
 	}
 
 	//创建文件树。
-	function createFileTree() {
+	function createFileTree(refresh) {
 		var checked = $('#refreshFiles').is(':checked') ? true : false;
 		$('#chanTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + refresh,
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
@@ -315,16 +315,14 @@
 							<th>&nbsp;栏目：</th>
 							<td nowrap="nowrap" align="left"><form:input path="parentId"
 									value="${channel.parentId}" />&nbsp;<input type="button"
-								value="清除" onclick="clearParentInput();" /> <form:errors
-									path="parentId" cssStyle="color:red;"></form:errors></td>
+								value="清除" onclick="clearParentInput();" />&nbsp;<span style="color: red;">*</span></td>
 							<th>&nbsp;名称：</th>
 							<td nowrap="nowrap" align="left"><input id="name"
-									name="name" value="${channel.name}"  type="text" required/></td>
+									name="name" value="${channel.name}"  type="text" required/>&nbsp;<span style="color: red;">*</span></td>
 							<th>&nbsp;编码：</th>
 							<td nowrap="nowrap" align="left"><input id="code"
 									name="code" value="${channel.code}" onchange="oncodeComplete()"
-									onkeyup="value=value.replace(/[^a-zA-Z]/g,'')"  type="text" required/>&nbsp;<form:errors
-									path="code" cssStyle="color:red;"></form:errors></td>
+									onkeyup="value=value.replace(/[^a-zA-Z]/g,'')"  type="text" required/>&nbsp;<span style="color: red;">*</span></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;关键字：</th>

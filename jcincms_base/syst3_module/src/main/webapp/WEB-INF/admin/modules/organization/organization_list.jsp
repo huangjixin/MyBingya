@@ -6,16 +6,7 @@
 <head>
 <title>organization管理</title>
 
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="Organization列表">
-<meta http-equiv="description" content="管理">
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css" />
-<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	Date.prototype.format = function(format) {
 		var o = {

@@ -6,11 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>资源管理</title>
-	<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/default/easyui.css"/>
-	<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/demo/demo.css"/>
-	<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui/themes/icon.css"/>
-	<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+	<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 	<script type="text/javascript">
 	$().ready(function() {
 		 $('#tgrid').treegrid({  
