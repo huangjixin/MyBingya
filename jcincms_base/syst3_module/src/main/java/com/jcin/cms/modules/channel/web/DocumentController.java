@@ -262,17 +262,19 @@ public class DocumentController extends BaseController<Document> {
 		String uploadWeb = "";
 		// 组合零时图片名
 		String imageName = file.getOriginalFilename();
-		String file_ext = imageName.substring(imageName.lastIndexOf(".") + 1);
+		String tempImageName = imageName;
+		/*String file_ext = imageName.substring(imageName.lastIndexOf(".") + 1);
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss");
 		String imgeName = df.format(new Date());
-		String tempImageName = imgeName + "." + file_ext;
+		String tempImageName = imgeName + "." + file_ext;*/
+		
 		/*String uploadPath = Global.getUploadpath() + UserUtils.getUserId()
 				+ File.separator + tempImageName;*/
-		df = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		
 		String fileDir = df.format(new Date());
 		@SuppressWarnings("deprecation") 
 		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
-		 
 		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
