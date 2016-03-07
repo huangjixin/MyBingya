@@ -4,30 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-th {
-	font-weight: normal;
-	font-size: 12px;
-}
-</style>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/ajaxfileupload.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/icon.css">
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	var chanTemp = "${channel.channelTemplete}";
 	var geneTemp = "${channel.geneTemplate}";
 	var mGeneTemp = "${channel.mGeneTemplate}";
 	
 	$().ready(function() {
+		$("#validForm").validate();
+		
 		createChannelTree();
 		createFileTree();
 		createGeneTree();
@@ -333,13 +318,12 @@ th {
 								value="清除" onclick="clearParentInput();" /> <form:errors
 									path="parentId" cssStyle="color:red;"></form:errors></td>
 							<th>&nbsp;名称：</th>
-							<td nowrap="nowrap" align="left"><form:input id="name"
-									path="name" value="${channel.name}" />&nbsp;<form:errors
-									path="name" cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><input id="name"
+									name="name" value="${channel.name}"  type="text" required/></td>
 							<th>&nbsp;编码：</th>
-							<td nowrap="nowrap" align="left"><form:input id="code"
-									path="code" value="${channel.code}" onchange="oncodeComplete()"
-									onkeyup="value=value.replace(/[^a-zA-Z]/g,'')" />&nbsp;<form:errors
+							<td nowrap="nowrap" align="left"><input id="code"
+									name="code" value="${channel.code}" onchange="oncodeComplete()"
+									onkeyup="value=value.replace(/[^a-zA-Z]/g,'')"  type="text" required/>&nbsp;<form:errors
 									path="code" cssStyle="color:red;"></form:errors></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
