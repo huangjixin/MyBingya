@@ -13,7 +13,7 @@
 		<!-- <span>加入我们 </span>|<span> 联系我们 </span>|<span> 智沃作品</span> -->
 	</div>
 	<div class="contentWidth">
-		<div>
+		<!--<div>
 			<hr style="height:1px;border:none;border-top:1px dashed gray;" />
 		</div>
 
@@ -48,7 +48,7 @@
 		<div>
 			<hr style="height:1px;border:none;border-top:1px solid gray;" />
 		</div>
-	</div>
+	</div>-->
 	<div
 		style="text-align: center;height: 100px;line-height: 100px;font-size: 24px;color: #A7A7A7;">
 		<span>广州专业的互动策划、营销网站设计、移动网站、微网站开发公司</span>
