@@ -39,6 +39,7 @@
 			url : '${ctxAdmin}/document/getChannelTree',
 			valuefield : 'id',
 			textfield : 'name',
+			missingMessage:"上级菜单不能为空！",
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -276,26 +277,21 @@
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;栏目：</th>
 							<td nowrap="nowrap" align="left"><input id="channelId"
-								name="channelId" />&nbsp;<form:errors path="channelId"
-									cssStyle="color:red;"></form:errors></td>
+								name="channelId" />&nbsp;</td>
 							<th>&nbsp;标题：</th>
-							<td nowrap="nowrap" align="left"><form:input path="title"
-									value="${document.title}" />&nbsp;<form:errors path="title"
-									cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><input name="title"
+									value="${document.title}" style="width: 200px;" required/></td>
 							<th>&nbsp;作者：</th>
 							<td nowrap="nowrap" align="left"><form:input path="author"
-									value="${document.author}" />&nbsp;<form:errors path="author"
-									cssStyle="color:red;"></form:errors></td>
+									value="${document.author}" style="width: 200px;" /></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;颜色：</th>
 							<td nowrap="nowrap" align="left"><form:input path="color"
-									value="${document.color}" />&nbsp;<form:errors path="color"
-									cssStyle="color:red;"></form:errors></td>
+									value="${document.color}" style="width: 200px;" /></td>
 							<th>&nbsp;关键字：</th>
 							<td nowrap="nowrap" align="left"><form:input path="keyword"
-									value="${document.keyword}" />&nbsp;<form:errors path="keyword"
-									cssStyle="color:red;"></form:errors></td>
+									value="${document.keyword}" style="width: 200px;" /></td>
 							<th>&nbsp;是否显示：</th>
 							<td nowrap="nowrap" align="left"><select  id="hidden" name="hidden" style="width:100px;">
 										<c:forEach var="sh" items="${fns:getByType('hidden')}">
@@ -310,22 +306,18 @@
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;优先级：</th>
 							<td nowrap="nowrap" align="left"><form:input path="priority"
-									value="${document.priority}" />&nbsp;<form:errors
-									path="priority" cssStyle="color:red;"></form:errors></td>
+									value="${document.priority}" style="width: 200px;" /></td>
 							<th>&nbsp;来源：</th>
 							<td nowrap="nowrap" align="left"><form:input path="source"
-									value="${document.source}" />&nbsp;<form:errors path="source"
-									cssStyle="color:red;"></form:errors></td>
+									value="${document.source}" style="width: 200px;" /></td>
 							<th>&nbsp;来源地址：</th>
 							<td nowrap="nowrap" align="left"><form:input
-									path="sourceAddr" value="${document.sourceAddr}" />&nbsp;<form:errors
-									path="sourceAddr" cssStyle="color:red;"></form:errors></td>
+									path="sourceAddr" value="${document.sourceAddr}" style="width: 200px;" /></td>
 						</tr>
 						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 							<th>&nbsp;标题图片：</th>
 							<td nowrap="nowrap" align="left"><form:input
-									path="titleImage" value="${document.titleImage}" />&nbsp;<form:errors
-									path="titleImage" cssStyle="color:red;"></form:errors></td>
+									path="titleImage" value="${document.titleImage}" style="width: 200px;" /></td>
 							<th>&nbsp;：</th>
 							<td nowrap="nowrap" align="left">
 								<input id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
