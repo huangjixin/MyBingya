@@ -1,0 +1,419 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: '微软雅黑';
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* 全局宽度 */
+.globalWidth {
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* 内容宽度 */
+.contentWidth {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 全局div */
+.globalDiv {
+	color: #333333;
+	border: 1px solid #cccccc;
+	padding: 20px;
+}
+
+.globalDiv:HOVER {
+	color: #06A3E9;
+	border: 1px solid #06A3E9;
+}
+
+.serviceDiv {
+	width: 47%;
+	border: 1px solid #cccccc;
+	padding: 10px;
+	border: 1px solid #cccccc;
+}
+
+.serviceDiv:HOVER {
+	border: 1px solid #EC3901;
+}
+
+.circle {
+	color: #ffffff; background-color : #f60;
+	text-align: center;
+	/* border: 1px solid #f60; */
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+	border-radius: 50px;
+	background-color: #f60;
+}
+
+.case {
+	color: #333333;
+	border: 1px solid #cccccc;
+	padding: 20px;
+	height: auto;
+}
+
+.case li {
+	font-size: 16px;
+	list-style-type: none;
+}
+
+.case li span{
+	float: right;
+}
+
+.case a{
+	color: #333333;
+}
+
+.case li a:HOVER{
+	text-decoration: underline;
+}
+
+.news {
+	width: 45%;
+	float: left;
+	color: #333333;
+	border: 1px solid #cccccc;
+	padding: 20px;
+}
+
+.news a{
+	color: #333333;
+}
+
+.news li {
+	margin-top:5px;
+	font-size: 16px;
+	width: 100%;
+	list-style-type: none;
+	width: 100%;
+}
+
+.news li a {
+	color: #333333;
+}
+
+.news li a:HOVER {
+	text-decoration: underline;
+}
+
+.news li a:VISITED {
+	color: #333333;
+}
+
+.news li span {
+	font-size: 14px;
+	float: right;
+}
+
+.build {
+	width: 45%;
+	float: right;
+	color: #333333;
+	border: 1px solid #cccccc;
+	padding: 20px;
+}
+
+.build a{
+	color: #333333;
+}
+
+.build li {
+	margin-top:5px;
+	font-size: 16px;
+	width: 100%;
+	list-style-type: none;
+	width: 100%;
+}
+
+.build li a {
+	color: #333333;
+}
+
+.build li a:HOVER {
+	text-decoration: underline;
+}
+
+.build li a:VISITED {
+	color: #333333;
+}
+
+.build li span {
+	font-size: 14px;
+	float: right;
+}
+
+.document{
+	color:#585858;
+}
+
+.document img{
+	width: 100%;
+	height:auto;
+}
+
+.devider {
+	height: 10px;
+}
+
+.clear {
+	clear: both;
+}
+
+.hr {
+	height: 1px;
+	border: none;
+	border-top: 1px solid #cccccc;
+}
+
+#header {
+	
+}
+
+#header #header-top {
+	color: #5E5E5E;
+	font-size: 12px;
+	height: 30px;
+	background-color: #F5F5F5;
+	height: 30px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #cccccc;
+}
+
+#header #header-top .left {
+	float: left;
+	padding: 9px 0;
+}
+
+#header #header-top .right {
+	float: right;
+	padding: 9px 0;
+}
+
+#header #logo {
+	color: #5E5E5E;
+	/* background-color: #F5F5F5; */
+	/* height: 110px; */
+	font-size: 12px;
+}
+
+#header #logo .left {
+	width: 100%;
+	float: left;
+	padding: 10px 0px;
+}
+
+#newslist a{
+	color:#585858;
+}
+
+#newslist a:HOVER{
+	color:#387FFF;
+}
+
+#footer {
+	
+}
+
+.navButton {
+	float:left;
+	margin-left:30px;
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #EAEAEA;
+	background-color: 0xffffff;
+	color: #444444;
+	font-size: 14px;
+}
+
+.navButton:HOVER {
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #1091CB;
+	background-color: #1091CB;
+	color: #ffffff;
+}
+
+.navButtonSelect {
+	float:left;
+	margin-left:30px;
+	width: 100px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #1091CB;
+	background-color: #1091CB;
+	color: #444444;
+	font-size: 14px;
+}
+/************** 菜单开始****************************/
+#menuContainer {
+	background: #212121;
+	z-index:998;
+	display: block;
+}
+
+.menu {
+	height: 50px;
+	font-size: 16px;
+	background: #212121;
+	z-index: 3;
+	display: block;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #212121;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	color: #FFF;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	/* background: #62b00e; */
+	background: #EC3901;
+}
+
+.menu ul li .selected {
+	position: relative;
+	background: #EC3901;
+}
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+/************** 菜单结束 **************************/
+
+/************** tab导航 **************************/
+/* .tab_conbox {
+	border: 1px solid #cccccc;
+	border-top: none;
+}
+
+.tab_con {
+	display: none;
+}
+
+.tabs {
+	margin: 0;
+	padding: 0;
+	height: 32px;
+	border-bottom: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	width: 100%;
+}
+
+.tabs a{
+	color: black;
+}
+
+.tabs li {
+	margin: 0;
+	padding: 0;
+	height: 31px;
+	line-height: 31px;
+	float: left;
+	border: 1px solid #cccccc;
+	border-left: none;
+	margin-bottom: -1px;
+	background: #e0e0e0;
+	overflow: hidden;
+	position: relative;
+}
+
+.tabs li a {
+	display: block;
+	padding: 0 20px;
+	border: 1px solid #fff;
+	outline: none;
+}
+
+.tabs li a:hover {
+	background: #ccc;
+}
+
+.tabs .thistab,.tabs .thistab a:hover {
+	background: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.tab_con {
+	padding: 12px;
+	font-size: 14px;
+	line-height: 175%;
+} */
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  fill: url(#gr-radial);
+}
