@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="minimum-scale=1,maximum-scale=1,width=320"/>
+<meta name="Keywords" content="大自然保护协会,TNC,自然保护,滇金丝猴,国家公园,nature, conservation, nature conservation, nature conservatory, the nature conservancy">
+<meta name="Description" content="大自然保护协会（TNC, The Nature Conservancy）成立于1951年，是国际上最大的非营利性的自然环境保护组织之一。一直致力于在全球保护具有重要生态价值的陆地和水域，维护自然环境、提升人类福祉。
+">
+<title>开发系统规划方法 | 大自然保护协会（TNC, The Nature Conservancy）</title>
+<link rel="stylesheet" href="../css/public.css" type="text/css" />
+<link rel="stylesheet" href="../css/protect.css" type="text/css" />
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript" ></script>
+<script src="../js/plugin.js"></script>
+<script>
+	var resizeImg = function(e,$w,$h,$par,s){
+		if(!e)return;
+		var temp = "block";
+		if(!!$par){temp = $(e).parents($par).css('display');}
+		if(temp=='none'){$(e).parents($par).show();}
+		if(!$w){$w = $(e).parent().width();}
+		if(!$h){$h = $(e).parent().height();}
+		var _w = e.width,_h = e.height,_s = !s?Math.max($w/_w,$h/_h):Math.min($w/_w,$h/_h);
+		if(!!_w){
+			$(e).css({position:'absolute',left:'50%',top:'50%',width:_s*_w,height:_s*_h,marginLeft:-_s*_w/2,marginTop:-_s*_h/2});
+		}else{
+			$(e).css({position:'absolute',left:0,top:0,width:$w,height:$h,marginLeft:0,marginTop:0});
+		}
+		if(temp=='none'){$(e).parents($par).hide();}
+	}
+</script>
+</head>
+<body style="">
+
+
+<!-- Copyright � 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Verdana; font-size: 9pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+��ҳ�������� <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.0.1025</b></a>  ��  02/26/16 18:07:09.<br>
+<b>��ַ:</b> <a class="info" href="http://tnc.org.cn/home/richscience?cid=14">http://tnc.org.cn/home/richscience?cid=14</a><br>
+<b>����:</b> 开发系统规划方法 | 大自然保护协会（TNC, The Nature Conservancy） &nbsp;&bull;&nbsp; <b>��С:</b> 17223<br></div>
+<!-- /Copyright � 2005. Spidersoft Ltd -->
+
+
+<script>
+	if(navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad|Mobile)/i)){
+		$('body').addClass('RMobile');
+	}
+</script>
+<!-- main start -->
+<div id="main" class="science">
+	<div class="menu">
+		<div id="menu_bg" class="menu_bg"></div>
+		<div id="logo" class="logo"><a href="http://tnc.org.cn/#Home"><img src="../img/nav/logo_1.jpg"></a></div>
+		<ul class="nav homeNav">
+			<li id="nav_0" class="nav_li ni" anchor="#Home" data-pos="0">
+				<a href="http://tnc.org.cn/#Home" class="icon"></a>
+			</li>
+			<li id="nav_1" class="nav_li" anchor="#TNC">
+				<a href="http://tnc.org.cn/#TNC" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">了解TNC</span>
+					<dl>
+						<dd class="ni" anchor="#china" data-pos="520" >
+							<a href="http://tnc.org.cn/#TNC#china">TNC在中国</a>
+						</dd>
+						<dd class="ni" anchor="#world" data-pos="1060">
+							<a href="http://tnc.org.cn/#TNC#world">TNC在全球</a>
+						</dd>
+						<dd class="ni" anchor="#events" data-pos="2020">
+							<a href="http://tnc.org.cn/#TNC#events">TNC大事记</a>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li id="nav_2" class="nav_li" anchor="#Project">
+				<a href="http://tnc.org.cn/#Project" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">保护项目</span>
+					<dl>
+						<dd class="ni" anchor="#area" data-pos="3160">
+							<a href="http://tnc.org.cn/#Project#area">保护地</a>
+						</dd>
+						<dd class="ni" anchor="#water" data-pos="3700">
+							<a href="http://tnc.org.cn/#Project#water">淡水</a>
+						</dd>
+						<dd class="ni" anchor="#climate" data-pos="4240">
+							<a href="http://tnc.org.cn/#Project#climate">气候变化</a>
+						</dd>
+						<dd><a href="richproject�cid=22.html" target="_self">保护无国界</a></dd>
+						<dd><a href="richproject�cid=23.html"  target="_self">中国全球保护基金</a></dd>
+                                                <dd><a href="../ivory.html"  target="_blank">减少象牙消费项目</a></dd>
+					</dl>
+				</div>
+			</li>
+			<li id="nav_3" class="nav_li" anchor="#Science">
+				<a href="http://tnc.org.cn/#Science" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">保护科学</span>
+					<dl>
+						<dd class="ni" anchor="#function" data-pos="4780">
+							<a href="http://tnc.org.cn/#Science#function">保护方法与工具</a>
+						</dd>
+						<dd class="ni" anchor="#service" data-pos="5320">
+							<a href="http://tnc.org.cn/#Science#service">信息服务</a>
+						</dd>
+						<dd class="ni" anchor="#knowledge" data-pos="5860">
+							<a href="http://tnc.org.cn/#Science#knowledge">保护科学</a>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li id="nav_4" class="nav_li ni"  anchor="#News" data-pos="6400">
+				<a href="http://tnc.org.cn/#News" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">新闻中心</span>
+					<dl>
+						<dd anchor="#schedule">
+							<a href="http://tnc.org.cn/#News#schedule">中国项目进展</a>
+						</dd>
+						<dd anchor="#report">
+							<a href="http://tnc.org.cn/#News#report">媒体报道</a>
+						</dd>
+                        <dd anchor="#worldschedule">
+							<a href="http://tnc.org.cn/#News#worldschedule">全球项目进展</a>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li id="nav_5" class="nav_li ni"  anchor="#Nature" data-pos="6940">
+				<a href="http://tnc.org.cn/#Nature" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">走进自然</span>
+					<dl>
+						<dd anchor="#story">
+							<a href="http://tnc.org.cn/#Nature#story">图片故事</a>
+						</dd>
+						<dd anchor="#video">
+							<a href="http://tnc.org.cn/#Nature#video">影像记录</a>
+						</dd>
+						<dd anchor="#card">
+							<a href="http://tnc.org.cn/#Nature#card">自然贺卡</a>
+						</dd>
+						<dd anchor="#q&a">
+							<a href="http://tnc.org.cn/#Nature#q&a">有问有答</a>
+						</dd>
+						<dd anchor="#lib">
+							<a href="http://tnc.org.cn/#Nature#lib">TNC阅览室</a>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li id="nav_6" class="nav_li ni" anchor="#MyTNC" data-pos="7480">
+				<a href="http://tnc.org.cn/#MyTNC" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">我的TNC</span>
+					<dl>
+						<dd anchor="#join">
+							<a href="http://tnc.org.cn/#MyTNC#join">我要参与</a>
+						</dd>
+						<dd anchor="#message">
+							<a href="http://tnc.org.cn/#MyTNC#message">留言板</a>
+						</dd>
+						<dd anchor="#info">
+							<a href="http://tnc.org.cn/#MyTNC#info">我的资料</a>
+						</dd>
+                        <dd anchor="#info">
+							<a href="http://tnc.org.cn/#MyTNC#joinmore">更多参与</a>
+						</dd>
+                        <dd anchor="#info">
+							<a href="http://tnc.org.cn/#MyTNC#withtnc">志愿者故事</a>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li class="nav_li ni" data-pos="7810" anchor="#Foot" style="display:none;"></li>
+			<li id="nav_7" class="nav_li">
+				<a href="http://vdisk.weibo.com/u/1905751047"  title="下载自然客杂志" target="_blank" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text">下载自然客</span>
+				</div>
+			</li>
+		</ul>
+		<ul class="RNav">
+			<li id="rnav_0">
+				<a href="javascript:void(0);" class="icon"></a>
+				<div class="nav_sub">
+					<span class="text" style="color:#993300;">
+						<a href="javascript:;" class="outlink">我要支持</a>
+						<a target="_blank" href="../ivory/web.html"  class="outlink">为大象发声</a>
+						<a href="richproject�cid=28.html"  class="outlink">滇金丝猴300+计划</a>
+					</span>
+				</div>
+			</li>
+			<li id="rnav_1">
+				<a href="javascript:void(0);" class="icon"></a>
+				<dl>
+					<dd><a href="javascript:;" class="s_sina" title="分享至新浪微博"><img src="../img/nav/r_2.jpg"></a></dd>
+					<dd><a href="javascript:;" class="s_qq" title="分享至腾讯微博"><img src="../img/nav/r_1.jpg"></a></dd>
+					<dd><a href="javascript:;" class="s_douban" title="分享至豆瓣"><img src="../img/nav/r_0.jpg"></a></dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<ul class="p_ul">
+		<li class="p_li p_ul_head">开发系统规划方法</li>
+				<li class="p_li">概述</li>
+			</ul>
+	<!-- home -->
+	<div id="container" class="view">
+		<div class="headbar">
+						<img src="../img/project/func.jpg" data-width="1280" data-height="390">
+		</div>
+		<div class="tagbar_div">
+			<div class="tagbar">
+							</div>
+		</div>
+		<div class="content">
+			<div class="left">
+								
+								<div class="article">
+					<h1 class="title">概述</h1>
+										<div class="part"><p class="p1" style="text-align: center;"><span class="s1"><img src="../ueditor1_2_6/php/upload/20130703/13728323062622.jpg" title="亚太-TNC.jpg"/><br/></span></p><p class="p1" style="text-align: center;"><span class="s1">亚太®TNC</span></p><p class="p1"><span class="s1"><br/></span></p><p class="p1"><span class="s1">　　我们面临着艰巨的挑战，目前最具前瞻性的方法仍然只能解决最棘手的，小区域范围内的问题。这些方法虽然可以识别快速发展给自然区域带来的威胁，但依然没有考虑到这些发展对自然生态系统未来健康发展的整体影响。我们应该从全局出发，考虑解决问题的方案，而不是用“创可贴”似的应急做法，割裂地看待每个问题产生的影响。</span><br/></p><p class="p1"><span class="s1">　　TNC的<a href="http://tnc.org.cn/home/richscience?cid=12#自然保护系统工程（Conservation by Design，CbD�?" target="_self" title="">“自然保护系统工程”（Conservation By Design，CbD）</a>试图突破单一项目的局限性，以确定发展对跨越不同行政地区的整个自然区域（整个生态系统）造成的累积性影响，依此，可以进一步为决策方提供帮助和指导，制定可持续发展的决策。跨区域的保护规划，可以大大提升传统保护方式的保护效果。DbD支持“减缓层次”（mitigation hierarchy）的混合保护规划，遵循“避免—减少/修复—抵消”的三种选择路线，有效降低发展对当地生态造成的影响。DbD主要解决以下几个问题：</span></p><p>　　１.哪里可能成为未来发展和保护目标的兼容点或冲突点？<br/></p><p>　　２.可以避免哪些生态影响？通过代偿性保护行动可以抵消什么生态影响？<br/></p><p>　　３.生态抵消方案能从多大程度上弥补开发造成的生态影响？<br/></p><p>　　４.什么样的生态抵消方案可以以最低的风险和经费，达到最大的生态保护效果？</p><p class="p1"><span class="s1">　　DbD提供更有效的解决方案来平衡发展与保护的需求，从而避免对敏感的自然区和珍稀的野生动植物造成影响，同时，寻找机会来抵消其他发展造成的生态影响。</span></p><p class="p2"><span class="s2">　　更多信息，<a href="http://www.nature.org/ourinitiatives/urgentissues/smart-development/publications/index.htm" target="_self" title="" textvalue="请访问这里。">请访问这里。</a></span></p></div>
+										
+									</div>
+							</div>
+			<div class="right">				
+				                
+                				                	<h1 class="pro_type">保护项目</h1>
+                                        <div class="pro_div">
+						<a class="pro_pic" href="richproject�cid=8.html">
+							                            <img onload="resizeImg(this,290,170)" src="../upload/20130719/151743_1.jpg">
+                            						</a>
+						<a class="pro_title" href="richproject�cid=8.html">湿地</a>
+						<p style="color:#000;" class="more_text">健康的湿地生态系统是生态安全体系的重要组成部分，也是经济社会可持续发展的重要基础。但在人类活动的长期影响下，特别是近20年来城市快速扩张，大量挤占湿地，使湿地不断受到围垦、污染和淤积的威胁，湿地面积日益缩小，生态遭到破坏，生物多样性降低。</p>
+						<p class="more_more"><a class="pro_more" href="richproject�cid=8.html"></a></p>
+					</div>
+                                        <div class="pro_div">
+						<a class="pro_pic" href="richproject�cid=7.html">
+							                            <img onload="resizeImg(this,290,170)" src="../upload/20130719/151718_1.jpg">
+                            						</a>
+						<a class="pro_title" href="richproject�cid=7.html">长江项目</a>
+						<p style="color:#000;" class="more_text">长江，在中华民族的历史上有着举足轻重的位置。从滚滚长江东逝水的壮阔，到共饮长江水的温婉，这条世界第三长河，滋养了中华儿女的体魄，丰富了炎黄子孙们的精神，成为了我们的精神图腾。今天，占国土面积1/5的长江流域不仅继续养育了全国1/3的人口，生产了全国1/3的粮食，而且还是中国经济增长最有活力、最具潜力的地区。</p>
+						<p class="more_more"><a class="pro_more" href="richproject�cid=7.html"></a></p>
+					</div>
+                                        <div class="pro_div">
+						<a class="pro_pic" href="richproject�cid=5.html">
+							                            <img onload="resizeImg(this,290,170)" src="../upload/20130719/155948_1.jpg">
+                            						</a>
+						<a class="pro_title" href="richproject�cid=5.html">内蒙古</a>
+						<p style="color:#000;" class="more_text">气候变化、水资源短缺和生物多样性丧失，已经成为全球最为严重的环境问题，内蒙古作为保障我国生态安全的重要屏障，深受这些环境问题的影响——由于上述的三个环境问题，生态系统逐渐退化，屏障功能日渐削弱，严重威胁到了我国的可持续发展，脆弱的生态急需修复。</p>
+						<p class="more_more"><a class="pro_more" href="richproject�cid=5.html"></a></p>
+					</div>
+                                    			</div>
+			<div class="clear"></div>
+		</div>
+        
+        <!-- more_more -->
+		
+	</div>
+	
+	<div id="foot" class="view">
+		<div id="foot_body" class="foot_body">
+			<div class="foot_l">
+				<div class="foot_t"><span><ul class="foot_ul">
+					<li><dl>
+						<dt>了解TNC</dt>
+						<dd><a href="http://tnc.org.cn/#TNC#china">TNC在中国</a></dd>
+						<dd><a href="http://tnc.org.cn/#TNC#world">TNC在全球</a></dd>
+						<dd><a href="http://tnc.org.cn/#TNC#events">TNC大事记</a></dd>
+					</dl></li>
+					<li><dl>
+						<dt>保护项目</dt>
+						<dd><a href="http://tnc.org.cn/#Project#area">保护地</a></dd>
+						<dd><a href="http://tnc.org.cn/#Project#water">淡水</a></dd>
+						<dd><a href="http://tnc.org.cn/#Project#climate">气候变化</a></dd>
+						<dd><a href="richproject�cid=22.html">保护无国界</a></dd>
+						<dd><a href="richproject�cid=23.html">中国全球保护基金</a></dd>
+					</dl></li>
+					<li><dl>
+						<dt>保护科学</dt>
+						<dd><a href="http://tnc.org.cn/#Science#function">方法与工具</a></dd>
+						<dd><a href="http://tnc.org.cn/#Science#service">信息服务</a></dd>
+						<dd><a href="http://tnc.org.cn/#Science#knowledge">保护科学</a></dd>
+						<dt>新闻中心</dt>
+						<dd><a href="http://tnc.org.cn/#News#schedule">项目进展</a></dd>
+						<dd><a href="http://tnc.org.cn/#News#report">媒体报道</a></dd>
+					</dl></li>
+					<li><dl>
+						<dt>走进自然</dt>
+						<dd><a href="http://tnc.org.cn/#Nature#story">图片故事</a></dd>
+						<dd><a href="http://tnc.org.cn/#Nature#video">影像记录</a></dd>
+						<dd><a href="http://tnc.org.cn/#Nature#card">自然贺卡</a></dd>
+						<dd><a href="http://tnc.org.cn/#Nature#q&a">有问有答</a></dd>
+						<dd><a href="http://tnc.org.cn/#Nature#lib">TNC阅览室</a></dd>
+					</dl></li>
+					<li><dl>
+						<dt>我的TNC</dt>
+						<dd><a href="http://tnc.org.cn/#MyTNC#join">我要参与</a></dd>
+						<dd><a href="http://tnc.org.cn/#MyTNC#donation">我要留言</a></dd>
+						<dd><a href="http://tnc.org.cn/#MyTNC#info">修改资料</a></dd>
+					</dl></li>
+				</ul></span></div>
+				<div class="foot_b">
+					<a href="http://tnc.org.cn/#Foot#iframe^view->合作伙伴^link->/home/more/49">合作伙伴</a><a href="http://tnc.org.cn/#Foot#iframe^view->法律声明^link->/home/more/50">法律声明</a><a href="http://tnc.org.cn/#Foot#iframe^view->问题与反馈^link->/feedback.html">问题与反馈</a><a href="http://tnc.org.cn/#Foot#iframe^sec->工作机会^link->/home/hr" class="fea_btn" data-pro="hr">工作机会</a><a href="http://tnc.org.cn/#Foot#iframe^view->联系我们^link->/home/more/51">联系我们</a>
+				</div>
+			</div>
+			<div class="foot_r">
+				<div class="foot_t">
+					<div class="search_div">
+					<input type="text" class="T_search" placeholder="请输入关键字"><a href="javascript:;" class="B_search" data-url="/home/search?q=">搜索</a>
+					</div>
+					<p class="search_text">保护所有生命赖以生存的陆地，淡水和海洋</p>
+				</div>
+				<div class="foot_b"><span>© 2013  WWW.TNC.ORG.CN 版权所有</span></div>
+			</div>
+            <div class="clear"></div>
+		</div>
+	</div>
+	
+	
+</div>
+<!-- main end -->
+<div class="bscroll"><div></div></div>
+<script src="../js/p.js" type="text/javascript" ></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F7461de46297f867fe6e5afc354b6b2da' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7004871-2']);
+  _gaq.push(['_setDomainName', 'tnc.org.cn']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

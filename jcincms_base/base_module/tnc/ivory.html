@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>‰∏∫Â§ßË±°ÂèëÂ£∞</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+
+<!-- Copyright © 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Verdana; font-size: 9pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+’‚“≥±£¥Ê «”√ <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.0.1025</b></a>  ‘⁄  02/26/16 18:07:09.<br>
+<b>µÿ÷∑:</b> <a class="info" href="http://tnc.org.cn/ivory">http://tnc.org.cn/ivory</a><br>
+<b>±ÍÃ‚:</b> ‰∏∫Â§ßË±°ÂèëÂ£∞ &nbsp;&bull;&nbsp; <b>¥Û–°:</b> 1621<br></div>
+<!-- /Copyright © 2005. Spidersoft Ltd -->
+
+
+    <script type="text/javascript">
+        $(function() {
+            if(isMobile()) window.location.href = '/ivory/mobile';
+            else window.location.href = '/ivory/web' + window.location.search;
+        });
+        function isMobile() {
+            var sUserAgent= navigator.userAgent.toLowerCase();
+            var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid= sUserAgent.match(/android/i) == "android";
+            var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    </script>
+</body>
+</html>
