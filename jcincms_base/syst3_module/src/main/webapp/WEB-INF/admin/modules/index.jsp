@@ -160,22 +160,22 @@ html,body {
 					title="系统首页" /></a>
 			</div>
 			<ul class="nav">
-				<li><a href="default.html" class="selected"><img
+				<li><a href="#" class="selected"><img
 						src="${ctxAdmin}/images/icon01.png" title="工作台" />
 						<h2>工作台</h2></a></li>
-				<li><a href="imgtable.html"><img
+				<li><a href="#"><img
 						src="${ctxAdmin}/images/icon02.png" title="模型管理" />
 						<h2>模型管理</h2></a></li>
-				<li><a href="imglist.html"><img
+				<li><a href="#"><img
 						src="${ctxAdmin}/images/icon03.png" title="模块设计" />
 						<h2>模块设计</h2></a></li>
-				<li><a href="tools.html"><img
+				<li><a href="#"><img
 						src="${ctxAdmin}/images/icon04.png" title="常用工具" />
 						<h2>常用工具</h2></a></li>
-				<li><a href="computer.html"><img
+				<li><a href="#"><img
 						src="${ctxAdmin}/images/icon05.png" title="文件管理" />
 						<h2>文件管理</h2></a></li>
-				<li><a href="tab.html"><img
+				<li><a href="#"><img
 						src="${ctxAdmin}/images/icon06.png" title="系统设置" />
 						<h2>系统设置</h2></a></li>
 			</ul>

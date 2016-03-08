@@ -393,10 +393,20 @@ public class DocumentController extends BaseController<Document> {
 			@RequestParam(value = "refresh",required=false) boolean refresh,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		List<FileVO> list =null;
+		if(!refresh){
+			list = (List<FileVO>) cache.get(FILES_CACHE);
+			if(list!=null){
+				return list;
+			}
+		}else{
+			cache.remove(FILES_CACHE);
+		}
+		
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 		File file = new File(webroot);
-		List<FileVO> list = getFiles(refresh, file);
+		list = getFiles(refresh, file);
 		return list;
 	}
 
