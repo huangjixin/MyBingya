@@ -275,7 +275,7 @@ public class DocumentController extends BaseController<Document> {
 		String fileDir = df.format(new Date());
 		@SuppressWarnings("deprecation") 
 		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
-		uploadWeb = "/upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
+		uploadWeb = httpServletRequest.getContextPath()+"upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
 		File targetFile = new File(uploadPath);
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
