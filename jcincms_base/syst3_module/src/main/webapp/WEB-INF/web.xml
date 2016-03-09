@@ -203,4 +203,5 @@
 		<welcome-file>/</welcome-file>
 		<!--<welcome-file>default/index.jsp</welcome-file> -->
 	</welcome-file-list>
+	<absolute-ordering/>
 </web-app>

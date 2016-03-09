@@ -58,6 +58,7 @@ public class DefaultController extends BaseController {
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+		
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
 
