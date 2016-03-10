@@ -1,8 +1,7 @@
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.web.socket.CloseStatus;
@@ -12,12 +11,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class WebsocketEndPoint extends TextWebSocketHandler {
 	private static  AtomicInteger connectionIds = new AtomicInteger(0);
-	private static  Set<WebsocketEndPoint> connections = new CopyOnWriteArraySet<WebsocketEndPoint>();
+	private static  ArrayList<WebSocketSession> connections = new ArrayList<WebSocketSession>();
 	private WebSocketSession session;
 
 	public WebsocketEndPoint() {
 		super();
-        connections.add(this);
 	}
 
 	@Override
@@ -35,7 +33,7 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 			throws Exception {
 		super.afterConnectionEstablished(session);
 		this.session = session;
-		connections.add(this);
+		connections.add(session);
 	}
 
 	@Override
@@ -47,15 +45,15 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	
 	
 	public static void broadcast(TextMessage msg) {
-        for (WebsocketEndPoint client : connections) {
+        for (WebSocketSession session : connections) {
             try {
-                synchronized (client) {
-                    client.session.sendMessage(msg);
+                synchronized (session) {
+                    session.sendMessage(msg);
                 }
             } catch (IOException e) {
-                connections.remove(client);
+                connections.remove(session);
                 try {
-                    client.session.close();
+                    session.close();
                 } catch (IOException e1) {
                     // Ignore
                 }
