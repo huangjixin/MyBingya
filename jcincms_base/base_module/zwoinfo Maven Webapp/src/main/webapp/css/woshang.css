@@ -189,37 +189,60 @@ a {
 }
 
 #header #header-top {
+	padding:5px 0;
 	color: #5E5E5E;
 	font-size: 12px;
-	height: 30px;
 	background-color: #F5F5F5;
-	height: 30px;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #cccccc;
 }
 
+#header #header-top #header-top-content{
+	position: relative;
+}
+
 #header #header-top .left {
-	float: left;
-	padding: 9px 0;
+	display: inline-block;
 }
 
 #header #header-top .right {
-	float: right;
-	padding: 9px 0;
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	/* float: right; */
 }
 
 #header #logo {
+	padding: 5px 0px;
 	color: #5E5E5E;
-	/* background-color: #F5F5F5; */
-	/* height: 110px; */
 	font-size: 12px;
 }
 
+#header #logo .right {
+	float: right;
+}
+
+#header #logo .right div{
+	/* position: absolute;
+	right: 0; */
+}
+
 #header #logo .left {
-	width: 100%;
-	float: left;
-	padding: 10px 0px;
+	position: relative;
+}
+
+#header #logo .div{
+	display: inline-block;
+}
+
+#header #logo .div .right{
+	position: absolute;
+	right: 0;
+}
+
+.tel{
+	background:url(../images/tel.png) no-repeat center;
 }
 
 #newslist a{

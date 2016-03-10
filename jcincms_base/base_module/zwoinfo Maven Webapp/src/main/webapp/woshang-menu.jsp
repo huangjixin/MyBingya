@@ -6,8 +6,9 @@
 		<div class="menu">
 			<ul>
 				<li><a href="${ctx}/">首页</a></li>
-				<c:if test="${list!=null}">
-					<c:forEach var="chan" items="${list}">
+				<c:set var="menus" value="${list}"/>
+				<c:if test="${menus!=null}">
+					<c:forEach var="chan" items="${menus}">
 						<c:if test="${chan.name!=null && chan.name!=''}">
 							<li><a href="${ctx}/${chan.linkAddr}"
 								<c:if test="${channel!=null && chan.name==channel.name }">class="selected"</c:if>>${chan.name}</a>
