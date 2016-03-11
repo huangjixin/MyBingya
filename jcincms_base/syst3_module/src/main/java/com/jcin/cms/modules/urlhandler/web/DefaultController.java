@@ -38,7 +38,7 @@ import com.jcin.cms.web.BaseController;
  */
 @Controller
 @RequestMapping(value = "/channel")
-@Scope(value="prototype")
+//@Scope(value="prototype")
 public class DefaultController extends BaseController {
 
 	private static final String REDIRECT = "redirect:/";
