@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	%> 
 	<H2>
 		Exception:
-		<%=ex.getMessage();%></H2>
+		<%=ex.getMessage()%></H2>
 	 
 	<P />
 	 

@@ -10,6 +10,9 @@ import java.io.Serializable;
 
 public class BetDomain implements Serializable {
 
+	public BetDomain() {
+		super();
+	}
 	/**
 	 * 
 	 */
@@ -26,6 +29,21 @@ public class BetDomain implements Serializable {
 	private  int dan = 0;
 	private  int shuang = 0;
 	
+	public void setMoney(int s,int money){
+		if (s == 1) {
+			setPingguo(money);
+		} else if (s == 2) {
+			setPutao(money);
+		} else if (s == 3) {
+			setBoluo(money);
+		} else if (s == 4) {
+			setCaomei(money);
+		} else if (s == 5) {
+			setXigua(money);
+		} else if (s == 6) {
+			setXiangjiao(money);
+		} 
+	}
 	public int getPingguo() {
 		return pingguo;
 	}

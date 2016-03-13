@@ -17,6 +17,10 @@
 		<param-value>WEB-INF/classes/spring/log4j.properties</param-value>
 	</context-param>
 	<listener>
+		<description>session监听器</description>
+		<listener-class>com.jcin.cms.modules.urlhandler.web.SessionListener</listener-class>
+	</listener>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
@@ -203,5 +207,5 @@
 		<welcome-file>/</welcome-file>
 		<!--<welcome-file>default/index.jsp</welcome-file> -->
 	</welcome-file-list>
-	<absolute-ordering/>
+	<absolute-ordering />
 </web-app>
