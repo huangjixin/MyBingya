@@ -13,6 +13,7 @@ public class InfoDomain  implements Serializable{
 	private int countTime;
 	private int count;
 	private int currentLuckyNum;
+	private String status;
 
 	public int getCount() {
 		return count;
@@ -36,5 +37,13 @@ public class InfoDomain  implements Serializable{
 
 	public void setCurrentLuckyNum(int currentLuckyNum) {
 		this.currentLuckyNum = currentLuckyNum;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

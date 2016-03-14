@@ -7,10 +7,7 @@
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -18,9 +15,13 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jcin.cms.modules.syst.domain.User;
@@ -47,7 +48,7 @@ public class ScheduledExecutorController {
 	private static String STATUS = END;
 
 	private static int currentLuckyNum = 0;
-	private static int totalTime = 15;
+	private static int totalTime = 100;
 
 	private static int currentway = 0;
 	private static int countTime = totalTime;
@@ -75,32 +76,87 @@ public class ScheduledExecutorController {
 		InfoDomain infoDomain = new InfoDomain();
 		infoDomain.setCount(SessionListener.getCount());
 		infoDomain.setCountTime(countTime);
+		infoDomain.setStatus(STATUS);
 		infoDomain.setCurrentLuckyNum(currentLuckyNum);
 		return infoDomain;
 	}
-	
-	@RequestMapping(value = "login")
+
+	@RequestMapping(value = "login",method=RequestMethod.POST)
 	@ResponseBody
-	public String login(User user,Model uiModel,
+	public User login(User user, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		 //当前Subject  
+	    Subject currentUser = SecurityUtils.getSubject();  
+	    UsernamePasswordToken token = new UsernamePasswordToken(  
+	           user.getUsername(),  
+	           user.getPassword());  
+	    token.setRememberMe(true);  
+	    try {  
+	        /* 
+	         * 在调用了login方法后，SecurityManager会收到AuthenticationToken，并将其发送给已配置的Realm 
+	         * ，执行必须的认证检查。每个Realm都能在必要时对提交的AuthenticationTokens作出反应。 
+	         * 但是如果登录失败了会发生什么？如果用户提供了错误密码又会发生什么？通过对Shiro的运行时AuthenticationException做出反应 
+	         * ，你可以控制失败 
+	         */  
+	        currentUser.login(token);  
+	        /*request.getRequestDispatcher("/index.jsp").forward(request,  
+	                response);*/  
+	    } catch (Exception e) {//登录失败  
+//	        e.printStackTrace();  
+	        /*request.setAttribute("msg", "不匹配的用户名和密码");  
+	        request.getRequestDispatcher("/login.jsp").forward(request,  
+	                response);*/  
+	    	return null;
+	    }  
+	    
+		return user;
+	}
+
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest httpServletRequest) {
+		Subject currentUser = SecurityUtils.getSubject();
+		if(currentUser.isAuthenticated()){
+			currentUser.logout();
+		}
+		return "redirect:index.html";
+	}
+	
+	@RequestMapping(value = "/personal")
+	public String personal(Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isAuthenticated()){
+			return "redirect:login.html";
+		}
+		return "redirect:personal.html";
+	}
+
+	@RequestMapping(value = "/register")
+	@ResponseBody
+	public String register(User user, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		System.out.println(user.getUsername());
 		return null;
 	}
-	
-	@RequestMapping(value = "register")
-	@ResponseBody
-	public String register(User user,Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		System.out.println(user.getUsername());
-		return null;
-	}
-	
+
 	@RequestMapping(value = { "startUp" })
 	@ResponseBody
 	public void startUp() {
 		shutDown();
 		lanuchTimer();
 		STATUS = START;
+	}
+
+	/**
+	 * 关闭。
+	 */
+	@RequestMapping(value = { "shutDown" })
+	@ResponseBody
+	public void shutDown() {
+		if (scheduExec != null) {
+			scheduExec.shutdownNow();
+			STATUS = END;
+		}
 	}
 
 	// 启动计时器
@@ -189,19 +245,7 @@ public class ScheduledExecutorController {
 					countTime = totalTime;
 				}
 			}
-		}, 1, 1, TimeUnit.SECONDS);
-	}
-
-	/**
-	 * 关闭。
-	 */
-	@RequestMapping(value = { "shutDown" })
-	@ResponseBody
-	public void shutDown() {
-		if (scheduExec != null) {
-			scheduExec.shutdownNow();
-			STATUS = END;
-		}
+		}, countTime, 1, TimeUnit.SECONDS);
 	}
 
 	public static String getTime() {
@@ -338,67 +382,68 @@ public class ScheduledExecutorController {
 			} else if (s == 3) {
 				int buyN1 = random.nextInt(6) + 1;
 				betDomain.setMoney(buyN1, money);
-				
+
 				int buyN2 = random.nextInt(6) + 1;
 				do {
 					buyN2 = random.nextInt(6) + 1;
 				} while (buyN1 == buyN2);
 				betDomain.setMoney(buyN2, money);
-				
+
 				int buyN3 = random.nextInt(6) + 1;
 				do {
 					buyN3 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN3 || buyN2 == buyN3 );
+				} while (buyN1 == buyN3 || buyN2 == buyN3);
 				betDomain.setMoney(buyN3, money);
-				
+
 			} else if (s == 4) {
 				int buyN1 = random.nextInt(6) + 1;
 				betDomain.setMoney(buyN1, money);
-				
+
 				int buyN2 = random.nextInt(6) + 1;
 				do {
 					buyN2 = random.nextInt(6) + 1;
 				} while (buyN1 == buyN2);
 				betDomain.setMoney(buyN2, money);
-				
+
 				int buyN3 = random.nextInt(6) + 1;
 				do {
 					buyN3 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN3 || buyN2 == buyN3 );
+				} while (buyN1 == buyN3 || buyN2 == buyN3);
 				betDomain.setMoney(buyN3, money);
-				
+
 				int buyN4 = random.nextInt(6) + 1;
 				do {
 					buyN4 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN4 || buyN2 == buyN4 || buyN3 == buyN4 );
+				} while (buyN1 == buyN4 || buyN2 == buyN4 || buyN3 == buyN4);
 				betDomain.setMoney(buyN4, money);
-				
+
 			} else if (s == 5) {
 				int buyN1 = random.nextInt(6) + 1;
 				betDomain.setMoney(buyN1, money);
-				
+
 				int buyN2 = random.nextInt(6) + 1;
 				do {
 					buyN2 = random.nextInt(6) + 1;
 				} while (buyN1 == buyN2);
 				betDomain.setMoney(buyN2, money);
-				
+
 				int buyN3 = random.nextInt(6) + 1;
 				do {
 					buyN3 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN3 || buyN2 == buyN3 );
+				} while (buyN1 == buyN3 || buyN2 == buyN3);
 				betDomain.setMoney(buyN3, money);
-				
+
 				int buyN4 = random.nextInt(6) + 1;
 				do {
 					buyN4 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN4 || buyN2 == buyN4 || buyN3 == buyN4 );
+				} while (buyN1 == buyN4 || buyN2 == buyN4 || buyN3 == buyN4);
 				betDomain.setMoney(buyN4, money);
-				
+
 				int buyN5 = random.nextInt(6) + 1;
 				do {
 					buyN5 = random.nextInt(6) + 1;
-				} while (buyN1 == buyN5 || buyN2 == buyN5 || buyN3 == buyN5 || buyN4 == buyN5 );
+				} while (buyN1 == buyN5 || buyN2 == buyN5 || buyN3 == buyN5
+						|| buyN4 == buyN5);
 				betDomain.setMoney(buyN5, money);
 			}
 

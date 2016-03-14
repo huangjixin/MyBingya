@@ -39,41 +39,57 @@ table.imagetable td {
 }
 </style>
 <script type="text/javascript">
+	var countTime = -1;
+	var status= "end";
+	var running= true;
 	$().ready(function() {
-		$.ajax({
-			type : "get",
-			url : "/scheduled/getInfo",
-			dataType : "json",
-			success : function(data) {
-				setTime(data);
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert(errorThrown);
-			}
-		});
+		getRemoteInfo();
 	})
 	
-	function setTime(countTime){
-		var t = countTime;
-
-		var m=Math.floor(t/60%60);
-		var s=Math.floor(t%60);
-		document.getElementById("min").innerHTML = (m<10?"0"+m:m)+"分";
-		document.getElementById("sec").innerHTML = (s<10?"0"+s:s)+"秒";
+	function getRemoteInfo(){
+		$.ajax({
+				type : "get",
+				url : "/scheduled/getInfo",
+				dataType : "json",
+				success : function(data) {
+					setData(data);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					status == "end"
+				}
+			});
 	}
 	
-	function setTime(data){
-		var t = data["countTime"];
-
-		var m=Math.floor(t/60%60);
-		var s=Math.floor(t%60);
-		document.getElementById("min").innerHTML = (m<10?"0"+m:m)+"分";
-		document.getElementById("sec").innerHTML = (s<10?"0"+s:s)+"秒";
+	function setData(data){
+		countTime = data["countTime"];
+		status= data["status"];
+		setTimeDoc();
 		
 		var currentLuckyNum= data["currentLuckyNum"];
 		document.getElementById("luckN").innerHTML = currentLuckyNum;
-		
 	}
+	
+	function setTimeDoc(){
+		if(countTime!=0){
+			var t = countTime;
+			var m=Math.floor(t/60%60);
+			var s=Math.floor(t%60);
+			document.getElementById("min").innerHTML = (m<10?"0"+m:m)+"分";
+			document.getElementById("sec").innerHTML = (s<10?"0"+s:s)+"秒";
+			
+			countTime-=1;
+		}
+		
+		if(countTime==0){
+			if(status == "start"){//已经开始
+				getRemoteInfo();
+			}else{//已经关闭
+			
+			}
+		}
+	}
+	
+	window.setInterval(function(){setTimeDoc();}, 1000);
 </script>
 </head>
 <body>
@@ -111,13 +127,13 @@ table.imagetable td {
 			<div>
 				<span id="min"
 					style="padding: 5px 10px;font-size: 30px;background-color: #C71C60;color:white;font-weight: bold;">
-					5分</span> <span id="sec"
+					0分</span> <span id="sec"
 					style="padding: 5px 10px;font-size: 30px;background-color: #C71C60;color:white;font-weight: bold;margin-left: 10px;">
 					0秒</span>
 			</div>
 			<div class="devider" style="height: 20px;"></div>
 			<div>
-				<a href="/scheduled/personal.html"><span
+				<a href="/scheduled/personal"><span
 					style="padding: 5px 10px;font-size: 30px;background-color: #EECB3F;color:white;font-weight: bold;">
 						马上下注</span></a>
 			</div>
