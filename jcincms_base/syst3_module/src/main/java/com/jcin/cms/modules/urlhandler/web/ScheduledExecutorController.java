@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jcin.cms.modules.syst.domain.User;
+import com.jcin.cms.modules.syst.service.IUserService;
 import com.jcin.cms.modules.urlhandler.domain.BetDomain;
+import com.jcin.cms.modules.urlhandler.domain.BetResultDomain;
 import com.jcin.cms.modules.urlhandler.domain.InfoDomain;
 
 /**
@@ -48,25 +51,29 @@ public class ScheduledExecutorController {
 	private static String STATUS = END;
 
 	private static int currentLuckyNum = 0;
-	private static int totalTime = 100;
+	private static int totalTime = 15;
 
 	private static int currentway = 0;
 	private static int countTime = totalTime;
 	private static List currentList = new ArrayList();
+	private static List<BetResultDomain> game = new ArrayList<BetResultDomain>();
 
 	private static List<BetDomain> list = new ArrayList<BetDomain>();
 
 	public ScheduledExecutorService scheduExec = null;
-
-	@RequestMapping(value = { "", "game" })
+	
+	@Autowired
+	private IUserService userService;
+	
+	@RequestMapping(value = { "", "index" })
 	public String channels(Model uiModel, HttpServletRequest httpServletRequest) {
-		uiModel.addAttribute("countTime", countTime);
+		/*uiModel.addAttribute("countTime", countTime);
 		uiModel.addAttribute("time", getTime());
 		uiModel.addAttribute("currentLuckyNum", currentLuckyNum);
 		uiModel.addAttribute("currentList", currentList.toString());
-		uiModel.addAttribute("currentway", currentway);
+		uiModel.addAttribute("currentway", currentway);*/
 
-		return "scheduled/game.jsp";
+		return "scheduled/index.html";
 	}
 
 	@RequestMapping(value = "getInfo")
@@ -78,6 +85,7 @@ public class ScheduledExecutorController {
 		infoDomain.setCountTime(countTime);
 		infoDomain.setStatus(STATUS);
 		infoDomain.setCurrentLuckyNum(currentLuckyNum);
+		infoDomain.setResult(game);
 		return infoDomain;
 	}
 
@@ -126,9 +134,9 @@ public class ScheduledExecutorController {
 			HttpServletRequest httpServletRequest) {
 		Subject currentUser = SecurityUtils.getSubject();
 		if(!currentUser.isAuthenticated()){
-			return "redirect:login.html";
+			return "scheduled/login.html";
 		}
-		return "redirect:personal.html";
+		return "scheduled/personal.html";
 	}
 
 	@RequestMapping(value = "/register")
@@ -237,6 +245,9 @@ public class ScheduledExecutorController {
 						currentList = winlostList;
 					}
 
+					BetResultDomain betResultDomain = new BetResultDomain();
+					betResultDomain.setNum(resu);
+					game.add(betResultDomain);
 					System.out.println("实际上开的是：" + resu + "，本轮的随机数是：" + way
 							+ "————1代表最低赔，2,3代表不输赔，4——10不干涉。");
 					System.out.println();
