@@ -49,13 +49,14 @@
 					minlength : "密码长度不能小于 5 个字母"
 				}
 			},submitHandler:function(form) {
+				document.getElementById("tip").innerHTML = "正在登陆……";
 				var options = {    
        				success:function(data){
 						if(data==""){
 							document.getElementById("tip").innerHTML = "用户名/密码错误";
 						}else{
 							document.getElementById("tip").innerHTML = "";
-							window.location.href="index.html";
+							window.location.href="/scheduled/personal.html";
 						}
 						
 					},error : function(XMLResponse) {  

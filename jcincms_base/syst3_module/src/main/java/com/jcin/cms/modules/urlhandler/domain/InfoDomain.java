@@ -7,6 +7,7 @@
 package com.jcin.cms.modules.urlhandler.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class InfoDomain  implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -14,7 +15,8 @@ public class InfoDomain  implements Serializable{
 	private int count;
 	private int currentLuckyNum;
 	private String status;
-
+	private List result;
+	
 	public int getCount() {
 		return count;
 	}
@@ -45,5 +47,13 @@ public class InfoDomain  implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public List getResult() {
+		return result;
+	}
+
+	public void setResult(List result) {
+		this.result = result;
 	}
 }

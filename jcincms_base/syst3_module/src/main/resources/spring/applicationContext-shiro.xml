@@ -136,7 +136,6 @@
 				/admin/login = authc
 				/admin/logout = logout
 				/admin/** = authc
-				/scheduled/personal.html = anon
 			</value>
 		</property>
 	</bean>

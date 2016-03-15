@@ -31,11 +31,18 @@ table.imagetable th {
 }
 
 table.imagetable td {
-	background: #dcddc0 url('cell-grey.jpg');
+/* 	background: #dcddc0; */
+	background: #ffffff;
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
 	border-color: #999999;
+	font-size: 1.5em;
+}
+
+table.imagetable img {
+	width:50px;
+	height:auto;
 }
 </style>
 <script type="text/javascript">
@@ -67,6 +74,39 @@ table.imagetable td {
 		
 		var currentLuckyNum= data["currentLuckyNum"];
 		document.getElementById("luckN").innerHTML = currentLuckyNum;
+		if(currentLuckyNum==1){
+			$("#resuImg").attr("src","./images/big_1.jpg");
+			}else if(currentLuckyNum==2){
+			$("#resuImg").attr("src","./images/big_2.jpg");
+			}else if(currentLuckyNum==3){
+			$("#resuImg").attr("src","./images/big_3.jpg");
+			}else if(currentLuckyNum==4){
+			$("#resuImg").attr("src","./images/big_4.jpg");
+			}else if(currentLuckyNum==5){
+			$("#resuImg").attr("src","./images/big_5.jpg");
+			}else if(currentLuckyNum==6){
+			$("#resuImg").attr("src","./images/big_6.jpg");
+			}
+			
+		$("#resultTable tr:gt(0)").remove();
+// 		$("#resultTable tr").empty();
+		var resultArr = data["result"];
+		for(var i=0;i<resultArr.length;i++){
+			if(resultArr[i]['num']==1){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_1.jpg'></td></tr>")
+			}else if(resultArr[i]['num']==2){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_2.jpg'></td></tr>")
+			}else if(resultArr[i]['num']==3){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_3.jpg'></td></tr>")
+			}else if(resultArr[i]['num']==4){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_4.jpg'></td></tr>")
+			}else if(resultArr[i]['num']==5){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_5.jpg'></td></tr>")
+			}else if(resultArr[i]['num']==6){
+				$("#resultTable").append("<tr><td>"+(i+1)+"</td><td>"+resultArr[i]['num']+"</td><td><img src='./images/big_6.jpg'></td></tr>")
+			}
+			
+		}
 	}
 	
 	function setTimeDoc(){
@@ -95,6 +135,7 @@ table.imagetable td {
 <body>
 	<div id="header">
 		<h1>猴王游戏</h1>
+		<a href="./intro.html"><h4 style="color: red;">规则介绍</h4></a>
 	</div>
 	<div id="banner">
 		<script language="Javascript">
@@ -140,17 +181,15 @@ table.imagetable td {
 			<div class="devider"></div>
 			<div class="indexonline">
 				上期结果：<span id="luckN"></span>
+				<div><img id="resuImg" src="" style="display: none;"></div>
 			</div>
 			<div class="devider"></div>
 			<div style="text-align: center;margin: 0 auto;width: 100%;">
-				<table class="imagetable">
+				<table class="imagetable" id="resultTable">
 					<tr>
 						<th>场次</th>
 						<th>结果</th>
-					</tr>
-					<tr>
-						<td>Text 1A</td>
-						<td>Text 1B</td>
+						<th>水果</th>
 					</tr>
 				</table>
 			</div>
