@@ -17,6 +17,10 @@
 		<param-value>WEB-INF/classes/spring/log4j.properties</param-value>
 	</context-param>
 	<listener>
+		<description>session监听器</description>
+		<listener-class>com.jcin.cms.modules.syst.web.SessionListener</listener-class>
+	</listener>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
@@ -164,7 +168,7 @@
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping> 
+	</servlet-mapping>
 
 	<session-config>
 		<session-timeout>30</session-timeout>
