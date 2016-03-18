@@ -3,6 +3,8 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div id="footer" class="globalWidth"
 	style="background-image: url('${ctx}/images/footer-bg.png');background-repeat: repeat;">
+	<!-- <a href="javascript:scroll(0,0)"><div class="back_to_top"
+	style="width:30px;line-height:30px;color: #ffffff;background-color: red;position: abslout;text-align: center;">Top</div></a> --> 
 	<div
 		style="text-align: center;height: 50px;line-height: 50px;font-size: 16px;color: #A7A7A7;width: 100%;">
 		<span style="display:inline-block;"> 加入我们 </span> <span
@@ -74,8 +76,14 @@
 		slidesPerView : 1,
 		paginationClickable : true,
 		spaceBetween : 30,
+		loop:true,
+		autoplay: 3000,
 		keyboardControl : true,
 		nextButton : '.swiper-button-next',
 		prevButton : '.swiper-button-prev',
 	});
+	
 </script>
+
+	
+	

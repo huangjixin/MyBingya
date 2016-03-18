@@ -13,7 +13,7 @@
 	<!-- 菜单 -->
 	<#include "woshang-menu.ftl">
 	<div style="height: 10px;"></div>
-	<#include "woshang-news-content.ftl">
+	<#include "woshang-cases-content.ftl">
 	<div class="devider"></div>
 	<!-- 底部 -->
 	<#include "woshang-footer.ftl">

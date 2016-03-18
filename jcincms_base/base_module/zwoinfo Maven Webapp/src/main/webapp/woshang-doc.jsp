@@ -15,7 +15,7 @@
 	<!-- 菜单 -->
 	<jsp:include page="woshang-menu.jsp" flush="true"></jsp:include>
 	<div style="height: 10px;"></div>
-	<jsp:include page="woshang-news-doc.jsp" flush="true"></jsp:include>
+	<jsp:include page="woshang-doc-content.jsp" flush="true"></jsp:include>
 	<div class="devider"></div>
 	<!-- 底部 -->
 	<jsp:include page="woshang-footer.jsp" flush="true"></jsp:include>

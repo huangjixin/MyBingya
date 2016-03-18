@@ -4,6 +4,20 @@
 			style="width: 100%;height: auto;">
 	</div>
 	<div class="contentWidth">
+		<div style="padding: 5px;background-color: #EC3901;">
+			<span style="color: #ffffff;font-size: 12px;">当前位置： <a
+				href="${ctx}/"
+				style="color: #ffffff;font-size: 12px;text-decoration: none;">首页</a>
+				<#if navChan ??>
+					<#list navChan as chan>
+										><a href="${ctx}/${chan.linkAddr}"
+							style="color: #ffffff;font-size: 12px;text-decoration: none;">${chan.name}</a>
+					</#list>
+				</#if>
+			</span>
+		</div>
+		<div class="devider"></div>
+		<div style="padding: 10px;border: 1px solid #cccccc;">
 		<#assign docs=page.rows>
 		<#if docs ??>
 			<ul id="newslist">
@@ -32,6 +46,7 @@
 				&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
 			</div>
 		</#if>
+		</div>
 	</div>
 
 </div>

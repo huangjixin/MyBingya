@@ -7,7 +7,7 @@
 			<div class="left">
 				&nbsp; <span>电话：139 2620 5227</span>&nbsp;&nbsp;|&nbsp; <span>邮箱：635152644@qq.com</span>&nbsp;&nbsp;|&nbsp;
 				<span>QQ群：40497044</span> &nbsp;&nbsp;<a
-					href="http://wpa.qq.com/msgrd?v=3&amp;uin=635152644&Site=在线客服一&Menu=yes"
+					href="http://wpa.qq.com/msgrd?v=3&amp;uin=635152644&amp;site=www.newcapec.com.cn&amp;menu=yes"
 					target="_blank"><img alt="在线客服一" border="0"
 					src="http://wpa.qq.com/pa?p=2:635152644:46" title="在线客服一" /></a>
 				&nbsp; <a
@@ -23,8 +23,8 @@
 	</div>
 	<div id="logo" class="contentWidth">
 		<div class="right">
-			<div class="div" style="padding-top: 20px;">
-				<img alt="" src="${ctx}/images/tel.png">
+			<div class="div" style="padding-top: 10px;height: 30px;line-height: 30px;">
+				<img alt="" src="${ctx}/images/tel.png" style="height: 30px;width: auto;">
 				<span style="font-weight: bold;font-size: 20px;color: #FF4A00;padding-right: 10px;">139 2620 5227</span>
 				<!-- <script language="Javascript">
 					var datelocalweek = new Array("星期日", "星期一", "星期二", "星期三",
@@ -59,6 +59,5 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
 </div>

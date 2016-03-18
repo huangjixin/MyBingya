@@ -71,6 +71,8 @@
 		slidesPerView : 1,
 		paginationClickable : true,
 		spaceBetween : 30,
+		loop:true,
+		autoplay: 3000,
 		keyboardControl : true,
 		nextButton : '.swiper-button-next',
 		prevButton : '.swiper-button-prev',

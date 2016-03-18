@@ -71,7 +71,7 @@
 			<div class="circle" style="float: left;background-color: #FFAE02;">PC</div>
 			<div
 				style="float: left;width: 300px;font-size: 14px;margin-left: 10px;">
-				<h3 style="color: #FFAE02;">特色1880建站</h3>
+				<h3 style="color: #FFAE02;">特色建站</h3>
 				<p>智沃信科顶尖的互动创意团队为您量身定造高端网站建设，让视觉力量极致发挥出对品牌的影响力。。</p>
 			</div>
 			<div class="clear"></div>
@@ -119,7 +119,7 @@
 			<div
 				style="float: left;width: 300px;font-size: 14px;margin-left: 10px;">
 				<h3 style="color: #E4007F;">SEO优化推广</h3>
-				<p>华攀科技专业的优化团队为您从市场、技术及用户角度深度挖掘商业及用户体验的潜在机遇。</p>
+				<p>智沃科技专业的优化团队为您从市场、技术及用户角度深度挖掘商业及用户体验的潜在机遇。</p>
 			</div>
 			<div class="clear"></div>
 		</div>
