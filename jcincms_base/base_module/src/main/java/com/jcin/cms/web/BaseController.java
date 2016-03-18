@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jcin.cms.utils.Page;
 
 @Controller
-public class BaseController<T extends Serializable> {
+public class BaseController<T extends Serializable>{
 	public String root = "WEB-INF/";
 
 	public Page select(Page page, Model uiModel,
