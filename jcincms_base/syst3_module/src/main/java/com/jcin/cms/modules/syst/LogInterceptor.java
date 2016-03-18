@@ -29,7 +29,7 @@ public class LogInterceptor implements HandlerInterceptor {
 	private static Logger logger = Logger.getLogger(LogInterceptor.class
 			.getName());
 
-	private static LogMapper logDao = SpringUtils.getBean(LogMapper.class);
+//	private static LogMapper logDao = SpringUtils.getBean(LogMapper.class);
 
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -83,7 +83,7 @@ public class LogInterceptor implements HandlerInterceptor {
 				log.setMethod(request.getMethod());
 				log.setParams(params.toString());
 				log.setException(ex != null ? ex.toString() : "");
-				logDao.insert(log);
+//				logDao.insert(log);
 
 				logger.debug("save log {type: {" + log.getType()
 						+ "}, loginName: {" + user.getUsername() + "}, uri: {"

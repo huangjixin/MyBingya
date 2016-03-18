@@ -32,7 +32,7 @@
 		<property name="httpOnly" value="true" />
 		<property name="maxAge" value="-1" />
 	</bean>
-
+	<!-- 会话管理器 -->
 	<bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<property name="globalSessionTimeout" value="1800000" />
@@ -51,7 +51,7 @@
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:spring/ehcache.xml" />
 	</bean>
-	
+
 	<bean id="cacheManager" class="com.jcin.cms.common.SpringCacheManagerWrapper">
 		<property name="cacheManager" ref="springCacheManager" />
 	</bean>
@@ -64,8 +64,8 @@
 	</bean>
 
 	<bean id="userRealm" class="com.jcin.cms.modules.syst.service.impl.UserRealm">
-		<property name="credentialsMatcher" ref="credentialsMatcher" />
-		<property name="cachingEnabled" value="false" />
+		<!-- <property name="credentialsMatcher" ref="credentialsMatcher" /> -->
+		<property name="cachingEnabled" value="true" />
 		<property name="authenticationCachingEnabled" value="true" />
 		<property name="authenticationCacheName" value="authenticationCache" />
 		<property name="authorizationCachingEnabled" value="true" />
@@ -104,18 +104,18 @@
 		<property name="usernameParam" value="username" />
 		<property name="passwordParam" value="password" />
 		<property name="rememberMeParam" value="rememberMe" />
-		<property name="successUrl" value="/admin/" />
+		<property name="successUrl" value="/admin/index" />
 		<property name="loginUrl" value="/admin/login" />
 	</bean>
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<property name="redirectUrl" value="/admin/login" />
 	</bean>
 
-	 <!-- <bean id="sysUserFilter" class="com.jcin.cms.modules.syst.SysUserFilter"/> -->
+	<!-- <bean id="sysUserFilter" class="com.jcin.cms.modules.syst.SysUserFilter"/> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/admin/login" />
-		<property name="successUrl" value="/admin" />
+		<!-- <property name="successUrl" value="/admin" /> -->
 		<property name="filters">
 			<util:map>
 				<entry key="authc" value-ref="formAuthenticationFilter" />
@@ -138,11 +138,13 @@
 				/admin/** = authc
 			</value>
 		</property>
-	</bean>
+	</bean><!-- /scheduled/personal** = authc -->
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-	
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
 </beans>
