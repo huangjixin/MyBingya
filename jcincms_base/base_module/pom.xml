@@ -42,5 +42,6 @@
 	<modules>
 		<module>demo</module>
     <module>zwoinfo</module>
+    <module>fruitGame</module>
   </modules>
 </project>
