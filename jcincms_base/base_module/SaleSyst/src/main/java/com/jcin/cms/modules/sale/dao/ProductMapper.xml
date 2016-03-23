@@ -291,20 +291,20 @@
 			      	 p.name,
 			    </if>
 			</if>
-		    sum(sto.procount) as procount,
-			sum(s.total_amount) as s_total_amount,
-		    sum(b.total_amount) as b_total_amount,
-			sum(s.sale_num*(s.sale_amount-b.buy_amount)) as profit
+		    sto.procount as procount,
+		    s.s_total_amount,
+		    b.b_total_amount,
+		    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
 		from
 		    tb_product as p
 		        left join
-			tb_sale
-		    as s ON s.pro_id = p.id
+		    (select *, sum(total_amount) as s_total_amount from tb_sale group by pro_id ) 
+			as s ON s.pro_id = p.id
 		        left join
-		     tb_buy
-			as b ON p.id = b.pro_id and b.id=s.buy_id
+		    (select *, sum(total_amount) as b_total_amount from tb_buy group by pro_id )
+			as b ON p.id = b.pro_id and b.id = s.buy_id
 		        left join
-		    tb_storage as sto ON p.id = sto.pro_id and sto.buy_id = b.id
+		    tb_storage as sto ON p.id = sto.pro_id
 		    where 1=1
 		<if test="record != null">
 			<if test="record.countTotal ==false" >
@@ -341,20 +341,20 @@
 				      	 p.name,
 				    </if>
 				</if>
-			    sum(sto.procount) as procount,
-				sum(s.total_amount) as s_total_amount,
-			    sum(b.total_amount) as b_total_amount,
-				sum(s.sale_num*(s.sale_amount-b.buy_amount)) as profit
+			    sto.procount as procount,
+			    s.s_total_amount,
+			    b.b_total_amount,
+			    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
 			from
 			    tb_product as p
 			        left join
-				tb_sale
-			    as s ON s.pro_id = p.id
+			    (select *, sum(total_amount) as s_total_amount from tb_sale group by pro_id ) 
+				as s ON s.pro_id = p.id
 			        left join
-			     tb_buy
-				as b ON p.id = b.pro_id and b.id=s.buy_id
+			    (select *, sum(total_amount) as b_total_amount from tb_buy group by pro_id )
+				as b ON p.id = b.pro_id and b.id = s.buy_id
 			        left join
-			    tb_storage as sto ON p.id = sto.pro_id and sto.buy_id = b.id
+			    tb_storage as sto ON p.id = sto.pro_id
 			where 1=1
 				<if test="record != null">
 					<if test="record.name != null" >
