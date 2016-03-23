@@ -90,7 +90,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	@Override
 	@Transactional(readOnly = false)
 	public String insert(User record) {
-		super.insert(record);
+		if(record.getId()==null)
+			super.insert(record);
 		String password = PasswordHelper.encryptPassword(record.getPassword());
 		record.setPassword(password);
 		record.setCreateDate(new Date());
