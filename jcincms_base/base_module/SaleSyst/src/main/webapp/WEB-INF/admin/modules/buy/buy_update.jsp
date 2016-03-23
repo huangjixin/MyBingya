@@ -9,7 +9,7 @@
 	$().ready(function() {
 		validateForm();
 		createDataGrid();
-		var cDate = '${sale.createDate}';
+		var cDate = '${buy.createDate}';
 		if(cDate!=""){
 			$("#createDateInput").datebox("setValue",toDate(cDate));
 		}
@@ -164,8 +164,8 @@
 							<td nowrap="nowrap" align="left"><input id="totalAmount"
 								name="totalAmount" value="${buy.totalAmount}" readonly="true" />&nbsp;元&nbsp;<label
 								for="totalAmount" style="color:red;">*</label></td>
-							<th></th>
-							<td nowrap="nowrap" align="left"></td>
+							<th>购买日期：</th>
+							<td nowrap="nowrap" align="left"><input id="createDateInput" class="easyui-datebox"></td>
 							<th></th>
 							<td></td>
 						</tr>

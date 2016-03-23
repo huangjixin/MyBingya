@@ -10,7 +10,10 @@
 		validateForm();
 		createDataGrid();
 		
-		$("#createDate").datebox("setValue", "${sale.createDate}");
+		var cDate = '${sale.createDate}';
+		if(cDate!=""){
+			$("#createDateInput").datebox("setValue",toDate(cDate));
+		}
 	});
 
 	function createDataGrid(){
