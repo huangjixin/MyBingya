@@ -4,25 +4,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-	th {
-		font-weight: normal;
-		font-size: 12px;
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
+<script type="text/javascript">
+	$().ready(function() {
+		validateForm();
+	});
+	
+	function validateForm(){
+		$("#validForm").validate({
+			errorPlacement : function(error,element) {
+				$(element).closest("form").find("label[for='"+ element.attr("id")+ "']").append(error);
+			},errorElement : "span",
+			rules : {
+				<#list introspectedColumns as introspectedColumn>
+				${introspectedColumn}:{
+					required : true
+				}<#if ((introspectedColumn_index+1)<(introspectedColumns?size))>,</#if>
+				</#list>
+			},messages : {
+				<#list introspectedColumns as introspectedColumn>
+				${introspectedColumn}:{
+					required : "必填"
+				}<#if ((introspectedColumn_index+1)<(introspectedColumns?size))>,</#if>
+				</#list>
+			},
+			submitHandler : function(form) {
+					return true;
+				}
+			})
 	}
-</style>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/icon.css">
-<title>${objInst}查看</title>
+	function clearForm(){
+		<#list introspectedColumns as introspectedColumn>
+		$('#${introspectedColumn}').val("");
+		</#list>
+	}
+</script>
+<title>${objInst}添加</title>
 </head>
 <body>
-	<form:form id="validForm" commandName="${objInst}">
+	<form id="validForm" action="${r'${ctxAdmin}'}/${objInst}/create" method="post">
 				<div class="desc">
-					<b>${objInst}信息更新</b>
+					<b>${objInst}信息添加</b>&nbsp;&nbsp;<b style="color: red;">${r'${msg}'}</b>
 				</div>
+				<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
 						<td width="100%">
@@ -34,7 +58,11 @@
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 								</#if>
 									<th>&nbsp;${introspectedColumn}：</th>
-									<td nowrap="nowrap" align="left"><form:input path="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<form:errors path="${introspectedColumn}" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left">
+									<input id="${introspectedColumn}" 
+										   name="${introspectedColumn}" 
+										   value="${r'${'}${objInst}.${introspectedColumn}}"/>
+									&nbsp;<label for="proName" style="color:red;">*</label></td>
 								<#if (iSum%3!=0 && iSum%3==2)>
 								</tr>
 								</#if>
@@ -51,6 +79,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form:form>		
+		</form>		
 </body>
 </html>

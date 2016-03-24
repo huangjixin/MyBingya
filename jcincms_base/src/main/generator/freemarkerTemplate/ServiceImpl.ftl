@@ -61,7 +61,8 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	@Override
 	@Transactional
 	public String insert(${domainObjectName} record) {
-		 super.insert(record);
+		if(record.getId()==null)
+		 	super.insert(record);
 
 		record.setCreateDate(new Date());
 		int result = ${daoMapper}Mapper.insert(record);
@@ -135,8 +136,8 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	public ${domainObjectName} selectByPrimaryKey(String id) {
 		super.selectByPrimaryKey(id);
 
-		${domainObjectName} article = ${daoMapper}Mapper.selectByPrimaryKey(id);
-		return article;
+		${domainObjectName} record = ${daoMapper}Mapper.selectByPrimaryKey(id);
+		return record;
 	}
 
 	/*

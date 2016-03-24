@@ -5,43 +5,60 @@
 <html>
 <head>
 <title>${objInst}管理</title>
-
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="${domainObjectName}列表">
-<meta http-equiv="description" content="管理">
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/default/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/demo/demo.css"/>
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/icon.css"/>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
-	Date.prototype.format = function(format) {
-		var o = {
-			"M+" : this.getMonth() + 1, //month
-			"d+" : this.getDate(), //day
-			"h+" : this.getHours(), //hour
-			"m+" : this.getMinutes(), //minute
-			"s+" : this.getSeconds(), //second
-			"q+" : Math.floor((this.getMonth() + 3) / 3), //quarter
-			"S" : this.getMilliseconds()
-		//millisecond
-		}
-		if (/(y+)/.test(format))
-			format = format.replace(RegExp.$1, (this.getFullYear() + "")
-					.substr(4 - RegExp.$1.length));
-		for ( var k in o)
-			if (new RegExp("(" + k + ")").test(format))
-				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
-						: ("00" + o[k]).substr(("" + o[k]).length));
-		return format;
-	}
-
 	$().ready(function() {
+		createDataGrid();
 		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
 	});
 
+	function createDataGrid(){
+		$('#tgrid').datagrid({
+		    height: 350,
+		    pageSize : 10,
+			pageList : [ 5, 10, 15, 20 ],
+			nowrap : true,
+			striped : true,
+			collapsible : true,
+			url: '${r'${ctxAdmin}'}/${objInst}/select',
+			loadMsg : '数据装载中......',
+			method: 'get',
+			singleSelect : false,
+			selectOnCheck: true,
+			checkOnSelect: true,
+			rownumbers: false,
+			treeField: 'name',
+			showHeader: true,
+			fit:false,
+			fitColumns:true,
+			pagination : true,
+		    columns: [[
+		        { field: 'ck', checkbox: true },
+		        <#list introspectedColumns as introspectedColumn>
+		        	<#if (introspectedColumn=="id")>
+		        		{ field: 'id',hidden:true, title: 'id', align: 'center',width:80 }
+		        		<#else>
+		        		{ field: '${introspectedColumn}',title: '${introspectedColumn}', align: 'center',width:80 }
+		        	</#if>
+		        	<#if ((introspectedColumn_index+1)<(introspectedColumns?size))>,</#if>
+		        </#list>
+		    ]],
+		    onBeforeLoad: function (param) {
+		    },
+		    onLoadSuccess: function (data) {
+		        
+		    },
+		    onLoadError: function () {
+		        
+		    },
+		    onClickCell: function (rowIndex, field, value) {
+		        
+		    },
+		    onSelect:function (rowIndex, rowData){
+		    	
+		    }
+		});
+	}
 	// 移除条目；
 	function deleteRows(selecedRow) {
 		var pamameter = null;
@@ -108,7 +125,6 @@
 		if (e == 13 || e == 32) {
 			search();
 			e.returnValue = false;
-			//返回false，在没有使用document.loginForm.submit()时可用于取消提交
 		}
 	}
 
@@ -186,35 +202,7 @@
 			<input  id="${introspectedColumn}Input" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			</#list>
 		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
-			style="height:350px;"
-			data-options="
-								pageSize : 10,
-								pageList : [ 5, 10, 15, 20 ],
-								nowrap : true,
-								striped : true,
-								collapsible : true,
-								url: '${r'${ctxAdmin}'}/${objInst}/select',
-								loadMsg : '数据装载中......',
-								method: 'get',
-								singleSelect : false,
-								selectOnCheck: true,
-								checkOnSelect: true,
-								rownumbers: false,
-								treeField: 'name',
-								showHeader: true,
-								fit:false,
-								fitColumns:true,
-								pagination : true
-							">
-			<thead>
-				<tr>
-					<th data-options="field:'ck',checkbox:true"></th>
-					<#list introspectedColumns as introspectedColumn>
-					<th data-options="field:'${introspectedColumn}',align:'center'" width="100%">${introspectedColumn}</th>
-					</#list>
-				</tr>
-			</thead>
+		<table id="tgrid">
 		</table>
 	</div>
 </body>

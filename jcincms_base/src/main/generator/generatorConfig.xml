@@ -11,7 +11,7 @@
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<!-- 自定义 -->
-		<property name="moduleName" value="channel"></property>
+		<property name="moduleName" value="sale"></property>
 		<property name="mergeable" value="false"></property>
 		
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -31,7 +31,7 @@
 		<!-- oracle.jdbc.driver.OracleDriver jdbc:oracle:thin:@10.123.188.106:1521:ECS 
 			WSSMALL_DEVELOP WSSMALL_DEVELOP -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/jcincms3" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/woshang" userId="root"
 			password="qwer123456">
 		</jdbcConnection>
 
@@ -39,24 +39,35 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.modules.channel.domain"
+		<javaModelGenerator targetPackage="com.jcin.cms.modules.sale.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.modules.channel.dao"
+		<sqlMapGenerator targetPackage="com.jcin.cms.modules.sale.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.modules.channel.dao" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.modules.sale.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
+		<!-- <table tableName="tb_fruit_betresult" domainObjectName="FruitBetresult" />
+		<table tableName="tb_fruit_betresult_history" domainObjectName="FruitBetresultHistory" />
+		<table tableName="tb_fruit_record" domainObjectName="FruitRecord" /> -->
+<!-- 		<table tableName="tb_product" domainObjectName="Product" /> -->
+		<table tableName="tb_storage" domainObjectName="Storage" />
+<!-- 		<table tableName="tb_sale" domainObjectName="Sale" /> -->
+<!-- 		<table tableName="tb_buy" domainObjectName="Buy" /> -->
+		<!-- <table tableName="tb_account" domainObjectName="Account" /> -->
+		<!-- <table tableName="agent_customer" domainObjectName="AgentCustomer" /> -->
 		<!-- <table tableName="tb_assets" domainObjectName="Assets" /> -->
 		<!-- <table tableName="busi_comment" domainObjectName="Comment" />  -->
-        <table tableName="busi_channel" domainObjectName="Channel" />
+       <!--  <table tableName="tb_vote_topic" domainObjectName="VoteTopic" />
+        <table tableName="tb_vote_choice" domainObjectName="VoteChoice" /> -->
+        <!-- <table tableName="busi_bet" domainObjectName="Channel" /> -->
 		<!-- <table tableName="busi_document" domainObjectName="Document" /> -->
 		<!-- <table tableName="tb_db_backup" domainObjectName="DbBackup" /> -->
 <!-- 		<table tableName="tb_user_organization" domainObjectName="UserOrganization" /> -->
@@ -66,10 +77,10 @@
 		<!-- <table tableName="tb_organization_resource" domainObjectName="OrganizationResource" /> -->
 		<!-- <table tableName="tb_dictionary" domainObjectName="Dictionary" /> -->
 		<!-- <table tableName="tb_user" domainObjectName="User" /> -->
-		<!-- <table tableName="tb_role" domainObjectName="Role" />
-		<table tableName="tb_user_role" domainObjectName="UserRole" /> 
+		 <!-- <table tableName="tb_role" domainObjectName="Role" /> -->
+		<!--<table tableName="tb_user_role" domainObjectName="UserRole" />-->
 		
-		<table tableName="tb_resource" domainObjectName="Resource" />-->
+		<!-- <table tableName="tb_resource" domainObjectName="Resource" /> -->
 		<!-- <table tableName="tb_operationlog" domainObjectName="Operationlog" 
 			/> -->
 

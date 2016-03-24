@@ -4,23 +4,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-	th {
-		font-weight: normal;
-		font-size: 12px;
-	}
-</style>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${r'${ctx}'}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css" href="${r'${ctx}'}/js/jquery-easyui/themes/icon.css">
+<%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
-		
+		validateForm();
 	});
 
+	function validateForm(){
+		$("#validForm").validate({
+			errorPlacement : function(error,element) {
+				$(element).closest("form").find("label[for='"+ element.attr("id")+ "']").append(error);
+			},errorElement : "span",
+			rules : {
+				<#list introspectedColumns as introspectedColumn>
+				${introspectedColumn}:{
+					required : true
+				}<#if ((introspectedColumn_index+1)<(introspectedColumns?size))>,</#if>
+				</#list>
+			},messages : {
+				<#list introspectedColumns as introspectedColumn>
+				${introspectedColumn}:{
+					required : "必填"
+				}<#if ((introspectedColumn_index+1)<(introspectedColumns?size))>,</#if>
+				</#list>
+			},
+			submitHandler : function(form) {
+					return true;
+				}
+			})
+	}
+	
 	function clearForm(){
 		<#list introspectedColumns as introspectedColumn>
 		$('#${introspectedColumn}').val("");
@@ -30,7 +43,7 @@
 <title>${objInst}更新</title>
 </head>
 <body>
-	<form:form id="validForm" action="${r'${ctxAdmin}'}/${objInst}/update/${r'${'}${objInst}.id}" method="post" commandName="${objInst}">
+	<form id="validForm" action="${r'${ctxAdmin}'}/${objInst}/update/${r'${'}${objInst}.id}" method="post">
 				<input name="id" value="${r'${'}${objInst}.id}" type="hidden" />
 				<div class="desc">
 					<b>${objInst}信息更新</b>&nbsp;&nbsp;<b style="color: red;">${r'${msg}'}</b>
@@ -47,7 +60,7 @@
 								<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 								</#if>
 									<th>&nbsp;${introspectedColumn}：</th>
-									<td nowrap="nowrap" align="left"><form:input id="${introspectedColumn}" path="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<span style="color: red;">*</span>&nbsp;<form:errors path="${introspectedColumn}" cssStyle="color:red;"></form:errors></td>
+									<td nowrap="nowrap" align="left"><input id="${introspectedColumn}" name="${introspectedColumn}" value="${r'${'}${objInst}.${introspectedColumn}}"/>&nbsp;<span style="color: red;">*</span></td>
 								<#if (iSum%3!=0 && iSum%3==2)>
 								</tr>
 								</#if>
@@ -64,6 +77,6 @@
 						</td>
 					</tr>
 				</table>	
-		</form:form>		
+		</form>		
 </body>
 </html>
