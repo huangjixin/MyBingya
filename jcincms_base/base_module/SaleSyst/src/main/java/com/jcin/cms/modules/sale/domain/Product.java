@@ -1,12 +1,10 @@
 package com.jcin.cms.modules.sale.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jcin.cms.modules.syst.dao.CustomDateSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Product implements Serializable {

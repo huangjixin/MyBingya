@@ -102,4 +102,8 @@ public interface ProductMapper {
     List<ProductSaleTj> selectTongjiByExample(@Param("record") Product record, @Param("example") ProductCriteria example);
 
 	int countTongjiByExample(@Param("record") Product record, @Param("example") ProductCriteria example);
+	
+	List<ProductSaleTj> selectProByExample(@Param("record") Product record, @Param("example") ProductCriteria example);
+	
+	int countProByExample(@Param("record") Product record, @Param("example") ProductCriteria example);
 }

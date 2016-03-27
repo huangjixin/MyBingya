@@ -284,32 +284,209 @@
       limit #{example.page.start} , #{example.page.pageSize}
     </if>
   </sql>
+  
+  <select id="selectProByExample" parameterType="map" resultType="com.jcin.cms.modules.sale.domain.ProductSaleTj" >
+		select 
+			<if test="record != null">
+				<if test="record.countTotal ==false" >
+			      	p.id,
+			      	p.name,
+			    </if>
+			</if>
+	    	sto.total_procount as procount,
+	    	s.s_total_amount,
+	    	b.b_total_amount
+		from
+	    	tb_product as p
+	        	left join
+	    	(select 
+	        	*, sum(total_amount) as s_total_amount
+	    		from
+	        	tb_sale
+	    		where
+	        		1 = 1 
+	        		<if test="record != null">
+				    	<if test="record.countTotal ==false" >
+					      	<if test="record.name != null" >
+					      		and pro_name like '%${record.name}%'
+					    	</if>
+					    </if>
+				    	<if test="record.beginDate != null" >
+					      	and create_date >= #{record.beginDate}
+				    	</if>
+				    	<if test="record.endDate != null" >
+					      	and create_date &lt;= #{record.endDate}
+				    	</if>
+				    	<if test="record.countTotal ==false" >
+					      	group by pro_id
+					    </if>
+					</if>
+			) as s ON s.pro_id = p.id
+	        left join
+	    	(select 
+	        	*, sum(total_amount) as b_total_amount
+	    		from
+	        	tb_buy
+		 		where
+	        	1 = 1 
+	        	<if test="record != null">
+				    	<if test="record.countTotal ==false" >
+					      	<if test="record.name != null" >
+					      		and pro_name like '%${record.name}%'
+					    	</if>
+					    </if>
+				    	<if test="record.beginDate != null" >
+					      	and create_date >= #{record.beginDate}
+				    	</if>
+				    	<if test="record.endDate != null" >
+					      	and create_date &lt;= #{record.endDate}
+				    	</if>
+				    	<if test="record.countTotal ==false" >
+					      	group by pro_id
+					    </if>
+				</if>
+	        ) as b ON p.id = b.pro_id
+	        left join
+	    	(select 
+	        	*, sum(procount) as total_procount
+	    		from
+	        	tb_storage
+	        	where
+	        	1 = 1
+	    		<if test="record != null">
+				    <if test="record.countTotal ==false" >
+					   group by pro_id
+					 </if>
+				</if>) as sto ON p.id = sto.pro_id
+		where
+	        1 = 1 
+	        <if test="record != null">
+				 <if test="record.countTotal ==false" >
+					   <if test="record.name != null" >
+					      		and p.name like '%${record.name}%'
+					    	</if>
+					    </if>
+				    	<if test="record.countTotal ==false" >
+					      	group by p.id
+					      	order by s.s_total_amount desc	
+					    </if>
+			</if>
+			<if test="_parameter != null" >
+	      		<include refid="tongjiSuffix" />
+	    	</if>													
+		
+  </select>
+  <select id="countProByExample" parameterType="map" resultType="java.lang.Integer" >
+		select 
+		   count(*)
+		from (
+				select 
+					<if test="record != null">
+						<if test="record.countTotal ==false" >
+					      	p.id,
+					      	p.name,
+					    </if>
+					</if>
+			    	sto.total_procount as procount,
+			    	s.s_total_amount,
+			    	b.b_total_amount
+				from
+			    	tb_product as p
+			        	left join
+			    	(select 
+			        	*, sum(total_amount) as s_total_amount
+			    		from
+			        	tb_sale
+			    		where
+			        		1 = 1 
+			        		<if test="record != null">
+						    	<if test="record.countTotal ==false" >
+							      	<if test="record.name != null" >
+							      		and pro_name like '%${record.name}%'
+							    	</if>
+							    </if>
+						    	<if test="record.beginDate != null" >
+							      	and create_date >= #{record.beginDate}
+						    	</if>
+						    	<if test="record.endDate != null" >
+							      	and create_date &lt;= #{record.endDate}
+						    	</if>
+						    	<if test="record.countTotal ==false" >
+							      	group by pro_id
+							    </if>
+							</if>
+					) as s ON s.pro_id = p.id
+			        left join
+			    	(select 
+			        	*, sum(total_amount) as b_total_amount
+			    		from
+			        	tb_buy
+				 		where
+			        	1 = 1 
+			        	<if test="record != null">
+						    	<if test="record.countTotal ==false" >
+							      	<if test="record.name != null" >
+							      		and pro_name like '%${record.name}%'
+							    	</if>
+							    </if>
+						    	<if test="record.beginDate != null" >
+							      	and create_date >= #{record.beginDate}
+						    	</if>
+						    	<if test="record.endDate != null" >
+							      	and create_date &lt;= #{record.endDate}
+						    	</if>
+						    	<if test="record.countTotal ==false" >
+							      	group by pro_id
+							    </if>
+						</if>
+			        ) as b ON p.id = b.pro_id
+			        left join
+			    	(select 
+			        	*, sum(procount) as total_procount
+			    		from
+			        	tb_storage
+			        	where
+			        	1 = 1
+			    		<if test="record != null">
+						    <if test="record.countTotal ==false" >
+							   group by pro_id
+							 </if>
+						</if>) as sto ON p.id = sto.pro_id
+				where
+			        1 = 1 
+			        <if test="record != null">
+						 <if test="record.countTotal ==false" >
+							   <if test="record.name != null" >
+							      		and p.name like '%${record.name}%'
+							    	</if>
+							    </if>
+						    	<if test="record.countTotal ==false" >
+							      	group by p.id
+							      	order by s.s_total_amount desc	
+							    </if>
+					</if>
+		) aa
+  </select>
+  
   <select id="selectTongjiByExample" parameterType="map" resultType="com.jcin.cms.modules.sale.domain.ProductSaleTj" >
 		select 
 			<if test="record != null">
 				<if test="record.countTotal ==false" >
-			      	 p.name,
+			      	s.pro_name as name,
 			    </if>
 			</if>
-		    sto.procount as procount,
-		    s.s_total_amount,
-		    b.b_total_amount,
-		    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
-		from
-		    tb_product as p
-		        left join
-		    (select *, sum(total_amount) as s_total_amount from tb_sale group by pro_id ) 
-			as s ON s.pro_id = p.id
-		        left join
-		    (select *, sum(total_amount) as b_total_amount from tb_buy group by pro_id )
-			as b ON p.id = b.pro_id and b.id = s.buy_id
-		        left join
-		    tb_storage as sto ON p.id = sto.pro_id
+				sum(s.total_amount) as s_total_amount,
+			    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
+			FROM
+			    tb_sale s
+			        left join
+			    tb_buy
+				b ON b.id = s.buy_id and b.pro_id = s.pro_id 
 		    where 1=1
 		<if test="record != null">
 			<if test="record.countTotal ==false" >
 		      	<if test="record.name != null" >
-		      	and p.name like '%${record.name}%'
+		      	and s.pro_name like '%${record.name}%'
 		    	</if>
 		    </if>
 			<if test="record.beginDate != null" >
@@ -323,7 +500,7 @@
 		</if>
 		<if test="record != null">
 			<if test="record.countTotal ==false" >
-		      	group by p.id
+		      	group by s.pro_id
 				order by s_total_amount desc
 		    </if>
 		</if>
@@ -338,27 +515,20 @@
 			select 
 				<if test="record != null">
 					<if test="record.countTotal ==false" >
-				      	 p.name,
+				      	s.pro_name  as name,
 				    </if>
 				</if>
-			    sto.procount as procount,
-			    s.s_total_amount,
-			    b.b_total_amount,
-			    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
-			from
-			    tb_product as p
-			        left join
-			    (select *, sum(total_amount) as s_total_amount from tb_sale group by pro_id ) 
-				as s ON s.pro_id = p.id
-			        left join
-			    (select *, sum(total_amount) as b_total_amount from tb_buy group by pro_id )
-				as b ON p.id = b.pro_id and b.id = s.buy_id
-			        left join
-			    tb_storage as sto ON p.id = sto.pro_id
-			where 1=1
+					sum(s.total_amount) as s_total_amount,
+				    sum(s.sale_num * (s.sale_amount - b.buy_amount)) as profit
+				FROM
+				    tb_sale s
+				        left join
+				    tb_buy
+					b ON b.id = s.buy_id and b.pro_id = s.pro_id 
+				where 1=1
 				<if test="record != null">
 					<if test="record.name != null" >
-		      			and p.name like '%${record.name}%'
+		      			and s.pro_name like '%${record.name}%'
 		    		</if>
 					<if test="record.beginDate != null" >
 		      			and s.create_date >= #{record.beginDate}
@@ -369,7 +539,12 @@
 		      			and b.create_date &lt;= #{record.endDate}
 		    		</if>
 				</if>
-			group by p.id
+				<if test="record != null">
+					<if test="record.countTotal ==false" >
+				      	group by s.pro_id
+						order by s_total_amount desc
+				    </if>
+				</if>	
 		) aa
   </select>
 </mapper>

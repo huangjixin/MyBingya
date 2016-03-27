@@ -27,4 +27,6 @@ public interface IProductService extends IBaseService<Product, String> {
 	List<Product> selectByExample(ProductCriteria criteria);
 	
 	Page selectTongjiByExample(Product record,ProductCriteria example);
+
+	Page selectProByExample(Product record, ProductCriteria example);
 }

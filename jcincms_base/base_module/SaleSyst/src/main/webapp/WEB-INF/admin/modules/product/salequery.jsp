@@ -40,10 +40,7 @@
 		        { field: 'id',hidden:true, title: 'id', align: 'center',width:80 },
 		        { field: 'name', title: '商品名称', align: 'center',width:80 },
 		        { field: 's_total_amount', title: '营业额', align: 'center',width:80 },
-		        { field: 'b_total_amount', title: '成本', align: 'center',width:80 },
-		        { field: 'profit', title: '利润', align: 'center',width:80 },
-		        { field: 'procount', title: '库存', align: 'center',width:80 },
-		        { field: 'createDate', title: '日期', align: 'center',width:80 }
+		        { field: 'profit', title: '利润', align: 'center',width:80 }
 		    ]],
 		    onBeforeLoad: function (param) {
 		    },
@@ -80,7 +77,7 @@
 			queryParams.endDate = $('#endDateInput').datebox('getValue');//$("#endDateInput").val();
 		}
 		
-		queryParams.countTotal = document.getElementById("countTotal").checked;
+// 		queryParams.countTotal = document.getElementById("countTotal").checked;
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -125,7 +122,7 @@
 				onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>结束日期:</label> <input id="endDateInput"  class="easyui-datetimebox"
 				onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label><input id="countTotal" name="countTotal" type="checkbox" />算总账 </label> 
+<!-- 			<label><input id="countTotal" name="countTotal" type="checkbox" />算总账 </label>  -->
 		</div>
 		<table id="tgrid">
 		</table>

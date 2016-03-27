@@ -240,9 +240,9 @@
 				onclick="deleteRows();" /> <input type="button" value="更新"
 				onclick="update();" />  <input type="button" id="searchBtn" value="搜索"
 				onclick="search();" /> <input type="button" id="clearBtn"
-				value="清除" onclick="clearSearch();" /> <input type="button"
+				value="清除" onclick="clearSearch();" /><!--  <input type="button"
 				id="exportBtn" value="导出excel" onclick="exportExcel()" /> <input
-				type="button" id="importBtn" value="导入excel" onclick="importExcel()" />
+				type="button" id="importBtn" value="导入excel" onclick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
 			<label>日期:</label> <input id="createDateInput"

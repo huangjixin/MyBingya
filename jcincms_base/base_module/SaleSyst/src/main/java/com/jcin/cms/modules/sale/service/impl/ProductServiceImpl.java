@@ -9,6 +9,7 @@ package com.jcin.cms.modules.sale.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -230,6 +231,21 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 		List<ProductSaleTj> list = productMapper.selectTongjiByExample(record,example);
 		page.setRows(list);
 		int total = productMapper.countTongjiByExample(record,example);
+		page.setTotal(total);
+		return page;
+	}
+
+	@Override
+	public Page selectProByExample( Product record, ProductCriteria example) {
+		Page page = new Page();
+		if(null != example){
+			if(null != example.getPage()){
+				page = example.getPage();
+			}
+		}
+		List<ProductSaleTj> list = productMapper.selectProByExample(record,example);
+		page.setRows(list);
+		int total = productMapper.countProByExample(record,example);
 		page.setTotal(total);
 		return page;
 	}

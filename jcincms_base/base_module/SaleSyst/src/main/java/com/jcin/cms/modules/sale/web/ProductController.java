@@ -148,6 +148,9 @@ public class ProductController extends BaseController<Product>{
 	public Page select(@ModelAttribute Page page, @ModelAttribute Product product,Model uiModel,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		if("".equals(product.getName())){
+			product.setName(null);
+		}
 		super.select(page, uiModel, httpServletRequest,
 				httpServletResponse);
 		ProductCriteria productCriteria = new ProductCriteria();
@@ -172,7 +175,7 @@ public class ProductController extends BaseController<Product>{
 		if (null != product.getDescription()  && !"".equals(product.getDescription())) {
 		  	criteria.andDescriptionLike("%" + product.getDescription() + "%");
 		}
-		page = productService.select(productCriteria);
+		page = productService.selectProByExample(product,productCriteria);
 		return page;
 	}
 	

@@ -37,7 +37,10 @@
 		        { field: 'ck', checkbox: true },
 		        { field: 'id',hidden:true, title: 'id', align: 'center',width:80 },
 		        { field: 'name', title: '商品名称', align: 'center',width:80 },
-		        { field: 'createDate', title: '日期', align: 'center',width:80 }
+		       // { field: 'procount', title: '库存', align: 'center',width:80 },
+		        { field: 's_total_amount', title: '销售总额', align: 'center',width:80 },
+		        { field: 'b_total_amount', title: '总成本', align: 'center',width:80 },
+		        { field: 'createDate', title: '录入日期', align: 'center',width:80 }
 		    ]],
 		    onBeforeLoad: function (param) {
 		    },
@@ -129,24 +132,17 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
 		if ($("nameInput").val() != "") {
 			queryParams.name = $("#nameInput").val();
 		}
-		if ($("createDateInput").val() != "") {
-			queryParams.createDate = $("#createDateInput").val();
+		if ($("beginDateInput").val() != "") {
+			queryParams.beginDate = $('#beginDateInput').datebox('getValue');//$("#beginDateInput").val();
 		}
-		if ($("createByInput").val() != "") {
-			queryParams.createBy = $("#createByInput").val();
+		if ($("endDateInput").val() != "") {
+			queryParams.endDate = $('#endDateInput').datebox('getValue');//$("#endDateInput").val();
 		}
-		if ($("parentIdInput").val() != "") {
-			queryParams.parentId = $("#parentIdInput").val();
-		}
-		if ($("descriptionInput").val() != "") {
-			queryParams.description = $("#descriptionInput").val();
-		}
+		
+// 		queryParams.countTotal = document.getElementById("countTotal").checked;
 
 		$("#tgrid").datagrid("getPager").pagination({
 			pageNumber : 1
@@ -158,12 +154,7 @@
 
 	//清除
 	function clearSearch() {
-		$("#idInput").val("");
 		$("#nameInput").val("");
-		$("#createDateInput").val("");
-		$("#createByInput").val("");
-		$("#parentIdInput").val("");
-		$("#descriptionInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -198,16 +189,17 @@
 				onclick="update();" /> <input type="button" value="营业详情"
 				onclick="show();" /> <input type="button" id="searchBtn" value="搜索"
 				onclick="search();" /> <input type="button" id="clearBtn"
-				value="清除" onclick="clearSearch();" /> <input type="button"
-				id="exportBtn" value="导出excel" onclick="exportExcel()" />
+				value="清除" onclick="clearSearch();" /> <!-- <input type="button"
+				id="exportBtn" value="导出excel" onclick="exportExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
 			<label>商品名称:</label> <input id="nameInput"
 				onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>开始日期:</label> <input id="createDateInput"
+			<label>开始日期:</label> <input id="beginDateInput"  class="easyui-datetimebox"
 				onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>结束日期:</label> <input id="createDateInput"
+			<label>结束日期:</label> <input id="endDateInput"  class="easyui-datetimebox"
 				onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<!-- <label><input id="countTotal" name="countTotal" type="checkbox" />算总账 </label>  -->
 		</div>
 		<table id="tgrid">
 		</table>
