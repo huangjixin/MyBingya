@@ -62,7 +62,7 @@ public class HtmlGeneratorUtils {
 		List<Channel> result = new ArrayList<Channel>();
 		searchChannel(menus, id, result);
 		if (result.size() == 0) {
-			return ;
+			return;
 		}
 
 		Page page = new Page();
@@ -79,6 +79,27 @@ public class HtmlGeneratorUtils {
 			}
 		}
 
+		/*// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				toGeneratedChannel.getCode(), recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+
+		// 点击率排名
+		Page page1 = new Page();
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				toGeneratedChannel.getCode(), page1);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}*/
+		
 		if (null == toGeneratedChannel.getChildren()
 				|| toGeneratedChannel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(toGeneratedChannel.getCode(),page);
@@ -286,8 +307,31 @@ public class HtmlGeneratorUtils {
 			root.put("page", page);
 		}
 
+		/*// 查询栏目推荐。
+		Page recommendPage = new Page();
+		recommendPage.setPageSize(8);
+		List<Document> recommendDocs = documentService.getDocByChannelCode(
+				toGeneratedChannel.getCode(), recommendPage);
+		for (Document document : recommendDocs) {
+			Channel channel2 = channelService.selectByPrimaryKey(document
+					.getChannelId());
+			document.setChannel(channel2);
+		}
+
+		// 点击率排名
+		Page page1 = new Page();
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				toGeneratedChannel.getCode(), page1);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}*/
+		
 		List<Channel> navChan = getParentChannels(menus, toGeneratedChannel);
 		
+//		root.put("clickCountDocs", clickCountDocs);
+//		root.put("recommendDocs", recommendDocs);// 推荐文章。
 		root.put("channel", toGeneratedChannel);
 		root.put("subChannels", toGeneratedChannel.getChildren());
 		root.put("menusMap", menusMap);
@@ -330,7 +374,12 @@ public class HtmlGeneratorUtils {
 				}
 			}
 		}
-		
+		/*
+		 * String templateFile = toGeneratedChannel.getChildren() != null &&
+		 * toGeneratedChannel.getChildren().size() > 0 ? "template" +
+		 * File.separator + "channels.ftl" : "template" + File.separator +
+		 * "channel.ftl";
+		 */
 		String htmlFile = toGeneratedFiles + File.separator + "docs"
 				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		FileUtils.createDirectory(toGeneratedFiles + File.separator + "docs");
@@ -746,7 +795,7 @@ public class HtmlGeneratorUtils {
 		return result;
 	}
 
-	private static Channel searchChannel(List<Channel> list, String id,
+	public static Channel searchChannel(List<Channel> list, String id,
 			List<Channel> result) {
 		Channel chan = null;
 		for (Channel channel : list) {
@@ -762,7 +811,7 @@ public class HtmlGeneratorUtils {
 		return null;
 	}
 
-	private static Channel searchChannel(List<Channel> list, Channel currentChannel,
+	public static Channel searchChannel(List<Channel> list, Channel currentChannel,
 			List<Channel> result) {
 		Channel chan = null;
 		for (Channel channel : list) {

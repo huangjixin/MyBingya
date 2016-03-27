@@ -34,8 +34,6 @@ import com.jcin.cms.web.BaseController;
 @SuppressWarnings("rawtypes")
 @Controller
 @RequestMapping(value = { "", "/" })
-// @Scope(value="prototype")
-// @Scope("session")
 public class DefaultIndexController extends BaseController {
 	private static Logger logger = Logger
 			.getLogger(DefaultIndexController.class.getName());
@@ -61,7 +59,7 @@ public class DefaultIndexController extends BaseController {
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping(value = { "", "/" })
+	@RequestMapping(value = { "", "/", "index" })
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 

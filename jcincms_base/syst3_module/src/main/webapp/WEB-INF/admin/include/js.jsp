@@ -54,9 +54,57 @@
 	}
 </script>
 <style type="text/css">
-th {
-	font-weight: normal;
-	font-size: 12px;
-	width: 50px;
+#validForm .input{
+	height:20px;
+	width: 300px;
 }
+#validForm .descrition{
+	height:80px;
+	width: 450px;
+}
+
+
+table.table {
+	width: 100%;
+	font-family: verdana, arial, sans-serif;
+	font-size: 14px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #B9D8F3;
+	border-collapse: collapse;
+	font-family: verdana, arial, sans-serif;
+}
+
+table.table th {
+	text-align:right;
+	font-size: 14px;
+	background: #F4FAFF;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #B9D8F3;
+}
+
+table.table td {
+	text-align:left;
+/* 	background: #dcddc0; */
+	background: #F4FAFF;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #B9D8F3;
+	font-size: 16px;
+/* 	font-size: 1.5em; */
+}
+
+/* table.table img {
+	width:50px;
+	height:auto;
+} */
+
+/* th {
+	font-weight: normal;
+	font-size: 16px;
+	width: 50px;
+} */
 </style>

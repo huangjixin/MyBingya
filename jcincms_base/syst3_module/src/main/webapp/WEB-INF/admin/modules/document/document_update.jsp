@@ -21,8 +21,10 @@
 	var docTemp = "${document.documentTemplete}";
 	var geneTemp = "${document.geneTemplate}";
 	var mGeneTemp = "${document.mGeneTemplate}";
-	
+
 	$().ready(function() {
+		validateForm();
+		
 		createDocumentTree();
 		createFileTree();
 		createGeneTempleteTree();
@@ -33,19 +35,56 @@
 		});
 	});
 
+	function validateForm(){
+		$("#validForm").validate({
+			errorPlacement: function(error, element) {
+			// Append error within linked label
+			$( element )
+				.closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" )
+						.append( error );
+		},
+		errorElement: "span",
+			rules : {
+				channelId : {
+					required : true
+				},
+				title : {
+					required : true
+				},
+				keyword : {
+					required : true
+				}
+			},
+			messages : {
+				channelId : {
+					required : "必填"
+				},
+				title : {
+					required : "必填"
+				},
+				keyword : {
+					required : "必填"
+				}
+			},submitHandler:function(form) {
+				
+  			}
+		})
+	}
+	
 	//创建文档树。
 	function createDocumentTree() {
 		$('#channelId').combotree({
 			url : '${ctxAdmin}/document/getChannelTree',
 			valuefield : 'id',
 			textfield : 'name',
-			missingMessage:"上级菜单不能为空！",
+			missingMessage : "上级菜单不能为空！",
 			required : false,
 			editable : false,
 			onClick : function(node) {
 				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
 				$('#parentId').val(node.id);*/
-			}, onLoadSuccess : function(node, data) {
+			},
+			onLoadSuccess : function(node, data) {
 				$('#channelId').combotree('tree').tree("collapseAll");
 				var cId = "${document.channelId}";
 				if (cId != "") {
@@ -54,12 +93,12 @@
 			}
 		});
 	}
-	
+
 	//创建文件树。
 	function createFileTree() {
-		var checked = $('#refreshFiles').is(':checked')?true:false;
+		var checked = $('#refreshFiles').is(':checked') ? true : false;
 		$('#docTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh='+checked,
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
 			valuefield : 'id',
 			textfield : 'name',
 			required : false,
@@ -70,26 +109,27 @@
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#docTemplete').combotree('tree').tree("collapseAll");
-					var dTemplete = "${document.documentTemplete}";
-				   $('#docTemplete').combotree("setValue", dTemplete);
-			},onSelect: function (item) {  
-                var parent = item;  
-                var tree = $('#docTemplete').combotree('tree');  
-                var path = new Array();  
-                do {  
-                    path.unshift(parent.text);  
-                    var parent = tree.tree('getParent', parent.target);  
-                } while (parent);  
-                var pathStr = '';  
-                for (var i = 0; i < path.length; i++) {  
-                    pathStr += path[i];  
-                    if (i < path.length - 1) {  
-                        pathStr += '/';  
-                    }  
-                }  
-                
-                docTemp = pathStr; 
-            }  
+				var dTemplete = "${document.documentTemplete}";
+				$('#docTemplete').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#docTemplete').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				docTemp = pathStr;
+			}
 		});
 	}
 
@@ -109,24 +149,25 @@
 				$('#geneTemplate').combotree('tree').tree("collapseAll");
 				var gTemplete = "${document.geneTemplate}";
 				$('#geneTemplate').combotree("setValue", gTemplete);
-			},onSelect: function (item) {  
-                var parent = item;  
-                var tree = $('#geneTemplate').combotree('tree');  
-                var path = new Array();  
-                do {  
-                    path.unshift(parent.text);  
-                    var parent = tree.tree('getParent', parent.target);  
-                } while (parent);  
-                var pathStr = '';  
-                for (var i = 0; i < path.length; i++) {  
-                    pathStr += path[i];  
-                    if (i < path.length - 1) {  
-                        pathStr += '/';  
-                    }  
-                }  
-                
-                geneTemp = pathStr; 
-            }  
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#geneTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				geneTemp = pathStr;
+			}
 		});
 	}
 	//创建移动页面模板树。
@@ -145,27 +186,28 @@
 				$('#mGeneTemplate').combotree('tree').tree("collapseAll");
 				var gTemplete = "${document.mGeneTemplate}";
 				$('#mGeneTemplate').combotree("setValue", gTemplete);
-			},onSelect: function (item) {  
-                var parent = item;  
-                var tree = $('#mGeneTemplate').combotree('tree');  
-                var path = new Array();  
-                do {  
-                    path.unshift(parent.text);  
-                    var parent = tree.tree('getParent', parent.target);  
-                } while (parent);  
-                var pathStr = '';  
-                for (var i = 0; i < path.length; i++) {  
-                    pathStr += path[i];  
-                    if (i < path.length - 1) {  
-                        pathStr += '/';  
-                    }  
-                }  
-                
-                mGeneTemp = pathStr; 
-            }  
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#mGeneTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				mGeneTemp = pathStr;
+			}
 		});
 	}
-	
+
 	function clearParentInput() {
 		$('#channelId').combotree('clear');
 	}
@@ -174,13 +216,13 @@
 		$('#docTemplete').combotree('clear');
 		docTemp = "";
 	}
-	
-	function cleargeneTemplate(){
+
+	function cleargeneTemplate() {
 		$('#geneTemplate').combotree('clear');
 		geneTemp = "";
 	}
-	
-	function clearmGeneTemplate(){
+
+	function clearmGeneTemplate() {
 		$('#mGeneTemplate').combotree('clear');
 		mGeneTemp = "";
 	}
@@ -188,13 +230,13 @@
 	//jquery 提交表单。
 	function submitForm() {
 		var contxt = ue.getContentTxt();
-		if(contxt!=$('#contentShort').val()){
-			if(contxt.length>200){
-				contxt = contxt.substring(0,200);
+		if (contxt != $('#contentShort').val()) {
+			if (contxt.length > 200) {
+				contxt = contxt.substring(0, 200);
 			}
 			$('#contentShort').val(contxt);
 		}
-		
+
 		var cont = ue.getContent();
 		$('#content').val(cont);
 		$('#documentTemplete').val(docTemp);
@@ -206,7 +248,8 @@
 	function selectFile() {
 		$('#file').click();
 	}
-
+	var uploadCount=0;
+	
 	function uploadImage() {
 		// 		alert("图片上传失败,请重新选择图片");
 		// 		$('#msg').text('正在上传'');
@@ -224,166 +267,187 @@
 			dataType : "text",
 			success : function(data, status) {
 				data = data.replace(/<pre.*?>/g, ''); //ajaxFileUpload会对服务器响应回来的text内容加上<pre style="....">text</pre>前后缀   
-				data = data.replace(/<PRE.*?>/g, ''); 
-				data = data.replace("<PRE>", ''); 
-				data = data.replace("</PRE>", ''); 
-				data = data.replace("<pre>", ''); 
-				data = data.replace("</pre>", ''); 
-				data = jQuery.parseJSON( data );
-// 				var a_id=eval('data'）;
-				alert(data.msg);
+				data = data.replace(/<PRE.*?>/g, '');
+				data = data.replace("<PRE>", '');
+				data = data.replace("</PRE>", '');
+				data = data.replace("<pre>", '');
+				data = data.replace("</pre>", '');
+				data = jQuery.parseJSON(data);
+				// 				var a_id=eval('data'）;
+				document.getElementById("msg").innerHTML = data.msg;
+				var fN='fileName'+uploadCount;
+				var fA='fileAddr'+uploadCount;
+				
 				$('#fileName').val(data.fileName);
-				$('#fileAddr').val(data.fileAddr);
 				$('#size').val(data.size);
-				if(''==$('#assetsIds').val()){
-					$('#assetsIds').val(data.assetsId);
+				
+				if(uploadCount==0){
+					$('#fileAddr').val(data.fileAddr);
+					$('#size').val(data.size);
 				}else{
+					var insertText = '<div><input value="'+data.fileAddr+'" class="input" />&nbsp;<input value="插入" type="button" onclick="insertContent(\''+data.fileAddr+'\');" /></div>';
+					$("#fileAddrTd").append(insertText);
+				}
+				
+				uploadCount++;
+				
+				if ('' == $('#assetsIds').val()) {
+					$('#assetsIds').val(data.assetsId);
+				} else {
 					var assIds = $('#assetsIds').val();
-					assIds += ","+data.assetsId;
+					assIds += "," + data.assetsId;
 					$('#assetsIds').val(assIds);
 				}
 			},
 			error : function(data, status, e) {
-				alert("图片上传失败,请重新选择图片");
+				document.getElementById("msg").innerHTML = "图片上传失败,请重新选择图片";
 			}
 		});
 		return false;
 	}
-	
-	function insert(){
-		var str = '<p><img src="${ctx}'+$('#fileAddr').val()+'" title="'+$('#fileName').val()+'" alt="'+$('#fileName').val()+'"/></p>';
-		ue.execCommand( 'inserthtml', str);
+
+	function insertContent(content) {
+		var contextPath = "${ctx}";
+		if(contextPath==""){
+			contextPath = "/";
+		}else{
+			contextPath = "/"+contextPath+"/";
+		}
+		var str = '<p><img src="'+contextPath + content + '" title="" alt=""/></p>';
+		ue.execCommand('inserthtml', str);
+	}
+
+	function insert() {
+		var contextPath = "${ctx}";
+		if(contextPath==""){
+			contextPath = "/";
+		}else{
+			contextPath = "/"+contextPath+"/";
+		}
+		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt=""/></p>';
+		ue.execCommand('inserthtml', str);
 	}
 </script>
 <title>文档修改</title>
 </head>
 <body>
 	<form:form id="validForm"
-		action="${ctxAdmin}/document/update/${document.id}" method="post" commandName="document">
+		action="${ctxAdmin}/document/update/${document.id}" method="post"
+		commandName="document">
 		<input name="id" value="${document.id}" type="hidden" />
-		<input id="contentShort" name="contentShort" value="${document.contentShort}" type="hidden" />
-		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}" type="hidden" />
-		<input id="documentTemplete" name="documentTemplete" value="${document.documentTemplete}" type="hidden" />
-		<input id="gTemplete" name="geneTemplate" value="${document.geneTemplate}" type="hidden" />
-		<input id="mgTemplete" name="mGeneTemplate" value="${document.mGeneTemplate}" type="hidden" />
+		<input id="contentShort" name="contentShort"
+			value="${document.contentShort}" type="hidden" />
+		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}"
+			type="hidden" />
+		<input id="documentTemplete" name="documentTemplete"
+			value="${document.documentTemplete}" type="hidden" />
+		<input id="gTemplete" name="geneTemplate"
+			value="${document.geneTemplate}" type="hidden" />
+		<input id="mgTemplete" name="mGeneTemplate"
+			value="${document.mGeneTemplate}" type="hidden" />
 		<div class="desc">
 			<b>文档信息修改</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
 		</div>
-		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<table class="table">
 			<tr>
-				<td width="100%">
-					<table border="0" cellpadding="3" cellspacing="1" width="100%"
-						align="center" style="background-color: #b9d8f3;">
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;栏目：</th>
-							<td nowrap="nowrap" align="left"><input id="channelId"
-								name="channelId" />&nbsp;</td>
-							<th>&nbsp;标题：</th>
-							<td nowrap="nowrap" align="left"><input name="title"
-									value="${document.title}" style="width: 200px;" required/></td>
-							<th>&nbsp;作者：</th>
-							<td nowrap="nowrap" align="left"><form:input path="author"
-									value="${document.author}" style="width: 200px;" /></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;颜色：</th>
-							<td nowrap="nowrap" align="left"><form:input path="color"
-									value="${document.color}" style="width: 200px;" /></td>
-							<th>&nbsp;关键字：</th>
-							<td nowrap="nowrap" align="left"><form:input path="keyword"
-									value="${document.keyword}" style="width: 200px;" /></td>
-							<th>&nbsp;是否显示：</th>
-							<td nowrap="nowrap" align="left"><select  id="hidden" name="hidden" style="width:100px;">
-										<c:forEach var="sh" items="${fns:getByType('hidden')}">
-											<option value="${sh.value}" <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
-										</c:forEach>
-									</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
-						</tr>
-						<%-- <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-									<th style="width: 150px;">&nbsp;描述：</th>
-									<td  style="text-align: left;" colspan="6"><textarea name="descrition" value="${document.descrition}"/>&nbsp;<form:errors path="descrition" cssStyle="color:red;"></form:errors></td>
-								</tr> --%>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;优先级：</th>
-							<td nowrap="nowrap" align="left"><form:input path="priority"
-									value="${document.priority}" style="width: 200px;" /></td>
-							<th>&nbsp;来源：</th>
-							<td nowrap="nowrap" align="left"><form:input path="source"
-									value="${document.source}" style="width: 200px;" /></td>
-							<th>&nbsp;来源地址：</th>
-							<td nowrap="nowrap" align="left"><form:input
-									path="sourceAddr" value="${document.sourceAddr}" style="width: 200px;" /></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;标题图片：</th>
-							<td nowrap="nowrap" align="left"><form:input
-									path="titleImage" value="${document.titleImage}" style="width: 200px;" /></td>
-							<th>&nbsp;：</th>
-							<td nowrap="nowrap" align="left">
-								<input id="content" name="content" type="hidden" value="" />&nbsp;<form:errors
-									path="content" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;文档模板：</th>
-							<td nowrap="nowrap" align="left">
-								<input id="docTemplete"/>
-								&nbsp;
-								<input type="button" onclick="cleardocTemplete();" value="清除"/>
-								&nbsp;
-								<input id="refreshFiles" type="checkbox">刷新</input>
-								&nbsp;
-								<input value="重新获取" type="button"  onclick="createFileTree();" ><form:errors path="documentTemplete" cssStyle="color:red;"></form:errors>
-							</td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;文件名：</th>
-							<td nowrap="nowrap" align="left"><form:input path="fileName"
-									value="${document.fileName}" />&nbsp;<input id="fileUploadBtn"
-								type="button" value="上传" onclick="selectFile()" /><input
-								style="display: none" type="file" id="file" name="file"
-								onchange="uploadImage()" />&nbsp;<form:errors path="fileName"
-									cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;文件地址：</th>
-							<td nowrap="nowrap" align="left"><form:input path="fileAddr"
-									value="${document.fileAddr}" />&nbsp;<form:errors
-									path="fileAddr" cssStyle="color:red;"></form:errors><input id="insertBtn" value="插入" type="button" onclick="insert();"/></td>
-							<th>&nbsp;大小：</th>
-							<td nowrap="nowrap" align="left"><form:input path="size"
-									value="${document.size}" />&nbsp;<form:errors path="size"
-									cssStyle="color:red;"></form:errors></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;是否推荐：</th>
-							<td nowrap="nowrap" align="left" ><select  id="recommend" name="recommend" style="width:100px;">
-										<c:forEach var="sh" items="${fns:getByType('recommend')}">
-											<option value="${sh.value}" <c:if test="${sh.value == false}">selected="selected"</c:if> <c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
-										</c:forEach>
-									</select>&nbsp;<form:errors path="recommend" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;页面生成模板：</th>
-							<td nowrap="nowrap" align="left">
-								<input id="geneTemplate"/>
-								&nbsp;
-								<input type="button" onclick="cleargeneTemplate();" value="清除"/>
-								<form:errors path="geneTemplate" cssStyle="color:red;"></form:errors>
-							</td>
-							<th>&nbsp;手机页面生成模板：</th>
-							<td nowrap="nowrap" align="left">
-								<input id="mGeneTemplate"/>
-								&nbsp;
-								<input type="button" onclick="clearmGeneTemplate();" value="清除"/>
-								<form:errors path="geneTemplate" cssStyle="color:red;"></form:errors>
-							</td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th style="width: 150px;">&nbsp;</th>
-							<td style="text-align: left;" colspan="6"><input
-								type="button" value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
-								type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
-								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/document'" />
-								&nbsp;&nbsp;<input type="button" value="新建"
-								onclick="javascript:window.location.href='${ctxAdmin}/document/create'" /></td>
-						</tr>
-					</table>
+				<th>&nbsp;栏目：</th>
+				<td><input id="channelId" name="channelId"
+					style="width: 150px;" />&nbsp;<label for="channelId" style="color:red;">*</label></td>
+				<th>&nbsp;是否显示：</th>
+				<td><select id="hidden" name="hidden" style="width:100px;">
+						<c:forEach var="sh" items="${fns:getByType('hidden')}">
+							<option value="${sh.value}"
+								<c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+			<tr>
+				<th>&nbsp;标题：</th>
+				<td><input id="title" name="title" value="${document.title}" class="input"
+					required />&nbsp;<label for="title" style="color:red;">*</label></td>
+				<th>&nbsp;作者：</th>
+				<td><input id="author" name="author" value="${document.author}"
+					class="input" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;颜色：</th>
+				<td><input name="color" value="${document.color}" class="input" /></td>
+				<th>&nbsp;关键字：</th>
+				<td><input id="keyword" name="keyword" value="${document.keyword}"
+					class="input" />&nbsp;<label for="keyword" style="color:red;">*</label></td>
+			</tr>
+			<tr>
+				<th>&nbsp;描述：</th>
+				<td colspan="4"><textarea id="descrition"
+						name="descrition" value="${document.descrition}" class="descrition" ></textarea></td>
+			</tr>
+			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+				<th>&nbsp;来源：</th>
+				<td><input name="source" value="${document.source}"
+					class="input" /></td>
+				<th>&nbsp;来源地址：</th>
+				<td><input name="sourceAddr" value="${document.sourceAddr}"
+					class="input" /></td>
+			</tr>
+			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+				<th>&nbsp;缩略图：</th>
+				<td><input name="titleImage" value="${document.titleImage}"
+					class="input" /></td>
+				<th>&nbsp;文档模板：</th>
+				<td><input id="docTemplete" /> &nbsp; <input type="button"
+					onclick="cleardocTemplete();" value="清除" /> &nbsp; <input
+					id="refreshFiles" type="checkbox">刷新</input> &nbsp; <input
+					value="重新获取" type="button" onclick="createFileTree();"> <form:errors
+						path="documentTemplete" cssStyle="color:red;"></form:errors></td>
+			</tr>
+			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+				<th>&nbsp;文件名：</th>
+				<td><input id="fileName" name="fileName"
+					value="${document.fileName}" class="input" />&nbsp;<input
+					id="fileUploadBtn" type="button" value="上传" onclick="selectFile()" /><input
+					style="display: none" type="file" id="file" name="file"
+					onchange="uploadImage()" /><br /></td>
+				<th>&nbsp;文件地址：</th>
+				<td  id="fileAddrTd"><input id="fileAddr" name="fileAddr"
+					value="${document.fileAddr}" class="input" />&nbsp;<input
+					id="insertBtn" value="插入" type="button" onclick="insert();" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;大小：</th>
+				<td><input id="size" name="size" value="${document.size}"
+					class="input" />&nbsp;k</td>
+				<th>&nbsp;是否推荐：</th>
+				<td><select id="recommend" name="recommend"
+					style="width:100px;">
+						<c:forEach var="sh" items="${fns:getByType('recommend')}">
+							<option value="${sh.value}"
+								<c:if test="${sh.value == false}">selected="selected"</c:if>
+								<c:if test="${sh.value == true}">selected="selected"</c:if>>${sh.label}</option>
+						</c:forEach>
+				</select>&nbsp;</td>
+			</tr>
+			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+				<th>&nbsp;页面生成模板：</th>
+				<td><input id="geneTemplate" /> <input id="generatePC"
+					name="generatePC" type="hidden" /> &nbsp; <input type="button"
+					onclick="cleargeneTemplate();" value="清除" /> <label><input
+						type="checkbox" id="autoGenratePC" onclick="autoGenratePC();" />生成模板页面</label>
+					<form:errors path="geneTemplate" cssStyle="color:red;"></form:errors>
 				</td>
+				<th>&nbsp;手机页面生成模板：</th>
+				<td><input id="mGeneTemplate" /> &nbsp; <input type="button"
+					onclick="clearmGeneTemplate();" value="清除" /> <form:errors
+						path="geneTemplate" cssStyle="color:red;"></form:errors></td>
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<td style="text-align: left;" colspan="6"><input type="button"
+					value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
+					type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
+					value="返回"
+					onclick="javascript:window.location.href='${ctxAdmin}/document'" />
+					&nbsp;&nbsp;<input type="button" value="新建"
+					onclick="javascript:window.location.href='${ctxAdmin}/document/create'" /></td>
 			</tr>
 		</table>
 		<%-- <img src="${ctx }/upload/1/20151021_111608.jpg"/> --%>
@@ -391,7 +455,7 @@
 			<b>正文</b>
 			<script id="editor" type="text/plain"
 				style="width:100%;height:500px;"></script>
-			<%-- <textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> --%> 
+			<%-- <textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> --%>
 		</div>
 	</form:form>
 </body>

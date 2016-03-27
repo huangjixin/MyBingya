@@ -40,6 +40,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.Global;
+import com.jcin.cms.common.HtmlGeneratorUtils;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Channel;
@@ -81,19 +82,27 @@ public class DocumentController extends BaseController<Document> {
 	public String create(@Valid Document document, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
+			HttpServletResponse httpServletResponse,@RequestParam(value="generatePC",required=false)boolean generatePC) {
 		/*
 		 * if (bindingResult.hasErrors()) { populateEditForm(uiModel, document);
 		 * return root+"admin/modules/document/document_create"; }
 		 */
 		if ("".equals(document.getChannelId())
-				&& null == document.getChannelId()) {
+				|| null == document.getChannelId()) {
 			populateEditForm(uiModel, document);
 			uiModel.addAttribute("msg", "请选中栏目");
 			return root + "admin/modules/document/document_create.jsp";
 		}
 		documentService.insert(document);
 
+		if(generatePC){
+			try {
+				HtmlGeneratorUtils.generateChannelDocs(document.getId(), false, httpServletRequest, httpServletResponse);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		redirectAttributes.addFlashAttribute("document", document);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
 		return "redirect:/" + Global.getAdminPath() + "/document/create";

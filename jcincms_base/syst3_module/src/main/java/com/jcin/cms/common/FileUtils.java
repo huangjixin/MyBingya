@@ -322,7 +322,7 @@ public class FileUtils {
 		File file = new File(descFileName);
 		if (file.exists()) {
 			log.debug("文件" + descFileName + "已存在!");
-			return false;
+//			return true;
 		}
 		if (descFileName.endsWith(File.separator)) {
 			log.debug(descFileName + "为目录，不能创建目录!");

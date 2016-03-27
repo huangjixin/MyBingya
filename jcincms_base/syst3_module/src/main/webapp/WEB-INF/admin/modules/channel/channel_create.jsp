@@ -9,22 +9,79 @@
 	var chanTemp = "${channel.channelTemplete}";
 	var geneTemp = "${channel.geneTemplate}";
 	var mGeneTemp = "${channel.mGeneTemplate}";
-	
+
 	$().ready(function() {
-		$("#validForm").validate();
-		
+		validateForm();
+
 		createChannelTree();
 		createFileTree();
 		createGeneTree();
 		createmGeneTemplateTree();
-		
-		$('#channelImg').attr("src", '${channel.image}');
+
+		/* var contextPath = "${ctx}";
+		if(contextPath==""){
+			$('#channelImg').attr("src", '/${channel.image}');
+		}else{
+			$('#channelImg').attr("src", "/${ctx}/${channel.image}");
+		} */
 	});
 
+	function validateForm(){
+		$("#validForm").validate({
+			errorPlacement: function(error, element) {
+			// Append error within linked label
+			$( element )
+				.closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" )
+						.append( error );
+		},
+		errorElement: "span",
+			rules : {
+				name : {
+					required : true
+				},
+				code : {
+					required : true
+				},
+				keyword : {
+					required : true
+				},
+				linkAddr : {
+					required : true
+				}
+			},
+			messages : {
+				name : {
+					required : "必填"
+				},
+				code : {
+					required : "必填"
+				},
+				keyword : {
+					required : "必填"
+				},
+				linkAddr : {
+					required : "必填"
+				}
+			},submitHandler:function(form) {
+				$('#channelTemplete').val(chanTemp);
+				$('#gTemplete').val(geneTemp);
+				$('#mgTemplete').val(mGeneTemp);
+				var row = $('#tgrid').datagrid('getSelected');
+				if (row) {
+					$("#documentId").val(row.id);
+				}
+				
+// 				$('#validForm').submit();
+				return true;
+  			}
+		})
+	}
+	
 	function createChannelTree() {
 		$('#parentId').combotree({
 			url : '${ctxAdmin}/channel/getChannelTree',
 			valuefield : 'id',
+			width:300,
 			textfield : 'name',
 			required : false,
 			editable : false,
@@ -46,11 +103,12 @@
 
 	//创建文件树。
 	function createFileTree(refresh) {
-		var checked = $('#refreshFiles').is(':checked') ? true : false;
+		var checked = document.getElementById("refreshFiles").checked;
 		$('#chanTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + refresh,
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
 			valuefield : 'id',
 			textfield : 'name',
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -80,14 +138,15 @@
 			}
 		});
 	}
-	
+
 	//创建生成模板文件树。
 	function createGeneTree() {
-		var checked = $('#refreshgeneFiles').is(':checked') ? true : false;
+		var checked = document.getElementById("refreshgeneFiles").checked;
 		$('#geneTemplete').combotree({
 			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
 			valuefield : 'id',
 			textfield : 'name',
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -124,6 +183,7 @@
 			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
 			valuefield : 'id',
 			textfield : 'name',
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -134,27 +194,28 @@
 				$('#mGeneTemplate').combotree('tree').tree("collapseAll");
 				var gTemplete = "${channel.mGeneTemplate}";
 				$('#mGeneTemplate').combotree("setValue", gTemplete);
-			},onSelect: function (item) {  
-                var parent = item;  
-                var tree = $('#mGeneTemplate').combotree('tree');  
-                var path = new Array();  
-                do {  
-                    path.unshift(parent.text);  
-                    var parent = tree.tree('getParent', parent.target);  
-                } while (parent);  
-                var pathStr = '';  
-                for (var i = 0; i < path.length; i++) {  
-                    pathStr += path[i];  
-                    if (i < path.length - 1) {  
-                        pathStr += '/';  
-                    }  
-                }  
-                
-                mGeneTemp = pathStr; 
-            }  
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#mGeneTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				mGeneTemp = pathStr;
+			}
 		});
 	}
-	
+
 	function oncodeComplete() {
 		$('#linkAddr').val("");
 		var node = $('#parentId').combotree('tree').tree("getSelected");
@@ -185,11 +246,11 @@
 		geneTemp = '';
 	}
 
-	function clearmGeneTemplateInput(){
+	function clearmGeneTemplateInput() {
 		$('#mGeneTemplate').combotree('clear');
 		mGeneTemp = "";
 	}
-	
+
 	function clearForm() {
 		$('#parentId').combotree('clear');
 		$('#name').val("");
@@ -214,16 +275,6 @@
 	}
 
 	function onsubmitHandler() {
-		/* if(chanTemp.indexOf(".") > 0){
-			chanTemp = chanTemp.substring(0,chanTemp.indexOf("."));
-		} */
-		$('#channelTemplete').val(chanTemp);
-		$('#gTemplete').val(geneTemp);
-		$('#mgTemplete').val(mGeneTemp);
-		var row = $('#tgrid').datagrid('getSelected');
-		if (row) {
-			$("#documentId").val(row.id);
-		}
 	}
 
 	//搜索
@@ -270,7 +321,7 @@
 			fileElementId : "file",
 			dataType : "text",
 			success : function(data, status) {
-				alert('上传成功');
+				document.getElementById("msg").innerHTML = "上传成功";
 				data = data.replace(/<pre.*?>/g, ''); //ajaxFileUpload会对服务器响应回来的text内容加上<pre style="....">text</pre>前后缀   
 				data = data.replace(/<PRE.*?>/g, '');
 				data = data.replace("<PRE>", '');
@@ -280,10 +331,15 @@
 				data = jQuery.parseJSON(data);
 				// 				var a_id=eval('data'）;
 				$('#image').val(data.fileAddr);
-				$('#channelImg').attr("src", data.fileAddr);
+				/* var contextPath = "${ctx}";
+				if(contextPath==""){
+					$('#channelImg').attr("src", "/"+data.fileAddr);
+				}else{
+					$('#channelImg').attr("src", "/${ctx}/"+data.fileAddr);
+				} */
 			},
 			error : function(data, status, e) {
-				alert("图片上传失败,请重新选择图片");
+				document.getElementById("msg").innerHTML = "图片上传失败,请重新选择图片";
 			}
 		});
 		return false;
@@ -293,141 +349,129 @@
 </head>
 <body>
 	<form:form id="validForm" action="${ctxAdmin}/channel/create"
-		method="post" commandName="channel" onsubmit="onsubmitHandler()">
+		method="post" commandName="channel">
 		<input id="channelTemplete" name="channelTemplete"
 			value="${channel.channelTemplete}" type="hidden" />
 		<input id="gTemplete" name="geneTemplate"
 			value="${channel.geneTemplate}" type="hidden" />
-		<input id="mgTemplete" name="mGeneTemplate" value="${channel.mGeneTemplate}" type="hidden" />
+		<input id="mgTemplete" name="mGeneTemplate"
+			value="${channel.mGeneTemplate}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
 			type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
 			type="hidden" />
-		<div class="descrition">
+		<div>
 			<b>栏目信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 		</div>
-		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<table class="table">
 			<tr>
-				<td width="100%">
-					<table border="0" cellpadding="3" cellspacing="1" width="100%"
-						align="center" style="background-color: #b9d8f3;">
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;栏目：</th>
-							<td nowrap="nowrap" align="left"><form:input path="parentId"
-									value="${channel.parentId}" />&nbsp;<input type="button"
-								value="清除" onclick="clearParentInput();" />&nbsp;<span style="color: red;">*</span></td>
-							<th>&nbsp;名称：</th>
-							<td nowrap="nowrap" align="left"><input id="name"
-									name="name" value="${channel.name}"  type="text" required/>&nbsp;<span style="color: red;">*</span></td>
-							<th>&nbsp;编码：</th>
-							<td nowrap="nowrap" align="left"><input id="code"
-									name="code" value="${channel.code}" onchange="oncodeComplete()"
-									onkeyup="value=value.replace(/[^a-zA-Z]/g,'')"  type="text" required/>&nbsp;<span style="color: red;">*</span></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;关键字：</th>
-							<td nowrap="nowrap" align="left"><form:input id="keyword"
-									path="keyword" value="${channel.keyword}" />&nbsp;<form:errors
-									path="keyword" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;链接地址：</th>
-							<td nowrap="nowrap" align="left"><form:input id="linkAddr"
-									path="linkAddr" value="${channel.linkAddr}" />&nbsp;<form:errors
-									path="linkAddr" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;新窗口打开：</th>
-							<td nowrap="nowrap" align="left"><select id="openMode"
-								name="openMode" style="width:100px;">
-									<c:forEach var="mode" items="${fns:getByType('openMode')}">
-										<option value="${mode.value}"
-											<c:if test="${mode.value == false}">selected="selected"</c:if>>${mode.label}</option>
-									</c:forEach>
-							</select>&nbsp;<form:errors path="openMode" cssStyle="color:red;"></form:errors></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;栏目模板：</th>
-							<td nowrap="nowrap" align="left"><input id="chanTemplete"
-								path="chanTemplete" />&nbsp;<input type="button" value="清除"
-								onclick="clearChanelTemplateInput();" /><b
-								id="channelTempleteTip"></b> <input id="refreshFiles"
-								type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
-								type="button" onclick="createFileTree();"> <form:errors
-									path="channelTemplete" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;是否隐藏：</th>
-							<td nowrap="nowrap" align="left"><select id="hidden"
-								name="hidden" style="width:100px;">
-									<c:forEach var="sh" items="${fns:getByType('hidden')}">
-										<option value="${sh.value}"
-											<c:if test="${sh.value == false}">selected="selected"</c:if>>${sh.label}</option>
-									</c:forEach>
-							</select>&nbsp;<form:errors path="hidden" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;当成文档：</th>
-							<td nowrap="nowrap" align="left"><select id="asdocument"
-								name="asdocument" style="width:100px;"
-								onchange="onasdocumentChange()">
-									<c:forEach var="asdoc" items="${fns:getByType('asdocument')}">
-										<option value="${asdoc.value}"
-											<c:if test="${asdoc.value == false}">selected="selected"</c:if>>${asdoc.label}</option>
-									</c:forEach>
-							</select>&nbsp;<input id="docBtn" type="button" value="选择文档"
-								disabled="true" onclick="$('#dlg').dialog('open')" /> <form:errors
-									path="asdocument" cssStyle="color:red;"></form:errors></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;描述：</th>
-							<td nowrap="nowrap" align="left" colspan="6"><form:textarea
-									id="descrition" path="descrition" value="${channel.descrition}"
-									style="width:400px;height:100px;" />&nbsp;<form:errors
-									path="descrition" cssStyle="color:red;"></form:errors></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;手工排序：</th>
-							<td style="text-align: left;"><form:input id="sort"
-									path="sort" value="${channel.sort}" />&nbsp; <form:errors
-									path="sort" cssStyle="color:red;"></form:errors></td>
-							<th>&nbsp;图片：</th>
-							<td style="text-align: left;"><form:input id="image"
-									path="image" value="${channel.image}" />&nbsp; <form:errors
-									path="image" cssStyle="color:red;"></form:errors> <input
-								id="fileUploadBtn" type="button" value="上传"
-								onclick="selectFile()" /><input style="display: none"
-								type="file" id="file" name="file" onchange="uploadImage()" /></td>
-							<th>&nbsp;</th>
-							<td></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th>&nbsp;PC模板：</th>
-							<td nowrap="nowrap" align="left"><input id="geneTemplete"/>
-							&nbsp;<input type="button" value="清除"
-								onclick="clearGeneTemplateInput();" /><b
-								id="geneTempleteTip"></b> <input id="refreshgeneFiles"
-								type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
-								type="button" onclick="createGeneTree();"></td>
-							<th>&nbsp;移动端模板：</th>
-							<td nowrap="nowrap" align="left"><input id="mGeneTemplate"/>
-							&nbsp;<input type="button" value="清除"
-								onclick="clearmGeneTemplateInput();" /></td>
-							<th>&nbsp;</th>
-							<td></td>
-						</tr>
-						<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
-							<th style="width: 150px;">&nbsp;</th>
-							<td style="text-align: left;" colspan="6"><input
-								type="submit" value="保存" />&nbsp;&nbsp;<input type="reset"
-								value="重置" />&nbsp;&nbsp;<input type="button" value="清空"
-								onclick="clearForm();" />&nbsp;&nbsp;<input type="button"
-								value="返回"
-								onclick="javascript:window.location.href='${ctxAdmin}/channel'" />
-								<c:if test="${channel.id!=null}">
+				<th>&nbsp;栏目：</th>
+				<td><form:input path="parentId"
+						value="${channel.parentId}" />&nbsp;<input type="button"
+					value="清除" onclick="clearParentInput();" />&nbsp;<span
+					style="color: red;">*</span></td>
+				<th>&nbsp;名称：</th>
+				<td><input id="name" name="name" class="input"
+					value="${channel.name}" type="text" required />
+					&nbsp;<label for="name" style="color:red;">*</label></td>
+			</tr>
+			<tr>
+				<th>&nbsp;编码：</th>
+				<td><input id="code" name="code" class="input"
+					value="${channel.code}" onchange="oncodeComplete()"
+					onkeyup="value=value.replace(/[^a-zA-Z]/g,'')" type="text" required />
+					&nbsp;<label for="code" style="color:red;">*</label></td>
+				<th>&nbsp;关键字：</th>
+				<td><form:input id="keyword" class="input"
+						path="keyword" value="${channel.keyword}" />
+						&nbsp;<label for="keyword" style="color:red;">*</label></td>
+			</tr>
+			<tr>
+				<th>&nbsp;链接地址：</th>
+				<td><form:input id="linkAddr"
+						path="linkAddr" value="${channel.linkAddr}"  class="input"/>
+						&nbsp;<label for="linkAddr" style="color:red;">*</label></td>
+				<th>&nbsp;新窗口打开：</th>
+				<td><select id="openMode"
+					name="openMode" style="width:100px;">
+						<c:forEach var="mode" items="${fns:getByType('openMode')}">
+							<option value="${mode.value}"
+								<c:if test="${mode.value == false}">selected="selected"</c:if>>${mode.label}</option>
+						</c:forEach>
+				</select>&nbsp;</td>
+			</tr>
+			<tr>
+				<th>&nbsp;栏目模板：</th>
+				<td><input id="chanTemplete"
+					path="chanTemplete" />&nbsp;<input type="button" value="清除"
+					onclick="clearChanelTemplateInput();" /><b id="channelTempleteTip"></b>
+					<input id="refreshFiles" type="checkbox" value="刷新" /> &nbsp; <input
+					value="重新获取" type="button" onclick="createFileTree();"></td>
+				<th>&nbsp;是否隐藏：</th>
+				<td><select id="hidden"
+					name="hidden" style="width:100px;">
+						<c:forEach var="sh" items="${fns:getByType('hidden')}">
+							<option value="${sh.value}"
+								<c:if test="${sh.value == false}">selected="selected"</c:if>>${sh.label}</option>
+						</c:forEach>
+				</select>&nbsp;</td>
+			</tr>
+			<tr>
+				<th>&nbsp;描述：</th>
+				<td><form:textarea
+						id="descrition" path="descrition" value="${channel.descrition}"
+						style="width:400px;height:100px;" />&nbsp;<form:errors
+						path="descrition" cssStyle="color:red;"></form:errors></td>
+				<th>&nbsp;当成文档：</th>
+				<td><select id="asdocument"
+					name="asdocument" style="width:100px;"
+					onchange="onasdocumentChange()">
+						<c:forEach var="asdoc" items="${fns:getByType('asdocument')}">
+							<option value="${asdoc.value}"
+								<c:if test="${asdoc.value == false}">selected="selected"</c:if>>${asdoc.label}</option>
+						</c:forEach>
+				</select>&nbsp;<input id="docBtn" type="button" value="选择文档" disabled="true"
+					onclick="$('#dlg').dialog('open')" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;手工排序：</th>
+				<td style="text-align: left;"><form:input id="sort" path="sort"  class="input"
+						value="${channel.sort}" />&nbsp; </td>
+				<th>&nbsp;图片：</th>
+				<td style="text-align: left;"><form:input id="image"
+						path="image" value="${channel.image}" /><input
+					id="fileUploadBtn" type="button" value="上传" onclick="selectFile()" /><input
+					style="display: none" type="file" id="file" name="file"
+					onchange="uploadImage()" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;PC模板：</th>
+				<td><input id="geneTemplete" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearGeneTemplateInput();" /><b id="geneTempleteTip"></b>
+					<input id="refreshgeneFiles" type="checkbox" value="刷新" /> &nbsp;
+					<input value="重新获取" type="button" onclick="createGeneTree();"></td>
+				<th>&nbsp;移动端模板：</th>
+				<td><input id="mGeneTemplate" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearmGeneTemplateInput();" /></td>
+			</tr>
+			<tr>
+				<th style="width: 150px;">&nbsp;</th>
+				<td style="text-align: left;" colspan="6"><input type="submit"
+					value="保存" />&nbsp;&nbsp;<input type="reset" value="重置" />&nbsp;&nbsp;<input
+					type="button" value="清空" onclick="clearForm();" />&nbsp;&nbsp;<input
+					type="button" value="返回"
+					onclick="javascript:window.location.href='${ctxAdmin}/channel'" />
+					<c:if test="${channel.id!=null}">
 									&nbsp;&nbsp;<input type="button" value="更新"
-										onclick="javascript:window.location.href='${ctxAdmin}/channel/update/${channel.id}'" />
-								</c:if></td>
-						</tr>
-					</table>
-				</td>
+							onclick="javascript:window.location.href='${ctxAdmin}/channel/update/${channel.id}'" />
+					</c:if></td>
 			</tr>
 		</table>
 	</form:form>
 	<div>
-		<img id="channelImg" alt="" src="upload/1/20151231_052456.jpg" />
+		<img id="channelImg" alt="" src="" />
 	</div>
 	<div id="dlg" class="easyui-dialog" title="文档选择"
 		data-options="iconCls:'icon-save',closed: true"
