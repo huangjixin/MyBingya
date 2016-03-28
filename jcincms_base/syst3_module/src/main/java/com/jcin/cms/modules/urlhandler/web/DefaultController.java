@@ -507,14 +507,19 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("lastdoc", lastdoc);
 		uiModel.addAttribute("nextdoc", nextdoc);
 
-		if (null != document.getDocumentTemplete()
-				&& !"".equals(document.getDocumentTemplete())) {
-			return document.getDocumentTemplete();
-		}
-
 		if (sitePreference == SitePreference.MOBILE) {
+			if (null != document.getDocumentTemplete()
+					&& !"".equals(document.getDocumentTemplete())) {
+				return document.getDocumentTemplete();
+			}
+			
 			return "m-doc.jsp";
 		} else {
+			if (null != document.getDocumentTemplete()
+					&& !"".equals(document.getDocumentTemplete())) {
+				return document.getDocumentTemplete();
+			}
+			
 			return "doc.jsp";
 		}
 	}

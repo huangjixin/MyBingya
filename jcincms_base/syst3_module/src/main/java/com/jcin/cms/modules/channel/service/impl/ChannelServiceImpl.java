@@ -69,6 +69,18 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		 if("".equals(record.getParentId())){
 			 record.setParentId(null);
 		 }
+		 if("".equals(record.getDocumentId())){
+			 record.setDocumentId(null);
+		 }
+		 if("".equals(record.getDocGeneTemplate())){
+			 record.setDocGeneTemplate(null);
+		 }
+		 if("".equals(record.getDocMgeneTemplate())){
+			 record.setDocMgeneTemplate(null);
+		 }
+		 if("".equals(record.getDocumentTemplete())){
+			 record.setDocumentTemplete(null);
+		 }
 //		record.setCreateDate(new Date());
 		int result = channelMapper.insert(record);
 		String id = record.getId();

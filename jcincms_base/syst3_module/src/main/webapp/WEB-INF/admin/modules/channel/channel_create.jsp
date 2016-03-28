@@ -9,6 +9,11 @@
 	var chanTemp = "${channel.channelTemplete}";
 	var geneTemp = "${channel.geneTemplate}";
 	var mGeneTemp = "${channel.mGeneTemplate}";
+	var docgeneTemp = "${channel.docGeneTemplate}";
+	var docMgeneTemp = "${channel.docMgeneTemplate}";
+	var mchannelTemp = "${channel.mchannelTemplate}";
+	var mdocumentTemp = "${channel.mdocumentTemplate}";
+	var documentTemp = "${channel.documentTemplete}";
 
 	$().ready(function() {
 		validateForm();
@@ -18,6 +23,12 @@
 		createGeneTree();
 		createmGeneTemplateTree();
 
+		createDocTree();
+		createMDocTree();
+		createMChannelTree();
+
+		createDocGeneTree();
+		createDocMgeneTree();
 		/* var contextPath = "${ctx}";
 		if(contextPath==""){
 			$('#channelImg').attr("src", '/${channel.image}');
@@ -66,6 +77,11 @@
 				$('#channelTemplete').val(chanTemp);
 				$('#gTemplete').val(geneTemp);
 				$('#mgTemplete').val(mGeneTemp);
+				$('#docGTemplete').val(docgeneTemp);
+				$('#docMgTemplete').val(docMgeneTemp);
+				$('#mchTemplete').val(mchannelTemp);
+				$('#mdocTemplete').val(mdocumentTemp);
+				$('#docTemplete').val(documentTemp);
 				var row = $('#tgrid').datagrid('getSelected');
 				if (row) {
 					$("#documentId").val(row.id);
@@ -139,6 +155,187 @@
 		});
 	}
 
+	//创建栏目文档生成模板文件树。
+	function createDocGeneTree() {
+		$('#docGeneTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#docGeneTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.docGeneTemplate}";
+				$('#docGeneTemplete').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#docGeneTemplete').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				docgeneTemp = pathStr;
+			}
+		});
+	}
+
+	function createMChannelTree() {
+		$('#mchannelTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#mchannelTemplate').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.docGeneTemplate}";
+				$('#mchannelTemplate').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#mchannelTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				mchannelTemp = pathStr;
+			}
+		});
+	}
+
+	function createDocTree() {
+		$('#documentTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#documentTemplate').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.documentTemplete}";
+				$('#documentTemplate').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#documentTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				documentTemp = pathStr;
+			}
+		});
+	}
+	
+	function createMDocTree() {
+		$('#mdocumentTemplate').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#mdocumentTemplate').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.mdocumentTemplate}";
+				$('#mdocumentTemplate').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#mdocumentTemplate').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				mdocumentTemp = pathStr;
+			}
+		});
+	}
+	//创建栏目文档生成模板文件树。
+	function createDocMgeneTree() {
+		$('#docMgeneTemplete').combotree({
+			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#docMgeneTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.docMgeneTemplate}";
+				$('#docMgeneTemplete').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#docMgeneTemplete').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				docMgeneTemp = pathStr;
+			}
+		});
+	}
+	
 	//创建生成模板文件树。
 	function createGeneTree() {
 		var checked = document.getElementById("refreshgeneFiles").checked;
@@ -356,6 +553,16 @@
 			value="${channel.geneTemplate}" type="hidden" />
 		<input id="mgTemplete" name="mGeneTemplate"
 			value="${channel.mGeneTemplate}" type="hidden" />
+		<input id="docGTemplete" name="docGeneTemplate"
+			value="${channel.docGeneTemplate}" type="hidden" />
+		<input id="docMgTemplete" name="docMgeneTemplate"
+			value="${channel.docMgeneTemplate}" type="hidden" />
+		<input id="mchTemplete" name="mchannelTemplate"
+			value="${channel.mchannelTemplate}" type="hidden" />
+		<input id="mdocTemplete" name="mdocumentTemplate"
+			value="${channel.mdocumentTemplate}" type="hidden" />
+		<input id="docTemplete" name="documentTemplete"
+			value="${channel.documentTemplete}" type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
 			type="hidden" />
 		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
@@ -417,6 +624,18 @@
 				</select>&nbsp;</td>
 			</tr>
 			<tr>
+				<th>&nbsp;栏目手机端模板：</th>
+				<td colspan="6"><input id="mchannelTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearChanelTemplateInput();" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;栏目文档模板：</th>
+				<td><input id="documentTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearChanelTemplateInput();" /></td>
+				<th>&nbsp;栏目文档手机端模板：</th>
+				<td>&nbsp;<input id="mdocumentTemplate" /></td>
+			</tr>
+			<tr>
 				<th>&nbsp;描述：</th>
 				<td><form:textarea
 						id="descrition" path="descrition" value="${channel.descrition}"
@@ -445,14 +664,24 @@
 					onchange="uploadImage()" /></td>
 			</tr>
 			<tr>
-				<th>&nbsp;PC模板：</th>
+				<th>&nbsp;栏目生成模板：</th>
 				<td><input id="geneTemplete" />
 					&nbsp;<input type="button" value="清除"
 					onclick="clearGeneTemplateInput();" /><b id="geneTempleteTip"></b>
 					<input id="refreshgeneFiles" type="checkbox" value="刷新" /> &nbsp;
 					<input value="重新获取" type="button" onclick="createGeneTree();"></td>
-				<th>&nbsp;移动端模板：</th>
+				<th>&nbsp;栏目手机端模板：</th>
 				<td><input id="mGeneTemplate" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearmGeneTemplateInput();" /></td>
+			</tr>
+			<tr>
+				<th>&nbsp;栏目文档生成模板：</th>
+				<td><input id="docGeneTemplete" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearGeneTemplateInput();" /></td>
+				<th>&nbsp;栏目文档手机端模板：</th>
+				<td><input id="docMgeneTemplete" />
 					&nbsp;<input type="button" value="清除"
 					onclick="clearmGeneTemplateInput();" /></td>
 			</tr>

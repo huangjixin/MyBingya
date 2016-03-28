@@ -77,6 +77,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		}
 
 		record.setCreateDate(new Date());
+		record.setUpdateDate(new Date());
 		int result = documentMapper.insert(record);
 		String id = record.getId();
 		return id;

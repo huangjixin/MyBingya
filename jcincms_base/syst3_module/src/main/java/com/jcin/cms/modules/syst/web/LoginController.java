@@ -107,9 +107,12 @@ public class LoginController extends BaseController<User> {
         return "true";  
     }
     
-	@RequestMapping(value = { "", "/", "index" })
+	@RequestMapping(value={"","/","index"})
 	public String index(Model uiModel) {
 		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isAuthenticated()){
+			return "admin/login";
+		}
 		Object object = currentUser.getPrincipal();
 		Set<String> set = null;
 		if (object != null) {

@@ -10,6 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Channel implements Serializable {
+	private String docGeneTemplate;
+	private String docMgeneTemplate;
+	private String mchannelTemplate;
+	private String mdocumentTemplate;
     /**
      *  id标识符 所属表字段为busi_channel.id
      *
@@ -710,4 +714,37 @@ private List<String> childrenids = new ArrayList<String>() ;
 	public void setChildrenids(List<String> childrenids) {
 		this.childrenids = childrenids;
 	}
+
+	public String getDocMgeneTemplate() {
+		return docMgeneTemplate;
+	}
+
+	public void setDocMgeneTemplate(String docMgeneTemplate) {
+		this.docMgeneTemplate = docMgeneTemplate;
+	}
+
+	public String getDocGeneTemplate() {
+		return docGeneTemplate;
+	}
+
+	public void setDocGeneTemplate(String docGeneTemplate) {
+		this.docGeneTemplate = docGeneTemplate;
+	}
+
+	public String getMchannelTemplate() {
+		return mchannelTemplate;
+	}
+
+	public void setMchannelTemplate(String mchannelTemplate) {
+		this.mchannelTemplate = mchannelTemplate;
+	}
+
+	public String getMdocumentTemplate() {
+		return mdocumentTemplate;
+	}
+
+	public void setMdocumentTemplate(String mdocumentTemplate) {
+		this.mdocumentTemplate = mdocumentTemplate;
+	}
+
 }

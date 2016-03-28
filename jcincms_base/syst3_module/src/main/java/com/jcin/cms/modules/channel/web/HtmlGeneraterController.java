@@ -167,18 +167,27 @@ public class HtmlGeneraterController extends BaseController {
 		if (null != indexTemp && !"".equals(indexTemp)) {
 			templateFile = indexTemp;
 		}
-		String htmlFile = webroot + "index.html";
-		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
-				root);
+		
+		File file = new File(webroot+templateFile);
+		String htmlFile = null;
+		if(file.exists()){
+			htmlFile = webroot + "index.html";
+			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
+					root);
+		}
 
 		templateFile = "template" + File.separator + "m-index.ftl";
 		if (null != mindexTemp && !"".equals(mindexTemp)) {
 			templateFile = mindexTemp;
 		}
 
-		htmlFile = webroot + "m-index.html";
-		FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
-				root);
+		file = new File(webroot+templateFile);
+		if(file.exists()){
+			htmlFile = webroot + "m-index.html";
+			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile, htmlFile,
+					root);
+		}
+		
 		return "生成首页成功";
 	}
 
@@ -356,9 +365,12 @@ public class HtmlGeneraterController extends BaseController {
 					}
 				}
 
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
-
+				File file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
+				
 				// 移动端；
 				templateFile = "template" + File.separator + "m-channel.ftl";
 				if (null != toGeneratedChannel.getmGeneTemplate()
@@ -384,12 +396,19 @@ public class HtmlGeneraterController extends BaseController {
 						}
 					}
 				}
+				
+				file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
+			}
+		} else { // 非叶子节点生成使用channels模板，叶子节点使用channel模板
+			File file1 = new File(webroot+templateFile);
+			if(file1.exists()){
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 			}
-		} else { // 非叶子节点生成使用channels模板，叶子节点使用channel模板
-			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-					htmlFile, root);
 
 			// 移动端；
 			templateFile = "template" + File.separator + "m-channels.ftl";
@@ -413,8 +432,12 @@ public class HtmlGeneraterController extends BaseController {
 					}
 				}
 			}
-			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-					htmlFile, root);
+			
+			file1 = new File(webroot+templateFile);
+			if(file1.exists()){
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+						htmlFile, root);
+			}
 		}
 
 		// 生成子栏目。
@@ -581,8 +604,12 @@ public class HtmlGeneraterController extends BaseController {
 						}
 					}
 				}
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+				
+				File file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
 
 				// 移动端；
 				templateFile = "template" + File.separator + "m-channel.ftl";
@@ -606,13 +633,19 @@ public class HtmlGeneraterController extends BaseController {
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + "m.html";
+				file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
+			}
+		} else { // 非叶子节点生成使用channels模板，叶子节点使用channel模板
+			File file1 = new File(webroot+templateFile);
+			if(file1.exists()){
 				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
 						htmlFile, root);
 			}
-		} else { // 非叶子节点生成使用channels模板，叶子节点使用channel模板
-			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-					htmlFile, root);
-
+			
 			// 移动端；
 			templateFile = "template" + File.separator + "m-channels.ftl";
 			if (null != toGeneratedChannel.getmGeneTemplate()
@@ -634,8 +667,11 @@ public class HtmlGeneraterController extends BaseController {
 			}
 			htmlFile = toGeneratedFiles + File.separator + "docs"
 					+ File.separator + toGeneratedChannel.getCode() + "1m.html";
-			FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-					htmlFile, root);
+			file1 = new File(webroot+templateFile);
+			if(file1.exists()){
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+						htmlFile, root);
+			}
 		}
 
 		if (null != toGeneratedChannel.getChildren()
@@ -830,14 +866,7 @@ public class HtmlGeneraterController extends BaseController {
 		if (null != documents && documents.size() > 0) {
 			for (Document document : documents) {
 				Map<String, Object> root = new HashMap<String, Object>();
-				String templatesPath = webroot;
-				String templateFile = "template" + File.separator + "doc.ftl";
-				if (null != document.getGeneTemplate()
-						&& !"".equals(document.getGeneTemplate())) {
-					templateFile = document.getGeneTemplate();
-				}
-				String htmlFile = toGeneratedFiles + File.separator
-						+ document.getId() + ".html";
+				
 				Document lastdoc = documentService.selectLastRecord(document);
 				Document nextdoc = documentService.selectNextRecord(document);
 				root.put("lastdoc", lastdoc);
@@ -850,19 +879,43 @@ public class HtmlGeneraterController extends BaseController {
 				root.put("navChan", navChan);
 				root.put("clickCountDocs", clickCountDocs);
 				root.put("document", document);
-
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+				
+				String templatesPath = webroot;
+				String templateFile = "template" + File.separator + "doc.ftl";
+				if (null != document.getGeneTemplate()
+						&& !"".equals(document.getGeneTemplate())) {
+					templateFile = document.getGeneTemplate();
+				}
+				if (null != toGeneratedChannel.getDocGeneTemplate()
+						&& !"".equals(toGeneratedChannel.getDocGeneTemplate())) {
+					templateFile = toGeneratedChannel.getDocGeneTemplate();
+				}
+				String htmlFile = toGeneratedFiles + File.separator
+						+ document.getId() + ".html";
+				
+				File file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
+				
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
 				if (null != document.getmGeneTemplate()
 						&& !"".equals(document.getmGeneTemplate())) {
 					templateFile = document.getmGeneTemplate();
 				}
+				if (null != toGeneratedChannel.getDocMgeneTemplate()
+						&& !"".equals(toGeneratedChannel.getDocMgeneTemplate())) {
+					templateFile = toGeneratedChannel.getDocMgeneTemplate();
+				}
 				htmlFile = toGeneratedFiles + File.separator + document.getId()
 						+ "m.html";
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+				file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
 			}
 		}
 
@@ -948,8 +1001,12 @@ public class HtmlGeneraterController extends BaseController {
 //				root.put("clickCountDocs", clickCountDocs);
 				root.put("document", document);
 
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+				File file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
+				
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
 				if (null != document.getmGeneTemplate()
@@ -958,8 +1015,11 @@ public class HtmlGeneraterController extends BaseController {
 				}
 				htmlFile = toGeneratedFiles + File.separator + document.getId()
 						+ "m.html";
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+				file1 = new File(webroot+templateFile);
+					if(file1.exists()){
+						FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+								htmlFile, root);
+				}
 			}
 		}
 
