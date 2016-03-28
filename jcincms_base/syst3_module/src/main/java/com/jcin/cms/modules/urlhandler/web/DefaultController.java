@@ -180,8 +180,20 @@ public class DefaultController extends BaseController {
 			documentService.getDocByChannelCode(channels, page);
 
 			uiModel.addAttribute("page", page);
-
-			return channel.getChannelTemplete();
+			
+		}
+		
+		if (sitePreference == SitePreference.MOBILE) {
+			if (null != channel.getMchannelTemplate()
+					&& !"".equals(channel.getMchannelTemplate())) {
+				return channel.getMchannelTemplate();
+			}
+		} else {
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
+			}
 		}
 
 		// 返回默认。
@@ -286,22 +298,25 @@ public class DefaultController extends BaseController {
 			}
 		}
 
-		if (null != channel.getChannelTemplete()
-				&& !"".equals(channel.getChannelTemplete())) {
-			return channel.getChannelTemplete();
-		}
-
 		if (null == channel.getChildren() || channel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
 			
-			if (sitePreference == SitePreference.MOBILE) {
-				return "m-channel.jsp";
-			} else {
-				return "channel.jsp";
-			}
 		}
 
+		if (sitePreference == SitePreference.MOBILE) {
+			if (null != channel.getMchannelTemplate()
+					&& !"".equals(channel.getMchannelTemplate())) {
+				return channel.getMchannelTemplate();
+			}
+		} else {
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
+			}
+		}
+		
 		if (sitePreference == SitePreference.MOBILE) {
 			return "m-channels.jsp";
 		} else {
@@ -402,17 +417,21 @@ public class DefaultController extends BaseController {
 			}
 		}
 
-		if (null != channel.getChannelTemplete()
-				&& !"".equals(channel.getChannelTemplete())) {
-			return channel.getChannelTemplete();
-		}
 		if (null == channel.getChildren() || channel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
-			if (sitePreference == SitePreference.MOBILE) {
-				return "m-channel.jsp";
-			} else {
-				return "channel.jsp";
+		}
+		
+		if (sitePreference == SitePreference.MOBILE) {
+			if (null != channel.getMchannelTemplate()
+					&& !"".equals(channel.getMchannelTemplate())) {
+				return channel.getMchannelTemplate();
+			}
+		} else {
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
 			}
 		}
 		return "channels.jsp";
@@ -508,18 +527,21 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("nextdoc", nextdoc);
 
 		if (sitePreference == SitePreference.MOBILE) {
-			if (null != document.getDocumentTemplete()
-					&& !"".equals(document.getDocumentTemplete())) {
-				return document.getDocumentTemplete();
+			if (null != channel.getMdocumentTemplate()
+					&& !"".equals(channel.getMdocumentTemplate())) {
+				return channel.getMdocumentTemplate();
 			}
-			
+		} else {
+			// 栏目模板不为空返回模板。
+			if (null != channel.getDocumentTemplete()
+					&& !"".equals(channel.getDocumentTemplete())) {
+				return channel.getDocumentTemplete();
+			}
+		}
+
+		if (sitePreference == SitePreference.MOBILE) {
 			return "m-doc.jsp";
 		} else {
-			if (null != document.getDocumentTemplete()
-					&& !"".equals(document.getDocumentTemplete())) {
-				return document.getDocumentTemplete();
-			}
-			
 			return "doc.jsp";
 		}
 	}
