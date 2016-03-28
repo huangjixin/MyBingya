@@ -38,11 +38,11 @@ import com.jcin.cms.web.BaseController;
  */
 @Controller
 @RequestMapping(value = "/channel")
-//@Scope(value="prototype")
+// @Scope(value="prototype")
 public class DefaultController extends BaseController {
 
 	private static final String REDIRECT = "redirect:/";
-	
+
 	// 文章统计点击数缓存。
 	public static final String DOC_CLICK_COUNT = "docClickCount";
 
@@ -58,7 +58,7 @@ public class DefaultController extends BaseController {
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		
+
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels();
 
@@ -180,13 +180,18 @@ public class DefaultController extends BaseController {
 			documentService.getDocByChannelCode(channels, page);
 
 			uiModel.addAttribute("page", page);
-			
+
 		}
-		
+
 		if (sitePreference == SitePreference.MOBILE) {
 			if (null != channel.getMchannelTemplate()
 					&& !"".equals(channel.getMchannelTemplate())) {
 				return channel.getMchannelTemplate();
+			}
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
 			}
 		} else {
 			// 栏目模板不为空返回模板。
@@ -248,9 +253,9 @@ public class DefaultController extends BaseController {
 				modules.add(channel2);
 			}
 		}
-		
+
 		List<Channel> navChan = getParentChannels(list, channel);
-		
+
 		// 返回属性集。
 		uiModel.addAttribute("list", list);
 		uiModel.addAttribute("name", channel.getName());
@@ -301,13 +306,17 @@ public class DefaultController extends BaseController {
 		if (null == channel.getChildren() || channel.getChildren().size() == 0) {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
-			
 		}
 
 		if (sitePreference == SitePreference.MOBILE) {
 			if (null != channel.getMchannelTemplate()
 					&& !"".equals(channel.getMchannelTemplate())) {
 				return channel.getMchannelTemplate();
+			}
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
 			}
 		} else {
 			// 栏目模板不为空返回模板。
@@ -316,7 +325,7 @@ public class DefaultController extends BaseController {
 				return channel.getChannelTemplete();
 			}
 		}
-		
+
 		if (sitePreference == SitePreference.MOBILE) {
 			return "m-channels.jsp";
 		} else {
@@ -421,11 +430,16 @@ public class DefaultController extends BaseController {
 			documentService.getDocByChannelCode(code, page);
 			uiModel.addAttribute("page", page);
 		}
-		
+
 		if (sitePreference == SitePreference.MOBILE) {
 			if (null != channel.getMchannelTemplate()
 					&& !"".equals(channel.getMchannelTemplate())) {
 				return channel.getMchannelTemplate();
+			}
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
 			}
 		} else {
 			// 栏目模板不为空返回模板。
@@ -531,6 +545,11 @@ public class DefaultController extends BaseController {
 					&& !"".equals(channel.getMdocumentTemplate())) {
 				return channel.getMdocumentTemplate();
 			}
+			// 栏目模板不为空返回模板。
+			if (null != channel.getChannelTemplete()
+					&& !"".equals(channel.getChannelTemplete())) {
+				return channel.getChannelTemplete();
+			}
 		} else {
 			// 栏目模板不为空返回模板。
 			if (null != channel.getDocumentTemplete()
@@ -580,14 +599,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + "m.html");
 					if (file.exists()) {
-						return REDIRECT+requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs" + File.separator
 								+ channelOrCode + page + "m.html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1m.html");
 					if (file.exists()) {
-						return REDIRECT+requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs" + File.separator
 								+ channelOrCode + "1m.html";
 					}
 				}
@@ -596,14 +615,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + ".html");
 					if (file.exists()) {
-						return REDIRECT+requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs" + File.separator
 								+ channelOrCode + page + ".html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1.html");
 					if (file.exists()) {
-						return REDIRECT+requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs" + File.separator
 								+ channelOrCode + "1.html";
 					}
 				}
@@ -640,13 +659,13 @@ public class DefaultController extends BaseController {
 				webroot += requestRri + "m.html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return REDIRECT+requestRri + "m.html";
+					return REDIRECT + requestRri + "m.html";
 				}
 			} else {
 				webroot += requestRri + ".html";
 				File file = new File(webroot);
 				if (file.exists()) {
-					return REDIRECT+requestRri + ".html";
+					return REDIRECT + requestRri + ".html";
 				}
 			}
 		}
