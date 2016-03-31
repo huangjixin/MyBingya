@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -148,6 +149,13 @@ public class ChannelController extends BaseController<Channel>{
 		channelService.deleteByPrimaryKey(id);
 		uiModel.asMap().clear();
 		return "redirect:/channel";
+	}
+	
+	@RequiresPermissions("topic:view")
+	@RequestMapping(value = "/topic/{code:^[a-z]+$}", method = RequestMethod.GET)
+	public String topic(Model uiModel) {
+		
+		return root+"admin/modules/channel/channel_topic.jsp";
 	}
 
 	void populateEditForm(Model uiModel, Channel channel) {

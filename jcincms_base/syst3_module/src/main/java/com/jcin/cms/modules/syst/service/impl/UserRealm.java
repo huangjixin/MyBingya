@@ -17,6 +17,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -69,7 +70,7 @@ public class UserRealm extends AuthorizingRealm {
 				// ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
 				getName() // realm name
 		);
-		clearCache(authenticationInfo.getPrincipals());
+//		clearCache(authenticationInfo.getPrincipals());
 		return authenticationInfo;
 	}
 
@@ -82,6 +83,12 @@ public class UserRealm extends AuthorizingRealm {
 		clearCachedAuthorizationInfo(principals);
 	}
 
+	@Override
+	public void setAuthorizationCache(
+			Cache<Object, AuthorizationInfo> authorizationCache) {
+		super.setAuthorizationCache(authorizationCache);
+	}
+	
 	@Override
 	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
 		super.clearCachedAuthorizationInfo(principals);

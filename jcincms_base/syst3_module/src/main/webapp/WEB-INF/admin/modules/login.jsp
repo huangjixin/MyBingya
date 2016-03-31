@@ -34,8 +34,11 @@
 </script>
 
 <link href="${ctxAdmin}/css/style.css" rel="stylesheet" type="text/css" />
-<script src="${ctxAdmin}/js/cloud.js" type="text/javascript"></script>
-<script src="${ctxAdmin}/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
+<script type="text/javascript" src="${ctxAdmin}/js/cloud.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.validate.js"></script>
+<script type="text/javascript" src="${ctx}/js/localization/messages_zh.js"></script>
 <script language="javascript">
 	$(function() {
 		$('.loginbox').css({
@@ -47,6 +50,55 @@
 				'position' : 'absolute',
 				'left' : ($(window).width() - 692) / 2
 			});
+		})
+		
+		$("#formLogin").validate({
+			errorPlacement: function(error, element) {
+			$( element )
+				.closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" )
+						.append( error );
+		},
+		errorElement: "span",
+			rules : {
+				username : {
+					required : true
+				},
+				password : {
+					required : true
+				}
+			},
+			messages : {
+				username : {
+					required : "必填",
+				},
+				password : {
+					required : "必填",
+				}
+			},submitHandler:function(form) {
+				document.getElementById("tip").innerHTML = "正在登陆……";
+				var param = {
+				        username : $("#username").val(),
+				        password : $("#password").val()
+				};
+				$.ajax({ 
+			        type: "post", 
+			        url: "${ctxAdmin}/login", 
+			        data: param, 
+			        success: function(data) { 
+			            if(data == 'success'){
+			            	 //登录成功
+			                window.location.href = "${ctxAdmin}/";
+			            }else{
+			            	document.getElementById("tip").innerHTML = "用户名/密码错误";
+			            }
+			        },
+			        error: function(data) { 
+			            alert("调用失败...."); 
+			        }
+			    });
+				
+				return false;
+  			}
 		})
 	});
 </script>
@@ -73,9 +125,9 @@
 			<div class="loginbox">
 				<ul>
 					<li><input id="username" name="username" type="text"
-						class="loginuser" value="admin" /></li>
+						class="loginuser" value="admin" /><label for="username" style="color:red;">*</label></li>
 					<li><input id="password" name="password" type="password"
-						class="loginpwd" value="123456" /></li>
+						class="loginpwd" value="123456" /><label for="password" style="color:red;">*</label></li>
 					<li><input type="submit" class="loginbtn" value="登录" />&nbsp;&nbsp;<input
 						type="reset" class="loginbtn" value="重置" />&nbsp; <%-- <input name="captcha"
 						value=""
@@ -84,7 +136,7 @@
 						title="点击更换" onclick="javascript:refreshCaptcha();"> --%>
 					<!-- <label><a
 							href="#">忘记密码？</a></label> --></li>
-					<li><span style="color: red;">${error}</span></li>
+					<li><span id="tip" style="color: red;">${error}</span></li>
 				</ul>
 			</div>
 		</form>

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +36,7 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "admin")
 public class LoginController extends BaseController<User> {
-
+	
 	@Autowired
 	private CaptchaFormAuthenticationFilter formAuthenticationFilter;
 	@Autowired
@@ -49,6 +52,7 @@ public class LoginController extends BaseController<User> {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@ResponseBody
 	public String login(@ModelAttribute User user, Model uiModel,
 			HttpServletRequest request) {
 		/*
@@ -70,7 +74,6 @@ public class LoginController extends BaseController<User> {
 		 */
 		uiModel.addAttribute("error", error);
 		Subject currentUser = SecurityUtils.getSubject();
-
 		String passw = PasswordHelper.encryptPassword(user.getPassword());
 		UsernamePasswordToken token = new UsernamePasswordToken(
 				user.getUsername(), passw);
@@ -80,14 +83,17 @@ public class LoginController extends BaseController<User> {
 		} catch (Exception uae) {
 			return root + "admin/modules/login.jsp";
 		}
+		
 		Object object = currentUser.getPrincipal();
+		
 		Set<String> set = null;
 		if (object != null) {
 			set = userService.findPermissions(object.toString());
 		}
 		List<Resource> list = resourceService.getResourceTree(set, true);
 		uiModel.addAttribute("menu", list);
-		return "/admin/index";
+//		return "/admin/index";
+		return "success";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)  

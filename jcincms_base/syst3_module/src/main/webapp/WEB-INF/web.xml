@@ -102,6 +102,14 @@
 
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
+		<url-pattern>*.mp3</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ogg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
 		<url-pattern>*.swf</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -178,7 +186,7 @@
 		</error-page> <error-page> <error-code>500</error-code> <location>/500.html</location> 
 		</error-page> -->
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index</welcome-file>
 		<welcome-file>/</welcome-file>
 		<!--<welcome-file>default/index.jsp</welcome-file> -->
 	</welcome-file-list>

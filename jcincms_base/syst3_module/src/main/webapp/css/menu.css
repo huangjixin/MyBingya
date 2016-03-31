@@ -1,0 +1,100 @@
+/************** 菜单开始****************************/
+#menuContainer {
+	width:100%;
+	background: #5B5AB2;
+	z-index:998;
+	/* display: block; */
+}
+.menuContent{
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.menu {
+	height: 40px;
+	font-size: 16px;
+	background: #5B5AB2;
+	z-index: 3;
+	display: block;
+}
+
+.menu {
+	height: 40px;
+	font-size: 14px;
+	background: #5B5AB2;
+	z-index: 3;
+	display: block;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	background: #5B5AB2;
+}
+
+.menu ul a {
+	color: #FFF;
+	display: block;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.menu ul a:hover {
+	border-top-width:2px;
+	border-top-color:#FF0000;
+	border-top-style:solid;
+	color: #333333;
+}
+
+.menu ul li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	white-space: nowrap;
+}
+
+.menu ul li:hover {
+	position: relative;
+	/* background: #62b00e; */
+	background: #ffffff;
+}
+
+/* .menu ul li .selected {
+	position: relative;
+	background: #ffffff;
+} */
+
+.menu ul li:hover>ul {
+	display: block;
+}
+
+.menu ul ul {
+	z-index: 9999;
+	top: 100%;
+	left: 0;
+	display: none;
+	background: #222;
+	position: absolute;
+	/* border: 1px solid #888; */
+}
+
+.menu ul ul li {
+	clear: both;
+	min-width: 100%;
+}
+
+.menu ul ul ul {
+	top: 2px;
+	left: 100%;
+}
+
+.menu ul ul ul ul ul ul {
+	left: auto;
+	right: 100%;
+}
+/************** 菜单结束 **************************/

@@ -882,14 +882,15 @@ public class HtmlGeneraterController extends BaseController {
 				
 				String templatesPath = webroot;
 				String templateFile = "template" + File.separator + "doc.ftl";
-				if (null != document.getGeneTemplate()
-						&& !"".equals(document.getGeneTemplate())) {
-					templateFile = document.getGeneTemplate();
-				}
 				if (null != toGeneratedChannel.getDocGeneTemplate()
 						&& !"".equals(toGeneratedChannel.getDocGeneTemplate())) {
 					templateFile = toGeneratedChannel.getDocGeneTemplate();
 				}
+				if (null != document.getGeneTemplate()
+						&& !"".equals(document.getGeneTemplate())) {
+					templateFile = document.getGeneTemplate();
+				}
+				
 				String htmlFile = toGeneratedFiles + File.separator
 						+ document.getId() + ".html";
 				
@@ -901,14 +902,16 @@ public class HtmlGeneraterController extends BaseController {
 				
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
-				if (null != document.getmGeneTemplate()
-						&& !"".equals(document.getmGeneTemplate())) {
-					templateFile = document.getmGeneTemplate();
-				}
 				if (null != toGeneratedChannel.getDocMgeneTemplate()
 						&& !"".equals(toGeneratedChannel.getDocMgeneTemplate())) {
 					templateFile = toGeneratedChannel.getDocMgeneTemplate();
 				}
+				
+				if (null != document.getmGeneTemplate()
+						&& !"".equals(document.getmGeneTemplate())) {
+					templateFile = document.getmGeneTemplate();
+				}
+				
 				htmlFile = toGeneratedFiles + File.separator + document.getId()
 						+ "m.html";
 				file1 = new File(webroot+templateFile);
@@ -981,6 +984,10 @@ public class HtmlGeneraterController extends BaseController {
 				Map<String, Object> root = new HashMap<String, Object>();
 				String templatesPath = webroot;
 				String templateFile = "template" + File.separator + "doc.ftl";
+				if (null != toGeneratedChannel.getDocGeneTemplate()
+						&& !"".equals(toGeneratedChannel.getDocGeneTemplate())) {
+					templateFile = toGeneratedChannel.getDocGeneTemplate();
+				}
 				if (null != document.getGeneTemplate()
 						&& !"".equals(document.getGeneTemplate())) {
 					templateFile = document.getGeneTemplate();
@@ -1009,6 +1016,10 @@ public class HtmlGeneraterController extends BaseController {
 				
 				// 移动端
 				templateFile = "template" + File.separator + "m-doc.ftl";
+				if (null != toGeneratedChannel.getDocMgeneTemplate()
+						&& !"".equals(toGeneratedChannel.getDocMgeneTemplate())) {
+					templateFile = toGeneratedChannel.getDocMgeneTemplate();
+				}
 				if (null != document.getmGeneTemplate()
 						&& !"".equals(document.getmGeneTemplate())) {
 					templateFile = document.getmGeneTemplate();

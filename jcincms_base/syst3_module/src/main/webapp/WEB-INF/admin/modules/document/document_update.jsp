@@ -231,8 +231,8 @@
 	function submitForm() {
 		var contxt = ue.getContentTxt();
 		if (contxt != $('#contentShort').val()) {
-			if (contxt.length > 200) {
-				contxt = contxt.substring(0, 200);
+			if (contxt.length > 100) {
+				contxt = contxt.substring(0, 100);
 			}
 			$('#contentShort').val(contxt);
 		}
@@ -307,23 +307,15 @@
 	}
 
 	function insertContent(content) {
-		var contextPath = "${ctx}";
-		if(contextPath==""){
-			contextPath = "/";
-		}else{
-			contextPath = "/"+contextPath+"/";
-		}
+		var contextPath = "${ctx}/";
+		
 		var str = '<p><img src="'+contextPath + content + '" title="" alt=""/></p>';
 		ue.execCommand('inserthtml', str);
 	}
 
 	function insert() {
-		var contextPath = "${ctx}";
-		if(contextPath==""){
-			contextPath = "/";
-		}else{
-			contextPath = "/"+contextPath+"/";
-		}
+		var contextPath = "${ctx}/";
+		
 		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt=""/></p>';
 		ue.execCommand('inserthtml', str);
 	}
