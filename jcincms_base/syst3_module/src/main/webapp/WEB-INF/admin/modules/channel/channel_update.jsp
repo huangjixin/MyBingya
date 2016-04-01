@@ -19,6 +19,7 @@
 		validateForm();
 
 		createOrganizationTree();
+		getFileData();
 		/* createFileTree();
 		createGeneTree();
 		createmGeneTemplateTree();
