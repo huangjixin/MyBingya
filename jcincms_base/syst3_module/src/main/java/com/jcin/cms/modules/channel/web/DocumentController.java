@@ -407,7 +407,14 @@ public class DocumentController extends BaseController<Document> {
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 		File file = new File(webroot);
-		list = getFiles(refresh, file);
+//		list = getFiles(refresh, file);
+		list = getFiles(file);
+		file = new File(webroot+File.separator+"template");
+		FileVO fileVO = new FileVO();
+		fileVO.setName("template");
+		List<FileVO> templates = getFiles(file);
+		fileVO.setChildren(templates);
+		list.add(fileVO);
 		return list;
 	}
 
@@ -439,6 +446,22 @@ public class DocumentController extends BaseController<Document> {
 
 	}
 
+	//file必须是ROOT。
+	public List<FileVO> getFiles(File file) {
+		List<FileVO> children = new ArrayList<FileVO>();
+		File[] childs = file.listFiles();
+		for (File object : childs) {
+			if(object.isFile()){
+				FileVO fileVO =  new FileVO();
+				fileVO.setName(object.getName());
+				if (fileVO != null) {
+					children.add(fileVO);
+				}
+			}
+		}
+		return children;
+	}
+	
 	public List<FileVO> getWebsiteFiles(File file) {
 		List<FileVO> children = new ArrayList<FileVO>();
 		File[] childs = file.listFiles();
