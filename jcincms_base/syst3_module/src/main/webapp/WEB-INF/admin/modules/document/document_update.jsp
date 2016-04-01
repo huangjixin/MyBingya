@@ -66,7 +66,7 @@
 					required : "必填"
 				}
 			},submitHandler:function(form) {
-				
+				return true;
   			}
 		})
 	}
@@ -337,6 +337,7 @@
 			value="${document.geneTemplate}" type="hidden" />
 		<input id="mgTemplete" name="mGeneTemplate"
 			value="${document.mGeneTemplate}" type="hidden" />
+		<input id="content" name="content" type="hidden" value="" />
 		<div class="desc">
 			<b>文档信息修改</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
 		</div>

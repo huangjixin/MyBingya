@@ -66,7 +66,7 @@
 					required : "必填"
 				}
 			},submitHandler:function(form) {
-				
+				return true;
   			}
 		})
 	}
