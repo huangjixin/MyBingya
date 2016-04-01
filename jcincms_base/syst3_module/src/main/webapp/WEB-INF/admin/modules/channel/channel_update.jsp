@@ -19,7 +19,7 @@
 		validateForm();
 
 		createOrganizationTree();
-		createFileTree();
+		/* createFileTree();
 		createGeneTree();
 		createmGeneTemplateTree();
 
@@ -28,7 +28,7 @@
 		createMChannelTree();
 
 		createDocGeneTree();
-		createDocMgeneTree();
+		createDocMgeneTree(); */
 
 		var contextPath = "${ctx}";
 		if (contextPath == "") {
@@ -38,6 +38,32 @@
 		}
 	});
 
+	var fileData;
+	function getFileData(){
+		var checked = document.getElementById("refreshFiles").checked;
+		$.ajax({ 
+	        type: "post", 
+	        url: "${ctxAdmin}/document/getWebsiteFiles?refresh=" + true, 
+	        success: function(data) { 
+	        	fileData = data;
+	        	
+	        	createFileTree();
+	    		createGeneTree();
+	    		createmGeneTemplateTree();
+
+	    		createDocTree();
+	    		createMDocTree();
+	    		createMChannelTree();
+
+	    		createDocGeneTree();
+	    		createDocMgeneTree();
+	        },
+	        error: function(data) { 
+	            alert("调用失败...."); 
+	        }
+	    });
+	}
+	
 	function validateForm() {
 		$("#validForm").validate(
 				{
@@ -124,9 +150,8 @@
 
 	//创建文件树。
 	function createFileTree() {
-		var checked = document.getElementById("refreshFiles").checked;
 		$('#chanTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -174,7 +199,7 @@
 
 	function createMChannelTree() {
 		$('#mchannelTemplate').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -210,7 +235,7 @@
 
 	function createDocTree() {
 		$('#documentTemplate').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -246,7 +271,7 @@
 
 	function createDocTree() {
 		$('#documentTemplate').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -282,7 +307,7 @@
 
 	function createMDocTree() {
 		$('#mdocumentTemplate').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -318,7 +343,7 @@
 	//创建栏目文档生成模板文件树。
 	function createDocMgeneTree() {
 		$('#docMgeneTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -354,9 +379,8 @@
 
 	//创建生成模板文件树。
 	function createGeneTree() {
-		var checked = document.getElementById("refreshgeneFiles").checked;
 		$('#geneTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=' + checked,
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
@@ -393,7 +417,7 @@
 	//创建移动页面模板树。
 	function createmGeneTemplateTree() {
 		$('#mgeneTemplete').combotree({
-			url : '${ctxAdmin}/document/getWebsiteFiles?refresh=false',
+			data : fileData,
 			valuefield : 'id',
 			textfield : 'name',
 			width : 300,
