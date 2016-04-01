@@ -82,7 +82,7 @@ public class DocumentController extends BaseController<Document> {
 	public String create(@Valid Document document, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model uiModel,
 			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse,@RequestParam(value="generatePC",required=false)boolean generatePC) {
+			HttpServletResponse httpServletResponse) {
 		/*
 		 * if (bindingResult.hasErrors()) { populateEditForm(uiModel, document);
 		 * return root+"admin/modules/document/document_create"; }
@@ -94,14 +94,6 @@ public class DocumentController extends BaseController<Document> {
 			return root + "admin/modules/document/document_create.jsp";
 		}
 		documentService.insert(document);
-
-		if(generatePC){
-			try {
-				HtmlGeneratorUtils.generateChannelDocs(document.getId(), false, httpServletRequest, httpServletResponse);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		redirectAttributes.addFlashAttribute("document", document);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
