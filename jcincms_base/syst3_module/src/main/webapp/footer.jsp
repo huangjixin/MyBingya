@@ -10,6 +10,8 @@
 			}
 			catch(e){}
 			
+			$('#nav').onePageNav();
+
 			//enabling stickUp on the '.navbar-wrapper' class
 			$('#menuContainer').stickUp();
 
@@ -21,9 +23,8 @@
 			});
 			
 			window.onscroll = function(){
-				animateContent1();
 				animateContent3();
-		        animateContent6_div();
+		        animateContent6();
 		    }
 			
 // 			alert($(".content_p1_img").height()+""+$(".content_p1_img").width());
@@ -37,17 +38,13 @@
 		});
 	});
 
-	function animateContent6_div(){
+	function animateContent6(){
 		var scrollTop = document.body.scrollTop;
 		var obj = document.getElementById("content6");
 	    var _getHeight = obj.offsetTop;
 	    if(scrollTop > _getHeight-100){
 	    	$(".content6_div").animate({height:"300px"});
-	    }/* else if(scrollTop < _getHeight+$(window).height()){
-	    	$(".content6_div").animate({height:"0px"});
-	    } */
-// 		var content6_divHeight = $(".content6_div").offset();
-// 		alert();
+	    }
 	}
 
 	function animateContent3(){
@@ -62,14 +59,6 @@
 	    }
 	}
 
-	function animateContent1(){
-		/* var scrollTop = document.body.scrollTop;
-		var obj = document.getElementById("content_p1");
-	    var _getHeight = obj.offsetTop;
-	    if(scrollTop > _getHeight-200){
-	    	/* $("#content1_div").animate({width:"100%"}); 
-	    } */
-	}
 	
 	function include(url) {
 		$.get(url, function(data) {
@@ -109,7 +98,7 @@
 	<source src="assets/audio/ticktac.mp3" type="audio/mpeg" />
 	<source src="assets/audio/ticktac.ogg" type="audio/ogg" />
 </audio>
-<div class="globalWidth"
+<div class="globalWidth" id="footer"
 	style="text-align: center;background-color: #0A264D;color:#466D88;">
 	<div class="contentWidth">
 		<div

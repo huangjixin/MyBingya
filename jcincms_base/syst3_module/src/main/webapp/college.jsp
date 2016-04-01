@@ -7,13 +7,13 @@
 <jsp:include page="meta-channel.jsp" flush="true"></jsp:include>
 <jsp:include page="css.jsp" flush="true"></jsp:include>
 <jsp:include page="js.jsp" flush="true"></jsp:include>
-<title>智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>网络营销学院_广州智沃——专业的互联网营销策划与人才服务商</title>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	<jsp:include page="menu.jsp" flush="true"></jsp:include>
-	<div class="globalWidth">
-		<img alt="" src="${ctx}/images/news_banner.png" style="width: 100%;">
+	<div class="globalWidth" id="banner">
+		<img alt="" src="${ctx}/images/colloege_banner.png" style="width: 100%;">
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
@@ -31,8 +31,8 @@
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
-			<span style="color:#333333;font-size: 30px;">NEWS新闻报道</span><span
-				style="color:#333333;font-size: 12px;">关注广州智沃，我们携手前进！</span>
+			<span style="color:#333333;font-size: 30px;">COLLEGE网络营销学院</span><span
+				style="color:#333333;font-size: 12px;">将网销进行到底！</span>
 		</div>
 		<hr class="hr"></hr>
 	</div>
@@ -45,13 +45,14 @@
 						<li style="margin-top: 20px;margin-bottom: 20px;"><a
 							href="${ctx}/${channel.linkAddr}/doc/${doc.id}">
 								<div style="float: left;">
-									<img src="${ctx}/${doc.fileAddr}"
+									<img src="${ctx}/${doc.titleImage}"
 										style="width: 100px;height:100px;">
 								</div>
 								<div style="float: left;margin-left: 20px;width:80%;">
 									<div>
 										<span style="font-weight: bold;">${doc.title}</span>
 									</div>
+									
 									<div style="font-size: 12px;padding-top: 5px;">
 										<fmt:formatDate value="${doc.createDate}" pattern="yyyy-MM-dd" />
 									</div>

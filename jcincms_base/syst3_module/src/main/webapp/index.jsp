@@ -17,6 +17,6 @@
 	<jsp:include page="menu.jsp" flush="true"></jsp:include>
 	<jsp:include page="banner.jsp" flush="true"></jsp:include>
 	<jsp:include page="content.jsp" flush="true"></jsp:include>
-	<jsp:include page="footer.jsp" flush="true"></jsp:include> 
+	<jsp:include page="footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

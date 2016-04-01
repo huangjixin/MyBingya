@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/css/font-awesome.css">
-<div class="slidecount" id="slidecount">
+<link rel="stylesheet" type="text/css"
+	href="${ctx}/css/font-awesome.css">
+<div id="nav">
 	<ul>
-		<li class="focus"><a href="#header">1</a></li>
-		<li><a href="#menuContainer">2</a></li>
-		<li><a href="#banner">4</a></li>
-		<li><a href="#banner">5</a></li>
-		<li><a href="#third">3</a></li>
-		<li><a href="#sixth">6</a></li>
-		<li><a href="#seventh">7</a></li>
-		<li><a href="#eighth">8</a></li>
-		<li><a href="#nineth">9</a></li>
-		<li><a href="#tenth">10</a></li>
-		<li><a href="#eleventh">11</a></li>
-		<li><a href="#tewlveth">12</a></li>
-		<li><a href="#thirdteenth">13</a></li>
+		<li><a href="#header">header</a></li>
+		<li><a href="#menuContainer">menuContainer</a></li>
+		<li><a href="#banner">0</a></li>
+		<li><a href="#content1">1</a></li>
+		<li><a href="#content2">2</a></li>
+		<li><a href="#content3">3</a></li>
+		<li><a href="#content4">4</a></li>
+		<li><a href="#content5">5</a></li>
+		<li><a href="#content6">6</a></li>
+		<li><a href="#content7">7</a></li>
+		<li><a href="#footer">footer</a></li>
 	</ul>
 </div>
 <div class="globalWidth" id="content1">
@@ -25,7 +24,8 @@
 			style="width: 100%;margin: 0 auto;text-align: center;padding-top: 30px;padding-bottom: 30px;">
 			<div style="font-size: 40px;">OUR SOLUTION</div>
 			<div style="font-size: 30px;padding-top: 10px;font-weight: bold;">
-				<span style="color:#F26721;">“世界在变革” </span>企业网销，势在必行！<i class="fa fa-spinner fa-spin"></i>
+				<span style="color:#F26721;">“世界在变革” </span>企业网销，势在必行！<i
+					class="fa fa-spinner fa-spin"></i>
 			</div>
 		</div>
 		<div class="content_p1">
@@ -70,7 +70,8 @@
 			style="width: 400px;">
 	</div>
 </div>
-<div class="globalWidth" id="content3" style="background-color: #18ABF2;">
+<div class="globalWidth" id="content3"
+	style="background-color: #18ABF2;">
 	<div class="contentWidth"
 		style="text-align: center;padding: 40px 0 0 0;color:#ffffff;">
 		<div
@@ -105,7 +106,8 @@
 		<div class="clear"></div>
 	</div>
 </div>
-<div class="globalWidth"  id="content4" style="background-color: #5882F8;">
+<div class="globalWidth" id="content4"
+	style="background-color: #5882F8;">
 	<div class="contentWidth"
 		style="text-align: center;padding: 40px 0 0 0;color:#ffffff;">
 		<div
@@ -113,10 +115,9 @@
 			<div style="font-size: 40px;padding-top: 20px;">怎么提升推广的效果？——打开漏斗每层的开口</div>
 		</div>
 		<div style="position: relative;height: 400px;">
-			<img src="${ctx}/images/part7img.jpg" style="float: left;"/>
+			<img src="${ctx}/images/part7img.jpg" style="float: left;" />
 
-			<div
-				style="text-align: left;float: left;">
+			<div style="text-align: left;float: left;">
 				<ul>
 					<li style="margin-top: 20px;">第一层：推广结果有效展现次数较少?</li>
 					<li style="margin-top: 20px;">第二层：推广结果被点击次数较少?</li>
@@ -130,7 +131,8 @@
 	</div>
 </div>
 <div class="globalWidth" id="content5">
-	<div class="contentWidth" style="text-align: center;padding-bottom: 50px;">
+	<div class="contentWidth"
+		style="text-align: center;padding-bottom: 50px;">
 		<div
 			style="width: 100%;margin: 0 auto;text-align: center;padding-top: 30px;padding-bottom: 30px;">
 			<div style="font-size: 40px;">TEAM</div>
@@ -141,77 +143,77 @@
 		<div class="content_p1">
 			<ul>
 				<li><div style="text-align: center;width: 100%;margin: 0 auto;">
-					<i id="goutong" style="color:#455DC2;" class="fa fa-refresh fa-spin fa-5x"></i>
+						<i id="goutong" style="color:#455DC2;"
+							class="fa fa-refresh fa-spin fa-5x"></i>
 						<h2>需求沟通</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >倾听客户需求，了解用户使用环境和操作流程</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>倾听客户需求，了解用户使用环境和操作流程</div>
 						</div>
 					</div></li>
 				<li><div style="text-align: center;width: 100%;margin: 0 auto;">
 						<i id="cehua" style="color:#A74ABB;" class="fa fa-edit fa-5x"></i>
 						<h2>网销策划</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >专业营销策划团队，为您量身打造最佳产品营销方案。</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>专业营销策划团队，为您量身打造最佳产品营销方案。</div>
 						</div>
 					</div></li>
 				<li><div style="text-align: center;width: 100%;margin: 0 auto;">
-						<i id="chyi" style="color:#2A92DE;" class="fa fa-eye fa-ring fa-5x"></i>
+						<i id="chyi" style="color:#2A92DE;"
+							class="fa fa-eye fa-ring fa-5x"></i>
 						<h2>视觉创意</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >色彩及平面元素设定，结构和布局规范确认。</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>色彩及平面元素设定，结构和布局规范确认。</div>
 						</div>
 					</div></li>
 				<li>
 					<div style="text-align: center;width: 100%;margin: 0 auto;">
-					<i id="zhizuo" style="color:#E37C51;" class="fa fa-cog fa-spin fa-5x"></i>
+						<i id="zhizuo" style="color:#E37C51;"
+							class="fa fa-cog fa-spin fa-5x"></i>
 						<h2>前端制作</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >CSS3、JS、HTML5实现页面动态交互展示。</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>CSS3、JS、HTML5实现页面动态交互展示。</div>
 						</div>
 					</div>
 				</li>
-				<li><div style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
-					<i id="goutong" style="color:#1D9C73;" class="fa fa-key fa-5x"></i>
+				<li><div
+						style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
+						<i id="goutong" style="color:#1D9C73;" class="fa fa-key fa-5x"></i>
 						<h2>技术实现</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
 							<div>后台程序和页面数据对接与开发。</div>
 						</div>
 					</div></li>
-				<li><div style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
+				<li><div
+						style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
 						<i id="cehua" style="color:#FF8080;" class="fa fa-search fa-5x"></i>
 						<h2>测试反馈</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >初步页面测调，规范完善。</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>初步页面测调，规范完善。</div>
 						</div>
 					</div></li>
-				<li><div style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
+				<li><div
+						style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
 						<i id="chyi" style="color:#E78823;" class="fa fa-bell fa-5x"></i>
 						<h2>SEO</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
-							<div >关键字搜索优化。</div>
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
+							<div>关键字搜索优化。</div>
 						</div>
 					</div></li>
 				<li>
-					<div style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
-					<i id="zhizuo" style="color:#66BF21;" class="fa fa-globe fa-spin fa-5x"></i>
+					<div
+						style="text-align: center;width: 100%;margin: 0 auto;padding-top: 20px;">
+						<i id="zhizuo" style="color:#66BF21;"
+							class="fa fa-globe fa-spin fa-5x"></i>
 						<h2>网络营销</h2>
 						<div style="height: 20px;"></div>
-						<div
-							style="width: 80%;text-align: center;margin: 0 auto;">
+						<div style="width: 80%;text-align: center;margin: 0 auto;">
 							<div>进行网络推广。</div>
 						</div>
 					</div>
@@ -221,7 +223,8 @@
 		<div class="clear"></div>
 	</div>
 </div>
-<div class="globalWidth"  id="content6" style="background-color: #8BB4FC;height: 607px;overflow: hidden;">
+<div class="globalWidth" id="content6"
+	style="background-color: #8BB4FC;height: 607px;overflow: hidden;">
 	<div class="contentWidth"
 		style="text-align: center;padding: 40px 0 0 0;color:#ffffff;">
 		<div
@@ -246,7 +249,7 @@
 				<li><div style="text-align: center;width: 100%;margin: 0 auto;">
 						<h2>七大诊断纬度</h2>
 						<div style="height: 20px;"></div>
-						<div  class="content6_div"
+						<div class="content6_div"
 							style="height: 0px;width: 80%;background-color: #A74ABB;text-align: center;margin: 0 auto;overflow: hidden;">
 							<div style="padding-top: 30px;">企业PC建站系统</div>
 							<div style="padding-top: 15px;">企业网销人才系统</div>
@@ -260,7 +263,7 @@
 				<li><div style="text-align: center;width: 100%;margin: 0 auto;">
 						<h2>四大落地系统</h2>
 						<div style="height: 20px;"></div>
-						<div  class="content6_div"
+						<div class="content6_div"
 							style="height: 0px;width: 80%;background-color: #2A92DE;text-align: center;margin: 0 auto;overflow: hidden;">
 							<div style="padding-top: 30px;">网销人才输送系统</div>
 							<div style="padding-top: 15px;">网销运营与策划系统</div>
@@ -272,7 +275,7 @@
 					<div style="text-align: center;width: 100%;margin: 0 auto;">
 						<h2>四大卖点</h2>
 						<div style="height: 20px;"></div>
-						<div  class="content6_div"
+						<div class="content6_div"
 							style="height: 0px;width: 80%;background-color: #E37C51;text-align: center;margin: 0 auto;overflow: hidden;">
 							<div style="padding-top: 30px;">最实战</div>
 							<div style="padding-top: 15px;">最精准</div>
@@ -306,7 +309,7 @@
 							<ul id="newslist">
 								<c:forEach var="doc" items="${docs}">
 									<li style="margin-top: 5px;margin-bottom: 5px;"><a
-										href="${ctx}/${channel.linkAddr}/doc/${doc.id}" target="blank">
+										href="${ctx}/channel/news/doc/${doc.id}">
 											<div style="float: left;">
 												<img src="${ctx}/${doc.fileAddr}"
 													style="width: 100px;height:100px;">
