@@ -228,7 +228,7 @@ public class DefaultController extends BaseController {
 		if (null == channel || null == channel.getId()) {
 			// channel = channelService.getByCode(code);
 			// 检查栏目是否存在；
-			channel.setCode(channels);
+			channel.setCode(code);
 			List<Channel> res = new ArrayList<Channel>();
 			searchChannel(list, channel, res);
 
@@ -353,7 +353,7 @@ public class DefaultController extends BaseController {
 			if (null == channel || null == channel.getId()) {
 				// channel = channelService.getByCode(code);
 				// 检查栏目是否存在；
-				channel.setCode(channels);
+				channel.setCode(code);
 				List<Channel> res = new ArrayList<Channel>();
 				searchChannel(list, channel, res);
 
