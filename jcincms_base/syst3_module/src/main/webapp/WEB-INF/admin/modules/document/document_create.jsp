@@ -25,9 +25,9 @@
 	$().ready(function() {
 		validateForm();
 		createDocumentTree();
-		createFileTree();
-		createGeneTempleteTree();
-		createmGeneTemplateTree();
+// 		createFileTree();
+// 		createGeneTempleteTree();
+// 		createmGeneTemplateTree();
 
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
@@ -236,9 +236,9 @@
 
 		var cont = ue.getContent();
 		$('#content').val(cont);
-		$('#documentTemplete').val(docTemp);
-		$('#gTemplete').val(geneTemp);
-		$('#mgTemplete').val(mGeneTemp);
+// 		$('#documentTemplete').val(docTemp);
+// 		$('#gTemplete').val(geneTemp);
+// 		$('#mgTemplete').val(mGeneTemp);
 		$('#validForm').submit();
 	}
 
@@ -324,12 +324,12 @@
 			type="hidden" />
 		<input id="contentShort" name="contentShort"
 			value="${document.contentShort}" type="hidden" />
-		<input id="documentTemplete" name="documentTemplete"
+		<%-- <input id="documentTemplete" name="documentTemplete"
 			value="${document.documentTemplete}" type="hidden" />
 		<input id="gTemplete" name="geneTemplate"
 			value="${document.geneTemplate}" type="hidden" />
 		<input id="mgTemplete" name="mGeneTemplate"
-			value="${document.mGeneTemplate}" type="hidden" />
+			value="${document.mGeneTemplate}" type="hidden" /> --%>
 		<input id="content" name="content" type="hidden" value="" />
 		<div class="desc">
 			<b>文档信息添加</b>&nbsp;&nbsp;<b id="msg" style="color: red;">${msg}</b>
@@ -381,11 +381,10 @@
 				<td><input name="titleImage" value="${document.titleImage}"
 					class="input" /></td>
 				<th>&nbsp;文档模板：</th>
-				<td><input id="docTemplete" /> &nbsp; <input type="button"
+				<td><!-- <input id="docTemplete" /> &nbsp; <input type="button"
 					onclick="cleardocTemplete();" value="清除" /> &nbsp; <input
 					id="refreshFiles" type="checkbox">刷新</input> &nbsp; <input
-					value="重新获取" type="button" onclick="createFileTree();"> <form:errors
-						path="documentTemplete" cssStyle="color:red;"></form:errors></td>
+					value="重新获取" type="button" onclick="createFileTree();"> --></td>
 			</tr>
 			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th>&nbsp;文件名：</th>
@@ -413,7 +412,7 @@
 						</c:forEach>
 				</select>&nbsp;</td>
 			</tr>
-			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
+			<%-- <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th>&nbsp;页面生成模板：</th>
 				<td><input id="geneTemplate" /> <input id="generatePC"
 					name="generatePC" type="hidden" /> &nbsp; <input type="button"
@@ -425,7 +424,7 @@
 				<td><input id="mGeneTemplate" /> &nbsp; <input type="button"
 					onclick="clearmGeneTemplate();" value="清除" /> <form:errors
 						path="geneTemplate" cssStyle="color:red;"></form:errors></td>
-			</tr>
+			</tr> --%>
 			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th style="width: 150px;">&nbsp;</th>
 				<td style="text-align: left;" colspan="6"><input type="button"
