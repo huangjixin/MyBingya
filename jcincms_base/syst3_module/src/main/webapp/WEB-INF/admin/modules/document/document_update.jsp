@@ -33,6 +33,8 @@
 			// editor准备好之后才可以使用
 			ue.setContent('${document.content}');
 		});
+		var textobj=document.getElementById('descrition');
+		textobj.innerHTML= '${document.descrition}';
 	});
 
 	function validateForm(){
