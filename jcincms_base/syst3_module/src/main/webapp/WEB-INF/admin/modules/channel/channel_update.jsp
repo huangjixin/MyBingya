@@ -13,14 +13,14 @@
 	var docMgeneTemp = "${channel.docMgeneTemplate}";
 	var mchannelTemp = "${channel.mchannelTemplate}";
 	var mdocumentTemp = "${channel.mdocumentTemplate}";
-	var documentTemp = "${channel.documentTemplete}";
-
+	var documentTemp = "${channel.documentTemplete}";	
+	var fileUrl = "${ctxAdmin}/document/getWebsiteFiles?refresh=" + true;
+	
 	$().ready(function() {
 		validateForm();
 
 		createOrganizationTree();
-		getFileData();
-		/* createFileTree();
+		createFileTree();
 		createGeneTree();
 		createmGeneTemplateTree();
 
@@ -29,42 +29,9 @@
 		createMChannelTree();
 
 		createDocGeneTree();
-		createDocMgeneTree(); */
-
-		var contextPath = "${ctx}";
-		if (contextPath == "") {
-			$('#channelImg').attr("src", '/${channel.image}');
-		} else {
-			$('#channelImg').attr("src", "/${ctx}/${channel.image}");
-		}
+		createDocMgeneTree();
 	});
 
-	var fileData;
-	function getFileData(){
-		var checked = document.getElementById("refreshFiles").checked;
-		$.ajax({ 
-	        type: "post", 
-	        url: "${ctxAdmin}/document/getWebsiteFiles?refresh=" + true, 
-	        success: function(data) { 
-	        	fileData = data;
-	        	
-	        	createFileTree();
-	    		createGeneTree();
-	    		createmGeneTemplateTree();
-
-	    		createDocTree();
-	    		createMDocTree();
-	    		createMChannelTree();
-
-	    		createDocGeneTree();
-	    		createDocMgeneTree();
-	        },
-	        error: function(data) { 
-	            alert("调用失败...."); 
-	        }
-	    });
-	}
-	
 	function validateForm() {
 		$("#validForm").validate(
 				{
@@ -114,7 +81,6 @@
 						$('#docTemplete').val(documentTemp);
 						var row = $('#tgrid').datagrid('getSelected');
 						if (row) {
-							//$.messager.alert('Info', row.id);
 							$("#documentId").val(row.id);
 						}
 						return true;
@@ -130,9 +96,6 @@
 			required : false,
 			editable : false,
 			onClick : function(node) {
-				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
-				$('#parentId').val(node.id);*/
-				// 				$('#linkAddr').val(node.code);
 				if (node.parentIds == '' || node.parentIds == null) {
 					$('#parentIds').val(node.id);
 				} else {
@@ -152,30 +115,17 @@
 	//创建文件树。
 	function createFileTree() {
 		$('#chanTemplete').combotree({
-			data : fileData,
-			valuefield : 'id',
+			url:fileUrl,
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
-				/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
-				$('#parentId').val(node.id);*/
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#chanTemplete').combotree('tree').tree("collapseAll");
 				var dTemplete = "${channel.channelTemplete}";
 				$('#chanTemplete').combotree("setValue", dTemplete);
-				/* if (dTemplete != "") {
-					var index = dTemplete.lastIndexOf("/");
-					if(index>0){
-						dTemplete = dTemplete.substring(index+1,dTemplete.length)+".jsp";
-						$('#chanTemplete').combotree("setValue", dTemplete);
-					}else{
-						$('#chanTemplete').combotree("setValue", dTemplete+".jsp");
-					}
-					
-				} */
 			},
 			onSelect : function(item) {
 				var parent = item;
@@ -198,12 +148,49 @@
 		});
 	}
 
-	function createMChannelTree() {
-		$('#mchannelTemplate').combotree({
-			data : fileData,
+	//创建栏目文档生成模板文件树。
+	function createDocGeneTree() {
+		$('#docGeneTemplete').combotree({
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
+			required : false,
+			editable : false,
+			onClick : function(node) {
+			}, //全部折叠
+			onLoadSuccess : function(node, data) {
+				$('#docGeneTemplete').combotree('tree').tree("collapseAll");
+				var dTemplete = "${channel.docGeneTemplate}";
+				$('#docGeneTemplete').combotree("setValue", dTemplete);
+			},
+			onSelect : function(item) {
+				var parent = item;
+				var tree = $('#docGeneTemplete').combotree('tree');
+				var path = new Array();
+				do {
+					path.unshift(parent.text);
+					var parent = tree.tree('getParent', parent.target);
+				} while (parent);
+				var pathStr = '';
+				for ( var i = 0; i < path.length; i++) {
+					pathStr += path[i];
+					if (i < path.length - 1) {
+						pathStr += '/';
+					}
+				}
+
+				docgeneTemp = pathStr;
+			}
+		});
+	}
+
+	function createMChannelTree() {
+		$('#mchannelTemplate').combotree({
+			url:fileUrl,
+			valuefield : 'id',
+			textfield : 'name',
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -236,10 +223,10 @@
 
 	function createDocTree() {
 		$('#documentTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -269,49 +256,13 @@
 			}
 		});
 	}
-
-	function createDocTree() {
-		$('#documentTemplate').combotree({
-			data : fileData,
-			valuefield : 'id',
-			textfield : 'name',
-			width : 300,
-			required : false,
-			editable : false,
-			onClick : function(node) {
-			}, //全部折叠
-			onLoadSuccess : function(node, data) {
-				$('#documentTemplate').combotree('tree').tree("collapseAll");
-				var dTemplete = "${channel.documentTemplete}";
-				$('#documentTemplate').combotree("setValue", dTemplete);
-			},
-			onSelect : function(item) {
-				var parent = item;
-				var tree = $('#documentTemplate').combotree('tree');
-				var path = new Array();
-				do {
-					path.unshift(parent.text);
-					var parent = tree.tree('getParent', parent.target);
-				} while (parent);
-				var pathStr = '';
-				for ( var i = 0; i < path.length; i++) {
-					pathStr += path[i];
-					if (i < path.length - 1) {
-						pathStr += '/';
-					}
-				}
-
-				documentTemp = pathStr;
-			}
-		});
-	}
-
+	
 	function createMDocTree() {
 		$('#mdocumentTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -344,10 +295,10 @@
 	//创建栏目文档生成模板文件树。
 	function createDocMgeneTree() {
 		$('#docMgeneTemplete').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -377,14 +328,14 @@
 			}
 		});
 	}
-
+	
 	//创建生成模板文件树。
 	function createGeneTree() {
 		$('#geneTemplete').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -417,11 +368,11 @@
 
 	//创建移动页面模板树。
 	function createmGeneTemplateTree() {
-		$('#mgeneTemplete').combotree({
-			data : fileData,
+		$('#mGeneTemplate').combotree({
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
-			width : 300,
+			width:300,
 			required : false,
 			editable : false,
 			onClick : function(node) {
@@ -429,13 +380,13 @@
 				$('#parentId').val(node.id);*/
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
-				$('#mgeneTemplete').combotree('tree').tree("collapseAll");
+				$('#mGeneTemplate').combotree('tree').tree("collapseAll");
 				var gTemplete = "${channel.mGeneTemplate}";
-				$('#mgeneTemplete').combotree("setValue", gTemplete);
+				$('#mGeneTemplate').combotree("setValue", gTemplete);
 			},
 			onSelect : function(item) {
 				var parent = item;
-				var tree = $('#mgeneTemplete').combotree('tree');
+				var tree = $('#mGeneTemplate').combotree('tree');
 				var path = new Array();
 				do {
 					path.unshift(parent.text);
@@ -469,24 +420,32 @@
 		}
 	}
 
-	function clearParentInput() {
-		$('#parentId').combotree('clear');
-		$('#parentIds').val('');
-	}
-
-	function clearChanelTemplateInput() {
-		$('#chanTemplete').combotree('clear');
-		chanTemp = '';
-	}
-
-	function clearGeneTemplateInput() {
-		$('#geneTemplete').combotree('clear');
-		geneTemp = '';
-	}
-
-	function clearmGeneTemplateInput() {
-		$('#mgeneTemplete').combotree('clear');
-		mGeneTemp = "";
+	function clearTreeInput(id) {
+		if(id=="chanTemplete"){
+			$('#chanTemplete').combotree('clear');
+			chanTemp = '';
+		}else if(id=="mchannelTemplate"){
+			$('#mchannelTemplate').combotree('clear');
+			mchannelTemp = '';
+		}else if(id=="geneTemplete"){
+			$('#geneTemplete').combotree('clear');
+			geneTemp = '';
+		}else if(id=="mGeneTemplate"){
+			$('#mGeneTemplate').combotree('clear');
+			mGeneTemp = "";
+		}else if(id=="documentTemplate"){
+			$('#documentTemplate').combotree('clear');
+			documentTemp = "";
+		}else if(id=="mdocumentTemplate"){
+			$('#mdocumentTemplate').combotree('clear');
+			mdocumentTemp = "";
+		}else if(id=="docGeneTemplete"){
+			$('#docGeneTemplete').combotree('clear');
+			docgeneTemp = "";
+		}else if(id=="docMgeneTemplete"){
+			$('#mdocumentTemplate').combotree('clear');
+			docMgeneTemp = "";
+		}
 	}
 
 	function clearForm() {
@@ -598,7 +557,7 @@
 			value="${channel.channelTemplete}" type="hidden" />
 		<input id="gTemplete" name="geneTemplate"
 			value="${channel.geneTemplate}" type="hidden" />
-		<input id="mgTemplate" name="mGeneTemplate"
+		<input id="mgTemplete" name="mGeneTemplate"
 			value="${channel.mGeneTemplate}" type="hidden" />
 		<input id="docGTemplete" name="docGeneTemplate"
 			value="${channel.docGeneTemplate}" type="hidden" />
@@ -610,9 +569,9 @@
 			value="${channel.mdocumentTemplate}" type="hidden" />
 		<input id="docTemplete" name="documentTemplete"
 			value="${channel.documentTemplete}" type="hidden" />
-		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
-			type="hidden" />
 		<input id="documentId" name="documentId" value="${channel.documentId}"
+			type="hidden" />
+		<input id="parentIds" name="parentIds" value="${channel.parentIds}"
 			type="hidden" />
 		<div>
 			<b>栏目信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
@@ -654,13 +613,14 @@
 			</tr>
 			<tr>
 				<th>&nbsp;栏目模板：</th>
-				<td><input id="chanTemplete" path="chanTemplete" />&nbsp;<input
-					type="button" value="清除" onclick="clearChanelTemplateInput();" /><b
-					id="channelTempleteTip"></b> <input id="refreshFiles"
-					type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
-					type="button" onclick="createFileTree();"></td>
+				<td><input id="chanTemplete"
+					path="chanTemplete" />&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('chanTemplete');" /><b id="channelTempleteTip"></b>
+					<input id="refreshFiles" type="checkbox" value="刷新" /> &nbsp; <input
+					value="重新获取" type="button" onclick="createFileTree();"></td>
 				<th>&nbsp;是否隐藏：</th>
-				<td><select id="hidden" name="hidden" style="width:100px;">
+				<td><select id="hidden"
+					name="hidden" style="width:100px;">
 						<c:forEach var="sh" items="${fns:getByType('hidden')}">
 							<option value="${sh.value}"
 								<c:if test="${sh.value == false}">selected="selected"</c:if>>${sh.label}</option>
@@ -669,24 +629,27 @@
 			</tr>
 			<tr>
 				<th>&nbsp;栏目手机端模板：</th>
-				<td colspan="6"><input id="mchannelTemplate" />&nbsp;<input
-					type="button" value="清除" onclick="clearChanelTemplateInput();" /></td>
+				<td colspan="6"><input id="mchannelTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('mchannelTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;栏目文档模板：</th>
-				<td><input id="documentTemplate" />&nbsp;<input type="button"
-					value="清除" onclick="clearChanelTemplateInput();" /></td>
+				<td><input id="documentTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('documentTemplate');;" /></td>
 				<th>&nbsp;栏目文档手机端模板：</th>
-				<td>&nbsp;<input id="mdocumentTemplate" /></td>
+				<td>&nbsp;<input id="mdocumentTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('mdocumentTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;描述：</th>
-				<td><form:textarea id="descrition" path="descrition"
-						value="${channel.descrition}" style="width:400px;height:100px;" />&nbsp;<form:errors
+				<td><form:textarea
+						id="descrition" path="descrition" value="${channel.descrition}"
+						style="width:400px;height:100px;" />&nbsp;<form:errors
 						path="descrition" cssStyle="color:red;"></form:errors></td>
 				<th>&nbsp;当成文档：</th>
-				<td><select id="asdocument" name="asdocument"
-					style="width:100px;" onchange="onasdocumentChange()">
+				<td><select id="asdocument"
+					name="asdocument" style="width:100px;"
+					onchange="onasdocumentChange()">
 						<c:forEach var="asdoc" items="${fns:getByType('asdocument')}">
 							<option value="${asdoc.value}"
 								<c:if test="${asdoc.value == false}">selected="selected"</c:if>>${asdoc.label}</option>
@@ -696,33 +659,34 @@
 			</tr>
 			<tr>
 				<th>&nbsp;手工排序：</th>
-				<td style="text-align: left;"><form:input id="sort" path="sort"
-						class="input" value="${channel.sort}" />&nbsp;</td>
+				<td style="text-align: left;"><form:input id="sort" path="sort"  class="input"
+						value="${channel.sort}" />&nbsp; </td>
 				<th>&nbsp;图片：</th>
 				<td style="text-align: left;"><form:input id="image"
-						path="image" value="${channel.image}" /><input id="fileUploadBtn"
-					type="button" value="上传" onclick="selectFile()" /><input
+						path="image" value="${channel.image}" /><input
+					id="fileUploadBtn" type="button" value="上传" onclick="selectFile()" /><input
 					style="display: none" type="file" id="file" name="file"
 					onchange="uploadImage()" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;栏目生成模板：</th>
-				<td><input id="geneTemplete" /> &nbsp;<input type="button"
-					value="清除" onclick="clearGeneTemplateInput();" /><b
-					id="geneTempleteTip"></b> <input id="refreshgeneFiles"
-					type="checkbox" value="刷新" /> &nbsp; <input value="重新获取"
-					type="button" onclick="createGeneTree();"></td>
+				<td><input id="geneTemplete" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('geneTemplete');" /></td>
 				<th>&nbsp;栏目手机端模板：</th>
-				<td><input id="mGeneTemplate" /> &nbsp;<input type="button"
-					value="清除" onclick="clearmGeneTemplateInput();" /></td>
+				<td><input id="mGeneTemplate" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('mGeneTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;栏目文档生成模板：</th>
-				<td><input id="docGeneTemplete" /> &nbsp;<input type="button"
-					value="清除" onclick="clearGeneTemplateInput();" /></td>
+				<td><input id="docGeneTemplete" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('docGeneTemplete');" /></td>
 				<th>&nbsp;栏目文档手机端模板：</th>
-				<td><input id="docMgeneTemplete" /> &nbsp;<input type="button"
-					value="清除" onclick="clearmGeneTemplateInput();" /></td>
+				<td><input id="docMgeneTemplete" />
+					&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('docMgeneTemplete');" /></td>
 			</tr>
 			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th style="width: 150px;">&nbsp;</th>

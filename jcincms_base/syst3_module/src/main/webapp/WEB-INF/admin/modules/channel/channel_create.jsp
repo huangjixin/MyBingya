@@ -14,13 +14,13 @@
 	var mchannelTemp = "${channel.mchannelTemplate}";
 	var mdocumentTemp = "${channel.mdocumentTemplate}";
 	var documentTemp = "${channel.documentTemplete}";
-
+	var fileUrl = "${ctxAdmin}/document/getWebsiteFiles?refresh=" + true;
+	
 	$().ready(function() {
 		validateForm();
 
 		createChannelTree();
-		getFileData();
-		/* createFileTree();
+		createFileTree();
 		createGeneTree();
 		createmGeneTemplateTree();
 
@@ -29,40 +29,9 @@
 		createMChannelTree();
 
 		createDocGeneTree();
-		createDocMgeneTree(); */
-		/* var contextPath = "${ctx}";
-		if(contextPath==""){
-			$('#channelImg').attr("src", '/${channel.image}');
-		}else{
-			$('#channelImg').attr("src", "/${ctx}/${channel.image}");
-		} */
+		createDocMgeneTree();
 	});
 
-	var fileData;
-	function getFileData(){
-		var checked = document.getElementById("refreshFiles").checked;
-		$.ajax({ 
-	        type: "post", 
-	        url: "${ctxAdmin}/document/getWebsiteFiles?refresh=" + true, 
-	        success: function(data) { 
-	        	fileData = data;
-	        	
-	        	createFileTree();
-	    		createGeneTree();
-	    		createmGeneTemplateTree();
-
-	    		createDocTree();
-	    		createMDocTree();
-	    		createMChannelTree();
-
-	    		createDocGeneTree();
-	    		createDocMgeneTree();
-	        },
-	        error: function(data) { 
-	            alert("调用失败...."); 
-	        }
-	    });
-	}
 	function validateForm(){
 		$("#validForm").validate({
 			errorPlacement: function(error, element) {
@@ -144,10 +113,9 @@
 	}
 
 	//创建文件树。
-	function createFileTree(refresh) {
+	function createFileTree() {
 		$('#chanTemplete').combotree({
-			data : fileData,
-			valuefield : 'id',
+			url:fileUrl,
 			textfield : 'name',
 			width:300,
 			required : false,
@@ -183,7 +151,7 @@
 	//创建栏目文档生成模板文件树。
 	function createDocGeneTree() {
 		$('#docGeneTemplete').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -219,7 +187,7 @@
 
 	function createMChannelTree() {
 		$('#mchannelTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -255,7 +223,7 @@
 
 	function createDocTree() {
 		$('#documentTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -291,7 +259,7 @@
 	
 	function createMDocTree() {
 		$('#mdocumentTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -327,7 +295,7 @@
 	//创建栏目文档生成模板文件树。
 	function createDocMgeneTree() {
 		$('#docMgeneTemplete').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -364,7 +332,7 @@
 	//创建生成模板文件树。
 	function createGeneTree() {
 		$('#geneTemplete').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -401,7 +369,7 @@
 	//创建移动页面模板树。
 	function createmGeneTemplateTree() {
 		$('#mGeneTemplate').combotree({
-			data : fileData,
+			url:fileUrl,
 			valuefield : 'id',
 			textfield : 'name',
 			width:300,
@@ -457,21 +425,34 @@
 		$('#parentIds').val('');
 	}
 
-	function clearChanelTemplateInput() {
-		$('#chanTemplete').combotree('clear');
-		chanTemp = '';
+	function clearTreeInput(id) {
+		if(id=="chanTemplete"){
+			$('#chanTemplete').combotree('clear');
+			chanTemp = '';
+		}else if(id=="mchannelTemplate"){
+			$('#mchannelTemplate').combotree('clear');
+			mchannelTemp = '';
+		}else if(id=="geneTemplete"){
+			$('#geneTemplete').combotree('clear');
+			geneTemp = '';
+		}else if(id=="mGeneTemplate"){
+			$('#mGeneTemplate').combotree('clear');
+			mGeneTemp = "";
+		}else if(id=="documentTemplate"){
+			$('#documentTemplate').combotree('clear');
+			documentTemp = "";
+		}else if(id=="mdocumentTemplate"){
+			$('#mdocumentTemplate').combotree('clear');
+			mdocumentTemp = "";
+		}else if(id=="docGeneTemplete"){
+			$('#docGeneTemplete').combotree('clear');
+			docgeneTemp = "";
+		}else if(id=="docMgeneTemplete"){
+			$('#mdocumentTemplate').combotree('clear');
+			docMgeneTemp = "";
+		}
 	}
-
-	function clearGeneTemplateInput() {
-		$('#geneTemplete').combotree('clear');
-		geneTemp = '';
-	}
-
-	function clearmGeneTemplateInput() {
-		$('#mGeneTemplate').combotree('clear');
-		mGeneTemp = "";
-	}
-
+	
 	function clearForm() {
 		$('#parentId').combotree('clear');
 		$('#name').val("");
@@ -635,7 +616,7 @@
 				<th>&nbsp;栏目模板：</th>
 				<td><input id="chanTemplete"
 					path="chanTemplete" />&nbsp;<input type="button" value="清除"
-					onclick="clearChanelTemplateInput();" /><b id="channelTempleteTip"></b>
+					onclick="clearTreeInput('chanTemplete');" /><b id="channelTempleteTip"></b>
 					<input id="refreshFiles" type="checkbox" value="刷新" /> &nbsp; <input
 					value="重新获取" type="button" onclick="createFileTree();"></td>
 				<th>&nbsp;是否隐藏：</th>
@@ -650,14 +631,15 @@
 			<tr>
 				<th>&nbsp;栏目手机端模板：</th>
 				<td colspan="6"><input id="mchannelTemplate" />&nbsp;<input type="button" value="清除"
-					onclick="clearChanelTemplateInput();" /></td>
+					onclick="clearTreeInput('mchannelTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;栏目文档模板：</th>
 				<td><input id="documentTemplate" />&nbsp;<input type="button" value="清除"
-					onclick="clearChanelTemplateInput();" /></td>
+					onclick="clearTreeInput('documentTemplate');;" /></td>
 				<th>&nbsp;栏目文档手机端模板：</th>
-				<td>&nbsp;<input id="mdocumentTemplate" /></td>
+				<td>&nbsp;<input id="mdocumentTemplate" />&nbsp;<input type="button" value="清除"
+					onclick="clearTreeInput('mdocumentTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;描述：</th>
@@ -691,23 +673,21 @@
 				<th>&nbsp;栏目生成模板：</th>
 				<td><input id="geneTemplete" />
 					&nbsp;<input type="button" value="清除"
-					onclick="clearGeneTemplateInput();" /><b id="geneTempleteTip"></b>
-					<input id="refreshgeneFiles" type="checkbox" value="刷新" /> &nbsp;
-					<input value="重新获取" type="button" onclick="createGeneTree();"></td>
+					onclick="clearTreeInput('geneTemplete');" /></td>
 				<th>&nbsp;栏目手机端模板：</th>
 				<td><input id="mGeneTemplate" />
 					&nbsp;<input type="button" value="清除"
-					onclick="clearmGeneTemplateInput();" /></td>
+					onclick="clearTreeInput('mGeneTemplate');" /></td>
 			</tr>
 			<tr>
 				<th>&nbsp;栏目文档生成模板：</th>
 				<td><input id="docGeneTemplete" />
 					&nbsp;<input type="button" value="清除"
-					onclick="clearGeneTemplateInput();" /></td>
+					onclick="clearTreeInput('docGeneTemplete');" /></td>
 				<th>&nbsp;栏目文档手机端模板：</th>
 				<td><input id="docMgeneTemplete" />
 					&nbsp;<input type="button" value="清除"
-					onclick="clearmGeneTemplateInput();" /></td>
+					onclick="clearTreeInput('docMgeneTemplete');" /></td>
 			</tr>
 			<tr>
 				<th style="width: 150px;">&nbsp;</th>

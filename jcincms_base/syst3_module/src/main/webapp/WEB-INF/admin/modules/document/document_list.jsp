@@ -224,11 +224,13 @@
 					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
 					<th data-options="field:'channelId',align:'center',hidden:true" width="100%">channelId</th>
 					<th data-options="field:'title',align:'center'" width="100%">标题</th>
-					<th data-options="field:'documentTemplete',align:'center'" width="100%">jsp动态文档模板</th>
+					<!-- <th data-options="field:'documentTemplete',align:'center'" width="100%">jsp动态文档模板</th>
 					<th data-options="field:'geneTemplate',align:'center'" width="100%">PC静态化模板</th>
-					<th data-options="field:'mGeneTemplate',align:'center'" width="100%">移动端静态化模板</th>
-					<th data-options="field:'recommend',align:'center'" width="100%">是否推荐</th>
+					<th data-options="field:'mGeneTemplate',align:'center'" width="100%">移动端静态化模板</th> -->
 					<th data-options="field:'author',align:'center'" width="100%">作者</th>
+					<th data-options="field:'createDate',align:'center'" width="100%">日期</th>
+					<th data-options="field:'recommend',align:'center'" width="100%">是否推荐</th>
+					
 				</tr>
 			</thead>
 		</table>
