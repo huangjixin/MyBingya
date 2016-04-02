@@ -13,7 +13,7 @@
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	<jsp:include page="menu.jsp" flush="true"></jsp:include>
 	<div class="globalWidth" id="banner">
-		<img alt="" src="${ctx}/images/aboutus_banner.png"
+		<img alt="" src="${ctx}/images/aboutus_banner.jpg"
 			style="width: 100%;">
 	</div>
 	<div class="globalWidth">

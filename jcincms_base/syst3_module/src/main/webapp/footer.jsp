@@ -93,6 +93,21 @@
 			return false;
 		});
 	}
+	
+	
+	<!-- Initialize Swiper -->
+		var swiper = new Swiper('.swiper-container', {
+			pagination : '.swiper-pagination',
+			slidesPerView : 1,
+			effect : 'fade',
+			paginationClickable : true,
+			spaceBetween : 30,
+			loop: true,
+			keyboardControl : true,
+	        centeredSlides: true,
+	        autoplay: 3000,
+	        autoplayDisableOnInteraction: true
+		});
 </script>
 <audio id="alarm-ring" preload>
 	<source src="assets/audio/ticktac.mp3" type="audio/mpeg" />

@@ -723,7 +723,7 @@ public class DefaultController extends BaseController {
 	 */
 	private void setPage(Page page, HttpServletRequest httpServletRequest) {
 		// String requestRri = httpServletRequest.getRequestURI();
-
+		
 		// 当前页
 		String startStr = httpServletRequest.getParameter("start");
 		// 当前页
@@ -747,13 +747,19 @@ public class DefaultController extends BaseController {
 		} else if (null != limit) {
 			number = Integer.parseInt(limit);
 		} else {
-			number = 10;
+			number = 8;
 		}
 
 		int start = 0;
 		// 每页的开始记录 第一页为1 第二页为number +1
 		if (page != null && rows != null) {
-			start = (intPage - 1) * number;
+			if(intPage>=1){
+				start = (intPage - 1) * number;
+			}else{
+				intPage = 1;
+				start = (intPage - 1) * number;
+			}
+			
 		} else if (startStr != null) {
 			start = Integer.parseInt(startStr);
 		} else if (pageStr != null) {
