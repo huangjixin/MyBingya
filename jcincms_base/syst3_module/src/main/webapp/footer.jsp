@@ -96,18 +96,6 @@
 	
 	
 	<!-- Initialize Swiper -->
-		var swiper = new Swiper('.swiper-container', {
-			pagination : '.swiper-pagination',
-			slidesPerView : 1,
-			effect : 'fade',
-			paginationClickable : true,
-			spaceBetween : 30,
-			loop: true,
-			keyboardControl : true,
-	        centeredSlides: true,
-	        autoplay: 3000,
-	        autoplayDisableOnInteraction: true
-		});
 </script>
 <audio id="alarm-ring" preload>
 	<source src="assets/audio/ticktac.mp3" type="audio/mpeg" />
@@ -132,5 +120,111 @@
 		style="text-align: center;height: 40px;line-height: 40px;">
 		<span style="font-size: 14px;color: #ffffff">Copyright
 			2015-2016 广州智沃信息技术 All rights reserved</span>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".side ul li").hover(function(){
+		$(this).find(".sidebox").stop().animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})	
+	},function(){
+		$(this).find(".sidebox").stop().animate({"width":"45px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})	
+	});
+	$("#eee").hover(function(){
+		$(".erwei").fadeIn(300);
+		},function(){
+			$(".erwei").hide();
+			});
+});
+
+//回到顶部
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+<style>
+/* side */
+.side {
+	position: fixed;
+	width: 45px;
+	height: 275px;
+	right: 0;
+	top: 224px;
+	z-index: 100;
+}
+
+.side ul li {
+	width: 45px;
+	height: 45px;
+	float: left;
+	position: relative;
+	border-bottom: 1px solid #444;
+}
+
+.side ul li .sidebox {
+	position: absolute;
+	width: 45px;
+	height: 45px;
+	top: 0;
+	right: 0;
+	transition: all 0.3s;
+	background: #000;
+	opacity: 0.8;
+	filter: Alpha(opacity = 80);
+	color: #fff;
+	font: 14px/45px "微软雅黑";
+	overflow: hidden;
+}
+
+.side ul li .sidetop {
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	display: inline-block;
+	background: #000;
+	opacity: 0.8;
+	filter: Alpha(opacity = 80);
+	transition: all 0.3s;
+}
+
+.side ul li .sidetop:hover {
+	background: #ae1c1c;
+	opacity: 1;
+	filter: Alpha(opacity = 100);
+}
+
+.side ul li img {
+	float: left;
+}
+
+.side .erwei {
+	width: 150px;
+	height: 165px;
+	position: absolute;
+	bottom: 84px;
+	right: 45px;
+	display: none;
+}
+</style>
+<div class="side">
+	<ul>
+		<li><a href="http://www.zonghengmc.com/Lessons/yugao/193.html"><div
+					class="sidebox">
+					<img src="/templets/zhsgstyle/images/side_icon01.png">当月活动
+				</div></a></li>
+		<li><a
+			href="http://wpa.qq.com/msgrd?v=3&uin=2998068673&site=qq&menu=yes"
+			rel="nofollow"><div class="sidebox">
+					<img src="/templets/zhsgstyle/images/side_icon02.png">QQ咨询
+				</div></a></li>
+		<li id="eee"><a href="javascript:void(0);" class="sidetop"><img
+				src="/templets/zhsgstyle/images/side_icon04.png" id="erwei"></a></li>
+		<li style="border:none;"><a href="javascript:goTop();"
+			class="sidetop"><img
+				src="/templets/zhsgstyle/images/side_icon05.png"></a></li>
+	</ul>
+	<div class="erwei">
+		<img src="/templets/zhsgstyle/images/zonghengewm.jpg" alt="纵横时光-二维码"
+			width="150" height="165">
 	</div>
 </div>
