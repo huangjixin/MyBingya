@@ -23,6 +23,7 @@
 			});
 			
 			window.onscroll = function(){
+				animateContent2();
 				animateContent3();
 		        animateContent6();
 		    }
@@ -56,6 +57,16 @@
 	    	$("#content3_ul").animate({left:"20px"});
 	    	$("#p3-1").animate({right:"0px"});
 	    	$("#p3-2").animate({right:"0px"});
+	    }
+	}
+
+	function animateContent2(){
+		var scrollTop = document.body.scrollTop;
+		var obj = document.getElementById("content2");
+	    var _getHeight = obj.offsetTop;
+	    if(scrollTop > _getHeight+200){
+	    	$("#content2_wap1").animate({right:"0px"});
+	    	$("#content2_wap2").animate({left:"10px"});
 	    }
 	}
 
@@ -130,11 +141,11 @@ $(document).ready(function(){
 	},function(){
 		$(this).find(".sidebox").stop().animate({"width":"45px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})	
 	});
-	$("#eee").hover(function(){
+	/* $("#eee").hover(function(){
 		$(".erwei").fadeIn(300);
 		},function(){
 			$(".erwei").hide();
-			});
+	}); */
 });
 
 //回到顶部
@@ -143,6 +154,12 @@ function goTop(){
 }
 </script>
 <style>
+.guestBook{
+	position: fixed;
+	bottom:0;
+	right: 0;
+	z-index: 100;
+}
 /* side */
 .side {
 	position: fixed;
@@ -208,23 +225,26 @@ function goTop(){
 </style>
 <div class="side">
 	<ul>
-		<li><a href="http://www.zonghengmc.com/Lessons/yugao/193.html"><div
+		<li><div
 					class="sidebox">
-					<img src="/templets/zhsgstyle/images/side_icon01.png">当月活动
+					<img src="${ctx}/images/side_icon01.png">营销技巧
 				</div></a></li>
 		<li><a
-			href="http://wpa.qq.com/msgrd?v=3&uin=2998068673&site=qq&menu=yes"
+			href="http://wpa.qq.com/msgrd?v=3&uin=517714860&site=qq&menu=yes"
 			rel="nofollow"><div class="sidebox">
-					<img src="/templets/zhsgstyle/images/side_icon02.png">QQ咨询
+					<img src="${ctx}/images/side_icon02.png">QQ咨询
 				</div></a></li>
 		<li id="eee"><a href="javascript:void(0);" class="sidetop"><img
-				src="/templets/zhsgstyle/images/side_icon04.png" id="erwei"></a></li>
+				src="${ctx}/images/side_icon04.png" id="erwei"></a></li>
 		<li style="border:none;"><a href="javascript:goTop();"
 			class="sidetop"><img
-				src="/templets/zhsgstyle/images/side_icon05.png"></a></li>
+				src="${ctx}/images/side_icon05.png"></a></li>
 	</ul>
 	<div class="erwei">
-		<img src="/templets/zhsgstyle/images/zonghengewm.jpg" alt="纵横时光-二维码"
+		<img src="/templets/zhsgstyle/images/zonghengewm.jpg" alt="广州智沃-二维码"
 			width="150" height="165">
+	</div>
+	<div class="guestBook">
+		<img src="${ctx}/images/55.gif" alt="广州智沃-互动">
 	</div>
 </div>

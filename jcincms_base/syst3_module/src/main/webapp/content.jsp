@@ -52,7 +52,26 @@
 	</div>
 </div>
 <div class="globalWidth" id="content2">
-	<div class="contentWidth" style="text-align: center;">
+	<div class="contentWidth"
+		style="text-align: center;position: relative;">
+		<div id="content2_wap1"
+			style="position: absolute;right: 400px;background-color: #5498DF;bottom: 100px;padding: 0 10px 20px 10px; color: #ffffff;font-size: 12px;text-align: left;">
+			<ul>
+				<li style="margin-top: 10px;">1、与web站、WAP站后台统一，便捷高效</li>
+				<li style="margin-top: 10px;">2、一键更新，三网展现</li>
+				<li style="margin-top: 10px;">3、及时互动，沟通无障</li>
+			</ul>
+		</div>
+		<div id="content2_wap2"
+			style="position: absolute;left: 400px;background-color: #5498DF;bottom: 60px;padding: 0 10px 20px 10px; color: #ffffff;font-size: 12px;text-align: left;">
+			<ul>
+				<li style="margin-top: 10px;">1、与WAP站同步自适应处理</li>
+				<li style="margin-top: 10px;">2、实现内容自动回复推送</li>
+				<li style="margin-top: 10px;">3、web页面二维码轻松进入手机端</li>
+				<li style="margin-top: 10px;">4、一键互动，随心沟通：一键拨号/定位/转发</li>
+				<li style="margin-top: 10px;">5、无缝对接外部平台：微博、微信...</li>
+			</ul>
+		</div>
 		<div
 			style="width: 100%;margin: 0 auto;text-align: center;padding-top: 30px;padding-bottom: 30px;">
 			<div style="font-size: 40px;">PRODUCTS</div>
@@ -68,7 +87,9 @@
 		</div>
 		<img id="bannerImg" alt="" src="${ctx}/images/banner.png"
 			style="width: 400px;">
+		
 	</div>
+	<div class="clear"></div>
 </div>
 <div class="globalWidth" id="content3"
 	style="background-color: #18ABF2;">
