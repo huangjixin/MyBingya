@@ -259,7 +259,6 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		jsonObject.setOpenMode(channel.getOpenMode());
 		jsonObject.setName(channel.getName());
 		jsonObject.setAsdocument(channel.getAsdocument());
-		jsonObject.setChannelTemplete(channel.getChannelTemplete());
 		jsonObject.setAsdocument(channel.getAsdocument());
 		jsonObject.setHidden(channel.getHidden());
 		jsonObject.setDocumentId(channel.getDocumentId());
@@ -269,8 +268,16 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		jsonObject.setCreateDate(channel.getCreateDate());
 		jsonObject.setUpdateBy(channel.getUpdateBy());
 		jsonObject.setUpdateDate(channel.getUpdateDate());
-		jsonObject.setGeneTemplate(channel.getGeneTemplate());
+		
 		jsonObject.setImage(channel.getImage());
+		jsonObject.setDocGeneTemplate(channel.getDocGeneTemplate());
+		jsonObject.setDocMgeneTemplate(channel.getDocMgeneTemplate());
+		jsonObject.setChannelTemplete(channel.getChannelTemplete());
+		jsonObject.setMchannelTemplate(channel.getMchannelTemplate());
+		jsonObject.setGeneTemplate(channel.getGeneTemplate());
+		jsonObject.setmGeneTemplate(channel.getmGeneTemplate());
+		jsonObject.setDocumentTemplete(channel.getDocumentTemplete());
+		jsonObject.setMdocumentTemplate(channel.getMdocumentTemplate());
 		
 		List<Channel> list = searialChild(channel,orgs);
 		if (null != list) {

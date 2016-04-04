@@ -167,10 +167,24 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
+			// 返回默认。
 			if (sitePreference == SitePreference.MOBILE) {
-				return "m-doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getMdocumentTemplate()
+						&& !"".equals(channel.getMdocumentTemplate())) {
+					return channel.getMdocumentTemplate();
+				}
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			} else {
-				return "doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			}
 		}
 
@@ -180,7 +194,6 @@ public class DefaultController extends BaseController {
 			documentService.getDocByChannelCode(channels, page);
 
 			uiModel.addAttribute("page", page);
-
 		}
 
 		if (sitePreference == SitePreference.MOBILE) {
@@ -296,10 +309,24 @@ public class DefaultController extends BaseController {
 				return document.getDocumentTemplete();
 			}
 
+			// 返回默认。
 			if (sitePreference == SitePreference.MOBILE) {
-				return "m-doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getMdocumentTemplate()
+						&& !"".equals(channel.getMdocumentTemplate())) {
+					return channel.getMdocumentTemplate();
+				}
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			} else {
-				return "doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			}
 		}
 
@@ -419,10 +446,24 @@ public class DefaultController extends BaseController {
 					&& !"".equals(document.getDocumentTemplete())) {
 				return document.getDocumentTemplete();
 			}
+			// 返回默认。
 			if (sitePreference == SitePreference.MOBILE) {
-				return "m-doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getMdocumentTemplate()
+						&& !"".equals(channel.getMdocumentTemplate())) {
+					return channel.getMdocumentTemplate();
+				}
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			} else {
-				return "doc.jsp";
+				// 栏目文档模板不为空返回模板。
+				if (null != channel.getDocumentTemplete()
+						&& !"".equals(channel.getDocumentTemplete())) {
+					return channel.getDocumentTemplete();
+				}
 			}
 		}
 
@@ -723,7 +764,7 @@ public class DefaultController extends BaseController {
 	 */
 	private void setPage(Page page, HttpServletRequest httpServletRequest) {
 		// String requestRri = httpServletRequest.getRequestURI();
-		
+
 		// 当前页
 		String startStr = httpServletRequest.getParameter("start");
 		// 当前页
@@ -753,13 +794,13 @@ public class DefaultController extends BaseController {
 		int start = 0;
 		// 每页的开始记录 第一页为1 第二页为number +1
 		if (page != null && rows != null) {
-			if(intPage>=1){
+			if (intPage >= 1) {
 				start = (intPage - 1) * number;
-			}else{
+			} else {
 				intPage = 1;
 				start = (intPage - 1) * number;
 			}
-			
+
 		} else if (startStr != null) {
 			start = Integer.parseInt(startStr);
 		} else if (pageStr != null) {
