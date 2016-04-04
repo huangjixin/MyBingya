@@ -57,12 +57,13 @@
 					<td>
 						<input id="${introspectedColumn}" name="${introspectedColumn}" 
 								value="${r'${'}${objInst}.${introspectedColumn}}"/>
-									&nbsp;<label for="proName" style="color:red;">*</label></td>
+									&nbsp;<label for="${introspectedColumn}" style="color:red;">*</label></td>
 					<#if (iSum%2==1)>
 					</tr>
 					</#if>
 					<#assign iSum=iSum+1>
 					</#list>
+					<#assign iSum=iSum+1>
 					<#if (iSum%2==0)>
 					</tr>
 					</#if>

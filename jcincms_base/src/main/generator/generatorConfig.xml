@@ -11,7 +11,7 @@
 	<!-- MyBatis3,Ibatis2Java5 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<!-- 自定义 -->
-		<property name="moduleName" value="sale"></property>
+		<property name="moduleName" value="syst"></property>
 		<property name="mergeable" value="false"></property>
 		
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
@@ -39,27 +39,27 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jcin.cms.modules.sale.domain"
+		<javaModelGenerator targetPackage="com.jcin.cms.modules.syst.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.jcin.cms.modules.sale.dao"
+		<sqlMapGenerator targetPackage="com.jcin.cms.modules.syst.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jcin.cms.modules.sale.dao" targetProject="src/main/java">
+			targetPackage="com.jcin.cms.modules.syst.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- <table tableName="tb_fruit_betresult" domainObjectName="FruitBetresult" />
 		<table tableName="tb_fruit_betresult_history" domainObjectName="FruitBetresultHistory" />
 		<table tableName="tb_fruit_record" domainObjectName="FruitRecord" /> -->
 <!-- 		<table tableName="tb_product" domainObjectName="Product" /> -->
-		<table tableName="tb_storage" domainObjectName="Storage" />
-<!-- 		<table tableName="tb_sale" domainObjectName="Sale" /> -->
+		<table tableName="tb_guestbook" domainObjectName="Guestbook" />
+<!-- 		<table tableName="tb_syst" domainObjectName="Sale" /> -->
 <!-- 		<table tableName="tb_buy" domainObjectName="Buy" /> -->
 		<!-- <table tableName="tb_account" domainObjectName="Account" /> -->
 		<!-- <table tableName="agent_customer" domainObjectName="AgentCustomer" /> -->

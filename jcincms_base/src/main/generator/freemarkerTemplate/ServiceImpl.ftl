@@ -63,8 +63,8 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	public String insert(${domainObjectName} record) {
 		if(record.getId()==null)
 		 	super.insert(record);
-
-		record.setCreateDate(new Date());
+		if(null==record.getCreateDate())
+			record.setCreateDate(new Date());
 		int result = ${daoMapper}Mapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -151,7 +151,8 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	@Transactional
 	public String update(${domainObjectName} record) {
 		// super.update(record);
-		record.setUpdateDate(new Date());
+		if(null==record.getUpdateDate())
+			record.setUpdateDate(new Date());
 		int result = ${daoMapper}Mapper.updateByPrimaryKey(record);
 		return record.getId();
 	}

@@ -185,11 +185,11 @@
 				<input type="button" value="删除" onclick="deleteRows();" />
 			</shiro:hasPermission>
 			<shiro:hasPermission name="${objInst}:update">
-				<input type="button" value="更新" onclick="update();" /> 
+				<input type="button" value="查看" onclick="update();" /> 
 			</shiro:hasPermission>
-			<shiro:hasPermission name="${objInst}:view">
+			<!--<shiro:hasPermission name="${objInst}:view">
 				<input type="button" value="详情" onclick="show();" /> 
-			</shiro:hasPermission>
+			</shiro:hasPermission>-->
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"
