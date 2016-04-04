@@ -31,7 +31,8 @@
 
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
-			ue.setContent('${document.content}');
+			var textS = HtmlDecode('${document.content}');
+			ue.setContent(textS);
 		});
 	});
 
@@ -313,6 +314,10 @@
 
 	function autoGenratePC() {
 		$('#generatePC').val(document.getElementById("autoGenratePC").checked);
+	}
+	
+	function HtmlDecode(text) {
+		return text.replace(/&/g, '&').replace(/"/g, '\"').replace(/</g, '<').replace(/>/g, '>');
 	}
 </script>
 <title>文档添加</title>

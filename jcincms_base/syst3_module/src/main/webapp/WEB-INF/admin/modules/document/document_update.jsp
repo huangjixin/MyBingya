@@ -31,7 +31,8 @@
 // 		createmGeneTemplateTree();
 		ue.addListener("ready", function() {
 			// editor准备好之后才可以使用
-			ue.setContent('${document.content}');
+			var textS = HtmlDecode('${document.content}');
+			ue.setContent(textS);
 		});
 		var textobj=document.getElementById('descrition');
 		textobj.innerHTML= '${document.descrition}';
@@ -320,6 +321,10 @@
 		
 		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt=""/></p>';
 		ue.execCommand('inserthtml', str);
+	}
+
+	function HtmlDecode(text) {
+		return text.replace(/&/g, '&').replace(/"/g, '\"').replace(/</g, '<').replace(/>/g, '>');
 	}
 </script>
 <title>文档修改</title>

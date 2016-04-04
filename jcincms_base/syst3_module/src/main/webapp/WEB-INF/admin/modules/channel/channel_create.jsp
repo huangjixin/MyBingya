@@ -651,11 +651,11 @@
 				<td><select id="asdocument"
 					name="asdocument" style="width:100px;"
 					onchange="onasdocumentChange()">
-						<c:forEach var="asdoc" items="${fns:getByType('asdocument')}">
-							<option value="${asdoc.value}"
-								<c:if test="${asdoc.value == false}">selected="selected"</c:if>>${asdoc.label}</option>
-						</c:forEach>
-				</select>&nbsp;<input id="docBtn" type="button" value="选择文档" disabled="true"
+						<option value="true"
+								<c:if test="${channel.asdocument == true}">selected="selected"</c:if>>是</option>
+						<option value="true"
+								<c:if test="${channel.asdocument == false}">selected="selected"</c:if>>否</option>
+				</select>&nbsp;<input id="docBtn" type="button" value="选择文档" <c:if test="${channel.asdocument == false}">disabled="true"</c:if>
 					onclick="$('#dlg').dialog('open')" /></td>
 			</tr>
 			<tr>
