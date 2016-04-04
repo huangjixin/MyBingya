@@ -48,8 +48,11 @@
 				</c:if>
 			</c:forEach>
 		</div>
-		<div class="contentWidth" style="text-align: left;padding: 5px 0;font-size: 14px;">
-			<div><span style="color:#4B8DF9;font-size: 30px;">公司简介</span><span
+		<div class="contentWidth" style="padding: 5px 0;">
+			${document.content}
+<!-- 		<div class="contentWidth" style="text-align: left;padding: 5px 0;font-size: 14px;"> -->
+			
+			<!-- <div><span style="color:#4B8DF9;font-size: 30px;">公司简介</span><span
 				style="color:#333333;font-size: 12px;">COMPANY</span></div>
 			<div style="padding: 5px 0;color: red;">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广州智沃信息科技有限公司——专业的互联网营销策划与人才服务商。
@@ -65,7 +68,7 @@
 			</div>
 			<div>
 				<p><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;纵横时光将以“汇科技能量，创智慧人生”为使命，以创新保证公司的技术领先地位，以求实研发生产出能真正给用户提供最大网络营销价值的技术与产品，以真诚的态度和专业的团队为企业提供满意的服务与技术支持。</p>
-			</div>
+			</div> -->
 			<div style="height: 15px;"></div>
 			<hr class="hr" style="border-top:1px dashed #cccccc;padding: 15px 0;"></hr>	
 		</div>
