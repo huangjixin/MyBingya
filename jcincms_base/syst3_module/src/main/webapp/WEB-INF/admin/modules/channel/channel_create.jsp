@@ -653,7 +653,7 @@
 					onchange="onasdocumentChange()">
 						<option value="true"
 								<c:if test="${channel.asdocument == true}">selected="selected"</c:if>>是</option>
-						<option value="true"
+						<option value="false"
 								<c:if test="${channel.asdocument == false}">selected="selected"</c:if>>否</option>
 				</select>&nbsp;<input id="docBtn" type="button" value="选择文档" <c:if test="${channel.asdocument == false}">disabled="true"</c:if>
 					onclick="$('#dlg').dialog('open')" /></td>
