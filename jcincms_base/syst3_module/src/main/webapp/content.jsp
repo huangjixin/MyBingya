@@ -192,7 +192,7 @@
 				<li>
 					<div style="text-align: center;width: 100%;margin: 0 auto;">
 						<i id="zhizuo" style="color:#E37C51;"
-							class="fa fa-cog fa-spin fa-5x"></i>
+							class="fa fa-html5 fa-5x"></i>
 						<h2>前端制作</h2>
 						<div style="height: 20px;"></div>
 						<div style="width: 80%;text-align: center;margin: 0 auto;">

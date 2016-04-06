@@ -40,7 +40,7 @@
 			<img src="${ctx}/images/p3c.png" width="276" />
 		</div>
 		<div style="position: absolute;left:30px;top: 100px;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />需求品牌值得信任与认可
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;left:30px;bottom: 0px;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />需求品牌值得信任与认可
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;right:30px;top: 100px;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />需求品牌值得信任与认可
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;right:30px;bottom: 0px;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />需求品牌值得信任与认可
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -79,9 +79,10 @@
 				<p style="padding: 10px 0;">产品展示有说服力</p>
 			</div>
 		</div>
-		
+
 	</div>
-</div><div class="clear"></div>
+</div>
+<div class="clear"></div>
 <div class="globalWidth">
 	<div class="contentWidth"
 		style="position: relative;text-align: center;padding: 20px 0 80px 0;">
@@ -93,7 +94,7 @@
 			<img src="${ctx}/images/p4c.png" width="276" />
 		</div>
 		<div style="position: absolute;left:30px;top: 100px;text-align: left;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />定位系统
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -101,7 +102,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;left:30px;top: 160px;text-align: left;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />运营系统
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -109,7 +110,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;left:30px;top: 240px;text-align: left;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />推广系统
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -117,7 +118,7 @@
 			</div>
 		</div>
 		<div style="position: absolute;left:30px;top: 320px;text-align: left;">
-			<p class="p31t"  style="color: #E5812F;">
+			<p class="p31t" style="color: #E5812F;">
 				<img src="${ctx}/images/dot.png" width="23" />营销落地系统
 			</p>
 			<div class="p3con" style="color: #3C79C9;">
@@ -139,6 +140,71 @@
 				<p style="padding: 10px 0;">不同平台，动静完美结合，美观与实用并存</p>
 			</div>
 		</div>
-		
 	</div>
+</div>
+<div class="clear"></div>
+<div class="globalWidth" style="padding: 20px 0;">
+	<div class="contentWidth">
+		<div style="color: red;">
+			<div style="font-size: 40px;">WAP站建设</div>
+			<div style="font-size: 20px;">WEB站终端劣势</div>
+		</div>
+		<div style="width: 100%;text-align: center;">
+			<img src="${ctx}/images/p6.png" />
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="globalWidth"
+	style="padding: 20px 0;background-color:#EFEFF0; ">
+	<div class="contentWidth">
+		<div style="color: red;">
+			<div style="font-size: 40px;">WAP站建设</div>
+			<div style="font-size: 20px;">WEB站终端优势</div>
+		</div>
+		<div style="width: 100%;text-align: center;">
+			<img src="${ctx}/images/p71.png" /> <img src="${ctx}/images/p72.png" />
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="globalWidth" style="padding: 20px 0;">
+	<div class="contentWidth" style="position: relative;">
+		<div style="color: red;">
+			<div style="font-size: 40px;">WAP站建设</div>
+			<div style="font-size: 20px;">WAP站优势</div>
+		</div>
+		<div style="width: 100%;text-align: center;">
+			<img src="${ctx}/images/p8.png" />
+		</div>
+		<div style="position: absolute;padding: 10px;background-color: #8BD0DB;top: 220px;">
+			<p style="width:150px;font-size: 12px;">WAP站内产品、营销、广告、各类 系统完美嫁接到WAP站内，最终实 现营销导向同步。</p>
+		</div>
+		<div style="position: absolute;padding: 10px;background-color: #8BD0DB;top: 320px;left:20px;">
+			<p style="width:150px;font-size: 12px;">单独定向UI设计，迎合用户浏览习惯， 让您的WAP站更具有良性用户体验。</p>
+		</div>
+		<div style="position: absolute;padding: 10px;background-color: #8BD0DB;top: 120px;right: 100px;">
+			<p style="width:150px;font-size: 12px;">全站自定义SEO系统，从编程、设计及运营角度更贴合无处不在的营销导向。</p>
+		</div>
+		<div style="position: absolute;padding: 10px;background-color: #8BD0DB;top: 320px;right:0px;">
+			<p style="width:150px;font-size: 12px;">对接当前各类流行新媒体平台，实 现全网自媒体流量互通有无，各类 新媒体即时联动。</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="globalWidth" style="padding: 20px 0;background-color:#EFEFF0; ">
+	<div class="contentWidth">
+		<div style="color: red;">
+			<div style="font-size: 40px;">WAP站建设</div>
+			<div style="font-size: 20px;">广智为您提供与众不同的WAP站</div>
+		</div>
+		<div style="width: 100%;text-align: center;padding-top: 20px;">
+			<img src="${ctx}/images/wap.png" width="100%"
+				style="float:left;" />
+		</div>
+	</div>
+	<div class="clear"></div>
 </div>
