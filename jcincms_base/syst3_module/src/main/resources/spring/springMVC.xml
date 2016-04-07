@@ -141,7 +141,7 @@
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
 
-	<bean id="websocket" class="com.jcin.cms.modules.urlhandler.web.WebsocketEndPoint" />
+	<!-- <bean id="websocket" class="com.jcin.cms.modules.urlhandler.web.WebsocketEndPoint" /> -->
 	<!-- <mvc:annotation-driven/> -->
 	<!-- <bean id="conversionService" conversion-service="conversionService" 
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> 
