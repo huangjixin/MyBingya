@@ -28,8 +28,8 @@
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
-			<span style="color:#333333;font-size: 30px;">CASE成功案例</span><span
-				style="color:#333333;font-size: 12px;">我们的作品，他们的故事！</span>
+			<span style="color:#333333;font-size: 30px;">COLLEGE网络营销学院</span><span
+				style="color:#333333;font-size: 12px;">将网销进行到底！</span>
 		</div>
 		<hr class="hr"></hr>
 	</div>
@@ -37,9 +37,29 @@
 		<div class="contentWidth" style="text-align: left;">
 			<#assign docs=page.rows/>
 			<#if docs ??>
-				<ul id="case_ul">
+				<ul id="newslist">
 					<#list docs as doc>
-						<a href="${ctx}/${channel.linkAddr}/doc/${doc.id}"><li><img src="${ctx}/${doc.titleImage}" /> <span>${doc.title}</span></li></a>
+						<li style="margin-top: 20px;margin-bottom: 20px;"><a
+							href="${ctx}/${channel.linkAddr}/doc/${doc.id}">
+								<div style="float: left;">
+									<img src="${ctx}/${doc.fileAddr}"
+										style="width: 100px;height:100px;">
+								</div>
+								<div style="float: left;margin-left: 20px;width:80%;">
+									<div>
+										<span style="font-weight: bold;">${doc.title}</span>
+									</div>
+									<div style="font-size: 12px;padding-top: 5px;">
+										<#setting date_format="yyyy.MM.dd">
+										<#if doc.createDate ??>${doc.createDate?date}</#if>
+									</div>
+									<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
+								</div>
+								<div class="clear"></div>
+								
+						</a></li>
+
+						<hr class="hr" style="border-top:1px dashed #cccccc;"></hr>
 					</#list>
 				</ul>
 			</#if>
@@ -62,19 +82,5 @@
 		</div>
 	</div>
 	<#include "footer.ftl">
-	<script type="text/javascript">
-	var swiper = new Swiper('.swiper-container', {
-		pagination : '.swiper-pagination',
-		slidesPerView : 1,
-		effect : 'fade',
-		paginationClickable : true,
-		spaceBetween : 30,
-		loop: true,
-		keyboardControl : true,
-        centeredSlides: true,
-        autoplay: 3000,
-        autoplayDisableOnInteraction: true
-	});
-	</script>
 </body>
 </html>

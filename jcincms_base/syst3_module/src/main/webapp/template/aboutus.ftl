@@ -1,36 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="meta-channel.jsp" flush="true"></jsp:include>
-<jsp:include page="css.jsp" flush="true"></jsp:include>
-<jsp:include page="js.jsp" flush="true"></jsp:include>
-<title>${channel.name}_广州智沃——专业的互联网营销策划与人才服务商</title>
+<#include "meta-channel.ftl">
+<#include "css.ftl">
+<#include "js.ftl">
+<title>资讯中心_智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
-	<jsp:include page="header.jsp" flush="true"></jsp:include>
-	<jsp:include page="menu.jsp" flush="true"></jsp:include>
-	<div class="globalWidth" id="banner">
-		<img alt="" src="${ctx}/images/aboutus_banner.jpg"
-			style="width: 100%;">
+	<#include "header.ftl">
+	<#include "menu.ftl">
+	<div class="globalWidth">
+		<img alt="" src="${ctx}/images/aboutus_banner.jpg" style="width: 100%;">
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
 			<span style="font-size: 12px;color:#333333;">当前位置： <a
 				href="${ctx}/"
 				style="font-size: 12px;text-decoration: none;color:#333333;">首页</a>
-				<c:if test="${navChan !=null}">
-					<c:forEach var="chan" items="${navChan}">
+				<#if navChan ??>
+					<#list navChan as chan>
 										><a href="${ctx}/${chan.linkAddr}"
 							style="font-size: 12px;text-decoration: none;color:#333333;">${chan.name}</a>
-					</c:forEach>
-				</c:if>
+					</#list>
+				</#if>
 			</span>
 		</div>
 	</div>
 	<div class="globalWidth">
+		<div class="contentWidth" style="text-align: left;padding: 5px 0;">
+			<#list navChan as chan>
+				<#if (chan_index==0)>
+					<#if chan.children ??>
+						<#assign chan = chan/>
+						<#include "subnav.ftl">
+					</#if>
+				</#if>
+			</#list>
+		</div>
 		<div class="contentWidth" style="text-align: left;position: relative;">
 			<span style="color:#333333;font-size: 30px;">ABOUT关于我们</span><span
 				style="color:#333333;font-size: 12px;">最专业的互联网营销策划与人才提供商！</span>
@@ -39,14 +45,14 @@
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;padding: 5px 0;">
-			<c:forEach items="${navChan}" var="chan" varStatus="status">
-				<c:if test="${status.index==0}">
-					<c:if test="${chan.children!=null}">
-						<c:set var="chan" value="${chan}" scope="request" />
-						<jsp:include page="subnav.jsp"></jsp:include>
-					</c:if>
-				</c:if>
-			</c:forEach>
+			<#list navChan as chan>
+				<#if (chan_index==0)>
+					<#if chan.children ??>
+						<#assign chan=chan />
+						<!--<jsp:include page="subnav.jsp"></jsp:include>-->
+					</#if>
+				</#if>
+			</#list>
 		</div>
 		<div class="contentWidth" style="padding: 5px 0;">
 			${document.content}
@@ -54,6 +60,6 @@
 			<hr class="hr" style="border-top:1px dashed #cccccc;padding: 15px 0;"></hr>	
 		</div>
 	</div>
-	<jsp:include page="footer.jsp" flush="true"></jsp:include>
+	<#include "footer.ftl">
 </body>
 </html>

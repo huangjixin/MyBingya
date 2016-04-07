@@ -46,13 +46,13 @@
 				style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
 			<div style="padding: 20px 0;">${document.content}</div>
 			<#if lastdoc ??>
-				<div style="width: 100%;font-size: 12px;text-align: left;padding: 5px 0;">
+				<div style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
 					<span>上一篇：</span><a style="text-decoration: none;color: #333333;"
 						href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 				</div>
 			</#if>
 			<#if nextdoc ??>
-				<div style="width: 100%;font-size: 12px;text-align: left;padding: 5px 0;">
+				<div style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
 					<span>下一篇：</span><a style="text-decoration: none;color: #333333;"
 						href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 				</div>
