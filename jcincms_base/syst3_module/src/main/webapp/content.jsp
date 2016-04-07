@@ -356,12 +356,7 @@
 					</div>
 
 					<div id="tab2" class="tab_content" style="display: none; ">
-						<h2>各种tab标签选项卡</h2>
-						<h3>
-							<a href="http://www.freejs.net/article_tabbiaoqian_17.html">tab标签页面,ajax载入</a>
-						</h3>
-
-						<p>tab标签，jquery ajax载入数据库的内容</p>
+						<p>暂无内容</p>
 					</div>
 				</div>
 			</div>
