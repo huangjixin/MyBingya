@@ -201,12 +201,17 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 					String[] ids = assetsIds.split(",");
 					for (String assetid : ids) {
 						Assets assets = assetsMapper.selectByPrimaryKey(assetid);
-						String uploadPath = assets.getPath();
-						File file = new File(uploadPath);
-						logger.info(file.exists());
-						FileUtils.deleteFile(uploadPath);
+						if(assets!=null){
+							String uploadPath = assets.getPath();
+							if(null!=uploadPath && !"".equals(uploadPath)){
+								File file = new File(uploadPath);
+								logger.info(file.exists());
+								FileUtils.deleteFile(uploadPath);
+							}
+							
+							assetsMapper.deleteByPrimaryKey(assetid);
+						}
 						
-						assetsMapper.deleteByPrimaryKey(assetid);
 					}
 				}
 			}
