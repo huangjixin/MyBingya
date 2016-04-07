@@ -372,12 +372,13 @@ public class HtmlGeneraterController extends BaseController {
 				}
 				
 				// 移动端；
-				templateFile = "template" + File.separator + "m-channel.ftl";
+//				templateFile = "template" + File.separator + "m-channel.ftl";
+				templateFile = "";
 				if (null != toGeneratedChannel.getmGeneTemplate()
 						&& !"".equals(toGeneratedChannel.getmGeneTemplate())) {
 					templateFile = toGeneratedChannel.getmGeneTemplate();
-
 				}
+				
 				htmlFile = toGeneratedFiles + File.separator + "docs"
 						+ File.separator + toGeneratedChannel.getCode()
 						+ (i + 1) + "m.html";
@@ -396,11 +397,12 @@ public class HtmlGeneraterController extends BaseController {
 						}
 					}
 				}
-				
-				file1 = new File(webroot+templateFile);
-				if(file1.exists()){
-					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-							htmlFile, root);
+				if(!"".equals(templateFile)){
+					file1 = new File(webroot+templateFile);
+					if(file1.exists()){
+						FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+								htmlFile, root);
+					}
 				}
 			}
 		} else { // 非叶子节点生成使用channels模板，叶子节点使用channel模板
@@ -412,6 +414,7 @@ public class HtmlGeneraterController extends BaseController {
 
 			// 移动端；
 			templateFile = "template" + File.separator + "m-channels.ftl";
+			templateFile = "";
 			if (null != toGeneratedChannel.getmGeneTemplate()
 					&& !"".equals(toGeneratedChannel.getmGeneTemplate())) {
 				templateFile = toGeneratedChannel.getmGeneTemplate();
@@ -433,15 +436,17 @@ public class HtmlGeneraterController extends BaseController {
 				}
 			}
 			
-			file1 = new File(webroot+templateFile);
-			if(file1.exists()){
-				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
-						htmlFile, root);
+			if(!"".equals(templateFile)){
+				file1 = new File(webroot+templateFile);
+				if(file1.exists()){
+					FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+							htmlFile, root);
+				}
 			}
 		}
 
 		// 生成子栏目。
-		if (generateSubchannel) {
+		if (generateSubchannel==true) {
 			if (null != toGeneratedChannel.getChildren()
 					&& toGeneratedChannel.getChildren().size() > 0) {
 				for (Channel channel : toGeneratedChannel.getChildren()) {

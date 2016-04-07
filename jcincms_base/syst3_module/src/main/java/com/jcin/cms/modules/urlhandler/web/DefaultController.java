@@ -41,7 +41,7 @@ import com.jcin.cms.web.BaseController;
 // @Scope(value="prototype")
 public class DefaultController extends BaseController {
 
-	private static final String REDIRECT = "redirect:/";
+	private static final String REDIRECT = "";
 
 	// 文章统计点击数缓存。
 	public static final String DOC_CLICK_COUNT = "docClickCount";

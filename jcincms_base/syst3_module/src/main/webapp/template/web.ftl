@@ -12,8 +12,7 @@
 <body>
 	<#include "header.ftl">
 	<#include "menu.ftl">
-	<#include "banner.ftl">
-	<#include "content.ftl">
+	<#include "web-content.ftl">
 	<#include "footer.ftl">
 </body>
 </html>

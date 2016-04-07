@@ -43,7 +43,7 @@ public class DefaultIndexController extends BaseController {
 
 	private static String webrootPath;
 	private static String contextPath;
-	private static final String REDIRECT = "redirect:";
+	private static final String REDIRECT = "";
 
 	@Autowired
 	private IChannelService channelService;

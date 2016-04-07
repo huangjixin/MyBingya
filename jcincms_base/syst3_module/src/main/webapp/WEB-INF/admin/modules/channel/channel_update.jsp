@@ -73,7 +73,7 @@
 					submitHandler : function(form) {
 						$('#channelTemplete').val(chanTemp);
 						$('#gTemplete').val(geneTemp);
-						$('#mgTemplete').val(mGeneTemp);
+						$('#mgTemplete').val('');
 						$('#docGTemplete').val(docgeneTemp);
 						$('#docMgTemplete').val(docMgeneTemp);
 						$('#mchTemplete').val(mchannelTemp);

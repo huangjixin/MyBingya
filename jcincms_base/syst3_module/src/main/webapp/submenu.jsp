@@ -8,7 +8,7 @@
 				<li><a href="${ctx}/${channel.linkAddr}">${channel.name}</a> <c:if
 						test="${channel.children!=null}">
 						<c:set var="list" value="${channel.children}" scope="request" />
-						<jsp:include page="submenu.jsp"></jsp:include>
+						<%-- <jsp:include page="submenu.jsp"></jsp:include> --%>
 					</c:if></li>
 			</c:if>
 		</c:forEach>

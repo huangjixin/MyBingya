@@ -652,7 +652,7 @@ public class Channel implements Serializable {
 	}
 
 	public void setmGeneTemplate(String mGeneTemplate) {
-		this.mGeneTemplate = mGeneTemplate== null ? null : geneTemplate.trim();
+		this.mGeneTemplate = mGeneTemplate== null ? null : mGeneTemplate.trim();
 	}
 
     /**
