@@ -9,8 +9,21 @@
 <body>
 	<#include "header.ftl">
 	<#include "menu.ftl">
-	<div class="globalWidth">
-		<img alt="" src="${ctx}/images/colloege_banner.png" style="width: 100%;">
+	<div class="globalWidth" id="banner">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img alt="智沃案例" src="${ctx}/images/case-01.jpg"
+						style="width: 100%;">
+				</div>
+				<div class="swiper-slide">
+					<img alt="智沃案例" src="${ctx}/images/case-02.jpg"
+						style="width: 100%;">
+				</div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
