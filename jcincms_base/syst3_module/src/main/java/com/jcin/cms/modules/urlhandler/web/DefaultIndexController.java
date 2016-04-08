@@ -59,6 +59,7 @@ public class DefaultIndexController extends BaseController {
 	 * @param httpServletRequest
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -67,13 +68,23 @@ public class DefaultIndexController extends BaseController {
 		if (null != result) {
 			return result;
 		}
-		String uri = httpServletRequest.getScheme() + "://"
+		
+		if (webrootPath == null) {
+			webrootPath = httpServletRequest.getRealPath("/");
+		}
+		if (contextPath == null) {
+			contextPath = httpServletRequest.getContextPath();
+		}
+		String webroot = webrootPath;
+		String conPath = contextPath;
+		
+		/*String uri = httpServletRequest.getScheme() + "://"
 				+ httpServletRequest.getServerName() + ":"
 				+ httpServletRequest.getServerPort()
 				+ httpServletRequest.getRequestURI();
 		System.out.println(uri);
 		String referer = httpServletRequest.getHeader("referer");
-		System.out.println(referer);
+		System.out.println(referer);*/
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
@@ -112,8 +123,15 @@ public class DefaultIndexController extends BaseController {
 		 */
 		// return "m-woshang-index.jsp";
 		if (sitePreference == SitePreference.MOBILE) {
-			logger.info("手机来的网页请求home-mobile");
-			return basicConfig.getMindexJsp();// "m-woshang-index.jsp";
+			if(null!=basicConfig.getMindexJsp() && !"".equals(basicConfig.getMindexJsp())){
+				File file = new File(webroot+basicConfig.getMindexJsp());
+				if(file.exists()){
+					logger.info("手机来的网页请求home-mobile");
+					return basicConfig.getMindexJsp();
+				}
+			}
+			return basicConfig.getIndexJsp();
+			// "m-woshang-index.jsp";
 		} else {
 			logger.info("PC来的网页请求");
 			return basicConfig.getIndexJsp();// "woshang-index.jsp";
