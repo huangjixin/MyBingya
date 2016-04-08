@@ -1,16 +1,6 @@
-<%@page import="com.jcin.cms.common.Global"%>
-<%@page import="org.apache.shiro.SecurityUtils"%>
-<%@page import="org.apache.shiro.subject.Subject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<%
-	Subject subject = SecurityUtils.getSubject();
-	if (subject.isAuthenticated()) {
-		response.sendRedirect(request.getContextPath() + "/"
-				+ Global.getAdminPath());
-	}
-%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -53,29 +43,14 @@
 		})
 		
 		$("#formLogin").validate({
-			errorPlacement: function(error, element) {
-			$( element )
-				.closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" )
-						.append( error );
-		},
-		errorElement: "span",
-			rules : {
-				username : {
-					required : true
-				},
-				password : {
-					required : true
+			submitHandler:function(form) {
+				if(""==$("#username").val()|| ""==$("#password").val()){
+					document.getElementById("tip").innerHTML = "用户名和密码必填";
+					return false;
+				}else{
+					document.getElementById("tip").innerHTML = "正在登陆……";
 				}
-			},
-			messages : {
-				username : {
-					required : "必填",
-				},
-				password : {
-					required : "必填",
-				}
-			},submitHandler:function(form) {
-				document.getElementById("tip").innerHTML = "正在登陆……";
+				
 				var param = {
 				        username : $("#username").val(),
 				        password : $("#password").val()
