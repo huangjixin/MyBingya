@@ -127,7 +127,7 @@
 					<li><input id="username" name="username" type="text"
 						class="loginuser" value="admin" /><label for="username" style="color:red;">*</label></li>
 					<li><input id="password" name="password" type="password"
-						class="loginpwd" value="123456" /><label for="password" style="color:red;">*</label></li>
+						class="loginpwd" value="" /><label for="password" style="color:red;">*</label></li>
 					<li><input type="submit" class="loginbtn" value="登录" />&nbsp;&nbsp;<input
 						type="reset" class="loginbtn" value="重置" />&nbsp; <%-- <input name="captcha"
 						value=""
