@@ -197,7 +197,7 @@
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#mchannelTemplate').combotree('tree').tree("collapseAll");
-				var dTemplete = "${channel.docGeneTemplate}";
+				var dTemplete = "${channel.mchannelTemplate}";
 				$('#mchannelTemplate').combotree("setValue", dTemplete);
 			},
 			onSelect : function(item) {
