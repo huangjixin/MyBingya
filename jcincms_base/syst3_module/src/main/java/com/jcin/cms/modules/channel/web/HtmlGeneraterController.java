@@ -784,7 +784,6 @@ public class HtmlGeneraterController extends BaseController {
 			@RequestParam(value = "deleteSubchannelDoc", required = false) boolean deleteSubchannelDoc,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-
 		@SuppressWarnings("deprecation")
 		String webroot = httpServletRequest.getRealPath("/");
 
@@ -801,18 +800,20 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr;
-		String fileName = toGeneratedFiles + File.separator + "docs"
-				+ File.separator + toGeneratedChannel.getCode() + "1.html";
+		String fileName = toGeneratedFiles + File.separator + "docs";
+//				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		File file = new File(fileName);
 		if (file.exists()) {
-			FileUtils.deleteFile(fileName);
+			file.delete();
+			FileUtils.deleteDirectory(fileName);
 		}
 		// 移动端，约定后缀名前面加“m”；
-		fileName = toGeneratedFiles + File.separator + "docs" + File.separator
-				+ toGeneratedChannel.getCode() + "1m.html";
+		fileName = toGeneratedFiles + File.separator + "docs" ;
+//		+ File.separator + toGeneratedChannel.getCode() + "1m.html";
 		file = new File(fileName);
-		if (file.exists()) {
-			FileUtils.deleteFile(fileName);
+		if (file.exists()) { 
+			file.delete();
+//			FileUtils.deleteFile(fileName);
 		}
 
 		if (deleteSubchannelDoc) {
