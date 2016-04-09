@@ -1,108 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <script type="text/javascript">
 	//initiating jQuery
 	jQuery(function($) {
 		$(document).ready(function() {
-			try{
-				$('#alarm-ring')[0].play();
-			}
-			catch(e){}
-			
-			$('#nav').onePageNav();
-
-			//enabling stickUp on the '.navbar-wrapper' class
 			$('#menuContainer').stickUp();
-
-			createTab();
-			$(".content_p1_img").mouseover(function(e) {
-				// 				if(checkHover(e,this)){
-				// 					anim(this, 'fadeInUp');
-				// 			    }
-			});
-			
-			window.onscroll = function(){
-				animateContent2();
-				animateContent3();
-		        animateContent6();
-		    }
-			
-// 			alert($(".content_p1_img").height()+""+$(".content_p1_img").width());
-			// 			$(".content_p1_img").mouseout(function() {
-			// 				if(checkHover(e,this)){
-			// 					anim(this, 'fadeInDown');
-			// 			    }
-			// 			});
-			// 			anim('.content_p1_img', 'bounceInLeft')
-			// 			$('.content_p1_img').addClass('animated bounceInLeft');
 		});
 	});
 
-	function animateContent6(){
-		var scrollTop = document.body.scrollTop;
-		var obj = document.getElementById("content6");
-	    var _getHeight = obj.offsetTop;
-	    if(scrollTop > _getHeight-100){
-	    	$(".content6_div").animate({height:"300px"});
-	    }
-	}
-
-	function animateContent3(){
-		var scrollTop = document.body.scrollTop;
-		var obj = document.getElementById("content3");
-	    var _getHeight = obj.offsetTop;
-	    if(scrollTop > _getHeight-200){
-	    	$("#content3_p").animate({left:"20px"});
-	    	$("#content3_ul").animate({left:"20px"});
-	    	$("#p3-1").animate({right:"0px"});
-	    	$("#p3-2").animate({right:"0px"});
-	    }
-	}
-
-	function animateContent2(){
-		var scrollTop = document.body.scrollTop;
-		var obj = document.getElementById("content2");
-	    var _getHeight = obj.offsetTop;
-	    if(scrollTop > _getHeight+200){
-	    	$("#content2_wap1").animate({right:"0px"});
-	    	$("#content2_wap2").animate({left:"10px"});
-	    }
-	}
-
-	
 	function include(url) {
 		$.get(url, function(data) {
 			document.write(data);
 		})
 	}
 
-	function anim(target, x) {
-		$(target)
-				.removeClass()
-				.addClass(x + ' animated')
-				.one(
-						'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-						function() {
-							$(this).removeClass();
-						});
-	};
-
-	function createTab() {
-		//Default Action
-		$(".tab_content").hide(); //Hide all content
-		$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-		$(".tab_content:first").show(); //Show first tab content
-
-		//On Click Event
-		$("ul.tabs li").click(function() {
-			$("ul.tabs li").removeClass("active"); //Remove any "active" class
-			$(this).addClass("active"); //Add "active" class to selected tab
-			$(".tab_content").hide(); //Hide all tab content
-			var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-			$(activeTab).fadeIn(); //Fade in the active content
-			return false;
-		});
-	}
-	
-	
 	<!-- Initialize Swiper -->
 </script>
 <audio id="alarm-ring" preload>

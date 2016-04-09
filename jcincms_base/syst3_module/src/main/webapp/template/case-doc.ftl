@@ -72,6 +72,20 @@
 			</#if>
 		</div>
 	</div>
+	<script type="text/javascript">
+	var swiper = new Swiper('.swiper-container', {
+		pagination : '.swiper-pagination',
+		slidesPerView : 1,
+		effect : 'fade',
+		paginationClickable : true,
+		spaceBetween : 30,
+		loop: true,
+		keyboardControl : true,
+        centeredSlides: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction: true
+	});
+	</script>
 	<#include "footer.ftl">
 </body>
 </html>

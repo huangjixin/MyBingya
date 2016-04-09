@@ -360,3 +360,81 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+			try{
+				$('#alarm-ring')[0].play();
+			}
+			catch(e){}
+			
+			$('#nav').onePageNav();
+
+			createTab();
+			$(".content_p1_img").mouseover(function(e) {
+			});
+			
+			window.onscroll = function(){
+				animateContent2();
+				animateContent3();
+		        animateContent6();
+		    }
+		});
+
+	function animateContent6(){
+		var scrollTop = document.body.scrollTop;
+		var obj = document.getElementById("content6");
+	    var _getHeight = obj.offsetTop;
+	    if(scrollTop > _getHeight-100){
+	    	$(".content6_div").animate({height:300});
+	    }
+	}
+
+	function animateContent3(){
+		var scrollTop = document.body.scrollTop;
+		var obj = document.getElementById("content3");
+	    var _getHeight = obj.offsetTop;
+	    if(scrollTop > _getHeight-200){
+	    	$("#content3_p").animate({left:20});
+	    	$("#content3_ul").animate({left:20});
+	    	$("#p3-1").animate({right:0});
+	    	$("#p3-2").animate({right:0});
+	    }
+	}
+
+	function animateContent2(){
+		var scrollTop = document.body.scrollTop;
+		var obj = document.getElementById("content2");
+	    var _getHeight = obj.offsetTop;
+	    if(scrollTop > _getHeight+200){
+	    	$("#content2_wap1").animate({right:0});
+	    	$("#content2_wap2").animate({left:10});
+	    }
+	}
+
+	function anim(target, x) {
+		$(target)
+				.removeClass()
+				.addClass(x + ' animated')
+				.one(
+						'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+						function() {
+							$(this).removeClass();
+						});
+	};
+
+	function createTab() {
+		$(".tab_content").hide(); //Hide all content
+		$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+		$(".tab_content:first").show(); //Show first tab content
+
+		//On Click Event
+		$("ul.tabs li").click(function() {
+			$("ul.tabs li").removeClass("active"); //Remove any "active" class
+			$(this).addClass("active"); //Add "active" class to selected tab
+			$(".tab_content").hide(); //Hide all tab content
+			var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+			$(activeTab).fadeIn(); //Fade in the active content
+			return false;
+		});
+	}
+</script>
