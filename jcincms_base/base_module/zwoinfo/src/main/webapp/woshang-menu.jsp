@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <div class="globalWidth" id="menuContainer">
-	<div class="contentWidth">
+	<div class="menuContent">
 		<div class="menu">
 			<ul>
 				<li><a href="${ctx}/">首页</a></li>
