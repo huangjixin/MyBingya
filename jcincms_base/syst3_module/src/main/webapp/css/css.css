@@ -52,16 +52,7 @@ a:VISITED {
 }
 
 #banner {
-	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,
-		startColorStr=#6A90F9, endColorStr=#889BF9 );
-	background: -ms-linear-gradient(top, #6A90F9,   #889BF9);        
-	background : -moz-linear-gradient( top, #6A90F9, #889BF9);
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6A90F9),
-		to(#889BF9) ); /*谷歌*/
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6A90F9),
-		to(#889BF9) );
-	background: -webkit-linear-gradient(top, #6A90F9, #889BF9);
-	background: -o-linear-gradient(top, #6A90F9, #889BF9);
+	background:#6A90F9;
 }
 
 .content_p1 {
