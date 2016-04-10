@@ -206,18 +206,31 @@ a:VISITED {
 	border: none;
 	border-top: 1px solid #cccccc;
 }
+
+#aboutus_content{
+	
+}
+
+#aboutus_content img{
+	width: 100%;
+}
+
+.web_img{
+	width: 100%;
+	height: auto;
+}
 /************** 菜单开始****************************/
 #menuContainer {
 	width: 100%;
 	z-index: 998;
 	/* display: none; */
-	background: black;
+	background: #5B5AB2;
 }
 
 .menu {
 	width: 100%;
 	height: 30px;
-	background: black;
+	background: #5B5AB2;
 	z-index: 3;
 	display: block;
 }
@@ -228,7 +241,7 @@ a:VISITED {
 	padding: 0;
 	float: left;
 	list-style: none;
-	background: black;
+	background: #5B5AB2;
 }
 
 .menu ul a {

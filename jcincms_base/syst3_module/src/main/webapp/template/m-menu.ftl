@@ -7,9 +7,9 @@
 						<#if chan.name ??>
 							<li><a href="${ctx}/${chan.linkAddr}"
 								<#if channel ??>
-									<#if channel.name==chan.name>
+									<#--<#if channel.name==chan.name>
 										class="selected"
-									</#if>
+									</#if>-->
 								</#if> >${chan.name}</a>
 								<#--<#if chan.children ??>
 									<#assign list=channel.children>

@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
 <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/stickUp.js"></script>
+<script type="text/javascript" src="${ctx}/js/swiper.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.case span').mouseover(function(e) {

@@ -13,6 +13,12 @@
 <script src="${ctx}/js/swiper.min.js"></script>
 <!-- Initialize Swiper -->
 <script>
+	jQuery(function($) {
+		$(document).ready(function() {
+			$('#menuContainer').stickUp();
+		});
+	});
+	
 	var swiper = new Swiper('.swiper-container', {
 		pagination : '.swiper-pagination',
 		slidesPerView : 1,
