@@ -84,8 +84,7 @@
 				<c:set var="docs" value="${fns:getDocByChannelCode('news',10)}"></c:set>
 				<c:if test="${docs!=null}">
 					<c:forEach var="doc" items="${docs}">
-						<li><a href="${ctx}/channel/news/doc/${doc.id}"
-							target="blank">${doc.title}<span><fmt:formatDate
+						<li><a href="${ctx}/channel/news/doc/${doc.id}">${doc.title}<span><fmt:formatDate
 										value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
 						<hr class="hr"></hr>
 					</c:forEach>

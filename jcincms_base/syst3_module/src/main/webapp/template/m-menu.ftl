@@ -1,7 +1,7 @@
 <div class="globalWidth" id="menuContainer">
 	<div class="menu">
 		<ul>
-				<li><a href="${ctx}/">首页</a></li>
+				<!--<li><a href="${ctx}/">首页</a></li>-->
 				<#if menus ??>
 					<#list menus as chan>
 						<#if chan.name ??>

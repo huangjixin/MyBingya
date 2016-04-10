@@ -226,7 +226,7 @@ public class Channel implements Serializable {
      * @mbggenerated 2015年12月31日 16时41分47秒 星期四
      */
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     /**

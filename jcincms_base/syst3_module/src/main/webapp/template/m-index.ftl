@@ -83,8 +83,7 @@
 						<#if rootKey=='news'>
 							<#list menusMap[rootKey] as doc>
 								<#setting date_format="yyyy.MM.dd">
-									<li><a href="${ctx}/channel/news/doc/${doc.id}"
-												target="blank">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
+									<li><a href="${ctx}/channel/news/doc/${doc.id}">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
 							</#list>
 						</#if>
 					</#list>

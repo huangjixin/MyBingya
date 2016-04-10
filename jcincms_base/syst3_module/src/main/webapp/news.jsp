@@ -7,7 +7,7 @@
 <jsp:include page="meta-channel.jsp" flush="true"></jsp:include>
 <jsp:include page="css.jsp" flush="true"></jsp:include>
 <jsp:include page="js.jsp" flush="true"></jsp:include>
-<title>智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>新闻中心，智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
@@ -70,14 +70,14 @@
 				<div class="spacer"></div>
 				<div
 					style="width:100%;padding: 15px 0px 15px 5px;font-size: 12px;text-align: center;">
-					<a href="${ctx}/${channel.linkAddr}?page=1"><span>首页</span></a>&nbsp;&nbsp;
+					<a href="${ctx}/${channel.linkAddr}?page=1" class="button button-primary button-rounded button-small">首页</a>&nbsp;&nbsp;
 					<c:if test="${page.page>1}">
-						<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}"><span>上一页</span></a>&nbsp;&nbsp;</c:if>
+						<a href="${ctx}/${channel.linkAddr}?page=${page.page-1}" class="button button-primary button-rounded button-small">上一页</a>&nbsp;&nbsp;</c:if>
 					<span>${page.page}</span>&nbsp;&nbsp;
 					<c:if test="${page.page < page.totalPage+1}">
-						<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}"><span>下一页</span></a>&nbsp;&nbsp;</c:if>
+						<a href="${ctx}/${channel.linkAddr}?page=${page.page+1}" class="button button-primary button-rounded button-small">下一页</a>&nbsp;&nbsp;</c:if>
 					<c:if test="${page.page < page.totalPage+1}">
-						<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}"><span>末页</span></a>&nbsp;&nbsp;</c:if>
+						<a href="${ctx}/${channel.linkAddr}?page=${page.totalPage+1}" class="button button-primary button-rounded button-small">末页</a>&nbsp;&nbsp;</c:if>
 					&nbsp;&nbsp;<span>共${page.totalPage+1}页 ${page.total}条</span>
 				</div>
 			</c:if>

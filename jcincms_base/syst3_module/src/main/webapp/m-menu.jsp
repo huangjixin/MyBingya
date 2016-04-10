@@ -4,11 +4,12 @@
 <div class="globalWidth" id="menuContainer">
 	<div class="menu">
 		<ul>
-			<li><a href="${ctx}/">首页</a></li>
+			<%-- <li><a href="${ctx}/">首页</a></li> --%>
 			<c:if test="${list!=null}">
 				<c:forEach var="chan" items="${list}">
 					<c:if test="${chan.name!=null && chan.name!=''}">
-						<li><a href="${ctx}/${chan.linkAddr}">${chan.name}</a>
+						<li><a href="${ctx}/${chan.linkAddr}">
+						${chan.name}</a>
 							<%-- <c:set var="list" value="${chan.children}" scope="request" /> --%> <%-- <jsp:include page="submenu.jsp"></jsp:include> --%></li>
 					</c:if>
 				</c:forEach>
