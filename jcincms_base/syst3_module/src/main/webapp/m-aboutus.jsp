@@ -19,7 +19,7 @@
 	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
 		<a href="${ctx}/"><img alt="智沃科技"
-			src="${ctx}/images/case-01.jpg" style="height: auto;width: 100%;"></a>
+			src="${ctx}/images/aboutus_banner.jpg" style="height: auto;width: 100%;"></a>
 	</div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">

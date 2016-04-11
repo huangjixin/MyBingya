@@ -1,20 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="m-meta.jsp" flush="true"></jsp:include>
-<jsp:include page="m-css.jsp" flush="true"></jsp:include>
-<jsp:include page="m-js.jsp" flush="true"></jsp:include>
-<title>关于广州智沃,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<#include "m-meta.ftl" >
+<#include "m-css.ftl" >
+<#include "m-js.ftl" >
 </head>
+<title>广州智沃,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
 <body>
 	<!-- 头部 -->
-	<jsp:include page="m-header.jsp" flush="true"></jsp:include>
+	<#include "m-header.ftl" >
 	<div class="clear"></div>
 	<!-- 菜单 -->
-	<jsp:include page="m-menu.jsp" flush="true"></jsp:include>
+	<#include "m-menu.ftl" >
 	<div class="clear"></div>
 	<div style="height: 1px;"></div>
 	<div class="global"
@@ -206,8 +202,8 @@
 	</div>
 	<div class="clear"></div>
 	<!-- 底部 -->
-	<jsp:include page="m-footer.jsp" flush="true"></jsp:include>
+	<#include "m-footer.ftl" >
 	<!-- 菜单底部 -->
-	<jsp:include page="m-bottommenu.jsp" flush="true"></jsp:include>
+	<#include "m-bottommenu.ftl" >
 </body>
 </html>
