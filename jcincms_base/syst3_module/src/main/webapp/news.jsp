@@ -45,7 +45,7 @@
 						<li style="margin-top: 20px;margin-bottom: 20px;"><a
 							href="${ctx}/${channel.linkAddr}/doc/${doc.id}">
 								<div style="float: left;">
-									<img src="${ctx}/${doc.fileAddr}"
+									<img src="${ctx}/${doc.titleImage}"
 										style="width: 100px;height:100px;">
 								</div>
 								<div style="float: left;margin-left: 20px;width:80%;">

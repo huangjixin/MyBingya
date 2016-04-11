@@ -33,7 +33,7 @@
 					<c:forEach var="doc" items="${docs}">
 						<li><a href="${ctx}/channel/news/doc/${doc.id}">
 								<div style="float: left;">
-									<img src="${ctx}/${doc.fileAddr}"
+									<img src="${ctx}/${doc.titleImage}"
 										style="width: 80px;height:80px;">
 								</div>
 								<div style="float: left;margin-left: 20px;width:240px;">

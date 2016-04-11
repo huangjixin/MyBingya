@@ -178,12 +178,12 @@ a:VISITED {
 
 .case{
 	margin: 0 auto;text-align: center;padding-top: 10px;padding-bottom: 10px;
-	color:#cccccc;
+	color:#333333;
 }
 
 .case span{
 	display:inline-block;padding: 5px 20px;
-	border: 1px solid #cccccc;margin-top: 5px;
+	border: 1px solid #333333;margin-top: 5px;
 }
 
 .case span:HOVER{
