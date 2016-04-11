@@ -92,6 +92,26 @@
 			</ul>
 		</div>
 	</div>
+	<div class="clear"></div>
+	<div class="devider"></div>
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>营销知识</span>
+	</div>
+	<div class="global">
+		<div class="news">
+			<ul style="padding-top: 10px;">
+				<c:set var="docs" value="${fns:getDocByChannelCode('college',10)}"></c:set>
+				<c:if test="${docs!=null}">
+					<c:forEach var="doc" items="${docs}">
+						<li><a href="${ctx}/channel/college/doc/${doc.id}">${doc.title}<span><fmt:formatDate
+										value="${doc.createDate}" pattern="yyyy.MM.dd" /></span></a></li>
+						<hr class="hr"></hr>
+					</c:forEach>
+				</c:if>
+			</ul>
+		</div>
+	</div>
 
 	<div class="clear"></div>
 	<!-- 底部 -->

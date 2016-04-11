@@ -91,6 +91,29 @@
 			</ul>
 		</div>
 	</div>
+	
+	<div class="clear"></div>
+	<div class="devider"></div>
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>营销知识</span>
+	</div>
+	<div class="global">
+		<div class="news">
+			<ul style="padding-top: 10px;">
+				<#if menusMap?exists>
+					<#list menusMap?keys as rootKey>
+						<#if rootKey=='college'>
+							<#list menusMap[rootKey] as doc>
+								<#setting date_format="yyyy.MM.dd">
+									<li><a href="${ctx}/channel/news/doc/${doc.id}">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
+							</#list>
+						</#if>
+					</#list>
+				</#if>
+			</ul>
+		</div>
+	</div>
 
 	<div class="clear"></div>
 	<!-- 底部 -->
