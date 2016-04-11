@@ -1,34 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="m-meta.jsp" flush="true"></jsp:include>
-<jsp:include page="m-css.jsp" flush="true"></jsp:include>
-<jsp:include page="m-js.jsp" flush="true"></jsp:include>
-<title>成功案例,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<#include "m-meta.ftl" >
+<#include "m-css.ftl" >
+<#include "m-js.ftl" >
 </head>
+<title>广州智沃,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
 <body>
 	<!-- 头部 -->
-	<jsp:include page="m-header.jsp" flush="true"></jsp:include>
+	<#include "m-header.ftl" >
 	<div class="clear"></div>
 	<!-- 菜单 -->
-	<jsp:include page="m-menu.jsp" flush="true"></jsp:include>
+	<#include "m-menu.ftl" >
 	<div class="clear"></div>
 	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
-		<img alt="智沃科技" src="${ctx}/images/case-01.jpg" style="height: auto;width: 100%;">
+		<img alt="智沃科技" src="${ctx}/images/colloege_banner.png"
+			style="height: auto;width: 100%;">
 	</div>
+	<div class="clear"></div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
-		<span>CASE成功案例</span>
+		<span>COLLEGE网络营销学院</span>
 	</div>
 	<div class="global">
 		<div style="text-align: center;color: #333333;padding: 20px 0;">
 			<h3>${document.title}</h3>
-			<span><fmt:formatDate value="${document.createDate}"
-					pattern="yyyy-MM-dd" /></span>
+			<span><#setting date_format="yyyy.MM.dd">
+				<#if document.createDate ??>${document.createDate?date}</#if></span>
 			<div class="bshare-custom">
 				<a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博"
 					class="bshare-sinaminiblog"></a><a title="分享到人人网"
@@ -46,26 +44,25 @@
 			<hr
 				style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
 			<div style="padding: 20px 0;">${document.content}</div>
-			<c:if test="${lastdoc!=null}">
-				<div
-					style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
+			<#if lastdoc ??>
+				<div style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
 					<span>上一篇：</span><a style="text-decoration: none;color: #333333;"
 						href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 				</div>
-			</c:if>
-			<c:if test="${nextdoc!=null}">
-				<div
-					style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
+			</#if>
+			<#if nextdoc ??>
+				<div style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
 					<span>下一篇：</span><a style="text-decoration: none;color: #333333;"
 						href="${ctx}/${channel.linkAddr}/doc/${nextdoc.id}">${nextdoc.title}</a>
 				</div>
-			</c:if>
+			</#if>
 		</div>
 	</div>
+
 	<div class="clear"></div>
 	<!-- 底部 -->
-	<jsp:include page="m-footer.jsp" flush="true"></jsp:include>
+	<#include "m-footer.ftl" >
 	<!-- 菜单底部 -->
-	<jsp:include page="m-bottommenu.jsp" flush="true"></jsp:include>
+	<#include "m-bottommenu.ftl" >
 </body>
 </html>

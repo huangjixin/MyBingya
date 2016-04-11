@@ -7,7 +7,7 @@
 <jsp:include page="m-meta.jsp" flush="true"></jsp:include>
 <jsp:include page="m-css.jsp" flush="true"></jsp:include>
 <jsp:include page="m-js.jsp" flush="true"></jsp:include>
-<title>新闻中心,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>网络营销学院,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<!-- 头部 -->
@@ -19,11 +19,11 @@
 	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
 		<img alt="智沃科技"
-			src="${ctx}/images/news_banner.png" style="height: auto;width: 100%;">
+			src="${ctx}/images/colloege_banner.png" style="height: auto;width: 100%;">
 	</div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
-		<span>NEWS新闻报道</span>
+		<span>COLLEGE网络营销学院</span>
 	</div>
 	<div class="global">
 		<div class="news">

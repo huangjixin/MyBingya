@@ -4,7 +4,7 @@
 <#include "m-css.ftl" >
 <#include "m-js.ftl" >
 </head>
-<title>成功案例,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
+<title>广州智沃,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
 <body>
 	<!-- 头部 -->
 	<#include "m-header.ftl" >
@@ -14,13 +14,13 @@
 	<div class="clear"></div>
 	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
-		<img alt="智沃科技" src="${ctx}/images/case-01.jpg"
+		<img alt="智沃科技" src="${ctx}/images/colloege_banner.png"
 			style="height: auto;width: 100%;">
 	</div>
 	<div class="clear"></div>
 	<div
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
-		<span>CASE成功案例</span>
+		<span>COLLEGE网络营销学院</span>
 	</div>
 	<div class="global">
 		<div class="news">

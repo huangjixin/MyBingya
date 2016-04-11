@@ -14,8 +14,8 @@
 	<div class="clear"></div>
 	<div style="height: 1px;"></div>
 	<div style="padding: 5px 0px;">
-		<a href="${ctx}/"><img alt="智沃科技" src="${ctx}/images/case-01.jpg"
-			style="height: auto;width: 100%;"></a>
+		<img alt="智沃科技" src="${ctx}/images/case-01.jpg"
+			style="height: auto;width: 100%;">
 	</div>
 	<div class="clear"></div>
 	<div
