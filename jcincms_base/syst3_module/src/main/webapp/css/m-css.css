@@ -183,7 +183,7 @@ a:VISITED {
 
 .case span{
 	display:inline-block;padding: 5px 20px;
-	border: 1px solid #333333;margin-top: 5px;
+	border: 1px solid #06A3E9;margin-top: 5px;
 }
 
 .case span:HOVER{
