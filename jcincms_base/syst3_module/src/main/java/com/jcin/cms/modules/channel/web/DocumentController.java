@@ -33,14 +33,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.FileUtils;
+import com.jcin.cms.common.FreeMarkerUtil;
 import com.jcin.cms.common.Global;
-import com.jcin.cms.common.HtmlGeneratorUtils;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.channel.domain.Channel;
@@ -50,8 +52,6 @@ import com.jcin.cms.modules.channel.domain.FileVO;
 import com.jcin.cms.modules.channel.service.IAssetsService;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
-import com.jcin.cms.modules.syst.domain.Organization;
-import com.jcin.cms.modules.syst.domain.OrganizationCriteria;
 import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
@@ -95,8 +95,17 @@ public class DocumentController extends BaseController<Document> {
 		}
 		documentService.insert(document);
 		
-		redirectAttributes.addFlashAttribute("document", document);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
+		if(document.getAutoGenerate()){
+			try {
+				generateChannelDocs(document.getChannelId(),document, httpServletRequest, httpServletResponse);
+			} catch (IOException e) {
+				redirectAttributes.addFlashAttribute("msg", "新增成功,但是生成html文件有误，请检查模板或者路径");
+				e.printStackTrace();
+			}
+		}
+		redirectAttributes.addFlashAttribute("document", document);
+		
 		return "redirect:/" + Global.getAdminPath() + "/document/create";
 	}
 
@@ -247,6 +256,8 @@ public class DocumentController extends BaseController<Document> {
 		String[] ids = idstring.split(",");
 		List<String> list = new ArrayList<String>();
 		for (String idstr : ids) {
+			Document document = documentService.selectByPrimaryKey(idstr);
+			deleteChannelDoc(document.getChannelId(),document,httpServletRequest,httpServletResponse);
 			list.add(idstr);
 		}
 		int result = documentService.deleteBatch(list);
@@ -506,5 +517,206 @@ public class DocumentController extends BaseController<Document> {
 		}
 
 		return children;
+	}
+	
+	
+	public String generateChannelDocs(String id,Document document,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+		String conPath = httpServletRequest.getContextPath();
+
+		List<Channel> menus = UserUtils.getChannels();// 菜单。
+		// 约定指向文档的栏目不会出现在模块内容当中。
+		List<Channel> modules = new ArrayList<Channel>();
+		for (Channel channel2 : menus) {
+			if (!channel2.getAsdocument()) {
+				modules.add(channel2);
+			}
+		}
+
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus, id, result);
+		if (result.size() == 0) {
+			return "获取栏目失败，注意刷新栏目";
+		}
+
+		Channel toGeneratedChannel = result.get(0);
+
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot + linkAddr + File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
+		File file = new File(toGeneratedFiles);
+		if (!file.exists()) {
+			FileUtils.createDirectory(toGeneratedFiles);
+		}
+
+		List<Channel> navChan = getParentChannels(menus, toGeneratedChannel);
+		// 点击率排名
+		/*Page page1 = new Page();
+		List<Document> clickCountDocs = documentService.getClickCountDoc(
+				toGeneratedChannel.getCode(), page1);
+		for (Document document1 : clickCountDocs) {
+			Channel channel1 = channelService.selectByPrimaryKey(document1
+					.getChannelId());
+			document1.setChannel(channel1);
+		}*/
+		
+		Map<String, Object> root = new HashMap<String, Object>();
+		
+		Document lastdoc = documentService.selectLastRecord(document);
+		Document nextdoc = documentService.selectNextRecord(document);
+		root.put("lastdoc", lastdoc);
+		root.put("nextdoc", nextdoc);
+		root.put("channel", toGeneratedChannel);
+		root.put("path", webroot);
+		root.put("ctx", conPath);
+		root.put("menus", menus);
+		root.put("modules", modules);
+		root.put("navChan", navChan);
+//		root.put("clickCountDocs", clickCountDocs);
+		root.put("document", document);
+		
+		String templatesPath = webroot;
+		String templateFile = "template" + File.separator + "doc.ftl";
+		templateFile = "";
+		if (null != toGeneratedChannel.getDocGeneTemplate()
+				&& !"".equals(toGeneratedChannel.getDocGeneTemplate())) {
+			templateFile = toGeneratedChannel.getDocGeneTemplate();
+		}
+		if (null != document.getGeneTemplate()
+				&& !"".equals(document.getGeneTemplate())) {
+			templateFile = document.getGeneTemplate();
+		}
+		
+		String htmlFile = toGeneratedFiles + File.separator
+				+ document.getId() + ".html";
+		
+		File file1 = new File(webroot+templateFile);
+		if(!"".equals(templateFile)){
+			if(file1.exists()){
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+						htmlFile, root);
+			}
+		}
+		
+		// 移动端
+		templateFile = "template" + File.separator + "m-doc.ftl";
+		templateFile = "";
+		if (null != toGeneratedChannel.getDocMgeneTemplate()
+				&& !"".equals(toGeneratedChannel.getDocMgeneTemplate())) {
+			templateFile = toGeneratedChannel.getDocMgeneTemplate();
+		}
+		
+		if (null != document.getmGeneTemplate()
+				&& !"".equals(document.getmGeneTemplate())) {
+			templateFile = document.getmGeneTemplate();
+		}
+		
+		htmlFile = toGeneratedFiles + File.separator + document.getId()
+				+ "m.html";
+		if(!"".equals(templateFile)){
+			file1 = new File(webroot+templateFile);
+			if(file1.exists()){
+				FreeMarkerUtil.analysisTemplate(templatesPath, templateFile,
+						htmlFile, root);
+			}
+		}
+
+		return "生成栏目文档成功";
+	}
+	
+	public String deleteChannelDoc(String id,Document document,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		@SuppressWarnings("deprecation")
+		String webroot = httpServletRequest.getRealPath("/");
+
+		List<Channel> menus = UserUtils.getChannels();// 菜单。
+
+		List<Channel> result = new ArrayList<Channel>();
+		searchChannel(menus, id, result);
+		if (result.size() == 0) {
+			return "获取栏目失败，注意刷新栏目";
+		}
+
+		Channel toGeneratedChannel = result.get(0);
+
+		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr = linkAddr.replaceAll("//", File.separator);
+		String toGeneratedFiles = webroot + linkAddr;
+		String fileName = toGeneratedFiles + File.separator + "docs"
+				+ File.separator + document.getId() + ".html";
+		File file = new File(fileName);
+		if (file.exists()) {
+			file.delete();
+			FileUtils.deleteFile(fileName);
+		}
+		// 移动端，约定后缀名前面加“m”；
+		fileName = toGeneratedFiles + File.separator + "docs" 
+		+ File.separator + document.getId() + "m.html";
+		file = new File(fileName);
+		if (file.exists()) { 
+			file.delete();
+			FileUtils.deleteFile(fileName);
+		}
+
+		return "删除栏目文档成功";
+	}
+
+	private List<Channel> getParentChannels(List<Channel> list,
+			Channel currentChannel) {
+		List<Channel> result = new ArrayList<Channel>();
+		while (currentChannel != null
+				&& !"".equals(currentChannel.getParentId())
+				&& null != currentChannel.getParentId()) {
+			result.add(currentChannel);
+			List<Channel> res = new ArrayList<Channel>();
+			searchChannel(list, currentChannel, res);
+			if (res.size() > 0) {
+				currentChannel = res.get(0);
+			}
+		}
+		result.add(currentChannel);
+		List<Channel> temp = new ArrayList<Channel>();
+		for (int i = result.size() - 1; i >= 0; i--) {
+			temp.add(result.get(i));
+		}
+		result = temp;
+		return result;
+	}
+
+	private Channel searchChannel(List<Channel> list, String id,
+			List<Channel> result) {
+		Channel chan = null;
+		for (Channel channel : list) {
+			if (channel.getId().equals(id)) {
+				result.add((chan = channel));
+				break;
+			}
+			if (channel.getChildren() != null
+					&& channel.getChildren().size() > 0) {
+				chan = searchChannel(channel.getChildren(), id, result);
+			}
+		}
+		return null;
+	}
+
+	private Channel searchChannel(List<Channel> list, Channel currentChannel,
+			List<Channel> result) {
+		Channel chan = null;
+		for (Channel channel : list) {
+			if (channel.getId().equals(currentChannel.getParentId())) {
+				result.add(chan = channel);
+				break;
+			}
+			if (channel.getChildren() != null
+					&& channel.getChildren().size() > 0) {
+				chan = searchChannel(channel.getChildren(), currentChannel,
+						result);
+			}
+		}
+		return null;
 	}
 }

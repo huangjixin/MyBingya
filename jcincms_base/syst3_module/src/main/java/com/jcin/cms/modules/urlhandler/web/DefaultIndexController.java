@@ -173,7 +173,7 @@ public class DefaultIndexController extends BaseController {
 		}
 		uiModel.addAttribute("modules", modules);
 
-		return "m-woshang-index.jsp";
+		return basicConfig.getMindexJsp();
 	}
 
 	@SuppressWarnings("deprecation")

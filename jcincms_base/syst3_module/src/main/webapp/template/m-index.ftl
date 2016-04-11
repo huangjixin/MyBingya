@@ -35,41 +35,6 @@
 		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
 		<span>成功案例</span>
 	</div>
-	<div class="global">
-		<div class="news">
-			<ul style="padding-top: 10px;">
-				<c:set var="docs" value="${fns:getDocByChannelCode('case',10)}"></c:set>
-				<c:if test="${docs!=null}">
-					<c:forEach var="doc" items="${docs}">
-						<li><a href="${ctx}/channel/case/doc/${doc.id}">
-								<div style="float: left;">
-									<img src="${ctx}/${doc.titleImage}"
-										style="width: 80px;height:80px;">
-								</div>
-								<div style="float: left;margin-left: 20px;width:240px;">
-									<div>
-										<span style="font-weight: bold;float:none;">${doc.title}</span>
-									</div>
-									<div style="font-size: 12px;padding-top: 5px;">
-										<#setting date_format="yyyy.MM.dd">
-											<#if doc.createDate ??>${doc.createDate?date}</#if>
-									</div>
-									<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
-								</div>
-								<div class="clear"></div>
-						</a></li>
-						<hr class="hr"></hr>
-					</c:forEach>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-	<div class="clear"></div>
-	<div class="devider"></div>
-	<div
-		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
-		<span>成功案例</span>
-	</div>
 	<div style="padding-top: 5px;text-align: center;">
 		<a href="${ctx}/channel/case"><img alt="智沃科技" src="${ctx}/images/m-case-banner1.jpg"
 			style="width: 49%;"> <img alt="智沃科技"
@@ -109,6 +74,42 @@
 			</span>
 		</div>
 	</div>
+	<div class="clear"></div>
+	<div class="devider"></div>
+	<div
+		style="padding: 5px 0;text-align: center;background-color: red;color:#ffffff;">
+		<span>成功案例</span>
+	</div>
+	<div class="global">
+		<div class="news">
+			<ul style="padding-top: 10px;">
+				<#if menusMap?exists>
+					<#list menusMap?keys as rootKey>
+						<#if rootKey=='case'>
+							<#list menusMap[rootKey] as doc>
+								<#setting date_format="yyyy.MM.dd">
+									<li>
+										<a href="${ctx}/channel/case/doc/${doc.id}">
+								<div style="float: left;">
+									<img src="${ctx}/${doc.titleImage}"
+										style="width: 80px;height:80px;">
+								</div>
+								<div style="float: left;margin-left: 20px;width:240px;">
+									<div>
+										<span style="font-weight: bold;float:none;">${doc.title}</span>
+									</div>
+									<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
+								</div>
+								<div class="clear"></div>
+						</a></li>
+							</#list>
+						</#if>
+					</#list>
+				</#if>
+			</ul>
+		</div>
+	</div>
+	
 	<div class="clear"></div>
 	<div class="devider"></div>
 	<div

@@ -35,7 +35,7 @@ import com.jcin.cms.modules.urlhandler.domain.BasicConfig;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
-@Controller
+@Controller(value="htmlGeneraterController")
 @RequestMapping(value = "admin/htmlgenerate")
 public class HtmlGeneraterController extends BaseController {
 

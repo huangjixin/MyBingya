@@ -779,5 +779,16 @@ public class Document implements Serializable {
 		this.channel = channel;
 	}
 
+	public Boolean getAutoGenerate() {
+		return autoGenerate;
+	}
+
+	public void setAutoGenerate(Boolean autoGenerate) {
+		this.autoGenerate = autoGenerate;
+	}
+
 	private Channel channel;
+	
+	private Boolean autoGenerate;
+	
 }
