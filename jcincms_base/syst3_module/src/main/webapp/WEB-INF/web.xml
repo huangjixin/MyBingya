@@ -168,7 +168,10 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff2</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>kaptcha</servlet-name>
 		<url-pattern>/images/kaptcha.jpg</url-pattern>

@@ -102,6 +102,7 @@
 								</div>
 								<div class="clear"></div>
 						</a></li>
+						<hr class="hr"></hr>
 							</#list>
 						</#if>
 					</#list>
@@ -125,6 +126,7 @@
 							<#list menusMap[rootKey] as doc>
 								<#setting date_format="yyyy.MM.dd">
 									<li><a href="${ctx}/channel/news/doc/${doc.id}">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
+									<hr class="hr"></hr>
 							</#list>
 						</#if>
 					</#list>
@@ -148,6 +150,7 @@
 							<#list menusMap[rootKey] as doc>
 								<#setting date_format="yyyy.MM.dd">
 									<li><a href="${ctx}/channel/news/doc/${doc.id}">${doc.title}<span><#if doc.createDate ??>${doc.createDate?date}</#if></span></a></li>
+									<hr class="hr"></hr>
 							</#list>
 						</#if>
 					</#list>
