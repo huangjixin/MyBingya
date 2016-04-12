@@ -68,7 +68,7 @@ public class DefaultIndexController extends BaseController {
 		if (null != result) {
 			return result;
 		}
-		
+
 		if (webrootPath == null) {
 			webrootPath = httpServletRequest.getRealPath("/");
 		}
@@ -77,14 +77,15 @@ public class DefaultIndexController extends BaseController {
 		}
 		String webroot = webrootPath;
 		String conPath = contextPath;
-		
-		/*String uri = httpServletRequest.getScheme() + "://"
-				+ httpServletRequest.getServerName() + ":"
-				+ httpServletRequest.getServerPort()
-				+ httpServletRequest.getRequestURI();
-		System.out.println(uri);
-		String referer = httpServletRequest.getHeader("referer");
-		System.out.println(referer);*/
+
+		/*
+		 * String uri = httpServletRequest.getScheme() + "://" +
+		 * httpServletRequest.getServerName() + ":" +
+		 * httpServletRequest.getServerPort() +
+		 * httpServletRequest.getRequestURI(); System.out.println(uri); String
+		 * referer = httpServletRequest.getHeader("referer");
+		 * System.out.println(referer);
+		 */
 		// List<Channel> list = channelService.getChannelTree();
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
 		uiModel.addAttribute("list", list);
@@ -123,9 +124,10 @@ public class DefaultIndexController extends BaseController {
 		 */
 		// return "m-woshang-index.jsp";
 		if (sitePreference == SitePreference.MOBILE) {
-			if(null!=basicConfig.getMindexJsp() && !"".equals(basicConfig.getMindexJsp())){
-				File file = new File(webroot+basicConfig.getMindexJsp());
-				if(file.exists()){
+			if (null != basicConfig.getMindexJsp()
+					&& !"".equals(basicConfig.getMindexJsp())) {
+				File file = new File(webroot + basicConfig.getMindexJsp());
+				if (file.exists()) {
 					logger.info("手机来的网页请求home-mobile");
 					return basicConfig.getMindexJsp();
 				}
@@ -144,22 +146,15 @@ public class DefaultIndexController extends BaseController {
 		if (webrootPath == null) {
 			webrootPath = httpServletRequest.getRealPath("/");
 		}
-		if (contextPath == null) {
-			contextPath = httpServletRequest.getContextPath();
-		}
+
 		String webroot = webrootPath;
-		String conPath = contextPath;
-		String requestRri = httpServletRequest.getRequestURI();
-		int index = -1;
-		if ("".equals(conPath)) {
-			index = 0;
-		} else {
-			index = requestRri.lastIndexOf(conPath);
-		}
-		webroot += requestRri + ".html";
+		String m_index = basicConfig.getMindexJsp();
+		int dot = m_index.indexOf(".");
+		m_index = m_index.substring(0, dot);
+		webroot += m_index + ".html";
 		File file = new File(webroot);
 		if (file.exists()) {
-			return REDIRECT + requestRri + ".html";
+			return REDIRECT + m_index + ".html";
 		}
 
 		List<Channel> list = UserUtils.getChannels(); // 利用缓存。
@@ -182,38 +177,28 @@ public class DefaultIndexController extends BaseController {
 		if (webrootPath == null) {
 			webrootPath = httpServletRequest.getRealPath("/");
 		}
-		if (contextPath == null) {
-			contextPath = httpServletRequest.getContextPath();
-		}
+		
 		String webroot = webrootPath;
-		String conPath = contextPath;
-
-		String requestRri = httpServletRequest.getRequestURI();
-		int index = -1;
-		if ("".equals(conPath)) {
-			index = 0;
+		if (sitePreference == SitePreference.MOBILE) {
+			String m_index = basicConfig.getMindexJsp();
+			int dot = m_index.indexOf(".");
+			m_index = m_index.substring(0, dot);
+			webroot += m_index + ".html";
+			File file = new File(webroot);
+			if (file.exists()) {
+				return REDIRECT + m_index + ".html";
+			}
 		} else {
-			index = requestRri.lastIndexOf(conPath);
-		}
-
-		if (index != -1) {
-			requestRri = requestRri.substring(index + conPath.length() + 1);
-			requestRri = requestRri.replaceAll("//", File.separator);
-
-			if (sitePreference == SitePreference.MOBILE) {
-				webroot += requestRri + "m-index.html";
-				File file = new File(webroot);
-				if (file.exists()) {
-					return REDIRECT + requestRri + "m-index.html";
-				}
-			} else {
-				webroot += requestRri + "index.html";
-				File file = new File(webroot);
-				if (file.exists()) {
-					return REDIRECT + requestRri + "index.html";
-				}
+			String index = basicConfig.getIndexJsp();
+			int dot = index.indexOf(".");
+			index = index.substring(0, dot);
+			webroot += index + ".html";
+			File file = new File(webroot);
+			if (file.exists()) {
+				return REDIRECT + index + ".html";
 			}
 		}
+		
 		return null;
 	}
 }

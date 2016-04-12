@@ -640,14 +640,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + "m.html");
 					if (file.exists()) {
-						return REDIRECT + requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + page + "m.html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1m.html");
 					if (file.exists()) {
-						return REDIRECT + requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + "1m.html";
 					}
 				}
@@ -656,14 +656,14 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + page + ".html");
 					if (file.exists()) {
-						return REDIRECT + requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + page + ".html";
 					}
 				} else {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1.html");
 					if (file.exists()) {
-						return REDIRECT + requestRri + "docs" + File.separator
+						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + "1.html";
 					}
 				}
