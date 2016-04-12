@@ -45,7 +45,6 @@
 			</ul>
 		</div>
 		<div class="clear"></div> -->
-		<%-- <img alt="" src="${ctx}/images/banner.png"> --%>
 	</div>
 </div>
 <div class="globalWidth" id="content2">
