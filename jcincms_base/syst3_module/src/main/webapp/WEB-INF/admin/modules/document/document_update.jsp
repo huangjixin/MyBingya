@@ -239,7 +239,7 @@
 			}
 			$('#contentShort').val(contxt);
 		}
-
+		$('#autoGenerate').val(document.getElementById("autoGenratePC").checked);
 		var cont = ue.getContent();
 		$('#content').val(cont);
 // 		$('#documentTemplete').val(docTemp);
@@ -338,6 +338,8 @@
 			value="${document.contentShort}" type="hidden" />
 		<input id="assetsIds" name="assetsIds" value="${document.assetsIds}"
 			type="hidden" />
+		<input id="autoGenerate"
+					name="autoGenerate" type="hidden" />
 		<%-- <input id="documentTemplete" name="documentTemplete"
 			value="${document.documentTemplete}" type="hidden" />
 		<input id="gTemplete" name="geneTemplate"
@@ -440,7 +442,10 @@
 			</tr> --%>
 			<tr>
 				<th>&nbsp;</th>
-				<td style="text-align: left;" colspan="6"><input type="button"
+				<td style="text-align: left;" colspan="6">
+				<input
+						type="checkbox" id="autoGenratePC" <c:if test="${document.autoGenerate}">checked="checked"</c:if>/>自动 生成html</label>
+					<input type="button"
 					value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
 					type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
 					value="返回"
