@@ -443,7 +443,7 @@
 			<tr>
 				<th>&nbsp;</th>
 				<td style="text-align: left;" colspan="6">
-				<input
+				<label><input
 						type="checkbox" id="autoGenratePC" <c:if test="${document.autoGenerate}">checked="checked"</c:if>/>自动 生成html</label>
 					<input type="button"
 					value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
