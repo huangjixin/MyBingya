@@ -347,7 +347,34 @@
 					</div>
 
 					<div id="tab2" class="tab_content" style="display: none; ">
-						<p>暂无内容</p>
+						<c:set var="docs" value="${fns:getDocByChannelCode('college',10)}"></c:set>
+						<c:if test="${docs!=null}">
+							<ul id="newslist">
+								<c:forEach var="doc" items="${docs}">
+									<li style="margin-top: 5px;margin-bottom: 5px;"><a
+										href="${ctx}/channel/college/doc/${doc.id}">
+											<div style="float: left;">
+												<img src="${ctx}/${doc.fileAddr}"
+													style="width: 100px;height:100px;">
+											</div>
+											<div style="float: left;margin-left: 10px;width: 80%;">
+												<div>
+													<span style="font-weight: bold;">${doc.title}</span>
+												</div>
+
+												<div style="font-size: 12px;padding-top: 5px;">
+													<fmt:formatDate value="${doc.createDate}"
+														pattern="yyyy-MM-dd" />
+												</div>
+												<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
+											</div>
+											<div class="clear"></div>
+											<hr class="hr" style="border-top:1px dashed #cccccc;"></hr>
+									</a></li>
+
+								</c:forEach>
+							</ul>
+						</c:if>
 					</div>
 				</div>
 			</div>

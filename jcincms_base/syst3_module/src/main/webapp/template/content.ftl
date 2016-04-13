@@ -351,7 +351,34 @@
 					</#if>
 					</div>
 					<div id="tab2" class="tab_content" style="display: none; ">
-						<p>暂无内容</p>
+						<#if menusMap?exists>
+						<#list menusMap?keys as rootKey>
+							<#if rootKey=='college'>
+								<ul id="newslist">
+								<#list menusMap[rootKey] as doc>
+									<#setting date_format="yyyy.MM.dd">
+									<li style="margin-top: 5px;margin-bottom: 5px;"><a href="${ctx}/channel/college/doc/${doc.id}">
+												<div style="float: left;">
+													<img src="${ctx}/${doc.fileAddr}"
+														style="width: 100px;height:100px;">
+												</div>
+												<div style="float: left;margin-left: 10px;width: 80%;">
+													<div>
+														<span style="font-weight: bold;">${doc.title}</span>
+													</div>
+													<div style="font-size: 12px;padding-top: 5px;">
+														<#if doc.createDate ??>${doc.createDate?date}</#if>
+													</div>
+													<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
+												</div>
+												<div class="clear"></div>
+												<hr class="hr" style="border-top:1px dashed #cccccc;"></hr>
+												</a></li>
+								</#list>
+								</ul>
+							</#if>
+						</#list>
+					</#if>
 					</div>
 				</div>
 			</div>

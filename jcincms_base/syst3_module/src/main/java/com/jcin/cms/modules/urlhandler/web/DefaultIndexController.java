@@ -7,14 +7,17 @@
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +41,7 @@ public class DefaultIndexController extends BaseController {
 	private static Logger logger = Logger
 			.getLogger(DefaultIndexController.class.getName());
 
+	public static long endtime = 0l;
 	@Autowired
 	private BasicConfig basicConfig; // 注入基础配置。
 
@@ -51,6 +55,10 @@ public class DefaultIndexController extends BaseController {
 	@Autowired
 	private IDocumentService documentService;
 
+	public static void main(String[] args) {
+		System.out.println(new Date().getTime()+15552000000l);
+		System.out.println(15552000000l);
+	}
 	/**
 	 * 首页跳转。
 	 * 
@@ -63,7 +71,19 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-
+		if(endtime==0){
+			try {
+				endtime = new SimpleDateFormat("yyyy.MM.dd").parse("2016.10.01").getTime();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println(new Date().getTime()+","+endtime+","+(new Date().getTime()-endtime));
+		long end = endtime-new Date().getTime();
+		if(endtime>0){
+			return "/error.jsp";
+		}
 		String result = getIndexFile(sitePreference, httpServletRequest);
 		if (null != result) {
 			return result;
