@@ -19,9 +19,9 @@
 	 <iframe style="display:none;" class="qq_iframe" src=""></iframe> 
 	 <script> $(function(){ setTimeout(function(){ qq_list = new Array('635152644', '517714860'); 
 	 //随机 
-	 qq_i = Math.floor(Math.random()*qq_list.length); 
-	 src = "tencent://message/?uin="+qq_list[qq_i]+"&Site=&menu=yes"; 
-	 $('.qq_iframe').attr('src', src); }, 15000)
+	 //qq_i = Math.floor(Math.random()*qq_list.length); 
+	 //src = "tencent://message/?uin="+qq_list[qq_i]+"&Site=&menu=yes"; 
+	 //$('.qq_iframe').attr('src', src); }, 15000)
 	 //这里的单位是毫秒，10000就是10秒弹 
 	 }) 
 	 </script>

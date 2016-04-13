@@ -16,9 +16,6 @@
 				$(element).closest("form").find("label[for='"+ element.attr("id")+ "']").append(error);
 			},errorElement : "span",
 			rules : {
-								id:{
-					required : true
-				},
 				topic:{
 					required : true
 				},
@@ -44,9 +41,6 @@
 					required : true
 				}
 			},messages : {
-				id:{
-					required : "必填"
-				},
 				topic:{
 					required : "必填"
 				},
@@ -79,15 +73,12 @@
 	}
 	
 	function clearForm(){
-		$('#id').val("");
 		$('#topic').val("");
 		$('#content').val("");
 		$('#tel').val("");
 		$('#qq').val("");
 		$('#name').val("");
 		$('#email').val("");
-		$('#createDate').val("");
-		$('#updateDate').val("");
 	}
 </script>
 <title>留言板更新</title>

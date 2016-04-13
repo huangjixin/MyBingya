@@ -151,6 +151,6 @@ function goTop(){
 			width="150" height="165">
 	</div>
 	<div class="guestBook">
-		<img src="${ctx}/images/55.gif" alt="广州智沃-互动">
+		<a href="${ctx}/guestbook/create"><img src="${ctx}/images/55.gif" alt="广州智沃-互动"></a>
 	</div>
 </div>

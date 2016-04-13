@@ -16,9 +16,6 @@
 				$(element).closest("form").find("label[for='"+ element.attr("id")+ "']").append(error);
 			},errorElement : "span",
 			rules : {
-								id:{
-					required : true
-				},
 				topic:{
 					required : true
 				},
@@ -35,18 +32,9 @@
 					required : true
 				},
 				email:{
-					required : true
-				},
-				createDate:{
-					required : true
-				},
-				updateDate:{
 					required : true
 				}
 			},messages : {
-				id:{
-					required : "必填"
-				},
 				topic:{
 					required : "必填"
 				},
@@ -63,12 +51,6 @@
 					required : "必填"
 				},
 				email:{
-					required : "必填"
-				},
-				createDate:{
-					required : "必填"
-				},
-				updateDate:{
 					required : "必填"
 				}
 			},
@@ -86,8 +68,6 @@
 		$('#qq').val("");
 		$('#name').val("");
 		$('#email').val("");
-		$('#createDate').val("");
-		$('#updateDate').val("");
 	}
 </script>
 <title>留言板新增</title>
