@@ -126,6 +126,14 @@ public class DocumentController extends BaseController<Document> {
 		documentService.update(document);
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
+		if(document.getAutoGenerate()){
+			try {
+				generateChannelDocs(document.getChannelId(),document, httpServletRequest, httpServletResponse);
+			} catch (IOException e) {
+				redirectAttributes.addFlashAttribute("msg", "修改成功,但是生成html文件有误，请检查模板或者路径");
+				e.printStackTrace();
+			}
+		}
 		redirectAttributes.addFlashAttribute("document", document);
 		return "redirect:/" + Global.getAdminPath() + "/document/update/"
 				+ document.getId();

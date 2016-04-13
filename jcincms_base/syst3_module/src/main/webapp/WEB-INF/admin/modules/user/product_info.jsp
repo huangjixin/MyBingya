@@ -38,7 +38,7 @@ td {
 					</tr>
 					<tr class="tr">
 						<th>&nbsp;版本号：</th>
-						<td nowrap="nowrap" align="left">1.0</td>
+						<td nowrap="nowrap" align="left">2.0</td>
 					</tr>
 					<tr class="tr">
 						<th>&nbsp;版权：</th>
