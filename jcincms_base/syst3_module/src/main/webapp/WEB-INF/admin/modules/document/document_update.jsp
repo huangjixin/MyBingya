@@ -249,6 +249,7 @@
 	}
 
 	function selectFile() {
+		document.getElementById("uploadTip").innerHTML = "";
 		$('#file').click();
 	}
 	var uploadCount=0;
@@ -278,6 +279,8 @@
 				data = jQuery.parseJSON(data);
 				// 				var a_id=eval('data'）;
 				document.getElementById("msg").innerHTML = data.msg;
+				document.getElementById("uploadTip").innerHTML = data.msg;
+				
 				var fN='fileName'+uploadCount;
 				var fA='fileAddr'+uploadCount;
 				
@@ -319,7 +322,7 @@
 	function insert() {
 		var contextPath = "${ctx}/";
 		
-		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt="" style="width:100%;"/></p>';
+		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt=""/></p>';
 		ue.execCommand('inserthtml', str);
 	}
 
@@ -460,6 +463,20 @@
 			<script id="editor" type="text/plain"
 				style="width:100%;height:500px;"></script>
 			<%-- <textarea name="content" id="editor" style="width:100%;height:500px;" value="${document.content}"></textarea> --%>
+		</div>
+		<div style="text-align: center;">
+			<input type="button" value="上传"
+				onclick="selectFile()" /> 
+			<input value="插入" type="button" onclick="insert();" />
+			<input type="button" value="保存"
+				onclick="submitForm();" />&nbsp;&nbsp;<input type="reset"
+				value="重置" />&nbsp;&nbsp;<input type="button" value="返回"
+				onclick="javascript:window.location.href='${ctxAdmin}/document'" />
+			<c:if test="${document.id!=null}">
+									&nbsp;&nbsp;<input type="button" value="更新"
+					onclick="javascript:window.location.href='${ctxAdmin}/document/update/${document.id}'" />
+			</c:if>
+			<span id="uploadTip"></span>
 		</div>
 	</form:form>
 </body>
