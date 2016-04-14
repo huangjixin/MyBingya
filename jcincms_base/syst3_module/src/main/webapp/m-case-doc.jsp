@@ -45,11 +45,11 @@
 		<div class="contentWidth">
 			<hr
 				style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-			<div style="padding: 20px 0;" class="docContent">${document.content}</div>
+			<div style="padding: 20px 0;width: 100%;" id="docContent">${document.content}</div>
 			<c:if test="${lastdoc!=null}">
 				<div
 					style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">
-					<span>上一篇：</span><a style="text-decoration: none;color: #333333;"
+					<span>上一篇111：</span><a style="text-decoration: none;color: #333333;"
 						href="${ctx}/${channel.linkAddr}/doc/${lastdoc.id}">${lastdoc.title}</a>
 				</div>
 			</c:if>

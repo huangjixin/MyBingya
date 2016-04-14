@@ -309,7 +309,7 @@
 	function insert() {
 		var contextPath = "${ctx}/";
 		
-		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt=""/></p>';
+		var str = '<p><img src="'+contextPath + $('#fileAddr').val() + '" title="" alt="" style="width:100%;"/></p>';
 		ue.execCommand('inserthtml', str);
 	}
 

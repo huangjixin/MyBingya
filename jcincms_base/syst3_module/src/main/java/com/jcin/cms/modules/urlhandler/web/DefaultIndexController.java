@@ -71,7 +71,7 @@ public class DefaultIndexController extends BaseController {
 	@RequestMapping
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		if(endtime==0){
+		/*if(endtime==0){
 			try {
 				endtime = new SimpleDateFormat("yyyy.MM.dd").parse("2016.10.01").getTime();
 			} catch (ParseException e) {
@@ -83,7 +83,7 @@ public class DefaultIndexController extends BaseController {
 		long end = endtime-new Date().getTime();
 		if(endtime>0){
 			return "/error.jsp";
-		}
+		}*/
 		String result = getIndexFile(sitePreference, httpServletRequest);
 		if (null != result) {
 			return result;

@@ -304,3 +304,15 @@ a:VISITED {
 	right: 100%;
 }
 /************** 菜单结束 **************************/
+.docContent {
+}
+
+.docContent p img{
+	width: 100%;
+	height: auto;
+}
+
+.docContent img{
+	width: 100%;
+	height: auto;
+}
