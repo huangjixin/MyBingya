@@ -36,7 +36,9 @@
 			ue.setContent(textS);
 		});
 
-		$('#table').stickUp();
+		if('${document.titleImage}'==''){
+			$('#titleImage').val('images/logo.png');
+		}
 	});
 
 	function validateForm() {
@@ -399,7 +401,7 @@
 			</tr>
 			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th>&nbsp;缩略图：</th>
-				<td><input name="titleImage" value="${document.titleImage}"
+				<td><input name="titleImage" id="titleImage" value="${document.titleImage}"
 					class="input" /></td>
 				<th>&nbsp;文档模板：</th>
 				<td>
