@@ -4,7 +4,7 @@
 <#include "meta-doc.ftl">
 <#include "css.ftl">
 <#include "js.ftl">
-<title>${document.title}_智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>${document.title},智沃商务,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<#include "header.ftl">

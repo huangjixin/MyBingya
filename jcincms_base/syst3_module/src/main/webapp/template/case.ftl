@@ -4,7 +4,7 @@
 <#include "meta-channel.ftl">
 <#include "css.ftl">
 <#include "js.ftl">
-<title>资讯中心_智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>成功案例,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<#include "header.ftl">
