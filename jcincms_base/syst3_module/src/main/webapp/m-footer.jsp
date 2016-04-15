@@ -30,3 +30,12 @@
 		prevButton : '.swiper-button-prev',
 	});
 </script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8a73e59ca4b3c76c4061afd550f44726";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>

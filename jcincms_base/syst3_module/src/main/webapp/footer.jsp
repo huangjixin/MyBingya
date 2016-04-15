@@ -157,3 +157,12 @@ function goTop(){
 		<a href="${ctx}/guestbook/create"><img src="${ctx}/images/55.gif" alt="广州智沃-互动"></a>
 	</div>
 </div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8a73e59ca4b3c76c4061afd550f44726";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>

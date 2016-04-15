@@ -49,17 +49,14 @@
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">
 							<th>&nbsp;名称：</th>
-							<td nowrap="nowrap" align="left"><form:input path="name"
-									value="${resource.name}" />&nbsp;<form:errors path="name"
-									cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><input id="name" name="name"
+									value="${resource.name}" /></td>
 							<th>&nbsp;权限名称：</th>
-							<td nowrap="nowrap" align="left"><form:input path="authName"
-									value="${resource.authName}" />&nbsp;<form:errors
-									path="authName" cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><input name="authName"
+									value="${resource.authName}" /></td>
 							<th>&nbsp;访问路径：</th>
-							<td nowrap="nowrap" align="left"><form:input path="path"
-									value="${resource.path}" />&nbsp;<form:errors path="path"
-									cssStyle="color:red;"></form:errors></td>
+							<td nowrap="nowrap" align="left"><input name="path"
+									value="${resource.path}" /></td>
 						</tr>
 						<tr
 							style="text-align: right; BACKGROUND-COLOR: #F4FAFF; font-weight: normal;">

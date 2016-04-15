@@ -72,7 +72,12 @@
 // 		        refreshTab({tabTitle:title,url:url});  
 		    } else {  
 		        if (url){  
-		            var content = '<iframe id="ifrContentArea" frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
+					if(url=='http://tongji.baidu.com'){
+						window.open("http://tongji.baidu.com");  				
+					}else{
+						var content = '<iframe id="ifrContentArea" frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
+					}
+		            
 		        } else {  
 		            var content = '未实现';  
 		        }  
