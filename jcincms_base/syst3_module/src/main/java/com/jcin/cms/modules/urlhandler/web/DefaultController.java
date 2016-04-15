@@ -517,6 +517,9 @@ public class DefaultController extends BaseController {
 
 		document = documentService.selectByPrimaryKey(id);// 获取当前文档。
 
+		if(null == document){
+			return "/channelNotExsit.jsp";
+		}
 		// 菜单缓存。
 		List<Channel> list = UserUtils.getChannels();
 		Channel channel = null;

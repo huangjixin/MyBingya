@@ -290,6 +290,7 @@
 				
 				$('#fileName').val(data.fileName);
 				$('#size').val(data.size);
+				$('#fileAddr').val(data.fileAddr);
 				
 				if(uploadCount==0){
 					$('#fileAddr').val(data.fileAddr);

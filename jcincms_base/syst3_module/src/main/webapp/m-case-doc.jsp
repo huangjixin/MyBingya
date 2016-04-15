@@ -45,7 +45,7 @@
 		<div class="contentWidth">
 			<hr
 				style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
-			<div style="padding: 20px 0;width: 100%;" id="docContent">${document.content}</div>
+			<div style="padding: 20px 0;width: 100%;" class="docContent">${document.content}</div>
 			<c:if test="${lastdoc!=null}">
 				<div
 					style="width: 100%;font-size: 12px;text-align: left;padding: 20px 0;">

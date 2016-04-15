@@ -68,7 +68,7 @@ public class DefaultIndexController extends BaseController {
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	@RequestMapping
+	@RequestMapping(value = { "", "/", "index" })
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		/*if(endtime==0){
