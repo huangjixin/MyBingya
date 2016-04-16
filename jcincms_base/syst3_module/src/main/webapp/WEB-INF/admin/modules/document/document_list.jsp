@@ -6,6 +6,7 @@
 <head>
 <title>文档管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
+<c:set var="pageNumber" value="${pageNumber}" scope="request"/>
 <script type="text/javascript">
 	$().ready(function() {
 		createChannelTree();
@@ -82,8 +83,10 @@
 		if (row == null || row.length==0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/document/update/'+row[0].id+''; 
+		var grid = $('#tgrid');  
+		var options = grid.datagrid('getPager').data("pagination").options;  
+		var curr = options.pageNumber;
+		window.location.href='${ctxAdmin}/document/update/'+row[0].id+'?pageNumber='+curr; 
 	}
 		
 	function show(){
@@ -168,19 +171,19 @@
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
 			<shiro:hasPermission name="document:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+				<input type="button" value="添加" id="btn_Add" name="btn_Add" onClick="create();" /> 
 			</shiro:hasPermission>
 			<shiro:hasPermission name="document:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
+				<input type="button" value="删除" onClick="deleteRows();" />
 			</shiro:hasPermission>
 			<shiro:hasPermission name="document:update">
-				<input type="button" value="更新" onclick="update();" /> 
+				<input type="button" value="更新" onClick="update();" /> 
 			</shiro:hasPermission>
 			<shiro:hasPermission name="document:view">
-				<input type="button" value="详情" onclick="show();" /> 
+				<input type="button" value="详情" onClick="show();" /> 
 			</shiro:hasPermission> 
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
+			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
+			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <!-- <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" /> -->
@@ -188,14 +191,14 @@
 		<div style="padding: 5px;border: 0px;">
 			<input  id="channelId" type="hidden">
 			<label>标题:</label>
-			<input  id="titleInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input  id="titleInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>作者:</label>
-			<input  id="authorInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input  id="authorInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>模板:</label>
-			<input  id="documentTempleteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input  id="documentTempleteInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>栏目:</label>
-			<input  id="channelInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<input type="button" value="清除" onclick="clearChannelIdInput();" />
+			<input  id="channelInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input type="button" value="清除" onClick="clearChannelIdInput();" />
 		</div>
 		<table id="tgrid" title="" class="easyui-datagrid"
 			style="height:350px;"
@@ -217,6 +220,7 @@
 								fit:false,
 								fitColumns:true,
 								pagination : true
+                                <c:if test="${pageNumber!=null}">,pageNumber:${pageNumber}</c:if>
 							">
 			<thead>
 				<tr>

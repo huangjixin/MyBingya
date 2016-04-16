@@ -390,7 +390,7 @@
 			<tr>
 				<th>&nbsp;描述：</th>
 				<td colspan="4"><textarea id="descrition" name="descrition"
-						value="${document.descrition}" class="descrition"></textarea></td>
+						class="descrition">${document.descrition}</textarea></td>
 			</tr>
 			<tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
 				<th>&nbsp;来源：</th>
