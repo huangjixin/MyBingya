@@ -97,7 +97,7 @@
 		</div>
 		<div style="position: absolute;top: 75px;left: 120px;">
 			<span style="font-size: 30px;color: #ffffff;">微网站</span> <span
-				style="font-size: 20px;color: #ffffff;">微信平台企业企业网站</span>
+				style="font-size: 20px;color: #ffffff;">微信平台企业网站</span>
 		</div>
 		<p
 			style="width:400px;position: absolute;top: 200px;left: 50px;text-align: left;">
