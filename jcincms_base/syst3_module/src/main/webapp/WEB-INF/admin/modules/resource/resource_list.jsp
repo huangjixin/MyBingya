@@ -167,7 +167,7 @@
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
 					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th data-options="field:'name',align:'center'" width="100%">名称</th>
+					<th data-options="field:'name',align:'left'" width="100%">名称</th>
 					<!-- <th data-options="field:'description',align:'center'" width="100%">描述</th> -->
 					<th data-options="field:'path',align:'center'" width="100%">路径</th>
 					<th data-options="field:'parentId',align:'center',hidden:true" width="100%">父亲Id</th>
