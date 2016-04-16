@@ -273,6 +273,9 @@ public class DocumentController extends BaseController<Document> {
 		return result;
 	}
 
+	private SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+	private SimpleDateFormat dftime = new SimpleDateFormat("yyyyMMddhhmmss");
+	
 	@RequestMapping(value = "/uploadFile")
 	@ResponseBody
 	public Map<String, Object> uploadFile(
@@ -290,10 +293,9 @@ public class DocumentController extends BaseController<Document> {
 		
 		/*String uploadPath = Global.getUploadpath() + UserUtils.getUserId()
 				+ File.separator + tempImageName;*/
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		String fileDir = df.format(new Date());
-		df = new SimpleDateFormat("yyyyMMddhhmmss");
-		tempImageName =df.format(new Date())+tempImageName; 
+		Date date = new Date();
+		String fileDir = df.format(date);
+		tempImageName =dftime.format(date)+tempImageName; 
 		@SuppressWarnings("deprecation") 
 		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
 		uploadWeb = httpServletRequest.getContextPath()+"upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
