@@ -304,9 +304,15 @@ a:VISITED {
 	right: 100%;
 }
 /************** 菜单结束 **************************/
-.docContent {
+.docContent *{
+	font-size:1.75em;
 }
-
+.docContent * p {
+	font-size:1.75em;
+}
+.docContent * p *{
+	font-size:1.75em;
+}
 .docContent p img{
 	width: 100%;
 	height: auto;
