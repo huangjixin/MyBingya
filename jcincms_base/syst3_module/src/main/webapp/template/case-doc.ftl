@@ -41,8 +41,8 @@
 	</div>
 	<div class="globalWidth">
 		<div class="contentWidth" style="text-align: left;position: relative;">
-			<span style="color:#333333;font-size: 30px;">NEWS新闻报道</span><span
-				style="color:#333333;font-size: 12px;">关注广州智沃，我们携手前进！</span>
+			<span style="color:#333333;font-size: 30px;">CASE成功案例</span><span
+				style="color:#333333;font-size: 12px;">我们的作品，他们的故事！</span>
 		</div>
 		<hr class="hr"></hr>
 	</div>

@@ -49,10 +49,12 @@
 									<div>
 										<span style="font-weight: bold;">${doc.title}</span>
 									</div>
+									<div class="clear"></div>
 									<div style="font-size: 12px;padding-top: 5px;">
 										<#setting date_format="yyyy.MM.dd">
 										<#if doc.createDate ??>${doc.createDate?date}</#if>
 									</div>
+									<div class="clear"></div>
 									<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
 								</div>
 								<div class="clear"></div>

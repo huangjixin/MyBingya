@@ -305,13 +305,13 @@ a:VISITED {
 }
 /************** 菜单结束 **************************/
 .docContent *{
-	font-size:1.75em;
+	font-size:1.20em;
 }
 .docContent * p {
-	font-size:1.75em;
+	font-size:1.20em;
 }
 .docContent * p *{
-	font-size:1.75em;
+	font-size:1.20em;
 }
 .docContent p img{
 	width: 100%;
