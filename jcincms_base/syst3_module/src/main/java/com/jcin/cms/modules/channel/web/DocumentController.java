@@ -309,14 +309,12 @@ public class DocumentController extends BaseController<Document> {
 			try {
 				file.transferTo(targetFile);
 			} catch (IllegalStateException e1) {
-
 				e1.printStackTrace();
 			} catch (IOException e1) {
-
 				e1.printStackTrace();
 			}
 		}
-		FileUtils.createFile(uploadPath);
+//		FileUtils.createFile(uploadPath);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "上传成功");
