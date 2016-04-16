@@ -94,7 +94,7 @@
 									<img src="${ctx}/${doc.titleImage}"
 										style="width: 80px;height:80px;">
 								</div>
-								<div style="float: left;margin-left: 20px;width:240px;">
+								<div style="float: left;margin-left: 20px;width:240px;display: block;">
 									<div>
 										<span style="font-weight: bold;float:none;">${doc.title}</span>
 									</div>

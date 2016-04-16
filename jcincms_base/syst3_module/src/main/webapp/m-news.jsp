@@ -40,9 +40,11 @@
 									<div>
 										<span style="font-weight: bold;">${doc.title}</span>
 									</div>
+									<div class="clear"></div>
 									<div style="font-size: 12px;padding-top: 5px;">
 										<fmt:formatDate value="${doc.createDate}" pattern="yyyy-MM-dd" />
 									</div>
+									<div class="clear"></div>
 									<div style="font-size: 12px;padding-top: 5px;">${doc.contentShort}……</div>
 								</div>
 								<div class="clear"></div>
