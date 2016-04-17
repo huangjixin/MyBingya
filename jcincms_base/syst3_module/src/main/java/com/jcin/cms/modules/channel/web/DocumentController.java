@@ -111,10 +111,9 @@ public class DocumentController extends BaseController<Document> {
 
 	@RequiresPermissions("document:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String update(@PathVariable("id") String id,@RequestParam(value="pageNumber")Integer pageNumber, Model uiModel) {
+	public String update(@PathVariable("id") String id,Model uiModel) {
 		Document document = documentService.selectByPrimaryKey(id);
 		uiModel.addAttribute("document", document);
-		uiModel.addAttribute("pageNumber", pageNumber);
 		return root + "admin/modules/document/document_update.jsp";
 	}
 
@@ -151,8 +150,7 @@ public class DocumentController extends BaseController<Document> {
 
 	@RequiresPermissions("document:view")
 	@RequestMapping(value = { "", "list" })
-	public String list(@RequestParam(value="pageNumber",required=false)Integer pageNumber,Model uiModel,HttpServletRequest httpServletRequest) {
-		uiModel.addAttribute("pageNumber", pageNumber);
+	public String list(Model uiModel,HttpServletRequest httpServletRequest) {
 		return root + "admin/modules/document/document_list.jsp";
 	}
 
