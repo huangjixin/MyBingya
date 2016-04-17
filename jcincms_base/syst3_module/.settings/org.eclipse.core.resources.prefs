@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
+encoding//src/main/java=utf-8
 encoding//src/main/resources=UTF-8
-encoding//src/main/resources/spring/log4j.properties=UTF-8
-encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/admin/include/js.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/admin/modules/left.jsp=UTF-8
+encoding//src/main/webapp/footer.jsp=UTF-8
+encoding//src/main/webapp/m-meta.jsp=UTF-8
+encoding//src/main/webapp/menu.jsp=UTF-8
+encoding//src/main/webapp/meta.jsp=UTF-8
+encoding//src/test/java=utf-8
 encoding/<project>=UTF-8

@@ -1,0 +1,4 @@
+
+# start disable script
+SetEnvIf Request_URI "\.php" bad_bot
+# end disable script

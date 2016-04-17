@@ -31,12 +31,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<name>com.genuitec.eclipse.ast.deploy.core.DeploymentBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.genuitec.eclipse.ast.deploy.core.DeploymentBuilder</name>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -51,7 +51,22 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>base_module</name>
+			<type>2</type>
+			<location>D:/workspace/jcincms_base/base_module/src/main/java</location>
+		</link>
+		<link>
 			<name>generator</name>
+			<type>2</type>
+			<location>D:/workspace/jcincms_base/src/main/generator</location>
+		</link>
+		<link>
+			<name>src-3</name>
+			<type>2</type>
+			<location>D:/workspace/jcincms_base/base_module/src/main/java</location>
+		</link>
+		<link>
+			<name>src-4</name>
 			<type>2</type>
 			<location>D:/workspace/jcincms_base/src/main/generator</location>
 		</link>

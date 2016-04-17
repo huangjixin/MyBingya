@@ -59,10 +59,10 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-
+			<div class="clear"></div>
 			<c:if test="${docs!=null}">
-				<hr
-					style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />
+				<!--<hr
+					style="width: 100%;height:1px;border:none;border-top:1px solid #CCCCCC;" />-->
 				<div class="spacer" style="height: 20px;"></div>
 				<div
 					style="width:100%;padding: 15px 0px 15px 5px;font-size: 12px;text-align: center;">

@@ -266,8 +266,8 @@ public class DocumentController extends BaseController<Document> {
 		String[] ids = idstring.split(",");
 		List<String> list = new ArrayList<String>();
 		for (String idstr : ids) {
-			Document document = documentService.selectByPrimaryKey(idstr);
-			deleteChannelDoc(document.getChannelId(),document,httpServletRequest,httpServletResponse);
+//			Document document = documentService.selectByPrimaryKey(idstr);
+			deleteChannelDoc(idstring,httpServletRequest,httpServletResponse);
 			list.add(idstr);
 		}
 		int result = documentService.deleteBatch(list);
@@ -637,42 +637,64 @@ public class DocumentController extends BaseController<Document> {
 		return "生成栏目文档成功";
 	}
 	
-	public String deleteChannelDoc(String id,Document document,
+	@RequestMapping(value = "/geneChannelDoc")
+	@ResponseBody
+	public String geneChannelDoc(@RequestParam(value = "idstring") String idstring,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		@SuppressWarnings("deprecation")
-		String webroot = httpServletRequest.getRealPath("/");
-
-		List<Channel> menus = UserUtils.getChannels();// 菜单。
-
-		List<Channel> result = new ArrayList<Channel>();
-		searchChannel(menus, id, result);
-		if (result.size() == 0) {
-			return "获取栏目失败，注意刷新栏目";
+		String[] ids = idstring.split(",");
+		for (String idstr : ids) {
+			Document document = documentService.selectByPrimaryKey(idstr);
+			if(null!=document){
+				generateChannelDocs(document.getChannelId(),document,httpServletRequest,httpServletResponse);
+			}
 		}
+		
+		return "succ";
+	}
+	
+	@RequestMapping(value = "/deleteChannelDoc")
+	@ResponseBody
+	public void deleteChannelDoc(@RequestParam(value = "idstring") String idstring,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
+		String[] ids = idstring.split(",");
+		for (String idstr : ids) {
+			Document document = documentService.selectByPrimaryKey(idstr);
+			if(null!=document){
+				@SuppressWarnings("deprecation")
+				String webroot = httpServletRequest.getRealPath("/");
 
-		Channel toGeneratedChannel = result.get(0);
+				List<Channel> menus = UserUtils.getChannels();// 菜单。
 
-		String linkAddr = toGeneratedChannel.getLinkAddr();
-		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot + linkAddr;
-		String fileName = toGeneratedFiles + File.separator + "docs"
-				+ File.separator + document.getId() + ".html";
-		File file = new File(fileName);
-		if (file.exists()) {
-			file.delete();
-			FileUtils.deleteFile(fileName);
+				List<Channel> result = new ArrayList<Channel>();
+				searchChannel(menus, document.getChannelId(), result);
+				if (result.size() == 0) {
+					continue;
+				}
+
+				Channel toGeneratedChannel = result.get(0);
+
+				String linkAddr = toGeneratedChannel.getLinkAddr();
+				linkAddr = linkAddr.replaceAll("//", File.separator);
+				String toGeneratedFiles = webroot + linkAddr;
+				String fileName = toGeneratedFiles + File.separator + "docs"
+						+ File.separator + document.getId() + ".html";
+				File file = new File(fileName);
+				if (file.exists()) {
+					file.delete();
+					FileUtils.deleteFile(fileName);
+				}
+				// 移动端，约定后缀名前面加“m”；
+				fileName = toGeneratedFiles + File.separator + "docs" 
+				+ File.separator + document.getId() + "m.html";
+				file = new File(fileName);
+				if (file.exists()) { 
+					file.delete();
+					FileUtils.deleteFile(fileName);
+				}
+			}
 		}
-		// 移动端，约定后缀名前面加“m”；
-		fileName = toGeneratedFiles + File.separator + "docs" 
-		+ File.separator + document.getId() + "m.html";
-		file = new File(fileName);
-		if (file.exists()) { 
-			file.delete();
-			FileUtils.deleteFile(fileName);
-		}
-
-		return "删除栏目文档成功";
 	}
 
 	private List<Channel> getParentChannels(List<Channel> list,

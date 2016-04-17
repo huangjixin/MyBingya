@@ -56,7 +56,7 @@
 					</#list>
 				</ul>
 			</#if>
-			
+			<div class="clear"></div>
 			<#if docs ??>
 				<div class="spacer"></div>
 				<div
