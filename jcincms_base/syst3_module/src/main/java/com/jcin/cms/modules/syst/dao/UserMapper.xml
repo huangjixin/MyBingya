@@ -18,6 +18,7 @@
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
     <result column="head_image" property="headImage" jdbcType="VARCHAR" />
+    <result column="member_lebel_id" property="memberLebelId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -79,7 +80,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, username, password, login_date, create_date, update_date, show_name, email, mobile, 
-    login_count, login_ip, last_login, sex, create_by, update_by, head_image
+    login_count, login_ip, last_login, sex, create_by, update_by, head_image,  member_lebel_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -119,13 +120,15 @@
       show_name, email, mobile, 
       login_count, login_ip, last_login, 
       sex, create_by, update_by, 
-      head_image)
+      head_image,  member_lebel_id
+      )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{loginDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{showName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{loginCount,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{lastLogin,jdbcType=TIMESTAMP}, 
       #{sex,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
-      #{headImage,jdbcType=VARCHAR})
+      #{headImage,jdbcType=VARCHAR}, #{memberLebelId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.syst.domain.User" >
     insert into tb_user
@@ -178,6 +181,9 @@
       <if test="headImage != null" >
         head_image,
       </if>
+      <if test="memberLebelId != null" >
+        member_lebel_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -227,6 +233,12 @@
       </if>
       <if test="headImage != null" >
         #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="lock != null" >
+        #{jdbcType=BIT},
+      </if>
+      <if test="memberLebelId != null" >
+        #{memberLebelId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -287,6 +299,9 @@
       <if test="record.headImage != null" >
         head_image = #{record.headImage,jdbcType=VARCHAR},
       </if>
+      <if test="record.memberLebelId != null" >
+        member_lebel_id = #{record.memberLebelId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -309,7 +324,8 @@
       sex = #{record.sex,jdbcType=TINYINT},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_by = #{record.updateBy,jdbcType=VARCHAR},
-      head_image = #{record.headImage,jdbcType=VARCHAR}
+      head_image = #{record.headImage,jdbcType=VARCHAR},
+      member_lebel_id = #{record.memberLebelId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -362,6 +378,9 @@
       <if test="headImage != null" >
         head_image = #{headImage,jdbcType=VARCHAR},
       </if>
+      <if test="memberLebelId != null" >
+        member_lebel_id = #{memberLebelId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -381,13 +400,14 @@
       sex = #{sex,jdbcType=TINYINT},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_by = #{updateBy,jdbcType=VARCHAR},
-      head_image = #{headImage,jdbcType=VARCHAR}
+      head_image = #{headImage,jdbcType=VARCHAR},
+      member_lebel_id = #{memberLebelId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into tb_user (id, username, password, login_date, create_date, update_date, show_name, email, mobile, login_count, login_ip, last_login, sex, create_by, update_by, head_image) values 
+    insert into tb_user (id, username, password, login_date, create_date, update_date, show_name, email, mobile, login_count, login_ip, last_login, sex, create_by, update_by, head_image,  member_lebel_id) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.showName,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.loginCount,jdbcType=INTEGER}, #{item.loginIp,jdbcType=VARCHAR}, #{item.lastLogin,jdbcType=TIMESTAMP}, #{item.sex,jdbcType=TINYINT}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.headImage,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.showName,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.loginCount,jdbcType=INTEGER}, #{item.loginIp,jdbcType=VARCHAR}, #{item.lastLogin,jdbcType=TIMESTAMP}, #{item.sex,jdbcType=TINYINT}, #{item.createBy,jdbcType=VARCHAR}, #{item.updateBy,jdbcType=VARCHAR}, #{item.headImage,jdbcType=VARCHAR}, #{item.memberLebelId,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
@@ -407,6 +427,7 @@
       </if>
     </if>
   </sql>
+  
   <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.syst.domain.UserCriteria" >
   	<include refid="OracleDialectPrefix" />
   	SELECT 

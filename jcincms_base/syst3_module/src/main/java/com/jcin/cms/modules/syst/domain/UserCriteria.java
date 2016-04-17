@@ -27,42 +27,42 @@ public class UserCriteria {
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public UserCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -71,7 +71,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -80,7 +80,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -89,7 +89,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -98,7 +98,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public boolean isDistinct() {
         return distinct;
@@ -107,7 +107,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -116,7 +116,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -125,7 +125,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -136,7 +136,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -149,7 +149,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -159,7 +159,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void clear() {
         oredCriteria.clear();
@@ -170,7 +170,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setPage(Page page) {
         this.page=page;
@@ -179,7 +179,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Page getPage() {
         return page;
@@ -188,7 +188,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -197,7 +197,7 @@ public class UserCriteria {
     /**
      * 该方法由系统生成 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getDialect() {
         return dialect;
@@ -206,7 +206,7 @@ public class UserCriteria {
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分15秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1309,6 +1309,136 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andLockIsNull() {
+            addCriterion("lock is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockIsNotNull() {
+            addCriterion("lock is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockEqualTo(Boolean value) {
+            addCriterion("lock =", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockNotEqualTo(Boolean value) {
+            addCriterion("lock <>", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockGreaterThan(Boolean value) {
+            addCriterion("lock >", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("lock >=", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockLessThan(Boolean value) {
+            addCriterion("lock <", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockLessThanOrEqualTo(Boolean value) {
+            addCriterion("lock <=", value, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockIn(List<Boolean> values) {
+            addCriterion("lock in", values, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockNotIn(List<Boolean> values) {
+            addCriterion("lock not in", values, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockBetween(Boolean value1, Boolean value2) {
+            addCriterion("lock between", value1, value2, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andLockNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("lock not between", value1, value2, "lock");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdIsNull() {
+            addCriterion("member_lebel_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdIsNotNull() {
+            addCriterion("member_lebel_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdEqualTo(String value) {
+            addCriterion("member_lebel_id =", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdNotEqualTo(String value) {
+            addCriterion("member_lebel_id <>", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdGreaterThan(String value) {
+            addCriterion("member_lebel_id >", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdGreaterThanOrEqualTo(String value) {
+            addCriterion("member_lebel_id >=", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdLessThan(String value) {
+            addCriterion("member_lebel_id <", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdLessThanOrEqualTo(String value) {
+            addCriterion("member_lebel_id <=", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdLike(String value) {
+            addCriterion("member_lebel_id like", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdNotLike(String value) {
+            addCriterion("member_lebel_id not like", value, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdIn(List<String> values) {
+            addCriterion("member_lebel_id in", values, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdNotIn(List<String> values) {
+            addCriterion("member_lebel_id not in", values, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdBetween(String value1, String value2) {
+            addCriterion("member_lebel_id between", value1, value2, "memberLebelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLebelIdNotBetween(String value1, String value2) {
+            addCriterion("member_lebel_id not between", value1, value2, "memberLebelId");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1358,12 +1488,17 @@ public class UserCriteria {
             addCriterion("upper(head_image) like", value.toUpperCase(), "headImage");
             return (Criteria) this;
         }
+
+        public Criteria andMemberLebelIdLikeInsensitive(String value) {
+            addCriterion("upper(member_lebel_id) like", value.toUpperCase(), "memberLebelId");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated do_not_delete_during_merge 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated do_not_delete_during_merge 2016年04月17日 11时44分22秒 星期日
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1375,7 +1510,7 @@ public class UserCriteria {
     /**
      * 该类对应于数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public static class Criterion {
         private String condition;

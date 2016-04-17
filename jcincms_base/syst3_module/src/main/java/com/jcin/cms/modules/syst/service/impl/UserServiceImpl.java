@@ -92,6 +92,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	public String insert(User record) {
 		if(record.getId()==null)
 			super.insert(record);
+		if("".equals(record.getMemberLebelId())){
+			record.setMemberLebelId(null);
+		}
 		String password = PasswordHelper.encryptPassword(record.getPassword());
 		record.setPassword(password);
 		record.setCreateDate(new Date());
@@ -182,6 +185,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	public String update(User record) {
 		// super.update(record);
 		record.setUpdateDate(new Date());
+		if("".equals(record.getMemberLebelId())){
+			record.setMemberLebelId(null);
+		}
 		int result = userMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}

@@ -9,46 +9,46 @@ public class User implements Serializable {
     /**
      *   所属表字段为tb_user.id
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String id;
 
     /**
-     *   所属表字段为tb_user.username
+     *  用户登录名 所属表字段为tb_user.username
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String username;
 
     /**
-     *   所属表字段为tb_user.password
+     *  密码，加密存储 所属表字段为tb_user.password
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String password;
 
     /**
      *   所属表字段为tb_user.login_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date loginDate;
 
     /**
-     *   所属表字段为tb_user.create_date
+     *  创建日期 所属表字段为tb_user.create_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
 
     /**
-     *   所属表字段为tb_user.update_date
+     *  更新日期 所属表字段为tb_user.update_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -57,79 +57,86 @@ public class User implements Serializable {
     /**
      *  显示名称 所属表字段为tb_user.show_name
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String showName;
 
     /**
      *  邮箱 所属表字段为tb_user.email
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String email;
 
     /**
-     *   所属表字段为tb_user.mobile
+     *  移动电话 所属表字段为tb_user.mobile
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String mobile;
 
     /**
      *  登录次数 所属表字段为tb_user.login_count
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
-    private Integer loginCount=0;
+    private Integer loginCount;
 
     /**
      *  登录IP 所属表字段为tb_user.login_ip
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String loginIp;
 
     /**
      *  上一次登录 所属表字段为tb_user.last_login
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date lastLogin;
 
     /**
-     *   所属表字段为tb_user.sex
+     *  性别 所属表字段为tb_user.sex
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private Byte sex;
 
     /**
-     *   所属表字段为tb_user.create_by
+     *  创建人 所属表字段为tb_user.create_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String createBy;
 
     /**
-     *   所属表字段为tb_user.update_by
+     *  更新人 所属表字段为tb_user.update_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String updateBy;
 
     /**
-     *   所属表字段为tb_user.head_image
+     *  头像 所属表字段为tb_user.head_image
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private String headImage;
 
     /**
+     *  会员级别 所属表字段为tb_user.member_lebel_id
+     *
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
+     */
+    private String memberLebelId;
+
+    /**
      * 该字段对应数据库表 tb_user
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     private static final long serialVersionUID = 1L;
 
@@ -138,7 +145,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.id
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getId() {
         return id;
@@ -149,7 +156,7 @@ public class User implements Serializable {
      *
      * @param id 赋值 tb_user.id
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -160,7 +167,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.username
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getUsername() {
         return username;
@@ -171,7 +178,7 @@ public class User implements Serializable {
      *
      * @param username 赋值 tb_user.username
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
@@ -182,7 +189,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.password
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getPassword() {
         return password;
@@ -193,7 +200,7 @@ public class User implements Serializable {
      *
      * @param password 赋值 tb_user.password
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
@@ -204,7 +211,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.login_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Date getLoginDate() {
         return loginDate;
@@ -215,7 +222,7 @@ public class User implements Serializable {
      *
      * @param loginDate 赋值 tb_user.login_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
@@ -226,7 +233,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.create_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Date getCreateDate() {
         return createDate;
@@ -237,7 +244,7 @@ public class User implements Serializable {
      *
      * @param createDate 赋值 tb_user.create_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -248,7 +255,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.update_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -259,7 +266,7 @@ public class User implements Serializable {
      *
      * @param updateDate 赋值 tb_user.update_date
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
@@ -270,7 +277,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.show_name
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getShowName() {
         return showName;
@@ -281,7 +288,7 @@ public class User implements Serializable {
      *
      * @param showName 赋值 tb_user.show_name
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setShowName(String showName) {
         this.showName = showName == null ? null : showName.trim();
@@ -292,7 +299,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.email
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getEmail() {
         return email;
@@ -303,7 +310,7 @@ public class User implements Serializable {
      *
      * @param email 赋值 tb_user.email
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
@@ -314,7 +321,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.mobile
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getMobile() {
         return mobile;
@@ -325,7 +332,7 @@ public class User implements Serializable {
      *
      * @param mobile 赋值 tb_user.mobile
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
@@ -336,7 +343,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.login_count
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Integer getLoginCount() {
         return loginCount;
@@ -347,7 +354,7 @@ public class User implements Serializable {
      *
      * @param loginCount 赋值 tb_user.login_count
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setLoginCount(Integer loginCount) {
         this.loginCount = loginCount;
@@ -358,7 +365,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.login_ip
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getLoginIp() {
         return loginIp;
@@ -369,7 +376,7 @@ public class User implements Serializable {
      *
      * @param loginIp 赋值 tb_user.login_ip
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setLoginIp(String loginIp) {
         this.loginIp = loginIp == null ? null : loginIp.trim();
@@ -380,7 +387,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.last_login
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Date getLastLogin() {
         return lastLogin;
@@ -391,7 +398,7 @@ public class User implements Serializable {
      *
      * @param lastLogin 赋值 tb_user.last_login
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
@@ -402,7 +409,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.sex
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public Byte getSex() {
         return sex;
@@ -413,7 +420,7 @@ public class User implements Serializable {
      *
      * @param sex 赋值 tb_user.sex
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setSex(Byte sex) {
         this.sex = sex;
@@ -424,7 +431,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.create_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getCreateBy() {
         return createBy;
@@ -435,7 +442,7 @@ public class User implements Serializable {
      *
      * @param createBy 赋值 tb_user.create_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setCreateBy(String createBy) {
         this.createBy = createBy == null ? null : createBy.trim();
@@ -446,7 +453,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.update_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getUpdateBy() {
         return updateBy;
@@ -457,7 +464,7 @@ public class User implements Serializable {
      *
      * @param updateBy 赋值 tb_user.update_by
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
@@ -468,7 +475,7 @@ public class User implements Serializable {
      *
      * @return 返回 tb_user.head_image
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public String getHeadImage() {
         return headImage;
@@ -479,10 +486,33 @@ public class User implements Serializable {
      *
      * @param headImage 赋值 tb_user.head_image
      *
-     * @mbggenerated 2015年12月11日 17时18分16秒 星期五
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
      */
     public void setHeadImage(String headImage) {
         this.headImage = headImage == null ? null : headImage.trim();
+    }
+
+
+    /**
+     * 所属表字段为 tb_user.member_lebel_id
+     *
+     * @return 返回 tb_user.member_lebel_id
+     *
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
+     */
+    public String getMemberLebelId() {
+        return memberLebelId;
+    }
+
+    /**
+     * setter方法 tb_user.member_lebel_id
+     *
+     * @param memberLebelId 赋值 tb_user.member_lebel_id
+     *
+     * @mbggenerated 2016年04月17日 11时44分22秒 星期日
+     */
+    public void setMemberLebelId(String memberLebelId) {
+        this.memberLebelId = memberLebelId == null ? null : memberLebelId.trim();
     }
     
     public String getRoleName() {
