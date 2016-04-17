@@ -305,13 +305,13 @@ a:VISITED {
 }
 /************** 菜单结束 **************************/
 .docContent *{
-	font-size:1.20em;
+
 }
 .docContent * p {
-	font-size:1.20em;
+	white-space: normal; widows: auto; color: rgb(51, 51, 51); font-family: arial, &#39;Microsoft Yahei&#39;, &#39;Hiragino Sans GB&#39;, sans-serif; font-size: 15px; line-height: 2em; background-color: rgb(255, 255, 255);
 }
 .docContent * p *{
-	font-size:1.20em;
+	/* font-size:1.20em; */
 }
 .docContent p img{
 	width: 100%;

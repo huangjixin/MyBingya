@@ -6,7 +6,6 @@
 <head>
 <title>文档管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
-<c:set var="pageNumber" value="${pageNumber}" scope="request"/>
 <script type="text/javascript">
 	$().ready(function() {
 		createChannelTree();
@@ -300,7 +299,6 @@
 								fit:false,
 								fitColumns:true,
 								pagination : true
-                                <c:if test="${pageNumber!=null}">,pageNumber:${pageNumber}</c:if>
 							">
 			<thead>
 				<tr>

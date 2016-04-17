@@ -5,7 +5,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
-<c:set var="pageNumber" value="${pageNumber}" scope="request"/>
 <script type="text/javascript" charset="utf-8">
 	window.UEDITOR_HOME_URL = "${ctx}/ueditor/"; //UEDITOR_HOME_URL、config、all这三个顺序不能改变
 </script>
@@ -461,7 +460,7 @@
 						生成html</label> <input type="button" value="保存" onclick="submitForm();" />&nbsp;&nbsp;<input
 					type="reset" value="重置" />&nbsp;&nbsp;<input type="button"
 					value="返回"
-					onclick="javascript:window.location.href='${ctxAdmin}/document?pageNumber=${pageNumber}'" />
+					onclick="javascript:window.location.href='${ctxAdmin}/document'" />
 					<c:if test="${document.id!=null}">
 									&nbsp;&nbsp;<input type="button" value="更新"
 							onclick="javascript:window.location.href='${ctxAdmin}/document/update/${document.id}'" />
