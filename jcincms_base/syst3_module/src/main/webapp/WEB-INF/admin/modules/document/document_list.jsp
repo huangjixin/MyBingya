@@ -162,6 +162,83 @@
 	function importExcel() {
 
 	}
+	
+	// 移除静态html；
+	function deleteChannelDoc() {
+		var pamameter = null;
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
+		}
+		pamameter = {};
+		pamameter.idstring = string;
+
+		if (pamameter == null) {
+			return;
+		}
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/document/deleteChannelDoc',
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				document.getElementById("tip").innerHTML="删除成功"; // 重新加载;
+			}
+		});
+	}
+	//生成静态html；
+	function geneChannelDoc() {
+		var pamameter = null;
+		//多行删除。
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length==0) {
+			return;
+		}
+		var i = 0;
+		var string = "";
+		for (i; i < row.length; i++) {
+			string += row[i].id;
+			if (i < row.length - 1) {
+				string += ',';
+			} else {
+				break;
+			}
+		}
+		pamameter = {};
+		pamameter.idstring = string;
+
+		if (pamameter == null) {
+			return;
+		}
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : '${ctxAdmin}/document/geneChannelDoc',
+			data : pamameter,
+			async : false,
+			error : function(request) {
+				alert("连接失败");
+			},
+			success : function(data) {
+				document.getElementById("tip").innerHTML="生成成功"; // 重新加载;
+			}
+		});
+	}
 </script>
 </head>
 
@@ -184,8 +261,11 @@
 			</shiro:hasPermission> 
 			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
 			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <!-- <input type="button" id="importBtn"
+			<input type="button" value="删除静态HTML" onClick="deleteChannelDoc();" />
+        	<input type="button" value="生成静态HTML" onClick="geneChannelDoc();" />
+            <span id="tip"></span>
+			<!-- <input type="button" id="exportBtn" value="导出excel"
+				onclick="exportExcel()" /> --> <!-- <input type="button" id="importBtn"
 				value="导入excel" onclick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
