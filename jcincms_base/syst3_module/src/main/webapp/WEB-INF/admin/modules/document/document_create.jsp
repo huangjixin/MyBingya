@@ -282,13 +282,13 @@
 						var fN = 'fileName' + uploadCount;
 						var fA = 'fileAddr' + uploadCount;
 
-						$('#fileName').val(data.fileName);
 						$('#size').val(data.size);
 						$('#fileAddr').val(data.fileAddr);
 						
 						if (uploadCount == 0) {
 							$('#fileAddr').val(data.fileAddr);
 							$('#size').val(data.size);
+							$('#fileName').val(data.fileName);
 						} else {
 							var insertText = '<div><input value="'+data.fileAddr+'" class="input" />&nbsp;<input value="插入" type="button" onclick="insertContent(\''
 									+ data.fileAddr + '\');" /></div>';
