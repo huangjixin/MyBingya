@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.modules.pro.dao.BrandMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.modules.pro.domain.Brand" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="pro_category_id" property="proCategoryId" jdbcType="VARCHAR" />
+    <result column="zh_name" property="zhName" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.pro.domain.BrandWithBLOBs" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="story" property="story" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pro_category_id, zh_name, en_name, status, website, update_date, create_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, story
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jcin.cms.modules.pro.domain.BrandCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pro_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.pro.domain.BrandCriteria" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pro_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcin.cms.modules.pro.domain.BrandCriteria" >
+    delete from pro_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcin.cms.modules.pro.domain.BrandWithBLOBs" >
+    insert into pro_brand (id, pro_category_id, zh_name, 
+      en_name, status, website, 
+      update_date, create_date, description, 
+      story)
+    values (#{id,jdbcType=VARCHAR}, #{proCategoryId,jdbcType=VARCHAR}, #{zhName,jdbcType=VARCHAR}, 
+      #{enName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}, 
+      #{story,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.BrandWithBLOBs" >
+    insert into pro_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="proCategoryId != null" >
+        pro_category_id,
+      </if>
+      <if test="zhName != null" >
+        zh_name,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="website != null" >
+        website,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="story != null" >
+        story,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proCategoryId != null" >
+        #{proCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zhName != null" >
+        #{zhName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="story != null" >
+        #{story,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcin.cms.modules.pro.domain.BrandCriteria" resultType="java.lang.Integer" >
+    select count(*) from pro_brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_brand
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proCategoryId != null" >
+        pro_category_id = #{record.proCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhName != null" >
+        zh_name = #{record.zhName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enName != null" >
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null" >
+        website = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.story != null" >
+        story = #{record.story,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update pro_brand
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_category_id = #{record.proCategoryId,jdbcType=VARCHAR},
+      zh_name = #{record.zhName,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      website = #{record.website,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=LONGVARCHAR},
+      story = #{record.story,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_brand
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_category_id = #{record.proCategoryId,jdbcType=VARCHAR},
+      zh_name = #{record.zhName,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      website = #{record.website,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.pro.domain.BrandWithBLOBs" >
+    update pro_brand
+    <set >
+      <if test="proCategoryId != null" >
+        pro_category_id = #{proCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zhName != null" >
+        zh_name = #{zhName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="story != null" >
+        story = #{story,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jcin.cms.modules.pro.domain.BrandWithBLOBs" >
+    update pro_brand
+    set pro_category_id = #{proCategoryId,jdbcType=VARCHAR},
+      zh_name = #{zhName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR},
+      story = #{story,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.pro.domain.Brand" >
+    update pro_brand
+    set pro_category_id = #{proCategoryId,jdbcType=VARCHAR},
+      zh_name = #{zhName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into pro_brand (id, pro_category_id, zh_name, en_name, status, website, update_date, create_date, description, story) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.proCategoryId,jdbcType=VARCHAR}, #{item.zhName,jdbcType=VARCHAR}, #{item.enName,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.website,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.description,jdbcType=LONGVARCHAR}, #{item.story,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        select * from ( select row_.*, rownum rownum_ from ( 
+      </if>
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        <![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>
+      </if>
+      <if test="dialect == 'mysql'" >
+        limit #{page.start} , #{page.pageSize}
+      </if>
+    </if>
+  </sql>
+</mapper>

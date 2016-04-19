@@ -189,8 +189,9 @@
 		</error-page> <error-page> <error-code>500</error-code> <location>/500.html</location> 
 		</error-page> -->
 	<welcome-file-list>
+		<welcome-file>myindex.html</welcome-file>
 		<welcome-file>index</welcome-file>
-		<welcome-file>/</welcome-file>
+		<!-- <welcome-file>/</welcome-file> -->
 		<!--<welcome-file>default/index.jsp</welcome-file> -->
 	</welcome-file-list>
 	<absolute-ordering />

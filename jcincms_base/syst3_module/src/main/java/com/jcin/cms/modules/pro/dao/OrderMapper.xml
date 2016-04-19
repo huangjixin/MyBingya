@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcin.cms.modules.pro.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.jcin.cms.modules.pro.domain.Order" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="serialnumber" property="serialnumber" jdbcType="VARCHAR" />
+    <result column="ordercol" property="ordercol" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="counts" property="counts" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="real_amount" property="realAmount" jdbcType="DOUBLE" />
+    <result column="dis_amount" property="disAmount" jdbcType="DOUBLE" />
+    <result column="postage" property="postage" jdbcType="DOUBLE" />
+    <result column="has_postage" property="hasPostage" jdbcType="TINYINT" />
+    <result column="buyer_ip" property="buyerIp" jdbcType="VARCHAR" />
+    <result column="buyer_addr" property="buyerAddr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, serialnumber, ordercol, create_date, update_date, paytime, logistics, status, 
+    title, counts, price, amount, real_amount, dis_amount, postage, has_postage, buyer_ip, 
+    buyer_addr
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.pro.domain.OrderCriteria" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcin.cms.modules.pro.domain.OrderCriteria" >
+    delete from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcin.cms.modules.pro.domain.Order" >
+    insert into order (id, serialnumber, ordercol, 
+      create_date, update_date, paytime, 
+      logistics, status, title, 
+      counts, price, amount, 
+      real_amount, dis_amount, postage, 
+      has_postage, buyer_ip, buyer_addr
+      )
+    values (#{id,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, #{ordercol,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{logistics,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{counts,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
+      #{realAmount,jdbcType=DOUBLE}, #{disAmount,jdbcType=DOUBLE}, #{postage,jdbcType=DOUBLE}, 
+      #{hasPostage,jdbcType=TINYINT}, #{buyerIp,jdbcType=VARCHAR}, #{buyerAddr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.Order" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="serialnumber != null" >
+        serialnumber,
+      </if>
+      <if test="ordercol != null" >
+        ordercol,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="paytime != null" >
+        paytime,
+      </if>
+      <if test="logistics != null" >
+        logistics,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="counts != null" >
+        counts,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="realAmount != null" >
+        real_amount,
+      </if>
+      <if test="disAmount != null" >
+        dis_amount,
+      </if>
+      <if test="postage != null" >
+        postage,
+      </if>
+      <if test="hasPostage != null" >
+        has_postage,
+      </if>
+      <if test="buyerIp != null" >
+        buyer_ip,
+      </if>
+      <if test="buyerAddr != null" >
+        buyer_addr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercol != null" >
+        #{ordercol,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logistics != null" >
+        #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null" >
+        #{counts,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="realAmount != null" >
+        #{realAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="disAmount != null" >
+        #{disAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="postage != null" >
+        #{postage,jdbcType=DOUBLE},
+      </if>
+      <if test="hasPostage != null" >
+        #{hasPostage,jdbcType=TINYINT},
+      </if>
+      <if test="buyerIp != null" >
+        #{buyerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerAddr != null" >
+        #{buyerAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcin.cms.modules.pro.domain.OrderCriteria" resultType="java.lang.Integer" >
+    select count(*) from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialnumber != null" >
+        serialnumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordercol != null" >
+        ordercol = #{record.ordercol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paytime != null" >
+        paytime = #{record.paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logistics != null" >
+        logistics = #{record.logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counts != null" >
+        counts = #{record.counts,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realAmount != null" >
+        real_amount = #{record.realAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.disAmount != null" >
+        dis_amount = #{record.disAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postage != null" >
+        postage = #{record.postage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hasPostage != null" >
+        has_postage = #{record.hasPostage,jdbcType=TINYINT},
+      </if>
+      <if test="record.buyerIp != null" >
+        buyer_ip = #{record.buyerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerAddr != null" >
+        buyer_addr = #{record.buyerAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order
+    set id = #{record.id,jdbcType=VARCHAR},
+      serialnumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ordercol = #{record.ordercol,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      paytime = #{record.paytime,jdbcType=TIMESTAMP},
+      logistics = #{record.logistics,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      counts = #{record.counts,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      real_amount = #{record.realAmount,jdbcType=DOUBLE},
+      dis_amount = #{record.disAmount,jdbcType=DOUBLE},
+      postage = #{record.postage,jdbcType=DOUBLE},
+      has_postage = #{record.hasPostage,jdbcType=TINYINT},
+      buyer_ip = #{record.buyerIp,jdbcType=VARCHAR},
+      buyer_addr = #{record.buyerAddr,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcin.cms.modules.pro.domain.Order" >
+    update order
+    <set >
+      <if test="serialnumber != null" >
+        serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercol != null" >
+        ordercol = #{ordercol,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paytime != null" >
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logistics != null" >
+        logistics = #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null" >
+        counts = #{counts,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="realAmount != null" >
+        real_amount = #{realAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="disAmount != null" >
+        dis_amount = #{disAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="postage != null" >
+        postage = #{postage,jdbcType=DOUBLE},
+      </if>
+      <if test="hasPostage != null" >
+        has_postage = #{hasPostage,jdbcType=TINYINT},
+      </if>
+      <if test="buyerIp != null" >
+        buyer_ip = #{buyerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerAddr != null" >
+        buyer_addr = #{buyerAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.pro.domain.Order" >
+    update order
+    set serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      ordercol = #{ordercol,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      logistics = #{logistics,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      counts = #{counts,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      amount = #{amount,jdbcType=DOUBLE},
+      real_amount = #{realAmount,jdbcType=DOUBLE},
+      dis_amount = #{disAmount,jdbcType=DOUBLE},
+      postage = #{postage,jdbcType=DOUBLE},
+      has_postage = #{hasPostage,jdbcType=TINYINT},
+      buyer_ip = #{buyerIp,jdbcType=VARCHAR},
+      buyer_addr = #{buyerAddr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into order (id, serialnumber, ordercol, create_date, update_date, paytime, logistics, status, title, counts, price, amount, real_amount, dis_amount, postage, has_postage, buyer_ip, buyer_addr) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.serialnumber,jdbcType=VARCHAR}, #{item.ordercol,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.paytime,jdbcType=TIMESTAMP}, #{item.logistics,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.counts,jdbcType=INTEGER}, #{item.price,jdbcType=DOUBLE}, #{item.amount,jdbcType=DOUBLE}, #{item.realAmount,jdbcType=DOUBLE}, #{item.disAmount,jdbcType=DOUBLE}, #{item.postage,jdbcType=DOUBLE}, #{item.hasPostage,jdbcType=TINYINT}, #{item.buyerIp,jdbcType=VARCHAR}, #{item.buyerAddr,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        select * from ( select row_.*, rownum rownum_ from ( 
+      </if>
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <if test="dialect == 'oracle'" >
+        <![CDATA[ ) row_ ) where rownum_ > #{page.start} and rownum_ <= #{page.pageSize} ]]>
+      </if>
+      <if test="dialect == 'mysql'" >
+        limit #{page.start} , #{page.pageSize}
+      </if>
+    </if>
+  </sql>
+</mapper>

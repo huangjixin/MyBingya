@@ -68,9 +68,10 @@ public class DefaultIndexController extends BaseController {
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = { "", "/", "index" })
+	@RequestMapping(value = {"index"})
 	public String index(SitePreference sitePreference, Model uiModel,
 			HttpServletRequest httpServletRequest) {
+//		System.out.println(+","+httpServletRequest.getRequestURI());
 		/*if(endtime==0){
 			try {
 				endtime = new SimpleDateFormat("yyyy.MM.dd").parse("2016.10.01").getTime();
