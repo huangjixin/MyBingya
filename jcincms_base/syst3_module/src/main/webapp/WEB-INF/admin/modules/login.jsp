@@ -62,7 +62,7 @@
 			        success: function(data) { 
 			            if(data == 'success'){
 			            	 //登录成功
-			                window.location.href = "${ctxAdmin}/";
+			                window.location.href = "${ctxAdmin}/index";
 			            }else{
 			            	document.getElementById("tip").innerHTML = "用户名/密码错误";
 			            }
