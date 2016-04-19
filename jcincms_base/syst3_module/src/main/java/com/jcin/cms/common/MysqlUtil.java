@@ -25,8 +25,8 @@ public class MysqlUtil {
 	 */
 	public static String backup(String name) {
 		String mysqlPath = PropertiesUtil.readProperty("database.mysqlpath");
-		String filePath = System.getProperty("zwtech.root");
-//		String filePath = PropertiesUtil.readProperty("database.export");
+//		String filePath = System.getProperty("zwtech.root");
+		String filePath = PropertiesUtil.readProperty("database.export");
 		File f = new File(filePath);
 		if(!f.exists()){
 			FileUtils.createDirectory(filePath);
