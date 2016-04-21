@@ -60,7 +60,7 @@
 }
 #validForm .descrition{
 	height:80px;
-	width: 450px;
+	width: 90%;
 }
 
 

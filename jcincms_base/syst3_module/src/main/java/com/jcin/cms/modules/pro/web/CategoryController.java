@@ -47,6 +47,7 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "${adminPath}/category")
 public class CategoryController extends BaseController<Category>{
+	
 	@Autowired
 	private ICategoryService categoryService;
 
@@ -82,6 +83,13 @@ public class CategoryController extends BaseController<Category>{
 	public String update(Category category,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
+		if (category.getId().equals(category.getParentId())) {
+			redirectAttributes.addFlashAttribute("category", category);
+			redirectAttributes.addFlashAttribute("msg", "父亲节点不应该为本身");
+			return "redirect:/" + Global.getAdminPath() + "/category/update/"
+					+ category.getId();
+		}
+		
 		categoryService.update(category);
 		
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
@@ -128,7 +136,14 @@ public class CategoryController extends BaseController<Category>{
 		}
 		return pathSegment;
 	}
-
+	
+	@RequestMapping(value = "/getCategoryTree")
+	@ResponseBody
+	public List<Category> getCategoryTree(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+		List<Category> categories = categoryService.getCategoryTree();
+		return categories;
+	}
+	
 //	@RequiresPermissions("category:view")
 	@RequestMapping(value = "/select")
 	@ResponseBody

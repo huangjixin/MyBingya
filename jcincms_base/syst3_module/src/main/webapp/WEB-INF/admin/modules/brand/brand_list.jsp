@@ -4,71 +4,133 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>brand管理</title>
+<title>品牌管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
 		createDataGrid();
-		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
+		$('#tgrid').datagrid('getPager').pagination({
+			displayMsg : '当前显示从{from}-{to},共{total}条记录'
+		});
+		
+		createTree();
 	});
 
-	function createDataGrid(){
+	function createTree(){
+		$('#proCategory_idInput').combotree({ 	
+				url: '${ctxAdmin}/category/getCategoryTree',
+				width:300,
+				valuefield : 'id',
+				textfield : 'name',
+				required : false,
+				editable : false,
+				onClick : function(node) {
+					/*  JJ.Prm.GetDepartmentUser(node.id, 'selUserFrom'); 
+					$('#parentId').val(node.id);*/
+				}, //全部折叠
+				onLoadSuccess : function(node, data) {
+					$('#proCategory_idInput').combotree('tree').tree("collapseAll");
+					var val = "${category.parentId}";
+					$('#proCategory_idInput').combotree("setValue", val);
+				}
+			});
+	}
+	
+	function clearCategoryIdInput(){
+		$('#proCategory_idInput').combotree('clear');
+	}
+	
+	function createDataGrid() {
 		$('#tgrid').datagrid({
-		    height: 350,
-		    pageSize : 10,
+			height : 350,
+			pageSize : 10,
 			pageList : [ 5, 10, 15, 20 ],
 			nowrap : true,
 			striped : true,
 			collapsible : true,
-			url: '${ctxAdmin}/brand/select',
+			url : '${ctxAdmin}/brand/select',
 			loadMsg : '数据装载中......',
-			method: 'get',
+			method : 'get',
 			singleSelect : false,
-			selectOnCheck: true,
-			checkOnSelect: true,
-			rownumbers: false,
-			treeField: 'name',
-			showHeader: true,
-			fit:false,
-			fitColumns:true,
+			selectOnCheck : true,
+			checkOnSelect : true,
+			rownumbers : false,
+			treeField : 'name',
+			showHeader : true,
+			fit : false,
+			fitColumns : true,
 			pagination : true,
-		    columns: [[
-		        { field: 'ck', checkbox: true },
-		        		{ field: 'id',hidden:true, title: 'id', align: 'center',width:80 }
-		        	,
-		        		{ field: 'proCategory_id',title: 'proCategory_id', align: 'center',width:80 }
-		        	,
-		        		{ field: 'zhName',title: 'zhName', align: 'center',width:80 }
-		        	,
-		        		{ field: 'enName',title: 'enName', align: 'center',width:80 }
-		        	,
-		        		{ field: 'status',title: 'status', align: 'center',width:80 }
-		        	,
-		        		{ field: 'website',title: 'website', align: 'center',width:80 }
-		        	,
-		        		{ field: 'updateDate',title: 'updateDate', align: 'center',width:80 }
-		        	,
-		        		{ field: 'createDate',title: 'createDate', align: 'center',width:80 }
-		        	,
-		        		{ field: 'description',title: 'description', align: 'center',width:80 }
-		        	,
-		        		{ field: 'story',title: 'story', align: 'center',width:80 }
-		        	
-		    ]],
-		    onBeforeLoad: function (param) {
-		    },
-		    onLoadSuccess: function (data) {
-		        
-		    },
-		    onLoadError: function () {
-		        
-		    },
-		    onClickCell: function (rowIndex, field, value) {
-		        
-		    },
-		    onSelect:function (rowIndex, rowData){
-		    	
-		    }
+			columns : [ [ {
+				field : 'ck',
+				checkbox : true
+			}, {
+				field : 'id',
+				hidden : true,
+				title : 'id',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'proCategory_id',
+				title : 'proCategory_id',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'zhName',
+				title : '中文名',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'enName',
+				title : '英文名',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'status',
+				title : 'status',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'website',
+				title : '官方网址',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'updateDate',
+				title : '更新日期',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'createDate',
+				title : '创建日期',
+				align : 'center',
+				width : 80
+			}/*, {
+				field : 'description',
+				title : 'description',
+				align : 'center',
+				width : 80
+			}, {
+				field : 'story',
+				title : 'story',
+				align : 'center',
+				width : 80
+			}*/
+
+			] ],
+			onBeforeLoad : function(param) {
+			},
+			onLoadSuccess : function(data) {
+
+			},
+			onLoadError : function() {
+
+			},
+			onClickCell : function(rowIndex, field, value) {
+
+			},
+			onSelect : function(rowIndex, rowData) {
+
+			}
 		});
 	}
 	// 移除条目；
@@ -76,7 +138,7 @@
 		var pamameter = null;
 		//多行删除。
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
 		var i = 0;
@@ -110,28 +172,28 @@
 		});
 	}
 
-	function create(){
-		window.location.href='${ctxAdmin}/brand/create'; 
+	function create() {
+		window.location.href = '${ctxAdmin}/brand/create';
 	}
-	
-	function update(){
+
+	function update() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/brand/update/'+row[0].id+''; 
+
+		window.location.href = '${ctxAdmin}/brand/update/' + row[0].id + '';
 	}
-		
-	function show(){
+
+	function show() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/brand/show/'+row[0].id; 
+
+		window.location.href = '${ctxAdmin}/brand/show/' + row[0].id;
 	}
-	
+
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -143,9 +205,6 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
 		if ($("proCategory_idInput").val() != "") {
 			queryParams.proCategory_id = $("#proCategory_idInput").val();
 		}
@@ -154,24 +213,6 @@
 		}
 		if ($("enNameInput").val() != "") {
 			queryParams.enName = $("#enNameInput").val();
-		}
-		if ($("statusInput").val() != "") {
-			queryParams.status = $("#statusInput").val();
-		}
-		if ($("websiteInput").val() != "") {
-			queryParams.website = $("#websiteInput").val();
-		}
-		if ($("updateDateInput").val() != "") {
-			queryParams.updateDate = $("#updateDateInput").val();
-		}
-		if ($("createDateInput").val() != "") {
-			queryParams.createDate = $("#createDateInput").val();
-		}
-		if ($("descriptionInput").val() != "") {
-			queryParams.description = $("#descriptionInput").val();
-		}
-		if ($("storyInput").val() != "") {
-			queryParams.story = $("#storyInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -184,16 +225,9 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
-			$("#proCategory_idInput").val("");
-			$("#zhNameInput").val("");
-			$("#enNameInput").val("");
-			$("#statusInput").val("");
-			$("#websiteInput").val("");
-			$("#updateDateInput").val("");
-			$("#createDateInput").val("");
-			$("#descriptionInput").val("");
-			$("#storyInput").val("");
+		clearCategoryIdInput();
+		$("#zhNameInput").val("");
+		$("#enNameInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -217,53 +251,35 @@
 </script>
 </head>
 
-<body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
-	<div data-options="region:'center'" title=""
-		style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<shiro:hasPermission name="brand:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="brand:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
-			</shiro:hasPermission>
-			<shiro:hasPermission name="brand:update">
-				<input type="button" value="查看" onclick="update();" /> 
-			</shiro:hasPermission>
-			<!--<shiro:hasPermission name="brand:view">
+<body>
+	<div id="toolBar" style="padding: 5px;border: 0px;">
+		<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" />
+		<input type="button" value="删除" onClick="deleteRows();" />
+		<input type="button" value="查看" onClick="update();" />
+		<shiro:hasPermission name="brand:create">
+		</shiro:hasPermission>
+		<shiro:hasPermission name="brand:delete">
+		</shiro:hasPermission>
+		<shiro:hasPermission name="brand:update">
+		</shiro:hasPermission>
+		<!--<shiro:hasPermission name="brand:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>-->
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
-		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>proCategory_id:</label>
-			<input  id="proCategory_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>zhName:</label>
-			<input  id="zhNameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>enName:</label>
-			<input  id="enNameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>status:</label>
-			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>website:</label>
-			<input  id="websiteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>description:</label>
-			<input  id="descriptionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>story:</label>
-			<input  id="storyInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid">
-		</table>
+		<input type="button" id="searchBtn" value="搜索" onClick="search();" />
+		<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
+		<!-- <input type="button" id="exportBtn" value="导出excel"
+			onclick="exportExcel()" /> <input type="button" id="importBtn"
+			value="导入excel" onclick="importExcel()" /> -->
 	</div>
+	<div style="padding: 5px;border: 0px;">
+		<label>商品种类:</label> <input id="proCategory_idInput">&nbsp; <input type="button" value="清除"
+								onclick="clearCategoryIdInput();" />
+		<label>中文名称:</label> <input id="zhNameInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+		<label>英文名称:</label> <input id="enNameInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+	</div>
+	<table id="tgrid">
+	</table>
 </body>
 </html>

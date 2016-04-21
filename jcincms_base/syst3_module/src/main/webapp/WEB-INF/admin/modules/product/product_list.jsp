@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>product管理</title>
+<title>商品管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
@@ -164,12 +164,8 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
 			$("#nameInput").val("");
 			$("#proBrand_idInput").val("");
-			$("#createDateInput").val("");
-			$("#updateDateInput").val("");
-			$("#contentInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -198,37 +194,32 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<shiro:hasPermission name="product:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="product:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
-			</shiro:hasPermission>
-			<shiro:hasPermission name="product:update">
-				<input type="button" value="查看" onclick="update();" /> 
-			</shiro:hasPermission>
+			<!--<shiro:hasPermission name="product:create">-->
+				 
+			<!--</shiro:hasPermission>-->
+			<!--<shiro:hasPermission name="product:delete">-->
+				
+			<!--</shiro:hasPermission>-->
+			<!--<shiro:hasPermission name="product:update">-->
+				
+			<!--</shiro:hasPermission>-->
 			<!--<shiro:hasPermission name="product:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>-->
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
+            <input type="button" value="添加" id="btn_Add" name="btn_Add" onClick="create();" />
+            <input type="button" value="删除" onClick="deleteRows();" />
+            <input type="button" value="查看" onClick="update();" /> 
+			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
+			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
+			<!--<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+				value="导入excel" onClick="importExcel()" />-->
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>name:</label>
-			<input  id="nameInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>proBrand_id:</label>
-			<input  id="proBrand_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>content:</label>
-			<input  id="contentInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>商品名称:</label>
+			<input  id="nameInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>品牌:</label>
+			<input  id="proBrand_idInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid">
 		</table>

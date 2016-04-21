@@ -6,12 +6,14 @@
  */
 package com.jcin.cms.modules.pro.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.pro.dao.CategoryMapper;
@@ -65,6 +67,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		 	super.insert(record);
 		if(null==record.getCreateDate())
 			record.setCreateDate(new Date());
+		
+		if("".equals(record.getParentId()))
+			record.setParentId(null);
+		
 		int result = categoryMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -194,4 +200,68 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		return  categoryMapper.selectByExample(criteria);
 	}
 
+	@Override
+	public List<Category> getCategoryTree() {
+		CategoryCriteria categoryExample = new CategoryCriteria();
+		categoryExample.createCriteria().andParentIdIsNull();
+		categoryExample.setOrderByClause("sortid asc");
+		List<Category> list = categoryMapper.selectByExample(categoryExample);
+		List<Category> children = new ArrayList<Category>();
+		for (Category object : list) {
+			Category jsonObject;
+			try {
+				jsonObject = searialCategory(object);
+				if(jsonObject!=null){
+					children.add(jsonObject);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return children;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Category searialCategory(Category category) throws JSONException {
+		Category jsonObject = new Category();
+		jsonObject.setId(category.getId());
+		jsonObject.setParentId(category.getParentId());
+		jsonObject.setName(category.getName());
+		jsonObject.setCreateDate(category.getCreateDate());
+		jsonObject.setUpdateDate(category.getUpdateDate());
+		jsonObject.setSortid(category.getSortid());
+
+		List<Category> list = searialChild(category);
+		if (null != list) {
+			jsonObject.setChildren(list);
+		}
+
+		return jsonObject;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Category> searialChild(Category category) throws JSONException {
+		List children = null;
+		List<Category> list = getByParentId(category.getId());
+		if (list != null && list.size() > 0) {
+			children = new ArrayList();
+		}
+		for (Category object : list) {
+			Category jsonObject = searialCategory(object);
+			if(jsonObject!=null){
+				children.add(jsonObject);
+			}
+		}
+		return children;
+	}
+
+	@Override
+	public List<Category> getByParentId(String id) {
+		CategoryCriteria categoryExample = new CategoryCriteria();
+		categoryExample.createCriteria().andParentIdEqualTo(id);
+		categoryExample.setOrderByClause("sortid asc");
+		List<Category> list = categoryMapper.selectByExample(categoryExample);
+		return list;
+	}
 }

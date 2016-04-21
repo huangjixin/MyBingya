@@ -69,13 +69,13 @@
 		$('#content').val("");
 	}
 </script>
-<title>product更新</title>
+<title>商品更新</title>
 </head>
 <body>
 	<form id="validForm" action="${ctxAdmin}/product/update/${product.id}" method="post">
 				<input name="id" value="${product.id}" type="hidden" />
 				<div class="desc">
-					<b>product信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+					<b>商品信息更新</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 				<table class="table">

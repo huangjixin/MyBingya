@@ -62,10 +62,10 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	@Override
 	@Transactional
 	public String insert(BrandWithBLOBs record) {
-		if(record.getId()==null)
-		 	super.insert(record);
-		/*if(null==record.getCreateDate())
-			record.setCreateDate(new Date());*/
+		if(record.getId()==null||"".equals(record.getId()))
+			record.setId(new Date().getTime()+"");
+		if(null==record.getCreateDate())
+			record.setCreateDate(new Date());
 		int result = brandMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -134,10 +134,10 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	 * .String)
 	 */
 	@Override
-	public Brand selectByPrimaryKey(String id) {
+	public BrandWithBLOBs selectByPrimaryKey(String id) {
 		super.selectByPrimaryKey(id);
 
-		Brand record = brandMapper.selectByPrimaryKey(id);
+		BrandWithBLOBs record = brandMapper.selectByPrimaryKey(id);
 		return record;
 	}
 
@@ -150,11 +150,11 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	 */
 	@Override
 	@Transactional
-	public String update(Brand record) {
+	public String update(BrandWithBLOBs record) {
 		// super.update(record);
 		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = brandMapper.updateByPrimaryKey(record);
+		int result = brandMapper.updateByPrimaryKeyWithBLOBs(record);
 		return record.getId();
 	}
 
@@ -190,9 +190,9 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	
 	
 	@Override
-	public List<Brand> selectByExample(
+	public List<BrandWithBLOBs> selectByExample(
 			BrandCriteria criteria) {
-		return  brandMapper.selectByExample(criteria);
+		return  brandMapper.selectByExampleWithBLOBs(criteria);
 	}
 
 }

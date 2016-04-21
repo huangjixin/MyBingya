@@ -39,6 +39,7 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.common.Global;
 import com.jcin.cms.modules.pro.domain.Brand;
 import com.jcin.cms.modules.pro.domain.BrandCriteria;
+import com.jcin.cms.modules.pro.domain.BrandWithBLOBs;
 import com.jcin.cms.modules.pro.service.IBrandService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
@@ -52,14 +53,14 @@ public class BrandController extends BaseController<Brand>{
 
 //	@RequiresPermissions("brand:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String create(Brand brand, Model uiModel) {
+	public String create(BrandWithBLOBs brand, Model uiModel) {
 		uiModel.addAttribute("brand", brand);
 		return root+"admin/modules/brand/brand_create.jsp";
 	}
 
 //	@RequiresPermissions("brand:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(Brand brand, RedirectAttributes redirectAttributes,
+	public String create(BrandWithBLOBs brand, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		brandService.insert(brand);
@@ -72,14 +73,14 @@ public class BrandController extends BaseController<Brand>{
 //	@RequiresPermissions("brand:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
-		Brand brand = brandService.selectByPrimaryKey(id);
+		BrandWithBLOBs brand = brandService.selectByPrimaryKey(id);
 		uiModel.addAttribute("brand", brand);
 		return root+"admin/modules/brand/brand_update.jsp";
 	}
 
 //	@RequiresPermissions("brand:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(Brand brand,RedirectAttributes redirectAttributes,
+	public String update(BrandWithBLOBs brand,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		brandService.update(brand);

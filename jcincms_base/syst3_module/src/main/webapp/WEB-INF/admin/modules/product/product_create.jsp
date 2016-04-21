@@ -22,7 +22,7 @@
 				name:{
 					required : true
 				},
-				proBrand_id:{
+				proBrandId:{
 					required : true
 				},
 				createDate:{
@@ -41,7 +41,7 @@
 				name:{
 					required : "必填"
 				},
-				proBrand_id:{
+				proBrandId:{
 					required : "必填"
 				},
 				createDate:{
@@ -62,18 +62,18 @@
 	function clearForm(){
 		$('#id').val("");
 		$('#name').val("");
-		$('#proBrand_id').val("");
+		$('#proBrandId').val("");
 		$('#createDate').val("");
 		$('#updateDate').val("");
 		$('#content').val("");
 	}
 </script>
-<title>product添加</title>
+<title>商品添加</title>
 </head>
 <body>
 	<form id="validForm" action="${ctxAdmin}/product/create" method="post">
 				<div class="desc">
-					<b>product信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
+					<b>商品信息添加</b>&nbsp;&nbsp;<b style="color: red;">${msg}</b>
 				</div>
 				<hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
 				<table class="table">
@@ -90,11 +90,11 @@
 									&nbsp;<label for="name" style="color:red;">*</label></td>
 					</tr>
 					<tr>
-					<th>&nbsp;proBrand_id：</th>
+					<th>&nbsp;proBrandId：</th>
 					<td>
-						<input id="proBrand_id" name="proBrand_id" 
-								value="${product.proBrand_id}"/>
-									&nbsp;<label for="proBrand_id" style="color:red;">*</label></td>
+						<input id="proBrandId" name="proBrandId" 
+								value="${product.proBrandId}"/>
+									&nbsp;<label for="proBrandId" style="color:red;">*</label></td>
 					<th>&nbsp;createDate：</th>
 					<td>
 						<input id="createDate" name="createDate" 

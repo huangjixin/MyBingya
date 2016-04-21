@@ -1,8 +1,13 @@
 package com.jcin.cms.modules.pro.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jcin.cms.modules.syst.domain.Resource;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Category implements Serializable {
@@ -209,6 +214,10 @@ public class Category implements Serializable {
         return isParent;
     }
 
+    public String getText() {
+		return name;
+	}
+    
     /**
      * setter方法 pro_category.is_parent
      *
@@ -219,4 +228,24 @@ public class Category implements Serializable {
     public void setIsParent(Byte isParent) {
         this.isParent = isParent;
     }
+    
+    private List<Category> children = new ArrayList<Category>();
+
+	private boolean checked;
+	
+	public List<Category> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Category> children) {
+		this.children = children;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 }

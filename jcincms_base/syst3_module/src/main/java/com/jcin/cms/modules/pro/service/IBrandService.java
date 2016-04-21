@@ -22,7 +22,11 @@ public interface IBrandService extends IBaseService<Brand, String> {
 	 * @param dictionaryCriteria
 	 * @return
 	 */
-	List<Brand> selectByExample(BrandCriteria criteria);
+	List<BrandWithBLOBs> selectByExample(BrandCriteria criteria);
 
 	String insert(BrandWithBLOBs record);
+	
+	BrandWithBLOBs selectByPrimaryKey(String id);
+	
+	String update(BrandWithBLOBs record);
 }
