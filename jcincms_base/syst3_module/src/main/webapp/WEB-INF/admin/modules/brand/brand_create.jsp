@@ -26,7 +26,7 @@
 			}, //全部折叠
 			onLoadSuccess : function(node, data) {
 				$('#proCategoryId').combotree('tree').tree("collapseAll");
-				var val = "${category.proCategoryId}";
+				var val = "${brand.proCategoryId}";
 				$('#proCategoryId').combotree("setValue", val);
 			}
 		});
@@ -123,7 +123,7 @@
     <tr>
       <th>&nbsp;description：</th>
       <td><textarea class="descrition" id="description" name="description"
-					value="${brand.description}" ></textarea>
+					>${brand.description}</textarea>
         &nbsp;
         <label for="description"
 					style="color:red;">*</label></td>
