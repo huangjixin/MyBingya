@@ -627,6 +627,8 @@ public class DefaultController extends BaseController {
 		String page = httpServletRequest.getParameter("page");
 
 		String requestRri = httpServletRequest.getRequestURI();
+		requestRri +="s";
+		
 		int index = -1;
 		if ("".equals(conPath)) {
 			index = 0;
@@ -636,7 +638,7 @@ public class DefaultController extends BaseController {
 		if (index != -1) {
 			requestRri = requestRri.substring(index + conPath.length() + 1);
 			requestRri = requestRri.replaceAll("//", File.separator);
-			webroot += requestRri;
+			webroot += requestRri+File.separator;
 			File file = null;
 			if (sitePreference == SitePreference.MOBILE) {
 				if (page != null) {
@@ -666,7 +668,7 @@ public class DefaultController extends BaseController {
 					file = new File(webroot + "docs" + File.separator
 							+ channelOrCode + "1.html");
 					if (file.exists()) {
-						return REDIRECT + requestRri + "docs/"
+						return REDIRECT + requestRri + File.separator + "docs/"
 								+ channelOrCode + "1.html";
 					}
 				}
@@ -698,7 +700,7 @@ public class DefaultController extends BaseController {
 		if (index != -1) {
 			requestRri = requestRri.substring(index + conPath.length() + 1);
 			requestRri = requestRri.replaceAll("//", File.separator);
-			requestRri = requestRri.replaceAll("doc", "docs");
+			requestRri = requestRri.replaceAll("/doc", "s/docs");
 			if (sitePreference == SitePreference.MOBILE) {
 				webroot += requestRri + "m.html";
 				File file = new File(webroot);

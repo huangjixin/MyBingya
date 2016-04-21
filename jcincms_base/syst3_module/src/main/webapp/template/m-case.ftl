@@ -1,6 +1,6 @@
 <html>
 <head>
-<#include "m-meta.ftl" >
+<#include "m-meta-channel.ftl" >
 <#include "m-css.ftl" >
 <#include "m-js.ftl" >
 </head>

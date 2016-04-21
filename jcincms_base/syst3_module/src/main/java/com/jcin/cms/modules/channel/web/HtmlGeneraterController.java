@@ -295,6 +295,7 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr;
+		toGeneratedFiles+="s";
 		File file = new File(toGeneratedFiles);
 		if (!file.exists()) {
 			FileUtils.createDirectory(toGeneratedFiles);
@@ -549,6 +550,7 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr;
+		toGeneratedFiles+="s";
 		File file = new File(toGeneratedFiles);
 		if (!file.exists()) {
 			FileUtils.createDirectory(toGeneratedFiles);
@@ -740,8 +742,14 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr;
+		toGeneratedFiles+="s";
 		File file = new File(toGeneratedFiles + File.separator + "docs"
-				+ File.separator + toGeneratedChannel.getCode() + ".html");
+				+ File.separator + toGeneratedChannel.getCode() + "1.html");
+		if (file.exists()) {
+			file.delete();
+		}
+		file = new File(toGeneratedFiles + File.separator + "docs"
+				+ File.separator + toGeneratedChannel.getCode() + "1m.html");
 		if (file.exists()) {
 			file.delete();
 		}
@@ -800,6 +808,7 @@ public class HtmlGeneraterController extends BaseController {
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr;
+		toGeneratedFiles+="s";
 		String fileName = toGeneratedFiles + File.separator + "docs";
 //				+ File.separator + toGeneratedChannel.getCode() + "1.html";
 		File file = new File(fileName);
@@ -878,8 +887,11 @@ public class HtmlGeneraterController extends BaseController {
 		Channel toGeneratedChannel = result.get(0);
 
 		String linkAddr = toGeneratedChannel.getLinkAddr();
+		
 		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot + linkAddr + File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
+		String toGeneratedFiles = webroot + linkAddr;
+		toGeneratedFiles += "s";
+		toGeneratedFiles += File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
 		File file = new File(toGeneratedFiles);
 		if (!file.exists()) {
 			FileUtils.createDirectory(toGeneratedFiles);
@@ -1000,7 +1012,9 @@ public class HtmlGeneraterController extends BaseController {
 
 		String linkAddr = toGeneratedChannel.getLinkAddr();
 		linkAddr = linkAddr.replaceAll("//", File.separator);
-		String toGeneratedFiles = webroot + linkAddr + File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
+		String toGeneratedFiles = webroot + linkAddr ;
+		toGeneratedFiles += "s";
+		toGeneratedFiles += File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
 		File file = new File(toGeneratedFiles);
 		if (!file.exists()) {
 			FileUtils.createDirectory(toGeneratedFiles);
