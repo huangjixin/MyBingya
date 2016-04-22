@@ -6,6 +6,7 @@
 <head>
 <title>商品管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
+
 <script type="text/javascript">
 	$().ready(function() {
 		createDataGrid();
@@ -36,15 +37,13 @@
 		        { field: 'ck', checkbox: true },
 		        		{ field: 'id',hidden:true, title: 'id', align: 'center',width:80 }
 		        	,
-		        		{ field: 'name',title: 'name', align: 'center',width:80 }
+		        		{ field: 'name',title: '名称', align: 'center',width:80 }
 		        	,
-		        		{ field: 'proBrand_id',title: 'proBrand_id', align: 'center',width:80 }
+		        		{ field: 'proBrand_id',title: 'proBrand_id', align: 'center',width:80}
 		        	,
-		        		{ field: 'createDate',title: 'createDate', align: 'center',width:80 }
+		        		{ field: 'createDate',title: '创建日期', align: 'center',width:80 }
 		        	,
-		        		{ field: 'updateDate',title: 'updateDate', align: 'center',width:80 }
-		        	,
-		        		{ field: 'content',title: 'content', align: 'center',width:80 }
+		        		{ field: 'updateDate',title: '更新日期', align: 'center',width:80 }
 		        	
 		    ]],
 		    onBeforeLoad: function (param) {
@@ -186,43 +185,46 @@
 	function importExcel() {
 
 	}
+	
+	
 </script>
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
-	<div data-options="region:'center'" title=""
+<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
+<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<!--<shiro:hasPermission name="product:create">-->
-				 
-			<!--</shiro:hasPermission>-->
-			<!--<shiro:hasPermission name="product:delete">-->
-				
-			<!--</shiro:hasPermission>-->
-			<!--<shiro:hasPermission name="product:update">-->
-				
-			<!--</shiro:hasPermission>-->
-			<!--<shiro:hasPermission name="product:view">
+  <div id="toolBar" style="padding: 5px;border: 0px;"> 
+    <!--<shiro:hasPermission name="product:create">--> 
+    
+    <!--</shiro:hasPermission>--> 
+    <!--<shiro:hasPermission name="product:delete">--> 
+    
+    <!--</shiro:hasPermission>--> 
+    <!--<shiro:hasPermission name="product:update">--> 
+    
+    <!--</shiro:hasPermission>--> 
+    <!--<shiro:hasPermission name="product:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>-->
-            <input type="button" value="添加" id="btn_Add" name="btn_Add" onClick="create();" />
-            <input type="button" value="删除" onClick="deleteRows();" />
-            <input type="button" value="查看" onClick="update();" /> 
-			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
-			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
-			<!--<input type="button" id="exportBtn" value="导出excel"
+    <input type="button" value="添加" id="btn_Add" name="btn_Add" onClick="create();" />
+    <input type="button" value="删除" onClick="deleteRows();" />
+    <input type="button" value="查看" onClick="update();" />
+    <input type="button" id="searchBtn" value="搜索" onClick="search();" />
+    <input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
+    <!--<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onClick="importExcel()" />-->
-		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>商品名称:</label>
-			<input  id="nameInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>品牌:</label>
-			<input  id="proBrand_idInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid">
-		</table>
-	</div>
+				value="导入excel" onClick="importExcel()" />--> 
+  </div>
+  <div style="padding: 5px;border: 0px;">
+    <label>商品名称:</label>
+    <input  id="nameInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">
+    &nbsp;&nbsp;
+    <label>品牌:</label>
+    <input  id="proBrand_idInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">
+    &nbsp;&nbsp; </div>
+  <table id="tgrid">
+  </table>
+</div>
 </body>
 </html>
