@@ -553,6 +553,7 @@ public class DocumentController extends BaseController<Document> {
 		Channel toGeneratedChannel = result.get(0);
 
 		String linkAddr = toGeneratedChannel.getLinkAddr();
+		linkAddr+="s";
 		linkAddr = linkAddr.replaceAll("//", File.separator);
 		String toGeneratedFiles = webroot + linkAddr + File.separator + "docs";// 不要生成在doc里面，免得引起路径问题。
 		File file = new File(toGeneratedFiles);
@@ -674,6 +675,7 @@ public class DocumentController extends BaseController<Document> {
 				Channel toGeneratedChannel = result.get(0);
 
 				String linkAddr = toGeneratedChannel.getLinkAddr();
+				linkAddr+="s";
 				linkAddr = linkAddr.replaceAll("//", File.separator);
 				String toGeneratedFiles = webroot + linkAddr;
 				String fileName = toGeneratedFiles + File.separator + "docs"
