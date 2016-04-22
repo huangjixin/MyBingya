@@ -7,7 +7,7 @@
 <jsp:include page="m-meta.jsp" flush="true"></jsp:include>
 <jsp:include page="m-css.jsp" flush="true"></jsp:include>
 <jsp:include page="m-js.jsp" flush="true"></jsp:include>
-<title>新闻中心,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>${document.title},新闻中心,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<!-- 头部 -->

@@ -7,7 +7,7 @@
 <jsp:include page="meta-doc.jsp" flush="true"></jsp:include>
 <jsp:include page="css.jsp" flush="true"></jsp:include>
 <jsp:include page="js.jsp" flush="true"></jsp:include>
-<title>网络营销学院,广州智沃,专业的互联网营销策划与人才服务商</title>
+<title>${document.title},网络营销学院,广州智沃,专业的互联网营销策划与人才服务商</title>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>

@@ -4,7 +4,7 @@
 <#include "m-css.ftl" >
 <#include "m-js.ftl" >
 </head>
-<title>广州智沃,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
+<title>${document.title},广州智沃,华南品牌,专业建设营销建站,手机网站，微网站，微商城</title>
 <body>
 	<!-- 头部 -->
 	<#include "m-header.ftl" >

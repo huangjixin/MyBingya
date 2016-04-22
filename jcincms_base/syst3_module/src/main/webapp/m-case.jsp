@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="m-meta.jsp" flush="true"></jsp:include>
+<jsp:include page="m-meta-channel.jsp" flush="true"></jsp:include>
 <jsp:include page="m-css.jsp" flush="true"></jsp:include>
 <jsp:include page="m-js.jsp" flush="true"></jsp:include>
 <title>成功案例,智沃商务,专业建设营销建站,手机网站，微网站</title>

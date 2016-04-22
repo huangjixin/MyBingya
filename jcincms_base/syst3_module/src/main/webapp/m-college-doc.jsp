@@ -4,10 +4,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="m-meta.jsp" flush="true"></jsp:include>
+<jsp:include page="m-meta-doc.jsp" flush="true"></jsp:include>
 <jsp:include page="m-css.jsp" flush="true"></jsp:include>
 <jsp:include page="m-js.jsp" flush="true"></jsp:include>
-<title>网络营销学院,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
+<title>${document.title},网络营销学院,智沃商务,华南品牌,专业建设营销建站,手机网站，微网站</title>
 </head>
 <body>
 	<!-- 头部 -->
