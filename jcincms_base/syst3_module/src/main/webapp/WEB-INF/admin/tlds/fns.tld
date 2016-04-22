@@ -95,4 +95,13 @@
 		</function-signature>
 		<example>${fns:getByCode(code)}</example>
 	</function>
+	
+	<function>
+		<description>根据ID查询Brand</description>
+		<name>getBrandById</name>
+		<function-class>com.jcin.cms.common.ProductUtils</function-class>
+		<function-signature>com.jcin.cms.modules.pro.domain.Brand getBrandById(java.lang.String)
+		</function-signature>
+		<example>${fns:getBrandById(id)}</example>
+	</function>
 </taglib>
