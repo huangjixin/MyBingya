@@ -7,13 +7,16 @@
 package com.jcin.cms.modules.urlhandler.web;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +32,7 @@ import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.service.DocCache;
 import com.jcin.cms.modules.channel.service.IChannelService;
 import com.jcin.cms.modules.channel.service.IDocumentService;
+import com.jcin.cms.modules.urlhandler.domain.BasicConfig;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
@@ -41,6 +45,9 @@ import com.jcin.cms.web.BaseController;
 // @Scope(value="prototype")
 public class DefaultController extends BaseController {
 
+	@Autowired
+	private BasicConfig basicConfig; // 注入基础配置。
+	
 	private static final String REDIRECT = "";
 
 	// 文章统计点击数缓存。
@@ -74,9 +81,11 @@ public class DefaultController extends BaseController {
 		uiModel.addAttribute("modules", modules);
 
 		if (sitePreference == SitePreference.MOBILE) {
-			return "m-index.jsp";
+//			return "m-index.jsp";
+			return basicConfig.getMindexJsp();
 		} else {
-			return "index.jsp";
+//			return "index.jsp";
+			return basicConfig.getIndexJsp();
 		}
 	}
 
@@ -639,38 +648,70 @@ public class DefaultController extends BaseController {
 			requestRri = requestRri.substring(index + conPath.length() + 1);
 			requestRri = requestRri.replaceAll("//", File.separator);
 			webroot += requestRri+File.separator;
-			File file = null;
+//			File file = null;
+			Path path = null;
 			if (sitePreference == SitePreference.MOBILE) {
+				String pathToFile = webroot + "docs" + File.separator + channelOrCode  + (page==null?"1":page) +"m.html";
+				path  = Paths.get(pathToFile);
+				if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+					return REDIRECT + requestRri + "/docs/"+ channelOrCode + (page==null?"1":page) + "m.html";
+				}
+				
 				if (page != null) {
-					file = new File(webroot + "docs" + File.separator
-							+ channelOrCode + page + "m.html");
+					/*String pathToFile = webroot + "docs" + File.separator + channelOrCode + page + "m.html";
+					path  = Paths.get(pathToFile);
+					if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+						return REDIRECT + requestRri + "docs/"
+								+ channelOrCode + page + "m.html";
+					}*/
+					/*file = new File(pathToFile);
 					if (file.exists()) {
 						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + page + "m.html";
-					}
+					}*/
 				} else {
-					file = new File(webroot + "docs" + File.separator
-							+ channelOrCode + "1m.html");
+					/*String pathToFile = webroot + "docs" + File.separator
+							+ channelOrCode + "1m.html";
+					path  = Paths.get(pathToFile);
+					if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+						return REDIRECT + requestRri + "docs/"
+								+ channelOrCode + page + "1m.html";
+					}*/
+					/*file = new File(pathToFile);
 					if (file.exists()) {
 						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + "1m.html";
-					}
+					}*/
 				}
 			} else {
+				String pathToFile = webroot + "docs" + File.separator + channelOrCode  + (page==null?"1":page) +".html";
+				path  = Paths.get(pathToFile);
+				if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+					return REDIRECT + requestRri + "/docs/" + channelOrCode + (page==null?"1":page) + ".html";
+				}
+				
 				if (page != null) {
-					file = new File(webroot + "docs" + File.separator
-							+ channelOrCode + page + ".html");
+					/*String pathToFile = webroot + "docs" + File.separator
+							+ channelOrCode + page + ".html";
+					path  = Paths.get(pathToFile);
+					if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+						return REDIRECT + requestRri + "docs/"
+								+ channelOrCode + page + ".html";
+					}*/
+					
+					/*file = new File(pathToFile);
 					if (file.exists()) {
 						return REDIRECT + requestRri + "docs/"
 								+ channelOrCode + page + ".html";
-					}
+					}*/
 				} else {
-					file = new File(webroot + "docs" + File.separator
-							+ channelOrCode + "1.html");
+					
+					
+					/*file = new File(pathToFile);
 					if (file.exists()) {
 						return REDIRECT + requestRri + File.separator + "docs/"
 								+ channelOrCode + "1.html";
-					}
+					}*/
 				}
 			}
 		}
@@ -703,11 +744,24 @@ public class DefaultController extends BaseController {
 			requestRri = requestRri.replaceAll("/doc", "s/docs");
 			if (sitePreference == SitePreference.MOBILE) {
 				webroot += requestRri + "m.html";
+				String pathToFile = webroot;
+				Path path  = Paths.get(pathToFile);
+				if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+					return REDIRECT + requestRri + "m.html";
+				}
+						
 				File file = new File(webroot);
 				if (file.exists()) {
 					return REDIRECT + requestRri + "m.html";
 				}
 			} else {
+				webroot += requestRri + ".html";
+				String pathToFile = webroot;
+				Path path  = Paths.get(pathToFile);
+				if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
+					return REDIRECT + requestRri + ".html";
+				}
+				
 				webroot += requestRri + ".html";
 				File file = new File(webroot);
 				if (file.exists()) {
