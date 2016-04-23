@@ -296,8 +296,9 @@ public class DocumentController extends BaseController<Document> {
 		Date date = new Date();
 		String fileDir = df.format(date);
 		tempImageName =dftime.format(date)+tempImageName; 
+		String realPath = "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
 		@SuppressWarnings("deprecation") 
-		String uploadPath = httpServletRequest.getRealPath("/") + "upload" + File.separator + UserUtils.getUserId() + File.separator + fileDir + File.separator + tempImageName;
+		String uploadPath = httpServletRequest.getRealPath("/") + realPath;
 		uploadWeb = httpServletRequest.getContextPath()+"upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
 		uploadWeb = "upload/" + UserUtils.getUserId() + "/" + fileDir + "/" +tempImageName;
 		File targetFile = new File(uploadPath);
@@ -324,7 +325,7 @@ public class DocumentController extends BaseController<Document> {
 
 		Assets assets = new Assets();
 		assets.setName(tempImageName);
-		assets.setPath(uploadPath);
+		assets.setPath(realPath);
 		assets.setUrl(uploadWeb);
 		assetsService.insert(assets);
 		map.put("assetsId", assets.getId());

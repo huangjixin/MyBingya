@@ -39,6 +39,7 @@ import org.springframework.web.util.WebUtils;
 import com.jcin.cms.common.Global;
 import com.jcin.cms.modules.pro.domain.Product;
 import com.jcin.cms.modules.pro.domain.ProductCriteria;
+import com.jcin.cms.modules.pro.domain.ProductWithBLOBs;
 import com.jcin.cms.modules.pro.service.IProductService;
 import com.jcin.cms.utils.Page;
 import com.jcin.cms.utils.ExcelUtil;
@@ -52,14 +53,14 @@ public class ProductController extends BaseController<Product>{
 
 //	@RequiresPermissions("product:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String create(Product product, Model uiModel) {
+	public String create(ProductWithBLOBs product, Model uiModel) {
 		uiModel.addAttribute("product", product);
 		return root+"admin/modules/product/product_create.jsp";
 	}
 
 //	@RequiresPermissions("product:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(Product product, RedirectAttributes redirectAttributes,
+	public String create(ProductWithBLOBs product, RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		productService.insert(product);
@@ -72,14 +73,14 @@ public class ProductController extends BaseController<Product>{
 //	@RequiresPermissions("product:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
-		Product product = productService.selectByPrimaryKey(id);
+		ProductWithBLOBs product = productService.selectByPrimaryKey(id);
 		uiModel.addAttribute("product", product);
 		return root+"admin/modules/product/product_update.jsp";
 	}
 
 //	@RequiresPermissions("product:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(Product product,RedirectAttributes redirectAttributes,
+	public String update(ProductWithBLOBs product,RedirectAttributes redirectAttributes,
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		productService.update(product);
@@ -189,10 +190,10 @@ public class ProductController extends BaseController<Product>{
 	 */
 //	@RequiresPermissions("product:view")
 	@RequestMapping(value = "/exportExcel")
-	public void exportExcel(@ModelAttribute Product product,
+	public void exportExcel(@ModelAttribute ProductWithBLOBs product,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws IOException {
-		httpServletResponse.setCharacterEncoding("UTF-8");
+		/*httpServletResponse.setCharacterEncoding("UTF-8");
 		String filename = new String("用户信息".getBytes("GBK"), "iso8859-1");
 
 		List<Product>list = productService.selectAll();
@@ -225,15 +226,15 @@ public class ProductController extends BaseController<Product>{
 		OutputStream os = httpServletResponse.getOutputStream();
 		hwb.write(os);
 		os.flush();
-		os.close();
+		os.close();*/
 	}
 
-	private List<Map<String, Object>> createExcelRecord(List<Product> list) {
+	private List<Map<String, Object>> createExcelRecord(List<ProductWithBLOBs> list) {
 		List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sheetName", "sheet1");
 		listmap.add(map);
-		Product product = null;
+		ProductWithBLOBs product = null;
 		for (int j = 0; j < list.size(); j++) {
 			product = list.get(j);
 			Map<String, Object> mapValue = new HashMap<String, Object>();

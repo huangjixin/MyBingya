@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jcin.cms.modules.pro.domain.Product;
 import com.jcin.cms.modules.pro.domain.ProductCriteria;
+import com.jcin.cms.modules.pro.domain.ProductWithBLOBs;
 import com.jcin.cms.modules.pro.service.IProductService;
 import com.jcin.cms.service.IBaseService;
 import com.jcin.cms.utils.Page;
@@ -22,4 +23,10 @@ public interface IProductService extends IBaseService<Product, String> {
 	 * @return
 	 */
 	List<Product> selectByExample(ProductCriteria criteria);
+	
+	ProductWithBLOBs selectByPrimaryKey(String id);
+	
+	String insert(ProductWithBLOBs record);
+	
+	String update(ProductWithBLOBs record);
 }
