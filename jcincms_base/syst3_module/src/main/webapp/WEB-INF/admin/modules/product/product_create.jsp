@@ -291,15 +291,6 @@
 
 			] ]
 							">
-    <%-- <thead>
-      <tr>
-        <th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'id',align:'center',hidden:true"
-						width="100%">id</th>
-        <th data-options="field:'title',align:'center'" width="100%">标题</th>
-        <th data-options="field:'author',align:'center'" width="100%">作者</th>
-      </tr>
-    </thead>--%>
   </table>
 </div>
 </body>

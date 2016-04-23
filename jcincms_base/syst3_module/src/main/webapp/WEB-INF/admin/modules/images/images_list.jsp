@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>images管理</title>
+<title>商品图片管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
@@ -36,19 +36,19 @@
 		        { field: 'ck', checkbox: true },
 		        		{ field: 'id',hidden:true, title: 'id', align: 'center',width:80 }
 		        	,
-		        		{ field: 'site',title: 'site', align: 'center',width:80 }
+		        		{ field: 'site',title: '地址', align: 'center',width:80 }
 		        	,
-		        		{ field: 'proProduct_id',title: 'proProduct_id', align: 'center',width:80 }
+		        		{ field: 'proProduct_id',title: '所属商品ID', align: 'center',width:80 }
 		        	,
-		        		{ field: 'position',title: 'position', align: 'center',width:80 }
+		        		{ field: 'position',title: '位置', align: 'center',width:80 }
 		        	,
-		        		{ field: 'sortid',title: 'sortid', align: 'center',width:80 }
+		        		{ field: 'sortid',title: '序号', align: 'center',width:80 }
 		        	,
-		        		{ field: 'ismasterpic',title: 'ismasterpic', align: 'center',width:80 }
+		        		{ field: 'ismasterpic',title: '是否为主图', align: 'center',width:80 }
 		        	,
-		        		{ field: 'createDate',title: 'createDate', align: 'center',width:80 }
+		        		{ field: 'createDate',title: '创建日期', align: 'center',width:80 }
 		        	,
-		        		{ field: 'updateDate',title: 'updateDate', align: 'center',width:80 }
+		        		{ field: 'updateDate',title: '更新日期', align: 'center',width:80 }
 		        	
 		    ]],
 		    onBeforeLoad: function (param) {
@@ -139,29 +139,9 @@
 	//搜索
 	function search() {
 		var queryParams = {};
-		if ($("idInput").val() != "") {
-			queryParams.id = $("#idInput").val();
-		}
-		if ($("siteInput").val() != "") {
-			queryParams.site = $("#siteInput").val();
-		}
+		
 		if ($("proProduct_idInput").val() != "") {
 			queryParams.proProduct_id = $("#proProduct_idInput").val();
-		}
-		if ($("positionInput").val() != "") {
-			queryParams.position = $("#positionInput").val();
-		}
-		if ($("sortidInput").val() != "") {
-			queryParams.sortid = $("#sortidInput").val();
-		}
-		if ($("ismasterpicInput").val() != "") {
-			queryParams.ismasterpic = $("#ismasterpicInput").val();
-		}
-		if ($("createDateInput").val() != "") {
-			queryParams.createDate = $("#createDateInput").val();
-		}
-		if ($("updateDateInput").val() != "") {
-			queryParams.updateDate = $("#updateDateInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -174,14 +154,7 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
-			$("#siteInput").val("");
 			$("#proProduct_idInput").val("");
-			$("#positionInput").val("");
-			$("#sortidInput").val("");
-			$("#ismasterpicInput").val("");
-			$("#createDateInput").val("");
-			$("#updateDateInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -210,41 +183,30 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
+        	<input type="button" value="添加" id="btn_Add" name="btn_Add" onClick="create();" /> 
+            <input type="button" value="删除" onClick="deleteRows();" />
+            <input type="button" value="查看" onClick="update();" />
 			<shiro:hasPermission name="images:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+				
 			</shiro:hasPermission>
 			<shiro:hasPermission name="images:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
+				
 			</shiro:hasPermission>
 			<shiro:hasPermission name="images:update">
-				<input type="button" value="查看" onclick="update();" /> 
+				 
 			</shiro:hasPermission>
 			<!--<shiro:hasPermission name="images:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>-->
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
+			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
+			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
 			<input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+				value="导入excel" onClick="importExcel()" />
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>site:</label>
-			<input  id="siteInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>proProduct_id:</label>
-			<input  id="proProduct_idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>position:</label>
-			<input  id="positionInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>sortid:</label>
-			<input  id="sortidInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>ismasterpic:</label>
-			<input  id="ismasterpicInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<input  id="proProduct_idInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid">
 		</table>
