@@ -131,6 +131,7 @@
 				/images/kaptcha.jpg = anon
 				/logincss/** = anon
 				/js/** = anon
+				/upload/** = anon
 				/ueditor/** = anon
 				/default/** = anon
 				/admin/login = authc
