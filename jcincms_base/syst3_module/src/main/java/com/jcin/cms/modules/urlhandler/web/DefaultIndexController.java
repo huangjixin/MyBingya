@@ -36,7 +36,7 @@ import com.jcin.cms.web.BaseController;
  */
 @SuppressWarnings("rawtypes")
 @Controller
-@RequestMapping(value = { "", "/", "index" })
+@RequestMapping(value = {"","/","index" })
 public class DefaultIndexController extends BaseController {
 	private static Logger logger = Logger
 			.getLogger(DefaultIndexController.class.getName());
