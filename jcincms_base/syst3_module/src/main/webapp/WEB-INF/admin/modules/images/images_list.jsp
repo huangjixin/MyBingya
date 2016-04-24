@@ -38,7 +38,7 @@
 		        	,
 		        		{ field: 'site',title: '地址', align: 'center',width:80 }
 		        	,
-		        		{ field: 'proProduct_id',title: '所属商品ID', align: 'center',width:80 }
+		        		{ field: 'proProductId',title: '所属商品ID', align: 'center',width:80 }
 		        	,
 		        		{ field: 'position',title: '位置', align: 'center',width:80 }
 		        	,
@@ -140,8 +140,8 @@
 	function search() {
 		var queryParams = {};
 		
-		if ($("proProduct_idInput").val() != "") {
-			queryParams.proProduct_id = $("#proProduct_idInput").val();
+		if ($("nameInput").val() != "") {
+			queryParams.name = $("#nameInput").val();
 		}
 
 		$("#tgrid").datagrid("getPager").pagination({
@@ -154,7 +154,7 @@
 
 	//清除
 	function clearSearch() {
-			$("#proProduct_idInput").val("");
+			$("#nameInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -200,13 +200,13 @@
 			</shiro:hasPermission>-->
 			<input type="button" id="searchBtn" value="搜索" onClick="search();" />
 			<input type="button" id="clearBtn" value="清除" onClick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
+			<!-- <input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onClick="importExcel()" />
+				value="导入excel" onClick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>proProduct_id:</label>
-			<input  id="proProduct_idInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+			<label>商品查询:</label>
+			<input  id="nameInput" onKeyDown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid">
 		</table>

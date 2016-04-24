@@ -141,7 +141,7 @@
 <body>
 <form id="validForm" action="${ctxAdmin}/product/create" method="post">
   <input id="proBrandId" name="proBrandId"  value="${product.proBrandId}" type="hidden"/>
-  <input id="assets" name="assets" value="${document.assets}" type="hidden" />
+  <input id="assets" name="assets" value="${product.assets}" type="hidden" />
   <input id="content" name="content"  value="${product.content}" type="hidden"/>
   <div class="desc"> <b>商品信息添加</b>&nbsp;&nbsp;<b style="color: red;" id="msg">${msg}</b> </div>
   <hr style="height:1px;border:none;border-top:1px solid #CCCCCC;"/>
@@ -162,7 +162,7 @@
     <tr style="text-align: right; BACKGROUND-COLOR: #F4FAFF; ">
       <th>&nbsp;文件名：</th>
       <td><input id="fileName" name="fileName"
-					value="${document.fileName}" class="input" />
+					value="${product.fileName}" class="input" />
         &nbsp;
         <input
 					id="fileUploadBtn" type="button" value="上传" onclick="selectFile()" />
