@@ -8,6 +8,7 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="assets" property="assets" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, pro_brand_id, create_date, update_date, assets
+    id, name, pro_brand_id, create_date, update_date, assets, userid
   </sql>
   <sql id="Blob_Column_List" >
     content, description
@@ -130,10 +131,12 @@
   <insert id="insert" parameterType="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" >
     insert into pro_product (id, name, pro_brand_id, 
       create_date, update_date, assets, 
-      content, description)
+      userid, content, description
+      )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{proBrandId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{assets,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR})
+      #{userid,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" >
     insert into pro_product
@@ -155,6 +158,9 @@
       </if>
       <if test="assets != null" >
         assets,
+      </if>
+      <if test="userid != null" >
+        userid,
       </if>
       <if test="content != null" >
         content,
@@ -181,6 +187,9 @@
       </if>
       <if test="assets != null" >
         #{assets,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -217,6 +226,9 @@
       <if test="record.assets != null" >
         assets = #{record.assets,jdbcType=VARCHAR},
       </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -236,6 +248,7 @@
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       assets = #{record.assets,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR},
       description = #{record.description,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -249,7 +262,8 @@
       pro_brand_id = #{record.proBrandId,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      assets = #{record.assets,jdbcType=VARCHAR}
+      assets = #{record.assets,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +286,9 @@
       <if test="assets != null" >
         assets = #{assets,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -288,6 +305,7 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       assets = #{assets,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
@@ -298,13 +316,14 @@
       pro_brand_id = #{proBrandId,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
-      assets = #{assets,jdbcType=VARCHAR}
+      assets = #{assets,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, content, description) values 
+    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, userid, content, description) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

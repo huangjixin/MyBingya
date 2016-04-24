@@ -10,6 +10,7 @@
     <result column="ismasterpic" property="ismasterpic" jdbcType="TINYINT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, site, pro_product_id, position, sortid, ismasterpic, create_date, update_date
+    id, site, pro_product_id, position, sortid, ismasterpic, create_date, update_date, 
+    name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.pro.domain.ImagesCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -107,10 +109,12 @@
   <insert id="insert" parameterType="com.jcin.cms.modules.pro.domain.Images" >
     insert into pro_images (id, site, pro_product_id, 
       position, sortid, ismasterpic, 
-      create_date, update_date)
+      create_date, update_date, name
+      )
     values (#{id,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{proProductId,jdbcType=VARCHAR}, 
       #{position,jdbcType=VARCHAR}, #{sortid,jdbcType=INTEGER}, #{ismasterpic,jdbcType=TINYINT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.Images" >
     insert into pro_images
@@ -139,6 +143,9 @@
       <if test="updateDate != null" >
         update_date,
       </if>
+      <if test="name != null" >
+        name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -164,6 +171,9 @@
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -200,6 +210,9 @@
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,7 +227,8 @@
       sortid = #{record.sortid,jdbcType=INTEGER},
       ismasterpic = #{record.ismasterpic,jdbcType=TINYINT},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,6 +257,9 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -254,13 +271,14 @@
       sortid = #{sortid,jdbcType=INTEGER},
       ismasterpic = #{ismasterpic,jdbcType=TINYINT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into pro_images (id, site, pro_product_id, position, sortid, ismasterpic, create_date, update_date) values 
+    insert into pro_images (id, site, pro_product_id, position, sortid, ismasterpic, create_date, update_date, name) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.site,jdbcType=VARCHAR}, #{item.proProductId,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.sortid,jdbcType=INTEGER}, #{item.ismasterpic,jdbcType=TINYINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP})
+      (#{item.id,jdbcType=VARCHAR}, #{item.site,jdbcType=VARCHAR}, #{item.proProductId,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.sortid,jdbcType=INTEGER}, #{item.ismasterpic,jdbcType=TINYINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.name,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

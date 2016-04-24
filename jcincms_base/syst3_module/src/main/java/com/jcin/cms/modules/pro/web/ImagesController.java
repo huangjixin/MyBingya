@@ -150,8 +150,8 @@ public class ImagesController extends BaseController<Images>{
 //		if (null != images.getProProduct_id()  && !"".equals(images.getProProduct_id())) {
 //		  	criteria.andProProduct_idLike("%" + images.getProProduct_id() + "%");
 //		}
-		if (null != images.getPosition()  && !"".equals(images.getPosition())) {
-		  	criteria.andPositionLike("%" + images.getPosition() + "%");
+		if (null != images.getName()  && !"".equals(images.getName())) {
+		  	criteria.andNameLike("%" + images.getName() + "%");
 		}
 //		if (null != images.getSortid()  && !"".equals(images.getSortid())) {
 //		  	criteria.andSortidLike("%" + images.getSortid() + "%");

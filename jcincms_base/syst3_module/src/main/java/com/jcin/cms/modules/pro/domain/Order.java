@@ -9,28 +9,28 @@ public class Order implements Serializable {
     /**
      *   所属表字段为order.id
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String id;
 
     /**
      *  流水号 所属表字段为order.serialnumber
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String serialnumber;
 
     /**
      *   所属表字段为order.ordercol
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String ordercol;
 
     /**
      *  创建日期 所属表字段为order.create_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -39,7 +39,7 @@ public class Order implements Serializable {
     /**
      *  修改日期 所属表字段为order.update_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -48,7 +48,7 @@ public class Order implements Serializable {
     /**
      *  订单付款时间 所属表字段为order.paytime
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -57,91 +57,105 @@ public class Order implements Serializable {
     /**
      *  物流类型，如EMS，顺丰 所属表字段为order.logistics
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String logistics;
 
     /**
      *  订单状态，切勿使用数字，要用字符串 所属表字段为order.status
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String status;
 
     /**
      *  商品标题 所属表字段为order.title
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String title;
 
     /**
      *  数量 所属表字段为order.counts
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Integer counts;
 
     /**
      *   所属表字段为order.price
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Double price;
 
     /**
      *  总金额 所属表字段为order.amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Double amount;
 
     /**
      *  实付款 所属表字段为order.real_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Double realAmount;
 
     /**
      *  减免费用 所属表字段为order.dis_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Double disAmount;
 
     /**
      *   所属表字段为order.postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Double postage;
 
     /**
      *  是否有邮费 所属表字段为order.has_postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private Byte hasPostage;
 
     /**
      *  买家IP 所属表字段为order.buyer_ip
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String buyerIp;
 
     /**
      *  买家具体地址 所属表字段为order.buyer_addr
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private String buyerAddr;
 
     /**
+     *  用户ID 所属表字段为order.userid
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    private String userid;
+
+    /**
+     *   所属表字段为order.username
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    private String username;
+
+    /**
      * 该字段对应数据库表 order
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     private static final long serialVersionUID = 1L;
 
@@ -150,7 +164,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.id
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getId() {
         return id;
@@ -161,7 +175,7 @@ public class Order implements Serializable {
      *
      * @param id 赋值 order.id
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
@@ -172,7 +186,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.serialnumber
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getSerialnumber() {
         return serialnumber;
@@ -183,7 +197,7 @@ public class Order implements Serializable {
      *
      * @param serialnumber 赋值 order.serialnumber
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setSerialnumber(String serialnumber) {
         this.serialnumber = serialnumber == null ? null : serialnumber.trim();
@@ -194,7 +208,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.ordercol
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getOrdercol() {
         return ordercol;
@@ -205,7 +219,7 @@ public class Order implements Serializable {
      *
      * @param ordercol 赋值 order.ordercol
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setOrdercol(String ordercol) {
         this.ordercol = ordercol == null ? null : ordercol.trim();
@@ -216,7 +230,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.create_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Date getCreateDate() {
         return createDate;
@@ -227,7 +241,7 @@ public class Order implements Serializable {
      *
      * @param createDate 赋值 order.create_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -238,7 +252,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.update_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Date getUpdateDate() {
         return updateDate;
@@ -249,7 +263,7 @@ public class Order implements Serializable {
      *
      * @param updateDate 赋值 order.update_date
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
@@ -260,7 +274,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.paytime
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Date getPaytime() {
         return paytime;
@@ -271,7 +285,7 @@ public class Order implements Serializable {
      *
      * @param paytime 赋值 order.paytime
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setPaytime(Date paytime) {
         this.paytime = paytime;
@@ -282,7 +296,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.logistics
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getLogistics() {
         return logistics;
@@ -293,7 +307,7 @@ public class Order implements Serializable {
      *
      * @param logistics 赋值 order.logistics
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setLogistics(String logistics) {
         this.logistics = logistics == null ? null : logistics.trim();
@@ -304,7 +318,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.status
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getStatus() {
         return status;
@@ -315,7 +329,7 @@ public class Order implements Serializable {
      *
      * @param status 赋值 order.status
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
@@ -326,7 +340,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.title
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getTitle() {
         return title;
@@ -337,7 +351,7 @@ public class Order implements Serializable {
      *
      * @param title 赋值 order.title
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
@@ -348,7 +362,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.counts
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Integer getCounts() {
         return counts;
@@ -359,7 +373,7 @@ public class Order implements Serializable {
      *
      * @param counts 赋值 order.counts
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setCounts(Integer counts) {
         this.counts = counts;
@@ -370,7 +384,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.price
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Double getPrice() {
         return price;
@@ -381,7 +395,7 @@ public class Order implements Serializable {
      *
      * @param price 赋值 order.price
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setPrice(Double price) {
         this.price = price;
@@ -392,7 +406,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Double getAmount() {
         return amount;
@@ -403,7 +417,7 @@ public class Order implements Serializable {
      *
      * @param amount 赋值 order.amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setAmount(Double amount) {
         this.amount = amount;
@@ -414,7 +428,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.real_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Double getRealAmount() {
         return realAmount;
@@ -425,7 +439,7 @@ public class Order implements Serializable {
      *
      * @param realAmount 赋值 order.real_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setRealAmount(Double realAmount) {
         this.realAmount = realAmount;
@@ -436,7 +450,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.dis_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Double getDisAmount() {
         return disAmount;
@@ -447,7 +461,7 @@ public class Order implements Serializable {
      *
      * @param disAmount 赋值 order.dis_amount
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setDisAmount(Double disAmount) {
         this.disAmount = disAmount;
@@ -458,7 +472,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Double getPostage() {
         return postage;
@@ -469,7 +483,7 @@ public class Order implements Serializable {
      *
      * @param postage 赋值 order.postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setPostage(Double postage) {
         this.postage = postage;
@@ -480,7 +494,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.has_postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public Byte getHasPostage() {
         return hasPostage;
@@ -491,7 +505,7 @@ public class Order implements Serializable {
      *
      * @param hasPostage 赋值 order.has_postage
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setHasPostage(Byte hasPostage) {
         this.hasPostage = hasPostage;
@@ -502,7 +516,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.buyer_ip
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getBuyerIp() {
         return buyerIp;
@@ -513,7 +527,7 @@ public class Order implements Serializable {
      *
      * @param buyerIp 赋值 order.buyer_ip
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setBuyerIp(String buyerIp) {
         this.buyerIp = buyerIp == null ? null : buyerIp.trim();
@@ -524,7 +538,7 @@ public class Order implements Serializable {
      *
      * @return 返回 order.buyer_addr
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public String getBuyerAddr() {
         return buyerAddr;
@@ -535,9 +549,53 @@ public class Order implements Serializable {
      *
      * @param buyerAddr 赋值 order.buyer_addr
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
      */
     public void setBuyerAddr(String buyerAddr) {
         this.buyerAddr = buyerAddr == null ? null : buyerAddr.trim();
+    }
+
+    /**
+     * 所属表字段为 order.userid
+     *
+     * @return 返回 order.userid
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    public String getUserid() {
+        return userid;
+    }
+
+    /**
+     * setter方法 order.userid
+     *
+     * @param userid 赋值 order.userid
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
+    }
+
+    /**
+     * 所属表字段为 order.username
+     *
+     * @return 返回 order.username
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * setter方法 order.username
+     *
+     * @param username 赋值 order.username
+     *
+     * @mbggenerated 2016年04月24日 22时01分11秒 星期日
+     */
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 }

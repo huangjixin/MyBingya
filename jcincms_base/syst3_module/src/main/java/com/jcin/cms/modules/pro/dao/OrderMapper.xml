@@ -20,6 +20,8 @@
     <result column="has_postage" property="hasPostage" jdbcType="TINYINT" />
     <result column="buyer_ip" property="buyerIp" jdbcType="VARCHAR" />
     <result column="buyer_addr" property="buyerAddr" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,7 +84,7 @@
   <sql id="Base_Column_List" >
     id, serialnumber, ordercol, create_date, update_date, paytime, logistics, status, 
     title, counts, price, amount, real_amount, dis_amount, postage, has_postage, buyer_ip, 
-    buyer_addr
+    buyer_addr, userid, username
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jcin.cms.modules.pro.domain.OrderCriteria" >
     <include refid="OracleDialectPrefix" />
@@ -122,15 +124,15 @@
       logistics, status, title, 
       counts, price, amount, 
       real_amount, dis_amount, postage, 
-      has_postage, buyer_ip, buyer_addr
-      )
+      has_postage, buyer_ip, buyer_addr, 
+      userid, username)
     values (#{id,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, #{ordercol,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{paytime,jdbcType=TIMESTAMP}, 
       #{logistics,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{counts,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
       #{realAmount,jdbcType=DOUBLE}, #{disAmount,jdbcType=DOUBLE}, #{postage,jdbcType=DOUBLE}, 
-      #{hasPostage,jdbcType=TINYINT}, #{buyerIp,jdbcType=VARCHAR}, #{buyerAddr,jdbcType=VARCHAR}
-      )
+      #{hasPostage,jdbcType=TINYINT}, #{buyerIp,jdbcType=VARCHAR}, #{buyerAddr,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.Order" >
     insert into order
@@ -189,6 +191,12 @@
       <if test="buyerAddr != null" >
         buyer_addr,
       </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -244,6 +252,12 @@
       </if>
       <if test="buyerAddr != null" >
         #{buyerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -310,6 +324,12 @@
       <if test="record.buyerAddr != null" >
         buyer_addr = #{record.buyerAddr,jdbcType=VARCHAR},
       </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -334,7 +354,9 @@
       postage = #{record.postage,jdbcType=DOUBLE},
       has_postage = #{record.hasPostage,jdbcType=TINYINT},
       buyer_ip = #{record.buyerIp,jdbcType=VARCHAR},
-      buyer_addr = #{record.buyerAddr,jdbcType=VARCHAR}
+      buyer_addr = #{record.buyerAddr,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -393,6 +415,12 @@
       <if test="buyerAddr != null" >
         buyer_addr = #{buyerAddr,jdbcType=VARCHAR},
       </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -414,13 +442,15 @@
       postage = #{postage,jdbcType=DOUBLE},
       has_postage = #{hasPostage,jdbcType=TINYINT},
       buyer_ip = #{buyerIp,jdbcType=VARCHAR},
-      buyer_addr = #{buyerAddr,jdbcType=VARCHAR}
+      buyer_addr = #{buyerAddr,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into order (id, serialnumber, ordercol, create_date, update_date, paytime, logistics, status, title, counts, price, amount, real_amount, dis_amount, postage, has_postage, buyer_ip, buyer_addr) values 
+    insert into order (id, serialnumber, ordercol, create_date, update_date, paytime, logistics, status, title, counts, price, amount, real_amount, dis_amount, postage, has_postage, buyer_ip, buyer_addr, userid, username) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.serialnumber,jdbcType=VARCHAR}, #{item.ordercol,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.paytime,jdbcType=TIMESTAMP}, #{item.logistics,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.counts,jdbcType=INTEGER}, #{item.price,jdbcType=DOUBLE}, #{item.amount,jdbcType=DOUBLE}, #{item.realAmount,jdbcType=DOUBLE}, #{item.disAmount,jdbcType=DOUBLE}, #{item.postage,jdbcType=DOUBLE}, #{item.hasPostage,jdbcType=TINYINT}, #{item.buyerIp,jdbcType=VARCHAR}, #{item.buyerAddr,jdbcType=VARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.serialnumber,jdbcType=VARCHAR}, #{item.ordercol,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.paytime,jdbcType=TIMESTAMP}, #{item.logistics,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.counts,jdbcType=INTEGER}, #{item.price,jdbcType=DOUBLE}, #{item.amount,jdbcType=DOUBLE}, #{item.realAmount,jdbcType=DOUBLE}, #{item.disAmount,jdbcType=DOUBLE}, #{item.postage,jdbcType=DOUBLE}, #{item.hasPostage,jdbcType=TINYINT}, #{item.buyerIp,jdbcType=VARCHAR}, #{item.buyerAddr,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

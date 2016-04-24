@@ -9,42 +9,42 @@ public class ImagesCriteria {
     /**
      * 该字段对应数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public ImagesCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class ImagesCriteria {
     /**
      * 该方法由系统生成 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分21秒 星期日
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class ImagesCriteria {
     /**
      * 该类对应于数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -751,6 +751,76 @@ public class ImagesCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -770,12 +840,17 @@ public class ImagesCriteria {
             addCriterion("upper(position) like", value.toUpperCase(), "position");
             return (Criteria) this;
         }
+
+        public Criteria andNameLikeInsensitive(String value) {
+            addCriterion("upper(name) like", value.toUpperCase(), "name");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 pro_images
      *
-     * @mbggenerated do_not_delete_during_merge 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated do_not_delete_during_merge 2016年04月24日 21时17分20秒 星期日
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -787,7 +862,7 @@ public class ImagesCriteria {
     /**
      * 该类对应于数据库表 pro_images
      *
-     * @mbggenerated 2016年04月18日 10时57分01秒 星期一
+     * @mbggenerated 2016年04月24日 21时17分20秒 星期日
      */
     public static class Criterion {
         private String condition;
