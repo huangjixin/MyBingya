@@ -38,7 +38,7 @@
 		        	,
 		        		{ field: 'site',title: '地址', align: 'center',width:80 }
 		        	,
-		        		{ field: 'proProductId',title: '所属商品ID', align: 'center',width:80 }
+		        		{ field: 'name',title: '商品名称', align: 'center',width:80 }
 		        	,
 		        		{ field: 'position',title: '位置', align: 'center',width:80 }
 		        	,

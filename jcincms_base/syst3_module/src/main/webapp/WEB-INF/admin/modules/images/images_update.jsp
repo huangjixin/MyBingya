@@ -112,9 +112,9 @@
 			<tr>
 				<th>&nbsp;商品：</th>
 				<td><input id="proProductId" name="proProductId"
-					value="${images.proProductId}" type="hidden" /> <input id="name"
-					name="name" readonly="readonly" class="input" />&nbsp; <input
-					type="button" onclick="$('#dlg').dialog('open')" value="选择商品" />
+					value="${images.proProductId}" type="hidden" /> 
+					<input id="name" name="name" readonly="readonly" class="input"  value="${images.name}"/>
+					&nbsp; <input type="button" onclick="$('#dlg').dialog('open')" value="选择商品" />
 					&nbsp;<label for="name" style="color:red;">*</label></td>
 				<th>&nbsp;位置：</th>
 				<td><input id="position" name="position" class="input"
