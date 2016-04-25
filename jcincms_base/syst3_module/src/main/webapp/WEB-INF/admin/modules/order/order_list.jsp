@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>order管理</title>
+<title>订单管理</title>
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
@@ -36,39 +36,37 @@
 		        { field: 'ck', checkbox: true },
 		        		{ field: 'id',hidden:true, title: 'id', align: 'center',width:80 }
 		        	,
-		        		{ field: 'serialnumber',title: 'serialnumber', align: 'center',width:80 }
+		        		{ field: 'serialnumber',title: '流水号', align: 'center',width:80 }
 		        	,
-		        		{ field: 'ordercol',title: 'ordercol', align: 'center',width:80 }
+		        		{ field: 'createDate',title: '创建日期', align: 'center',width:80 }
 		        	,
-		        		{ field: 'createDate',title: 'createDate', align: 'center',width:80 }
+		        		{ field: 'updateDate',title: '更新日期', align: 'center',width:80 }
 		        	,
-		        		{ field: 'updateDate',title: 'updateDate', align: 'center',width:80 }
-		        	,
-		        		{ field: 'paytime',title: 'paytime', align: 'center',width:80 }
+		        		{ field: 'paytime',title: '付款日期', align: 'center',width:80 }
 		        	,
 		        		{ field: 'logistics',title: 'logistics', align: 'center',width:80 }
 		        	,
-		        		{ field: 'status',title: 'status', align: 'center',width:80 }
+		        		{ field: 'status',title: '状态', align: 'center',width:80 }
 		        	,
-		        		{ field: 'title',title: 'title', align: 'center',width:80 }
+		        		{ field: 'title',title: '标题', align: 'center',width:80 }
 		        	,
-		        		{ field: 'counts',title: 'counts', align: 'center',width:80 }
+		        		{ field: 'counts',title: '数量', align: 'center',width:80 }
 		        	,
-		        		{ field: 'price',title: 'price', align: 'center',width:80 }
+		        		{ field: 'price',title: '单价', align: 'center',width:80 }
 		        	,
-		        		{ field: 'amount',title: 'amount', align: 'center',width:80 }
+		        		{ field: 'amount',title: '总额', align: 'center',width:80 }
 		        	,
-		        		{ field: 'realAmount',title: 'realAmount', align: 'center',width:80 }
+		        		{ field: 'realAmount',title: '实付总额', align: 'center',width:80 }
 		        	,
-		        		{ field: 'disAmount',title: 'disAmount', align: 'center',width:80 }
+		        		{ field: 'disAmount',title: '减少金额', align: 'center',width:80 }
 		        	,
-		        		{ field: 'postage',title: 'postage', align: 'center',width:80 }
+		        		{ field: 'postage',title: '邮费', align: 'center',width:80 }
 		        	,
-		        		{ field: 'hasPostage',title: 'hasPostage', align: 'center',width:80 }
+		        		{ field: 'hasPostage',title: '是否有邮费', align: 'center',width:80 }
 		        	,
-		        		{ field: 'buyerIp',title: 'buyerIp', align: 'center',width:80 }
+		        		{ field: 'buyerIp',title: '买家IP地址', align: 'center',width:80 }
 		        	,
-		        		{ field: 'buyerAddr',title: 'buyerAddr', align: 'center',width:80 }
+		        		{ field: 'buyerAddr',title: '买家地址', align: 'center',width:80 }
 		        	
 		    ]],
 		    onBeforeLoad: function (param) {
@@ -224,7 +222,6 @@
 
 	//清除
 	function clearSearch() {
-			$("#idInput").val("");
 			$("#serialnumberInput").val("");
 			$("#ordercolInput").val("");
 			$("#createDateInput").val("");
@@ -270,61 +267,33 @@
 	<div data-options="region:'center'" title=""
 		style="padding:0px;background:#ffffff;">
 		<div id="toolBar" style="padding: 5px;border: 0px;">
+			<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
+			<input type="button" value="删除" onclick="deleteRows();" />
+			<input type="button" value="查看" onclick="update();" /> 
 			<shiro:hasPermission name="order:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
 			</shiro:hasPermission>
 			<shiro:hasPermission name="order:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
 			</shiro:hasPermission>
 			<shiro:hasPermission name="order:update">
-				<input type="button" value="查看" onclick="update();" /> 
 			</shiro:hasPermission>
 			<!--<shiro:hasPermission name="order:view">
 				<input type="button" value="详情" onclick="show();" /> 
 			</shiro:hasPermission>-->
 			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
 			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
+			<!-- <input type="button" id="exportBtn" value="导出excel"
 				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
+				value="导入excel" onclick="importExcel()" /> -->
 		</div>
 		<div style="padding: 5px;border: 0px;">
-			<label>id:</label>
-			<input  id="idInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>serialnumber:</label>
 			<input  id="serialnumberInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>ordercol:</label>
-			<input  id="ordercolInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>createDate:</label>
-			<input  id="createDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>updateDate:</label>
-			<input  id="updateDateInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>paytime:</label>
-			<input  id="paytimeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 			<label>logistics:</label>
 			<input  id="logisticsInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>status:</label>
+			<label>状态:</label>
 			<input  id="statusInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>title:</label>
+			<label>标题:</label>
 			<input  id="titleInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>counts:</label>
-			<input  id="countsInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>price:</label>
-			<input  id="priceInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>amount:</label>
-			<input  id="amountInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>realAmount:</label>
-			<input  id="realAmountInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>disAmount:</label>
-			<input  id="disAmountInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>postage:</label>
-			<input  id="postageInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>hasPostage:</label>
-			<input  id="hasPostageInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>buyerIp:</label>
-			<input  id="buyerIpInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>buyerAddr:</label>
-			<input  id="buyerAddrInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
 		</div>
 		<table id="tgrid">
 		</table>
