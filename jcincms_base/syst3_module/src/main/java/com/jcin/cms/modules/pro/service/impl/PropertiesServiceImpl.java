@@ -151,9 +151,9 @@ public class PropertiesServiceImpl extends BaseServiceImpl<Properties, String>
 	@Transactional
 	public String update(Properties record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = propertiesMapper.updateByPrimaryKey(record);
+		int result = propertiesMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

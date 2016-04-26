@@ -157,9 +157,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	@Transactional
 	public String update(Category record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = categoryMapper.updateByPrimaryKey(record);
+		int result = categoryMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

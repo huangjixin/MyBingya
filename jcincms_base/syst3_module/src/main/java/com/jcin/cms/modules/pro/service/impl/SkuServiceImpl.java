@@ -153,7 +153,7 @@ public class SkuServiceImpl extends BaseServiceImpl<Sku, String>
 		// super.update(record);
 		/*if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());*/
-		int result = skuMapper.updateByPrimaryKey(record);
+		int result = skuMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

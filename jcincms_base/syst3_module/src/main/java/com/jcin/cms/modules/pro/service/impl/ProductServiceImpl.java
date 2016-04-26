@@ -164,9 +164,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	@Transactional
 	public String update(ProductWithBLOBs record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = productMapper.updateByPrimaryKeyWithBLOBs(record);
+		int result = productMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

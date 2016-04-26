@@ -152,9 +152,9 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	@Transactional
 	public String update(BrandWithBLOBs record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = brandMapper.updateByPrimaryKeyWithBLOBs(record);
+		int result = brandMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

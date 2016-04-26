@@ -151,9 +151,9 @@ public class ImagesServiceImpl extends BaseServiceImpl<Images, String>
 	@Transactional
 	public String update(Images record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = imagesMapper.updateByPrimaryKey(record);
+		int result = imagesMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

@@ -150,10 +150,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, String>
 	@Override
 	@Transactional
 	public String update(Order record) {
-		// super.update(record);
-		if(null==record.getUpdateDate())
-			record.setUpdateDate(new Date());
-		int result = orderMapper.updateByPrimaryKey(record);
+		record.setUpdateDate(new Date());
+		int result = orderMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

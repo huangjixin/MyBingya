@@ -153,7 +153,7 @@ public class OrderCommentServiceImpl extends BaseServiceImpl<OrderComment, Strin
 		// super.update(record);
 		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = orderCommentMapper.updateByPrimaryKey(record);
+		int result = orderCommentMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

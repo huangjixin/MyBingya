@@ -153,7 +153,7 @@ public class ProductValueServiceImpl extends BaseServiceImpl<ProductValue, Strin
 		// super.update(record);
 		/*if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());*/
-		int result = productValueMapper.updateByPrimaryKey(record);
+		int result = productValueMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

@@ -148,7 +148,7 @@ public class MemberLebelServiceImpl extends BaseServiceImpl<MemberLebel, String>
 	@Override
 	@Transactional
 	public String update(MemberLebel record) {
-		int result = memberLebelMapper.updateByPrimaryKey(record);
+		int result = memberLebelMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

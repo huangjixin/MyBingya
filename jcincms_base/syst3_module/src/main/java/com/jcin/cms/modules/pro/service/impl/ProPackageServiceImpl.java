@@ -151,9 +151,9 @@ public class ProPackageServiceImpl extends BaseServiceImpl<ProPackage, String>
 	@Transactional
 	public String update(ProPackage record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = proPackageMapper.updateByPrimaryKey(record);
+		int result = proPackageMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 

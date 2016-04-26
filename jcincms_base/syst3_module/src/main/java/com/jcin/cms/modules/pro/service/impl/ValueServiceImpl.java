@@ -151,9 +151,9 @@ public class ValueServiceImpl extends BaseServiceImpl<Value, String>
 	@Transactional
 	public String update(Value record) {
 		// super.update(record);
-		if(null==record.getUpdateDate())
+//		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = valueMapper.updateByPrimaryKey(record);
+		int result = valueMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 
