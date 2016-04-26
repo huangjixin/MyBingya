@@ -143,7 +143,7 @@
 				<td><input id="serialnumber" name="serialnumber"
 					value="${order.serialnumber}" /> &nbsp;<label for="serialnumber"
 					style="color:red;">*</label></td>
-				<th>&nbsp;paytime：</th>
+				<th>&nbsp;付款时间：</th>
 				<td><input id="paytime" name="paytime" value="${order.paytime}" />
 					&nbsp;<label for="paytime" style="color:red;">*</label></td>
 			</tr>
