@@ -6,21 +6,14 @@
  */
 package com.jcin.cms.modules.pro.service.impl;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.common.FileUtils;
-import com.jcin.cms.modules.channel.dao.AssetsMapper;
-import com.jcin.cms.modules.channel.domain.Assets;
-import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.pro.dao.ProductMapper;
 import com.jcin.cms.modules.pro.domain.Product;
 import com.jcin.cms.modules.pro.domain.ProductCriteria;
@@ -43,9 +36,6 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	@Autowired
 	private ProductMapper productMapper;
 
-	@Resource
-	private AssetsMapper assetsMapper;
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -72,12 +62,12 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	@Override
 	@Transactional
 	public String insert(ProductWithBLOBs record) {
-		if(record.getId()==null || "".equals(record.getId())){
+		if(record.getId()==null  || "".equals(record.getId())){
 			record.setId(""+new Date().getTime());
 		}
-		if(null==record.getCreateDate()){
+		 	super.insert(record);
+		if(null==record.getCreateDate())
 			record.setCreateDate(new Date());
-		}
 		int result = productMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -164,7 +154,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	@Transactional
 	public String update(ProductWithBLOBs record) {
 		// super.update(record);
-//		if(null==record.getUpdateDate())
+		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
 		int result = productMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
@@ -193,31 +183,6 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	@Override
 	@Transactional
 	public int deleteBatch(List<String> list) {
-		if(list.size()>0){
-			for (String id : list) {
-				Product product = productMapper.selectByPrimaryKey(id);
-				String assetsIds = product.getAssets();
-				if(null != assetsIds && !"".equals(assetsIds)){
-					String[] ids = assetsIds.split(",");
-					for (String assetid : ids) {
-						Assets assets = assetsMapper.selectByPrimaryKey(assetid);
-						if(assets!=null){
-							String uploadPath = assets.getPath();
-							String webroot = System.getProperty("zwtech.root");
-							uploadPath = webroot+ uploadPath;
-							if(null!=uploadPath && !"".equals(uploadPath)){
-								File file = new File(uploadPath);
-								logger.info(file.exists());
-								FileUtils.deleteFile(uploadPath);
-							}
-							
-							assetsMapper.deleteByPrimaryKey(assetid);
-						}
-						
-					}
-				}
-			}
-		}
 		ProductCriteria productCriteria = new ProductCriteria();
 		productCriteria.createCriteria().andIdIn(list);
 		int result = productMapper.deleteByExample(productCriteria);

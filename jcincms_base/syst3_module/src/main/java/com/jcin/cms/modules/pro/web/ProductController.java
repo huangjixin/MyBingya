@@ -7,9 +7,7 @@
 package com.jcin.cms.modules.pro.web;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,14 +16,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +31,14 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.jcin.cms.common.Global;
+import com.jcin.cms.modules.pro.domain.Images;
+import com.jcin.cms.modules.pro.domain.ImagesCriteria;
 import com.jcin.cms.modules.pro.domain.Product;
 import com.jcin.cms.modules.pro.domain.ProductCriteria;
 import com.jcin.cms.modules.pro.domain.ProductWithBLOBs;
+import com.jcin.cms.modules.pro.service.IImagesService;
 import com.jcin.cms.modules.pro.service.IProductService;
 import com.jcin.cms.utils.Page;
-import com.jcin.cms.utils.ExcelUtil;
 import com.jcin.cms.web.BaseController;
 
 @Controller
@@ -50,10 +46,18 @@ import com.jcin.cms.web.BaseController;
 public class ProductController extends BaseController<Product>{
 	@Autowired
 	private IProductService productService;
+	@Autowired
+	private IImagesService imagesService;
 
 //	@RequiresPermissions("product:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ProductWithBLOBs product, Model uiModel) {
+		if(product.getId()!=null){
+			ImagesCriteria imagesCriteria =new ImagesCriteria();
+			imagesCriteria.createCriteria().andProProductIdEqualTo(product.getId());
+			List<Images> images = imagesService.selectByExample(imagesCriteria);
+			product.setImages(images);
+		}
 		uiModel.addAttribute("product", product);
 		return root+"admin/modules/product/product_create.jsp";
 	}
@@ -65,6 +69,16 @@ public class ProductController extends BaseController<Product>{
 			HttpServletResponse httpServletResponse) {
 		productService.insert(product);
 		
+		if(product.getImages().size()>0){
+			List<Images> imagess = product.getImages();
+			for (Images images : imagess) {
+				images.setId(new Date().getTime()+"");
+				images.setProProductId(product.getId());
+			}
+			
+			imagesService.insertBatch(imagess);
+		}
+		
 		redirectAttributes.addFlashAttribute("product", product);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
 		return "redirect:/"+Global.getAdminPath()+"/product/create";
@@ -74,6 +88,13 @@ public class ProductController extends BaseController<Product>{
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String id, Model uiModel) {
 		ProductWithBLOBs product = productService.selectByPrimaryKey(id);
+		if(product.getId()!=null){
+			ImagesCriteria imagesCriteria =new ImagesCriteria();
+			imagesCriteria.createCriteria().andProProductIdEqualTo(product.getId());
+			List<Images> images = imagesService.selectByExample(imagesCriteria);
+			product.setImages(images);
+		}
+		
 		uiModel.addAttribute("product", product);
 		return root+"admin/modules/product/product_update.jsp";
 	}
@@ -84,6 +105,22 @@ public class ProductController extends BaseController<Product>{
 			Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 		productService.update(product);
+		if(product.getId()!=null){
+			ImagesCriteria imagesCriteria =new ImagesCriteria();
+			imagesCriteria.createCriteria().andProProductIdEqualTo(product.getId());
+			List<Images> imagess = imagesService.selectByExample(imagesCriteria);
+			List<String> ids = new ArrayList<String>();
+			for (Images images : imagess) {
+				ids.add(images.getId());
+			}
+			imagesService.deleteBatch(ids);
+			imagess = product.getImages();
+			for (Images images : imagess) {
+				images.setProProductId(product.getId());
+			}
+			
+			imagesService.insertBatch(imagess);
+		}
 		
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("product", product);

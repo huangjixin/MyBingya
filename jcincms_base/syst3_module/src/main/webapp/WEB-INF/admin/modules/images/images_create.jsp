@@ -98,8 +98,7 @@
 		<table class="table">
 			<tr>
 				<th>&nbsp;文件名：</th>
-				<td><input id="fileName" name="fileName"
-					value="${document.fileName}" class="input" />&nbsp;<input
+				<td><input id="fileName" name="fileName" class="input" />&nbsp;<input
 					id="fileUploadBtn" type="button" value="上传" onclick="selectFile()" /><input
 					style="display: none" type="file" id="file" name="file"
 					onchange="uploadImage()" /><br /></td>

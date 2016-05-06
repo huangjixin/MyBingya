@@ -9,10 +9,20 @@
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="assets" property="assets" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content_keywords" property="contentKeywords" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="title_image" property="titleImage" jdbcType="VARCHAR" />
+    <result column="gene_template" property="geneTemplate" jdbcType="VARCHAR" />
+    <result column="m_gene_template" property="mGeneTemplate" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="measure" property="measure" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="afert_service" property="afertService" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,10 +83,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, pro_brand_id, create_date, update_date, assets, userid
+    id, name, pro_brand_id, create_date, update_date, assets, userid, keywords, title, 
+    content_keywords, tags, title_image, gene_template, m_gene_template, price, measure
   </sql>
   <sql id="Blob_Column_List" >
-    content, description
+    content, description, afert_service
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jcin.cms.modules.pro.domain.ProductCriteria" >
     select
@@ -131,12 +142,18 @@
   <insert id="insert" parameterType="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" >
     insert into pro_product (id, name, pro_brand_id, 
       create_date, update_date, assets, 
-      userid, content, description
-      )
+      userid, keywords, title, 
+      content_keywords, tags, title_image, 
+      gene_template, m_gene_template, price, 
+      measure, content, description, 
+      afert_service)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{proBrandId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{assets,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR}
-      )
+      #{userid,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{contentKeywords,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, 
+      #{geneTemplate,jdbcType=VARCHAR}, #{mGeneTemplate,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{measure,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR}, 
+      #{afertService,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" >
     insert into pro_product
@@ -162,11 +179,41 @@
       <if test="userid != null" >
         userid,
       </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="contentKeywords != null" >
+        content_keywords,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="titleImage != null" >
+        title_image,
+      </if>
+      <if test="geneTemplate != null" >
+        gene_template,
+      </if>
+      <if test="mGeneTemplate != null" >
+        m_gene_template,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="measure != null" >
+        measure,
+      </if>
       <if test="content != null" >
         content,
       </if>
       <if test="description != null" >
         description,
+      </if>
+      <if test="afertService != null" >
+        afert_service,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -191,11 +238,41 @@
       <if test="userid != null" >
         #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentKeywords != null" >
+        #{contentKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="geneTemplate != null" >
+        #{geneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="mGeneTemplate != null" >
+        #{mGeneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null" >
+        #{measure,jdbcType=VARCHAR},
+      </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="afertService != null" >
+        #{afertService,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -229,11 +306,41 @@
       <if test="record.userid != null" >
         userid = #{record.userid,jdbcType=VARCHAR},
       </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentKeywords != null" >
+        content_keywords = #{record.contentKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tags != null" >
+        tags = #{record.tags,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleImage != null" >
+        title_image = #{record.titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.geneTemplate != null" >
+        gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mGeneTemplate != null" >
+        m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measure != null" >
+        measure = #{record.measure,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.afertService != null" >
+        afert_service = #{record.afertService,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -249,8 +356,18 @@
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       assets = #{record.assets,jdbcType=VARCHAR},
       userid = #{record.userid,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      content_keywords = #{record.contentKeywords,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=VARCHAR},
+      title_image = #{record.titleImage,jdbcType=VARCHAR},
+      gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      measure = #{record.measure,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR},
-      description = #{record.description,jdbcType=LONGVARCHAR}
+      description = #{record.description,jdbcType=LONGVARCHAR},
+      afert_service = #{record.afertService,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -263,7 +380,16 @@
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       assets = #{record.assets,jdbcType=VARCHAR},
-      userid = #{record.userid,jdbcType=VARCHAR}
+      userid = #{record.userid,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      content_keywords = #{record.contentKeywords,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=VARCHAR},
+      title_image = #{record.titleImage,jdbcType=VARCHAR},
+      gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
+      m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      measure = #{record.measure,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -289,11 +415,41 @@
       <if test="userid != null" >
         userid = #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentKeywords != null" >
+        content_keywords = #{contentKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        title_image = #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="geneTemplate != null" >
+        gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="mGeneTemplate != null" >
+        m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null" >
+        measure = #{measure,jdbcType=VARCHAR},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="afertService != null" >
+        afert_service = #{afertService,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -306,8 +462,18 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       assets = #{assets,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content_keywords = #{contentKeywords,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      title_image = #{titleImage,jdbcType=VARCHAR},
+      gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      measure = #{measure,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
-      description = #{description,jdbcType=LONGVARCHAR}
+      description = #{description,jdbcType=LONGVARCHAR},
+      afert_service = #{afertService,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jcin.cms.modules.pro.domain.Product" >
@@ -317,13 +483,22 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       assets = #{assets,jdbcType=VARCHAR},
-      userid = #{userid,jdbcType=VARCHAR}
+      userid = #{userid,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content_keywords = #{contentKeywords,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      title_image = #{titleImage,jdbcType=VARCHAR},
+      gene_template = #{geneTemplate,jdbcType=VARCHAR},
+      m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      measure = #{measure,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, userid, content, description) values 
+    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, userid, keywords, title, content_keywords, tags, title_image, gene_template, m_gene_template, price, measure, content, description, afert_service) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.keywords,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.contentKeywords,jdbcType=VARCHAR}, #{item.tags,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.price,jdbcType=VARCHAR}, #{item.measure,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR}, #{item.afertService,jdbcType=LONGVARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >
