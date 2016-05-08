@@ -61,8 +61,10 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	@Override
 	@Transactional
 	public String insert(${domainObjectName} record) {
-		if(record.getId()==null)
-		 	super.insert(record);
+		if(record.getId()==null  || "".equals(record.getId())){
+			record.setId(""+new Date().getTime());
+		}
+		 	//super.insert(record);
 		if(null==record.getCreateDate())
 			record.setCreateDate(new Date());
 		int result = ${daoMapper}Mapper.insert(record);
@@ -153,7 +155,7 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 		// super.update(record);
 		if(null==record.getUpdateDate())
 			record.setUpdateDate(new Date());
-		int result = ${daoMapper}Mapper.updateByPrimaryKey(record);
+		int result = ${daoMapper}Mapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
 
@@ -166,6 +168,11 @@ public class ${domainObjectName}ServiceImpl extends BaseServiceImpl<${domainObje
 	@Override
 	@Transactional
 	public int insertBatch(List<${domainObjectName}> list) {
+		for(${domainObjectName} record in list){
+			if(record.getId()==null  || "".equals(record.getId())){
+				record.setId(""+new Date().getTime());
+			}
+		}
 		int result = ${daoMapper}Mapper.insertBatch(list);
 		super.insertBatch(list);
 		return result;

@@ -57,7 +57,7 @@
 					</#if>
 						<th>&nbsp;${introspectedColumn}：</th>
 						<td>
-							<input id="${introspectedColumn}" name="${introspectedColumn}" 
+							<input id="${introspectedColumn}" name="${introspectedColumn}"  class="input"
 								value="${r'${'}${objInst}.${introspectedColumn}}"/>
 									&nbsp;<label for="${introspectedColumn}" style="color:red;">*</label></td>
 					<#if (iSum%2==1)>
