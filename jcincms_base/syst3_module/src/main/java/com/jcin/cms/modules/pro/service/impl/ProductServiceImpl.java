@@ -65,7 +65,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 		if(record.getId()==null  || "".equals(record.getId())){
 			record.setId(""+new Date().getTime());
 		}
-		 	super.insert(record);
+//		 	super.insert(record);
 		if(null==record.getCreateDate())
 			record.setCreateDate(new Date());
 		int result = productMapper.insert(record);

@@ -109,11 +109,14 @@ public class ProductController extends BaseController<Product>{
 			ImagesCriteria imagesCriteria =new ImagesCriteria();
 			imagesCriteria.createCriteria().andProProductIdEqualTo(product.getId());
 			List<Images> imagess = imagesService.selectByExample(imagesCriteria);
-			List<String> ids = new ArrayList<String>();
-			for (Images images : imagess) {
-				ids.add(images.getId());
+			if(imagess.size()>0){
+				List<String> ids = new ArrayList<String>();
+				for (Images images : imagess) {
+					ids.add(images.getId());
+				}
+				imagesService.deleteBatch(ids);
 			}
-			imagesService.deleteBatch(ids);
+			
 			imagess = product.getImages();
 			for (Images images : imagess) {
 				images.setProProductId(product.getId());

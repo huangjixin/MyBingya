@@ -249,10 +249,22 @@
 				<td><input id="name" name="name" value="${product.name}"
 					class="input" /> &nbsp; <label for="name" style="color:red;">*</label></td>
 				<th>&nbsp;品牌：</th>
-				<td><input type="text" id="zhName" name="zhName" class="input"
+				<td><input type="text" id="zhName" name="brandName" class="input"
 					readonly="readonly" /> &nbsp; <input type="button"
 					onclick="$('#dlg').dialog('open')" value="选择品牌" /> &nbsp; <label
 					for="proBrandId" style="color:red;">*</label></td>
+			</tr>
+			<tr>
+				<th>&nbsp;页面标题：</th>
+				<td><input id="title" name="title" value="${product.title}"
+					class="input" /> &nbsp; <label for="title" style="color:red;">*</label></td>
+				<th>&nbsp;关键字：</th>
+				<td><input type="text" id="keywords" name="keywords" class="input"/>  &nbsp; <label
+					for="keywords" style="color:red;">*</label></td>
+			</tr>
+			<tr>
+				<th>&nbsp;描述：</th>
+				<td colspan="6"><textarea name="description" style="width: 90%;height:100px;">${product.description}</textarea></td>
 			</tr>
 			<tr>
 				<th>&nbsp;封面缩略图：</th>
@@ -299,7 +311,7 @@
 					</div> 
 					<c:forEach var="images"
 						items="${product.images}" varStatus="images">
-						<input id="image${images.index}" name="image" class="input" />
+						<input id="image${images.index}" name="image" class="input" value="${product.images[images.index].site}"/>
 					</c:forEach>
 				</td>
 				<th>&nbsp;预览（160*160）：</th>
@@ -307,14 +319,14 @@
 						items="${product.images}" varStatus="images">
 						<div id="imagesDiv${images.index}">
 							<input name="images[${images.index }].id"
-								value="images[${images.index }].id" type="hidden"> <input
+								value="${product.images[images.index].id}" type="hidden"> <input
 								name="images[${images.index }].site"
-								value="images[${images.index }].site" type="hidden"> <input
+								value="${product.images[images.index].site}" type="hidden"> <input
 								name="images[${images.index }].position"
-								value="images[${images.index }].position" type="hidden">
+								value="${product.images[images.index].position}" type="hidden">
 							<input name="images[${images.index }].sortid"
-								value="images[${images.index }].sortid" type="hidden"> <img
-								id="titleImg1" src="${ctx}/${images.site}"
+								value="${product.images[images.index ].sortid}" type="hidden"> <img
+								id="titleImg1" src="${ctx}/${product.images[images.index].site}"
 								style="width:160px;height:160px;background-color: gray;border: 1px solid black;" />
 							<input type="button" value="删除" onclick="$('#image${images.index}').remove();$('#imagesDiv${images.index}').remove();"/>
 						</div>

@@ -18,6 +18,7 @@
     <result column="m_gene_template" property="mGeneTemplate" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="measure" property="measure" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -84,7 +85,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, name, pro_brand_id, create_date, update_date, assets, userid, keywords, title, 
-    content_keywords, tags, title_image, gene_template, m_gene_template, price, measure
+    content_keywords, tags, title_image, gene_template, m_gene_template, price, measure, 
+    brand_name
   </sql>
   <sql id="Blob_Column_List" >
     content, description, afert_service
@@ -145,15 +147,15 @@
       userid, keywords, title, 
       content_keywords, tags, title_image, 
       gene_template, m_gene_template, price, 
-      measure, content, description, 
-      afert_service)
+      measure, brand_name, content, 
+      description, afert_service)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{proBrandId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{assets,jdbcType=VARCHAR}, 
       #{userid,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{contentKeywords,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, 
       #{geneTemplate,jdbcType=VARCHAR}, #{mGeneTemplate,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
-      #{measure,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR}, 
-      #{afertService,jdbcType=LONGVARCHAR})
+      #{measure,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR}, #{afertService,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcin.cms.modules.pro.domain.ProductWithBLOBs" >
     insert into pro_product
@@ -205,6 +207,9 @@
       </if>
       <if test="measure != null" >
         measure,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
       </if>
       <if test="content != null" >
         content,
@@ -264,6 +269,9 @@
       </if>
       <if test="measure != null" >
         #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -333,6 +341,9 @@
       <if test="record.measure != null" >
         measure = #{record.measure,jdbcType=VARCHAR},
       </if>
+      <if test="record.brandName != null" >
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -365,6 +376,7 @@
       m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=VARCHAR},
       measure = #{record.measure,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR},
       description = #{record.description,jdbcType=LONGVARCHAR},
       afert_service = #{record.afertService,jdbcType=LONGVARCHAR}
@@ -389,7 +401,8 @@
       gene_template = #{record.geneTemplate,jdbcType=VARCHAR},
       m_gene_template = #{record.mGeneTemplate,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=VARCHAR},
-      measure = #{record.measure,jdbcType=VARCHAR}
+      measure = #{record.measure,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -442,6 +455,9 @@
       <if test="measure != null" >
         measure = #{measure,jdbcType=VARCHAR},
       </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -471,6 +487,7 @@
       m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
       price = #{price,jdbcType=VARCHAR},
       measure = #{measure,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       description = #{description,jdbcType=LONGVARCHAR},
       afert_service = #{afertService,jdbcType=LONGVARCHAR}
@@ -492,13 +509,14 @@
       gene_template = #{geneTemplate,jdbcType=VARCHAR},
       m_gene_template = #{mGeneTemplate,jdbcType=VARCHAR},
       price = #{price,jdbcType=VARCHAR},
-      measure = #{measure,jdbcType=VARCHAR}
+      measure = #{measure,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, userid, keywords, title, content_keywords, tags, title_image, gene_template, m_gene_template, price, measure, content, description, afert_service) values 
+    insert into pro_product (id, name, pro_brand_id, create_date, update_date, assets, userid, keywords, title, content_keywords, tags, title_image, gene_template, m_gene_template, price, measure, brand_name, content, description, afert_service) values 
     <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.keywords,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.contentKeywords,jdbcType=VARCHAR}, #{item.tags,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.price,jdbcType=VARCHAR}, #{item.measure,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR}, #{item.afertService,jdbcType=LONGVARCHAR})
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.proBrandId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.assets,jdbcType=VARCHAR}, #{item.userid,jdbcType=VARCHAR}, #{item.keywords,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.contentKeywords,jdbcType=VARCHAR}, #{item.tags,jdbcType=VARCHAR}, #{item.titleImage,jdbcType=VARCHAR}, #{item.geneTemplate,jdbcType=VARCHAR}, #{item.mGeneTemplate,jdbcType=VARCHAR}, #{item.price,jdbcType=VARCHAR}, #{item.measure,jdbcType=VARCHAR}, #{item.brandName,jdbcType=VARCHAR}, #{item.content,jdbcType=LONGVARCHAR}, #{item.description,jdbcType=LONGVARCHAR}, #{item.afertService,jdbcType=LONGVARCHAR})
     </foreach>
   </insert>
   <sql id="OracleDialectPrefix" >

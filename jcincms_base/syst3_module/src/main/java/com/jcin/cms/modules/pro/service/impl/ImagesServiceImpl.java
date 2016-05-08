@@ -166,8 +166,14 @@ public class ImagesServiceImpl extends BaseServiceImpl<Images, String>
 	@Override
 	@Transactional
 	public int insertBatch(List<Images> list) {
+		for (Images record : list) {
+			if(record.getId()==null  || "".equals(record.getId())){
+				record.setId(""+new Date().getTime());
+			}
+		}
 		int result = imagesMapper.insertBatch(list);
-		super.insertBatch(list);
+		
+//		super.insertBatch(list);
 		return result;
 	}
 

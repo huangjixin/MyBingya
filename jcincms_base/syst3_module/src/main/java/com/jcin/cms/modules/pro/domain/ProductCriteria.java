@@ -9,42 +9,42 @@ public class ProductCriteria {
     /**
      * 该字段对应数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected String orderByClause;
 
     /**
      * 该字段对应数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected boolean distinct;
 
     /**
      * 该字段对应数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 该字段对应数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected Page page;
 
     /**
      * 该字段对应数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     private String dialect = "mysql";
 
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public ProductCriteria() {
         oredCriteria = new ArrayList<Criteria>();
@@ -53,7 +53,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -62,7 +62,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -71,7 +71,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -80,7 +80,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public boolean isDistinct() {
         return distinct;
@@ -89,7 +89,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -98,7 +98,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -107,7 +107,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -118,7 +118,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -131,7 +131,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -141,7 +141,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void clear() {
         oredCriteria.clear();
@@ -152,7 +152,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void setPage(Page page) {
         this.page=page;
@@ -161,7 +161,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public Page getPage() {
         return page;
@@ -170,7 +170,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public void setDialect(String dialect) {
         this.dialect=dialect;
@@ -179,7 +179,7 @@ public class ProductCriteria {
     /**
      * 该方法由系统生成 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public String getDialect() {
         return dialect;
@@ -188,7 +188,7 @@ public class ProductCriteria {
     /**
      * 该类对应于数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1331,6 +1331,76 @@ public class ProductCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andBrandNameIsNull() {
+            addCriterion("brand_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameIsNotNull() {
+            addCriterion("brand_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameEqualTo(String value) {
+            addCriterion("brand_name =", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameNotEqualTo(String value) {
+            addCriterion("brand_name <>", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameGreaterThan(String value) {
+            addCriterion("brand_name >", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameGreaterThanOrEqualTo(String value) {
+            addCriterion("brand_name >=", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameLessThan(String value) {
+            addCriterion("brand_name <", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameLessThanOrEqualTo(String value) {
+            addCriterion("brand_name <=", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameLike(String value) {
+            addCriterion("brand_name like", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameNotLike(String value) {
+            addCriterion("brand_name not like", value, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameIn(List<String> values) {
+            addCriterion("brand_name in", values, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameNotIn(List<String> values) {
+            addCriterion("brand_name not in", values, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameBetween(String value1, String value2) {
+            addCriterion("brand_name between", value1, value2, "brandName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNameNotBetween(String value1, String value2) {
+            addCriterion("brand_name not between", value1, value2, "brandName");
+            return (Criteria) this;
+        }
+
         public Criteria andIdLikeInsensitive(String value) {
             addCriterion("upper(id) like", value.toUpperCase(), "id");
             return (Criteria) this;
@@ -1400,12 +1470,17 @@ public class ProductCriteria {
             addCriterion("upper(measure) like", value.toUpperCase(), "measure");
             return (Criteria) this;
         }
+
+        public Criteria andBrandNameLikeInsensitive(String value) {
+            addCriterion("upper(brand_name) like", value.toUpperCase(), "brandName");
+            return (Criteria) this;
+        }
     }
 
     /**
      * 该类对应于数据库表 pro_product
      *
-     * @mbggenerated do_not_delete_during_merge 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated do_not_delete_during_merge 2016年05月08日 21时36分09秒 星期日
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1417,7 +1492,7 @@ public class ProductCriteria {
     /**
      * 该类对应于数据库表 pro_product
      *
-     * @mbggenerated 2016年05月06日 12时25分22秒 星期五
+     * @mbggenerated 2016年05月08日 21时36分09秒 星期日
      */
     public static class Criterion {
         private String condition;
