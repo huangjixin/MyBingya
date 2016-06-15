@@ -163,6 +163,6 @@
 				</tr>
 			</thead>
 		</table>
-
+		<%@ include file="/WEB-INF/admin/include/footer.jsp"%>
 </body>
 </html>

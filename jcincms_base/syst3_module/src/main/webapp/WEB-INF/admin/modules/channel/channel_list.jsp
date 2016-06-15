@@ -30,7 +30,7 @@
 
 	$().ready(function() {
 		$('#tgrid').treegrid({
-			onLoadSuccess:function (row, data){
+			onLoadSuccess : function(row, data) {
 				$('#tgrid').treegrid('collapseAll');
 			}
 		});
@@ -41,7 +41,7 @@
 		var pamameter = null;
 		//多行删除。
 		var row = $('#tgrid').treegrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
 		var i = 0;
@@ -75,29 +75,29 @@
 		});
 	}
 
-	function create(){
-		window.location.href='${ctxAdmin}/channel/create'; 
-	}
-	
-	function update(){
-		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			return;
-		}
-		
-		window.location.href='${ctxAdmin}/channel/update/'+row[0].id+''; 
-	}
-		
-	function show(){
-		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			return;
-		}
-		
-		window.location.href='${ctxAdmin}/channel/show/'+row[0].id; 
+	function create() {
+		window.location.href = '${ctxAdmin}/channel/create';
 	}
 
-	function refreshMenu(){
+	function update() {
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length == 0) {
+			return;
+		}
+
+		window.location.href = '${ctxAdmin}/channel/update/' + row[0].id + '';
+	}
+
+	function show() {
+		var row = $('#tgrid').datagrid('getSelections');
+		if (row == null || row.length == 0) {
+			return;
+		}
+
+		window.location.href = '${ctxAdmin}/channel/show/' + row[0].id;
+	}
+
+	function refreshMenu() {
 		$.ajax({
 			cache : true,
 			url : '${ctxAdmin}/channel/getChannels',
@@ -110,7 +110,7 @@
 			}
 		});
 	}
-	
+
 	//格式化用户状态显示。
 	function formatDate(val, row) {
 		var date = new Date();
@@ -120,47 +120,49 @@
 		return result;
 	}
 
-	function up(){
+	function up() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			$("#tooltip")[0].innerHTML="请选择一个节点";
+		if (row == null || row.length == 0) {
+			$("#tooltip")[0].innerHTML = "请选择一个节点";
 			return;
-		}else{
-			$("#tooltip")[0].innerHTML="";
+		} else {
+			$("#tooltip")[0].innerHTML = "";
 		}
 		$.ajax({
 			cache : true,
-			url : '${ctxAdmin}/channel/toUp?id='+row[0].id+'&time='+new Date(),
+			url : '${ctxAdmin}/channel/toUp?id=' + row[0].id + '&time='
+					+ new Date(),
 			async : false,
 			error : function(request) {
 				alert("连接失败");
 			},
 			success : function(data) {
-				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$("#tooltip")[0].innerHTML = "操作成功"; // 重新加载;
 				$('#tgrid').datagrid('clearSelections');
 				$('#tgrid').treegrid('reload');
 			}
 		});
-		
+
 	}
 
-	function down(){
+	function down() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
-			$("#tooltip")[0].innerHTML="请选择一个节点";
+		if (row == null || row.length == 0) {
+			$("#tooltip")[0].innerHTML = "请选择一个节点";
 			return;
-		}else{
-			$("#tooltip")[0].innerHTML="";
+		} else {
+			$("#tooltip")[0].innerHTML = "";
 		}
 		$.ajax({
 			cache : true,
-			url : '${ctxAdmin}/channel/toDown?id='+row[0].id+'&time='+new Date(),
+			url : '${ctxAdmin}/channel/toDown?id=' + row[0].id + '&time='
+					+ new Date(),
 			async : false,
 			error : function(request) {
 				alert("连接失败");
 			},
 			success : function(data) {
-				$("#tooltip")[0].innerHTML="操作成功"; // 重新加载;
+				$("#tooltip")[0].innerHTML = "操作成功"; // 重新加载;
 				$('#tgrid').datagrid('clearSelections');
 				$('#tgrid').treegrid('reload');
 			}
@@ -169,38 +171,36 @@
 </script>
 </head>
 
-<body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
-	<div data-options="region:'center'" title=""
-		style="padding:5px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<shiro:hasPermission name="channel:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="channel:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
-			</shiro:hasPermission>
-			<shiro:hasPermission name="channel:update">
-				<input type="button" value="更新" onclick="update();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="channel:view">
-				<input type="button" value="详情" onclick="show();" /> 
-			</shiro:hasPermission>   
-			<shiro:hasPermission name="channel:update">
-				<input type="button" value="上升" onclick="up();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="channel:update">
-				<input type="button" value="下降" onclick="down();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="channel:update">
-				<input type="button" value="刷新栏目缓存" onclick="refreshMenu();" /> 
-			</shiro:hasPermission>
-			&nbsp;&nbsp;<span id="tooltip" style="color: red;"></span>
-		</div>
-		
-		<table id="tgrid" title="" class="easyui-treegrid"
-			style="height:350px;"
-			data-options="
+<body>
+	<div id="toolBar" style="padding: 5px;border: 0px;">
+		<shiro:hasPermission name="channel:create">
+			<input type="button" value="添加" id="btn_Add" name="btn_Add"
+				onclick="create();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:delete">
+			<input type="button" value="删除" onclick="deleteRows();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:update">
+			<input type="button" value="更新" onclick="update();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:view">
+			<input type="button" value="详情" onclick="show();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:update">
+			<input type="button" value="上升" onclick="up();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:update">
+			<input type="button" value="下降" onclick="down();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="channel:update">
+			<input type="button" value="刷新栏目缓存" onclick="refreshMenu();" />
+		</shiro:hasPermission>
+		&nbsp;&nbsp;<span id="tooltip" style="color: red;"></span>
+	</div>
+
+	<table id="tgrid" title="" class="easyui-treegrid"
+		style="height:350px;"
+		data-options="
 								url: '${ctxAdmin}/channel/getChannelTree',
 								method: 'get',
 								rownumbers: false,
@@ -213,21 +213,23 @@
 								checkOnSelect: true,
 								fitColumns:true
 							">
-			<thead>
-				<tr>
-					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th data-options="field:'name',align:'center'" width="100%">路径</th>
-					<th data-options="field:'code',align:'center'" width="100%">编码</th>
-					<th data-options="field:'channelTemplete',align:'center'" width="100%">栏目模板</th>
-					<th data-options="field:'keyword',align:'center'" width="100%">关键字</th>
-					<th data-options="field:'linkAddr',align:'center'" width="100%">链接地址</th>
-					<th data-options="field:'sort',align:'center'" width="100%">排序序号</th>
-					<!-- <th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th> -->
-					<!-- <th data-options="field:'descrition',align:'center'" width="100%">描述</th> -->
-				</tr>
-			</thead>
-		</table>
-	</div>
+		<thead>
+			<tr>
+				<th data-options="field:'ck',checkbox:true"></th>
+				<th data-options="field:'id',align:'center',hidden:true"
+					width="100%">id</th>
+				<th data-options="field:'name',align:'center'" width="100%">路径</th>
+				<th data-options="field:'code',align:'center'" width="100%">编码</th>
+				<th data-options="field:'channelTemplete',align:'center'"
+					width="100%">栏目模板</th>
+				<th data-options="field:'keyword',align:'center'" width="100%">关键字</th>
+				<th data-options="field:'linkAddr',align:'center'" width="100%">链接地址</th>
+				<th data-options="field:'sort',align:'center'" width="100%">排序序号</th>
+				<!-- <th data-options="field:'openMode',align:'center'" width="100%">新窗口打开</th> -->
+				<!-- <th data-options="field:'descrition',align:'center'" width="100%">描述</th> -->
+			</tr>
+		</thead>
+	</table>
+	<%@ include file="/WEB-INF/admin/include/footer.jsp"%>
 </body>
 </html>

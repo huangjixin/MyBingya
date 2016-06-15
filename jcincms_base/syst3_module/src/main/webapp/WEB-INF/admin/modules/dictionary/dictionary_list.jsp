@@ -8,7 +8,9 @@
 <%@ include file="/WEB-INF/admin/include/js.jsp"%>
 <script type="text/javascript">
 	$().ready(function() {
-		$('#tgrid').datagrid('getPager').pagination({displayMsg:'当前显示从{from}-{to},共{total}条记录'});
+		$('#tgrid').datagrid('getPager').pagination({
+			displayMsg : '当前显示从{from}-{to},共{total}条记录'
+		});
 	});
 
 	// 移除条目；
@@ -16,7 +18,7 @@
 		var pamameter = null;
 		//多行删除。
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
 		var i = 0;
@@ -50,28 +52,29 @@
 		});
 	}
 
-	function create(){
-		window.location.href='${ctxAdmin}/dictionary/create'; 
+	function create() {
+		window.location.href = '${ctxAdmin}/dictionary/create';
 	}
-	
-	function update(){
+
+	function update() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/dictionary/update/'+row[0].id+''; 
+
+		window.location.href = '${ctxAdmin}/dictionary/update/' + row[0].id
+				+ '';
 	}
-		
-	function show(){
+
+	function show() {
 		var row = $('#tgrid').datagrid('getSelections');
-		if (row == null || row.length==0) {
+		if (row == null || row.length == 0) {
 			return;
 		}
-		
-		window.location.href='${ctxAdmin}/dictionary/show/'+row[0].id; 
+
+		window.location.href = '${ctxAdmin}/dictionary/show/' + row[0].id;
 	}
-	
+
 	//处理事件的函数
 	function onKeyEnter(e) {
 		if (e == 13 || e == 32) {
@@ -107,9 +110,9 @@
 
 	//清除
 	function clearSearch() {
-			$("#typeInput").val("");
-			$("#labelInput").val("");
-			$("#valueInput").val("");
+		$("#typeInput").val("");
+		$("#labelInput").val("");
+		$("#valueInput").val("");
 	}
 
 	//格式化用户状态显示。
@@ -134,39 +137,37 @@
 </head>
 
 <body class="easyui-layout" data-options="fit:true">
-	<!-- 	<div data-options="region:'north'" style="padding:0px;"></div> -->
-	<div data-options="region:'center'" title=""
-		style="padding:0px;background:#ffffff;">
-		<div id="toolBar" style="padding: 5px;border: 0px;">
-			<shiro:hasPermission name="dictionary:create">
-				<input type="button" value="添加" id="btn_Add" name="btn_Add" onclick="create();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="dictionary:delete">
-				<input type="button" value="删除" onclick="deleteRows();" />
-			</shiro:hasPermission>
-			<shiro:hasPermission name="dictionary:update">
-				<input type="button" value="更新" onclick="update();" /> 
-			</shiro:hasPermission>
-			<shiro:hasPermission name="dictionary:view">
-				<input type="button" value="详情" onclick="show();" /> 
-			</shiro:hasPermission>  
-			<input type="button" id="searchBtn" value="搜索" onclick="search();" />
-			<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
-			<input type="button" id="exportBtn" value="导出excel"
-				onclick="exportExcel()" /> <input type="button" id="importBtn"
-				value="导入excel" onclick="importExcel()" />
-		</div>
-		<div style="padding: 5px;border: 0px;">
-			<label>类型:</label>
-			<input  id="typeInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>键:</label>
-			<input  id="labelInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-			<label>值:</label>
-			<input  id="valueInput" onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
-		</div>
-		<table id="tgrid" title="" class="easyui-datagrid"
-			style="height:350px;"
-			data-options="
+	<div id="toolBar" style="padding: 5px;border: 0px;">
+		<shiro:hasPermission name="dictionary:create">
+			<input type="button" value="添加" id="btn_Add" name="btn_Add"
+				onclick="create();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="dictionary:delete">
+			<input type="button" value="删除" onclick="deleteRows();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="dictionary:update">
+			<input type="button" value="更新" onclick="update();" />
+		</shiro:hasPermission>
+		<shiro:hasPermission name="dictionary:view">
+			<input type="button" value="详情" onclick="show();" />
+		</shiro:hasPermission>
+		<input type="button" id="searchBtn" value="搜索" onclick="search();" />
+		<input type="button" id="clearBtn" value="清除" onclick="clearSearch();" />
+		<input type="button" id="exportBtn" value="导出excel"
+			onclick="exportExcel()" /> <input type="button" id="importBtn"
+			value="导入excel" onclick="importExcel()" />
+	</div>
+	<div style="padding: 5px;border: 0px;">
+		<label>类型:</label> <input id="typeInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+		<label>键:</label> <input id="labelInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+		<label>值:</label> <input id="valueInput"
+			onkeydown="onKeyEnter(event.keyCode||event.which);">&nbsp;&nbsp;
+	</div>
+	<table id="tgrid" title="" class="easyui-datagrid"
+		style="height:350px;"
+		data-options="
 								pageSize : 10,
 								pageList : [ 5, 10, 15, 20 ],
 								nowrap : true,
@@ -185,16 +186,17 @@
 								fitColumns:true,
 								pagination : true
 							">
-			<thead>
-				<tr>
-					<th data-options="field:'ck',checkbox:true"></th>
-					<th data-options="field:'id',align:'center',hidden:true" width="100%">id</th>
-					<th data-options="field:'type',align:'center'" width="100%">类型</th>
-					<th data-options="field:'label',align:'center'" width="100%">键</th>
-					<th data-options="field:'value',align:'center'" width="100%">值</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
+		<thead>
+			<tr>
+				<th data-options="field:'ck',checkbox:true"></th>
+				<th data-options="field:'id',align:'center',hidden:true"
+					width="100%">id</th>
+				<th data-options="field:'type',align:'center'" width="100%">类型</th>
+				<th data-options="field:'label',align:'center'" width="100%">键</th>
+				<th data-options="field:'value',align:'center'" width="100%">值</th>
+			</tr>
+		</thead>
+	</table>
+	<%@ include file="/WEB-INF/admin/include/footer.jsp"%>
 </body>
 </html>
