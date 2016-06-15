@@ -22,8 +22,8 @@
 			<c:if test="${resource.children!=null}">
 				<ul class="menuson">
 					<c:forEach var="resource" items="${resource.children}">
-						<li><cite></cite><a href="#"
-							onclick="javascript:doLink('${resource.name}','${resource.path}');">${resource.name}</a><i></i></li>
+						<li onclick="javascript:doLink('${resource.name}','${resource.path}');"><cite></cite><b 
+							>${resource.name}</b><i></i></li>
 					</c:forEach>
 				</ul>
 			</c:if>

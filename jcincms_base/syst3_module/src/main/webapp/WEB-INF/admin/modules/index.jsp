@@ -7,19 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>系统首页</title>
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/demo/demo.css" />
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/icon.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui-v1.4.4/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-easyui-v1.4.4/themes/icon.css" />
 <link href="${ctxAdmin}/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript">
-</script>
+<script type="text/javascript" src="${ctx}/js/jquery-easyui-v1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$().ready(function() {
 		//顶部导航切换
@@ -75,7 +70,7 @@
 					if(url=='http://tongji.baidu.com'){
 						window.open("http://tongji.baidu.com");  				
 					}else{
-						var content = '<iframe id="ifrContentArea" frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
+						var content = '<iframe frameborder="0" name="main" style="width:100%;height:99%;" border="0"  scrolling="auto" src="${ctxAdmin}/'+url+'"></iframe>';  
 					}
 		            
 		        } else {  
@@ -241,5 +236,6 @@ html,body {
 			style="text-align:center;height:25px;padding-top: 2px;">
 			Copyright © 黄记新软件有限公司版权所有</div> -->
 	</div>
+	<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
