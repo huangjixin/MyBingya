@@ -11,7 +11,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="testService")
 public class TestServiceImpl extends BaseServiceImpl<Test, String>
 		implements ITestService {
-	private static Logger logger = Logger.getLogger(TestServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(TestServiceImpl.class
 			.getName());
 
 	@Resource

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +28,11 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service(value="categoryService")
+@Service(value = "categoryService")
 public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		implements ICategoryService {
-	private static Logger logger = Logger.getLogger(CategoryServiceImpl.class
-			.getName());
+	private static Logger logger = LoggerFactory
+			.getLogger(CategoryServiceImpl.class);
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -57,20 +57,20 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#insert(com.jcin.cms.service.pro.
-	 * Category)
+	 * com.jcin.cms.service.pro.ICategoryService#insert(com.jcin.cms.service
+	 * .pro. Category)
 	 */
 	@Override
 	@Transactional
 	public String insert(Category record) {
-		if(record.getId()==null)
-		 	super.insert(record);
-		if(null==record.getCreateDate())
+		if (record.getId() == null)
+			super.insert(record);
+		if (null == record.getCreateDate())
 			record.setCreateDate(new Date());
-		
-		if("".equals(record.getParentId()))
+
+		if ("".equals(record.getParentId()))
 			record.setParentId(null);
-		
+
 		int result = categoryMapper.insert(record);
 		String id = record.getId();
 		return id;
@@ -85,7 +85,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	@Override
 	public Page select(Page page) {
 		super.select(page);
-		//setOrderByClause("SER_NO  asc , ORG_ID desc");  
+		// setOrderByClause("SER_NO  asc , ORG_ID desc");
 		CategoryCriteria categoryCriteria = new CategoryCriteria();
 		categoryCriteria.setOrderByClause("id desc");
 		categoryCriteria.setPage(page);
@@ -96,18 +96,19 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#select(com.jcin.cms.service.pro.CategoryCriteria)
+	 * com.jcin.cms.service.pro.ICategoryService#select(com.jcin.cms.service
+	 * .pro.CategoryCriteria)
 	 */
-	//@Override
+	// @Override
 	public Page select(CategoryCriteria criteria) {
 		Page page = new Page();
-		if(null != criteria){
-			if(null != criteria.getPage()){
+		if (null != criteria) {
+			if (null != criteria.getPage()) {
 				page = criteria.getPage();
 			}
 		}
@@ -118,19 +119,18 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		page.setTotal(total);
 		return page;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#selectAll()
+	 * @see com.jcin.cms.service.pro.ICategoryService#selectAll()
 	 */
 	@Override
 	public List<Category> selectAll() {
 		List<Category> list = categoryMapper.selectByExample(null);
 		return list;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -150,15 +150,15 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#update(com.jcin.cms.service.pro.
-	 * Category)
+	 * com.jcin.cms.service.pro.ICategoryService#update(com.jcin.cms.service
+	 * .pro. Category)
 	 */
 	@Override
 	@Transactional
 	public String update(Category record) {
 		// super.update(record);
-//		if(null==record.getUpdateDate())
-			record.setUpdateDate(new Date());
+		// if(null==record.getUpdateDate())
+		record.setUpdateDate(new Date());
 		int result = categoryMapper.updateByPrimaryKeySelective(record);
 		return record.getId();
 	}
@@ -166,8 +166,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#insertBatch(List)
+	 * @see com.jcin.cms.service.pro.ICategoryService#insertBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -180,8 +179,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jcin.cms.service.pro.ICategoryService#deleteBatch(List)
+	 * @see com.jcin.cms.service.pro.ICategoryService#deleteBatch(List)
 	 */
 	@Override
 	@Transactional
@@ -192,12 +190,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		super.deleteBatch(list);
 		return result;
 	}
-	
-	
+
 	@Override
-	public List<Category> selectByExample(
-			CategoryCriteria criteria) {
-		return  categoryMapper.selectByExample(criteria);
+	public List<Category> selectByExample(CategoryCriteria criteria) {
+		return categoryMapper.selectByExample(criteria);
 	}
 
 	@Override
@@ -209,13 +205,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		List<Category> children = new ArrayList<Category>();
 		for (Category object : list) {
 			Category jsonObject;
-			try {
-				jsonObject = searialCategory(object);
-				if(jsonObject!=null){
-					children.add(jsonObject);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
+			jsonObject = searialCategory(object);
+			if (jsonObject != null) {
+				children.add(jsonObject);
 			}
 
 		}
@@ -223,7 +215,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Category searialCategory(Category category) throws JSONException {
+	public Category searialCategory(Category category) {
 		Category jsonObject = new Category();
 		jsonObject.setId(category.getId());
 		jsonObject.setParentId(category.getParentId());
@@ -241,7 +233,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<Category> searialChild(Category category) throws JSONException {
+	public List<Category> searialChild(Category category) {
 		List children = null;
 		List<Category> list = getByParentId(category.getId());
 		if (list != null && list.size() > 0) {
@@ -249,7 +241,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 		}
 		for (Category object : list) {
 			Category jsonObject = searialCategory(object);
-			if(jsonObject!=null){
+			if (jsonObject != null) {
 				children.add(jsonObject);
 			}
 		}

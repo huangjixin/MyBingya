@@ -5,9 +5,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +26,7 @@ import com.jcin.cms.modules.syst.domain.User;
  */
 public class LogInterceptor implements HandlerInterceptor {
 
-	private static Logger logger = Logger.getLogger(LogInterceptor.class
+	private static Logger logger = LoggerFactory.getLogger(LogInterceptor.class
 			.getName());
 
 	private static LogMapper logDao = SpringUtils.getBean(LogMapper.class);

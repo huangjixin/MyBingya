@@ -9,7 +9,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 数据库工具类
@@ -18,7 +19,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class MysqlUtil {
-	private static Logger logger = Logger.getLogger(MysqlUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(MysqlUtil.class);
 
 	/**
 	 * 备份数据库

@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jcin.cms.common.Global;
 import com.jcin.cms.common.PasswordHelper;
 import com.jcin.cms.common.UserUtils;
 import com.jcin.cms.modules.syst.domain.Organization;
@@ -61,7 +60,7 @@ public class UserController extends BaseController<User> {
 		uiModel.addAttribute("user", user);
 		List<Role> roles = roleService.selectAll();
 		uiModel.addAttribute("roleList", roles);
-		return root+"admin/modules/user/user_create.jsp";
+		return root+"admin/modules/syst/user/user_create.jsp";
 	}
 
 	@RequiresPermissions("user:create")
@@ -76,7 +75,7 @@ public class UserController extends BaseController<User> {
 		if(user2!=null){
 			redirectAttributes.addFlashAttribute("user", user);
 			redirectAttributes.addFlashAttribute("msg", "用户名已经存在");
-			return "redirect:/" + Global.getAdminPath() + "/user/create";
+			return "redirect:/admin/user/create";
 		}
 		user.setCreateBy(UserUtils.getUsername());
 		user.setCreateDate(new Date());
@@ -92,7 +91,7 @@ public class UserController extends BaseController<User> {
 		}
 		redirectAttributes.addFlashAttribute("user", user);
 		redirectAttributes.addFlashAttribute("msg", "新增成功");
-		return "redirect:/" + Global.getAdminPath() + "/user/create";
+		return "redirect:/admin/user/create";
 	}
 
 	@RequiresPermissions("user:update")
@@ -119,7 +118,7 @@ public class UserController extends BaseController<User> {
 			uiModel.addAttribute("organizationId", list2.get(0).getId());
 		}
 
-		return root+"admin/modules/user/user_update.jsp";
+		return root+"admin/modules/syst/user/user_update.jsp";
 	}
 
 	@RequiresPermissions("user:update")
@@ -139,7 +138,7 @@ public class UserController extends BaseController<User> {
 				if(!user2.getId().equals(user.getId())){
 					uiModel.addAttribute("user", user);
 					redirectAttributes.addFlashAttribute("msg", "用户名已经存在");
-					return "redirect:/" + Global.getAdminPath() + "/user/update/"
+					return "redirect:/admin/user/update/"
 					+ user.getId();
 				}
 			}
@@ -180,7 +179,7 @@ public class UserController extends BaseController<User> {
 
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		redirectAttributes.addFlashAttribute("user", user);
-		return "redirect:/" + Global.getAdminPath() + "/user/update/"
+		return "redirect:/admin/user/update/"
 				+ user.getId();
 	}
 
@@ -197,7 +196,7 @@ public class UserController extends BaseController<User> {
 		}
 
 		uiModel.addAttribute("user", user);
-		return root+"admin/modules/user/user_show.jsp";
+		return root+"admin/modules/syst/user/user_show.jsp";
 	}
 
 	@RequiresPermissions("user:update")
@@ -207,7 +206,7 @@ public class UserController extends BaseController<User> {
 			HttpServletResponse httpServletResponse) {
 		User user = UserUtils.getUser();
 		uiModel.addAttribute("user", user);
-		return root+"admin/modules/user/changePassword.jsp";
+		return root+"admin/modules/syst/user/changePassword.jsp";
 	}
 
 	/**
@@ -229,20 +228,20 @@ public class UserController extends BaseController<User> {
 		User user2 = UserUtils.getUser();
 		if (!user2.getPassword().equals(PasswordHelper.encryptPassword(user.getPassword()))) {
 			uiModel.addAttribute("msg", "旧密码输入有误");
-			return root+"admin/modules/user/changePassword";
+			return root+"admin/modules/syst/user/changePassword";
 		}
 		User user3 = new User();
 		newPassword = PasswordHelper.encryptPassword(newPassword);
 		user3.setPassword(newPassword);
 		user3.setId(user2.getId());
 		userService.updatePassword(user3);
-		return "redirect:/" + Global.getAdminPath() + "/logout";
+		return "redirect:/admin/logout";
 	}
 
 	@RequiresPermissions("user:view")
 	@RequestMapping(value = { "", "list" })
 	public String list(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/user/user_list.jsp";
+		return root+"admin/modules/syst/user/user_list.jsp";
 	}
 
 	/**
@@ -252,7 +251,7 @@ public class UserController extends BaseController<User> {
 	 */
 	@RequestMapping(value = { "productInfo" })
 	public String productInfo(HttpServletRequest httpServletRequest) {
-		return root+"admin/modules/user/product_info.jsp";
+		return root+"admin/modules/syst/user/product_info.jsp";
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)

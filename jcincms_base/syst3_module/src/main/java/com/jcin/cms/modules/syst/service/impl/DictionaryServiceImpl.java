@@ -10,7 +10,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="dictionaryService")
 public class DictionaryServiceImpl extends BaseServiceImpl<Dictionary, String>
 		implements IDictionaryService {
-	private static Logger logger = Logger.getLogger(DictionaryServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(DictionaryServiceImpl.class
 			.getName());
 
 	@Resource

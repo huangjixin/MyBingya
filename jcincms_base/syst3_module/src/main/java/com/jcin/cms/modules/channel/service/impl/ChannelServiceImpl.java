@@ -11,18 +11,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.channel.dao.ChannelMapper;
-import com.jcin.cms.modules.channel.dao.DocumentMapper;
 import com.jcin.cms.modules.channel.domain.Channel;
 import com.jcin.cms.modules.channel.domain.ChannelCriteria;
-import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.channel.service.IChannelService;
-import com.jcin.cms.modules.channel.service.IDocumentService;
 import com.jcin.cms.service.impl.BaseServiceImpl;
 import com.jcin.cms.utils.Page;
 
@@ -34,7 +31,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="channelService")
 public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 		implements IChannelService {
-	private static Logger logger = Logger.getLogger(ChannelServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(ChannelServiceImpl.class
 			.getName());
 	@Resource
 	private ChannelMapper channelMapper;

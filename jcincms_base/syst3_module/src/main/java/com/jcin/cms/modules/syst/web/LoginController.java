@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.Cache;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +35,7 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = "admin")
 public class LoginController extends BaseController<User> {
+	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private CaptchaFormAuthenticationFilter formAuthenticationFilter;
@@ -48,6 +48,7 @@ public class LoginController extends BaseController<User> {
 	public String login(Model uiModel, HttpServletRequest request) {
 		uiModel.addAttribute("captchaEnabled",
 				formAuthenticationFilter.isCaptchaEnabled());
+		logger.debug("来自IP[" + request.getRemoteHost() + "]的访问");
 		return root + "admin/modules/login.jsp";
 	}
 
@@ -113,7 +114,7 @@ public class LoginController extends BaseController<User> {
         return "true";  
     }
     
-	@RequestMapping(value={"","/","index"})
+	@RequestMapping(value={"","/","index","index/"})
 	public String index(Model uiModel) {
 		Subject currentUser = SecurityUtils.getSubject();
 		if(!currentUser.isAuthenticated()){

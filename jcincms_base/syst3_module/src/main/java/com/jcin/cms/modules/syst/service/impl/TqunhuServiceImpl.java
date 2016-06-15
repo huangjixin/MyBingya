@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,20 +28,21 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service(value="tqunhuInfoService")
-public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> implements
-		ITqunhuInfoService {
-	private static Logger logger = Logger.getLogger(TqunhuServiceImpl.class
-			.getName());
+@Service(value = "tqunhuInfoService")
+public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String>
+		implements ITqunhuInfoService {
+	private static Logger logger = LoggerFactory
+			.getLogger(TqunhuServiceImpl.class.getName());
 
 	@javax.annotation.Resource
 	private TqunhuInfoMapper tqunhuInfoMapper;
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#deleteByPrimaryKey((java.lang
-	 * .String ))
+	 * com.jcin.cms.service.system.ITqunhuInfoService#deleteByPrimaryKey((java
+	 * .lang .String ))
 	 */
 	@Override
 	@Transactional(readOnly = false)
@@ -55,17 +57,17 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#insert(com.jcin.cms.service.
-	 * system. TqunhuInfo)
+	 * com.jcin.cms.service.system.ITqunhuInfoService#insert(com.jcin.cms.service
+	 * . system. TqunhuInfo)
 	 */
 	@Override
 	@Transactional(readOnly = false)
 	public String insert(TqunhuInfo record) {
-//		super.insert(record);
+		// super.insert(record);
 
-//		record.setCreateDate(new Date());
+		// record.setCreateDate(new Date());
 		int result = tqunhuInfoMapper.insert(record);
-		String id = record.getId()+"";
+		String id = record.getId() + "";
 		return id;
 	}
 
@@ -73,7 +75,8 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#select(com.jcin.cms.utils.Page)
+	 * com.jcin.cms.service.system.ITqunhuInfoService#select(com.jcin.cms.utils
+	 * .Page)
 	 */
 	@Override
 	public Page select(Page page) {
@@ -94,14 +97,14 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#select(com.jcin.cms.service.
-	 * system.TqunhuInfoCriteria)
+	 * com.jcin.cms.service.system.ITqunhuInfoService#select(com.jcin.cms.service
+	 * . system.TqunhuInfoCriteria)
 	 */
 	// @Override
 	public Page select(TqunhuInfoCriteria criteria) {
 		Page page = new Page();
-		if(null != criteria){
-			if(null != criteria.getPage()){
+		if (null != criteria) {
+			if (null != criteria.getPage()) {
 				page = criteria.getPage();
 			}
 		}
@@ -128,14 +131,15 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#selectByPrimaryKey(java.lang
-	 * .String)
+	 * com.jcin.cms.service.system.ITqunhuInfoService#selectByPrimaryKey(java
+	 * .lang .String)
 	 */
 	@Override
 	public TqunhuInfo selectByPrimaryKey(String id) {
 		super.selectByPrimaryKey(id);
 
-		TqunhuInfo article = tqunhuInfoMapper.selectByPrimaryKey(Integer.valueOf(id));
+		TqunhuInfo article = tqunhuInfoMapper.selectByPrimaryKey(Integer
+				.valueOf(id));
 		return article;
 	}
 
@@ -143,16 +147,16 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jcin.cms.service.system.ITqunhuInfoService#update(com.jcin.cms.service.
-	 * system. TqunhuInfo)
+	 * com.jcin.cms.service.system.ITqunhuInfoService#update(com.jcin.cms.service
+	 * . system. TqunhuInfo)
 	 */
 	@Override
 	@Transactional(readOnly = false)
 	public String update(TqunhuInfo record) {
 		// super.update(record);
-//		record.setUpdateDate(new Date());
+		// record.setUpdateDate(new Date());
 		int result = tqunhuInfoMapper.updateByPrimaryKeySelective(record);
-		return record.getId()+"";
+		return record.getId() + "";
 	}
 
 	/*
@@ -176,10 +180,10 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	@Override
 	@Transactional(readOnly = false)
 	public int deleteBatch(List<String> list) {
-//		TqunhuInfoCriteria roleCriteria = new TqunhuInfoCriteria();
-//		roleCriteria.createCriteria().andIdIn(list);
-//		int result = tqunhuInfoMapper.deleteByExample(roleCriteria);
-//		super.deleteBatch(list);
+		// TqunhuInfoCriteria roleCriteria = new TqunhuInfoCriteria();
+		// roleCriteria.createCriteria().andIdIn(list);
+		// int result = tqunhuInfoMapper.deleteByExample(roleCriteria);
+		// super.deleteBatch(list);
 		return 0;
 	}
 
@@ -190,12 +194,13 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String> imple
 	}
 
 	/**
-     * 动态创建表。
-     * @param table_name
-     */
+	 * 动态创建表。
+	 * 
+	 * @param table_name
+	 */
 	@Override
-	public void createTableSql(String table_name){
-		Map<String, String>map = new HashMap<String, String>();
+	public void createTableSql(String table_name) {
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("table_name", table_name);
 		tqunhuInfoMapper.createTableSql(map);
 	}

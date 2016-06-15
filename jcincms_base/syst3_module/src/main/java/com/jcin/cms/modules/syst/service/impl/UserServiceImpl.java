@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
     public static final int HASH_INTERATIONS = 1024;
     public static final int SALT_SIZE = 8;
     
-	private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 
 	@javax.annotation.Resource
 	private UserMapper userMapper;

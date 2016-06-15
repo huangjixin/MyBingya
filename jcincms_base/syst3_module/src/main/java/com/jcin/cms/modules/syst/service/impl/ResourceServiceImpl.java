@@ -11,13 +11,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jcin.cms.modules.channel.domain.Channel;
-import com.jcin.cms.modules.channel.domain.ChannelCriteria;
 import com.jcin.cms.modules.syst.dao.ResourceMapper;
 import com.jcin.cms.modules.syst.dao.RoleMapper;
 import com.jcin.cms.modules.syst.dao.RoleResourceMapper;
@@ -34,11 +32,11 @@ import com.jcin.cms.utils.Page;
  * @date 2014-12-18,下午6:56:55
  * 
  */
-@Service(value="resourceService")
+@Service(value = "resourceService")
 public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		implements IResourceService {
-	private static Logger logger = Logger.getLogger(ResourceServiceImpl.class
-			.getName());
+	private static Logger logger = LoggerFactory
+			.getLogger(ResourceServiceImpl.class.getName());
 
 	@javax.annotation.Resource
 	private ResourceMapper resourceMapper;
@@ -127,8 +125,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	// @Override
 	public Page select(ResourceCriteria criteria) {
 		Page page = new Page();
-		if(null != criteria){
-			if(null != criteria.getPage()){
+		if (null != criteria) {
+			if (null != criteria.getPage()) {
 				page = criteria.getPage();
 			}
 		}
@@ -221,8 +219,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 				}
 			}
 		}
-		
-		
+
 		int result = resourceMapper.insertBatch(list);
 		super.insertBatch(list);
 		return result;
@@ -278,18 +275,16 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		List<Resource> list = resourceMapper.selectByExample(resourceExample);
 		List<Resource> children = new ArrayList<Resource>();
 		for (Resource object : list) {
-			if(object.getAuthName()!=null && !"".equals(object.getAuthName()) && permission !=null && !permission.contains(object.getAuthName())){
+			if (object.getAuthName() != null
+					&& !"".equals(object.getAuthName()) && permission != null
+					&& !permission.contains(object.getAuthName())) {
 				continue;
 			}
 			Resource jsonObject;
-			
-			try {
-				jsonObject = searialResource(object, permission, menuOnly);
-				if(jsonObject!=null){
-					children.add(jsonObject);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
+
+			jsonObject = searialResource(object, permission, menuOnly);
+			if (jsonObject != null) {
+				children.add(jsonObject);
 			}
 
 		}
@@ -298,12 +293,12 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 
 	@SuppressWarnings("rawtypes")
 	public Resource searialResource(Resource resource, Set<String> permission,
-			boolean menuOnly) throws JSONException {
+			boolean menuOnly) {
 		Resource jsonObject = new Resource();
 		if (menuOnly) {// 如果仅仅是菜单
-			if(resource.getType().equals(Resource.ResourceType.button)){
+			if (resource.getType().equals(Resource.ResourceType.button)) {
 				jsonObject = null;
-			}else{
+			} else {
 				jsonObject.setId(resource.getId());
 				jsonObject.setParentId(resource.getParentId());
 				jsonObject.setName(resource.getName());
@@ -317,7 +312,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 				jsonObject.setUpdateDate(resource.getUpdateDate());
 				jsonObject.setSort(resource.getSort());
 			}
-		}else{
+		} else {
 			jsonObject.setId(resource.getId());
 			jsonObject.setParentId(resource.getParentId());
 			jsonObject.setName(resource.getName());
@@ -342,18 +337,20 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Resource> searialChild(Resource resource,
-			Set<String> permission, boolean menuOnly) throws JSONException {
+			Set<String> permission, boolean menuOnly) {
 		List children = null;
 		List<Resource> list = getByParentId(resource.getId());
 		if (list != null && list.size() > 0) {
 			children = new ArrayList();
 		}
 		for (Resource object : list) {
-			if(object.getAuthName()!=null && !"".equals(object.getAuthName()) && permission !=null && !permission.contains(object.getAuthName())){
+			if (object.getAuthName() != null
+					&& !"".equals(object.getAuthName()) && permission != null
+					&& !permission.contains(object.getAuthName())) {
 				continue;
 			}
 			Resource jsonObject = searialResource(object, permission, menuOnly);
-			if(jsonObject!=null){
+			if (jsonObject != null) {
 				children.add(jsonObject);
 			}
 		}
@@ -379,29 +376,29 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		List<Resource> children = new ArrayList<Resource>();
 		for (Resource object : list) {
 			Resource jsonObject = searialResource(object, resources);
-			if(jsonObject!=null){
+			if (jsonObject != null) {
 				boolean inResources = false;
-				if(null != resources){
+				if (null != resources) {
 					for (int i = 0; i < resources.size(); i++) {
-						Resource resource = resources.get(i); 
-						if(object.getId().equals(resource.getId())){
+						Resource resource = resources.get(i);
+						if (object.getId().equals(resource.getId())) {
 							jsonObject.setChecked(true);
 							break;
 						}
 					}
-				}else{
+				} else {
 					jsonObject.setChecked(false);
 				}
-				if(!inResources){
+				if (!inResources) {
 					jsonObject.setChecked(false);
 				}
 				children.add(jsonObject);
 			}
-			
+
 		}
 		return children;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public Resource searialResource(Resource resource, List<Resource> resources) {
 		Resource jsonObject = new Resource();
@@ -417,7 +414,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		jsonObject.setUpdateBy(resource.getUpdateBy());
 		jsonObject.setUpdateDate(resource.getUpdateDate());
 		jsonObject.setSort(resource.getSort());
-		
+
 		List<Resource> list = searialChild(resource, resources);
 		if (null != list) {
 			jsonObject.setChildren(list);
@@ -425,9 +422,10 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 
 		return jsonObject;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<Resource> searialChild(Resource resource,List<Resource> resources){
+	public List<Resource> searialChild(Resource resource,
+			List<Resource> resources) {
 		List children = null;
 		List<Resource> list = getByParentId(resource.getId());
 		if (list != null && list.size() > 0) {
@@ -435,20 +433,20 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 		}
 		for (Resource object : list) {
 			Resource jsonObject = searialResource(object, resources);
-			if(jsonObject!=null){
+			if (jsonObject != null) {
 				boolean inResources = false;
-				if(null != resources){
+				if (null != resources) {
 					for (Resource resource1 : resources) {
-						if(object.getId().equals(resource1.getId())){
+						if (object.getId().equals(resource1.getId())) {
 							jsonObject.setChecked(true);
 							break;
 						}
 					}
-				}else{
+				} else {
 					jsonObject.setChecked(false);
 				}
-				
-				if(!inResources){
+
+				if (!inResources) {
 					jsonObject.setChecked(false);
 				}
 				children.add(jsonObject);
@@ -468,14 +466,12 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	}
 
 	@Override
-	public List<Resource> selectByExample(
-			ResourceCriteria criteria) {
-		return  resourceMapper.selectByExample(criteria);
+	public List<Resource> selectByExample(ResourceCriteria criteria) {
+		return resourceMapper.selectByExample(criteria);
 	}
-	
+
 	@Override
-	public int countByExample(
-			ResourceCriteria criteria) {
-		return  resourceMapper.countByExample(criteria);
+	public int countByExample(ResourceCriteria criteria) {
+		return resourceMapper.countByExample(criteria);
 	}
 }

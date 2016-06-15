@@ -12,7 +12,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +36,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="documentService")
 public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 		implements IDocumentService {
-	private static Logger logger = Logger.getLogger(DocumentServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class
 			.getName());
 
 	@Resource
@@ -205,7 +206,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 							String uploadPath = assets.getPath();
 							if(null!=uploadPath && !"".equals(uploadPath)){
 								File file = new File(uploadPath);
-								logger.info(file.exists());
+								logger.info(file.exists()+"");
 								FileUtils.deleteFile(uploadPath);
 							}
 							

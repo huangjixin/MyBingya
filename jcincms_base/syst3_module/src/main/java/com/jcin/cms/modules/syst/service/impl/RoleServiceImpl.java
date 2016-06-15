@@ -9,7 +9,8 @@ package com.jcin.cms.modules.syst.service.impl;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="roleService")
 public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		IRoleService {
-	private static Logger logger = Logger.getLogger(RoleServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class
 			.getName());
 
 	@javax.annotation.Resource

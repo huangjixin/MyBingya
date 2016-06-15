@@ -9,9 +9,10 @@ package com.jcin.cms.modules.channel.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.modules.channel.dao.VoteTopicMapper;
@@ -29,7 +30,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="voteTopicService")
 public class VoteTopicServiceImpl extends BaseServiceImpl<VoteTopic, String>
 		implements IVoteTopicService {
-	private static Logger logger = Logger.getLogger(VoteTopicServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(VoteTopicServiceImpl.class
 			.getName());
 
 	@Autowired

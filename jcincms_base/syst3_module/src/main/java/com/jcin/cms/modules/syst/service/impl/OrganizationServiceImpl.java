@@ -13,7 +13,8 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +36,7 @@ import com.jcin.cms.utils.Page;
 @Service(value = "organizationService")
 public class OrganizationServiceImpl extends
 		BaseServiceImpl<Organization, String> implements IOrganizationService {
-	private static Logger logger = Logger
-			.getLogger(OrganizationServiceImpl.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class.getName());
 
 	@Resource
 	private OrganizationMapper organizationMapper;

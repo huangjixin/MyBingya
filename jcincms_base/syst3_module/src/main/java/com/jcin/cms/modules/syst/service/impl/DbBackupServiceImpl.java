@@ -6,7 +6,6 @@
  */
 package com.jcin.cms.modules.syst.service.impl;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,15 +13,14 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.MysqlUtil;
-import com.jcin.cms.modules.channel.domain.Assets;
-import com.jcin.cms.modules.channel.domain.Document;
 import com.jcin.cms.modules.syst.dao.DbBackupMapper;
 import com.jcin.cms.modules.syst.domain.DbBackup;
 import com.jcin.cms.modules.syst.domain.DbBackupCriteria;
@@ -38,7 +36,7 @@ import com.jcin.cms.utils.Page;
 @Service(value="dbBackupService")
 public class DbBackupServiceImpl extends BaseServiceImpl<DbBackup, String>
 		implements IDbBackupService {
-	private static Logger logger = Logger.getLogger(DbBackupServiceImpl.class
+	private static Logger logger = LoggerFactory.getLogger(DbBackupServiceImpl.class
 			.getName());
 
 	@Resource

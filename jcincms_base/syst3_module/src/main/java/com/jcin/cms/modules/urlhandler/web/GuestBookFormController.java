@@ -11,7 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +34,7 @@ import com.jcin.cms.web.BaseController;
 @Controller
 @RequestMapping(value = { "guestbook"})
 public class GuestBookFormController extends BaseController {
-	private static Logger logger = Logger
-			.getLogger(GuestBookFormController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(GuestBookFormController.class.getName());
 
 	@Autowired
 	private IGuestbookService guestbookService; // 注入基础配置。
