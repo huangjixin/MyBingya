@@ -186,5 +186,6 @@
 				return val=='menu'?'菜单':'按钮';
 			}
 		</script>
+		<%@ include file="/WEB-INF/admin/include/footer.jsp"%>
 </body>
 </html>
