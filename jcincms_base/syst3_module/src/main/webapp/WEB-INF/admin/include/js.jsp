@@ -1,20 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/admin/include/taglib.jsp"%>
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<link href="${ctx}/js/jquery-easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/js/jquery-easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-easyui/easyloader.js"></script>
 <script type="text/javascript" src="${ctx}/js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery.validate.js"></script>
-<%-- <script type="text/javascript" src="${ctx}/js/jquery-ui/jquery-ui.js"></script> --%>
-<script type="text/javascript"
-	src="${ctx}/js/localization/messages_zh.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/demo/demo.css">
-<link rel="stylesheet" type="text/css"
-	href="${ctx}/js/jquery-easyui/themes/icon.css">
-<%-- <link rel="stylesheet" type="text/css" href="${ctx}/js/jquery-ui/jquery-ui.css"> --%>
+<script type="text/javascript" src="${ctx}/js/localization/messages_zh.js"></script>
 <script type="text/javascript">
 	$.fn.datebox.defaults.formatter = function(date) {
 		var y = date.getFullYear();
@@ -54,6 +52,10 @@
 	}
 </script>
 <style type="text/css">
+#toolBar{
+	padding: 5px;
+	border: 1px;
+}
 #validForm .input{
 	height:20px;
 	width: 300px;
