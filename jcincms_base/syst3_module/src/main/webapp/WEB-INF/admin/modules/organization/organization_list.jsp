@@ -229,5 +229,6 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/admin/include/footer.jsp"%>
 </body>
 </html>
