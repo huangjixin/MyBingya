@@ -3,11 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
 
 /**
  * 验证码工具类
