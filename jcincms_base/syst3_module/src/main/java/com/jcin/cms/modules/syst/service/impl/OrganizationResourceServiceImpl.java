@@ -98,6 +98,7 @@ public class OrganizationResourceServiceImpl extends BaseServiceImpl<Organizatio
 	 * com.jcin.cms.service.syst.IOrganizationResourceService#select(com.jcin.cms.service.syst.OrganizationResourceCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(OrganizationResourceCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

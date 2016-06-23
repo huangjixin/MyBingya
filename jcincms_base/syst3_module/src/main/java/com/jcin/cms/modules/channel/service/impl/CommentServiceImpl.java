@@ -98,6 +98,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment, String>
 	 * com.jcin.cms.service.channel.ICommentService#select(com.jcin.cms.service.channel.CommentCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(CommentCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

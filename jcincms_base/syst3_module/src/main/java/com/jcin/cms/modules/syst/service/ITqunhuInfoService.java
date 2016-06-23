@@ -1,9 +1,6 @@
 package  com.jcin.cms.modules.syst.service;
 
 
-import java.util.List;
-import java.util.Map;
-
 import com.jcin.cms.modules.syst.domain.CreatedTb;
 import com.jcin.cms.modules.syst.domain.TqunhuInfo;
 import com.jcin.cms.modules.syst.domain.TqunhuInfoCriteria;

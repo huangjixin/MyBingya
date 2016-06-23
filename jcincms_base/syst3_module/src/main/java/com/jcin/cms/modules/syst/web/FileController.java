@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jcin.cms.common.FileUtils;
 import com.jcin.cms.common.UserUtils;
-import com.jcin.cms.modules.channel.domain.Assets;
 import com.jcin.cms.modules.syst.domain.DbBackup;
 import com.jcin.cms.modules.syst.service.IDbBackupService;
 import com.jcin.cms.web.BaseController;

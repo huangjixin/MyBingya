@@ -98,6 +98,7 @@ public class PropertiesServiceImpl extends BaseServiceImpl<Properties, String>
 	 * com.jcin.cms.service.pro.IPropertiesService#select(com.jcin.cms.service.pro.PropertiesCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(PropertiesCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

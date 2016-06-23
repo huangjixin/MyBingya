@@ -98,6 +98,7 @@ public class AssetsServiceImpl extends BaseServiceImpl<Assets, String>
 	 * com.jcin.cms.service.channel.IAssetsService#select(com.jcin.cms.service.channel.AssetsCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(AssetsCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

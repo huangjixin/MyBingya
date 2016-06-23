@@ -99,6 +99,7 @@ public class ImagesServiceImpl extends BaseServiceImpl<Images, String>
 	 * com.jcin.cms.service.pro.IImagesService#select(com.jcin.cms.service.pro.ImagesCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(ImagesCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

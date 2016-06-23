@@ -6,37 +6,15 @@
  */
 package com.jcin.cms.modules.weixin.web;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.jcin.cms.common.UserUtils;
-import com.jcin.cms.modules.channel.domain.Channel;
-import com.jcin.cms.modules.channel.domain.Document;
-import com.jcin.cms.modules.channel.service.DocCache;
-import com.jcin.cms.modules.channel.service.IChannelService;
-import com.jcin.cms.modules.channel.service.IDocumentService;
-import com.jcin.cms.modules.urlhandler.domain.BasicConfig;
-import com.jcin.cms.utils.Page;
 import com.jcin.cms.web.BaseController;
 
 /**

@@ -1,8 +1,6 @@
 package com.jcin.cms.modules.pro.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jcin.cms.modules.syst.domain.Resource;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

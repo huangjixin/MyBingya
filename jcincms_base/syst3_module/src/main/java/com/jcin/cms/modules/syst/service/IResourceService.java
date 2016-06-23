@@ -3,7 +3,6 @@ package com.jcin.cms.modules.syst.service;
 import java.util.List;
 import java.util.Set;
 
-import com.jcin.cms.modules.syst.domain.Organization;
 import com.jcin.cms.modules.syst.domain.Resource;
 import com.jcin.cms.modules.syst.domain.ResourceCriteria;
 import com.jcin.cms.service.IBaseService;

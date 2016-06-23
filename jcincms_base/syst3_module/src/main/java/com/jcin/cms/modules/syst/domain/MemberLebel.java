@@ -1,8 +1,6 @@
 package com.jcin.cms.modules.syst.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class MemberLebel implements Serializable {
     /**

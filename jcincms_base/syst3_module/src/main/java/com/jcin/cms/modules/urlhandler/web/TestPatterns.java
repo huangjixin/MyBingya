@@ -101,7 +101,7 @@ public class TestPatterns {
 				i=0;
 				System.out.println("/////////////////////////////////////////////////////////////////////");
 			}
-			String type = (String) iterator.next();
+			String type = iterator.next();
 			System.out.println(type);
 		}
 	}

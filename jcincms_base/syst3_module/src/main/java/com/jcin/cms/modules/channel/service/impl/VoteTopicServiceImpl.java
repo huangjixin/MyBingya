@@ -98,6 +98,7 @@ public class VoteTopicServiceImpl extends BaseServiceImpl<VoteTopic, String>
 	 * com.jcin.cms.service.channel.IVoteTopicService#select(com.jcin.cms.service.channel.VoteTopicCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(VoteTopicCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

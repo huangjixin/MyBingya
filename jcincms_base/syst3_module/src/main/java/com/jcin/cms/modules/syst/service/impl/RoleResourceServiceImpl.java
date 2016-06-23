@@ -98,6 +98,7 @@ public class RoleResourceServiceImpl extends BaseServiceImpl<RoleResource, Strin
 	 * com.jcin.cms.service.syst.IRoleResourceService#select(com.jcin.cms.service.syst.RoleResourceCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(RoleResourceCriteria criteria) {
 		Page page = new Page();
 		@SuppressWarnings("rawtypes")

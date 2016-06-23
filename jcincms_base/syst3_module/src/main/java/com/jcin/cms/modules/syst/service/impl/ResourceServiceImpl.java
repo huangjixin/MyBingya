@@ -123,6 +123,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, String>
 	 * system.ResourceCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(ResourceCriteria criteria) {
 		Page page = new Page();
 		if (null != criteria) {

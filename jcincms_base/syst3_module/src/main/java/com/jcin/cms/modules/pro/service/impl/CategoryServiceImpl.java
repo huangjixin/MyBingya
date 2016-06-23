@@ -105,6 +105,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, String>
 	 * .pro.CategoryCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(CategoryCriteria criteria) {
 		Page page = new Page();
 		if (null != criteria) {

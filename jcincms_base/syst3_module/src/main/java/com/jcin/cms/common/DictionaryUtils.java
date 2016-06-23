@@ -4,14 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.UnavailableSecurityManagerException;
-import org.apache.shiro.subject.Subject;
-
-import com.jcin.cms.modules.syst.dao.DictionaryMapper;
 import com.jcin.cms.modules.syst.domain.Dictionary;
 import com.jcin.cms.modules.syst.domain.DictionaryCriteria;
-import com.jcin.cms.modules.syst.domain.User;
 import com.jcin.cms.modules.syst.service.IDictionaryService;
 import com.jcin.cms.modules.syst.service.impl.DictionaryServiceImpl;
 

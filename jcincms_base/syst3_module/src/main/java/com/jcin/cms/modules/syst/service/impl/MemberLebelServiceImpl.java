@@ -96,6 +96,7 @@ public class MemberLebelServiceImpl extends BaseServiceImpl<MemberLebel, String>
 	 * com.jcin.cms.service.syst.IMemberLebelService#select(com.jcin.cms.service.syst.MemberLebelCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(MemberLebelCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

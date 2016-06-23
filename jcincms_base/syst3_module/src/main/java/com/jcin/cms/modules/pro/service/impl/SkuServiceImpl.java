@@ -97,6 +97,7 @@ public class SkuServiceImpl extends BaseServiceImpl<Sku, String>
 	 * com.jcin.cms.service.pro.ISkuService#select(com.jcin.cms.service.pro.SkuCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(SkuCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

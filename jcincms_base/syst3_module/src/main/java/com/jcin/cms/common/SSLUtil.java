@@ -24,6 +24,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link #_hostnameVerifier}.
 	 */
+	@Deprecated
 	private static com.sun.net.ssl.HostnameVerifier __hostnameVerifier;
 
 	/**
@@ -31,6 +32,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link #_trustManagers}.
 	 */
+	@Deprecated
 	private static com.sun.net.ssl.TrustManager[] __trustManagers;
 
 	/**
@@ -49,6 +51,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link #_trustAllHostnames()}.
 	 */
+	@Deprecated
 	private static void __trustAllHostnames() {
 		// Create a trust manager that does not validate certificate chains
 		if (__hostnameVerifier == null) {
@@ -64,6 +67,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link #_trustAllHttpsCertificates()}.
 	 */
+	@Deprecated
 	private static void __trustAllHttpsCertificates() {
 		com.sun.net.ssl.SSLContext context;
 
@@ -157,6 +161,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link SSLUtil.FakeHostnameVerifier}.
 	 */
+	@Deprecated
 	public static class _FakeHostnameVerifier implements com.sun.net.ssl.HostnameVerifier {
 
 		/**
@@ -167,6 +172,7 @@ public final class SSLUtil {
 		 * @param session the SSL session used on the connection to host.
 		 * @return the true boolean value indicating the host name is trusted.
 		 */
+		@Override
 		public boolean verify(String hostname, String session) {
 			return (true);
 		} // verify
@@ -180,6 +186,7 @@ public final class SSLUtil {
 	 * 
 	 * @deprecated see {@link SSLUtil.FakeX509TrustManager}.
 	 */
+	@Deprecated
 	public static class _FakeX509TrustManager implements com.sun.net.ssl.X509TrustManager {
 
 		/**
@@ -193,6 +200,7 @@ public final class SSLUtil {
 		 * @param chain the peer certificate chain.
 		 * @return the true boolean value indicating the chain is trusted.
 		 */
+		@Override
 		public boolean isClientTrusted(X509Certificate[] chain) {
 			return (true);
 		} // checkClientTrusted
@@ -203,6 +211,7 @@ public final class SSLUtil {
 		 * @param chain the peer certificate chain.
 		 * @return the true boolean value indicating the chain is trusted.
 		 */
+		@Override
 		public boolean isServerTrusted(X509Certificate[] chain) {
 			return (true);
 		} // checkServerTrusted
@@ -212,6 +221,7 @@ public final class SSLUtil {
 		 * 
 		 * @return a empty array of issuer certificates.
 		 */
+		@Override
 		public X509Certificate[] getAcceptedIssuers() {
 			return (_AcceptedIssuers);
 		} // getAcceptedIssuers
@@ -232,6 +242,7 @@ public final class SSLUtil {
 		 * @param session the SSL session used on the connection to host.
 		 * @return the true boolean value indicating the host name is trusted.
 		 */
+		@Override
 		public boolean verify(String hostname, javax.net.ssl.SSLSession session) {
 			return (true);
 		} // verify
@@ -256,6 +267,7 @@ public final class SSLUtil {
 		 * @param chain the peer certificate chain.
 		 * @param authType the authentication type based on the client certificate.
 		 */
+		@Override
 		public void checkClientTrusted(X509Certificate[] chain, String authType) {
 		} // checkClientTrusted
 
@@ -265,6 +277,7 @@ public final class SSLUtil {
 		 * @param chain the peer certificate chain.
 		 * @param authType the key exchange algorithm used.
 		 */
+		@Override
 		public void checkServerTrusted(X509Certificate[] chain, String authType) {
 		} // checkServerTrusted
 
@@ -273,6 +286,7 @@ public final class SSLUtil {
 		 * 
 		 * @return a empty array of issuer certificates.
 		 */
+		@Override
 		public X509Certificate[] getAcceptedIssuers() {
 			return (_AcceptedIssuers);
 		} // getAcceptedIssuers

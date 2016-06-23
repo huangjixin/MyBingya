@@ -98,6 +98,7 @@ public class UserOrganizationServiceImpl extends BaseServiceImpl<UserOrganizatio
 	 * com.jcin.cms.service.syst.IUserOrganizationService#select(com.jcin.cms.service.syst.UserOrganizationCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(UserOrganizationCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

@@ -98,6 +98,7 @@ public class DictionaryServiceImpl extends BaseServiceImpl<Dictionary, String>
 	 * com.jcin.cms.service.syst.IDictionaryService#select(com.jcin.cms.service.syst.DictionaryCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(DictionaryCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

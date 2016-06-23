@@ -95,6 +95,7 @@ public class LogServiceImpl extends BaseServiceImpl<Log, String> implements
 	 * system.LogCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(LogCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

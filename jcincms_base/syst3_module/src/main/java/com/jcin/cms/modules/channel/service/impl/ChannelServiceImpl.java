@@ -112,6 +112,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel, String>
 	 * com.jcin.cms.service.channel.IChannelService#select(com.jcin.cms.service.channel.ChannelCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(ChannelCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

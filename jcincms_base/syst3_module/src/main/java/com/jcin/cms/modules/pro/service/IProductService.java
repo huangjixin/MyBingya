@@ -24,6 +24,7 @@ public interface IProductService extends IBaseService<Product, String> {
 	 */
 	List<Product> selectByExample(ProductCriteria criteria);
 	
+	@Override
 	ProductWithBLOBs selectByPrimaryKey(String id);
 	
 	String insert(ProductWithBLOBs record);

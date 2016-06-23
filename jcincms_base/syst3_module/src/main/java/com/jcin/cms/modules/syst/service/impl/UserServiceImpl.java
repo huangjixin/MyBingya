@@ -133,6 +133,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 	 * system.UserCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(UserCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

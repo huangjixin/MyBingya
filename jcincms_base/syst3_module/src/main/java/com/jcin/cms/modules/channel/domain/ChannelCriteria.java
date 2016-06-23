@@ -1,6 +1,5 @@
 package com.jcin.cms.modules.channel.domain;
 
-import com.jcin.cms.modules.channel.domain.DocumentCriteria.Criteria;
 import com.jcin.cms.utils.Page;
 import java.util.ArrayList;
 import java.util.Date;

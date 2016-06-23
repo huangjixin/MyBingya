@@ -101,6 +101,7 @@ public class TqunhuServiceImpl extends BaseServiceImpl<TqunhuInfo, String>
 	 * . system.TqunhuInfoCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(TqunhuInfoCriteria criteria) {
 		Page page = new Page();
 		if (null != criteria) {

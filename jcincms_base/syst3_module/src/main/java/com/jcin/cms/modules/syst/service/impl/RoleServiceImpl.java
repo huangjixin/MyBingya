@@ -107,6 +107,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 	 * system.RoleCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(RoleCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

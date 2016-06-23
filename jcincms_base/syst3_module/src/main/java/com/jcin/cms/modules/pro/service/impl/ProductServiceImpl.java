@@ -101,6 +101,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, String>
 	 * com.jcin.cms.service.pro.IProductService#select(com.jcin.cms.service.pro.ProductCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(ProductCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

@@ -99,6 +99,7 @@ public class TestServiceImpl extends BaseServiceImpl<Test, String>
 	 * com.jcin.cms.service.channel.ITestService#select(com.jcin.cms.service.channel.TestCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(TestCriteria criteria) {
 		Page page = new Page();
 		@SuppressWarnings("rawtypes")

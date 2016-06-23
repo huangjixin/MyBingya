@@ -26,6 +26,7 @@ public interface IBrandService extends IBaseService<Brand, String> {
 
 	String insert(BrandWithBLOBs record);
 	
+	@Override
 	BrandWithBLOBs selectByPrimaryKey(String id);
 	
 	String update(BrandWithBLOBs record);

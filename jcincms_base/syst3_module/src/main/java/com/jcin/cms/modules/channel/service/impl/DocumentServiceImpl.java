@@ -112,6 +112,7 @@ public class DocumentServiceImpl extends BaseServiceImpl<Document, String>
 	 * com.jcin.cms.service.channel.IDocumentService#select(com.jcin.cms.service.channel.DocumentCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(DocumentCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

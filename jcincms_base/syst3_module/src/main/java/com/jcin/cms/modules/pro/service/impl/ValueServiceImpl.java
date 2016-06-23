@@ -98,6 +98,7 @@ public class ValueServiceImpl extends BaseServiceImpl<Value, String>
 	 * com.jcin.cms.service.pro.IValueService#select(com.jcin.cms.service.pro.ValueCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(ValueCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

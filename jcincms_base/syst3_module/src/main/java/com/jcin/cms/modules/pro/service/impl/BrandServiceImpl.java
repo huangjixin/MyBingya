@@ -100,6 +100,7 @@ public class BrandServiceImpl extends BaseServiceImpl<Brand, String>
 	 * com.jcin.cms.service.pro.IBrandService#select(com.jcin.cms.service.pro.BrandCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(BrandCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

@@ -99,6 +99,7 @@ public class GuestbookServiceImpl extends BaseServiceImpl<Guestbook, String>
 	 * com.jcin.cms.service.syst.IGuestbookService#select(com.jcin.cms.service.syst.GuestbookCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(GuestbookCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

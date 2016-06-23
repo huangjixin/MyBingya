@@ -99,6 +99,7 @@ public class ProPackageServiceImpl extends BaseServiceImpl<ProPackage, String>
 	 * com.jcin.cms.service.pro.IProPackageService#select(com.jcin.cms.service.pro.ProPackageCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(ProPackageCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

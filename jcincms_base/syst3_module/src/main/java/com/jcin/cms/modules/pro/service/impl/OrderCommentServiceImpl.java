@@ -99,6 +99,7 @@ public class OrderCommentServiceImpl extends BaseServiceImpl<OrderComment, Strin
 	 * com.jcin.cms.service.pro.IOrderCommentService#select(com.jcin.cms.service.pro.OrderCommentCriteria)
 	 */
 	//@Override
+	@Override
 	public Page select(OrderCommentCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){

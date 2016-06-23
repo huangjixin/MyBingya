@@ -123,6 +123,7 @@ public class OrganizationServiceImpl extends
 	 * .syst.OrganizationCriteria)
 	 */
 	// @Override
+	@Override
 	public Page select(OrganizationCriteria criteria) {
 		Page page = new Page();
 		if(null != criteria){
